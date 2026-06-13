@@ -20,6 +20,11 @@
 
 <title>Algorithm Hub — LeetCode Hot 100 + 算法可视化</title>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧮</text></svg>">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#1d1d1f">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'%3E%3Crect width='192' height='192' rx='42' fill='%231d1d1f'/%3E%3Ctext x='96' y='130' font-size='100' text-anchor='middle' fill='white'%3E🧮%3C/text%3E%3C/svg%3E">
 <link rel="stylesheet" href="css/main.css">
 <link rel="stylesheet" href="css/algorithm.css">
 <link rel="stylesheet" href="css/solutions-v2.css">
@@ -27,9 +32,10 @@
 <link rel="stylesheet" href="css/viz-modal.css">
 </head>
 <body>
+<a href="#main-content" class="skip-nav" style="position:absolute;top:-100px;left:0;background:#0071e3;color:#fff;padding:8px 16px;z-index:9999;border-radius:0 0 8px 0;transition:top .2s;text-decoration:none;">跳到主要内容</a>
 
 <!-- Navigation -->
-<nav class="nav">
+<nav class="nav" role="navigation" aria-label="主导航">
   <div class="nav-left">
     <div class="nav-logo">🧮 Algorithm<span>Hub</span></div>
   </div>
@@ -38,11 +44,12 @@
       <button class="view-switch-btn active" data-view="problems">📋 题库</button>
       <button class="view-switch-btn" data-view="visualizer">🎬 可视化</button>
     </div>
-    <button class="theme-btn" id="theme-toggle" title="切换深色模式 (T)">🌙</button>
+    <button class="theme-btn" id="theme-toggle" title="切换深色模式 (T)" aria-label="切换深色模式">🌙</button>
   </div>
 </nav>
 
 <!-- View: Problems -->
+<main id="main-content">
 <div id="view-problems">
   <!-- Hero -->
   <div class="hero">
@@ -193,7 +200,7 @@
 </div>
 
 <!-- Problem Detail Modal -->
-<div id="problem-modal" class="modal-overlay">
+<div id="problem-modal" class="modal-overlay" role="dialog" aria-modal="true" aria-label="题目详情">
   <div class="modal-content" id="modal-content"></div>
 </div>
 
@@ -202,7 +209,7 @@
   <div class="modal-content" style="max-width:900px;">
     <div class="viz-header">
       <h2 id="viz-title" style="margin:0;font-size:1.3rem;">🎬 动画演示</h2>
-      <button class="ctrl-btn" onclick="document.getElementById('viz-modal').style.display='none';VizEngine.stop();" style="padding:6px 12px;">✕ 关闭</button>
+      <button class="ctrl-btn" onclick="App.closeVizModal()" style="padding:6px 12px;">✕ 关闭</button>
     </div>
     <div class="viz-player">
       <canvas id="viz-canvas" width="800" height="380" style="width:100%;border-radius:12px;border:1px solid rgba(0,0,0,0.1);"></canvas>
@@ -225,7 +232,9 @@
 </div>
 
 <!-- Back to Top -->
-<button id="back-to-top" title="回到顶部">↑</button>
+<button id="back-to-top" title="回到顶部" aria-label="回到顶部">↑</button>
+
+</main>
 
 <!-- Toast -->
 <div id="toast"></div>
@@ -262,6 +271,21 @@ document.addEventListener('DOMContentLoaded', function() {
     Algorithm.init();
   }
 });
+// Register Service Worker for offline support
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function() {
+    navigator.serviceWorker.register('sw.js').catch(function(e) {
+      console.log('SW registration failed:', e);
+    });
+  });
+}
+// Click outside viz-modal to close
+var vizModal = document.getElementById('viz-modal');
+if (vizModal) {
+  vizModal.addEventListener('click', function(e) {
+    if (e.target === vizModal) App.closeVizModal();
+  });
+}
 </script>
 </body>
 </html>

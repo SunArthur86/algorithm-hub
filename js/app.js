@@ -53,6 +53,13 @@ var App = (function() {
           break;
         case 'Escape':
           closeModal();
+          closeVizModal();
+          break;
+        case 'ArrowLeft':
+          if (state.currentProblem) { e.preventDefault(); navigateProblem(-1); }
+          break;
+        case 'ArrowRight':
+          if (state.currentProblem) { e.preventDefault(); navigateProblem(1); }
           break;
         case 't':
         case 'T':
@@ -63,6 +70,26 @@ var App = (function() {
           break;
       }
     });
+  }
+
+  // Close visualization modal
+  function closeVizModal() {
+    var vm = document.getElementById('viz-modal');
+    if (vm && (vm.style.display !== 'none' || vm.classList.contains('show'))) {
+      vm.classList.remove('show');
+      vm.style.display = 'none';
+      if (typeof VizEngine !== 'undefined') VizEngine.stop();
+    }
+  }
+
+  // Navigate to prev/next problem from modal
+  function navigateProblem(dir) {
+    if (!state.currentProblem) return;
+    var idx = PROBLEMS.findIndex(function(p) { return p.id === state.currentProblem; });
+    if (idx < 0) return;
+    var next = idx + dir;
+    if (next < 0 || next >= PROBLEMS.length) return;
+    openProblemDetail(PROBLEMS[next].id);
   }
 
   // === Back to Top ===
@@ -414,6 +441,7 @@ var App = (function() {
   function openProblemDetail(id) {
     var p = PROBLEMS.find(function(x) { return x.id === id; });
     if (!p) return;
+    state.currentProblem = id;
     var sol = (typeof SOLUTIONS !== 'undefined') ? SOLUTIONS[id] : null;
     var isDone = state.completed.indexOf(p.id) >= 0;
     var isStarred = state.starred.indexOf(p.id) >= 0;
@@ -434,6 +462,8 @@ var App = (function() {
     html += '    </div>';
     html += '  </div>';
     html += '  <button class="modal-close" onclick="App.closeModal()">✕</button>';
+    html += '  <button class="modal-nav modal-nav-prev" onclick="App.navigateProblem(-1)" title="上一题 (←)">‹</button>';
+    html += '  <button class="modal-nav modal-nav-next" onclick="App.navigateProblem(1)" title="下一题 (→)">›</button>';
     html += '</div>';
 
     // Animation button
@@ -843,6 +873,8 @@ var App = (function() {
     showToast: showToast,
     closeModal: closeModal,
     openViz: openViz,
+    closeVizModal: closeVizModal,
+    navigateProblem: navigateProblem,
     toggleFromModal: toggleFromModal,
     copyCode: copyCode,
     switchApproach: switchApproach,
