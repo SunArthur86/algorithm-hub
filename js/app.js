@@ -436,6 +436,11 @@ var App = (function() {
     html += '  <button class="modal-close" onclick="App.closeModal()">✕</button>';
     html += '</div>';
 
+    // Animation button
+    html += '<div style="margin-bottom:16px;">';
+    html += '  <button class="viz-btn" onclick="App.openViz(\'' + p.id + '\', \'' + p.title.replace(/'/g, "\\'") + '\')">🎬 动画演示</button>';
+    html += '</div>';
+
     if (sol) {
       // Thinking
       if (sol.thinking) {
@@ -564,6 +569,34 @@ var App = (function() {
     var modal = $('problem-modal');
     if (modal) modal.classList.remove('show');
     document.body.style.overflow = '';
+  }
+
+  function openViz(problemId, title) {
+    var vizModal = document.getElementById('viz-modal');
+    var vizTitle = document.getElementById('viz-title');
+    if (vizTitle) vizTitle.textContent = '🎬 ' + title;
+    if (vizModal) {
+      vizModal.style.display = 'flex';
+      vizModal.classList.add('show');
+    }
+    // Resize canvas to match container
+    var canvas = document.getElementById('viz-canvas');
+    if (canvas) {
+      var container = canvas.parentElement;
+      canvas.width = Math.min(800, container.offsetWidth - 20);
+      canvas.height = 380;
+    }
+    if (typeof VizEngine !== 'undefined') {
+      if (!VizEngine._initialized) {
+        VizEngine.init();
+        VizEngine._initialized = true;
+      }
+      var has = VizEngine.load(problemId);
+      if (!has) {
+        var msgEl = document.getElementById('viz-message');
+        if (msgEl) msgEl.textContent = '此题暂无动画数据';
+      }
+    }
   }
 
   function toggleFromModal(id, type) {
@@ -809,6 +842,7 @@ var App = (function() {
     loadTheme: loadTheme,
     showToast: showToast,
     closeModal: closeModal,
+    openViz: openViz,
     toggleFromModal: toggleFromModal,
     copyCode: copyCode,
     switchApproach: switchApproach,

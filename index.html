@@ -24,6 +24,7 @@
 <link rel="stylesheet" href="css/algorithm.css">
 <link rel="stylesheet" href="css/solutions-v2.css">
 <link rel="stylesheet" href="css/interactive.css">
+<link rel="stylesheet" href="css/viz-modal.css">
 </head>
 <body>
 
@@ -196,6 +197,33 @@
   <div class="modal-content" id="modal-content"></div>
 </div>
 
+<!-- Visualization Modal -->
+<div id="viz-modal" class="modal-overlay" style="display:none;z-index:10001;">
+  <div class="modal-content" style="max-width:900px;">
+    <div class="viz-header">
+      <h2 id="viz-title" style="margin:0;font-size:1.3rem;">🎬 动画演示</h2>
+      <button class="ctrl-btn" onclick="document.getElementById('viz-modal').style.display='none';VizEngine.stop();" style="padding:6px 12px;">✕ 关闭</button>
+    </div>
+    <div class="viz-player">
+      <canvas id="viz-canvas" width="800" height="380" style="width:100%;border-radius:12px;border:1px solid rgba(0,0,0,0.1);"></canvas>
+      <div class="viz-progress-bar"><div class="viz-progress-fill" id="viz-progress"></div></div>
+      <div class="viz-controls">
+        <button class="ctrl-btn" id="viz-step-back" title="上一步">⏮</button>
+        <button class="ctrl-btn primary" id="viz-play">▶ 播放</button>
+        <button class="ctrl-btn" id="viz-step-fwd" title="下一步">⏭</button>
+        <button class="ctrl-btn" id="viz-reset" title="重置">↻</button>
+        <div class="viz-speed-wrap">
+          <label>速度</label>
+          <input type="range" id="viz-speed" min="1" max="10" value="6">
+          <span id="viz-speed-val">6</span>
+        </div>
+        <span class="viz-counter" id="viz-counter">Step 0 / 0</span>
+      </div>
+      <div class="viz-message" id="viz-message"></div>
+    </div>
+  </div>
+</div>
+
 <!-- Back to Top -->
 <button id="back-to-top" title="回到顶部">↑</button>
 
@@ -221,6 +249,13 @@
 <script src="js/app.js" defer></script>
 <script src="js/algorithm-visualizer.js" defer></script>
 <script src="js/visualizer-extended.js" defer></script>
+<script src="js/viz-engine.js" defer></script>
+<script src="js/viz-traces-01.js" defer></script>
+<script src="js/viz-traces-02.js" defer></script>
+<script src="js/viz-traces-03.js" defer></script>
+<script src="js/viz-traces-04.js" defer></script>
+<script src="js/viz-traces-05.js" defer></script>
+<script src="js/viz-traces-06.js" defer></script>
 <script>
 document.addEventListener('DOMContentLoaded', function() {
   if (typeof Algorithm !== 'undefined' && Algorithm.init) {
