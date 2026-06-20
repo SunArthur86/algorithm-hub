@@ -32,6 +32,7 @@ interface AppState {
   reviewAlgorithm: Algorithm;
   dailyReviewLimit: number;
   planProgress: Record<string, boolean>;
+  autoEnroll: boolean;
   _hasHydrated: boolean;
 
   toggleFavorite: (id: string) => void;
@@ -52,6 +53,7 @@ interface AppState {
   setDailyReviewLimit: (n: number) => void;
   togglePlanDone: (lcId: string) => void;
   isPlanDone: (lcId: string) => boolean;
+  toggleAutoEnroll: () => void;
   resetProgress: () => void;
   resetReview: () => void;
   setHydrated: (b: boolean) => void;
@@ -75,6 +77,7 @@ export const useStore = create<AppState>()(
       reviewAlgorithm: 'sm2',
       dailyReviewLimit: 50,
       planProgress: {},
+      autoEnroll: true,
       _hasHydrated: false,
 
       toggleFavorite: (id) =>
@@ -152,6 +155,7 @@ export const useStore = create<AppState>()(
           return { planProgress: pp };
         }),
       isPlanDone: (lcId) => !!get().planProgress[lcId],
+      toggleAutoEnroll: () => set((s) => ({ autoEnroll: !s.autoEnroll })),
       resetProgress: () => set({ viewed: [], planProgress: {} }),
       resetReview: () => set({ reviewData: {} }),
       setHydrated: (b) => set({ _hasHydrated: b }),
@@ -175,6 +179,7 @@ export const useStore = create<AppState>()(
         reviewAlgorithm: s.reviewAlgorithm,
         dailyReviewLimit: s.dailyReviewLimit,
         planProgress: s.planProgress,
+        autoEnroll: s.autoEnroll,
       }),
       onRehydrateStorage: () => (state) => {
         state?.setHydrated(true);

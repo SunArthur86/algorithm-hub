@@ -10,6 +10,7 @@ import SearchBar from './SearchBar';
 import DifficultyBars from './DifficultyBars';
 import QuestionCard from './QuestionCard';
 import QuestionModal from './QuestionModal';
+import ReviewDashboard from './ReviewDashboard';
 import ProgressRing from './ProgressRing';
 
 export default function HomeClient({ questions }: { questions: Question[] }) {
@@ -24,6 +25,7 @@ export default function HomeClient({ questions }: { questions: Question[] }) {
   const [onlyFav, setOnlyFav] = useState(false);
   const [search, setSearch] = useState('');
   const [openIndex, setOpenIndex] = useState<number | null>(null);
+  const [reviewOpen, setReviewOpen] = useState(false);
 
   // 分类计数
   const counts = useMemo(() => {
@@ -81,6 +83,7 @@ export default function HomeClient({ questions }: { questions: Question[] }) {
         <div style={{ marginLeft: 'auto', display: 'flex', gap: '8px', alignItems: 'center' }}>
           <a href="/study-plan/" style={topLink}>📋 热题100</a>
           <a href="/columns/" style={topLink}>📚 专栏</a>
+          <button onClick={() => setReviewOpen(true)} style={topLink}>🔁 复习</button>
           <button onClick={toggleTheme} style={iconBtn}>
             {theme === 'light' ? '🌙' : '☀️'}
           </button>
@@ -127,6 +130,8 @@ export default function HomeClient({ questions }: { questions: Question[] }) {
         onClose={() => setOpenIndex(null)}
         onNavigate={setOpenIndex}
       />
+
+      {reviewOpen && <ReviewDashboard questions={questions} onClose={() => setReviewOpen(false)} />}
 
       <footer style={{ marginTop: '40px', padding: '16px 0', borderTop: '1px solid var(--border)', textAlign: 'center', fontSize: '12px', color: 'var(--text-tertiary)' }}>
         <a href={APP_CONFIG.repoUrl} target="_blank" rel="noreferrer">
