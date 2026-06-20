@@ -1105,3 +1105,54 @@ html {
     display: none !important;
   }
 }
+
+/* ===== Bonus / Extra Problems Section ===== */
+.extra-section {
+  border-top: 2px dashed var(--color-border, rgba(0,0,0,.08));
+  margin-top: 24px;
+}
+.extra-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 4px;
+  flex-wrap: wrap;
+}
+.extra-header h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 0;
+}
+.extra-subtitle {
+  font-size: .9rem;
+  font-weight: 400;
+  color: var(--color-text-secondary, #6e6e73);
+  margin-left: 8px;
+}
+.extra-count {
+  background: linear-gradient(135deg, #ff9500, #ff6a00);
+  color: #fff;
+  padding: 4px 12px;
+  border-radius: 999px;
+  font-size: .8rem;
+  font-weight: 600;
+}
+.extra-desc {
+  color: var(--color-text-secondary, #6e6e73);
+  font-size: .92rem;
+  margin: 8px 0 20px;
+}
+.extra-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.extra-card {
+  border-left: 3px solid #ff9500 !important;
+}
+.tag-extra {
+  background: linear-gradient(135deg, #ff9500, #ff6a00) !important;
+  color: #fff !important;
+  font-weight: 600;
+}

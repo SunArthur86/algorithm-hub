@@ -1,4 +1,6 @@
-/* Batch 2: 子串(3) + 普通数组(5) + 矩阵(4) = 12题 */
+/* Batch 2: 子串(3) + 普通数组(5) + 矩阵(4) = 12题
+   (注：#88 合并两个有序数组 不在 LeetCode 热题 100 列表中，
+   其题解已迁移至 js/extra-solutions.js 作为扩展练习) */
 
 SOLUTIONS["560"] = {
   thinking: "求和为 k 的子数组个数。暴力 O(n²)，但可以用前缀和+哈希表优化到 O(n)。核心：prefix[j]-prefix[i]=k 等价于找之前有多少个前缀和等于 prefix[j]-k。",
@@ -277,26 +279,4 @@ SOLUTIONS["240"] = {
     steps: ["从右上角 (0,n-1) 开始", "等于 target 返回 true", "大于 target 左移 col--", "小于 target 下移 row++"]
   }],
   pitfalls: ["不能从左上角或右下角开始——两个方向同增/同减", "左下角也可以作为起点"]
-};
-
-SOLUTIONS["88"] = {
-  thinking: "合并两个有序数组到 nums1。从后往前填充，避免覆盖 nums1 还没处理的元素。",
-  approaches: [{
-    name: "逆向双指针",
-    desc: "三个指针分别指向 nums1 有效末尾、nums2 末尾、合并后末尾。从后往前比较填入较大的值。",
-    complexity: { time: "O(m+n)", space: "O(1)" },
-    lang: "java",
-    code: `class Solution {
-    public void merge(int[] nums1, int m, int[] nums2, int n) {
-        int p1 = m - 1, p2 = n - 1, p = m + n - 1;
-        while (p1 >= 0 && p2 >= 0) {
-            nums1[p--] = nums1[p1] > nums2[p2] ? nums1[p1--] : nums2[p2--];
-        }
-        while (p2 >= 0) nums1[p--] = nums2[p2--];
-    }
-}`,
-    keyPoints: ["从后往前填避免覆盖", "三个指针：p1、p2、p", "nums2 有剩余时直接复制"],
-    steps: ["p1=m-1, p2=n-1, p=m+n-1", "比较填入较大值", "p2 有剩余继续填入"]
-  }],
-  pitfalls: ["从前往后填会覆盖 nums1 未处理元素", "p1 有剩余不用管——已经在正确位置"]
 };

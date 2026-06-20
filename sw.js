@@ -1,9 +1,11 @@
-/* Algorithm Interview Service Worker v1 */
-var CACHE_NAME = 'algo-hub-v1';
+/* Algorithm Interview Service Worker v2 (adds diagrams + extra-solutions) */
+var CACHE_NAME = 'algo-hub-v2';
 var ASSETS = [
   './',
   './index.html',
   './manifest.json',
+  './robots.txt',
+  './sitemap.xml',
   './css/main.css',
   './css/algorithm.css',
   './css/solutions-v2.css',
@@ -24,6 +26,8 @@ var ASSETS = [
   './js/sol-v2-07a.js',
   './js/sol-v2-07b.js',
   './js/sol-v2-07c.js',
+  './js/extra-solutions.js',
+  './js/diagrams.js',
   './js/app.js',
   './js/algorithm-visualizer.js',
   './js/visualizer-extended.js',

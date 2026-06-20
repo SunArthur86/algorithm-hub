@@ -34,6 +34,7 @@ var App = (function() {
     renderDiffTabs();
     renderSortTabs();
     renderProblemList();
+    renderExtraProblems();
     bindSearch();
     bindViewSwitch();
     bindKeyboard();
@@ -422,6 +423,53 @@ var App = (function() {
     });
   }
 
+  // === Bonus / Extra Problems (outside LeetCode Hot 100) ===
+  // Always rendered below the main list so learners can extend their practice.
+  function renderExtraProblems() {
+    var section = $('extra-section');
+    var list = $('extra-list');
+    var countEl = $('extra-count');
+    if (!section || !list) return;
+    var extras = (typeof EXTRA_SOLUTIONS !== 'undefined') ? EXTRA_SOLUTIONS : {};
+    var keys = Object.keys(extras);
+    if (keys.length === 0) { section.style.display = 'none'; return; }
+
+    section.style.display = 'block';
+    if (countEl) countEl.textContent = keys.length + ' 题';
+
+    list.innerHTML = '';
+    keys.forEach(function(id, idx) {
+      var e = extras[id];
+      var card = document.createElement('div');
+      card.className = 'problem-card extra-card';
+      card.style.animationDelay = Math.min(idx * 15, 300) + 'ms';
+      card.innerHTML =
+        '<div class="problem-card-left">' +
+          '<span class="problem-num">#' + id + '</span>' +
+          '<div class="problem-info">' +
+            '<a href="' + (e.url || '#') + '" target="_blank" class="problem-title">' + e.title + '</a>' +
+            '<div class="problem-tags">' +
+              '<span class="problem-cat">' + e.cat + '</span>' +
+              '<span class="tag tag-extra">🎁 扩展</span>' +
+              (e.tags || []).slice(0, 3).map(function(t) { return '<span class="tag">' + t + '</span>'; }).join('') +
+            '</div>' +
+          '</div>' +
+        '</div>' +
+        '<div class="problem-card-right">' +
+          '<button class="sol-btn" data-id="' + id + '" title="查看题解">📝</button>' +
+          '<span class="diff-badge diff-badge-' + (e.diff || 'medium').toLowerCase() + '">' + e.diff + '</span>' +
+        '</div>';
+
+      card.style.cursor = 'pointer';
+      card.addEventListener('click', function() { openProblemDetail(id); });
+      var solBtn = card.querySelector('.sol-btn');
+      if (solBtn) solBtn.addEventListener('click', function(ev) { ev.stopPropagation(); openProblemDetail(id); });
+      var link = card.querySelector('.problem-title');
+      if (link) link.addEventListener('click', function(ev) { ev.preventDefault(); openProblemDetail(id); });
+      list.appendChild(card);
+    });
+  }
+
   function highlightSearch(text) {
     if (!state.search) return text;
     try {
@@ -438,11 +486,27 @@ var App = (function() {
   }
 
   // === Problem Detail Modal ===
-  function openProblemDetail(id) {
+  // Resolve a problem by id across main list + bonus extra solutions.
+  // Returns {id,title,diff,cat,tags,url, fromExtra} or null.
+  function resolveProblem(id) {
     var p = PROBLEMS.find(function(x) { return x.id === id; });
+    if (p) {
+      return { id: p.id, title: p.title, diff: p.diff, cat: p.cat, tags: p.tags, url: p.url, fromExtra: false };
+    }
+    if (typeof EXTRA_SOLUTIONS !== 'undefined' && EXTRA_SOLUTIONS[id]) {
+      var e = EXTRA_SOLUTIONS[id];
+      return { id: e.id || id, title: e.title, diff: e.diff, cat: e.cat, tags: e.tags, url: e.url, fromExtra: true };
+    }
+    return null;
+  }
+
+  function openProblemDetail(id) {
+    var p = resolveProblem(id);
     if (!p) return;
     state.currentProblem = id;
-    var sol = (typeof SOLUTIONS !== 'undefined') ? SOLUTIONS[id] : null;
+    var sol = (typeof SOLUTIONS !== 'undefined' && SOLUTIONS[id]) ? SOLUTIONS[id]
+            : (typeof EXTRA_SOLUTIONS !== 'undefined' && EXTRA_SOLUTIONS[id]) ? EXTRA_SOLUTIONS[id]
+            : null;
     var isDone = state.completed.indexOf(p.id) >= 0;
     var isStarred = state.starred.indexOf(p.id) >= 0;
 
@@ -458,6 +522,9 @@ var App = (function() {
     html += '    <div class="modal-tags">';
     html += '      <span class="diff-badge diff-badge-' + p.diff.toLowerCase() + '">' + p.diff + '</span>';
     html += '      <span class="problem-cat">' + p.cat + '</span>';
+    if (p.fromExtra) {
+      html += '      <span class="tag tag-extra">🎁 扩展练习</span>';
+    }
     html += '      ' + p.tags.map(function(t) { return '<span class="tag">' + t + '</span>'; }).join('');
     html += '    </div>';
     html += '  </div>';
@@ -477,6 +544,14 @@ var App = (function() {
         html += '<div class="sol-section">';
         html += '  <div class="sol-section-title">💡 解题思路</div>';
         html += '  <div class="sol-thinking">' + sol.thinking + '</div>';
+        html += '</div>';
+      }
+
+      // Static diagram (inline SVG, self-contained — works offline)
+      if (typeof Diagrams !== 'undefined' && Diagrams.get(id)) {
+        html += '<div class="sol-section sol-diagram">';
+        html += '  <div class="sol-section-title">🖼 图解示意</div>';
+        html += '  <div class="diagram-wrap">' + Diagrams.get(id) + '</div>';
         html += '</div>';
       }
 

@@ -773,7 +773,7 @@
     "slug": "search-a-2d-matrix",
     "title": "搜索二维矩阵",
     "diff": "Medium",
-    "cat": "二二分查找",
+    "cat": "二分查找",
     "tags": [
       "数组",
       "二分查找",
