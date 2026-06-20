@@ -6,6 +6,7 @@
 顺序 ASCII slug（lbd-001）。
 """
 import os
+import subprocess
 import fitz  # PyMuPDF
 from _epub_common import yaml_escape, SKIP_TITLE_KEYWORDS
 
@@ -66,9 +67,18 @@ def main():
                         pix = None
                         continue
                     order_for_img = order + 1
-                    img_name = f'{order_for_img:02d}-{img_count:02d}.png'
-                    pix.save(os.path.join(OUT_IMG, img_name))
+                    # 先存临时 PNG，再用 cwebp 压成 WebP（视觉无损，体积约 1/10）
+                    tmp_png = os.path.join(OUT_IMG, f'_tmp_{order_for_img:02d}-{img_count:02d}.png')
+                    img_name = f'{order_for_img:02d}-{img_count:02d}.webp'
+                    pix.save(tmp_png)
                     pix = None
+                    resize = ['-resize', '1600', '0'] if fitz.Pixmap(doc, xref).width > 1600 else []
+                    subprocess.run(
+                        ['cwebp', '-quiet', '-q', '85', *resize, tmp_png,
+                         '-o', os.path.join(OUT_IMG, img_name)],
+                        check=True, capture_output=True,
+                    )
+                    os.remove(tmp_png)
                     img_count += 1
                 except Exception as e:
                     print(f'  img extract warn (p{pno}): {e}')
