@@ -8,7 +8,8 @@
 
 ### 📋 100 题完整题解（严格对齐热题 100）
 - **完全复刻** [leetcode.cn/studyplan/top-100-liked](https://leetcode.cn/studyplan/top-100-liked/) 的 17 大分类
-- **Java 为主要语言**，每题含解题思路、多解法、复杂度、关键点、陷阱（由 `public/legacy/sol-v2-*.js` 驱动）
+- **每题 9 大板块富内容**：📝 题目描述（题意翻译）/ 🧠 思考路径 / 💻 Java 题解（多解法+复杂度+关键点+步骤）/ ⚠️ 易错点 / 📊 复杂度分析 / 🏢 实际业务应用 / 📖 名著形象类比 / 🎵 记忆口诀 / 🔗 延伸练习
+- **内容来源**：legacy Java 题解 + 参考目录 markdown（题意翻译/名著类比/记忆口诀等），`scripts/rewrite_questions.py` 合并生成
 - **100 题逐题动画**：统一 viz-engine.js Canvas 渲染器，7 种可视化类型（数组/链表/树/DP/矩阵/哈希/栈）
 - **13 幅内联 SVG 图解**（静态）
 
@@ -16,6 +17,7 @@
 - 复刻力扣学习计划：大进度环、连续学习天数、预计完成日期
 - 17 分类分组列表，勾选进度本地保存（localStorage）
 - 勾选联动题库首页题卡
+- **进度导出/导入**：一键备份为 JSON，支持跨设备迁移
 
 ### 📚 算法知识专栏（三本书）
 解析三本经典算法书籍为知识长文（共 174 篇）：
@@ -26,12 +28,20 @@
 ### 🔁 智能间隔复习
 - **三种算法**：SM-2 智能间隔 / Leitner 卡盒 / 艾宾浩斯曲线
 - 到期队列、四档评分（再来/困难/良好/简单）、下次复习时间预览
+- **近 7 天学习统计柱状图**、掌握度分布
 - 费曼快学卡 + 第一性原理卡（题目 frontmatter 驱动）
+
+### 🔍 搜索与筛选
+- 分类标签（17 分类）、难度筛选、排序（计划顺序/题号/难度）
+- **标签云**：按出现频次展示热门标签，点击筛选
+- **`/` 快捷键**聚焦搜索框，带搜索历史
 
 ### 🎮 其他
 - 收藏、自评掌握度、笔记
 - 分类筛选 / 难度筛选 / 排序 / 搜索（带历史）
-- 深色模式、PWA 离线、响应式
+- 深色模式（平滑过渡）、PWA 离线、响应式（移动端适配）
+- 无障碍（a11y）：键盘焦点样式、aria 标签、prefers-reduced-motion
+- SEO：OpenGraph / twitter cards / keywords
 
 ## 🛠 技术栈
 - **Next.js 15**（App Router，`output: export` 静态导出 → GitHub Pages）
@@ -60,7 +70,9 @@
 │   └── sw.js               # Service Worker
 ├── legacy/                 # 旧 HTML/JS 项目备份
 └── scripts/                # 数据迁移 + 书籍提取脚本
-    ├── migrate_problems.py        # 100 题 → markdown
+    ├── migrate_problems.py        # 100 题元数据 → markdown（基础版）
+    ├── rewrite_questions.py       # 100 题富内容重写（合并参考目录 + legacy 题解）
+    ├── compress_images.py         # PNG → WebP 压缩
     ├── _epub_common.py            # epub 解析共享模块
     ├── extract_ds_beauty.py       # 数据结构与算法之美
     ├── extract_dp_book.py         # 动态规划面试宝典
@@ -96,10 +108,11 @@ python3 scripts/extract_labuladong.py
 |--------|------|
 | `←` `→` | 上一题 / 下一题（弹窗内） |
 | `Esc` | 关闭弹窗 |
+| `/` | 聚焦搜索框（首页） |
 
 ## 📊 数据统计
-- **100 题**（热题 100，17 分类）
-- **174 篇专栏**（3 本书）
+- **100 题**（热题 100，17 分类），每题 9 大板块富内容
+- **174 篇专栏**（3 本书），labuladong 483 张图已压缩为 WebP（18M）
 - **100 题逐题动画** + 18 种算法动画 + 13 幅 SVG 图解
 - **280 个静态页面**
 
