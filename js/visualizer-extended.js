@@ -40,11 +40,18 @@ var AlgorithmExtended = (function() {
     return true;
   }
 
+  // 返回 CSS 像素尺寸（主模块 Algorithm 设置了 setTransform(dpr)，所以这里用 width/dpr）
+  function size() {
+    if (!canvas) return { w: 800, h: 400 };
+    var dpr = window.devicePixelRatio || 1;
+    return { w: canvas.width / dpr, h: canvas.height / dpr };
+  }
+
   function clearCanvas() {
     if (!ctx) return;
-    var w = canvas.width, h = canvas.height;
+    var s = size();
     ctx.fillStyle = getComputedStyle(document.documentElement).getPropertyValue('--bg-secondary') || '#f5f5f7';
-    ctx.fillRect(0, 0, w, h);
+    ctx.fillRect(0, 0, s.w, s.h);
   }
 
   function getColor(name) {
@@ -82,7 +89,7 @@ var AlgorithmExtended = (function() {
 
     function drawDP(curI, curJ) {
       clearCanvas();
-      var cw = canvas.width, ch = canvas.height;
+      var cw = size().w, ch = size().h;
       var cols = W + 1, rows = n + 1;
       var cellW = Math.min(60, (cw - 160) / cols);
       var cellH = Math.min(45, (ch - 100) / rows);
@@ -172,8 +179,9 @@ var AlgorithmExtended = (function() {
 
     function draw() {
       clearCanvas();
-      var cellW = Math.min(50, (canvas.width - 120) / (n + 2));
-      var cellH = Math.min(40, (canvas.height - 80) / (m + 2));
+      var cw = size().w, ch = size().h;
+      var cellW = Math.min(50, (cw - 120) / (n + 2));
+      var cellH = Math.min(40, (ch - 80) / (m + 2));
       var sx = 80, sy = 50;
 
       ctx.font = 'bold 14px monospace';
@@ -236,7 +244,7 @@ var AlgorithmExtended = (function() {
 
     function draw(step) {
       clearCanvas();
-      var cw = canvas.width, ch = canvas.height;
+      var cw = size().w, ch = size().h;
       var stepW = Math.min(70, (cw - 80) / (n + 1));
       var stepH = 40;
       var baseY = ch / 2 + 40;
@@ -296,7 +304,7 @@ var AlgorithmExtended = (function() {
 
     function draw() {
       clearCanvas();
-      var cw = canvas.width, ch = canvas.height;
+      var cw = size().w, ch = size().h;
       var nodeW = 70, nodeH = 50;
       var gap = 40;
       var totalW = nodes.length * (nodeW + gap) - gap;
@@ -392,11 +400,11 @@ var AlgorithmExtended = (function() {
       if (node.left) layout(node.left, x - spread, y + 80, spread / 2);
       if (node.right) layout(node.right, x + spread, y + 80, spread / 2);
     }
-    layout(root, canvas.width / 2, 50, canvas.width / 5);
+    layout(root, size().w / 2, 50, size().w / 5);
 
     function draw(highlightNode, order, orderName) {
       clearCanvas();
-      var cw = canvas.width, ch = canvas.height;
+      var cw = size().w, ch = size().h;
 
       // Draw edges first
       function drawEdges(node) {
@@ -484,7 +492,7 @@ var AlgorithmExtended = (function() {
 
     function draw() {
       clearCanvas();
-      var cw = canvas.width, ch = canvas.height;
+      var cw = size().w, ch = size().h;
       var cellW = Math.min(70, (cw - 60) / sorted.length);
       var cellH = 60;
       var baseY = ch / 2;
@@ -566,7 +574,7 @@ var AlgorithmExtended = (function() {
 
     function draw(currRight) {
       clearCanvas();
-      var cw = canvas.width, ch = canvas.height;
+      var cw = size().w, ch = size().h;
       var cellW = Math.min(70, (cw - 60) / chars.length);
       var cellH = 60;
       var baseY = ch / 2;
@@ -784,8 +792,17 @@ var AlgorithmExtended = (function() {
 
   return {
     init: init,
-    runExt: runExt
+    runExt: runExt,
+    // 暴露扩展算法 key 列表，供主模块 Algorithm 判断是否应让出画布
+    keys: function() { return Object.keys(EXT_ALGOS); }
   };
+})();
+
+// 全局快捷列表（供主模块 Algorithm.start() 判断当前是否为扩展算法）
+var EXT_ALGO_KEYS = (function() {
+  var k = [];
+  if (typeof AlgorithmExtended !== 'undefined' && AlgorithmExtended.keys) k = AlgorithmExtended.keys();
+  return k;
 })();
 
 document.addEventListener('DOMContentLoaded', function() {

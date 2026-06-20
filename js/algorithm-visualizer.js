@@ -788,6 +788,12 @@ var Algorithm = (function() {
   }
 
   async function start() {
+    // 扩展算法（链表/树/DP/双指针/滑动窗口）由 AlgorithmExtended 独占渲染。
+    // 若主模块继续运行会调用 resetArr()+drawBars() 用柱状图覆盖画布，
+    // 导致"默认都是柱状图 / 看不到链表"等问题。这里直接交还控制权。
+    if (currentAlgo && typeof EXT_ALGO_KEYS !== 'undefined' && EXT_ALGO_KEYS.indexOf(currentAlgo) >= 0) {
+      return;
+    }
     if (running) {
       stopFlag = true;
       await sleep();
@@ -925,6 +931,12 @@ var Algorithm = (function() {
       // 清空状态标签
       var statusEl = document.getElementById('algo-status');
       if (statusEl) { statusEl.textContent = ''; statusEl.className = 'algo-status'; }
+      // 扩展算法（链表/树/DP 等）的画布由 AlgorithmExtended 接管，不画默认柱状图
+      var isExt = btn.dataset.ext === '1';
+      if (isExt) {
+        running = false;
+        return;
+      }
       setTimeout(function() {
         stopFlag = false;
         running = false;

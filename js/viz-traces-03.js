@@ -117,18 +117,18 @@ VIZ_TRACES["160"] = function() {
 VIZ_TRACES["206"] = function() {
   var nodes = [1,2,3,4,5], frames = [];
   var prev = -1, curr = 0;
-  frames.push({type:'linkedlist', nodes:nodes.slice(), pointers:{prev:-1, curr:0}, msg:'prev=null, curr=head'});
+  frames.push({type:'linkedlist', nodes:nodes.slice(), pointers:{prev:-1, curr:0}, msg:'初始: prev=null, curr=head(节点1)'});
   while (curr < nodes.length) {
-    var hl = {}; hl[curr] = 'current';
-    frames.push({type:'linkedlist', nodes:nodes.slice(), pointers:{prev:prev, curr:curr, next:curr+1}, highlights:hl, msg:'保存 next=' + nodes[curr+1] + ', 让curr.next指向prev'});
-    // 模拟翻转方向
-    var display = nodes.slice();
-    if (prev >= 0) display[prev] = '⤴';
-    if (curr < nodes.length-1) display[curr] = nodes[curr] + '→prev';
-    frames.push({type:'linkedlist', nodes:nodes.slice(), pointers:{prev:curr, curr:curr+1}, highlights:{curr:'sorted'}, msg:'prev移到curr, curr移到next'});
+    // 第1步：高亮当前 curr 节点，展示将要做的事
+    var hl1 = {}; hl1[curr] = 'current';
+    if (prev >= 0) hl1[prev] = 'new';
+    frames.push({type:'linkedlist', nodes:nodes.slice(), pointers:{prev:prev, curr:curr}, highlights:hl1, msg:'① 保存 next=节点' + nodes[curr+1] + '；② 让节点' + nodes[curr] + '.next 指向 prev'});
+    // 第2步：prev 前移、curr 后移（用真实索引高亮，修正原来用字面量 'curr' 的 bug）
+    var hl2 = {}; hl2[prev >= 0 ? prev : curr] = 'done';
+    frames.push({type:'linkedlist', nodes:nodes.slice(), pointers:{prev:curr, curr:curr+1}, highlights:hl2, msg:'③ prev 移到 curr(节点' + nodes[curr] + ')，curr 移到 next'});
     prev = curr; curr++;
   }
-  frames.push({type:'linkedlist', nodes:nodes.slice().reverse(), result:'✅ 反转完成: 5→4→3→2→1', msg:'✅ 反转完成'});
+  frames.push({type:'linkedlist', nodes:nodes.slice().reverse(), result:'✅ 反转完成: 5→4→3→2→1', msg:'✅ 反转完成！prev 现在指向新的头节点 5'});
   return frames;
 };
 
