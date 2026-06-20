@@ -2,6 +2,7 @@ import { getAllLcIds, getQuestionByLcId } from '@/lib/questions';
 import { APP_CONFIG } from '@/lib/config';
 import { notFound } from 'next/navigation';
 import QuestionContent from '@/components/QuestionContent';
+import Link from 'next/link';
 import type { Metadata } from 'next';
 
 export function generateStaticParams() {
@@ -29,12 +30,12 @@ export default async function Page({ params }: { params: Promise<{ lcId: string 
   const catCfg = APP_CONFIG.categories[q.category] || APP_CONFIG.categories['all'];
   return (
     <main style={{ maxWidth: 760, margin: '0 auto', padding: '16px', minHeight: '100vh' }}>
-      <a
-        href="../../"
+      <Link
+        href="/"
         style={{ display: 'inline-block', marginBottom: '12px', fontSize: '13px' }}
       >
         ← 返回题库
-      </a>
+      </Link>
       <h1 style={{ fontSize: '22px', fontWeight: 700, margin: '0 0 4px' }}>
         <span style={{ marginRight: '6px' }}>{catCfg.icon}</span>
         {q.lcId}. {q.title}

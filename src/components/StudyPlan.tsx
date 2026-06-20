@@ -1,6 +1,7 @@
 'use client';
 
 import { useMemo } from 'react';
+import Link from 'next/link';
 import type { Question } from '@/lib/types';
 import type { StudyPlan as Plan } from '@/lib/study-plan';
 import { useStore } from '@/lib/store';
@@ -117,7 +118,7 @@ export default function StudyPlan({ plan, questions }: Props) {
                   );
                 }
                 return (
-                  <a key={lcId} href={`/question/${lcId}/`} style={{ ...row(done), textDecoration: 'none', color: 'var(--text)' }}>
+                  <Link key={lcId} href={`/question/${lcId}/`} style={{ ...row(done), textDecoration: 'none', color: 'var(--text)' }}>
                     <input
                       type="checkbox"
                       checked={done}
@@ -145,7 +146,7 @@ export default function StudyPlan({ plan, questions }: Props) {
                       {q.difficulty}
                     </span>
                     {(APP_CONFIG as any) && q.hasViz && <span title="逐题动画">🎬</span>}
-                  </a>
+                  </Link>
                 );
               })}
             </div>

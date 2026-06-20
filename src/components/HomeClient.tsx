@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useMemo, useState } from 'react';
+import Link from 'next/link';
 import type { Question } from '@/lib/types';
 import { APP_CONFIG } from '@/lib/config';
 import { useStore } from '@/lib/store';
@@ -88,8 +89,8 @@ export default function HomeClient({ questions }: { questions: Question[] }) {
         </h1>
         <span style={{ fontSize: '12px', color: 'var(--text-tertiary)' }}>{questions.length} 题</span>
         <div style={{ marginLeft: 'auto', display: 'flex', gap: '8px', alignItems: 'center' }}>
-          <a href="/study-plan/" style={topLink}>📋 热题100</a>
-          <a href="/columns/" style={topLink}>📚 专栏</a>
+          <Link href="/study-plan/" style={topLink}>📋 热题100</Link>
+          <Link href="/columns/" style={topLink}>📚 专栏</Link>
           <button onClick={() => setReviewOpen(true)} style={topLink}>🔁 复习</button>
           <button onClick={toggleTheme} style={iconBtn}>
             {theme === 'light' ? '🌙' : '☀️'}

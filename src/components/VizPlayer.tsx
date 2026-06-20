@@ -21,63 +21,75 @@ const SCRIPTS = [
   '/legacy/viz-traces-06.js',
 ];
 
-function loadScript(src: string): Promise<void> {
-  return new Promise((resolve, reject) => {
-    const s = document.createElement('script');
-    s.src = src;
-    s.onload = () => resolve();
-    s.onerror = () => reject(new Error('failed to load ' + src));
-    document.body.appendChild(s);
-  });
+let _scriptsLoaded: Promise<void> | null = null;
+
+function loadAllScripts(): Promise<void> {
+  if (_scriptsLoaded) return _scriptsLoaded;
+  _scriptsLoaded = (async () => {
+    for (const s of SCRIPTS) {
+      await new Promise<void>((resolve, reject) => {
+        const el = document.createElement('script');
+        el.src = BASE + s;
+        el.onload = () => resolve();
+        el.onerror = () => reject(new Error('failed to load ' + s));
+        document.body.appendChild(el);
+      }).catch((e) => console.error(e));
+    }
+  })();
+  return _scriptsLoaded;
 }
 
 export default function VizPlayer({ lcId }: { lcId: number }) {
-  const [ready, setReady] = useState(false);
-  const [hasTrace, setHasTrace] = useState(false);
-  const loadedRef = useRef(false);
+  const [status, setStatus] = useState<'loading' | 'ready' | 'no-trace'>('loading');
+  const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     let cancelled = false;
-    if (loadedRef.current) return;
-    loadedRef.current = true;
+    const key = String(lcId);
 
     (async () => {
-      for (const s of SCRIPTS) {
-        try {
-          await loadScript(BASE + s);
-        } catch (e) {
-          console.error(e);
-        }
+      await loadAllScripts();
+      if (cancelled || !containerRef.current) return;
+      if (!window.VizEngine) {
+        setStatus('no-trace');
+        return;
       }
+      // 重置初始化标志，强制重新绑定 DOM（每次挂载新 canvas）
+      window.VizEngine._initialized = false;
+      window.VizEngine.stop && window.VizEngine.stop();
+      window.VizEngine.init();
+      window.VizEngine._initialized = true;
+      const has = window.VizEngine.load(key);
       if (cancelled) return;
-      if (window.VizEngine) {
-        if (!window.VizEngine._initialized) {
-          window.VizEngine.init();
-          window.VizEngine._initialized = true;
-        }
-        setHasTrace(window.VizEngine.load(String(lcId)));
-      }
-      setReady(true);
+      setStatus(has ? 'ready' : 'no-trace');
     })();
 
     return () => {
       cancelled = true;
+      try {
+        window.VizEngine?.stop?.();
+      } catch {}
     };
   }, [lcId]);
 
-  if (!ready) {
-    return <div style={{ textAlign: 'center', padding: '24px', color: 'var(--text-tertiary)' }}>加载动画引擎…</div>;
-  }
-
+  // 始终渲染完整的 DOM 骨架（canvas + 控件 + 状态元素），viz-engine 的 init() 才能 getElementById 命中
   return (
-    <div style={{ marginTop: '12px' }}>
+    <div ref={containerRef} style={{ marginTop: '12px' }}>
       <canvas
         id="viz-canvas"
         width={640}
         height={320}
-        style={{ width: '100%', maxWidth: 640, background: 'var(--card-secondary)', borderRadius: 'var(--radius-md)', border: '1px solid var(--border)' }}
+        style={{
+          width: '100%',
+          maxWidth: 640,
+          background: 'var(--card-secondary)',
+          borderRadius: 'var(--radius-md)',
+          border: '1px solid var(--border)',
+        }}
       />
-      <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginTop: '8px', flexWrap: 'wrap', justifyContent: 'center' }}>
+      {/* viz-engine render() 会写这些元素 */}
+      <div id="viz-message" style={{ textAlign: 'center', fontSize: '12px', color: 'var(--text-secondary)', margin: '6px 0', minHeight: '16px' }} />
+      <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap', justifyContent: 'center' }}>
         <button id="viz-step-back" style={btn}>◀</button>
         <button id="viz-play" style={{ ...btn, background: 'var(--primary)', color: '#fff', borderColor: 'var(--primary)' }}>▶ 播放</button>
         <button id="viz-step-fwd" style={btn}>▶|</button>
@@ -85,7 +97,16 @@ export default function VizPlayer({ lcId }: { lcId: number }) {
         <input id="viz-speed" type="range" min={1} max={10} defaultValue={6} style={{ marginLeft: '6px', width: '100px' }} />
         <span id="viz-speed-val" style={{ fontSize: '12px', color: 'var(--text-tertiary)' }}>6</span>
       </div>
-      {!hasTrace && (
+      <div style={{ marginTop: '6px' }}>
+        <div id="viz-counter" style={{ textAlign: 'center', fontSize: '11px', color: 'var(--text-tertiary)' }} />
+        <div id="viz-progress" style={{ height: '4px', background: 'var(--border)', borderRadius: '2px', marginTop: '4px', overflow: 'hidden' }} />
+      </div>
+      {status === 'loading' && (
+        <div style={{ textAlign: 'center', padding: '8px', color: 'var(--text-tertiary)', fontSize: '12px' }}>
+          加载动画引擎…
+        </div>
+      )}
+      {status === 'no-trace' && (
         <p style={{ textAlign: 'center', fontSize: '12px', color: 'var(--text-tertiary)', marginTop: '6px' }}>
           此题暂无逐题动画
         </p>

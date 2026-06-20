@@ -3,6 +3,7 @@ import { getAllQuestions } from '@/lib/questions';
 import { APP_CONFIG } from '@/lib/config';
 import Markdown from '@/components/Markdown';
 import { notFound } from 'next/navigation';
+import Link from 'next/link';
 import type { Metadata } from 'next';
 
 export function generateStaticParams() {
@@ -31,9 +32,9 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
 
   return (
     <main style={{ maxWidth: 760, margin: '0 auto', padding: '16px', minHeight: '100vh' }}>
-      <a href="/columns/" style={{ display: 'inline-block', marginBottom: '12px', fontSize: '13px' }}>
+      <Link href="/columns/" style={{ display: 'inline-block', marginBottom: '12px', fontSize: '13px' }}>
         ← 返回专栏
-      </a>
+      </Link>
       <div style={{ fontSize: '12px', color: 'var(--text-tertiary)', marginBottom: '4px' }}>
         {srcCfg?.icon} {srcCfg?.label}
       </div>
@@ -46,9 +47,9 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
           <ul style={{ margin: 0, paddingLeft: '20px', lineHeight: 1.8 }}>
             {related.map((q) => (
               <li key={q.lcId} style={{ fontSize: '13px' }}>
-                <a href={`/question/${q.lcId}/`}>
+                <Link href={`/question/${q.lcId}/`}>
                   #{q.lcId} {q.title}
-                </a>
+                </Link>
               </li>
             ))}
           </ul>

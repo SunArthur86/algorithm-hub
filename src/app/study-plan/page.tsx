@@ -1,6 +1,7 @@
 import { getTop100Plan } from '@/lib/study-plan';
 import { getAllQuestions } from '@/lib/questions';
 import StudyPlan from '@/components/StudyPlan';
+import Link from 'next/link';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -13,9 +14,9 @@ export default function Page() {
   const questions = getAllQuestions();
   return (
     <main style={{ maxWidth: 760, margin: '0 auto', padding: '16px', minHeight: '100vh' }}>
-      <a href="/" style={{ display: 'inline-block', marginBottom: '12px', fontSize: '13px' }}>
+      <Link href="/" style={{ display: 'inline-block', marginBottom: '12px', fontSize: '13px' }}>
         ← 返回题库
-      </a>
+      </Link>
       <StudyPlan plan={plan} questions={questions} />
     </main>
   );
