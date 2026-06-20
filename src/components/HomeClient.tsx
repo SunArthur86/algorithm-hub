@@ -1,6 +1,6 @@
 'use client';
 
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import type { Question } from '@/lib/types';
 import { APP_CONFIG } from '@/lib/config';
 import { useStore } from '@/lib/store';
@@ -18,6 +18,13 @@ export default function HomeClient({ questions }: { questions: Question[] }) {
   const toggleTheme = useStore((s) => s.toggleTheme);
   const viewed = useStore((s) => s.viewed);
   const favorites = useStore((s) => s.favorites);
+
+  // 同步深色模式 class 到 <html>（持久化）
+  useEffect(() => {
+    if (typeof document === 'undefined') return;
+    document.documentElement.classList.toggle('dark', theme === 'dark');
+    document.documentElement.setAttribute('data-theme', theme);
+  }, [theme]);
 
   const [cat, setCat] = useState('all');
   const [diff, setDiff] = useState<DifficultyFilter>('all');
