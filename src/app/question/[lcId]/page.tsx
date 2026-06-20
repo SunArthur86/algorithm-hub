@@ -29,7 +29,7 @@ export default async function Page({ params }: { params: Promise<{ lcId: string 
   if (!q) notFound();
   const catCfg = APP_CONFIG.categories[q.category] || APP_CONFIG.categories['all'];
   return (
-    <main style={{ maxWidth: 760, margin: '0 auto', padding: '16px', minHeight: '100vh' }}>
+    <main className="detail-main" style={{ maxWidth: 760, margin: '0 auto', padding: '16px', minHeight: '100vh' }}>
       <Link
         href="/"
         style={{ display: 'inline-block', marginBottom: '12px', fontSize: '13px' }}

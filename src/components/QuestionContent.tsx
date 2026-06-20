@@ -28,6 +28,7 @@ export default function QuestionContent({ q }: { q: Question }) {
   const setNote = useStore((s) => s.setNote);
   const logStudy = useStore((s) => s.logStudy);
   const [showViz, setShowViz] = useState(false);
+  const [expanded, setExpanded] = useState(false);
 
   const markDone = () => {
     markViewed(key);
@@ -74,7 +75,13 @@ export default function QuestionContent({ q }: { q: Question }) {
 
       {showViz && q.hasViz && <VizPlayer lcId={q.lcId} />}
 
-      <Markdown>{q.answer}</Markdown>
+      {expanded ? (
+        <Markdown>{q.answer}</Markdown>
+      ) : (
+        <button onClick={() => setExpanded(true)} style={{ ...btn, width: '100%', padding: '10px', marginTop: '4px' }}>
+          📖 展开完整解析（题目描述 / 思路 / Java 题解 / 易错点 / 类比…）
+        </button>
+      )}
 
       <FeynmanCard feynman={q.feynman} />
       <FirstPrincipleCard fp={q.first_principle} />

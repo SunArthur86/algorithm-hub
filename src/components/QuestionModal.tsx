@@ -32,6 +32,7 @@ export default function QuestionModal({ question, list, index, onClose, onNaviga
 
   return (
     <div
+      className="q-modal-overlay"
       onClick={onClose}
       style={{
         position: 'fixed',
@@ -46,6 +47,7 @@ export default function QuestionModal({ question, list, index, onClose, onNaviga
       }}
     >
       <div
+        className="q-modal-inner"
         onClick={(e) => e.stopPropagation()}
         style={{
           background: 'var(--bg-soft)',

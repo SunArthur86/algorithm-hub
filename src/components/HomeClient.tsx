@@ -88,7 +88,7 @@ export default function HomeClient({ questions }: { questions: Question[] }) {
           {APP_CONFIG.appIcon} {APP_CONFIG.appName}
         </h1>
         <span style={{ fontSize: '12px', color: 'var(--text-tertiary)' }}>{questions.length} 题</span>
-        <div style={{ marginLeft: 'auto', display: 'flex', gap: '8px', alignItems: 'center' }}>
+        <div className="top-nav" style={{ marginLeft: 'auto', display: 'flex', gap: '8px', alignItems: 'center' }}>
           <Link href="/study-plan/" style={topLink}>📋 热题100</Link>
           <Link href="/columns/" style={topLink}>📚 专栏</Link>
           <button onClick={() => setReviewOpen(true)} style={topLink}>🔁 复习</button>
@@ -117,6 +117,7 @@ export default function HomeClient({ questions }: { questions: Question[] }) {
 
       {/* 题目网格 */}
       <div
+        className="q-grid"
         style={{
           display: 'grid',
           gridTemplateColumns: 'repeat(auto-fill, minmax(240px, 1fr))',

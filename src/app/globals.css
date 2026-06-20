@@ -190,3 +190,29 @@ button {
   background: var(--border-strong);
   border-radius: 4px;
 }
+
+/* 移动端响应式 */
+@media (max-width: 640px) {
+  /* 题卡网格：单列 */
+  .q-grid {
+    grid-template-columns: 1fr !important;
+  }
+  /* modal 内边距收紧 */
+  .q-modal-inner {
+    padding: 18px 16px !important;
+    margin-top: 0 !important;
+  }
+  .q-modal-overlay {
+    padding: 0 !important;
+    align-items: stretch !important;
+  }
+  /* 顶栏按钮换行 */
+  .top-nav {
+    flex-wrap: wrap;
+    gap: 6px !important;
+  }
+  /* 题目详情主区 padding 收紧 */
+  .detail-main {
+    padding: 12px !important;
+  }
+}
