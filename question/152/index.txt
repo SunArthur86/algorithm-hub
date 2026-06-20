@@ -1,0 +1,153 @@
+1:"$Sreact.fragment"
+2:I[5244,[],""]
+3:I[3866,[],""]
+5:I[6213,[],"OutletBoundary"]
+7:I[6213,[],"MetadataBoundary"]
+9:I[6213,[],"ViewportBoundary"]
+b:I[4835,[],""]
+:HL["/algorithm-interview/_next/static/css/c1e787639001e16b.css","style"]
+0:{"P":null,"b":"xos97fAiWtKfKXI6hZLx4","p":"/algorithm-interview","c":["","question","152",""],"i":false,"f":[[["",{"children":["question",{"children":[["lcId","152","d"],{"children":["__PAGE__",{}]}]}]},"$undefined","$undefined",true],["",["$","$1","c",{"children":[[["$","link","0",{"rel":"stylesheet","href":"/algorithm-interview/_next/static/css/c1e787639001e16b.css","precedence":"next","crossOrigin":"$undefined","nonce":"$undefined"}]],["$","html",null,{"lang":"zh","children":[["$","head",null,{"children":["$","script",null,{"dangerouslySetInnerHTML":{"__html":"\ntry {\n  var raw = localStorage.getItem('algo-interview');\n  var theme = 'light';\n  if (raw) { var p = JSON.parse(raw); theme = (p.state && p.state.theme) || 'light'; }\n  if (theme === 'dark') {\n    document.documentElement.classList.add('dark');\n    document.documentElement.setAttribute('data-theme', 'dark');\n  }\n} catch (e) {}\n"}}]}],["$","body",null,{"children":[["$","$L2",null,{"parallelRouterKey":"children","segmentPath":["children"],"error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L3",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":[[],[["$","title",null,{"children":"404: This page could not be found."}],["$","div",null,{"style":{"fontFamily":"system-ui,\"Segoe UI\",Roboto,Helvetica,Arial,sans-serif,\"Apple Color Emoji\",\"Segoe UI Emoji\"","height":"100vh","textAlign":"center","display":"flex","flexDirection":"column","alignItems":"center","justifyContent":"center"},"children":["$","div",null,{"children":[["$","style",null,{"dangerouslySetInnerHTML":{"__html":"body{color:#000;background:#fff;margin:0}.next-error-h1{border-right:1px solid rgba(0,0,0,.3)}@media (prefers-color-scheme:dark){body{color:#fff;background:#000}.next-error-h1{border-right:1px solid rgba(255,255,255,.3)}}"}}],["$","h1",null,{"className":"next-error-h1","style":{"display":"inline-block","margin":"0 20px 0 0","padding":"0 23px 0 0","fontSize":24,"fontWeight":500,"verticalAlign":"top","lineHeight":"49px"},"children":404}],["$","div",null,{"style":{"display":"inline-block"},"children":["$","h2",null,{"style":{"fontSize":14,"fontWeight":400,"lineHeight":"49px","margin":0},"children":"This page could not be found."}]}]]}]}]]],"forbidden":"$undefined","unauthorized":"$undefined"}],["$","script",null,{"dangerouslySetInnerHTML":{"__html":"\nif ('serviceWorker' in navigator) {\n  window.addEventListener('load', function () {\n    navigator.serviceWorker.register('/algorithm-interview/sw.js').catch(function () {});\n  });\n}\n"}}]]}]]}]]}],{"children":["question",["$","$1","c",{"children":[null,["$","$L2",null,{"parallelRouterKey":"children","segmentPath":["children","question","children"],"error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L3",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","forbidden":"$undefined","unauthorized":"$undefined"}]]}],{"children":[["lcId","152","d"],["$","$1","c",{"children":[null,["$","$L2",null,{"parallelRouterKey":"children","segmentPath":["children","question","children","$0:f:0:1:2:children:2:children:0","children"],"error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L3",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","forbidden":"$undefined","unauthorized":"$undefined"}]]}],{"children":["__PAGE__",["$","$1","c",{"children":["$L4",null,["$","$L5",null,{"children":"$L6"}]]}],{},null,false]},null,false]},null,false]},null,false],["$","$1","h",{"children":[null,["$","$1","mJbf32ZnI4rPcF4vi4h_Q",{"children":[["$","$L7",null,{"children":"$L8"}],["$","$L9",null,{"children":"$La"}],null]}]]}],false]],"m":"$undefined","G":["$b","$undefined"],"s":false,"S":true}
+c:I[8173,["173","static/chunks/173-69860a4742bb7020.js","829","static/chunks/829-7533e70598480772.js","937","static/chunks/937-ef36a5ac4bc37a7e.js","447","static/chunks/447-06af9414e164c047.js","8","static/chunks/app/question/%5BlcId%5D/page-478b0d2a69e222f2.js"],""]
+d:I[3447,["173","static/chunks/173-69860a4742bb7020.js","829","static/chunks/829-7533e70598480772.js","937","static/chunks/937-ef36a5ac4bc37a7e.js","447","static/chunks/447-06af9414e164c047.js","8","static/chunks/app/question/%5BlcId%5D/page-478b0d2a69e222f2.js"],"default"]
+e:T1b1e,# 152. 乘积最大子数组
+
+> 难度：**Medium** | 分类：动态规划 | 标签：数组, 动态规划
+
+> 🔗 力扣链接：[https://leetcode.cn/problems/maximum-product-subarray/](https://leetcode.cn/problems/maximum-product-subarray/)
+
+## 📝 题目描述
+
+给你一个整数数组 `nums`，找一个连续子数组，让这个子数组里所有元素的乘积最大，返回这个最大乘积。
+
+重点不在"乘法怎么算"，而在"负数会翻转最大最小，怎么同时维护两个状态"。
+
+- 题号：152
+- 题目名：乘积最大子数组
+- 难度：中等
+- 题型：动态规划
+- 为什么选这题：它是最大子数组和的进阶版，乘法引入了"负负得正"的问题，状态必须同时跟踪最大和最小。
+
+## 🧠 思考路径
+
+如果只有正数，这题和最大子数组和完全一样——每一步要么接着乘，要么重新开始。但负数搞乱了这件事：一个很大的负数乘上另一个负数，可能变成一个更大的正数。
+
+所以我们必须同时记住当前位置的"最大乘积"和"最小乘积"。当遇到负数时，最大和最小会互换角色。状态转移是：
+
+- `maxDP[i] = max(nums[i], maxDP[i-1] * nums[i], minDP[i-1] * nums[i])`
+- `minDP[i] = min(nums[i], maxDP[i-1] * nums[i], minDP[i-1] * nums[i])`
+
+每一步更新两个值，全局取最大的那个 `maxDP`。
+
+所以这题的关键词不是"乘积"，而是"负数让最大变最小，必须两手都抓"。
+
+## 💻 Java 题解
+
+### 解法 1：动态规划（双状态）
+
+维护maxProd和minProd。负数时交换。maxProd=max(num, maxProd*num)，minProd=min(num, minProd*num)。
+
+- ⏱ 时间复杂度：`O(n)`
+- 💾 空间复杂度：`O(1)`
+
+```java
+class Solution {
+    public int maxProduct(int[] nums) {
+        int maxProd = nums[0], minProd = nums[0], result = nums[0];
+        for (int i = 1; i < nums.length; i++) {
+            int num = nums[i];
+            if (num < 0) { int t = maxProd; maxProd = minProd; minProd = t; } // 负数交换
+            maxProd = Math.max(num, maxProd * num);
+            minProd = Math.min(num, minProd * num);
+            result = Math.max(result, maxProd);
+        }
+        return result;
+    }
+}
+```
+
+**关键点：**
+- 同时维护最大积和最小积
+- 负数时交换max和min
+- 更新result
+
+**执行步骤：**
+1. 遇负数交换max和min
+1. 更新maxProd和minProd
+1. 更新全局最大值
+
+
+## ⚠️ 易错点
+
+- 遇到负数时必须先交换再计算，否则交换后用的是已更新的值。
+- 空间可以优化到 O(1)，只需要两个变量，不需要整个 DP 数组。
+- 不要忘记 `nums[i]` 本身也可能成为新的起点——比如前面乘积很小，不如从当前重新开始。
+
+- 负数会让最小变最大——必须交换
+
+- 先交换再计算
+
+## 📊 复杂度分析
+
+- 时间复杂度：`O(n)`。遍历一次数组。
+- 空间复杂度：`O(1)`。只用了常数个变量。
+
+## 🏢 实际业务应用
+
+- 金融领域的连续收益率计算：每天的涨跌百分比相乘得到累计收益，遇到下跌（负收益率）后可能反弹更大，需要同时跟踪最大和最小累计收益。
+- 信号处理中的能量累积：某些信号有正负交替的波形，乘积运算需要跟踪正负极值。
+- 游戏开发里的连击伤害系统：某些 buff/debuff 效果有正负加成，连续叠加时需要计算最优组合。
+
+- 金融领域的连续收益率计算：每天的涨跌百分比相乘得到累计收益，遇到下跌（负收益率）后可能反弹更大，需要同时跟踪最大和最小累计收益。
+- 信号处理中的能量累积：某些信号有正负交替的波形，乘积运算需要跟踪正负极值。
+- 游戏开发里的连击伤害系统：某些 buff/debuff 效果有正负加成，连续叠加时需要计算最优组合。
+
+## 📖 形象类比
+
+可以把它类比成《西游记》里孙悟空战力值的变化。
+
+悟空一路西行，每遇到一个妖怪，战力可能增加（正数）也可能削弱（负数）。但有个关键：如果悟空之前被削弱得很厉害（很大负数），再遇到一个削弱效果（又一个负数），反而因"负负得正"触发暴走模式，战力暴涨。所以观音菩萨给悟空同时记两本账：一本记"当前最强战力"，一本记"当前最弱战力"。每次遇到妖怪，都要两本账一起算，才知道真正的上限在哪。
+
+对应关系是：
+
+- "战力变化"对应 `nums[i]`
+- "最强战力账本"对应 `curMax`
+- "最弱战力账本"对应 `curMin`
+- "遇到妖怪战力削弱"对应负数时交换 max 和 min
+- "暴走模式"对应负负得正
+
+这段记忆的关键是：负数不可怕，可怕的是忘了它可能翻盘。
+
+可以把它类比成《西游记》里孙悟空战力值的变化。
+
+悟空一路西行，每遇到一个妖怪，战力可能增加（正数）也可能削弱（负数）。但有个关键：如果悟空之前被削弱得很厉害（很大负数），再遇到一个削弱效果（又一个负数），反而因"负负得正"触发暴走模式，战力暴涨。所以观音菩萨给悟空同时记两本账：一本记"当前最强战力"，一本记"当前最弱战力"。每次遇到妖怪，都要两本账一起算，才知道真正的上限在哪。
+
+对应关系是：
+
+- "战力变化"对应 `nums[i]`
+- "最强战力账本"对应 `curMax`
+- "最弱战力账本"对应 `curMin`
+- "遇到妖怪战力削弱"对应负数时交换 max 和 min
+- "暴走模式"对应负负得正
+
+这段记忆的关键是：负数不可怕，可怕的是忘了它可能翻盘。
+
+小兔在森林里收集蘑菇，有的蘑菇能增加体力，有的蘑菇有毒会减少体力。但有个奇妙的规则：如果连吃两颗毒蘑菇，毒性互相抵消，反而大补。所以小兔一个篮子装"最多能有多少体力"，另一个篮子装"最少能剩多少体力"。每采一颗蘑菇，两个篮子都算一下，最后看最大的那个篮子。
+
+小兔在森林里收集蘑菇，有的蘑菇能增加体力，有的蘑菇有毒会减少体力。但有个奇妙的规则：如果连吃两颗毒蘑菇，毒性互相抵消，反而大补。所以小兔一个篮子装"最多能有多少体力"，另一个篮子装"最少能剩多少体力"。每采一颗蘑菇，两个篮子都算一下，最后看最大的那个篮子。
+
+## 🎵 记忆口诀
+
+最大最小两手抓，遇负交换别忘它。
+
+最大最小两手抓，遇负交换别忘它。
+
+## 🔗 延伸练习
+
+- `53. 最大子数组和`：把乘法变加法，只需要一个状态，是本题的简化版。
+- `1567. 乘积为正数的最长子数组长度`：同样跟踪正负状态，但目标从"最大乘积"变成"最长长度"。
+
+- `53. 最大子数组和`：把乘法变加法，只需要一个状态，是本题的简化版。
+- `1567. 乘积为正数的最长子数组长度`：同样跟踪正负状态，但目标从"最大乘积"变成"最长长度"。4:["$","main",null,{"className":"detail-main","style":{"maxWidth":760,"margin":"0 auto","padding":"16px","minHeight":"100vh"},"children":[["$","$Lc",null,{"href":"/","style":{"display":"inline-block","marginBottom":"12px","fontSize":"13px"},"children":"← 返回题库"}],["$","h1",null,{"style":{"fontSize":"22px","fontWeight":700,"margin":"0 0 4px"},"children":[["$","span",null,{"style":{"marginRight":"6px"},"children":"🧩"}],152,". ","乘积最大子数组"]}],["$","$Ld",null,{"q":{"id":"0152","lcId":152,"slug":"maximum-product-subarray","title":"乘积最大子数组","question":"乘积最大子数组","answer":"$e","difficulty":"Medium","category":"dynamic-programming","categories":["dynamic-programming"],"tags":["数组","动态规划"],"url":"https://leetcode.cn/problems/maximum-product-subarray/","planOrder":88,"hasViz":true,"hasDiagram":false,"feynman":{"essence":"给你一个整数数组 `nums`，找一个连续子数组，让这个子数组里所有元素的乘积最大，返回这个最大乘积。  重点不在\"乘法怎么算\"，而在\"负数会翻转最大最小，怎么同时维护两个状态\"。","analogy":"","key_points":[]},"first_principle":{"problem":"","axioms":[],"rebuild":""}}}]]}]
+a:[["$","meta","0",{"name":"viewport","content":"width=device-width, initial-scale=1"}],["$","meta","1",{"name":"theme-color","content":"#f97316"}]]
+8:[["$","meta","0",{"charSet":"utf-8"}],["$","title","1",{"children":"152. 乘积最大子数组 - 算法面试"}],["$","meta","2",{"name":"description","content":"给你一个整数数组 `nums`，找一个连续子数组，让这个子数组里所有元素的乘积最大，返回这个最大乘积。  重点不在\"乘法怎么算\"，而在\"负数会翻转最大最小，怎么同时维护两个状态\"。"}],["$","meta","3",{"name":"application-name","content":"算法面试"}],["$","link","4",{"rel":"manifest","href":"/algorithm-interview/manifest.json","crossOrigin":"$undefined"}],["$","meta","5",{"name":"keywords","content":"乘积最大子数组,LeetCode 152,Medium,数组,动态规划"}],["$","meta","6",{"name":"mobile-web-app-capable","content":"yes"}],["$","meta","7",{"name":"apple-mobile-web-app-title","content":"算法面试"}],["$","meta","8",{"name":"apple-mobile-web-app-status-bar-style","content":"default"}],["$","meta","9",{"property":"og:title","content":"152. 乘积最大子数组"}],["$","meta","10",{"property":"og:description","content":"给你一个整数数组 `nums`，找一个连续子数组，让这个子数组里所有元素的乘积最大，返回这个最大乘积。  重点不在\"乘法怎么算\"，而在\"负数会翻转最大最小，怎么同时维护两个状态\"。"}],["$","meta","11",{"property":"og:locale","content":"zh_CN"}],["$","meta","12",{"property":"og:type","content":"article"}],["$","meta","13",{"name":"twitter:card","content":"summary"}],["$","meta","14",{"name":"twitter:title","content":"152. 乘积最大子数组"}],["$","meta","15",{"name":"twitter:description","content":"给你一个整数数组 `nums`，找一个连续子数组，让这个子数组里所有元素的乘积最大，返回这个最大乘积。  重点不在\"乘法怎么算\"，而在\"负数会翻转最大最小，怎么同时维护两个状态\"。"}]]
+6:null

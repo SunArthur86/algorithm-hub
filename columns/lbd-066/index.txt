@@ -1,0 +1,113 @@
+1:"$Sreact.fragment"
+2:I[5244,[],""]
+3:I[3866,[],""]
+5:I[6213,[],"OutletBoundary"]
+7:I[6213,[],"MetadataBoundary"]
+9:I[6213,[],"ViewportBoundary"]
+b:I[4835,[],""]
+:HL["/algorithm-interview/_next/static/css/c1e787639001e16b.css","style"]
+0:{"P":null,"b":"xos97fAiWtKfKXI6hZLx4","p":"/algorithm-interview","c":["","columns","lbd-066",""],"i":false,"f":[[["",{"children":["columns",{"children":[["slug","lbd-066","d"],{"children":["__PAGE__",{}]}]}]},"$undefined","$undefined",true],["",["$","$1","c",{"children":[[["$","link","0",{"rel":"stylesheet","href":"/algorithm-interview/_next/static/css/c1e787639001e16b.css","precedence":"next","crossOrigin":"$undefined","nonce":"$undefined"}]],["$","html",null,{"lang":"zh","children":[["$","head",null,{"children":["$","script",null,{"dangerouslySetInnerHTML":{"__html":"\ntry {\n  var raw = localStorage.getItem('algo-interview');\n  var theme = 'light';\n  if (raw) { var p = JSON.parse(raw); theme = (p.state && p.state.theme) || 'light'; }\n  if (theme === 'dark') {\n    document.documentElement.classList.add('dark');\n    document.documentElement.setAttribute('data-theme', 'dark');\n  }\n} catch (e) {}\n"}}]}],["$","body",null,{"children":[["$","$L2",null,{"parallelRouterKey":"children","segmentPath":["children"],"error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L3",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":[[],[["$","title",null,{"children":"404: This page could not be found."}],["$","div",null,{"style":{"fontFamily":"system-ui,\"Segoe UI\",Roboto,Helvetica,Arial,sans-serif,\"Apple Color Emoji\",\"Segoe UI Emoji\"","height":"100vh","textAlign":"center","display":"flex","flexDirection":"column","alignItems":"center","justifyContent":"center"},"children":["$","div",null,{"children":[["$","style",null,{"dangerouslySetInnerHTML":{"__html":"body{color:#000;background:#fff;margin:0}.next-error-h1{border-right:1px solid rgba(0,0,0,.3)}@media (prefers-color-scheme:dark){body{color:#fff;background:#000}.next-error-h1{border-right:1px solid rgba(255,255,255,.3)}}"}}],["$","h1",null,{"className":"next-error-h1","style":{"display":"inline-block","margin":"0 20px 0 0","padding":"0 23px 0 0","fontSize":24,"fontWeight":500,"verticalAlign":"top","lineHeight":"49px"},"children":404}],["$","div",null,{"style":{"display":"inline-block"},"children":["$","h2",null,{"style":{"fontSize":14,"fontWeight":400,"lineHeight":"49px","margin":0},"children":"This page could not be found."}]}]]}]}]]],"forbidden":"$undefined","unauthorized":"$undefined"}],["$","script",null,{"dangerouslySetInnerHTML":{"__html":"\nif ('serviceWorker' in navigator) {\n  window.addEventListener('load', function () {\n    navigator.serviceWorker.register('/algorithm-interview/sw.js').catch(function () {});\n  });\n}\n"}}]]}]]}]]}],{"children":["columns",["$","$1","c",{"children":[null,["$","$L2",null,{"parallelRouterKey":"children","segmentPath":["children","columns","children"],"error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L3",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","forbidden":"$undefined","unauthorized":"$undefined"}]]}],{"children":[["slug","lbd-066","d"],["$","$1","c",{"children":[null,["$","$L2",null,{"parallelRouterKey":"children","segmentPath":["children","columns","children","$0:f:0:1:2:children:2:children:0","children"],"error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L3",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","forbidden":"$undefined","unauthorized":"$undefined"}]]}],{"children":["__PAGE__",["$","$1","c",{"children":["$L4",null,["$","$L5",null,{"children":"$L6"}]]}],{},null,false]},null,false]},null,false]},null,false],["$","$1","h",{"children":[null,["$","$1","iu8sno1C-E679iQLv49io",{"children":[["$","$L7",null,{"children":"$L8"}],["$","$L9",null,{"children":"$La"}],null]}]]}],false]],"m":"$undefined","G":["$b","$undefined"],"s":false,"S":true}
+c:I[8173,["173","static/chunks/173-69860a4742bb7020.js","829","static/chunks/829-7533e70598480772.js","306","static/chunks/app/columns/%5Bslug%5D/page-58fc1d8f5085c1ff.js"],""]
+d:I[4780,["173","static/chunks/173-69860a4742bb7020.js","829","static/chunks/829-7533e70598480772.js","306","static/chunks/app/columns/%5Bslug%5D/page-58fc1d8f5085c1ff.js"],"default"]
+e:T10c4,# 如何判定括号合法性
+
+如何判定括号合法性
+学算法，认准 labuladong 就够了！
+对括号的合法性判断是⼀个很常⻅且实⽤的问题，⽐如说我们写的代码，编
+辑器和编译器都会检查括号是否正确闭合。⽽且我们的代码可能会包含三种
+括号  [](){} ，判断起来有⼀点难度。
+本⽂就来聊⼀道关于括号合法性判断的算法题，相信能加深你对栈这种数据
+结构的理解。
+题⽬很简单，输⼊⼀个字符串，其中包含  [](){}  六种括号，请你判断这
+个字符串组成的括号是否合法。
+Input: "()[]{}"
+Output: true
+Input: "([)]"
+Output: false
+Input: "{[]}"
+Output: true
+解决这个问题之前，我们先降低难度，思考⼀下，如果只有⼀种括号
+ () ，应该如何判断字符串组成的括号是否合法呢？
+⼀、处理⼀种括号
+字符串中只有圆括号，如果想让括号字符串合法，那么必须做到：
+每个右括号  )  的左边必须有⼀个左括号  (  和它匹配。
+⽐如说字符串  ()))((  中，中间的两个右括号左边就没有左括号匹配，所
+以这个括号组合是不合法的。
+如何判定括号合法性
+445
+
+那么根据这个思路，我们可以写出算法：
+bool isValid(string str) {
+    // 待匹配的左括号数量
+    int left = 0;
+    for (char c : str) {
+        if (c == '(')
+            left++;
+        else // 遇到右括号
+            left--;
+        if (left < 0)
+            return false;
+    }
+    return left == 0;
+}
+如果只有圆括号，这样就能正确判断合法性。对于三种括号的情况，我⼀开
+始想模仿这个思路，定义三个变量  left1 ， left2 ， left3  分别处理每种
+括号，虽然要多写不少 if else 分⽀，但是似乎可以解决问题。
+但实际上直接照搬这种思路是不⾏的，⽐如说只有⼀个括号的情况下  (()) 
+是合法的，但是多种括号的情况下，  [(])  显然是不合法的。
+仅仅记录每种左括号出现的次数已经不能做出正确判断了，我们要加⼤存储
+的信息量，可以利⽤栈来模仿类似的思路。
+⼆、处理多种括号
+栈是⼀种先进后出的数据结构，处理括号问题的时候尤其有⽤。
+我们这道题就⽤⼀个名为  left  的栈代替之前思路中的  left  变量，遇到
+左括号就⼊栈，遇到右括号就去栈中寻找最近的左括号，看是否匹配。
+bool isValid(string str) {
+    stack<char> left;
+    for (char c : str) {
+        if (c == '(' || c == '{' || c == '[')
+如何判定括号合法性
+446
+
+            left.push(c);
+        else // 字符 c 是右括号
+            if (!left.empty() && leftOf(c) == left.top())
+                left.pop();
+            else
+                // 和最近的左括号不匹配
+                return false;
+    }
+    // 是否所有的左括号都被匹配了
+    return left.empty();
+}
+char leftOf(char c) {
+    if (c == '}') return '{';
+    if (c == ')') return '(';
+    return '[';
+}
+＿＿＿＿＿＿＿＿＿＿＿＿＿
+刷算法，学套路，认准 labuladong。
+本⼩抄即将出版，扫码关注 labuladong 公众号或 ongline book 查看更新⽂
+章，后台回复「pdf」限时免费获取，回复「进群」可进刷题群⼀起刷题，
+labuladong 带你⽇穿 LeetCode。
+如何判定括号合法性
+447
+
+如何寻找消失的元素
+学算法，认准 labuladong 就够了！
+之前也有⽂章写过⼏个有趣的智⼒题，今天再聊⼀道巧妙的题⽬。
+题⽬⾮常简单：
+给⼀个⻓度为 n 的数组，其索引应该在  [0,n) ，但是现在你要装进去 n + 1
+个元素  [0,n] ，那么肯定有⼀个元素装不下嘛，请你找出这个缺失的元
+素。
+这道题不难的，我们应该很容易想到，把这个数组排个序，然后遍历⼀遍，
+不就很容易找到缺失的那个元素了吗？
+或者说，借助数据结构的特性，⽤⼀个 HashSet 把数组⾥出现的数字都储存
+下来，再遍历  [0,n]  之间的数字，去 HashSet 中查询，也可以很容易查出
+那个缺失的元素。
+排序解法的时间复杂度是 O(NlogN)，HashSet 的解法时间复杂度是 O(N)，
+但是还需要 O(N) 的空间复杂度存储 HashSet。
+如何寻找缺失的元素
+4484:["$","main",null,{"style":{"maxWidth":760,"margin":"0 auto","padding":"16px","minHeight":"100vh"},"children":[["$","$Lc",null,{"href":"/columns/","style":{"display":"inline-block","marginBottom":"12px","fontSize":"13px"},"children":"← 返回专栏"}],["$","div",null,{"style":{"fontSize":"12px","color":"var(--text-tertiary)","marginBottom":"4px"},"children":["📕"," ","labuladong 算法小抄"]}],["$","h1",null,{"style":{"fontSize":"22px","fontWeight":700,"margin":"0 0 16px"},"children":"如何判定括号合法性"}],["$","$Ld",null,{"children":"$e"}],false]}]
+a:[["$","meta","0",{"name":"viewport","content":"width=device-width, initial-scale=1"}],["$","meta","1",{"name":"theme-color","content":"#f97316"}]]
+8:[["$","meta","0",{"charSet":"utf-8"}],["$","title","1",{"children":"如何判定括号合法性 - 算法面试"}],["$","meta","2",{"name":"description","content":"LeetCode 热题 100 完整 Java 题解、逐题动画、知识专栏与智能间隔复习。"}],["$","meta","3",{"name":"application-name","content":"算法面试"}],["$","link","4",{"rel":"manifest","href":"/algorithm-interview/manifest.json","crossOrigin":"$undefined"}],["$","meta","5",{"name":"keywords","content":"LeetCode,热题100,算法面试,Java题解,数据结构,动态规划,面试刷题"}],["$","meta","6",{"name":"mobile-web-app-capable","content":"yes"}],["$","meta","7",{"name":"apple-mobile-web-app-title","content":"算法面试"}],["$","meta","8",{"name":"apple-mobile-web-app-status-bar-style","content":"default"}],["$","meta","9",{"property":"og:title","content":"算法面试题库"}],["$","meta","10",{"property":"og:description","content":"LeetCode 热题 100 完整 Java 题解、逐题动画、知识专栏与智能复习"}],["$","meta","11",{"property":"og:site_name","content":"算法面试题库"}],["$","meta","12",{"property":"og:locale","content":"zh_CN"}],["$","meta","13",{"property":"og:type","content":"website"}],["$","meta","14",{"name":"twitter:card","content":"summary"}],["$","meta","15",{"name":"twitter:title","content":"算法面试题库"}],["$","meta","16",{"name":"twitter:description","content":"LeetCode 热题 100 完整 Java 题解、逐题动画、知识专栏与智能复习"}]]
+6:null

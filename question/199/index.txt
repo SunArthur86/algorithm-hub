@@ -1,0 +1,145 @@
+1:"$Sreact.fragment"
+2:I[5244,[],""]
+3:I[3866,[],""]
+5:I[6213,[],"OutletBoundary"]
+7:I[6213,[],"MetadataBoundary"]
+9:I[6213,[],"ViewportBoundary"]
+b:I[4835,[],""]
+:HL["/algorithm-interview/_next/static/css/c1e787639001e16b.css","style"]
+0:{"P":null,"b":"xos97fAiWtKfKXI6hZLx4","p":"/algorithm-interview","c":["","question","199",""],"i":false,"f":[[["",{"children":["question",{"children":[["lcId","199","d"],{"children":["__PAGE__",{}]}]}]},"$undefined","$undefined",true],["",["$","$1","c",{"children":[[["$","link","0",{"rel":"stylesheet","href":"/algorithm-interview/_next/static/css/c1e787639001e16b.css","precedence":"next","crossOrigin":"$undefined","nonce":"$undefined"}]],["$","html",null,{"lang":"zh","children":[["$","head",null,{"children":["$","script",null,{"dangerouslySetInnerHTML":{"__html":"\ntry {\n  var raw = localStorage.getItem('algo-interview');\n  var theme = 'light';\n  if (raw) { var p = JSON.parse(raw); theme = (p.state && p.state.theme) || 'light'; }\n  if (theme === 'dark') {\n    document.documentElement.classList.add('dark');\n    document.documentElement.setAttribute('data-theme', 'dark');\n  }\n} catch (e) {}\n"}}]}],["$","body",null,{"children":[["$","$L2",null,{"parallelRouterKey":"children","segmentPath":["children"],"error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L3",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":[[],[["$","title",null,{"children":"404: This page could not be found."}],["$","div",null,{"style":{"fontFamily":"system-ui,\"Segoe UI\",Roboto,Helvetica,Arial,sans-serif,\"Apple Color Emoji\",\"Segoe UI Emoji\"","height":"100vh","textAlign":"center","display":"flex","flexDirection":"column","alignItems":"center","justifyContent":"center"},"children":["$","div",null,{"children":[["$","style",null,{"dangerouslySetInnerHTML":{"__html":"body{color:#000;background:#fff;margin:0}.next-error-h1{border-right:1px solid rgba(0,0,0,.3)}@media (prefers-color-scheme:dark){body{color:#fff;background:#000}.next-error-h1{border-right:1px solid rgba(255,255,255,.3)}}"}}],["$","h1",null,{"className":"next-error-h1","style":{"display":"inline-block","margin":"0 20px 0 0","padding":"0 23px 0 0","fontSize":24,"fontWeight":500,"verticalAlign":"top","lineHeight":"49px"},"children":404}],["$","div",null,{"style":{"display":"inline-block"},"children":["$","h2",null,{"style":{"fontSize":14,"fontWeight":400,"lineHeight":"49px","margin":0},"children":"This page could not be found."}]}]]}]}]]],"forbidden":"$undefined","unauthorized":"$undefined"}],["$","script",null,{"dangerouslySetInnerHTML":{"__html":"\nif ('serviceWorker' in navigator) {\n  window.addEventListener('load', function () {\n    navigator.serviceWorker.register('/algorithm-interview/sw.js').catch(function () {});\n  });\n}\n"}}]]}]]}]]}],{"children":["question",["$","$1","c",{"children":[null,["$","$L2",null,{"parallelRouterKey":"children","segmentPath":["children","question","children"],"error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L3",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","forbidden":"$undefined","unauthorized":"$undefined"}]]}],{"children":[["lcId","199","d"],["$","$1","c",{"children":[null,["$","$L2",null,{"parallelRouterKey":"children","segmentPath":["children","question","children","$0:f:0:1:2:children:2:children:0","children"],"error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L3",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","forbidden":"$undefined","unauthorized":"$undefined"}]]}],{"children":["__PAGE__",["$","$1","c",{"children":["$L4",null,["$","$L5",null,{"children":"$L6"}]]}],{},null,false]},null,false]},null,false]},null,false],["$","$1","h",{"children":[null,["$","$1","ZlLBzZnPMRVjol4hYlyuX",{"children":[["$","$L7",null,{"children":"$L8"}],["$","$L9",null,{"children":"$La"}],null]}]]}],false]],"m":"$undefined","G":["$b","$undefined"],"s":false,"S":true}
+c:I[8173,["173","static/chunks/173-69860a4742bb7020.js","829","static/chunks/829-7533e70598480772.js","937","static/chunks/937-ef36a5ac4bc37a7e.js","447","static/chunks/447-06af9414e164c047.js","8","static/chunks/app/question/%5BlcId%5D/page-478b0d2a69e222f2.js"],""]
+d:I[3447,["173","static/chunks/173-69860a4742bb7020.js","829","static/chunks/829-7533e70598480772.js","937","static/chunks/937-ef36a5ac4bc37a7e.js","447","static/chunks/447-06af9414e164c047.js","8","static/chunks/app/question/%5BlcId%5D/page-478b0d2a69e222f2.js"],"default"]
+e:T1528,# 199. 二叉树的右视图
+
+> 难度：**Medium** | 分类：二叉树 | 标签：树, 深度优先搜索, 广度优先搜索, 二叉树
+
+> 🔗 力扣链接：[https://leetcode.cn/problems/binary-tree-right-side-view/](https://leetcode.cn/problems/binary-tree-right-side-view/)
+
+## 📝 题目描述
+
+给你一棵二叉树的根节点，想象你站在树的右侧，按从上到下的顺序返回你能看到的节点值。也就是说，返回每层最右边的节点。
+
+- 题号：199
+- 题目名：二叉树的右视图
+- 难度：中等
+- 题型：二叉树
+- 为什么选这题：它用 BFS 层序遍历取每层最后一个节点，是"层序遍历 + 变形应用"的典型代表。
+
+## 🧠 思考路径
+
+方法一（BFS）：层序遍历，每层从左到右依次入队。每层的最后一个出队元素就是右视图看到的节点。
+
+方法二（DFS）：前序遍历的变体——先右子树后左子树。每层第一次被访问的节点就是最右边的。用一个变量 `depth` 记录当前深度，如果这个深度还没被记录过，就把当前节点加入结果。
+
+BFS 更直观，DFS 更省空间（递归栈 vs 队列）。这里用 BFS 解。
+
+## 💻 Java 题解
+
+### 解法 1：BFS 每层最后节点
+
+层序遍历，每层最后一个节点就是右视图看到的节点。
+
+- ⏱ 时间复杂度：`O(n)`
+- 💾 空间复杂度：`O(n)`
+
+```java
+class Solution {
+    public List<Integer> rightSideView(TreeNode root) {
+        List<Integer> result = new ArrayList<>();
+        if (root == null) return result;
+        Queue<TreeNode> q = new LinkedList<>();
+        q.offer(root);
+        while (!q.isEmpty()) {
+            int size = q.size();
+            for (int i = 0; i < size; i++) {
+                TreeNode node = q.poll();
+                if (i == size - 1) result.add(node.val); // 每层最后一个
+                if (node.left != null) q.offer(node.left);
+                if (node.right != null) q.offer(node.right);
+            }
+        }
+        return result;
+    }
+}
+```
+
+**关键点：**
+- BFS每层最后一个节点
+- i == size-1 时记录
+
+**执行步骤：**
+1. BFS层序遍历
+1. 每层最后一个节点加入结果
+
+
+## ⚠️ 易错点
+
+- 每层开始前必须"快照"队列长度（`level_size = len(queue)`），因为队列在循环中会变化。
+- 不是"只遍历右子树"——有些节点可能没有右子节点，右视图的节点在左子树里。
+- 空树要返回空列表，不是 `null`。
+
+- 空树返回空列表
+
+## 📊 复杂度分析
+
+- 时间复杂度：`O(n)`，每个节点访问一次。
+- 空间复杂度：`O(w)`，`w` 是树的最大宽度（队列大小）。
+
+## 🏢 实际业务应用
+
+- 组织架构图中"每个层级最右边的部门"（比如每个层级最新成立的部门）。
+- 文件系统的目录层级中，每层最后一个目录/文件。
+- 任何层级结构中"每层最末端元素"的提取。
+
+- 组织架构图中"每个层级最右边的部门"（比如每个层级最新成立的部门）。
+- 文件系统的目录层级中，每层最后一个目录/文件。
+- 任何层级结构中"每层最末端元素"的提取。
+
+## 📖 形象类比
+
+可以类比成《西游记》里天宫的"右列仙班"。
+
+玉皇大帝坐在宝座上往右边看，每排神仙里只能看到最右边的那一位（前面的都被挡住了）。他想把这"每排最右边的神仙"记下来，于是让太白金星从第一排开始，依次报出每排最后一位的名字。
+
+对应关系是：
+
+- "每排神仙"对应树的每一层
+- "最右边的神仙"对应每层最后一个节点
+- "从第一排开始"对应 BFS 层序遍历
+- "只报最后一位"对应 `i == level_size - 1`
+
+这段记忆的关键是：层序遍历，每层取最后一个。
+
+可以类比成《西游记》里天宫的"右列仙班"。
+
+玉皇大帝坐在宝座上往右边看，每排神仙里只能看到最右边的那一位（前面的都被挡住了）。他想把这"每排最右边的神仙"记下来，于是让太白金星从第一排开始，依次报出每排最后一位的名字。
+
+对应关系是：
+
+- "每排神仙"对应树的每一层
+- "最右边的神仙"对应每层最后一个节点
+- "从第一排开始"对应 BFS 层序遍历
+- "只报最后一位"对应 `i == level_size - 1`
+
+这段记忆的关键是：层序遍历，每层取最后一个。
+
+小松鼠站在森林的右侧看过去。每排树里只能看到最右边那棵。它从上到下数，第一排最右边是松树，第二排最右边是柏树，第三排最右边是柳树。把这些"右侧可见的树"记下来，就是右视图。
+
+小松鼠站在森林的右侧看过去。每排树里只能看到最右边那棵。它从上到下数，第一排最右边是松树，第二排最右边是柏树，第三排最右边是柳树。把这些"右侧可见的树"记下来，就是右视图。
+
+## 🎵 记忆口诀
+
+BFS 层序遍历，每层取最后一个。
+
+BFS 层序遍历，每层取最后一个。
+
+## 🔗 延伸练习
+
+- `102. 二叉树的层序遍历`：右视图的基础，先弄懂完整的层序遍历。
+- `545. 二叉树的边界`：从右视图扩展到整棵树的边界（左边界 + 叶子 + 右边界）。
+
+- `102. 二叉树的层序遍历`：右视图的基础，先弄懂完整的层序遍历。
+- `545. 二叉树的边界`：从右视图扩展到整棵树的边界（左边界 + 叶子 + 右边界）。4:["$","main",null,{"className":"detail-main","style":{"maxWidth":760,"margin":"0 auto","padding":"16px","minHeight":"100vh"},"children":[["$","$Lc",null,{"href":"/","style":{"display":"inline-block","marginBottom":"12px","fontSize":"13px"},"children":"← 返回题库"}],["$","h1",null,{"style":{"fontSize":"22px","fontWeight":700,"margin":"0 0 4px"},"children":[["$","span",null,{"style":{"marginRight":"6px"},"children":"🌳"}],199,". ","二叉树的右视图"]}],["$","$Ld",null,{"q":{"id":"0199","lcId":199,"slug":"binary-tree-right-side-view","title":"二叉树的右视图","question":"二叉树的右视图","answer":"$e","difficulty":"Medium","category":"binary-tree","categories":["binary-tree"],"tags":["树","深度优先搜索","广度优先搜索","二叉树"],"url":"https://leetcode.cn/problems/binary-tree-right-side-view/","planOrder":45,"hasViz":true,"hasDiagram":false,"feynman":{"essence":"给你一棵二叉树的根节点，想象你站在树的右侧，按从上到下的顺序返回你能看到的节点值。也就是说，返回每层最右边的节点。","analogy":"","key_points":[]},"first_principle":{"problem":"","axioms":[],"rebuild":""}}}]]}]
+a:[["$","meta","0",{"name":"viewport","content":"width=device-width, initial-scale=1"}],["$","meta","1",{"name":"theme-color","content":"#f97316"}]]
+8:[["$","meta","0",{"charSet":"utf-8"}],["$","title","1",{"children":"199. 二叉树的右视图 - 算法面试"}],["$","meta","2",{"name":"description","content":"给你一棵二叉树的根节点，想象你站在树的右侧，按从上到下的顺序返回你能看到的节点值。也就是说，返回每层最右边的节点。"}],["$","meta","3",{"name":"application-name","content":"算法面试"}],["$","link","4",{"rel":"manifest","href":"/algorithm-interview/manifest.json","crossOrigin":"$undefined"}],["$","meta","5",{"name":"keywords","content":"二叉树的右视图,LeetCode 199,Medium,树,深度优先搜索,广度优先搜索,二叉树"}],["$","meta","6",{"name":"mobile-web-app-capable","content":"yes"}],["$","meta","7",{"name":"apple-mobile-web-app-title","content":"算法面试"}],["$","meta","8",{"name":"apple-mobile-web-app-status-bar-style","content":"default"}],["$","meta","9",{"property":"og:title","content":"199. 二叉树的右视图"}],["$","meta","10",{"property":"og:description","content":"给你一棵二叉树的根节点，想象你站在树的右侧，按从上到下的顺序返回你能看到的节点值。也就是说，返回每层最右边的节点。"}],["$","meta","11",{"property":"og:locale","content":"zh_CN"}],["$","meta","12",{"property":"og:type","content":"article"}],["$","meta","13",{"name":"twitter:card","content":"summary"}],["$","meta","14",{"name":"twitter:title","content":"199. 二叉树的右视图"}],["$","meta","15",{"name":"twitter:description","content":"给你一棵二叉树的根节点，想象你站在树的右侧，按从上到下的顺序返回你能看到的节点值。也就是说，返回每层最右边的节点。"}]]
+6:null

@@ -1,0 +1,144 @@
+1:"$Sreact.fragment"
+2:I[5244,[],""]
+3:I[3866,[],""]
+5:I[6213,[],"OutletBoundary"]
+7:I[6213,[],"MetadataBoundary"]
+9:I[6213,[],"ViewportBoundary"]
+b:I[4835,[],""]
+:HL["/algorithm-interview/_next/static/css/c1e787639001e16b.css","style"]
+0:{"P":null,"b":"xos97fAiWtKfKXI6hZLx4","p":"/algorithm-interview","c":["","question","20",""],"i":false,"f":[[["",{"children":["question",{"children":[["lcId","20","d"],{"children":["__PAGE__",{}]}]}]},"$undefined","$undefined",true],["",["$","$1","c",{"children":[[["$","link","0",{"rel":"stylesheet","href":"/algorithm-interview/_next/static/css/c1e787639001e16b.css","precedence":"next","crossOrigin":"$undefined","nonce":"$undefined"}]],["$","html",null,{"lang":"zh","children":[["$","head",null,{"children":["$","script",null,{"dangerouslySetInnerHTML":{"__html":"\ntry {\n  var raw = localStorage.getItem('algo-interview');\n  var theme = 'light';\n  if (raw) { var p = JSON.parse(raw); theme = (p.state && p.state.theme) || 'light'; }\n  if (theme === 'dark') {\n    document.documentElement.classList.add('dark');\n    document.documentElement.setAttribute('data-theme', 'dark');\n  }\n} catch (e) {}\n"}}]}],["$","body",null,{"children":[["$","$L2",null,{"parallelRouterKey":"children","segmentPath":["children"],"error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L3",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":[[],[["$","title",null,{"children":"404: This page could not be found."}],["$","div",null,{"style":{"fontFamily":"system-ui,\"Segoe UI\",Roboto,Helvetica,Arial,sans-serif,\"Apple Color Emoji\",\"Segoe UI Emoji\"","height":"100vh","textAlign":"center","display":"flex","flexDirection":"column","alignItems":"center","justifyContent":"center"},"children":["$","div",null,{"children":[["$","style",null,{"dangerouslySetInnerHTML":{"__html":"body{color:#000;background:#fff;margin:0}.next-error-h1{border-right:1px solid rgba(0,0,0,.3)}@media (prefers-color-scheme:dark){body{color:#fff;background:#000}.next-error-h1{border-right:1px solid rgba(255,255,255,.3)}}"}}],["$","h1",null,{"className":"next-error-h1","style":{"display":"inline-block","margin":"0 20px 0 0","padding":"0 23px 0 0","fontSize":24,"fontWeight":500,"verticalAlign":"top","lineHeight":"49px"},"children":404}],["$","div",null,{"style":{"display":"inline-block"},"children":["$","h2",null,{"style":{"fontSize":14,"fontWeight":400,"lineHeight":"49px","margin":0},"children":"This page could not be found."}]}]]}]}]]],"forbidden":"$undefined","unauthorized":"$undefined"}],["$","script",null,{"dangerouslySetInnerHTML":{"__html":"\nif ('serviceWorker' in navigator) {\n  window.addEventListener('load', function () {\n    navigator.serviceWorker.register('/algorithm-interview/sw.js').catch(function () {});\n  });\n}\n"}}]]}]]}]]}],{"children":["question",["$","$1","c",{"children":[null,["$","$L2",null,{"parallelRouterKey":"children","segmentPath":["children","question","children"],"error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L3",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","forbidden":"$undefined","unauthorized":"$undefined"}]]}],{"children":[["lcId","20","d"],["$","$1","c",{"children":[null,["$","$L2",null,{"parallelRouterKey":"children","segmentPath":["children","question","children","$0:f:0:1:2:children:2:children:0","children"],"error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L3",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","forbidden":"$undefined","unauthorized":"$undefined"}]]}],{"children":["__PAGE__",["$","$1","c",{"children":["$L4",null,["$","$L5",null,{"children":"$L6"}]]}],{},null,false]},null,false]},null,false]},null,false],["$","$1","h",{"children":[null,["$","$1","cHW4txZJQcXOQahJLb5qt",{"children":[["$","$L7",null,{"children":"$L8"}],["$","$L9",null,{"children":"$La"}],null]}]]}],false]],"m":"$undefined","G":["$b","$undefined"],"s":false,"S":true}
+c:I[8173,["173","static/chunks/173-69860a4742bb7020.js","829","static/chunks/829-7533e70598480772.js","937","static/chunks/937-ef36a5ac4bc37a7e.js","447","static/chunks/447-06af9414e164c047.js","8","static/chunks/app/question/%5BlcId%5D/page-478b0d2a69e222f2.js"],""]
+d:I[3447,["173","static/chunks/173-69860a4742bb7020.js","829","static/chunks/829-7533e70598480772.js","937","static/chunks/937-ef36a5ac4bc37a7e.js","447","static/chunks/447-06af9414e164c047.js","8","static/chunks/app/question/%5BlcId%5D/page-478b0d2a69e222f2.js"],"default"]
+e:T1530,# 20. 有效的括号
+
+> 难度：**Easy** | 分类：栈 | 标签：栈, 字符串
+
+> 🔗 力扣链接：[https://leetcode.cn/problems/valid-parentheses/](https://leetcode.cn/problems/valid-parentheses/)
+
+## 📝 题目描述
+
+给你一个只包含 `(`, `)`, `{`, `}`, `[`, `]` 的字符串 `s`，判断括号是否有效：左括号必须用相同类型的右括号闭合，且必须按正确顺序闭合。
+
+- 题号：20
+- 题目名：有效的括号
+- 难度：简单
+- 题型：栈
+- 为什么选这题：它是最经典的栈应用题，训练"后进先出匹配"的直觉。
+
+## 🧠 思考路径
+
+括号匹配的核心规律是：最后出现的左括号，最先被闭合。这正好是栈的"后进先出"特性。
+
+遇到左括号就入栈，遇到右括号就检查栈顶是否是对应的左括号：是就弹出，不是就不合法。最后栈为空说明所有括号都配对了。
+
+## 💻 Java 题解
+
+### 解法 1：栈
+
+遍历字符串，左括号入栈，右括号弹出栈顶检查是否匹配。最后栈必须为空。
+
+- ⏱ 时间复杂度：`O(n)`
+- 💾 空间复杂度：`O(n)`
+
+```java
+class Solution {
+    public boolean isValid(String s) {
+        Deque<Character> stack = new ArrayDeque<>();
+        Map<Character, Character> pairs = Map.of(')', '(', ']', '[', '}', '{');
+        for (char c : s.toCharArray()) {
+            if (pairs.containsValue(c)) stack.push(c);
+            else if (pairs.containsKey(c)) {
+                if (stack.isEmpty() || stack.pop() != pairs.get(c)) return false;
+            }
+        }
+        return stack.isEmpty();
+    }
+}
+```
+
+**关键点：**
+- 右括号→左括号的映射
+- 弹出时检查匹配
+- 最后栈为空才有效
+
+**执行步骤：**
+1. 左括号入栈
+1. 右括号弹出栈顶比较
+1. 遍历完栈必须为空
+
+
+## ⚠️ 易错点
+
+- 遇到右括号时栈可能为空（如 `"]"`），要先检查栈是否为空再取栈顶。
+- 遍历结束后必须检查栈是否为空。如果有剩余的左括号（如 `"(["`），说明没有配对完。
+- 奇数长度的字符串一定不合法，可以提前返回。
+
+- 右括号时栈可能为空
+
+- Map.of 是Java9+特性
+
+## 📊 复杂度分析
+
+- 时间复杂度：`O(n)`。遍历字符串一次。
+- 空间复杂度：`O(n)`。栈最多存 `n/2` 个左括号。
+
+## 🏢 实际业务应用
+
+- 代码编辑器的语法校验：IDE 实时检测括号是否匹配，标红未闭合的括号。
+- 模板引擎解析：HTML/XML 标签的嵌套检查（`<div>...</div>`）与括号匹配逻辑完全一致。
+- 表达式计算：数学表达式的求值中，括号匹配是第一步。
+- JSON/YAML 解析器：解析嵌套结构时，用栈跟踪当前所在的层级。
+
+- 代码编辑器的语法校验：IDE 实时检测括号是否匹配，标红未闭合的括号。
+- 模板引擎解析：HTML/XML 标签的嵌套检查（`<div>...</div>`）与括号匹配逻辑完全一致。
+- 表达式计算：数学表达式的求值中，括号匹配是第一步。
+- JSON/YAML 解析器：解析嵌套结构时，用栈跟踪当前所在的层级。
+
+## 📖 形象类比
+
+可以类比《红楼梦》里丫鬟整理礼盒的场景。
+
+贾府送来一套套嵌套的礼盒，每个大盒子里面套着小盒子。丫鬟要检查每层盒子是否正确关闭：最里层的盒子先关上，然后关外面的，最外层的最后关。如果关的顺序不对，或者有盒子没关上，就不合格。
+
+对应关系是：
+
+- "打开的盒子"对应左括号（入栈）
+- "关上盒子"对应右括号（出栈）
+- "最里层先关"对应栈的 LIFO 特性
+- "有盒子没关"对应栈非空
+
+记忆的关键是：后开先关，栈来匹配。
+
+可以类比《红楼梦》里丫鬟整理礼盒的场景。
+
+贾府送来一套套嵌套的礼盒，每个大盒子里面套着小盒子。丫鬟要检查每层盒子是否正确关闭：最里层的盒子先关上，然后关外面的，最外层的最后关。如果关的顺序不对，或者有盒子没关上，就不合格。
+
+对应关系是：
+
+- "打开的盒子"对应左括号（入栈）
+- "关上盒子"对应右括号（出栈）
+- "最里层先关"对应栈的 LIFO 特性
+- "有盒子没关"对应栈非空
+
+记忆的关键是：后开先关，栈来匹配。
+
+小松鼠在森林里找到了一排魔法门，门有三种形状：圆的、方的和花形的。每扇门打开后，必须按相反顺序关上——最后打开的门要最先关上。小松鼠一边走一边记住打开的门，关的时候从最后记住的开始关。走完后如果所有门都关上了，这条路就是通的。
+
+小松鼠在森林里找到了一排魔法门，门有三种形状：圆的、方的和花形的。每扇门打开后，必须按相反顺序关上——最后打开的门要最先关上。小松鼠一边走一边记住打开的门，关的时候从最后记住的开始关。走完后如果所有门都关上了，这条路就是通的。
+
+## 🎵 记忆口诀
+
+左入栈右匹配，最后栈空才合法。
+
+左入栈右匹配，最后栈空才合法。
+
+## 🔗 延伸练习
+
+- `32. 最长有效括号`：不只判断是否合法，而是找最长的合法括号子串。
+- `22. 括号生成`：逆问题——生成所有合法的括号组合。
+
+- `32. 最长有效括号`：不只判断是否合法，而是找最长的合法括号子串。
+- `22. 括号生成`：逆问题——生成所有合法的括号组合。4:["$","main",null,{"className":"detail-main","style":{"maxWidth":760,"margin":"0 auto","padding":"16px","minHeight":"100vh"},"children":[["$","$Lc",null,{"href":"/","style":{"display":"inline-block","marginBottom":"12px","fontSize":"13px"},"children":"← 返回题库"}],["$","h1",null,{"style":{"fontSize":"22px","fontWeight":700,"margin":"0 0 4px"},"children":[["$","span",null,{"style":{"marginRight":"6px"},"children":"🥞"}],20,". ","有效的括号"]}],["$","$Ld",null,{"q":{"id":"0020","lcId":20,"slug":"valid-parentheses","title":"有效的括号","question":"有效的括号","answer":"$e","difficulty":"Easy","category":"stack","categories":["stack"],"tags":["栈","字符串"],"url":"https://leetcode.cn/problems/valid-parentheses/","planOrder":69,"hasViz":true,"hasDiagram":true,"feynman":{"essence":"给你一个只包含 `(`, `)`, `{`, `}`, `[`, `]` 的字符串 `s`，判断括号是否有效：左括号必须用相同类型的右括号闭合，且必须按正确顺序闭合。","analogy":"","key_points":[]},"first_principle":{"problem":"","axioms":[],"rebuild":""}}}]]}]
+a:[["$","meta","0",{"name":"viewport","content":"width=device-width, initial-scale=1"}],["$","meta","1",{"name":"theme-color","content":"#f97316"}]]
+8:[["$","meta","0",{"charSet":"utf-8"}],["$","title","1",{"children":"20. 有效的括号 - 算法面试"}],["$","meta","2",{"name":"description","content":"给你一个只包含 `(`, `)`, `{`, `}`, `[`, `]` 的字符串 `s`，判断括号是否有效：左括号必须用相同类型的右括号闭合，且必须按正确顺序闭合。"}],["$","meta","3",{"name":"application-name","content":"算法面试"}],["$","link","4",{"rel":"manifest","href":"/algorithm-interview/manifest.json","crossOrigin":"$undefined"}],["$","meta","5",{"name":"keywords","content":"有效的括号,LeetCode 20,Easy,栈,字符串"}],["$","meta","6",{"name":"mobile-web-app-capable","content":"yes"}],["$","meta","7",{"name":"apple-mobile-web-app-title","content":"算法面试"}],["$","meta","8",{"name":"apple-mobile-web-app-status-bar-style","content":"default"}],["$","meta","9",{"property":"og:title","content":"20. 有效的括号"}],["$","meta","10",{"property":"og:description","content":"给你一个只包含 `(`, `)`, `{`, `}`, `[`, `]` 的字符串 `s`，判断括号是否有效：左括号必须用相同类型的右括号闭合，且必须按正确顺序闭合。"}],["$","meta","11",{"property":"og:locale","content":"zh_CN"}],["$","meta","12",{"property":"og:type","content":"article"}],["$","meta","13",{"name":"twitter:card","content":"summary"}],["$","meta","14",{"name":"twitter:title","content":"20. 有效的括号"}],["$","meta","15",{"name":"twitter:description","content":"给你一个只包含 `(`, `)`, `{`, `}`, `[`, `]` 的字符串 `s`，判断括号是否有效：左括号必须用相同类型的右括号闭合，且必须按正确顺序闭合。"}]]
+6:null

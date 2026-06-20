@@ -1,0 +1,145 @@
+1:"$Sreact.fragment"
+2:I[5244,[],""]
+3:I[3866,[],""]
+5:I[6213,[],"OutletBoundary"]
+7:I[6213,[],"MetadataBoundary"]
+9:I[6213,[],"ViewportBoundary"]
+b:I[4835,[],""]
+:HL["/algorithm-interview/_next/static/css/c1e787639001e16b.css","style"]
+0:{"P":null,"b":"xos97fAiWtKfKXI6hZLx4","p":"/algorithm-interview","c":["","question","155",""],"i":false,"f":[[["",{"children":["question",{"children":[["lcId","155","d"],{"children":["__PAGE__",{}]}]}]},"$undefined","$undefined",true],["",["$","$1","c",{"children":[[["$","link","0",{"rel":"stylesheet","href":"/algorithm-interview/_next/static/css/c1e787639001e16b.css","precedence":"next","crossOrigin":"$undefined","nonce":"$undefined"}]],["$","html",null,{"lang":"zh","children":[["$","head",null,{"children":["$","script",null,{"dangerouslySetInnerHTML":{"__html":"\ntry {\n  var raw = localStorage.getItem('algo-interview');\n  var theme = 'light';\n  if (raw) { var p = JSON.parse(raw); theme = (p.state && p.state.theme) || 'light'; }\n  if (theme === 'dark') {\n    document.documentElement.classList.add('dark');\n    document.documentElement.setAttribute('data-theme', 'dark');\n  }\n} catch (e) {}\n"}}]}],["$","body",null,{"children":[["$","$L2",null,{"parallelRouterKey":"children","segmentPath":["children"],"error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L3",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":[[],[["$","title",null,{"children":"404: This page could not be found."}],["$","div",null,{"style":{"fontFamily":"system-ui,\"Segoe UI\",Roboto,Helvetica,Arial,sans-serif,\"Apple Color Emoji\",\"Segoe UI Emoji\"","height":"100vh","textAlign":"center","display":"flex","flexDirection":"column","alignItems":"center","justifyContent":"center"},"children":["$","div",null,{"children":[["$","style",null,{"dangerouslySetInnerHTML":{"__html":"body{color:#000;background:#fff;margin:0}.next-error-h1{border-right:1px solid rgba(0,0,0,.3)}@media (prefers-color-scheme:dark){body{color:#fff;background:#000}.next-error-h1{border-right:1px solid rgba(255,255,255,.3)}}"}}],["$","h1",null,{"className":"next-error-h1","style":{"display":"inline-block","margin":"0 20px 0 0","padding":"0 23px 0 0","fontSize":24,"fontWeight":500,"verticalAlign":"top","lineHeight":"49px"},"children":404}],["$","div",null,{"style":{"display":"inline-block"},"children":["$","h2",null,{"style":{"fontSize":14,"fontWeight":400,"lineHeight":"49px","margin":0},"children":"This page could not be found."}]}]]}]}]]],"forbidden":"$undefined","unauthorized":"$undefined"}],["$","script",null,{"dangerouslySetInnerHTML":{"__html":"\nif ('serviceWorker' in navigator) {\n  window.addEventListener('load', function () {\n    navigator.serviceWorker.register('/algorithm-interview/sw.js').catch(function () {});\n  });\n}\n"}}]]}]]}]]}],{"children":["question",["$","$1","c",{"children":[null,["$","$L2",null,{"parallelRouterKey":"children","segmentPath":["children","question","children"],"error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L3",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","forbidden":"$undefined","unauthorized":"$undefined"}]]}],{"children":[["lcId","155","d"],["$","$1","c",{"children":[null,["$","$L2",null,{"parallelRouterKey":"children","segmentPath":["children","question","children","$0:f:0:1:2:children:2:children:0","children"],"error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L3",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","forbidden":"$undefined","unauthorized":"$undefined"}]]}],{"children":["__PAGE__",["$","$1","c",{"children":["$L4",null,["$","$L5",null,{"children":"$L6"}]]}],{},null,false]},null,false]},null,false]},null,false],["$","$1","h",{"children":[null,["$","$1","2Jr71hHtZv0Db4ZK1LH86",{"children":[["$","$L7",null,{"children":"$L8"}],["$","$L9",null,{"children":"$La"}],null]}]]}],false]],"m":"$undefined","G":["$b","$undefined"],"s":false,"S":true}
+c:I[8173,["173","static/chunks/173-69860a4742bb7020.js","829","static/chunks/829-7533e70598480772.js","937","static/chunks/937-ef36a5ac4bc37a7e.js","447","static/chunks/447-06af9414e164c047.js","8","static/chunks/app/question/%5BlcId%5D/page-478b0d2a69e222f2.js"],""]
+d:I[3447,["173","static/chunks/173-69860a4742bb7020.js","829","static/chunks/829-7533e70598480772.js","937","static/chunks/937-ef36a5ac4bc37a7e.js","447","static/chunks/447-06af9414e164c047.js","8","static/chunks/app/question/%5BlcId%5D/page-478b0d2a69e222f2.js"],"default"]
+e:T19c3,# 155. 最小栈
+
+> 难度：**Medium** | 分类：栈 | 标签：栈, 设计
+
+> 🔗 力扣链接：[https://leetcode.cn/problems/min-stack/](https://leetcode.cn/problems/min-stack/)
+
+## 📝 题目描述
+
+设计一个栈，除了标准的 `push`、`pop`、`top` 操作外，还要支持 `getMin`，能在 O(1) 时间内拿到栈里当前的最小值。
+
+重点不在"栈怎么实现"，而在"怎么在不遍历的情况下随时知道最小值"。
+
+- 题号：155
+- 题目名：最小栈
+- 难度：中等
+- 题型：栈
+- 为什么选这题：它是"用空间换时间"的经典范例，用辅助栈把 O(n) 的最小值查询变成 O(1)。
+
+## 🧠 思考路径
+
+普通的栈，找最小值需要遍历，O(n)。要 O(1) 拿到，就必须在每次 push/pop 的时候维护好最小值信息。
+
+最直观的想法：用一个额外的变量存当前最小值。但 pop 的时候，如果弹出的正好是最小值，怎么知道"次小值"是多少？
+
+答案是再用一个栈——最小值栈。每次 push 的时候，把当前的最小值也压入最小值栈；每次 pop 的时候，两个栈同步弹出。这样最小值栈的栈顶始终是当前栈的最小值。
+
+所以这题的关键词不是"栈"，而是"主栈管数据，辅栈管最小值，同步进出"。
+
+## 💻 Java 题解
+
+### 解法 1：辅助栈
+
+主栈存数据，辅助栈同步存当前最小值。push时辅助栈push min(val, 当前栈顶)，pop时两个栈同步弹。
+
+- ⏱ 时间复杂度：`O(1) all ops`
+- 💾 空间复杂度：`O(n)`
+
+```java
+class MinStack {
+    Deque<Integer> stack, minStack;
+    public MinStack() { stack = new ArrayDeque<>(); minStack = new ArrayDeque<>(); }
+    public void push(int val) {
+        stack.push(val);
+        minStack.push(minStack.isEmpty() ? val : Math.min(val, minStack.peek()));
+    }
+    public void pop() { stack.pop(); minStack.pop(); }
+    public int top() { return stack.peek(); }
+    public int getMin() { return minStack.peek(); }
+}
+```
+
+**关键点：**
+- 辅助栈同步记录最小值
+- push时与辅助栈顶比较取min
+
+**执行步骤：**
+1. push: 两栈同时push
+1. pop: 两栈同时pop
+1. getMin: 返回辅助栈顶
+
+
+## ⚠️ 易错点
+
+- `min_stack` 每次 push 都要压值，不能只在更小的时候压——否则 pop 时两个栈长度不一致，对应关系就乱了。
+- 比较时用 `<=` 不是 `<`，保证相等时也压入，否则弹出后可能丢失最小值。
+- 两个栈必须同步 pop，不能只弹一个。
+
+- push第一个元素时辅助栈为空要特殊处理
+
+## 📊 复杂度分析
+
+- 时间复杂度：所有操作都是 `O(1)`。
+- 空间复杂度：`O(n)`。最坏情况最小值栈和主栈一样长。
+
+## 🏢 实际业务应用
+
+- 监控系统中的"当前最低水位"：服务器指标（CPU、内存）实时压栈式记录，需要随时查询历史最低点，不需要遍历全部数据。
+- 编辑器的撤销栈：每次操作记录当前文档状态的最小信息量（比如最小内存快照），撤销时能快速恢复到最优状态。
+- 游戏里的状态回溯：角色属性变化压栈，需要随时知道"历史最低血量"来触发成就系统。
+
+- 监控系统中的"当前最低水位"：服务器指标（CPU、内存）实时压栈式记录，需要随时查询历史最低点，不需要遍历全部数据。
+- 编辑器的撤销栈：每次操作记录当前文档状态的最小信息量（比如最小内存快照），撤销时能快速恢复到最优状态。
+- 游戏里的状态回溯：角色属性变化压栈，需要随时知道"历史最低血量"来触发成就系统。
+
+## 📖 形象类比
+
+可以把它类比成《三国演义》里刘备行军时粮草官的记账方式。
+
+刘备的军队一路行进，每到一处就建一个粮仓（push）。粮草官同时记两本账：一本记每个粮仓有多少粮（主栈），另一本记"到这一站为止，最少的存粮是多少"（辅助栈）。撤军时（pop），两本账同步翻一页。刘备问"现在最缺粮的是多少"（getMin），粮草官看第二本账最后一页就行。
+
+对应关系是：
+
+- "粮仓"对应栈里的元素
+- "粮草账本"对应主栈 `stack`
+- "最少存粮账本"对应辅助栈 `min_stack`
+- "同步翻页"对应同步 pop
+- "看最后一页就知最少"对应 O(1) 查询
+
+这段记忆的关键是：记账时多记一笔"到目前最少多少"，查的时候就不必翻遍整本账。
+
+可以把它类比成《三国演义》里刘备行军时粮草官的记账方式。
+
+刘备的军队一路行进，每到一处就建一个粮仓（push）。粮草官同时记两本账：一本记每个粮仓有多少粮（主栈），另一本记"到这一站为止，最少的存粮是多少"（辅助栈）。撤军时（pop），两本账同步翻一页。刘备问"现在最缺粮的是多少"（getMin），粮草官看第二本账最后一页就行。
+
+对应关系是：
+
+- "粮仓"对应栈里的元素
+- "粮草账本"对应主栈 `stack`
+- "最少存粮账本"对应辅助栈 `min_stack`
+- "同步翻页"对应同步 pop
+- "看最后一页就知最少"对应 O(1) 查询
+
+这段记忆的关键是：记账时多记一笔"到目前最少多少"，查的时候就不必翻遍整本账。
+
+小松鼠每天往树洞里存一颗松果，每颗大小不同。它同时在旁边的树皮上刻一道记号，记"到今天为止最小的松果是多大"。第二天再存一颗，就再刻一道新记号。如果松果被吃掉了（pop），就把两块树皮上的最后一道记号一起擦掉。猫头鹰问"现在最小的松果多大"，小松鼠看一眼旁边的树皮最后一道记号就知道了。
+
+小松鼠每天往树洞里存一颗松果，每颗大小不同。它同时在旁边的树皮上刻一道记号，记"到今天为止最小的松果是多大"。第二天再存一颗，就再刻一道新记号。如果松果被吃掉了（pop），就把两块树皮上的最后一道记号一起擦掉。猫头鹰问"现在最小的松果多大"，小松鼠看一眼旁边的树皮最后一道记号就知道了。
+
+## 🎵 记忆口诀
+
+主栈存数据，辅栈存最小，同步进出不分离。
+
+主栈存数据，辅栈存最小，同步进出不分离。
+
+## 🔗 延伸练习
+
+- `716. 最大栈`：从"最小"变成"最大"，思路一样，方向反转。
+- `232. 用栈实现队列`：同样是栈的扩展应用，用两个栈组合出队列的行为。
+
+- `716. 最大栈`：从"最小"变成"最大"，思路一样，方向反转。
+- `232. 用栈实现队列`：同样是栈的扩展应用，用两个栈组合出队列的行为。4:["$","main",null,{"className":"detail-main","style":{"maxWidth":760,"margin":"0 auto","padding":"16px","minHeight":"100vh"},"children":[["$","$Lc",null,{"href":"/","style":{"display":"inline-block","marginBottom":"12px","fontSize":"13px"},"children":"← 返回题库"}],["$","h1",null,{"style":{"fontSize":"22px","fontWeight":700,"margin":"0 0 4px"},"children":[["$","span",null,{"style":{"marginRight":"6px"},"children":"🥞"}],155,". ","最小栈"]}],["$","$Ld",null,{"q":{"id":"0155","lcId":155,"slug":"min-stack","title":"最小栈","question":"最小栈","answer":"$e","difficulty":"Medium","category":"stack","categories":["stack"],"tags":["栈","设计"],"url":"https://leetcode.cn/problems/min-stack/","planOrder":70,"hasViz":true,"hasDiagram":false,"feynman":{"essence":"设计一个栈，除了标准的 `push`、`pop`、`top` 操作外，还要支持 `getMin`，能在 O(1) 时间内拿到栈里当前的最小值。  重点不在\"栈怎么实现\"，而在\"怎么在不遍历的情况下随时","analogy":"","key_points":[]},"first_principle":{"problem":"","axioms":[],"rebuild":""}}}]]}]
+a:[["$","meta","0",{"name":"viewport","content":"width=device-width, initial-scale=1"}],["$","meta","1",{"name":"theme-color","content":"#f97316"}]]
+8:[["$","meta","0",{"charSet":"utf-8"}],["$","title","1",{"children":"155. 最小栈 - 算法面试"}],["$","meta","2",{"name":"description","content":"设计一个栈，除了标准的 `push`、`pop`、`top` 操作外，还要支持 `getMin`，能在 O(1) 时间内拿到栈里当前的最小值。  重点不在\"栈怎么实现\"，而在\"怎么在不遍历的情况下随时"}],["$","meta","3",{"name":"application-name","content":"算法面试"}],["$","link","4",{"rel":"manifest","href":"/algorithm-interview/manifest.json","crossOrigin":"$undefined"}],["$","meta","5",{"name":"keywords","content":"最小栈,LeetCode 155,Medium,栈,设计"}],["$","meta","6",{"name":"mobile-web-app-capable","content":"yes"}],["$","meta","7",{"name":"apple-mobile-web-app-title","content":"算法面试"}],["$","meta","8",{"name":"apple-mobile-web-app-status-bar-style","content":"default"}],["$","meta","9",{"property":"og:title","content":"155. 最小栈"}],["$","meta","10",{"property":"og:description","content":"设计一个栈，除了标准的 `push`、`pop`、`top` 操作外，还要支持 `getMin`，能在 O(1) 时间内拿到栈里当前的最小值。  重点不在\"栈怎么实现\"，而在\"怎么在不遍历的情况下随时"}],["$","meta","11",{"property":"og:locale","content":"zh_CN"}],["$","meta","12",{"property":"og:type","content":"article"}],["$","meta","13",{"name":"twitter:card","content":"summary"}],["$","meta","14",{"name":"twitter:title","content":"155. 最小栈"}],["$","meta","15",{"name":"twitter:description","content":"设计一个栈，除了标准的 `push`、`pop`、`top` 操作外，还要支持 `getMin`，能在 O(1) 时间内拿到栈里当前的最小值。  重点不在\"栈怎么实现\"，而在\"怎么在不遍历的情况下随时"}]]
+6:null

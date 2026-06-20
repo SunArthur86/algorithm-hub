@@ -1,0 +1,235 @@
+1:"$Sreact.fragment"
+2:I[5244,[],""]
+3:I[3866,[],""]
+5:I[6213,[],"OutletBoundary"]
+7:I[6213,[],"MetadataBoundary"]
+9:I[6213,[],"ViewportBoundary"]
+b:I[4835,[],""]
+:HL["/algorithm-interview/_next/static/css/c1e787639001e16b.css","style"]
+0:{"P":null,"b":"xos97fAiWtKfKXI6hZLx4","p":"/algorithm-interview","c":["","columns","lbd-033",""],"i":false,"f":[[["",{"children":["columns",{"children":[["slug","lbd-033","d"],{"children":["__PAGE__",{}]}]}]},"$undefined","$undefined",true],["",["$","$1","c",{"children":[[["$","link","0",{"rel":"stylesheet","href":"/algorithm-interview/_next/static/css/c1e787639001e16b.css","precedence":"next","crossOrigin":"$undefined","nonce":"$undefined"}]],["$","html",null,{"lang":"zh","children":[["$","head",null,{"children":["$","script",null,{"dangerouslySetInnerHTML":{"__html":"\ntry {\n  var raw = localStorage.getItem('algo-interview');\n  var theme = 'light';\n  if (raw) { var p = JSON.parse(raw); theme = (p.state && p.state.theme) || 'light'; }\n  if (theme === 'dark') {\n    document.documentElement.classList.add('dark');\n    document.documentElement.setAttribute('data-theme', 'dark');\n  }\n} catch (e) {}\n"}}]}],["$","body",null,{"children":[["$","$L2",null,{"parallelRouterKey":"children","segmentPath":["children"],"error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L3",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":[[],[["$","title",null,{"children":"404: This page could not be found."}],["$","div",null,{"style":{"fontFamily":"system-ui,\"Segoe UI\",Roboto,Helvetica,Arial,sans-serif,\"Apple Color Emoji\",\"Segoe UI Emoji\"","height":"100vh","textAlign":"center","display":"flex","flexDirection":"column","alignItems":"center","justifyContent":"center"},"children":["$","div",null,{"children":[["$","style",null,{"dangerouslySetInnerHTML":{"__html":"body{color:#000;background:#fff;margin:0}.next-error-h1{border-right:1px solid rgba(0,0,0,.3)}@media (prefers-color-scheme:dark){body{color:#fff;background:#000}.next-error-h1{border-right:1px solid rgba(255,255,255,.3)}}"}}],["$","h1",null,{"className":"next-error-h1","style":{"display":"inline-block","margin":"0 20px 0 0","padding":"0 23px 0 0","fontSize":24,"fontWeight":500,"verticalAlign":"top","lineHeight":"49px"},"children":404}],["$","div",null,{"style":{"display":"inline-block"},"children":["$","h2",null,{"style":{"fontSize":14,"fontWeight":400,"lineHeight":"49px","margin":0},"children":"This page could not be found."}]}]]}]}]]],"forbidden":"$undefined","unauthorized":"$undefined"}],["$","script",null,{"dangerouslySetInnerHTML":{"__html":"\nif ('serviceWorker' in navigator) {\n  window.addEventListener('load', function () {\n    navigator.serviceWorker.register('/algorithm-interview/sw.js').catch(function () {});\n  });\n}\n"}}]]}]]}]]}],{"children":["columns",["$","$1","c",{"children":[null,["$","$L2",null,{"parallelRouterKey":"children","segmentPath":["children","columns","children"],"error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L3",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","forbidden":"$undefined","unauthorized":"$undefined"}]]}],{"children":[["slug","lbd-033","d"],["$","$1","c",{"children":[null,["$","$L2",null,{"parallelRouterKey":"children","segmentPath":["children","columns","children","$0:f:0:1:2:children:2:children:0","children"],"error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L3",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","forbidden":"$undefined","unauthorized":"$undefined"}]]}],{"children":["__PAGE__",["$","$1","c",{"children":["$L4",null,["$","$L5",null,{"children":"$L6"}]]}],{},null,false]},null,false]},null,false]},null,false],["$","$1","h",{"children":[null,["$","$1","L3GbA_Ex8qHKgLtNySTwI",{"children":[["$","$L7",null,{"children":"$L8"}],["$","$L9",null,{"children":"$La"}],null]}]]}],false]],"m":"$undefined","G":["$b","$undefined"],"s":false,"S":true}
+c:I[8173,["173","static/chunks/173-69860a4742bb7020.js","829","static/chunks/829-7533e70598480772.js","306","static/chunks/app/columns/%5Bslug%5D/page-58fc1d8f5085c1ff.js"],""]
+d:I[4780,["173","static/chunks/173-69860a4742bb7020.js","829","static/chunks/829-7533e70598480772.js","306","static/chunks/app/columns/%5Bslug%5D/page-58fc1d8f5085c1ff.js"],"default"]
+e:T2704,# 二叉堆详解实现优先级队列
+
+⼆叉堆详解实现优先级队列
+学算法，认准 labuladong 就够了！
+⼆叉堆（Binary Heap）没什么神秘，性质⽐⼆叉搜索树 BST 还简单。其主
+要操作就两个， sink （下沉）和  swim （上浮），⽤以维护⼆叉堆的性
+质。其主要应⽤有两个，⾸先是⼀种排序⽅法「堆排序」，第⼆是⼀种很有
+⽤的数据结构「优先级队列」。
+本⽂就以实现优先级队列（Priority Queue）为例，通过图⽚和⼈类的语⾔来
+描述⼀下⼆叉堆怎么运作的。
+⼀、⼆叉堆概览
+⾸先，⼆叉堆和⼆叉树有啥关系呢，为什么⼈们总数把⼆叉堆画成⼀棵⼆叉
+树？
+因为，⼆叉堆其实就是⼀种特殊的⼆叉树（完全⼆叉树），只不过存储在数
+组⾥。⼀般的链表⼆叉树，我们操作节点的指针，⽽在数组⾥，我们把数组
+索引作为指针：
+// ⽗节点的索引
+int parent(int root) {
+    return root / 2;
+}
+// 左孩⼦的索引
+int left(int root) {
+    return root * 2;
+}
+// 右孩⼦的索引
+int right(int root) {
+    return root * 2 + 1;
+}
+⼆叉堆详解实现优先级队列
+227
+
+画个图你⽴即就能理解了，注意数组的第⼀个索引 0 空着不⽤，
+PS：因为数组索引是数组，为了⽅便区分，将字符作为数组元素。
+你看到了，把 arr[1] 作为整棵树的根的话，每个节点的⽗节点和左右孩⼦的
+索引都可以通过简单的运算得到，这就是⼆叉堆设计的⼀个巧妙之处。为了
+⽅便讲解，下⾯都会画的图都是⼆叉树结构，相信你能把树和数组对应起
+来。
+⼆叉堆还分为最⼤堆和最⼩堆。最⼤堆的性质是：每个节点都⼤于等于它的
+两个⼦节点。类似的，最⼩堆的性质是：每个节点都⼩于等于它的⼦节点。
+两种堆核⼼思路都是⼀样的，本⽂以最⼤堆为例讲解。
+对于⼀个最⼤堆，根据其性质，显然堆顶，也就是 arr[1] ⼀定是所有元素中
+最⼤的元素。
+⼆、优先级队列概览
+⼆叉堆详解实现优先级队列
+228
+
+优先级队列这种数据结构有⼀个很有⽤的功能，你插⼊或者删除元素的时
+候，元素会⾃动排序，这底层的原理就是⼆叉堆的操作。
+数据结构的功能⽆⾮增删查该，优先级队列有两个主要 API，分别是
+ insert  插⼊⼀个元素和  delMax  删除最⼤元素（如果底层⽤最⼩堆，那么
+就是  delMin ）。
+下⾯我们实现⼀个简化的优先级队列，先看下代码框架：
+PS：为了清晰起⻅，这⾥⽤到 Java 的泛型， Key  可以是任何⼀种可⽐较⼤
+⼩的数据类型，你可以认为它是 int、char 等。
+public class MaxPQ
+    <Key extends Comparable<Key>> {
+    // 存储元素的数组
+    private Key[] pq;
+    // 当前 Priority Queue 中的元素个数
+    private int N = 0;
+    public MaxPQ(int cap) {
+        // 索引 0 不⽤，所以多分配⼀个空间
+        pq = (Key[]) new Comparable[cap + 1];
+    }
+    /* 返回当前队列中最⼤元素 */
+    public Key max() {
+        return pq[1];
+    }
+    /* 插⼊元素 e */
+    public void insert(Key e) {...}
+    /* 删除并返回当前队列中最⼤元素 */
+    public Key delMax() {...}
+    /* 上浮第 k 个元素，以维护最⼤堆性质 */
+    private void swim(int k) {...}
+    /* 下沉第 k 个元素，以维护最⼤堆性质 */
+    private void sink(int k) {...}
+⼆叉堆详解实现优先级队列
+229
+
+    /* 交换数组的两个元素 */
+    private void exch(int i, int j) {
+        Key temp = pq[i];
+        pq[i] = pq[j];
+        pq[j] = temp;
+    }
+    /* pq[i] 是否⽐ pq[j] ⼩？ */
+    private boolean less(int i, int j) {
+        return pq[i].compareTo(pq[j]) < 0;
+    }
+    /* 还有 left, right, parent 三个⽅法 */
+}
+空出来的四个⽅法是⼆叉堆和优先级队列的奥妙所在，下⾯⽤图⽂来逐个理
+解。
+三、实现 swim 和 sink
+为什么要有上浮 swim 和下沉 sink 的操作呢？为了维护堆结构。
+我们要讲的是最⼤堆，每个节点都⽐它的两个⼦节点⼤，但是在插⼊元素和
+删除元素时，难免破坏堆的性质，这就需要通过这两个操作来恢复堆的性质
+了。
+对于最⼤堆，会破坏堆性质的有有两种情况：
+1. 如果某个节点 A ⽐它的⼦节点（中的⼀个）⼩，那么 A 就不配做⽗节
+点，应该下去，下⾯那个更⼤的节点上来做⽗节点，这就是对 A 进⾏
+下沉。
+2. 如果某个节点 A ⽐它的⽗节点⼤，那么 A 不应该做⼦节点，应该把⽗
+节点换下来，⾃⼰去做⽗节点，这就是对 A 的上浮。
+当然，错位的节点 A 可能要上浮（或下沉）很多次，才能到达正确的位
+置，恢复堆的性质。所以代码中肯定有⼀个  while  循环。
+⼆叉堆详解实现优先级队列
+230
+
+细⼼的读者也许会问，这两个操作不是互逆吗，所以上浮的操作⼀定能⽤下
+沉来完成，为什么我还要费劲写两个⽅法？
+是的，操作是互逆等价的，但是最终我们的操作只会在堆底和堆顶进⾏（等
+会讲原因），显然堆底的「错位」元素需要上浮，堆顶的「错位」元素需要
+下沉。
+上浮的代码实现：
+private void swim(int k) {
+    // 如果浮到堆顶，就不能再上浮了
+    while (k > 1 && less(parent(k), k)) {
+        // 如果第 k 个元素⽐上层⼤
+        // 将 k 换上去
+        exch(parent(k), k);
+        k = parent(k);
+    }
+}
+画个 GIF 看⼀眼就明⽩了：
+【PDF格式⽆法显⽰GIF⽂件 heap/swim.gif，可移步公众号查看】
+下沉的代码实现：
+下沉⽐上浮略微复杂⼀点，因为上浮某个节点 A，只需要 A 和其⽗节点⽐
+较⼤⼩即可；但是下沉某个节点 A，需要 A 和其两个⼦节点⽐较⼤⼩，如
+果 A 不是最⼤的就需要调整位置，要把较⼤的那个⼦节点和 A 交换。
+private void sink(int k) {
+    // 如果沉到堆底，就沉不下去了
+    while (left(k) <= N) {
+        // 先假设左边节点较⼤
+        int older = left(k);
+        // 如果右边节点存在，⽐⼀下⼤⼩
+        if (right(k) <= N && less(older, right(k)))
+            older = right(k);
+        // 结点 k ⽐俩孩⼦都⼤，就不必下沉了
+        if (less(older, k)) break;
+⼆叉堆详解实现优先级队列
+231
+
+        // 否则，不符合最⼤堆的结构，下沉 k 结点
+        exch(k, older);
+        k = older;
+    }
+}
+画个 GIF 看下就明⽩了：
+【PDF格式⽆法显⽰GIF⽂件 heap/sink.gif，可移步公众号查看】
+⾄此，⼆叉堆的主要操作就讲完了，⼀点都不难吧，代码加起来也就⼗⾏。
+明⽩了  sink  和  swim  的⾏为，下⾯就可以实现优先级队列了。
+四、实现 delMax 和 insert
+这两个⽅法就是建⽴在  swim  和  sink  上的。
+ insert  ⽅法先把要插⼊的元素添加到堆底的最后，然后让其上浮到正确位
+置。
+【PDF格式⽆法显⽰GIF⽂件 heap/insert.gif，可移步公众号查看】
+public void insert(Key e) {
+    N++;
+    // 先把新元素加到最后
+    pq[N] = e;
+    // 然后让它上浮到正确的位置
+    swim(N);
+}
+ delMax  ⽅法先把堆顶元素 A 和堆底最后的元素 B 对调，然后删除 A，最
+后让 B 下沉到正确位置。
+public Key delMax() {
+    // 最⼤堆的堆顶就是最⼤元素
+    Key max = pq[1];
+    // 把这个最⼤元素换到最后，删除之
+    exch(1, N);
+⼆叉堆详解实现优先级队列
+232
+
+    pq[N] = null;
+    N--;
+    // 让 pq[1] 下沉到正确位置
+    sink(1);
+    return max;
+}
+【PDF格式⽆法显⽰GIF⽂件 heap/delete.gif，可移步公众号查看】
+⾄此，⼀个优先级队列就实现了，插⼊和删除元素的时间复杂度为
+ O(logK) ， K  为当前⼆叉堆（优先级队列）中的元素总数。因为我们时间
+复杂度主要花费在  sink  或者  swim  上，⽽不管上浮还是下沉，最多也就
+树（堆）的⾼度，也就是 log 级别。
+五、最后总结
+⼆叉堆就是⼀种完全⼆叉树，所以适合存储在数组中，⽽且⼆叉堆拥有⼀些
+特殊性质。
+⼆叉堆的操作很简单，主要就是上浮和下沉，来维护堆的性质（堆有序），
+核⼼代码也就⼗⾏。
+优先级队列是基于⼆叉堆实现的，主要操作是插⼊和删除。插⼊是先插到最
+后，然后上浮到正确位置；删除是调换位置后再删除，然后下沉到正确位
+置。核⼼代码也就⼗⾏。
+也许这就是数据结构的威⼒，简单的操作就能实现巧妙的功能，真⼼佩服发
+明⼆叉堆算法的⼈！
+＿＿＿＿＿＿＿＿＿＿＿＿＿
+刷算法，学套路，认准 labuladong。
+本⼩抄即将出版，关注 labuladong 公众号或 ongline book 查看更新⽂章，
+后台回复「进群」可进刷题群，labuladong 带你⽇穿 LeetCode。
+⼆叉堆详解实现优先级队列
+233
+
+⼆叉堆详解实现优先级队列
+234
+
+LRU算法详解
+学算法，认准 labuladong 就够了！
+⼀、什么是 LRU 算法
+就是⼀种缓存淘汰策略。
+计算机的缓存容量有限，如果缓存满了就要删除⼀些内容，给新内容腾位
+置。但问题是，删除哪些内容呢？我们肯定希望删掉哪些没什么⽤的缓存，
+⽽把有⽤的数据继续留在缓存⾥，⽅便之后继续使⽤。那么，什么样的数
+据，我们判定为「有⽤的」的数据呢？
+LRU 缓存淘汰算法就是⼀种常⽤策略。LRU 的全称是 Least Recently
+Used，也就是说我们认为最近使⽤过的数据应该是是「有⽤的」，很久都
+没⽤过的数据应该是⽆⽤的，内存满了就优先删那些很久没⽤过的数据。
+举个简单的例⼦，安卓⼿机都可以把软件放到后台运⾏，⽐如我先后打开了
+「设置」「⼿机管家」「⽇历」，那么现在他们在后台排列的顺序是这样
+的：
+LRU算法详解
+2354:["$","main",null,{"style":{"maxWidth":760,"margin":"0 auto","padding":"16px","minHeight":"100vh"},"children":[["$","$Lc",null,{"href":"/columns/","style":{"display":"inline-block","marginBottom":"12px","fontSize":"13px"},"children":"← 返回专栏"}],["$","div",null,{"style":{"fontSize":"12px","color":"var(--text-tertiary)","marginBottom":"4px"},"children":["📕"," ","labuladong 算法小抄"]}],["$","h1",null,{"style":{"fontSize":"22px","fontWeight":700,"margin":"0 0 16px"},"children":"二叉堆详解实现优先级队列"}],["$","$Ld",null,{"children":"$e"}],false]}]
+a:[["$","meta","0",{"name":"viewport","content":"width=device-width, initial-scale=1"}],["$","meta","1",{"name":"theme-color","content":"#f97316"}]]
+8:[["$","meta","0",{"charSet":"utf-8"}],["$","title","1",{"children":"二叉堆详解实现优先级队列 - 算法面试"}],["$","meta","2",{"name":"description","content":"LeetCode 热题 100 完整 Java 题解、逐题动画、知识专栏与智能间隔复习。"}],["$","meta","3",{"name":"application-name","content":"算法面试"}],["$","link","4",{"rel":"manifest","href":"/algorithm-interview/manifest.json","crossOrigin":"$undefined"}],["$","meta","5",{"name":"keywords","content":"LeetCode,热题100,算法面试,Java题解,数据结构,动态规划,面试刷题"}],["$","meta","6",{"name":"mobile-web-app-capable","content":"yes"}],["$","meta","7",{"name":"apple-mobile-web-app-title","content":"算法面试"}],["$","meta","8",{"name":"apple-mobile-web-app-status-bar-style","content":"default"}],["$","meta","9",{"property":"og:title","content":"算法面试题库"}],["$","meta","10",{"property":"og:description","content":"LeetCode 热题 100 完整 Java 题解、逐题动画、知识专栏与智能复习"}],["$","meta","11",{"property":"og:site_name","content":"算法面试题库"}],["$","meta","12",{"property":"og:locale","content":"zh_CN"}],["$","meta","13",{"property":"og:type","content":"website"}],["$","meta","14",{"name":"twitter:card","content":"summary"}],["$","meta","15",{"name":"twitter:title","content":"算法面试题库"}],["$","meta","16",{"name":"twitter:description","content":"LeetCode 热题 100 完整 Java 题解、逐题动画、知识专栏与智能复习"}]]
+6:null

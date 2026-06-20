@@ -1,0 +1,212 @@
+<!DOCTYPE html><html lang="zh"><head><meta charSet="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="/algorithm-interview/_next/static/css/c1e787639001e16b.css" data-precedence="next"/><link rel="preload" as="script" fetchPriority="low" href="/algorithm-interview/_next/static/chunks/webpack-65b8ce4c1158f96f.js"/><script src="/algorithm-interview/_next/static/chunks/4bd1b696-899926250d3992f1.js" async=""></script><script src="/algorithm-interview/_next/static/chunks/517-b6df7dad4ff96d0b.js" async=""></script><script src="/algorithm-interview/_next/static/chunks/main-app-9e7bfff32fd8ebe9.js" async=""></script><script src="/algorithm-interview/_next/static/chunks/173-69860a4742bb7020.js" async=""></script><script src="/algorithm-interview/_next/static/chunks/829-7533e70598480772.js" async=""></script><script src="/algorithm-interview/_next/static/chunks/app/columns/%5Bslug%5D/page-58fc1d8f5085c1ff.js" async=""></script><meta name="theme-color" content="#f97316"/><title>双指针技巧总结 - 算法面试</title><meta name="description" content="LeetCode 热题 100 完整 Java 题解、逐题动画、知识专栏与智能间隔复习。"/><meta name="application-name" content="算法面试"/><link rel="manifest" href="/algorithm-interview/manifest.json"/><meta name="keywords" content="LeetCode,热题100,算法面试,Java题解,数据结构,动态规划,面试刷题"/><meta name="mobile-web-app-capable" content="yes"/><meta name="apple-mobile-web-app-title" content="算法面试"/><meta name="apple-mobile-web-app-status-bar-style" content="default"/><meta property="og:title" content="算法面试题库"/><meta property="og:description" content="LeetCode 热题 100 完整 Java 题解、逐题动画、知识专栏与智能复习"/><meta property="og:site_name" content="算法面试题库"/><meta property="og:locale" content="zh_CN"/><meta property="og:type" content="website"/><meta name="twitter:card" content="summary"/><meta name="twitter:title" content="算法面试题库"/><meta name="twitter:description" content="LeetCode 热题 100 完整 Java 题解、逐题动画、知识专栏与智能复习"/><script>
+try {
+  var raw = localStorage.getItem('algo-interview');
+  var theme = 'light';
+  if (raw) { var p = JSON.parse(raw); theme = (p.state && p.state.theme) || 'light'; }
+  if (theme === 'dark') {
+    document.documentElement.classList.add('dark');
+    document.documentElement.setAttribute('data-theme', 'dark');
+  }
+} catch (e) {}
+</script><script src="/algorithm-interview/_next/static/chunks/polyfills-42372ed130431b0a.js" noModule=""></script></head><body><main style="max-width:760px;margin:0 auto;padding:16px;min-height:100vh"><a style="display:inline-block;margin-bottom:12px;font-size:13px" href="/algorithm-interview/columns/">← 返回专栏</a><div style="font-size:12px;color:var(--text-tertiary);margin-bottom:4px">📕<!-- --> <!-- -->labuladong 算法小抄</div><h1 style="font-size:22px;font-weight:700;margin:0 0 16px">双指针技巧总结</h1><div class="prose max-w-none" style="font-size:14px;color:var(--text)"><h1>双指针技巧总结</h1>
+<p>双指针技巧总结
+学算法，认准 labuladong 就够了！
+我把双指针技巧再分为两类，⼀类是「快慢指针」，⼀类是「左右指针」。
+前者解决主要解决链表中的问题，⽐如典型的判定链表中是否包含环；后者
+主要解决数组（或者字符串）中的问题，⽐如⼆分查找。
+⼀、快慢指针的常⻅算法
+快慢指针⼀般都初始化指向链表的头结点 head，前进时快指针 fast 在前，
+慢指针 slow 在后，巧妙解决⼀些链表中的问题。
+1、判定链表中是否含有环
+这应该属于链表最基本的操作了，如果读者已经知道这个技巧，可以跳过。
+单链表的特点是每个节点只知道下⼀个节点，所以⼀个指针的话⽆法判断链
+表中是否含有环的。
+如果链表中不含环，那么这个指针最终会遇到空指针 null 表⽰链表到头
+了，这还好说，可以判断该链表不含环。
+boolean hasCycle(ListNode head) {
+while (head != null)
+head = head.next;
+return false;
+}
+但是如果链表中含有环，那么这个指针就会陷⼊死循环，因为环形数组中没
+有 null 指针作为尾部节点。
+双指针技巧总结
+318</p>
+<p>经典解法就是⽤两个指针，⼀个跑得快，⼀个跑得慢。如果不含有环，跑得
+快的那个指针最终会遇到 null，说明链表不含环；如果含有环，快指针最终
+会超慢指针⼀圈，和慢指针相遇，说明链表含有环。
+boolean hasCycle(ListNode head) {
+ListNode fast, slow;
+fast = slow = head;
+while (fast != null &amp;&amp; fast.next != null) {
+fast = fast.next.next;
+slow = slow.next;
+if (fast == slow) return true;
+}
+return false;
+}
+2、已知链表中含有环，返回这个环的起始位置
+这个问题⼀点都不困难，有点类似脑筋急转弯，先直接看代码：
+ListNode detectCycle(ListNode head) {
+ListNode fast, slow;
+fast = slow = head;
+while (fast != null &amp;&amp; fast.next != null) {
+fast = fast.next.next;
+slow = slow.next;
+if (fast == slow) break;
+}
+// 上⾯的代码类似 hasCycle 函数
+双指针技巧总结
+319</p>
+<pre><code>slow = head;
+while (slow != fast) {
+    fast = fast.next;
+    slow = slow.next;
+}
+return slow;
+</code></pre>
+<p>}
+可以看到，当快慢指针相遇时，让其中任⼀个指针指向头节点，然后让它俩
+以相同速度前进，再次相遇时所在的节点位置就是环开始的位置。这是为什
+么呢？
+第⼀次相遇时，假设慢指针 slow ⾛了 k 步，那么快指针 fast ⼀定⾛了 2k
+步，也就是说⽐ slow 多⾛了 k 步（也就是环的⻓度）。
+设相遇点距环的起点的距离为 m，那么环的起点距头结点 head 的距离为 k -
+m，也就是说如果从 head 前进 k - m 步就能到达环起点。
+巧的是，如果从相遇点继续前进 k - m 步，也恰好到达环起点。
+双指针技巧总结
+320</p>
+<p>所以，只要我们把快慢指针中的任⼀个重新指向 head，然后两个指针同速
+前进，k - m 步后就会相遇，相遇之处就是环的起点了。
+3、寻找链表的中点
+类似上⾯的思路，我们还可以让快指针⼀次前进两步，慢指针⼀次前进⼀
+步，当快指针到达链表尽头时，慢指针就处于链表的中间位置。
+while (fast != null &amp;&amp; fast.next != null) {
+fast = fast.next.next;
+slow = slow.next;
+}
+// slow 就在中间位置
+return slow;
+当链表的⻓度是奇数时，slow 恰巧停在中点位置；如果⻓度是偶数，slow
+最终的位置是中间偏右：
+双指针技巧总结
+321</p>
+<p>寻找链表中点的⼀个重要作⽤是对链表进⾏归并排序。
+回想数组的归并排序：求中点索引递归地把数组⼆分，最后合并两个有序数
+组。对于链表，合并两个有序链表是很简单的，难点就在于⼆分。
+但是现在你学会了找到链表的中点，就能实现链表的⼆分了。关于归并排序
+的具体内容本⽂就不具体展开了。
+4、寻找链表的倒数第 k 个元素
+我们的思路还是使⽤快慢指针，让快指针先⾛ k 步，然后快慢指针开始同速
+前进。这样当快指针⾛到链表末尾 null 时，慢指针所在的位置就是倒数第 k
+个链表节点（为了简化，假设 k 不会超过链表⻓度）：
+ListNode slow, fast;
+slow = fast = head;
+while (k-- &gt; 0)
+fast = fast.next;
+while (fast != null) {
+slow = slow.next;
+fast = fast.next;
+}
+return slow;
+⼆、左右指针的常⽤算法
+左右指针在数组中实际是指两个索引值，⼀般初始化为 left = 0, right =
+nums.length - 1 。
+1、⼆分查找
+前⽂「⼆分查找」有详细讲解，这⾥只写最简单的⼆分算法，旨在突出它的
+双指针特性：
+int binarySearch(int[] nums, int target) {
+int left = 0;
+int right = nums.length - 1;
+双指针技巧总结
+322</p>
+<pre><code>while(left &lt;= right) {
+    int mid = (right + left) / 2;
+    if(nums[mid] == target)
+        return mid; 
+    else if (nums[mid] &lt; target)
+        left = mid + 1; 
+    else if (nums[mid] &gt; target)
+        right = mid - 1;
+}
+return -1;
+</code></pre>
+<p>}
+2、两数之和
+直接看⼀道 LeetCode 题⽬吧：
+只要数组有序，就应该想到双指针技巧。这道题的解法有点类似⼆分查找，
+通过调节 left 和 right 可以调整 sum 的⼤⼩：
+int[] twoSum(int[] nums, int target) {
+int left = 0, right = nums.length - 1;
+while (left &lt; right) {
+int sum = nums[left] + nums[right];
+if (sum == target) {
+// 题⽬要求的索引是从 1 开始的
+双指针技巧总结
+323</p>
+<pre><code>        return new int[]{left + 1, right + 1};
+    } else if (sum &lt; target) {
+        left++; // 让 sum ⼤⼀点
+    } else if (sum &gt; target) {
+        right--; // 让 sum ⼩⼀点
+    }
+}
+return new int[]{-1, -1};
+</code></pre>
+<p>}
+3、反转数组
+void reverse(int[] nums) {
+int left = 0;
+int right = nums.length - 1;
+while (left &lt; right) {
+// swap(nums[left], nums[right])
+int temp = nums[left];
+nums[left] = nums[right];
+nums[right] = temp;
+left++; right--;
+}
+}
+4、滑动窗⼝算法
+这也许是双指针技巧的最⾼境界了，如果掌握了此算法，可以解决⼀⼤类⼦
+字符串匹配的问题，不过「滑动窗⼝」稍微⽐上述的这些算法复杂些。
+幸运的是，这类算法是有框架模板的，⽽且这篇⽂章就讲解了「滑动窗⼝」
+算法模板，帮⼤家秒杀⼏道 LeetCode ⼦串匹配的问题。
+＿＿＿＿＿＿＿＿＿＿＿＿＿
+刷算法，学套路，认准 labuladong。
+本⼩抄即将出版，关注 labuladong 公众号或 ongline book 查看更新⽂章，
+后台回复「进群」可进刷题群，labuladong 带你⽇穿 LeetCode。
+双指针技巧总结
+324</p>
+<p>双指针技巧总结
+325</p>
+<p>twoSum问题的核⼼思想
+学算法，认准 labuladong 就够了！
+Two Sum 系列问题在 LeetCode 上有好⼏道，这篇⽂章就挑出有代表性的⼏
+道，介绍⼀下这种问题怎么解决。
+TwoSum I
+这个问题的最基本形式是这样：给你⼀个数组和⼀个整数  target ，可以保
+证数组中存在两个数的和为  target ，请你返回这两个数的索引。
+⽐如输⼊  nums = [3,1,3,6], target = 6 ，算法应该返回数组  [0,2] ，因为
+3 + 3 = 6。
+这个问题如何解决呢？⾸先最简单粗暴的办法当然是穷举了：
+int[] twoSum(int[] nums, int target) {
+for (int i = 0; i &lt; nums.length; i++)
+for (int j = i + 1; j &lt; nums.length; j++)
+if (nums[j] == target - nums[i])
+return new int[] { i, j };
+// 不存在这么两个数
+return new int[] {-1, -1};
+}
+这个解法⾮常直接，时间复杂度 O(N^2)，空间复杂度 O(1)。
+可以通过⼀个哈希表减少时间复杂度：
+int[] twoSum(int[] nums, int target) {
+int n = nums.length;
+index&lt;Integer, Integer&gt; index = new HashMap&lt;&gt;();
+twoSum问题的核⼼思想
+326</p></div></main><script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function () {
+    navigator.serviceWorker.register('/algorithm-interview/sw.js').catch(function () {});
+  });
+}
+</script><script src="/algorithm-interview/_next/static/chunks/webpack-65b8ce4c1158f96f.js" async=""></script><script>(self.__next_f=self.__next_f||[]).push([0])</script><script>self.__next_f.push([1,"1:\"$Sreact.fragment\"\n2:I[5244,[],\"\"]\n3:I[3866,[],\"\"]\n5:I[6213,[],\"OutletBoundary\"]\n7:I[6213,[],\"MetadataBoundary\"]\n9:I[6213,[],\"ViewportBoundary\"]\nb:I[4835,[],\"\"]\n:HL[\"/algorithm-interview/_next/static/css/c1e787639001e16b.css\",\"style\"]\n"])</script><script>self.__next_f.push([1,"0:{\"P\":null,\"b\":\"xos97fAiWtKfKXI6hZLx4\",\"p\":\"/algorithm-interview\",\"c\":[\"\",\"columns\",\"lbd-046\",\"\"],\"i\":false,\"f\":[[[\"\",{\"children\":[\"columns\",{\"children\":[[\"slug\",\"lbd-046\",\"d\"],{\"children\":[\"__PAGE__\",{}]}]}]},\"$undefined\",\"$undefined\",true],[\"\",[\"$\",\"$1\",\"c\",{\"children\":[[[\"$\",\"link\",\"0\",{\"rel\":\"stylesheet\",\"href\":\"/algorithm-interview/_next/static/css/c1e787639001e16b.css\",\"precedence\":\"next\",\"crossOrigin\":\"$undefined\",\"nonce\":\"$undefined\"}]],[\"$\",\"html\",null,{\"lang\":\"zh\",\"children\":[[\"$\",\"head\",null,{\"children\":[\"$\",\"script\",null,{\"dangerouslySetInnerHTML\":{\"__html\":\"\\ntry {\\n  var raw = localStorage.getItem('algo-interview');\\n  var theme = 'light';\\n  if (raw) { var p = JSON.parse(raw); theme = (p.state \u0026\u0026 p.state.theme) || 'light'; }\\n  if (theme === 'dark') {\\n    document.documentElement.classList.add('dark');\\n    document.documentElement.setAttribute('data-theme', 'dark');\\n  }\\n} catch (e) {}\\n\"}}]}],[\"$\",\"body\",null,{\"children\":[[\"$\",\"$L2\",null,{\"parallelRouterKey\":\"children\",\"segmentPath\":[\"children\"],\"error\":\"$undefined\",\"errorStyles\":\"$undefined\",\"errorScripts\":\"$undefined\",\"template\":[\"$\",\"$L3\",null,{}],\"templateStyles\":\"$undefined\",\"templateScripts\":\"$undefined\",\"notFound\":[[],[[\"$\",\"title\",null,{\"children\":\"404: This page could not be found.\"}],[\"$\",\"div\",null,{\"style\":{\"fontFamily\":\"system-ui,\\\"Segoe UI\\\",Roboto,Helvetica,Arial,sans-serif,\\\"Apple Color Emoji\\\",\\\"Segoe UI Emoji\\\"\",\"height\":\"100vh\",\"textAlign\":\"center\",\"display\":\"flex\",\"flexDirection\":\"column\",\"alignItems\":\"center\",\"justifyContent\":\"center\"},\"children\":[\"$\",\"div\",null,{\"children\":[[\"$\",\"style\",null,{\"dangerouslySetInnerHTML\":{\"__html\":\"body{color:#000;background:#fff;margin:0}.next-error-h1{border-right:1px solid rgba(0,0,0,.3)}@media (prefers-color-scheme:dark){body{color:#fff;background:#000}.next-error-h1{border-right:1px solid rgba(255,255,255,.3)}}\"}}],[\"$\",\"h1\",null,{\"className\":\"next-error-h1\",\"style\":{\"display\":\"inline-block\",\"margin\":\"0 20px 0 0\",\"padding\":\"0 23px 0 0\",\"fontSize\":24,\"fontWeight\":500,\"verticalAlign\":\"top\",\"lineHeight\":\"49px\"},\"children\":404}],[\"$\",\"div\",null,{\"style\":{\"display\":\"inline-block\"},\"children\":[\"$\",\"h2\",null,{\"style\":{\"fontSize\":14,\"fontWeight\":400,\"lineHeight\":\"49px\",\"margin\":0},\"children\":\"This page could not be found.\"}]}]]}]}]]],\"forbidden\":\"$undefined\",\"unauthorized\":\"$undefined\"}],[\"$\",\"script\",null,{\"dangerouslySetInnerHTML\":{\"__html\":\"\\nif ('serviceWorker' in navigator) {\\n  window.addEventListener('load', function () {\\n    navigator.serviceWorker.register('/algorithm-interview/sw.js').catch(function () {});\\n  });\\n}\\n\"}}]]}]]}]]}],{\"children\":[\"columns\",[\"$\",\"$1\",\"c\",{\"children\":[null,[\"$\",\"$L2\",null,{\"parallelRouterKey\":\"children\",\"segmentPath\":[\"children\",\"columns\",\"children\"],\"error\":\"$undefined\",\"errorStyles\":\"$undefined\",\"errorScripts\":\"$undefined\",\"template\":[\"$\",\"$L3\",null,{}],\"templateStyles\":\"$undefined\",\"templateScripts\":\"$undefined\",\"notFound\":\"$undefined\",\"forbidden\":\"$undefined\",\"unauthorized\":\"$undefined\"}]]}],{\"children\":[[\"slug\",\"lbd-046\",\"d\"],[\"$\",\"$1\",\"c\",{\"children\":[null,[\"$\",\"$L2\",null,{\"parallelRouterKey\":\"children\",\"segmentPath\":[\"children\",\"columns\",\"children\",\"$0:f:0:1:2:children:2:children:0\",\"children\"],\"error\":\"$undefined\",\"errorStyles\":\"$undefined\",\"errorScripts\":\"$undefined\",\"template\":[\"$\",\"$L3\",null,{}],\"templateStyles\":\"$undefined\",\"templateScripts\":\"$undefined\",\"notFound\":\"$undefined\",\"forbidden\":\"$undefined\",\"unauthorized\":\"$undefined\"}]]}],{\"children\":[\"__PAGE__\",[\"$\",\"$1\",\"c\",{\"children\":[\"$L4\",null,[\"$\",\"$L5\",null,{\"children\":\"$L6\"}]]}],{},null,false]},null,false]},null,false]},null,false],[\"$\",\"$1\",\"h\",{\"children\":[null,[\"$\",\"$1\",\"-BdWjbdhyrTZ3o_4ETUIl\",{\"children\":[[\"$\",\"$L7\",null,{\"children\":\"$L8\"}],[\"$\",\"$L9\",null,{\"children\":\"$La\"}],null]}]]}],false]],\"m\":\"$undefined\",\"G\":[\"$b\",\"$undefined\"],\"s\":false,\"S\":true}\n"])</script><script>self.__next_f.push([1,"c:I[8173,[\"173\",\"static/chunks/173-69860a4742bb7020.js\",\"829\",\"static/chunks/829-7533e70598480772.js\",\"306\",\"static/chunks/app/columns/%5Bslug%5D/page-58fc1d8f5085c1ff.js\"],\"\"]\nd:I[4780,[\"173\",\"static/chunks/173-69860a4742bb7020.js\",\"829\",\"static/chunks/829-7533e70598480772.js\",\"306\",\"static/chunks/app/columns/%5Bslug%5D/page-58fc1d8f5085c1ff.js\"],\"default\"]\ne:T1f8d,"])</script><script>self.__next_f.push([1,"# 双指针技巧总结\n\n双指针技巧总结\n学算法，认准 labuladong 就够了！\n我把双指针技巧再分为两类，⼀类是「快慢指针」，⼀类是「左右指针」。\n前者解决主要解决链表中的问题，⽐如典型的判定链表中是否包含环；后者\n主要解决数组（或者字符串）中的问题，⽐如⼆分查找。\n⼀、快慢指针的常⻅算法\n快慢指针⼀般都初始化指向链表的头结点 head，前进时快指针 fast 在前，\n慢指针 slow 在后，巧妙解决⼀些链表中的问题。\n1、判定链表中是否含有环\n这应该属于链表最基本的操作了，如果读者已经知道这个技巧，可以跳过。\n单链表的特点是每个节点只知道下⼀个节点，所以⼀个指针的话⽆法判断链\n表中是否含有环的。\n如果链表中不含环，那么这个指针最终会遇到空指针 null 表⽰链表到头\n了，这还好说，可以判断该链表不含环。\nboolean hasCycle(ListNode head) {\n    while (head != null)\n        head = head.next;\n    return false;\n}\n但是如果链表中含有环，那么这个指针就会陷⼊死循环，因为环形数组中没\n有 null 指针作为尾部节点。\n双指针技巧总结\n318\n\n经典解法就是⽤两个指针，⼀个跑得快，⼀个跑得慢。如果不含有环，跑得\n快的那个指针最终会遇到 null，说明链表不含环；如果含有环，快指针最终\n会超慢指针⼀圈，和慢指针相遇，说明链表含有环。\nboolean hasCycle(ListNode head) {\n    ListNode fast, slow;\n    fast = slow = head;\n    while (fast != null \u0026\u0026 fast.next != null) {\n        fast = fast.next.next;\n        slow = slow.next;\n        if (fast == slow) return true;\n    }\n    return false;\n}\n2、已知链表中含有环，返回这个环的起始位置\n这个问题⼀点都不困难，有点类似脑筋急转弯，先直接看代码：\nListNode detectCycle(ListNode head) {\n    ListNode fast, slow;\n    fast = slow = head;\n    while (fast != null \u0026\u0026 fast.next != null) {\n        fast = fast.next.next;\n        slow = slow.next;\n        if (fast == slow) break;\n    }\n    // 上⾯的代码类似 hasCycle 函数\n双指针技巧总结\n319\n\n    slow = head;\n    while (slow != fast) {\n        fast = fast.next;\n        slow = slow.next;\n    }\n    return slow;\n}\n可以看到，当快慢指针相遇时，让其中任⼀个指针指向头节点，然后让它俩\n以相同速度前进，再次相遇时所在的节点位置就是环开始的位置。这是为什\n么呢？\n第⼀次相遇时，假设慢指针 slow ⾛了 k 步，那么快指针 fast ⼀定⾛了 2k\n步，也就是说⽐ slow 多⾛了 k 步（也就是环的⻓度）。\n设相遇点距环的起点的距离为 m，那么环的起点距头结点 head 的距离为 k -\nm，也就是说如果从 head 前进 k - m 步就能到达环起点。\n巧的是，如果从相遇点继续前进 k - m 步，也恰好到达环起点。\n双指针技巧总结\n320\n\n所以，只要我们把快慢指针中的任⼀个重新指向 head，然后两个指针同速\n前进，k - m 步后就会相遇，相遇之处就是环的起点了。\n3、寻找链表的中点\n类似上⾯的思路，我们还可以让快指针⼀次前进两步，慢指针⼀次前进⼀\n步，当快指针到达链表尽头时，慢指针就处于链表的中间位置。\nwhile (fast != null \u0026\u0026 fast.next != null) {\n    fast = fast.next.next;\n    slow = slow.next;\n}\n// slow 就在中间位置\nreturn slow;\n当链表的⻓度是奇数时，slow 恰巧停在中点位置；如果⻓度是偶数，slow\n最终的位置是中间偏右：\n双指针技巧总结\n321\n\n寻找链表中点的⼀个重要作⽤是对链表进⾏归并排序。\n回想数组的归并排序：求中点索引递归地把数组⼆分，最后合并两个有序数\n组。对于链表，合并两个有序链表是很简单的，难点就在于⼆分。\n但是现在你学会了找到链表的中点，就能实现链表的⼆分了。关于归并排序\n的具体内容本⽂就不具体展开了。\n4、寻找链表的倒数第 k 个元素\n我们的思路还是使⽤快慢指针，让快指针先⾛ k 步，然后快慢指针开始同速\n前进。这样当快指针⾛到链表末尾 null 时，慢指针所在的位置就是倒数第 k\n个链表节点（为了简化，假设 k 不会超过链表⻓度）：\nListNode slow, fast;\nslow = fast = head;\nwhile (k-- \u003e 0) \n    fast = fast.next;\nwhile (fast != null) {\n    slow = slow.next;\n    fast = fast.next;\n}\nreturn slow;\n⼆、左右指针的常⽤算法\n左右指针在数组中实际是指两个索引值，⼀般初始化为 left = 0, right =\nnums.length - 1 。\n1、⼆分查找\n前⽂「⼆分查找」有详细讲解，这⾥只写最简单的⼆分算法，旨在突出它的\n双指针特性：\nint binarySearch(int[] nums, int target) {\n    int left = 0; \n    int right = nums.length - 1;\n双指针技巧总结\n322\n\n    while(left \u003c= right) {\n        int mid = (right + left) / 2;\n        if(nums[mid] == target)\n            return mid; \n        else if (nums[mid] \u003c target)\n            left = mid + 1; \n        else if (nums[mid] \u003e target)\n            right = mid - 1;\n    }\n    return -1;\n}\n2、两数之和\n直接看⼀道 LeetCode 题⽬吧：\n只要数组有序，就应该想到双指针技巧。这道题的解法有点类似⼆分查找，\n通过调节 left 和 right 可以调整 sum 的⼤⼩：\nint[] twoSum(int[] nums, int target) {\n    int left = 0, right = nums.length - 1;\n    while (left \u003c right) {\n        int sum = nums[left] + nums[right];\n        if (sum == target) {\n            // 题⽬要求的索引是从 1 开始的\n双指针技巧总结\n323\n\n            return new int[]{left + 1, right + 1};\n        } else if (sum \u003c target) {\n            left++; // 让 sum ⼤⼀点\n        } else if (sum \u003e target) {\n            right--; // 让 sum ⼩⼀点\n        }\n    }\n    return new int[]{-1, -1};\n}\n3、反转数组\nvoid reverse(int[] nums) {\n    int left = 0;\n    int right = nums.length - 1;\n    while (left \u003c right) {\n        // swap(nums[left], nums[right])\n        int temp = nums[left];\n        nums[left] = nums[right];\n        nums[right] = temp;\n        left++; right--;\n    }\n}\n4、滑动窗⼝算法\n这也许是双指针技巧的最⾼境界了，如果掌握了此算法，可以解决⼀⼤类⼦\n字符串匹配的问题，不过「滑动窗⼝」稍微⽐上述的这些算法复杂些。\n幸运的是，这类算法是有框架模板的，⽽且这篇⽂章就讲解了「滑动窗⼝」\n算法模板，帮⼤家秒杀⼏道 LeetCode ⼦串匹配的问题。\n＿＿＿＿＿＿＿＿＿＿＿＿＿\n刷算法，学套路，认准 labuladong。\n本⼩抄即将出版，关注 labuladong 公众号或 ongline book 查看更新⽂章，\n后台回复「进群」可进刷题群，labuladong 带你⽇穿 LeetCode。\n双指针技巧总结\n324\n\n双指针技巧总结\n325\n\ntwoSum问题的核⼼思想\n学算法，认准 labuladong 就够了！\nTwo Sum 系列问题在 LeetCode 上有好⼏道，这篇⽂章就挑出有代表性的⼏\n道，介绍⼀下这种问题怎么解决。\nTwoSum I\n这个问题的最基本形式是这样：给你⼀个数组和⼀个整数  target ，可以保\n证数组中存在两个数的和为  target ，请你返回这两个数的索引。\n⽐如输⼊  nums = [3,1,3,6], target = 6 ，算法应该返回数组  [0,2] ，因为\n3 + 3 = 6。\n这个问题如何解决呢？⾸先最简单粗暴的办法当然是穷举了：\nint[] twoSum(int[] nums, int target) {\n    for (int i = 0; i \u003c nums.length; i++) \n        for (int j = i + 1; j \u003c nums.length; j++) \n            if (nums[j] == target - nums[i]) \n                return new int[] { i, j };\n    // 不存在这么两个数\n    return new int[] {-1, -1};\n}\n这个解法⾮常直接，时间复杂度 O(N^2)，空间复杂度 O(1)。\n可以通过⼀个哈希表减少时间复杂度：\nint[] twoSum(int[] nums, int target) {\n    int n = nums.length;\n    index\u003cInteger, Integer\u003e index = new HashMap\u003c\u003e();\ntwoSum问题的核⼼思想\n326"])</script><script>self.__next_f.push([1,"4:[\"$\",\"main\",null,{\"style\":{\"maxWidth\":760,\"margin\":\"0 auto\",\"padding\":\"16px\",\"minHeight\":\"100vh\"},\"children\":[[\"$\",\"$Lc\",null,{\"href\":\"/columns/\",\"style\":{\"display\":\"inline-block\",\"marginBottom\":\"12px\",\"fontSize\":\"13px\"},\"children\":\"← 返回专栏\"}],[\"$\",\"div\",null,{\"style\":{\"fontSize\":\"12px\",\"color\":\"var(--text-tertiary)\",\"marginBottom\":\"4px\"},\"children\":[\"📕\",\" \",\"labuladong 算法小抄\"]}],[\"$\",\"h1\",null,{\"style\":{\"fontSize\":\"22px\",\"fontWeight\":700,\"margin\":\"0 0 16px\"},\"children\":\"双指针技巧总结\"}],[\"$\",\"$Ld\",null,{\"children\":\"$e\"}],false]}]\n"])</script><script>self.__next_f.push([1,"a:[[\"$\",\"meta\",\"0\",{\"name\":\"viewport\",\"content\":\"width=device-width, initial-scale=1\"}],[\"$\",\"meta\",\"1\",{\"name\":\"theme-color\",\"content\":\"#f97316\"}]]\n"])</script><script>self.__next_f.push([1,"8:[[\"$\",\"meta\",\"0\",{\"charSet\":\"utf-8\"}],[\"$\",\"title\",\"1\",{\"children\":\"双指针技巧总结 - 算法面试\"}],[\"$\",\"meta\",\"2\",{\"name\":\"description\",\"content\":\"LeetCode 热题 100 完整 Java 题解、逐题动画、知识专栏与智能间隔复习。\"}],[\"$\",\"meta\",\"3\",{\"name\":\"application-name\",\"content\":\"算法面试\"}],[\"$\",\"link\",\"4\",{\"rel\":\"manifest\",\"href\":\"/algorithm-interview/manifest.json\",\"crossOrigin\":\"$undefined\"}],[\"$\",\"meta\",\"5\",{\"name\":\"keywords\",\"content\":\"LeetCode,热题100,算法面试,Java题解,数据结构,动态规划,面试刷题\"}],[\"$\",\"meta\",\"6\",{\"name\":\"mobile-web-app-capable\",\"content\":\"yes\"}],[\"$\",\"meta\",\"7\",{\"name\":\"apple-mobile-web-app-title\",\"content\":\"算法面试\"}],[\"$\",\"meta\",\"8\",{\"name\":\"apple-mobile-web-app-status-bar-style\",\"content\":\"default\"}],[\"$\",\"meta\",\"9\",{\"property\":\"og:title\",\"content\":\"算法面试题库\"}],[\"$\",\"meta\",\"10\",{\"property\":\"og:description\",\"content\":\"LeetCode 热题 100 完整 Java 题解、逐题动画、知识专栏与智能复习\"}],[\"$\",\"meta\",\"11\",{\"property\":\"og:site_name\",\"content\":\"算法面试题库\"}],[\"$\",\"meta\",\"12\",{\"property\":\"og:locale\",\"content\":\"zh_CN\"}],[\"$\",\"meta\",\"13\",{\"property\":\"og:type\",\"content\":\"website\"}],[\"$\",\"meta\",\"14\",{\"name\":\"twitter:card\",\"content\":\"summary\"}],[\"$\",\"meta\",\"15\",{\"name\":\"twitter:title\",\"content\":\"算法面试题库\"}],[\"$\",\"meta\",\"16\",{\"name\":\"twitter:description\",\"content\":\"LeetCode 热题 100 完整 Java 题解、逐题动画、知识专栏与智能复习\"}]]\n"])</script><script>self.__next_f.push([1,"6:null\n"])</script></body></html>

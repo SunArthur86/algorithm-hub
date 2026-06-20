@@ -1,0 +1,257 @@
+1:"$Sreact.fragment"
+2:I[5244,[],""]
+3:I[3866,[],""]
+5:I[6213,[],"OutletBoundary"]
+7:I[6213,[],"MetadataBoundary"]
+9:I[6213,[],"ViewportBoundary"]
+b:I[4835,[],""]
+:HL["/algorithm-interview/_next/static/css/c1e787639001e16b.css","style"]
+0:{"P":null,"b":"xos97fAiWtKfKXI6hZLx4","p":"/algorithm-interview","c":["","columns","lbd-044",""],"i":false,"f":[[["",{"children":["columns",{"children":[["slug","lbd-044","d"],{"children":["__PAGE__",{}]}]}]},"$undefined","$undefined",true],["",["$","$1","c",{"children":[[["$","link","0",{"rel":"stylesheet","href":"/algorithm-interview/_next/static/css/c1e787639001e16b.css","precedence":"next","crossOrigin":"$undefined","nonce":"$undefined"}]],["$","html",null,{"lang":"zh","children":[["$","head",null,{"children":["$","script",null,{"dangerouslySetInnerHTML":{"__html":"\ntry {\n  var raw = localStorage.getItem('algo-interview');\n  var theme = 'light';\n  if (raw) { var p = JSON.parse(raw); theme = (p.state && p.state.theme) || 'light'; }\n  if (theme === 'dark') {\n    document.documentElement.classList.add('dark');\n    document.documentElement.setAttribute('data-theme', 'dark');\n  }\n} catch (e) {}\n"}}]}],["$","body",null,{"children":[["$","$L2",null,{"parallelRouterKey":"children","segmentPath":["children"],"error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L3",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":[[],[["$","title",null,{"children":"404: This page could not be found."}],["$","div",null,{"style":{"fontFamily":"system-ui,\"Segoe UI\",Roboto,Helvetica,Arial,sans-serif,\"Apple Color Emoji\",\"Segoe UI Emoji\"","height":"100vh","textAlign":"center","display":"flex","flexDirection":"column","alignItems":"center","justifyContent":"center"},"children":["$","div",null,{"children":[["$","style",null,{"dangerouslySetInnerHTML":{"__html":"body{color:#000;background:#fff;margin:0}.next-error-h1{border-right:1px solid rgba(0,0,0,.3)}@media (prefers-color-scheme:dark){body{color:#fff;background:#000}.next-error-h1{border-right:1px solid rgba(255,255,255,.3)}}"}}],["$","h1",null,{"className":"next-error-h1","style":{"display":"inline-block","margin":"0 20px 0 0","padding":"0 23px 0 0","fontSize":24,"fontWeight":500,"verticalAlign":"top","lineHeight":"49px"},"children":404}],["$","div",null,{"style":{"display":"inline-block"},"children":["$","h2",null,{"style":{"fontSize":14,"fontWeight":400,"lineHeight":"49px","margin":0},"children":"This page could not be found."}]}]]}]}]]],"forbidden":"$undefined","unauthorized":"$undefined"}],["$","script",null,{"dangerouslySetInnerHTML":{"__html":"\nif ('serviceWorker' in navigator) {\n  window.addEventListener('load', function () {\n    navigator.serviceWorker.register('/algorithm-interview/sw.js').catch(function () {});\n  });\n}\n"}}]]}]]}]]}],{"children":["columns",["$","$1","c",{"children":[null,["$","$L2",null,{"parallelRouterKey":"children","segmentPath":["children","columns","children"],"error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L3",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","forbidden":"$undefined","unauthorized":"$undefined"}]]}],{"children":[["slug","lbd-044","d"],["$","$1","c",{"children":[null,["$","$L2",null,{"parallelRouterKey":"children","segmentPath":["children","columns","children","$0:f:0:1:2:children:2:children:0","children"],"error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L3",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","forbidden":"$undefined","unauthorized":"$undefined"}]]}],{"children":["__PAGE__",["$","$1","c",{"children":["$L4",null,["$","$L5",null,{"children":"$L6"}]]}],{},null,false]},null,false]},null,false]},null,false],["$","$1","h",{"children":[null,["$","$1","u5RgUPyA3SNweM_whkKt0",{"children":[["$","$L7",null,{"children":"$L8"}],["$","$L9",null,{"children":"$La"}],null]}]]}],false]],"m":"$undefined","G":["$b","$undefined"],"s":false,"S":true}
+c:I[8173,["173","static/chunks/173-69860a4742bb7020.js","829","static/chunks/829-7533e70598480772.js","306","static/chunks/app/columns/%5Bslug%5D/page-58fc1d8f5085c1ff.js"],""]
+d:I[4780,["173","static/chunks/173-69860a4742bb7020.js","829","static/chunks/829-7533e70598480772.js","306","static/chunks/app/columns/%5Bslug%5D/page-58fc1d8f5085c1ff.js"],"default"]
+e:T2fd0,# 回溯算法最佳实践：解数独
+
+回溯算法秒杀数独问题
+学算法，认准 labuladong 就够了！
+经常拿回溯算法来说事⼉的，⽆⾮就是⼋皇后问题和数独问题了。那我们今
+天就通过实际且有趣的例⼦来讲⼀下如何⽤回溯算法来解决数独问题。
+⼀、直观感受
+说实话我⼩的时候也尝试过玩数独游戏，但从来都没有完成过⼀次。做数独
+是有技巧的，我记得⼀些⽐较专业的数独游戏软件，他们会教你玩数独的技
+巧，不过在我看来这些技巧都太复杂，我根本就没有兴趣看下去。
+不过⾃从我学习了算法，多困难的数独问题都拦不住我了。下⾯是我⽤程序
+完成数独的⼀个例⼦：
+【PDF格式⽆法显⽰GIF⽂件 sudoku/sudoku_slove.gif，可移步公众号查看】
+PS：GIF 可能出现 bug，若卡住​点开查看即可，​下同。​
+这是⼀个安卓⼿机中的数独游戏，我使⽤⼀个叫做 Auto.js 的脚本引擎，配
+合回溯算法来实现⾃动完成填写，并且算法记录了执⾏次数。在后⽂，我会
+给出该脚本的实现思路代码以及软件⼯具的下载，你也可以拿来装逼⽤。
+可以观察到前两次都执⾏了 1 万多次，⽽最后⼀次只执⾏了 100 多次就算出
+了答案，这说明对于不同的局⾯，回溯算法得到答案的时间是不相同的。
+那么计算机如何解决数独问题呢？其实⾮常的简单，就是穷举嘛，下⾯我可
+视化了求解过程：
+【PDF格式⽆法显⽰GIF⽂件 sudoku/sudoku_process.gif，可移步公众号查
+看】
+回溯算法最佳实践：解数独
+305
+
+算法的核⼼思路⾮常⾮常的简单，就是对每⼀个空着的格⼦穷举 1 到 9，如
+果遇到不合法的数字（在同⼀⾏或同⼀列或同⼀个 3×3 的区域中存在相同
+的数字）则跳过，如果找到⼀个合法的数字，则继续穷举下⼀个空格⼦。
+对于数独游戏，也许我们还会有另⼀个误区：就是下意识地认为如果给定的
+数字越少那么这个局⾯的难度就越⼤。
+这个结论对⼈来说应该没⽑病，但对于计算机⽽⾔，给的数字越少，反⽽穷
+举的步数就越少，得到答案的速度越快，⾄于为什么，我们后⾯探讨代码实
+现的时候会讲。
+上⼀个 GIF 是最后⼀关 70 关，下图是第 52 关，数字⽐较多，看起来似乎
+不难，但是我们看⼀下算法执⾏的过程：
+【PDF格式⽆法显⽰GIF⽂件 sudoku/sudoku3.gif，可移步公众号查看】
+可以看到算法在前两⾏穷举了半天都没有⾛出去，由于时间原因我就没有继
+续录制了，事实上，这个局⾯穷举的次数⼤概是上⼀个局⾯的 10 倍。
+⾔归正传，下⾯我们就来具体探讨⼀下如何⽤算法来求解数独问题，顺便说
+说我是如何可视化这个求解过程的。
+⼆、代码实现
+⾸先，我们不⽤管游戏的 UI，先单纯地解决回溯算法，LeetCode 第 37 题就
+是解数独的问题，算法函数签名如下：
+void solveSudoku(char[][] board);
+输⼊是⼀个9x9的棋盘，空⽩格⼦⽤点号字符  .  表⽰，算法需要在原地修
+改棋盘，将空⽩格⼦填上数字，得到⼀个可⾏解。
+⾄于数独的要求，⼤家想必都很熟悉了，每⾏，每列以及每⼀个 3×3 的⼩
+⽅格都不能有相同的数字出现。那么，现在我们直接套回溯框架即可求解。
+回溯算法最佳实践：解数独
+306
+
+前⽂回溯算法详解，已经写过了回溯算法的套路框架，如果还没看过那篇⽂
+章的，建议先看看。
+回忆刚才的 GIF 图⽚，我们求解数独的思路很简单粗暴，就是对每⼀个格
+⼦所有可能的数字进⾏穷举。对于每个位置，应该如何穷举，有⼏个选择
+呢？很简单啊，从 1 到 9 就是选择，全部试⼀遍不就⾏了：
+// 对 board[i][j] 进⾏穷举尝试
+void backtrack(char[][] board, int i, int j) {
+    int m = 9, n = 9;
+    for (char ch = '1'; ch <= '9'; ch++) {
+        // 做选择
+        board[i][j] = ch;
+        // 继续穷举下⼀个
+        backtrack(board, i, j + 1);
+        // 撤销选择
+        board[i][j] = '.';
+    }
+}
+emmm，再继续细化，并不是 1 到 9 都可以取到的，有的数字不是不满⾜数
+独的合法条件吗？⽽且现在只是给  j  加⼀，那如果  j  加到最后⼀列了，
+怎么办？
+很简单，当  j  到达超过每⼀⾏的最后⼀个索引时，转为增加  i  开始穷举
+下⼀⾏，并且在穷举之前添加⼀个判断，跳过不满⾜条件的数字：
+void backtrack(char[][] board, int i, int j) {
+    int m = 9, n = 9;
+    if (j == n) {
+        // 穷举到最后⼀列的话就换到下⼀⾏重新开始。
+        backtrack(board, i + 1, 0);
+        return;
+    }
+    // 如果该位置是预设的数字，不⽤我们操⼼
+    if (board[i][j] != '.') {
+        backtrack(board, i, j + 1);
+        return;
+回溯算法最佳实践：解数独
+307
+
+    } 
+    for (char ch = '1'; ch <= '9'; ch++) {
+        // 如果遇到不合法的数字，就跳过
+        if (!isValid(board, i, j, ch))
+            continue;
+        board[i][j] = ch;
+        backtrack(board, i, j + 1);
+        board[i][j] = '.';
+    }
+}
+// 判断 board[i][j] 是否可以填⼊ n
+boolean isValid(char[][] board, int r, int c, char n) {
+    for (int i = 0; i < 9; i++) {
+        // 判断⾏是否存在重复
+        if (board[r][i] == n) return false;
+        // 判断列是否存在重复
+        if (board[i][c] == n) return false;
+        // 判断 3 x 3 ⽅框是否存在重复
+        if (board[(r/3)*3 + i/3][(c/3)*3 + i%3] == n)
+            return false;
+    }
+    return true;
+}
+emmm，现在基本上差不多了，还剩最后⼀个问题：这个算法没有 base
+case，永远不会停⽌递归。这个好办，什么时候结束递归？显然  r == m  的
+时候就说明穷举完了最后⼀⾏，完成了所有的穷举，就是 base case。
+另外，前⽂也提到过，为了减少复杂度，我们可以让  backtrack  函数返回
+值为  boolean ，如果找到⼀个可⾏解就返回 true，这样就可以阻⽌后续的
+递归。只找⼀个可⾏解，也是题⽬的本意。
+最终代码修改如下：
+boolean backtrack(char[][] board, int i, int j) {
+    int m = 9, n = 9;
+    if (j == n) {
+        // 穷举到最后⼀列的话就换到下⼀⾏重新开始。
+回溯算法最佳实践：解数独
+308
+
+        return backtrack(board, i + 1, 0);
+    }
+    if (i == m) {
+        // 找到⼀个可⾏解，触发 base case
+        return true;
+    }
+    if (board[i][j] != '.') {
+        // 如果有预设数字，不⽤我们穷举
+        return backtrack(board, i, j + 1);
+    } 
+    for (char ch = '1'; ch <= '9'; ch++) {
+        // 如果遇到不合法的数字，就跳过
+        if (!isValid(board, i, j, ch))
+            continue;
+        board[i][j] = ch;
+        // 如果找到⼀个可⾏解，⽴即结束
+        if (backtrack(board, i, j + 1)) {
+            return true;
+        }
+        board[i][j] = '.';
+    }
+    // 穷举完 1~9，依然没有找到可⾏解，此路不通
+    return false;
+}
+boolean isValid(char[][] board, int r, int c, char n) {
+    // ⻅上⽂
+}
+现在可以回答⼀下之前的问题，为什么有时候算法执⾏的次数多，有时候
+少？为什么对于计算机⽽⾔，确定的数字越少，反⽽算出答案的速度越快？
+我们已经实现了⼀遍算法，掌握了其原理，回溯就是从 1 开始对每个格⼦穷
+举，最后只要试出⼀个可⾏解，就会⽴即停⽌后续的递归穷举。所以暴⼒试
+出答案的次数和随机⽣成的棋盘关系很⼤，这个是说不准的。
+那么你可能问，既然运⾏次数说不准，那么这个算法的时间复杂度是多少
+呢？
+回溯算法最佳实践：解数独
+309
+
+对于这种时间复杂度的计算，我们只能给出⼀个最坏情况，也就是
+O(9^M)，其中  M  是棋盘中空着的格⼦数量。你想嘛，对每个空格⼦穷举 9
+个数，结果就是指数级的。
+这个复杂度⾮常⾼，但稍作思考就能发现，实际上我们并没有真的对每个空
+格都穷举 9 次，有的数字会跳过，有的数字根本就没有穷举，因为当我们找
+到⼀个可⾏解的时候就⽴即结束了，后续的递归都没有展开。
+这个 O(9^M) 的复杂度实际上是完全穷举，或者说是找到所有可⾏解的时间
+复杂度。
+如果给定的数字越少，相当于给出的约束条件越少，对于计算机这种穷举策
+略来说，是更容易进⾏下去，⽽不容易⾛回头路进⾏回溯的，所以说如果仅
+仅找出⼀个可⾏解，这种情况下穷举的速度反⽽⽐较快。
+⾄此，回溯算法就完成了，你可以⽤以上代码通过 LeetCode 的判题系统，
+下⾯我们来简单说下我是如何把这个回溯过程可视化出来的。
+三、算法可视化
+让算法帮我玩游戏的核⼼是算法，如果你理解了这个算法，剩下就是借助安
+卓脚本引擎 Auto.js 调 API 操作⼿机了，⼯具我都放在后台了，你等会⼉就
+可以下载。
+⽤伪码简单说下思路，我可以写两个函数：
+void setNum(Button b, char n) {
+    // 输⼊⼀个⽅格，将该⽅格设置为数字 n
+}
+void cancelNum(Button b) {
+    // 输⼊⼀个⽅格，将该⽅格上的数字撤销
+}
+回溯算法最佳实践：解数独
+310
+
+回溯算法的核⼼框架如下，只要在框架对应的位置加上对应的操作，即可将
+算法做选择、撤销选择的过程完全展⽰出来，也许这就是套路框架的魅⼒所
+在：
+for (char ch = '1'; ch <= '9'; ch++) {
+    Button b = new Button(r, c);
+    // 做选择
+    setNum(b, ch);
+    board[i][j] = ch;
+    // 继续穷举下⼀个
+    backtrack(board, i, j + 1)
+    // 撤销选择
+    cancelNum(b);
+    board[i][j] = '.';
+}
+以上思路就可以模拟出算法穷举的过程：
+【PDF格式⽆法显⽰GIF⽂件 sudoku/sudoku_process.gif，可移步公众号查
+看】
+公众号后台回复关键词「数独」即可下载相应脚本、⼯具和游戏，Auto.js
+是⼀款优秀的开源脚本引擎，可以⽤ JavaScript 操作安卓⼿机。把脚本代码
+copy 进去即可运⾏，注意只⽀持安卓⼿机哦。
+＿＿＿＿＿＿＿＿＿＿＿＿＿
+刷算法，学套路，认准 labuladong。
+本⼩抄即将出版，关注 labuladong 公众号或 ongline book 查看更新⽂章，
+后台回复「进群」可进刷题群，labuladong 带你⽇穿 LeetCode。
+回溯算法最佳实践：解数独
+311
+
+回溯算法最佳实践：解数独
+312
+
+合法括号⽣成算法
+学算法，认准 labuladong 就够了！
+括号问题可以简单分成两类，⼀类是前⽂写过的 括号的合法性判断 ，⼀类
+是合法括号的⽣成。对于括号合法性的判断，主要是借助「栈」这种数据结
+构，⽽对于括号的⽣成，⼀般都要利⽤回溯递归的思想。
+关于回溯算法，我们前⽂写过⼀篇 回溯算法套路框架详解 反响⾮常好，读
+本⽂前应该读过那篇⽂章，这样你就能够进⼀步了解回溯算法的框架使⽤⽅
+法了。
+回到正题，括号⽣成算法是 LeetCode 第 22 题，要求如下：
+请你写⼀个算法，输⼊是⼀个正整数  n ，输出是  n  对⼉括号的所有合法
+组合，函数签名如下：
+vector<string> generateParenthesis(int n);
+⽐如说，输⼊  n=3 ，输出为如下 5 个字符串：
+"((()))", "(()())", "(())()", "()(())", "()()()"
+有关括号问题，你只要记住⼀个性质，思路就很容易想出来：
+1、⼀个「合法」括号组合的左括号数量⼀定等于右括号数量，这个很好理
+解。
+2、对于⼀个「合法」的括号字符串组合  p ，必然对于任何  0 <= i <
+len(p)  都有：⼦串  p[0..i]  中左括号的数量都⼤于或等于右括号的数量。
+如果不跟你说这个性质，可能不太容易发现，但是稍微想⼀下，其实很容易
+理解，因为从左往右算的话，肯定是左括号多嘛，到最后左右括号数量相
+等，说明这个括号组合是合法的。
+回溯算法最佳实践：括号⽣成
+3134:["$","main",null,{"style":{"maxWidth":760,"margin":"0 auto","padding":"16px","minHeight":"100vh"},"children":[["$","$Lc",null,{"href":"/columns/","style":{"display":"inline-block","marginBottom":"12px","fontSize":"13px"},"children":"← 返回专栏"}],["$","div",null,{"style":{"fontSize":"12px","color":"var(--text-tertiary)","marginBottom":"4px"},"children":["📕"," ","labuladong 算法小抄"]}],["$","h1",null,{"style":{"fontSize":"22px","fontWeight":700,"margin":"0 0 16px"},"children":"回溯算法最佳实践：解数独"}],["$","$Ld",null,{"children":"$e"}],false]}]
+a:[["$","meta","0",{"name":"viewport","content":"width=device-width, initial-scale=1"}],["$","meta","1",{"name":"theme-color","content":"#f97316"}]]
+8:[["$","meta","0",{"charSet":"utf-8"}],["$","title","1",{"children":"回溯算法最佳实践：解数独 - 算法面试"}],["$","meta","2",{"name":"description","content":"LeetCode 热题 100 完整 Java 题解、逐题动画、知识专栏与智能间隔复习。"}],["$","meta","3",{"name":"application-name","content":"算法面试"}],["$","link","4",{"rel":"manifest","href":"/algorithm-interview/manifest.json","crossOrigin":"$undefined"}],["$","meta","5",{"name":"keywords","content":"LeetCode,热题100,算法面试,Java题解,数据结构,动态规划,面试刷题"}],["$","meta","6",{"name":"mobile-web-app-capable","content":"yes"}],["$","meta","7",{"name":"apple-mobile-web-app-title","content":"算法面试"}],["$","meta","8",{"name":"apple-mobile-web-app-status-bar-style","content":"default"}],["$","meta","9",{"property":"og:title","content":"算法面试题库"}],["$","meta","10",{"property":"og:description","content":"LeetCode 热题 100 完整 Java 题解、逐题动画、知识专栏与智能复习"}],["$","meta","11",{"property":"og:site_name","content":"算法面试题库"}],["$","meta","12",{"property":"og:locale","content":"zh_CN"}],["$","meta","13",{"property":"og:type","content":"website"}],["$","meta","14",{"name":"twitter:card","content":"summary"}],["$","meta","15",{"name":"twitter:title","content":"算法面试题库"}],["$","meta","16",{"name":"twitter:description","content":"LeetCode 热题 100 完整 Java 题解、逐题动画、知识专栏与智能复习"}]]
+6:null

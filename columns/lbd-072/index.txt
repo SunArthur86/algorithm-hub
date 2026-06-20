@@ -1,0 +1,326 @@
+1:"$Sreact.fragment"
+2:I[5244,[],""]
+3:I[3866,[],""]
+5:I[6213,[],"OutletBoundary"]
+7:I[6213,[],"MetadataBoundary"]
+9:I[6213,[],"ViewportBoundary"]
+b:I[4835,[],""]
+:HL["/algorithm-interview/_next/static/css/c1e787639001e16b.css","style"]
+0:{"P":null,"b":"xos97fAiWtKfKXI6hZLx4","p":"/algorithm-interview","c":["","columns","lbd-072",""],"i":false,"f":[[["",{"children":["columns",{"children":[["slug","lbd-072","d"],{"children":["__PAGE__",{}]}]}]},"$undefined","$undefined",true],["",["$","$1","c",{"children":[[["$","link","0",{"rel":"stylesheet","href":"/algorithm-interview/_next/static/css/c1e787639001e16b.css","precedence":"next","crossOrigin":"$undefined","nonce":"$undefined"}]],["$","html",null,{"lang":"zh","children":[["$","head",null,{"children":["$","script",null,{"dangerouslySetInnerHTML":{"__html":"\ntry {\n  var raw = localStorage.getItem('algo-interview');\n  var theme = 'light';\n  if (raw) { var p = JSON.parse(raw); theme = (p.state && p.state.theme) || 'light'; }\n  if (theme === 'dark') {\n    document.documentElement.classList.add('dark');\n    document.documentElement.setAttribute('data-theme', 'dark');\n  }\n} catch (e) {}\n"}}]}],["$","body",null,{"children":[["$","$L2",null,{"parallelRouterKey":"children","segmentPath":["children"],"error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L3",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":[[],[["$","title",null,{"children":"404: This page could not be found."}],["$","div",null,{"style":{"fontFamily":"system-ui,\"Segoe UI\",Roboto,Helvetica,Arial,sans-serif,\"Apple Color Emoji\",\"Segoe UI Emoji\"","height":"100vh","textAlign":"center","display":"flex","flexDirection":"column","alignItems":"center","justifyContent":"center"},"children":["$","div",null,{"children":[["$","style",null,{"dangerouslySetInnerHTML":{"__html":"body{color:#000;background:#fff;margin:0}.next-error-h1{border-right:1px solid rgba(0,0,0,.3)}@media (prefers-color-scheme:dark){body{color:#fff;background:#000}.next-error-h1{border-right:1px solid rgba(255,255,255,.3)}}"}}],["$","h1",null,{"className":"next-error-h1","style":{"display":"inline-block","margin":"0 20px 0 0","padding":"0 23px 0 0","fontSize":24,"fontWeight":500,"verticalAlign":"top","lineHeight":"49px"},"children":404}],["$","div",null,{"style":{"display":"inline-block"},"children":["$","h2",null,{"style":{"fontSize":14,"fontWeight":400,"lineHeight":"49px","margin":0},"children":"This page could not be found."}]}]]}]}]]],"forbidden":"$undefined","unauthorized":"$undefined"}],["$","script",null,{"dangerouslySetInnerHTML":{"__html":"\nif ('serviceWorker' in navigator) {\n  window.addEventListener('load', function () {\n    navigator.serviceWorker.register('/algorithm-interview/sw.js').catch(function () {});\n  });\n}\n"}}]]}]]}]]}],{"children":["columns",["$","$1","c",{"children":[null,["$","$L2",null,{"parallelRouterKey":"children","segmentPath":["children","columns","children"],"error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L3",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","forbidden":"$undefined","unauthorized":"$undefined"}]]}],{"children":[["slug","lbd-072","d"],["$","$1","c",{"children":[null,["$","$L2",null,{"parallelRouterKey":"children","segmentPath":["children","columns","children","$0:f:0:1:2:children:2:children:0","children"],"error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L3",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","forbidden":"$undefined","unauthorized":"$undefined"}]]}],{"children":["__PAGE__",["$","$1","c",{"children":["$L4",null,["$","$L5",null,{"children":"$L6"}]]}],{},null,false]},null,false]},null,false]},null,false],["$","$1","h",{"children":[null,["$","$1","RNwNXoJF5j_nJOQKYFHYs",{"children":[["$","$L7",null,{"children":"$L8"}],["$","$L9",null,{"children":"$La"}],null]}]]}],false]],"m":"$undefined","G":["$b","$undefined"],"s":false,"S":true}
+c:I[8173,["173","static/chunks/173-69860a4742bb7020.js","829","static/chunks/829-7533e70598480772.js","306","static/chunks/app/columns/%5Bslug%5D/page-58fc1d8f5085c1ff.js"],""]
+d:I[4780,["173","static/chunks/173-69860a4742bb7020.js","829","static/chunks/829-7533e70598480772.js","306","static/chunks/app/columns/%5Bslug%5D/page-58fc1d8f5085c1ff.js"],"default"]
+e:T2e50,# Union-Find算法详解
+
+Union-Find算法详解
+学算法，认准 labuladong 就够了！
+今天讲讲 Union-Find 算法，也就是常说的并查集算法，主要是解决图论中
+「动态连通性」问题的。名词很⾼端，其实特别好理解，等会解释，另外这
+个算法的应⽤都⾮常有趣。
+说起这个 Union-Find，应该算是我的「启蒙算法」了，因为《算法4》的开
+头就介绍了这款算法，可是把我秀翻了，感觉好精妙啊！后来刷了
+LeetCode，并查集相关的算法题⽬都⾮常有意思，⽽且《算法4》给的解法
+竟然还可以进⼀步优化，只要加⼀个微⼩的修改就可以把时间复杂度降到
+O(1)。
+废话不多说，直接上⼲货，先解释⼀下什么叫动态连通性吧。
+⼀、问题介绍
+简单说，动态连通性其实可以抽象成给⼀幅图连线。⽐如下⾯这幅图，总共
+有 10 个节点，他们互不相连，分别⽤ 0~9 标记：
+Union-Find算法详解
+481
+
+现在我们的 Union-Find 算法主要需要实现这两个 API：
+class UF {
+    /* 将 p 和 q 连接 */
+    public void union(int p, int q);
+    /* 判断 p 和 q 是否连通 */
+    public boolean connected(int p, int q);
+    /* 返回图中有多少个连通分量 */
+    public int count();
+}
+这⾥所说的「连通」是⼀种等价关系，也就是说具有如下三个性质：
+1、⾃反性：节点 p 和 p 是连通的。
+2、对称性：如果节点 p 和 q 连通，那么 q 和 p 也连通。
+3、传递性：如果节点 p 和 q 连通， q 和 r 连通，那么 p 和 r 也连通。
+⽐如说之前那幅图，0〜9 任意两个不同的点都不连通，调⽤ connected 都
+会返回 false，连通分量为 10 个。
+如果现在调⽤ union(0, 1) ，那么 0 和 1 被连通，连通分量降为 9 个。
+Union-Find算法详解
+482
+
+再调⽤ union(1, 2) ，这时 0,1,2 都被连通，调⽤ connected(0, 2) 也会返回
+true，连通分量变为 8 个。
+判断这种「等价关系」⾮常实⽤，⽐如说编译器判断同⼀个变量的不同引
+⽤，⽐如社交⽹络中的朋友圈计算等等。
+这样，你应该⼤概明⽩什么是动态连通性了，Union-Find 算法的关键就在
+于 union 和 connected 函数的效率。那么⽤什么模型来表⽰这幅图的连通状
+态呢？⽤什么数据结构来实现代码呢？
+⼆、基本思路
+注意我刚才把「模型」和具体的「数据结构」分开说，这么做是有原因的。
+因为我们使⽤森林（若⼲棵树）来表⽰图的动态连通性，⽤数组来具体实现
+这个森林。
+怎么⽤森林来表⽰连通性呢？我们设定树的每个节点有⼀个指针指向其⽗节
+点，如果是根节点的话，这个指针指向⾃⼰。⽐如说刚才那幅 10 个节点的
+图，⼀开始的时候没有相互连通，就是这样：
+Union-Find算法详解
+483
+
+class UF {
+    // 记录连通分量
+    private int count;
+    // 节点 x 的节点是 parent[x]
+    private int[] parent;
+    /* 构造函数，n 为图的节点总数 */
+    public UF(int n) {
+        // ⼀开始互不连通
+        this.count = n;
+        // ⽗节点指针初始指向⾃⼰
+        parent = new int[n];
+        for (int i = 0; i < n; i++)
+            parent[i] = i;
+    }
+    /* 其他函数 */
+}
+如果某两个节点被连通，则让其中的（任意）⼀个节点的根节点接到另⼀个
+节点的根节点上：
+Union-Find算法详解
+484
+
+public void union(int p, int q) {
+    int rootP = find(p);
+    int rootQ = find(q);
+    if (rootP == rootQ)
+        return;
+    // 将两棵树合并为⼀棵
+    parent[rootP] = rootQ;
+    // parent[rootQ] = rootP 也⼀样
+    count--; // 两个分量合⼆为⼀
+}
+/* 返回某个节点 x 的根节点 */
+private int find(int x) {
+    // 根节点的 parent[x] == x
+    while (parent[x] != x)
+        x = parent[x];
+    return x;
+}
+/* 返回当前的连通分量个数 */
+public int count() { 
+    return count;
+}
+这样，如果节点 p 和 q 连通的话，它们⼀定拥有相同的根节点：
+Union-Find算法详解
+485
+
+public boolean connected(int p, int q) {
+    int rootP = find(p);
+    int rootQ = find(q);
+    return rootP == rootQ;
+}
+⾄此，Union-Find 算法就基本完成了。是不是很神奇？竟然可以这样使⽤数
+组来模拟出⼀个森林，如此巧妙的解决这个⽐较复杂的问题！
+那么这个算法的复杂度是多少呢？我们发现，主要
+API  connected 和 union 中的复杂度都是 find 函数造成的，所以说它们的
+复杂度和 find ⼀样。
+ find 主要功能就是从某个节点向上遍历到树根，其时间复杂度就是树的⾼
+度。我们可能习惯性地认为树的⾼度就是 logN ，但这并不⼀定。 logN 的
+⾼度只存在于平衡⼆叉树，对于⼀般的树可能出现极端不平衡的情况，使得
+「树」⼏乎退化成「链表」，树的⾼度最坏情况下可能变成 N 。
+Union-Find算法详解
+486
+
+所以说上⾯这种解法， find ,  union ,  connected 的时间复杂度都是 O(N)。
+这个复杂度很不理想的，你想图论解决的都是诸如社交⽹络这样数据规模巨
+⼤的问题，对于 union 和 connected 的调⽤⾮常频繁，每次调⽤需要线性时
+间完全不可忍受。
+问题的关键在于，如何想办法避免树的不平衡呢？只需要略施⼩计即可。
+三、平衡性优化
+我们要知道哪种情况下可能出现不平衡现象，关键在于 union 过程：
+public void union(int p, int q) {
+    int rootP = find(p);
+    int rootQ = find(q);
+    if (rootP == rootQ)
+        return;
+    // 将两棵树合并为⼀棵
+    parent[rootP] = rootQ;
+    // parent[rootQ] = rootP 也可以
+    count--;
+Union-Find算法详解
+487
+
+我们⼀开始就是简单粗暴的把 p 所在的树接到 q 所在的树的根节点下⾯，
+那么这⾥就可能出现「头重脚轻」的不平衡状况，⽐如下⾯这种局⾯：
+⻓此以往，树可能⽣⻓得很不平衡。我们其实是希望，⼩⼀些的树接到⼤⼀
+些的树下⾯，这样就能避免头重脚轻，更平衡⼀些。解决⽅法是额外使⽤⼀
+个 size 数组，记录每棵树包含的节点数，我们不妨称为「重量」：
+class UF {
+    private int count;
+    private int[] parent;
+    // 新增⼀个数组记录树的“重量”
+    private int[] size;
+    public UF(int n) {
+        this.count = n;
+        parent = new int[n];
+        // 最初每棵树只有⼀个节点
+        // 重量应该初始化 1
+        size = new int[n];
+        for (int i = 0; i < n; i++) {
+            parent[i] = i;
+            size[i] = 1;
+        }
+    }
+    /* 其他函数 */
+Union-Find算法详解
+488
+
+}
+⽐如说 size[3] = 5 表⽰，以节点 3 为根的那棵树，总共有 5 个节点。这
+样我们可以修改⼀下 union ⽅法：
+public void union(int p, int q) {
+    int rootP = find(p);
+    int rootQ = find(q);
+    if (rootP == rootQ)
+        return;
+    // ⼩树接到⼤树下⾯，较平衡
+    if (size[rootP] > size[rootQ]) {
+        parent[rootQ] = rootP;
+        size[rootP] += size[rootQ];
+    } else {
+        parent[rootP] = rootQ;
+        size[rootQ] += size[rootP];
+    }
+    count--;
+}
+这样，通过⽐较树的重量，就可以保证树的⽣⻓相对平衡，树的⾼度⼤致
+在 logN 这个数量级，极⼤提升执⾏效率。
+此时， find ,  union ,  connected 的时间复杂度都下降为 O(logN)，即便数据
+规模上亿，所需时间也⾮常少。
+四、路径压缩
+这步优化特别简单，所以⾮常巧妙。我们能不能进⼀步压缩每棵树的⾼度，
+使树⾼始终保持为常数？
+Union-Find算法详解
+489
+
+这样 find 就能以 O(1) 的时间找到某⼀节点的根节点，相应
+的， connected 和 union 复杂度都下降为 O(1)。
+要做到这⼀点，⾮常简单，只需要在 find 中加⼀⾏代码：
+private int find(int x) {
+    while (parent[x] != x) {
+        // 进⾏路径压缩
+        parent[x] = parent[parent[x]];
+        x = parent[x];
+    }
+    return x;
+}
+这个操作有点匪夷所思，看个 GIF 就明⽩它的作⽤了（为清晰起⻅，这棵
+树⽐较极端）：
+【PDF格式⽆法显⽰GIF⽂件 unionfind/9.gif，可移步公众号查看】
+可⻅，调⽤ find 函数每次向树根遍历的同时，顺⼿将树⾼缩短了，最终所
+有树⾼都不会超过 3（ union 的时候树⾼可能达到 3）。
+Union-Find算法详解
+490
+
+PS：读者可能会问，这个 GIF 图的find过程完成之后，树⾼恰好等于 3 了，
+但是如果更⾼的树，压缩后⾼度依然会⼤于 3 呀？不能这么想。这个 GIF
+的情景是我编出来⽅便⼤家理解路径压缩的，但是实际中，每次find都会进
+⾏路径压缩，所以树本来就不可能增⻓到这么⾼，你的这种担⼼应该是多余
+的。
+五、最后总结
+我们先来看⼀下完整代码：
+class UF {
+    // 连通分量个数
+    private int count;
+    // 存储⼀棵树
+    private int[] parent;
+    // 记录树的“重量”
+    private int[] size;
+    public UF(int n) {
+        this.count = n;
+        parent = new int[n];
+        size = new int[n];
+        for (int i = 0; i < n; i++) {
+            parent[i] = i;
+            size[i] = 1;
+        }
+    }
+    public void union(int p, int q) {
+        int rootP = find(p);
+        int rootQ = find(q);
+        if (rootP == rootQ)
+            return;
+        // ⼩树接到⼤树下⾯，较平衡
+        if (size[rootP] > size[rootQ]) {
+            parent[rootQ] = rootP;
+            size[rootP] += size[rootQ];
+        } else {
+            parent[rootP] = rootQ;
+Union-Find算法详解
+491
+
+            size[rootQ] += size[rootP];
+        }
+        count--;
+    }
+    public boolean connected(int p, int q) {
+        int rootP = find(p);
+        int rootQ = find(q);
+        return rootP == rootQ;
+    }
+    private int find(int x) {
+        while (parent[x] != x) {
+            // 进⾏路径压缩
+            parent[x] = parent[parent[x]];
+            x = parent[x];
+        }
+        return x;
+    }
+    public int count() {
+        return count;
+    }
+}
+Union-Find 算法的复杂度可以这样分析：构造函数初始化数据结构需要
+O(N) 的时间和空间复杂度；连通两个节点 union 、判断两个节点的连通
+性 connected 、计算连通分量 count 所需的时间复杂度均为 O(1)。
+＿＿＿＿＿＿＿＿＿＿＿＿＿
+刷算法，学套路，认准 labuladong。
+本⼩抄即将出版，关注 labuladong 公众号或 ongline book 查看更新⽂章，
+后台回复「进群」可进刷题群，labuladong 带你⽇穿 LeetCode。
+Union-Find算法详解
+492
+
+Union-Find算法详解
+493
+
+Union-Find算法应⽤
+学算法，认准 labuladong 就够了！
+上篇⽂章很多读者对于 Union-Find 算法的应⽤表⽰很感兴趣，这篇⽂章就
+拿⼏道 LeetCode 题⽬来讲讲这个算法的巧妙⽤法。
+⾸先，复习⼀下，Union-Find 算法解决的是图的动态连通性问题，这个算法
+本⾝不难，能不能应⽤出来主要是看你抽象问题的能⼒，是否能够把原始问
+题抽象成⼀个有关图论的问题。
+先复习⼀下上篇⽂章写的算法代码，回答读者提出的⼏个问题：
+class UF {
+    // 记录连通分量个数
+    private int count;
+    // 存储若⼲棵树
+    private int[] parent;
+    // 记录树的“重量”
+    private int[] size;
+    public UF(int n) {
+        this.count = n;
+        parent = new int[n];
+        size = new int[n];
+        for (int i = 0; i < n; i++) {
+            parent[i] = i;
+            size[i] = 1;
+        }
+    }
+    /* 将 p 和 q 连通 */
+    public void union(int p, int q) {
+        int rootP = find(p);
+        int rootQ = find(q);
+        if (rootP == rootQ)
+            return;
+Union-Find算法应⽤
+4944:["$","main",null,{"style":{"maxWidth":760,"margin":"0 auto","padding":"16px","minHeight":"100vh"},"children":[["$","$Lc",null,{"href":"/columns/","style":{"display":"inline-block","marginBottom":"12px","fontSize":"13px"},"children":"← 返回专栏"}],["$","div",null,{"style":{"fontSize":"12px","color":"var(--text-tertiary)","marginBottom":"4px"},"children":["📕"," ","labuladong 算法小抄"]}],["$","h1",null,{"style":{"fontSize":"22px","fontWeight":700,"margin":"0 0 16px"},"children":"Union-Find算法详解"}],["$","$Ld",null,{"children":"$e"}],false]}]
+a:[["$","meta","0",{"name":"viewport","content":"width=device-width, initial-scale=1"}],["$","meta","1",{"name":"theme-color","content":"#f97316"}]]
+8:[["$","meta","0",{"charSet":"utf-8"}],["$","title","1",{"children":"Union-Find算法详解 - 算法面试"}],["$","meta","2",{"name":"description","content":"LeetCode 热题 100 完整 Java 题解、逐题动画、知识专栏与智能间隔复习。"}],["$","meta","3",{"name":"application-name","content":"算法面试"}],["$","link","4",{"rel":"manifest","href":"/algorithm-interview/manifest.json","crossOrigin":"$undefined"}],["$","meta","5",{"name":"keywords","content":"LeetCode,热题100,算法面试,Java题解,数据结构,动态规划,面试刷题"}],["$","meta","6",{"name":"mobile-web-app-capable","content":"yes"}],["$","meta","7",{"name":"apple-mobile-web-app-title","content":"算法面试"}],["$","meta","8",{"name":"apple-mobile-web-app-status-bar-style","content":"default"}],["$","meta","9",{"property":"og:title","content":"算法面试题库"}],["$","meta","10",{"property":"og:description","content":"LeetCode 热题 100 完整 Java 题解、逐题动画、知识专栏与智能复习"}],["$","meta","11",{"property":"og:site_name","content":"算法面试题库"}],["$","meta","12",{"property":"og:locale","content":"zh_CN"}],["$","meta","13",{"property":"og:type","content":"website"}],["$","meta","14",{"name":"twitter:card","content":"summary"}],["$","meta","15",{"name":"twitter:title","content":"算法面试题库"}],["$","meta","16",{"name":"twitter:description","content":"LeetCode 热题 100 完整 Java 题解、逐题动画、知识专栏与智能复习"}]]
+6:null

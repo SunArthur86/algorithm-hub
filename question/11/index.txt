@@ -1,0 +1,148 @@
+1:"$Sreact.fragment"
+2:I[5244,[],""]
+3:I[3866,[],""]
+5:I[6213,[],"OutletBoundary"]
+7:I[6213,[],"MetadataBoundary"]
+9:I[6213,[],"ViewportBoundary"]
+b:I[4835,[],""]
+:HL["/algorithm-interview/_next/static/css/c1e787639001e16b.css","style"]
+0:{"P":null,"b":"xos97fAiWtKfKXI6hZLx4","p":"/algorithm-interview","c":["","question","11",""],"i":false,"f":[[["",{"children":["question",{"children":[["lcId","11","d"],{"children":["__PAGE__",{}]}]}]},"$undefined","$undefined",true],["",["$","$1","c",{"children":[[["$","link","0",{"rel":"stylesheet","href":"/algorithm-interview/_next/static/css/c1e787639001e16b.css","precedence":"next","crossOrigin":"$undefined","nonce":"$undefined"}]],["$","html",null,{"lang":"zh","children":[["$","head",null,{"children":["$","script",null,{"dangerouslySetInnerHTML":{"__html":"\ntry {\n  var raw = localStorage.getItem('algo-interview');\n  var theme = 'light';\n  if (raw) { var p = JSON.parse(raw); theme = (p.state && p.state.theme) || 'light'; }\n  if (theme === 'dark') {\n    document.documentElement.classList.add('dark');\n    document.documentElement.setAttribute('data-theme', 'dark');\n  }\n} catch (e) {}\n"}}]}],["$","body",null,{"children":[["$","$L2",null,{"parallelRouterKey":"children","segmentPath":["children"],"error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L3",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":[[],[["$","title",null,{"children":"404: This page could not be found."}],["$","div",null,{"style":{"fontFamily":"system-ui,\"Segoe UI\",Roboto,Helvetica,Arial,sans-serif,\"Apple Color Emoji\",\"Segoe UI Emoji\"","height":"100vh","textAlign":"center","display":"flex","flexDirection":"column","alignItems":"center","justifyContent":"center"},"children":["$","div",null,{"children":[["$","style",null,{"dangerouslySetInnerHTML":{"__html":"body{color:#000;background:#fff;margin:0}.next-error-h1{border-right:1px solid rgba(0,0,0,.3)}@media (prefers-color-scheme:dark){body{color:#fff;background:#000}.next-error-h1{border-right:1px solid rgba(255,255,255,.3)}}"}}],["$","h1",null,{"className":"next-error-h1","style":{"display":"inline-block","margin":"0 20px 0 0","padding":"0 23px 0 0","fontSize":24,"fontWeight":500,"verticalAlign":"top","lineHeight":"49px"},"children":404}],["$","div",null,{"style":{"display":"inline-block"},"children":["$","h2",null,{"style":{"fontSize":14,"fontWeight":400,"lineHeight":"49px","margin":0},"children":"This page could not be found."}]}]]}]}]]],"forbidden":"$undefined","unauthorized":"$undefined"}],["$","script",null,{"dangerouslySetInnerHTML":{"__html":"\nif ('serviceWorker' in navigator) {\n  window.addEventListener('load', function () {\n    navigator.serviceWorker.register('/algorithm-interview/sw.js').catch(function () {});\n  });\n}\n"}}]]}]]}]]}],{"children":["question",["$","$1","c",{"children":[null,["$","$L2",null,{"parallelRouterKey":"children","segmentPath":["children","question","children"],"error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L3",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","forbidden":"$undefined","unauthorized":"$undefined"}]]}],{"children":[["lcId","11","d"],["$","$1","c",{"children":[null,["$","$L2",null,{"parallelRouterKey":"children","segmentPath":["children","question","children","$0:f:0:1:2:children:2:children:0","children"],"error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L3",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","forbidden":"$undefined","unauthorized":"$undefined"}]]}],{"children":["__PAGE__",["$","$1","c",{"children":["$L4",null,["$","$L5",null,{"children":"$L6"}]]}],{},null,false]},null,false]},null,false]},null,false],["$","$1","h",{"children":[null,["$","$1","edLdNUIlZz8bMzZ_JgCeT",{"children":[["$","$L7",null,{"children":"$L8"}],["$","$L9",null,{"children":"$La"}],null]}]]}],false]],"m":"$undefined","G":["$b","$undefined"],"s":false,"S":true}
+c:I[8173,["173","static/chunks/173-69860a4742bb7020.js","829","static/chunks/829-7533e70598480772.js","937","static/chunks/937-ef36a5ac4bc37a7e.js","447","static/chunks/447-06af9414e164c047.js","8","static/chunks/app/question/%5BlcId%5D/page-478b0d2a69e222f2.js"],""]
+d:I[3447,["173","static/chunks/173-69860a4742bb7020.js","829","static/chunks/829-7533e70598480772.js","937","static/chunks/937-ef36a5ac4bc37a7e.js","447","static/chunks/447-06af9414e164c047.js","8","static/chunks/app/question/%5BlcId%5D/page-478b0d2a69e222f2.js"],"default"]
+e:T18fb,# 11. 盛最多水的容器
+
+> 难度：**Medium** | 分类：双指针 | 标签：贪心, 数组, 双指针
+
+> 🔗 力扣链接：[https://leetcode.cn/problems/container-with-most-water/](https://leetcode.cn/problems/container-with-most-water/)
+
+## 📝 题目描述
+
+给你一个数组 `height`，每个元素表示竖线的长度。找出两条竖线，让它们和 x 轴围成的矩形面积最大。面积 = 两条线的距离 × 较短那条线的高度。
+
+- 题号：11
+- 题目名：盛最多水的容器
+- 难度：中等
+- 题型：双指针
+- 为什么选这题：它是双指针"短板决定上限"思想的最佳入门题，训练"移动哪边"的决策能力。
+
+## 🧠 思考路径
+
+暴力做法是枚举所有两两组合，计算面积取最大值，时间 `O(n²)`。
+
+观察面积公式：`面积 = min(h[i], h[j]) × (j - i)`。如果左右两个指针分别站在数组两端，每次移动较短的那个指针向内靠拢，面积有可能变大（因为距离在减小，但如果新的线更高，面积的损失可能被弥补）。而移动较长的那边没有意义——面积受短板限制，长板变长也没用。
+
+这就是贪心策略：每次放弃短板，因为短板决定了当前面积的上限，留着它不可能得到更大的面积。
+
+## 💻 Java 题解
+
+### 解法 1：贪心双指针
+
+左右指针从两端出发。每次移动较短的一边（因为移动较长边不可能获得更大水量），记录最大值。
+
+- ⏱ 时间复杂度：`O(n)`
+- 💾 空间复杂度：`O(1)`
+
+```java
+class Solution {
+    public int maxArea(int[] height) {
+        int left = 0, right = height.length - 1;
+        int maxWater = 0;
+        while (left < right) {
+            int h = Math.min(height[left], height[right]);
+            int w = right - left;
+            maxWater = Math.max(maxWater, h * w);
+            if (height[left] < height[right]) left++;
+            else right--;
+        }
+        return maxWater;
+    }
+}
+```
+
+**关键点：**
+- 面积 = min(h[left],h[right]) × 宽度
+- 移动较短的一边
+- 一次遍历 O(n)
+
+**执行步骤：**
+1. left=0, right=n-1
+1. 计算当前水量并更新最大值
+1. 移动较短的一边
+1. 直到 left >= right
+
+
+## ⚠️ 易错点
+
+- 移动较短的那边，不是移动任意一边。移动长板只会让距离变小而短板不变，面积不可能增大。
+- 面积由短板决定，所以用 `min(height[left], height[right])`。
+- 两边高度相等时，移动哪边都可以，不影响正确性。
+
+- 不是移动较长边！移动较长边宽度减少但高度不会增加
+
+- 宽度是 right-left 不是 right-left+1
+
+## 📊 复杂度分析
+
+- 时间复杂度：`O(n)`。左右指针各最多遍历一半。
+- 空间复杂度：`O(1)`。只用常数个变量。
+
+## 🏢 实际业务应用
+
+- 容量规划：在资源受限的系统中（CPU、内存、带宽），最大吞吐量由最短的那块"板"决定，优化策略就是找到并提升瓶颈。
+- 双边界最优搜索：在价格区间、时间窗口等场景中，寻找两个端点使目标函数最大化。
+- 图像处理：在图像的直方图中寻找最大矩形面积，逻辑与此题类似。
+
+- 容量规划：在资源受限的系统中（CPU、内存、带宽），最大吞吐量由最短的那块"板"决定，优化策略就是找到并提升瓶颈。
+- 双边界最优搜索：在价格区间、时间窗口等场景中，寻找两个端点使目标函数最大化。
+- 图像处理：在图像的直方图中寻找最大矩形面积，逻辑与此题类似。
+
+## 📖 形象类比
+
+可以类比《三国演义》里草船借箭时调兵的决策。
+
+诸葛亮安排两排草船夹江而立。箭从两岸射来，每排船的载箭量取决于那一侧船的"防御能力"（高度）。他想让两排船之间装的箭最多，面积就是"两排船的距离 × 较低一侧的防御能力"。他先让两排船站在最远处，然后每次把防御能力更低的那一排往内收——因为低的那侧限制了总载箭量，收进来可能遇到更高的船。
+
+对应关系是：
+
+- "两排草船"对应左右两个指针
+- "防御能力"对应竖线高度 `height`
+- "两排船的距离"对应 `right - left`
+- "较低一侧的限制"对应 `min(height[left], height[right])`
+- "移动较低的一侧"对应移动短板
+
+记忆的关键是：谁短动谁，短板决定了上限。
+
+可以类比《三国演义》里草船借箭时调兵的决策。
+
+诸葛亮安排两排草船夹江而立。箭从两岸射来，每排船的载箭量取决于那一侧船的"防御能力"（高度）。他想让两排船之间装的箭最多，面积就是"两排船的距离 × 较低一侧的防御能力"。他先让两排船站在最远处，然后每次把防御能力更低的那一排往内收——因为低的那侧限制了总载箭量，收进来可能遇到更高的船。
+
+对应关系是：
+
+- "两排草船"对应左右两个指针
+- "防御能力"对应竖线高度 `height`
+- "两排船的距离"对应 `right - left`
+- "较低一侧的限制"对应 `min(height[left], height[right])`
+- "移动较低的一侧"对应移动短板
+
+记忆的关键是：谁短动谁，短板决定了上限。
+
+两排树木之间有一条小溪，小鹿想在两排树之间拦一道水坝存水。每棵树的高度不一样，能存多少水取决于较矮的那棵树和两棵树之间的距离。小鹿从最远的两棵树开始试，每次把较矮的那棵树往里换一棵，看能不能存更多水。
+
+两排树木之间有一条小溪，小鹿想在两排树之间拦一道水坝存水。每棵树的高度不一样，能存多少水取决于较矮的那棵树和两棵树之间的距离。小鹿从最远的两棵树开始试，每次把较矮的那棵树往里换一棵，看能不能存更多水。
+
+## 🎵 记忆口诀
+
+谁短动谁，短板定面积。
+
+谁短动谁，短板定面积。
+
+## 🔗 延伸练习
+
+- `42. 接雨水`：同样涉及左右指针和高度，但目标是计算所有凹陷处能接的雨水总量。
+- `84. 柱状图中最大的矩形`：用单调栈在柱子间找最大矩形面积，思路不同但问题结构相似。
+
+- `42. 接雨水`：同样涉及左右指针和高度，但目标是计算所有凹陷处能接的雨水总量。
+- `84. 柱状图中最大的矩形`：用单调栈在柱子间找最大矩形面积，思路不同但问题结构相似。4:["$","main",null,{"className":"detail-main","style":{"maxWidth":760,"margin":"0 auto","padding":"16px","minHeight":"100vh"},"children":[["$","$Lc",null,{"href":"/","style":{"display":"inline-block","marginBottom":"12px","fontSize":"13px"},"children":"← 返回题库"}],["$","h1",null,{"style":{"fontSize":"22px","fontWeight":700,"margin":"0 0 4px"},"children":[["$","span",null,{"style":{"marginRight":"6px"},"children":"🔀"}],11,". ","盛最多水的容器"]}],["$","$Ld",null,{"q":{"id":"0011","lcId":11,"slug":"container-with-most-water","title":"盛最多水的容器","question":"盛最多水的容器","answer":"$e","difficulty":"Medium","category":"two-pointers","categories":["two-pointers"],"tags":["贪心","数组","双指针"],"url":"https://leetcode.cn/problems/container-with-most-water/","planOrder":5,"hasViz":true,"hasDiagram":false,"feynman":{"essence":"给你一个数组 `height`，每个元素表示竖线的长度。找出两条竖线，让它们和 x 轴围成的矩形面积最大。面积 = 两条线的距离 × 较短那条线的高度。","analogy":"","key_points":[]},"first_principle":{"problem":"","axioms":[],"rebuild":""}}}]]}]
+a:[["$","meta","0",{"name":"viewport","content":"width=device-width, initial-scale=1"}],["$","meta","1",{"name":"theme-color","content":"#f97316"}]]
+8:[["$","meta","0",{"charSet":"utf-8"}],["$","title","1",{"children":"11. 盛最多水的容器 - 算法面试"}],["$","meta","2",{"name":"description","content":"给你一个数组 `height`，每个元素表示竖线的长度。找出两条竖线，让它们和 x 轴围成的矩形面积最大。面积 = 两条线的距离 × 较短那条线的高度。"}],["$","meta","3",{"name":"application-name","content":"算法面试"}],["$","link","4",{"rel":"manifest","href":"/algorithm-interview/manifest.json","crossOrigin":"$undefined"}],["$","meta","5",{"name":"keywords","content":"盛最多水的容器,LeetCode 11,Medium,贪心,数组,双指针"}],["$","meta","6",{"name":"mobile-web-app-capable","content":"yes"}],["$","meta","7",{"name":"apple-mobile-web-app-title","content":"算法面试"}],["$","meta","8",{"name":"apple-mobile-web-app-status-bar-style","content":"default"}],["$","meta","9",{"property":"og:title","content":"11. 盛最多水的容器"}],["$","meta","10",{"property":"og:description","content":"给你一个数组 `height`，每个元素表示竖线的长度。找出两条竖线，让它们和 x 轴围成的矩形面积最大。面积 = 两条线的距离 × 较短那条线的高度。"}],["$","meta","11",{"property":"og:locale","content":"zh_CN"}],["$","meta","12",{"property":"og:type","content":"article"}],["$","meta","13",{"name":"twitter:card","content":"summary"}],["$","meta","14",{"name":"twitter:title","content":"11. 盛最多水的容器"}],["$","meta","15",{"name":"twitter:description","content":"给你一个数组 `height`，每个元素表示竖线的长度。找出两条竖线，让它们和 x 轴围成的矩形面积最大。面积 = 两条线的距离 × 较短那条线的高度。"}]]
+6:null

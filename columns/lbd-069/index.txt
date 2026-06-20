@@ -1,0 +1,216 @@
+1:"$Sreact.fragment"
+2:I[5244,[],""]
+3:I[3866,[],""]
+5:I[6213,[],"OutletBoundary"]
+7:I[6213,[],"MetadataBoundary"]
+9:I[6213,[],"ViewportBoundary"]
+b:I[4835,[],""]
+:HL["/algorithm-interview/_next/static/css/c1e787639001e16b.css","style"]
+0:{"P":null,"b":"xos97fAiWtKfKXI6hZLx4","p":"/algorithm-interview","c":["","columns","lbd-069",""],"i":false,"f":[[["",{"children":["columns",{"children":[["slug","lbd-069","d"],{"children":["__PAGE__",{}]}]}]},"$undefined","$undefined",true],["",["$","$1","c",{"children":[[["$","link","0",{"rel":"stylesheet","href":"/algorithm-interview/_next/static/css/c1e787639001e16b.css","precedence":"next","crossOrigin":"$undefined","nonce":"$undefined"}]],["$","html",null,{"lang":"zh","children":[["$","head",null,{"children":["$","script",null,{"dangerouslySetInnerHTML":{"__html":"\ntry {\n  var raw = localStorage.getItem('algo-interview');\n  var theme = 'light';\n  if (raw) { var p = JSON.parse(raw); theme = (p.state && p.state.theme) || 'light'; }\n  if (theme === 'dark') {\n    document.documentElement.classList.add('dark');\n    document.documentElement.setAttribute('data-theme', 'dark');\n  }\n} catch (e) {}\n"}}]}],["$","body",null,{"children":[["$","$L2",null,{"parallelRouterKey":"children","segmentPath":["children"],"error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L3",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":[[],[["$","title",null,{"children":"404: This page could not be found."}],["$","div",null,{"style":{"fontFamily":"system-ui,\"Segoe UI\",Roboto,Helvetica,Arial,sans-serif,\"Apple Color Emoji\",\"Segoe UI Emoji\"","height":"100vh","textAlign":"center","display":"flex","flexDirection":"column","alignItems":"center","justifyContent":"center"},"children":["$","div",null,{"children":[["$","style",null,{"dangerouslySetInnerHTML":{"__html":"body{color:#000;background:#fff;margin:0}.next-error-h1{border-right:1px solid rgba(0,0,0,.3)}@media (prefers-color-scheme:dark){body{color:#fff;background:#000}.next-error-h1{border-right:1px solid rgba(255,255,255,.3)}}"}}],["$","h1",null,{"className":"next-error-h1","style":{"display":"inline-block","margin":"0 20px 0 0","padding":"0 23px 0 0","fontSize":24,"fontWeight":500,"verticalAlign":"top","lineHeight":"49px"},"children":404}],["$","div",null,{"style":{"display":"inline-block"},"children":["$","h2",null,{"style":{"fontSize":14,"fontWeight":400,"lineHeight":"49px","margin":0},"children":"This page could not be found."}]}]]}]}]]],"forbidden":"$undefined","unauthorized":"$undefined"}],["$","script",null,{"dangerouslySetInnerHTML":{"__html":"\nif ('serviceWorker' in navigator) {\n  window.addEventListener('load', function () {\n    navigator.serviceWorker.register('/algorithm-interview/sw.js').catch(function () {});\n  });\n}\n"}}]]}]]}]]}],{"children":["columns",["$","$1","c",{"children":[null,["$","$L2",null,{"parallelRouterKey":"children","segmentPath":["children","columns","children"],"error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L3",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","forbidden":"$undefined","unauthorized":"$undefined"}]]}],{"children":[["slug","lbd-069","d"],["$","$1","c",{"children":[null,["$","$L2",null,{"parallelRouterKey":"children","segmentPath":["children","columns","children","$0:f:0:1:2:children:2:children:0","children"],"error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L3",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","forbidden":"$undefined","unauthorized":"$undefined"}]]}],{"children":["__PAGE__",["$","$1","c",{"children":["$L4",null,["$","$L5",null,{"children":"$L6"}]]}],{},null,false]},null,false]},null,false]},null,false],["$","$1","h",{"children":[null,["$","$1","jNpK6HeLZBDzPrzMSziO0",{"children":[["$","$L7",null,{"children":"$L8"}],["$","$L9",null,{"children":"$La"}],null]}]]}],false]],"m":"$undefined","G":["$b","$undefined"],"s":false,"S":true}
+c:I[8173,["173","static/chunks/173-69860a4742bb7020.js","829","static/chunks/829-7533e70598480772.js","306","static/chunks/app/columns/%5Bslug%5D/page-58fc1d8f5085c1ff.js"],""]
+d:I[4780,["173","static/chunks/173-69860a4742bb7020.js","829","static/chunks/829-7533e70598480772.js","306","static/chunks/app/columns/%5Bslug%5D/page-58fc1d8f5085c1ff.js"],"default"]
+e:T203f,# 如何判断回文链表
+
+如何⾼效判断回⽂链表
+学算法，认准 labuladong 就够了！
+我们之前有两篇⽂章写了回⽂串和回⽂序列相关的问题。
+寻找回⽂串的核⼼思想是从中⼼向两端扩展：
+string palindrome(string& s, int l, int r) {
+    // 防⽌索引越界
+    while (l >= 0 && r < s.size()
+            && s[l] == s[r]) {
+        // 向两边展开
+        l--; r++;
+    }
+    // 返回以 s[l] 和 s[r] 为中⼼的最⻓回⽂串
+    return s.substr(l + 1, r - l - 1);
+}
+因为回⽂串⻓度可能为奇数也可能是偶数，⻓度为奇数时只存在⼀个中⼼
+点，⽽⻓度为偶数时存在两个中⼼点，所以上⾯这个函数需要传
+⼊ l 和 r 。
+⽽判断⼀个字符串是不是回⽂串就简单很多，不需要考虑奇偶情况，只需要
+「双指针技巧」，从两端向中间逼近即可：
+bool isPalindrome(string s) {
+    int left = 0, right = s.length - 1;
+    while (left < right) {
+        if (s[left] != s[right])
+            return false;
+        left++; right--;
+    }
+    return true;
+}
+如何判断回⽂链表
+459
+
+以上代码很好理解吧，因为回⽂串是对称的，所以正着读和倒着读应该是⼀
+样的，这⼀特点是解决回⽂串问题的关键。
+下⾯扩展这⼀最简单的情况，来解决：如何判断⼀个「单链表」是不是回
+⽂。
+⼀、判断回⽂单链表
+输⼊⼀个单链表的头结点，判断这个链表中的数字是不是回⽂：
+/**
+ * 单链表节点的定义：
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ * }
+ */
+boolean isPalindrome(ListNode head);
+输⼊: 1->2->null
+输出: false
+输⼊: 1->2->2->1->null
+输出: true
+这道题的关键在于，单链表⽆法倒着遍历，⽆法使⽤双指针技巧。那么最简
+单的办法就是，把原始链表反转存⼊⼀条新的链表，然后⽐较这两条链表是
+否相同。关于如何反转链表，可以参⻅前⽂「递归操作链表」。
+其实，借助⼆叉树后序遍历的思路，不需要显式反转原始链表也可以倒序遍
+历链表，下⾯来具体聊聊。
+对于⼆叉树的⼏种遍历⽅式，我们再熟悉不过了：
+void traverse(TreeNode root) {
+    // 前序遍历代码
+    traverse(root.left);
+如何判断回⽂链表
+460
+
+    // 中序遍历代码
+    traverse(root.right);
+    // 后序遍历代码
+}
+在「学习数据结构的框架思维」中说过，链表兼具递归结构，树结构不过是
+链表的衍⽣。那么，链表其实也可以有前序遍历和后序遍历：
+void traverse(ListNode head) {
+    // 前序遍历代码
+    traverse(head.next);
+    // 后序遍历代码
+}
+这个框架有什么指导意义呢？如果我想正序打印链表中的 val 值，可以在
+前序遍历位置写代码；反之，如果想倒序遍历链表，就可以在后序遍历位置
+操作：
+/* 倒序打印单链表中的元素值 */
+void traverse(ListNode head) {
+    if (head == null) return;
+    traverse(head.next);
+    // 后序遍历代码
+    print(head.val);
+}
+说到这了，其实可以稍作修改，模仿双指针实现回⽂判断的功能：
+// 左侧指针
+ListNode left;
+boolean isPalindrome(ListNode head) {
+    left = head;
+    return traverse(head);
+}
+boolean traverse(ListNode right) {
+    if (right == null) return true;
+如何判断回⽂链表
+461
+
+    boolean res = traverse(right.next);
+    // 后序遍历代码
+    res = res && (right.val == left.val);
+    left = left.next;
+    return res;
+}
+这么做的核⼼逻辑是什么呢？实际上就是把链表节点放⼊⼀个栈，然后再拿
+出来，这时候元素顺序就是反的，只不过我们利⽤的是递归函数的堆栈⽽
+已。
+【PDF格式⽆法显⽰GIF⽂件 回⽂链表/1.gif，可移步公众号查看】
+当然，⽆论造⼀条反转链表还是利⽤后续遍历，算法的时间和空间复杂度都
+是 O(N)。下⾯我们想想，能不能不⽤额外的空间，解决这个问题呢？
+⼆、优化空间复杂度
+更好的思路是这样的：
+1、先通过「双指针技巧」中的快慢指针来找到链表的中点：
+ListNode slow, fast;
+slow = fast = head;
+while (fast != null && fast.next != null) {
+    slow = slow.next;
+    fast = fast.next.next;
+}
+// slow 指针现在指向链表中点
+如何判断回⽂链表
+462
+
+2、如果 fast 指针没有指向 null ，说明链表⻓度为奇数， slow 还要再前
+进⼀步：
+if (fast != null)
+    slow = slow.next;
+3、从 slow 开始反转后⾯的链表，现在就可以开始⽐较回⽂串了：
+如何判断回⽂链表
+463
+
+ListNode left = head;
+ListNode right = reverse(slow);
+while (right != null) {
+    if (left.val != right.val)
+        return false;
+    left = left.next;
+    right = right.next;
+}
+return true;
+⾄此，把上⾯ 3 段代码合在⼀起就⾼效地解决这个问题了，其中 reverse 函
+数很容易实现：
+ListNode reverse(ListNode head) {
+    ListNode pre = null, cur = head;
+    while (cur != null) {
+        ListNode next = cur.next;
+        cur.next = pre;
+        pre = cur;
+        cur = next;
+    }
+    return pre;
+}
+如何判断回⽂链表
+464
+
+【PDF格式⽆法显⽰GIF⽂件 kgroup/8.gif，可移步公众号查看】
+算法总体的时间复杂度 O(N)，空间复杂度 O(1)，已经是最优的了。
+我知道肯定有读者会问：这种解法虽然⾼效，但破坏了输⼊链表的原始结
+构，能不能避免这个瑕疵呢？
+其实这个问题很好解决，关键在于得到 p, q 这两个指针位置：
+这样，只要在函数 return 之前加⼀段代码即可恢复原先链表顺序：
+p.next = reverse(q);
+篇幅所限，我就不写了，读者可以⾃⼰尝试⼀下。
+三、最后总结
+⾸先，寻找回⽂串是从中间向两端扩展，判断回⽂串是从两端向中间收缩。
+对于单链表，⽆法直接倒序遍历，可以造⼀条新的反转链表，可以利⽤链表
+的后序遍历，也可以⽤栈结构倒序处理单链表。
+如何判断回⽂链表
+465
+
+具体到回⽂链表的判断问题，由于回⽂的特殊性，可以不完全反转链表，⽽
+是仅仅反转部分链表，将空间复杂度降到 O(1)。
+＿＿＿＿＿＿＿＿＿＿＿＿＿
+刷算法，学套路，认准 labuladong。
+本⼩抄即将出版，关注 labuladong 公众号或 ongline book 查看更新⽂章，
+后台回复「进群」可进刷题群，labuladong 带你⽇穿 LeetCode。
+如何判断回⽂链表
+466
+
+随机算法之⽔塘抽样算法
+学算法，认准 labuladong 就够了！
+我最近在 LeetCode 上做到两道⾮常有意思的题⽬，382 和 398 题，关于⽔
+塘抽样算法（Reservoir Sampling），本质上是⼀种随机概率算法，解法应该
+说会者不难，难者不会。
+我第⼀次⻅到这个算法问题是⾕歌的⼀道算法题：给你⼀个未知⻓度的链
+表，请你设计⼀个算法，只能遍历⼀次，随机地返回链表中的⼀个节点。
+这⾥说的随机是均匀随机（uniform random），也就是说，如果有  n  个元
+素，每个元素被选中的概率都是  1/n ，不可以有统计意义上的偏差。
+⼀般的想法就是，我先遍历⼀遍链表，得到链表的总⻓度  n ，再⽣成⼀个
+ [1,n]  之间的随机数为索引，然后找到索引对应的节点，不就是⼀个随机
+的节点了吗？
+但题⽬说了，只能遍历⼀次，意味着这种思路不可⾏。题⽬还可以再泛化，
+给⼀个未知⻓度的序列，如何在其中随机地选择  k  个元素？想要解决这个
+问题，就需要著名的⽔塘抽样算法了。
+算法实现
+先解决只抽取⼀个元素的问题，这个问题的难点在于，随机选择是「动态」
+的，⽐如说你现在你有 5 个元素，你已经随机选取了其中的某个元素  a  作
+为结果，但是现在再给你⼀个新元素  b ，你应该留着  a  还是将  b  作为
+结果呢，以什么逻辑选择  a  和  b  呢，怎么证明你的选择⽅法在概率上是
+公平的呢？
+先说结论，当你遇到第  i  个元素时，应该有  1/i  的概率选择该元素， 1
+- 1/i  的概率保持原有的选择。看代码容易理解这个思路：
+如何在⽆限序列中随机抽取元素
+4674:["$","main",null,{"style":{"maxWidth":760,"margin":"0 auto","padding":"16px","minHeight":"100vh"},"children":[["$","$Lc",null,{"href":"/columns/","style":{"display":"inline-block","marginBottom":"12px","fontSize":"13px"},"children":"← 返回专栏"}],["$","div",null,{"style":{"fontSize":"12px","color":"var(--text-tertiary)","marginBottom":"4px"},"children":["📕"," ","labuladong 算法小抄"]}],["$","h1",null,{"style":{"fontSize":"22px","fontWeight":700,"margin":"0 0 16px"},"children":"如何判断回文链表"}],["$","$Ld",null,{"children":"$e"}],false]}]
+a:[["$","meta","0",{"name":"viewport","content":"width=device-width, initial-scale=1"}],["$","meta","1",{"name":"theme-color","content":"#f97316"}]]
+8:[["$","meta","0",{"charSet":"utf-8"}],["$","title","1",{"children":"如何判断回文链表 - 算法面试"}],["$","meta","2",{"name":"description","content":"LeetCode 热题 100 完整 Java 题解、逐题动画、知识专栏与智能间隔复习。"}],["$","meta","3",{"name":"application-name","content":"算法面试"}],["$","link","4",{"rel":"manifest","href":"/algorithm-interview/manifest.json","crossOrigin":"$undefined"}],["$","meta","5",{"name":"keywords","content":"LeetCode,热题100,算法面试,Java题解,数据结构,动态规划,面试刷题"}],["$","meta","6",{"name":"mobile-web-app-capable","content":"yes"}],["$","meta","7",{"name":"apple-mobile-web-app-title","content":"算法面试"}],["$","meta","8",{"name":"apple-mobile-web-app-status-bar-style","content":"default"}],["$","meta","9",{"property":"og:title","content":"算法面试题库"}],["$","meta","10",{"property":"og:description","content":"LeetCode 热题 100 完整 Java 题解、逐题动画、知识专栏与智能复习"}],["$","meta","11",{"property":"og:site_name","content":"算法面试题库"}],["$","meta","12",{"property":"og:locale","content":"zh_CN"}],["$","meta","13",{"property":"og:type","content":"website"}],["$","meta","14",{"name":"twitter:card","content":"summary"}],["$","meta","15",{"name":"twitter:title","content":"算法面试题库"}],["$","meta","16",{"name":"twitter:description","content":"LeetCode 热题 100 完整 Java 题解、逐题动画、知识专栏与智能复习"}]]
+6:null

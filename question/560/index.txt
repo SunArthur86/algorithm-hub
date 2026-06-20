@@ -1,0 +1,143 @@
+1:"$Sreact.fragment"
+2:I[5244,[],""]
+3:I[3866,[],""]
+5:I[6213,[],"OutletBoundary"]
+7:I[6213,[],"MetadataBoundary"]
+9:I[6213,[],"ViewportBoundary"]
+b:I[4835,[],""]
+:HL["/algorithm-interview/_next/static/css/c1e787639001e16b.css","style"]
+0:{"P":null,"b":"xos97fAiWtKfKXI6hZLx4","p":"/algorithm-interview","c":["","question","560",""],"i":false,"f":[[["",{"children":["question",{"children":[["lcId","560","d"],{"children":["__PAGE__",{}]}]}]},"$undefined","$undefined",true],["",["$","$1","c",{"children":[[["$","link","0",{"rel":"stylesheet","href":"/algorithm-interview/_next/static/css/c1e787639001e16b.css","precedence":"next","crossOrigin":"$undefined","nonce":"$undefined"}]],["$","html",null,{"lang":"zh","children":[["$","head",null,{"children":["$","script",null,{"dangerouslySetInnerHTML":{"__html":"\ntry {\n  var raw = localStorage.getItem('algo-interview');\n  var theme = 'light';\n  if (raw) { var p = JSON.parse(raw); theme = (p.state && p.state.theme) || 'light'; }\n  if (theme === 'dark') {\n    document.documentElement.classList.add('dark');\n    document.documentElement.setAttribute('data-theme', 'dark');\n  }\n} catch (e) {}\n"}}]}],["$","body",null,{"children":[["$","$L2",null,{"parallelRouterKey":"children","segmentPath":["children"],"error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L3",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":[[],[["$","title",null,{"children":"404: This page could not be found."}],["$","div",null,{"style":{"fontFamily":"system-ui,\"Segoe UI\",Roboto,Helvetica,Arial,sans-serif,\"Apple Color Emoji\",\"Segoe UI Emoji\"","height":"100vh","textAlign":"center","display":"flex","flexDirection":"column","alignItems":"center","justifyContent":"center"},"children":["$","div",null,{"children":[["$","style",null,{"dangerouslySetInnerHTML":{"__html":"body{color:#000;background:#fff;margin:0}.next-error-h1{border-right:1px solid rgba(0,0,0,.3)}@media (prefers-color-scheme:dark){body{color:#fff;background:#000}.next-error-h1{border-right:1px solid rgba(255,255,255,.3)}}"}}],["$","h1",null,{"className":"next-error-h1","style":{"display":"inline-block","margin":"0 20px 0 0","padding":"0 23px 0 0","fontSize":24,"fontWeight":500,"verticalAlign":"top","lineHeight":"49px"},"children":404}],["$","div",null,{"style":{"display":"inline-block"},"children":["$","h2",null,{"style":{"fontSize":14,"fontWeight":400,"lineHeight":"49px","margin":0},"children":"This page could not be found."}]}]]}]}]]],"forbidden":"$undefined","unauthorized":"$undefined"}],["$","script",null,{"dangerouslySetInnerHTML":{"__html":"\nif ('serviceWorker' in navigator) {\n  window.addEventListener('load', function () {\n    navigator.serviceWorker.register('/algorithm-interview/sw.js').catch(function () {});\n  });\n}\n"}}]]}]]}]]}],{"children":["question",["$","$1","c",{"children":[null,["$","$L2",null,{"parallelRouterKey":"children","segmentPath":["children","question","children"],"error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L3",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","forbidden":"$undefined","unauthorized":"$undefined"}]]}],{"children":[["lcId","560","d"],["$","$1","c",{"children":[null,["$","$L2",null,{"parallelRouterKey":"children","segmentPath":["children","question","children","$0:f:0:1:2:children:2:children:0","children"],"error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L3",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","forbidden":"$undefined","unauthorized":"$undefined"}]]}],{"children":["__PAGE__",["$","$1","c",{"children":["$L4",null,["$","$L5",null,{"children":"$L6"}]]}],{},null,false]},null,false]},null,false]},null,false],["$","$1","h",{"children":[null,["$","$1","SP9AAYzUOA8Ed11X_Lm1S",{"children":[["$","$L7",null,{"children":"$L8"}],["$","$L9",null,{"children":"$La"}],null]}]]}],false]],"m":"$undefined","G":["$b","$undefined"],"s":false,"S":true}
+c:I[8173,["173","static/chunks/173-69860a4742bb7020.js","829","static/chunks/829-7533e70598480772.js","937","static/chunks/937-ef36a5ac4bc37a7e.js","447","static/chunks/447-06af9414e164c047.js","8","static/chunks/app/question/%5BlcId%5D/page-478b0d2a69e222f2.js"],""]
+d:I[3447,["173","static/chunks/173-69860a4742bb7020.js","829","static/chunks/829-7533e70598480772.js","937","static/chunks/937-ef36a5ac4bc37a7e.js","447","static/chunks/447-06af9414e164c047.js","8","static/chunks/app/question/%5BlcId%5D/page-478b0d2a69e222f2.js"],"default"]
+e:T168d,# 560. 和为 K 的子数组
+
+> 难度：**Medium** | 分类：子串 | 标签：数组, 哈希表, 前缀和
+
+> 🔗 力扣链接：[https://leetcode.cn/problems/subarray-sum-equals-k/](https://leetcode.cn/problems/subarray-sum-equals-k/)
+
+## 📝 题目描述
+
+给定一个整数数组 `nums` 和一个整数 `k`，统计数组中连续子数组的和等于 `k` 的个数。
+
+子数组是数组中连续的一段。
+
+- 题号：560
+- 题目名：和为 K 的子数组
+- 难度：中等
+- 题型：哈希
+- 为什么选这题：它是"前缀和 + 哈希"的经典代表作，这个组合在面试中出现频率极高。
+
+## 🧠 思考路径
+
+暴力做法：枚举所有子数组的起点和终点，计算每个子数组的和，看是否等于 `k`。时间 `O(n²)`。
+
+优化思路：用前缀和。定义 `prefix[i]` 为 `nums[0] + nums[1] + ... + nums[i-1]`。那么子数组 `nums[j..i]` 的和等于 `prefix[i+1] - prefix[j]`。要让它等于 `k`，就是 `prefix[j] = prefix[i+1] - k`。
+
+所以对于每个位置 `i`，我只需要知道"之前有多少个前缀和等于 `prefix[i+1] - k`"。这正是哈希表擅长的——用哈希表记录每个前缀和出现的次数，一边遍历一边查询。
+
+## 💻 Java 题解
+
+### 解法 1：前缀和 + 哈希表（最优）
+
+边遍历边计算前缀和，用哈希表记录每个前缀和出现的次数。对当前位置 j，查找 prefix-k 出现了多少次，即为以 j 结尾的和为 k 的子数组个数。
+
+- ⏱ 时间复杂度：`O(n)`
+- 💾 空间复杂度：`O(n)`
+
+```java
+class Solution {
+    public int subarraySum(int[] nums, int k) {
+        Map<Integer, Integer> map = new HashMap<>();
+        map.put(0, 1); // 前缀和为0出现1次（空前缀）
+        int sum = 0, count = 0;
+        for (int num : nums) {
+            sum += num;
+            count += map.getOrDefault(sum - k, 0);
+            map.merge(sum, 1, Integer::sum);
+        }
+        return count;
+    }
+}
+```
+
+**关键点：**
+- map.put(0,1) 处理从头开始的子数组
+- sum-k 表示前面有多少个前缀和使得差值为k
+- map.merge 简化计数
+
+**执行步骤：**
+1. 初始化 map{0:1}
+1. 遍历累加 sum
+1. count += map[sum-k]
+1. map[sum]++
+
+
+## ⚠️ 易错点
+
+- 必须先查询再更新哈希表。如果先更新再查询，可能会把当前位置的前缀和自己也算进去。
+- 哈希表初始要放入 `{0: 1}`，否则当子数组从第一个元素开始时会漏算。
+- 本题数组元素可以为负数，所以前缀和不一定单调递增，不能用滑动窗口。
+
+- 忘记 map.put(0,1) 会导致漏算从头开始的子数组
+
+- 不能用滑动窗口——数组有负数
+
+## 📊 复杂度分析
+
+- 时间复杂度：`O(n)`，一趟遍历，每次哈希查询 O(1)。
+- 空间复杂度：`O(n)`，最坏情况下哈希表存储 `n` 个不同的前缀和。
+
+## 🏢 实际业务应用
+
+- 股票交易系统中统计"累计收益恰好等于目标值"的交易区间数量，前缀和 + 哈希是标配。
+- 网络流量监控中，统计"某段时间内的流量增量等于某个阈值"的时间窗口个数。
+- 电商平台订单分析中，统计"连续订单金额之和等于某促销阈值"的区间数量，用于评估促销策略。
+
+- 股票交易系统中统计"累计收益恰好等于目标值"的交易区间数量，前缀和 + 哈希是标配。
+- 网络流量监控中，统计"某段时间内的流量增量等于某个阈值"的时间窗口个数。
+- 电商平台订单分析中，统计"连续订单金额之和等于某促销阈值"的区间数量，用于评估促销策略。
+
+## 📖 形象类比
+
+可以类比为《水浒传》中梁山泊统计粮草收支。
+
+每运进一批粮草就记一笔账（前缀和）。宋江想知道"中间有没有哪一段时间的净收入刚好是 `k` 石粮"。他让人把每一笔累计总额记在账本上，每来一笔新账，就回头查"之前有没有哪笔累计总额和当前差 `k` 石"。
+
+对应关系：
+
+- "每批粮草"对应 `nums[i]`
+- "累计总额"对应前缀和 `prefix_sum`
+- "差 `k` 石"对应 `prefix_sum - k`
+- "账本"对应哈希表 `sum_count`
+
+可以类比为《水浒传》中梁山泊统计粮草收支。
+
+每运进一批粮草就记一笔账（前缀和）。宋江想知道"中间有没有哪一段时间的净收入刚好是 `k` 石粮"。他让人把每一笔累计总额记在账本上，每来一笔新账，就回头查"之前有没有哪笔累计总额和当前差 `k` 石"。
+
+对应关系：
+
+- "每批粮草"对应 `nums[i]`
+- "累计总额"对应前缀和 `prefix_sum`
+- "差 `k` 石"对应 `prefix_sum - k`
+- "账本"对应哈希表 `sum_count`
+
+小松鼠每天在洞里存坚果，有时存多有时取少。它想知道中间有没有哪段日子净存了刚好 10 颗。聪明的小松鼠把每天的总数记下来，每天对一下旧账本："之前有没有哪天总数比今天少 10？"有的话就说明中间那段净存了 10 颗。
+
+小松鼠每天在洞里存坚果，有时存多有时取少。它想知道中间有没有哪段日子净存了刚好 10 颗。聪明的小松鼠把每天的总数记下来，每天对一下旧账本："之前有没有哪天总数比今天少 10？"有的话就说明中间那段净存了 10 颗。
+
+## 🎵 记忆口诀
+
+前缀和减 K，查哈希计数量。
+
+前缀和减 K，查哈希计数量。
+
+## 🔗 延伸练习
+
+- `523. 连续的子数组和`：从"和等于 K"变成"和是 K 的倍数"，前缀和取模 + 哈希。
+- `974. 和可被 K 整除的子数组`：同样取模 + 哈希，是 523 题的推广版。
+
+- `523. 连续的子数组和`：从"和等于 K"变成"和是 K 的倍数"，前缀和取模 + 哈希。
+- `974. 和可被 K 整除的子数组`：同样取模 + 哈希，是 523 题的推广版。4:["$","main",null,{"className":"detail-main","style":{"maxWidth":760,"margin":"0 auto","padding":"16px","minHeight":"100vh"},"children":[["$","$Lc",null,{"href":"/","style":{"display":"inline-block","marginBottom":"12px","fontSize":"13px"},"children":"← 返回题库"}],["$","h1",null,{"style":{"fontSize":"22px","fontWeight":700,"margin":"0 0 4px"},"children":[["$","span",null,{"style":{"marginRight":"6px"},"children":"🔗"}],560,". ","和为 K 的子数组"]}],["$","$Ld",null,{"q":{"id":"0560","lcId":560,"slug":"subarray-sum-equals-k","title":"和为 K 的子数组","question":"和为 K 的子数组","answer":"$e","difficulty":"Medium","category":"substring","categories":["substring"],"tags":["数组","哈希表","前缀和"],"url":"https://leetcode.cn/problems/subarray-sum-equals-k/","planOrder":10,"hasViz":true,"hasDiagram":false,"feynman":{"essence":"给定一个整数数组 `nums` 和一个整数 `k`，统计数组中连续子数组的和等于 `k` 的个数。  子数组是数组中连续的一段。","analogy":"","key_points":[]},"first_principle":{"problem":"","axioms":[],"rebuild":""}}}]]}]
+a:[["$","meta","0",{"name":"viewport","content":"width=device-width, initial-scale=1"}],["$","meta","1",{"name":"theme-color","content":"#f97316"}]]
+8:[["$","meta","0",{"charSet":"utf-8"}],["$","title","1",{"children":"560. 和为 K 的子数组 - 算法面试"}],["$","meta","2",{"name":"description","content":"给定一个整数数组 `nums` 和一个整数 `k`，统计数组中连续子数组的和等于 `k` 的个数。  子数组是数组中连续的一段。"}],["$","meta","3",{"name":"application-name","content":"算法面试"}],["$","link","4",{"rel":"manifest","href":"/algorithm-interview/manifest.json","crossOrigin":"$undefined"}],["$","meta","5",{"name":"keywords","content":"和为 K 的子数组,LeetCode 560,Medium,数组,哈希表,前缀和"}],["$","meta","6",{"name":"mobile-web-app-capable","content":"yes"}],["$","meta","7",{"name":"apple-mobile-web-app-title","content":"算法面试"}],["$","meta","8",{"name":"apple-mobile-web-app-status-bar-style","content":"default"}],["$","meta","9",{"property":"og:title","content":"560. 和为 K 的子数组"}],["$","meta","10",{"property":"og:description","content":"给定一个整数数组 `nums` 和一个整数 `k`，统计数组中连续子数组的和等于 `k` 的个数。  子数组是数组中连续的一段。"}],["$","meta","11",{"property":"og:locale","content":"zh_CN"}],["$","meta","12",{"property":"og:type","content":"article"}],["$","meta","13",{"name":"twitter:card","content":"summary"}],["$","meta","14",{"name":"twitter:title","content":"560. 和为 K 的子数组"}],["$","meta","15",{"name":"twitter:description","content":"给定一个整数数组 `nums` 和一个整数 `k`，统计数组中连续子数组的和等于 `k` 的个数。  子数组是数组中连续的一段。"}]]
+6:null

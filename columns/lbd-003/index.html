@@ -1,0 +1,370 @@
+<!DOCTYPE html><html lang="zh"><head><meta charSet="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="/algorithm-interview/_next/static/css/c1e787639001e16b.css" data-precedence="next"/><link rel="preload" as="script" fetchPriority="low" href="/algorithm-interview/_next/static/chunks/webpack-65b8ce4c1158f96f.js"/><script src="/algorithm-interview/_next/static/chunks/4bd1b696-899926250d3992f1.js" async=""></script><script src="/algorithm-interview/_next/static/chunks/517-b6df7dad4ff96d0b.js" async=""></script><script src="/algorithm-interview/_next/static/chunks/main-app-9e7bfff32fd8ebe9.js" async=""></script><script src="/algorithm-interview/_next/static/chunks/173-69860a4742bb7020.js" async=""></script><script src="/algorithm-interview/_next/static/chunks/829-7533e70598480772.js" async=""></script><script src="/algorithm-interview/_next/static/chunks/app/columns/%5Bslug%5D/page-58fc1d8f5085c1ff.js" async=""></script><meta name="theme-color" content="#f97316"/><title>动态规划解题套路框架 - 算法面试</title><meta name="description" content="LeetCode 热题 100 完整 Java 题解、逐题动画、知识专栏与智能间隔复习。"/><meta name="application-name" content="算法面试"/><link rel="manifest" href="/algorithm-interview/manifest.json"/><meta name="keywords" content="LeetCode,热题100,算法面试,Java题解,数据结构,动态规划,面试刷题"/><meta name="mobile-web-app-capable" content="yes"/><meta name="apple-mobile-web-app-title" content="算法面试"/><meta name="apple-mobile-web-app-status-bar-style" content="default"/><meta property="og:title" content="算法面试题库"/><meta property="og:description" content="LeetCode 热题 100 完整 Java 题解、逐题动画、知识专栏与智能复习"/><meta property="og:site_name" content="算法面试题库"/><meta property="og:locale" content="zh_CN"/><meta property="og:type" content="website"/><meta name="twitter:card" content="summary"/><meta name="twitter:title" content="算法面试题库"/><meta name="twitter:description" content="LeetCode 热题 100 完整 Java 题解、逐题动画、知识专栏与智能复习"/><script>
+try {
+  var raw = localStorage.getItem('algo-interview');
+  var theme = 'light';
+  if (raw) { var p = JSON.parse(raw); theme = (p.state && p.state.theme) || 'light'; }
+  if (theme === 'dark') {
+    document.documentElement.classList.add('dark');
+    document.documentElement.setAttribute('data-theme', 'dark');
+  }
+} catch (e) {}
+</script><script src="/algorithm-interview/_next/static/chunks/polyfills-42372ed130431b0a.js" noModule=""></script></head><body><main style="max-width:760px;margin:0 auto;padding:16px;min-height:100vh"><a style="display:inline-block;margin-bottom:12px;font-size:13px" href="/algorithm-interview/columns/">← 返回专栏</a><div style="font-size:12px;color:var(--text-tertiary);margin-bottom:4px">📕<!-- --> <!-- -->labuladong 算法小抄</div><h1 style="font-size:22px;font-weight:700;margin:0 0 16px">动态规划解题套路框架</h1><div class="prose max-w-none" style="font-size:14px;color:var(--text)"><h1>动态规划解题套路框架</h1>
+<p>动态规划详解
+学算法，认准 labuladong 就够了！
+这篇⽂章是我们号半年前⼀篇 200 多赞赏的成名之作「动态规划详解」的进
+阶版。由于账号迁移的原因，旧⽂⽆法被搜索到，所以我润⾊了本⽂，并添
+加了更多⼲货内容，希望本⽂成为解决动态规划的⼀部「指导⽅针」。
+再说句题外话，我们的公众号开号⾄今写了起码⼗⼏篇⽂章拆解动态规划问
+题，我都整理到了公众号菜单的「⽂章⽬录」中，它们都提到了动态规划的
+解题框架思维，本⽂就系统总结⼀下。这段时间本⼈也从⾮科班⼩⽩成⻓到
+刷通半个 LeetCode，所以我总结的套路可能不适合各路⼤神，但是应该适
+合⼤众，毕竟我⾃⼰也是⼀路摸爬滚打过来的。
+算法技巧就那⼏个套路，如果你⼼⾥有数，就会轻松很多，本⽂就来扒⼀扒
+动态规划的裤⼦，形成⼀套解决这类问题的思维框架。废话不多说了，上⼲
+货。
+动态规划问题的⼀般形式就是求最值。动态规划其实是运筹学的⼀种最优化
+⽅法，只不过在计算机问题上应⽤⽐较多，⽐如说让你求最⻓递增⼦序列
+呀，最⼩编辑距离呀等等。
+既然是要求最值，核⼼问题是什么呢？求解动态规划的核⼼问题是穷举。因
+为要求最值，肯定要把所有可⾏的答案穷举出来，然后在其中找最值呗。
+动态规划就这么简单，就是穷举就完事了？我看到的动态规划问题都很难
+啊！
+⾸先，动态规划的穷举有点特别，因为这类问题存在「重叠⼦问题」，如果
+暴⼒穷举的话效率会极其低下，所以需要「备忘录」或者「DP table」来优
+化穷举过程，避免不必要的计算。
+⽽且，动态规划问题⼀定会具备「最优⼦结构」，才能通过⼦问题的最值得
+到原问题的最值。
+动态规划解题套路框架
+23</p>
+<p>另外，虽然动态规划的核⼼思想就是穷举求最值，但是问题可以千变万化，
+穷举所有可⾏解其实并不是⼀件容易的事，只有列出正确的「状态转移⽅
+程」才能正确地穷举。
+以上提到的重叠⼦问题、最优⼦结构、状态转移⽅程就是动态规划三要素。
+具体什么意思等会会举例详解，但是在实际的算法问题中，写出状态转移⽅
+程是最困难的，这也就是为什么很多朋友觉得动态规划问题困难的原因，我
+来提供我研究出来的⼀个思维框架，辅助你思考状态转移⽅程：
+明确「状态」 -&gt; 定义 dp 数组/函数的含义 -&gt; 明确「选择」-&gt; 明确 base
+case。
+下⾯通过斐波那契数列问题和凑零钱问题来详解动态规划的基本原理。前者
+主要是让你明⽩什么是重叠⼦问题（斐波那契数列严格来说不是动态规划问
+题），后者主要举集中于如何列出状态转移⽅程。
+请读者不要嫌弃这个例⼦简单，只有简单的例⼦才能让你把精⼒充分集中在
+算法背后的通⽤思想和技巧上，⽽不会被那些隐晦的细节问题搞的莫名其
+妙。想要困难的例⼦，历史⽂章⾥有的是。
+⼀、斐波那契数列
+1、暴⼒递归
+斐波那契数列的数学形式就是递归的，写成代码就是这样：
+int fib(int N) {
+if (N == 1 || N == 2) return 1;
+return fib(N - 1) + fib(N - 2);
+}
+这个不⽤多说了，学校⽼师讲递归的时候似乎都是拿这个举例。我们也知道
+这样写代码虽然简洁易懂，但是⼗分低效，低效在哪⾥？假设 n = 20，请画
+出递归树。
+动态规划解题套路框架
+24</p>
+<p>PS：但凡遇到需要递归的问题，最好都画出递归树，这对你分析算法的复
+杂度，寻找算法低效的原因都有巨⼤帮助。
+这个递归树怎么理解？就是说想要计算原问题  f(20) ，我就得先计算出⼦
+问题  f(19)  和  f(18) ，然后要计算  f(19) ，我就要先算出⼦问题  f(18)
+和  f(17) ，以此类推。最后遇到  f(1)  或者  f(2)  的时候，结果已知，就
+能直接返回结果，递归树不再向下⽣⻓了。
+递归算法的时间复杂度怎么计算？⼦问题个数乘以解决⼀个⼦问题需要的时
+间。
+⼦问题个数，即递归树中节点的总数。显然⼆叉树节点总数为指数级别，所
+以⼦问题个数为 O(2^n)。
+解决⼀个⼦问题的时间，在本算法中，没有循环，只有 f(n - 1) + f(n - 2) ⼀
+个加法操作，时间为 O(1)。
+所以，这个算法的时间复杂度为 O(2^n)，指数级别，爆炸。
+观察递归树，很明显发现了算法低效的原因：存在⼤量重复计算，⽐如
+f(18)  被计算了两次，⽽且你可以看到，以  f(18)  为根的这个递归树体量
+巨⼤，多算⼀遍，会耗费巨⼤的时间。更何况，还不⽌  f(18)  这⼀个节点
+被重复计算，所以这个算法及其低效。
+动态规划解题套路框架
+25</p>
+<p>这就是动态规划问题的第⼀个性质：重叠⼦问题。下⾯，我们想办法解决这
+个问题。
+2、带备忘录的递归解法
+明确了问题，其实就已经把问题解决了⼀半。即然耗时的原因是重复计算，
+那么我们可以造⼀个「备忘录」，每次算出某个⼦问题的答案后别急着返
+回，先记到「备忘录」⾥再返回；每次遇到⼀个⼦问题先去「备忘录」⾥查
+⼀查，如果发现之前已经解决过这个问题了，直接把答案拿出来⽤，不要再
+耗时去计算了。
+⼀般使⽤⼀个数组充当这个「备忘录」，当然你也可以使⽤哈希表（字
+典），思想都是⼀样的。
+int fib(int N) {
+if (N &lt; 1) return 0;
+// 备忘录全初始化为 0
+vector<!-- -->&lt;int&gt;<!-- --> memo(N + 1, 0);
+// 初始化最简情况
+return helper(memo, N);
+}
+int helper(vector<!-- -->&lt;int&gt;<!-- -->&amp; memo, int n) {
+// base case
+if (n == 1 || n == 2) return 1;
+// 已经计算过
+if (memo[n] != 0) return memo[n];
+memo[n] = helper(memo, n - 1) +
+helper(memo, n - 2);
+return memo[n];
+}
+现在，画出递归树，你就知道「备忘录」到底做了什么。
+动态规划解题套路框架
+26</p>
+<p>实际上，带「备忘录」的递归算法，把⼀棵存在巨量冗余的递归树通过「剪
+枝」，改造成了⼀幅不存在冗余的递归图，极⼤减少了⼦问题（即递归图中
+节点）的个数。
+递归算法的时间复杂度怎么算？⼦问题个数乘以解决⼀个⼦问题需要的时
+间。
+动态规划解题套路框架
+27</p>
+<p>⼦问题个数，即图中节点的总数，由于本算法不存在冗余计算，⼦问题就是
+f(1) ,  f(2) ,  f(3)  ...  f(20) ，数量和输⼊规模 n = 20 成正⽐，所以⼦问
+题个数为 O(n)。
+解决⼀个⼦问题的时间，同上，没有什么循环，时间为 O(1)。
+所以，本算法的时间复杂度是 O(n)。⽐起暴⼒算法，是降维打击。
+⾄此，带备忘录的递归解法的效率已经和迭代的动态规划解法⼀样了。实际
+上，这种解法和迭代的动态规划已经差不多了，只不过这种⽅法叫做「⾃顶
+向下」，动态规划叫做「⾃底向上」。
+啥叫「⾃顶向下」？注意我们刚才画的递归树（或者说图），是从上向下延
+伸，都是从⼀个规模较⼤的原问题⽐如说  f(20) ，向下逐渐分解规模，直
+到  f(1)  和  f(2)  触底，然后逐层返回答案，这就叫「⾃顶向下」。
+啥叫「⾃底向上」？反过来，我们直接从最底下，最简单，问题规模最⼩的
+f(1)  和  f(2)  开始往上推，直到推到我们想要的答案  f(20) ，这就是动
+态规划的思路，这也是为什么动态规划⼀般都脱离了递归，⽽是由循环迭代
+完成计算。
+3、dp 数组的迭代解法
+有了上⼀步「备忘录」的启发，我们可以把这个「备忘录」独⽴出来成为⼀
+张表，就叫做 DP table 吧，在这张表上完成「⾃底向上」的推算岂不美哉！
+int fib(int N) {
+vector<!-- -->&lt;int&gt;<!-- --> dp(N + 1, 0);
+// base case
+dp[1] = dp[2] = 1;
+for (int i = 3; i &lt;= N; i++)
+dp[i] = dp[i - 1] + dp[i - 2];
+return dp[N];
+}
+动态规划解题套路框架
+28</p>
+<p>画个图就很好理解了，⽽且你发现这个 DP table 特别像之前那个「剪枝」后
+的结果，只是反过来算⽽已。实际上，带备忘录的递归解法中的「备忘
+录」，最终完成后就是这个 DP table，所以说这两种解法其实是差不多的，
+⼤部分情况下，效率也基本相同。
+这⾥，引出「状态转移⽅程」这个名词，实际上就是描述问题结构的数学形
+式：
+为啥叫「状态转移⽅程」？为了听起来⾼端。你把 f(n) 想做⼀个状态 n，这
+个状态 n 是由状态 n - 1 和状态 n - 2 相加转移⽽来，这就叫状态转移，仅此
+⽽已。
+你会发现，上⾯的⼏种解法中的所有操作，例如 return f(n - 1) + f(n - 2)，
+dp[i] = dp[i - 1] + dp[i - 2]，以及对备忘录或 DP table 的初始化操作，都是围
+绕这个⽅程式的不同表现形式。可⻅列出「状态转移⽅程」的重要性，它是
+解决问题的核⼼。很容易发现，其实状态转移⽅程直接代表着暴⼒解法。
+动态规划解题套路框架
+29</p>
+<p>千万不要看不起暴⼒解，动态规划问题最困难的就是写出状态转移⽅程，即
+这个暴⼒解。优化⽅法⽆⾮是⽤备忘录或者 DP table，再⽆奥妙可⾔。
+这个例⼦的最后，讲⼀个细节优化。细⼼的读者会发现，根据斐波那契数列
+的状态转移⽅程，当前状态只和之前的两个状态有关，其实并不需要那么⻓
+的⼀个 DP table 来存储所有的状态，只要想办法存储之前的两个状态就⾏
+了。所以，可以进⼀步优化，把空间复杂度降为 O(1)：
+int fib(int n) {
+if (n == 2 || n == 1)
+return 1;
+int prev = 1, curr = 1;
+for (int i = 3; i &lt;= n; i++) {
+int sum = prev + curr;
+prev = curr;
+curr = sum;
+}
+return curr;
+}
+有⼈会问，动态规划的另⼀个重要特性「最优⼦结构」，怎么没有涉及？下
+⾯会涉及。斐波那契数列的例⼦严格来说不算动态规划，因为没有涉及求最
+值，以上旨在演⽰算法设计螺旋上升的过程。下⾯，看第⼆个例⼦，凑零钱
+问题。
+⼆、凑零钱问题
+先看下题⽬：给你  k  种⾯值的硬币，⾯值分别为  c1, c2 ... ck ，每种硬
+币的数量⽆限，再给⼀个总⾦额  amount ，问你最少需要⼏枚硬币凑出这个
+⾦额，如果不可能凑出，算法返回 -1 。算法的函数签名如下：
+// coins 中是可选硬币⾯值，amount 是⽬标⾦额
+int coinChange(int[] coins, int amount);
+动态规划解题套路框架
+30</p>
+<p>⽐如说  k = 3 ，⾯值分别为 1，2，5，总⾦额  amount = 11 。那么最少需
+要 3 枚硬币凑出，即 11 = 5 + 5 + 1。
+你认为计算机应该如何解决这个问题？显然，就是把所有肯能的凑硬币⽅法
+都穷举出来，然后找找看最少需要多少枚硬币。
+1、暴⼒递归
+⾸先，这个问题是动态规划问题，因为它具有「最优⼦结构」的。要符合
+「最优⼦结构」，⼦问题间必须互相独⽴。啥叫相互独⽴？你肯定不想看数
+学证明，我⽤⼀个直观的例⼦来讲解。
+⽐如说，你的原问题是考出最⾼的总成绩，那么你的⼦问题就是要把语⽂考
+到最⾼，数学考到最⾼…… 为了每门课考到最⾼，你要把每门课相应的选
+择题分数拿到最⾼，填空题分数拿到最⾼…… 当然，最终就是你每门课都
+是满分，这就是最⾼的总成绩。
+得到了正确的结果：最⾼的总成绩就是总分。因为这个过程符合最优⼦结
+构，“每门科⽬考到最⾼”这些⼦问题是互相独⽴，互不⼲扰的。
+但是，如果加⼀个条件：你的语⽂成绩和数学成绩会互相制约，此消彼⻓。
+这样的话，显然你能考到的最⾼总成绩就达不到总分了，按刚才那个思路就
+会得到错误的结果。因为⼦问题并不独⽴，语⽂数学成绩⽆法同时最优，所
+以最优⼦结构被破坏。
+回到凑零钱问题，为什么说它符合最优⼦结构呢？⽐如你想求  amount =
+11  时的最少硬币数（原问题），如果你知道凑出  amount = 10  的最少硬币
+数（⼦问题），你只需要把⼦问题的答案加⼀（再选⼀枚⾯值为 1 的硬币）
+就是原问题的答案，因为硬币的数量是没有限制的，⼦问题之间没有相互
+制，是互相独⽴的。
+那么，既然知道了这是个动态规划问题，就要思考如何列出正确的状态转移
+⽅程？
+先确定「状态」，也就是原问题和⼦问题中变化的变量。由于硬币数量⽆
+限，所以唯⼀的状态就是⽬标⾦额  amount 。
+动态规划解题套路框架
+31</p>
+<p>然后确定  dp  函数的定义：当前的⽬标⾦额是  n ，⾄少需要  dp(n)  个硬
+币凑出该⾦额。
+然后确定「选择」并择优，也就是对于每个状态，可以做出什么选择改变当
+前状态。具体到这个问题，⽆论当的⽬标⾦额是多少，选择就是从⾯额列表
+coins  中选择⼀个硬币，然后⽬标⾦额就会减少：</p>
+<h1>伪码框架</h1>
+<p>def coinChange(coins: List[int], amount: int):
+# 定义：要凑出⾦额 n，⾄少要 dp(n) 个硬币
+def dp(n):
+# 做选择，选择需要硬币最少的那个结果
+for coin in coins:
+res = min(res, 1 + dp(n - coin))
+return res
+# 我们要求的问题是 dp(amount)
+return dp(amount)
+最后明确 base case，显然⽬标⾦额为 0 时，所需硬币数量为 0；当⽬标⾦额
+⼩于 0 时，⽆解，返回 -1：
+def coinChange(coins: List[int], amount: int):
+def dp(n):
+# base case
+if n == 0: return 0
+if n &lt; 0: return -1
+# 求最⼩值，所以初始化为正⽆穷
+res = float(&#x27;INF&#x27;)
+for coin in coins:
+subproblem = dp(n - coin)
+# ⼦问题⽆解，跳过
+if subproblem == -1: continue
+res = min(res, 1 + subproblem)
+return res if res != float(&#x27;INF&#x27;) else -1
+return dp(amount)
+动态规划解题套路框架
+32</p>
+<p>⾄此，状态转移⽅程其实已经完成了，以上算法已经是暴⼒解法了，以上代
+码的数学形式就是状态转移⽅程：
+⾄此，这个问题其实就解决了，只不过需要消除⼀下重叠⼦问题，⽐如
+amount = 11, coins = {1,2,5}  时画出递归树看看：
+时间复杂度分析：⼦问题总数 x 每个⼦问题的时间。
+⼦问题总数为递归树节点个数，这个⽐较难看出来，是 O(n^k)，总之是指
+数级别的。每个⼦问题中含有⼀个 for 循环，复杂度为 O(k)。所以总时间复
+杂度为 O(k * n^k)，指数级别。
+2、带备忘录的递归
+只需要稍加修改，就可以通过备忘录消除⼦问题：
+def coinChange(coins: List[int], amount: int):
+# 备忘录
+动态规划解题套路框架
+33</p>
+<pre><code>memo = dict()
+def dp(n):
+    # 查备忘录，避免重复计算
+    if n in memo: return memo[n]
+    if n == 0: return 0
+    if n &lt; 0: return -1
+    res = float(&#x27;INF&#x27;)
+    for coin in coins:
+        subproblem = dp(n - coin)
+        if subproblem == -1: continue
+        res = min(res, 1 + subproblem)
+    # 记⼊备忘录
+    memo[n] = res if res != float(&#x27;INF&#x27;) else -1
+    return memo[n]
+return dp(amount)
+</code></pre>
+<p>不画图了，很显然「备忘录」⼤⼤减⼩了⼦问题数⽬，完全消除了⼦问题的
+冗余，所以⼦问题总数不会超过⾦额数 n，即⼦问题数⽬为 O(n)。处理⼀个
+⼦问题的时间不变，仍是 O(k)，所以总的时间复杂度是 O(kn)。
+3、dp 数组的迭代解法
+当然，我们也可以⾃底向上使⽤ dp table 来消除重叠⼦问题， dp  数组的定
+义和刚才  dp  函数类似，定义也是⼀样的：
+dp[i] = x  表⽰，当⽬标⾦额为  i  时，⾄少需要  x  枚硬币。
+int coinChange(vector<!-- -->&lt;int&gt;<!-- -->&amp; coins, int amount) {
+// 数组⼤⼩为 amount + 1，初始值也为 amount + 1
+vector<!-- -->&lt;int&gt;<!-- --> dp(amount + 1, amount + 1);
+// base case
+dp[0] = 0;
+for (int i = 0; i &lt; dp.size(); i++) {
+// 内层 for 在求所有⼦问题 + 1 的最⼩值
+for (int coin : coins) {
+// ⼦问题⽆解，跳过
+if (i - coin &lt; 0) continue;
+dp[i] = min(dp[i], 1 + dp[i - coin]);
+动态规划解题套路框架
+34</p>
+<pre><code>    }
+}
+return (dp[amount] == amount + 1) ? -1 : dp[amount];
+</code></pre>
+<p>}
+PS：为啥  dp  数组初始化为  amount + 1  呢，因为凑成  amount  ⾦额的硬
+币数最多只可能等于  amount （全⽤ 1 元⾯值的硬币），所以初始化为
+amount + 1  就相当于初始化为正⽆穷，便于后续取最⼩值。
+三、最后总结
+第⼀个斐波那契数列的问题，解释了如何通过「备忘录」或者「dp table」
+的⽅法来优化递归树，并且明确了这两种⽅法本质上是⼀样的，只是⾃顶向
+下和⾃底向上的不同⽽已。
+第⼆个凑零钱的问题，展⽰了如何流程化确定「状态转移⽅程」，只要通过
+状态转移⽅程写出暴⼒递归解，剩下的也就是优化递归树，消除重叠⼦问题
+⽽已。
+如果你不太了解动态规划，还能看到这⾥，真得给你⿎掌，相信你已经掌握
+了这个算法的设计技巧。
+动态规划解题套路框架
+35</p>
+<p>计算机解决问题其实没有任何奇技淫巧，它唯⼀的解决办法就是穷举，穷举
+所有可能性。算法设计⽆⾮就是先思考“如何穷举”，然后再追求“如何聪明
+地穷举”。
+列出动态转移⽅程，就是在解决“如何穷举”的问题。之所以说它难，⼀是因
+为很多穷举需要递归实现，⼆是因为有的问题本⾝的解空间复杂，不那么容
+易穷举完整。
+备忘录、DP table 就是在追求“如何聪明地穷举”。⽤空间换时间的思路，是
+降低时间复杂度的不⼆法门，除此之外，试问，还能玩出啥花活？
+＿＿＿＿＿＿＿＿＿＿＿＿＿
+刷算法，学套路，认准 labuladong。
+本⼩抄即将出版，关注 labuladong 公众号或 ongline book 查看更新⽂章，
+后台回复「进群」可进刷题群，labuladong 带你⽇穿 LeetCode。
+动态规划解题套路框架
+36</p>
+<p>回溯算法详解
+学算法，认准 labuladong 就够了！
+这篇⽂章是很久之前的⼀篇《回溯算法详解》的进阶版，之前那篇不够清
+楚，就不必看了，看这篇就⾏。把框架给你讲清楚，你会发现回溯算法问题
+都是⼀个套路。
+废话不多说，直接上回溯算法框架。解决⼀个回溯问题，实际上就是⼀个决
+策树的遍历过程。你只需要思考 3 个问题：
+1、路径：也就是已经做出的选择。
+2、选择列表：也就是你当前可以做的选择。
+3、结束条件：也就是到达决策树底层，⽆法再做选择的条件。
+如果你不理解这三个词语的解释，没关系，我们后⾯会⽤「全排列」和「N
+皇后问题」这两个经典的回溯算法问题来帮你理解这些词语是什么意思，现
+在你先留着印象。
+代码⽅⾯，回溯算法的框架：
+result = []
+def backtrack(路径, 选择列表):
+if 满⾜结束条件:
+result.add(路径)
+return
+for 选择 in 选择列表:
+做选择
+backtrack(路径, 选择列表)
+撤销选择
+其核⼼就是 for 循环⾥⾯的递归，在递归调⽤之前「做选择」，在递归调⽤
+之后「撤销选择」，特别简单。
+回溯算法解题套路框架
+37</p></div></main><script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function () {
+    navigator.serviceWorker.register('/algorithm-interview/sw.js').catch(function () {});
+  });
+}
+</script><script src="/algorithm-interview/_next/static/chunks/webpack-65b8ce4c1158f96f.js" async=""></script><script>(self.__next_f=self.__next_f||[]).push([0])</script><script>self.__next_f.push([1,"1:\"$Sreact.fragment\"\n2:I[5244,[],\"\"]\n3:I[3866,[],\"\"]\n5:I[6213,[],\"OutletBoundary\"]\n7:I[6213,[],\"MetadataBoundary\"]\n9:I[6213,[],\"ViewportBoundary\"]\nb:I[4835,[],\"\"]\n:HL[\"/algorithm-interview/_next/static/css/c1e787639001e16b.css\",\"style\"]\n"])</script><script>self.__next_f.push([1,"0:{\"P\":null,\"b\":\"xos97fAiWtKfKXI6hZLx4\",\"p\":\"/algorithm-interview\",\"c\":[\"\",\"columns\",\"lbd-003\",\"\"],\"i\":false,\"f\":[[[\"\",{\"children\":[\"columns\",{\"children\":[[\"slug\",\"lbd-003\",\"d\"],{\"children\":[\"__PAGE__\",{}]}]}]},\"$undefined\",\"$undefined\",true],[\"\",[\"$\",\"$1\",\"c\",{\"children\":[[[\"$\",\"link\",\"0\",{\"rel\":\"stylesheet\",\"href\":\"/algorithm-interview/_next/static/css/c1e787639001e16b.css\",\"precedence\":\"next\",\"crossOrigin\":\"$undefined\",\"nonce\":\"$undefined\"}]],[\"$\",\"html\",null,{\"lang\":\"zh\",\"children\":[[\"$\",\"head\",null,{\"children\":[\"$\",\"script\",null,{\"dangerouslySetInnerHTML\":{\"__html\":\"\\ntry {\\n  var raw = localStorage.getItem('algo-interview');\\n  var theme = 'light';\\n  if (raw) { var p = JSON.parse(raw); theme = (p.state \u0026\u0026 p.state.theme) || 'light'; }\\n  if (theme === 'dark') {\\n    document.documentElement.classList.add('dark');\\n    document.documentElement.setAttribute('data-theme', 'dark');\\n  }\\n} catch (e) {}\\n\"}}]}],[\"$\",\"body\",null,{\"children\":[[\"$\",\"$L2\",null,{\"parallelRouterKey\":\"children\",\"segmentPath\":[\"children\"],\"error\":\"$undefined\",\"errorStyles\":\"$undefined\",\"errorScripts\":\"$undefined\",\"template\":[\"$\",\"$L3\",null,{}],\"templateStyles\":\"$undefined\",\"templateScripts\":\"$undefined\",\"notFound\":[[],[[\"$\",\"title\",null,{\"children\":\"404: This page could not be found.\"}],[\"$\",\"div\",null,{\"style\":{\"fontFamily\":\"system-ui,\\\"Segoe UI\\\",Roboto,Helvetica,Arial,sans-serif,\\\"Apple Color Emoji\\\",\\\"Segoe UI Emoji\\\"\",\"height\":\"100vh\",\"textAlign\":\"center\",\"display\":\"flex\",\"flexDirection\":\"column\",\"alignItems\":\"center\",\"justifyContent\":\"center\"},\"children\":[\"$\",\"div\",null,{\"children\":[[\"$\",\"style\",null,{\"dangerouslySetInnerHTML\":{\"__html\":\"body{color:#000;background:#fff;margin:0}.next-error-h1{border-right:1px solid rgba(0,0,0,.3)}@media (prefers-color-scheme:dark){body{color:#fff;background:#000}.next-error-h1{border-right:1px solid rgba(255,255,255,.3)}}\"}}],[\"$\",\"h1\",null,{\"className\":\"next-error-h1\",\"style\":{\"display\":\"inline-block\",\"margin\":\"0 20px 0 0\",\"padding\":\"0 23px 0 0\",\"fontSize\":24,\"fontWeight\":500,\"verticalAlign\":\"top\",\"lineHeight\":\"49px\"},\"children\":404}],[\"$\",\"div\",null,{\"style\":{\"display\":\"inline-block\"},\"children\":[\"$\",\"h2\",null,{\"style\":{\"fontSize\":14,\"fontWeight\":400,\"lineHeight\":\"49px\",\"margin\":0},\"children\":\"This page could not be found.\"}]}]]}]}]]],\"forbidden\":\"$undefined\",\"unauthorized\":\"$undefined\"}],[\"$\",\"script\",null,{\"dangerouslySetInnerHTML\":{\"__html\":\"\\nif ('serviceWorker' in navigator) {\\n  window.addEventListener('load', function () {\\n    navigator.serviceWorker.register('/algorithm-interview/sw.js').catch(function () {});\\n  });\\n}\\n\"}}]]}]]}]]}],{\"children\":[\"columns\",[\"$\",\"$1\",\"c\",{\"children\":[null,[\"$\",\"$L2\",null,{\"parallelRouterKey\":\"children\",\"segmentPath\":[\"children\",\"columns\",\"children\"],\"error\":\"$undefined\",\"errorStyles\":\"$undefined\",\"errorScripts\":\"$undefined\",\"template\":[\"$\",\"$L3\",null,{}],\"templateStyles\":\"$undefined\",\"templateScripts\":\"$undefined\",\"notFound\":\"$undefined\",\"forbidden\":\"$undefined\",\"unauthorized\":\"$undefined\"}]]}],{\"children\":[[\"slug\",\"lbd-003\",\"d\"],[\"$\",\"$1\",\"c\",{\"children\":[null,[\"$\",\"$L2\",null,{\"parallelRouterKey\":\"children\",\"segmentPath\":[\"children\",\"columns\",\"children\",\"$0:f:0:1:2:children:2:children:0\",\"children\"],\"error\":\"$undefined\",\"errorStyles\":\"$undefined\",\"errorScripts\":\"$undefined\",\"template\":[\"$\",\"$L3\",null,{}],\"templateStyles\":\"$undefined\",\"templateScripts\":\"$undefined\",\"notFound\":\"$undefined\",\"forbidden\":\"$undefined\",\"unauthorized\":\"$undefined\"}]]}],{\"children\":[\"__PAGE__\",[\"$\",\"$1\",\"c\",{\"children\":[\"$L4\",null,[\"$\",\"$L5\",null,{\"children\":\"$L6\"}]]}],{},null,false]},null,false]},null,false]},null,false],[\"$\",\"$1\",\"h\",{\"children\":[null,[\"$\",\"$1\",\"8JzdifRjInuld8DRLv_c5\",{\"children\":[[\"$\",\"$L7\",null,{\"children\":\"$L8\"}],[\"$\",\"$L9\",null,{\"children\":\"$La\"}],null]}]]}],false]],\"m\":\"$undefined\",\"G\":[\"$b\",\"$undefined\"],\"s\":false,\"S\":true}\n"])</script><script>self.__next_f.push([1,"c:I[8173,[\"173\",\"static/chunks/173-69860a4742bb7020.js\",\"829\",\"static/chunks/829-7533e70598480772.js\",\"306\",\"static/chunks/app/columns/%5Bslug%5D/page-58fc1d8f5085c1ff.js\"],\"\"]\nd:I[4780,[\"173\",\"static/chunks/173-69860a4742bb7020.js\",\"829\",\"static/chunks/829-7533e70598480772.js\",\"306\",\"static/chunks/app/columns/%5Bslug%5D/page-58fc1d8f5085c1ff.js\"],\"default\"]\ne:T4d77,"])</script><script>self.__next_f.push([1,"# 动态规划解题套路框架\n\n动态规划详解\n学算法，认准 labuladong 就够了！\n这篇⽂章是我们号半年前⼀篇 200 多赞赏的成名之作「动态规划详解」的进\n阶版。由于账号迁移的原因，旧⽂⽆法被搜索到，所以我润⾊了本⽂，并添\n加了更多⼲货内容，希望本⽂成为解决动态规划的⼀部「指导⽅针」。\n再说句题外话，我们的公众号开号⾄今写了起码⼗⼏篇⽂章拆解动态规划问\n题，我都整理到了公众号菜单的「⽂章⽬录」中，它们都提到了动态规划的\n解题框架思维，本⽂就系统总结⼀下。这段时间本⼈也从⾮科班⼩⽩成⻓到\n刷通半个 LeetCode，所以我总结的套路可能不适合各路⼤神，但是应该适\n合⼤众，毕竟我⾃⼰也是⼀路摸爬滚打过来的。\n算法技巧就那⼏个套路，如果你⼼⾥有数，就会轻松很多，本⽂就来扒⼀扒\n动态规划的裤⼦，形成⼀套解决这类问题的思维框架。废话不多说了，上⼲\n货。\n动态规划问题的⼀般形式就是求最值。动态规划其实是运筹学的⼀种最优化\n⽅法，只不过在计算机问题上应⽤⽐较多，⽐如说让你求最⻓递增⼦序列\n呀，最⼩编辑距离呀等等。\n既然是要求最值，核⼼问题是什么呢？求解动态规划的核⼼问题是穷举。因\n为要求最值，肯定要把所有可⾏的答案穷举出来，然后在其中找最值呗。\n动态规划就这么简单，就是穷举就完事了？我看到的动态规划问题都很难\n啊！\n⾸先，动态规划的穷举有点特别，因为这类问题存在「重叠⼦问题」，如果\n暴⼒穷举的话效率会极其低下，所以需要「备忘录」或者「DP table」来优\n化穷举过程，避免不必要的计算。\n⽽且，动态规划问题⼀定会具备「最优⼦结构」，才能通过⼦问题的最值得\n到原问题的最值。\n动态规划解题套路框架\n23\n\n另外，虽然动态规划的核⼼思想就是穷举求最值，但是问题可以千变万化，\n穷举所有可⾏解其实并不是⼀件容易的事，只有列出正确的「状态转移⽅\n程」才能正确地穷举。\n以上提到的重叠⼦问题、最优⼦结构、状态转移⽅程就是动态规划三要素。\n具体什么意思等会会举例详解，但是在实际的算法问题中，写出状态转移⽅\n程是最困难的，这也就是为什么很多朋友觉得动态规划问题困难的原因，我\n来提供我研究出来的⼀个思维框架，辅助你思考状态转移⽅程：\n明确「状态」 -\u003e 定义 dp 数组/函数的含义 -\u003e 明确「选择」-\u003e 明确 base\ncase。\n下⾯通过斐波那契数列问题和凑零钱问题来详解动态规划的基本原理。前者\n主要是让你明⽩什么是重叠⼦问题（斐波那契数列严格来说不是动态规划问\n题），后者主要举集中于如何列出状态转移⽅程。\n请读者不要嫌弃这个例⼦简单，只有简单的例⼦才能让你把精⼒充分集中在\n算法背后的通⽤思想和技巧上，⽽不会被那些隐晦的细节问题搞的莫名其\n妙。想要困难的例⼦，历史⽂章⾥有的是。\n⼀、斐波那契数列\n1、暴⼒递归\n斐波那契数列的数学形式就是递归的，写成代码就是这样：\nint fib(int N) {\n    if (N == 1 || N == 2) return 1;\n    return fib(N - 1) + fib(N - 2);\n}\n这个不⽤多说了，学校⽼师讲递归的时候似乎都是拿这个举例。我们也知道\n这样写代码虽然简洁易懂，但是⼗分低效，低效在哪⾥？假设 n = 20，请画\n出递归树。\n动态规划解题套路框架\n24\n\nPS：但凡遇到需要递归的问题，最好都画出递归树，这对你分析算法的复\n杂度，寻找算法低效的原因都有巨⼤帮助。\n这个递归树怎么理解？就是说想要计算原问题  f(20) ，我就得先计算出⼦\n问题  f(19)  和  f(18) ，然后要计算  f(19) ，我就要先算出⼦问题  f(18) \n和  f(17) ，以此类推。最后遇到  f(1)  或者  f(2)  的时候，结果已知，就\n能直接返回结果，递归树不再向下⽣⻓了。\n递归算法的时间复杂度怎么计算？⼦问题个数乘以解决⼀个⼦问题需要的时\n间。\n⼦问题个数，即递归树中节点的总数。显然⼆叉树节点总数为指数级别，所\n以⼦问题个数为 O(2^n)。\n解决⼀个⼦问题的时间，在本算法中，没有循环，只有 f(n - 1) + f(n - 2) ⼀\n个加法操作，时间为 O(1)。\n所以，这个算法的时间复杂度为 O(2^n)，指数级别，爆炸。\n观察递归树，很明显发现了算法低效的原因：存在⼤量重复计算，⽐如\n f(18)  被计算了两次，⽽且你可以看到，以  f(18)  为根的这个递归树体量\n巨⼤，多算⼀遍，会耗费巨⼤的时间。更何况，还不⽌  f(18)  这⼀个节点\n被重复计算，所以这个算法及其低效。\n动态规划解题套路框架\n25\n\n这就是动态规划问题的第⼀个性质：重叠⼦问题。下⾯，我们想办法解决这\n个问题。\n2、带备忘录的递归解法\n明确了问题，其实就已经把问题解决了⼀半。即然耗时的原因是重复计算，\n那么我们可以造⼀个「备忘录」，每次算出某个⼦问题的答案后别急着返\n回，先记到「备忘录」⾥再返回；每次遇到⼀个⼦问题先去「备忘录」⾥查\n⼀查，如果发现之前已经解决过这个问题了，直接把答案拿出来⽤，不要再\n耗时去计算了。\n⼀般使⽤⼀个数组充当这个「备忘录」，当然你也可以使⽤哈希表（字\n典），思想都是⼀样的。\nint fib(int N) {\n    if (N \u003c 1) return 0;\n    // 备忘录全初始化为 0\n    vector\u003cint\u003e memo(N + 1, 0);\n    // 初始化最简情况\n    return helper(memo, N);\n}\nint helper(vector\u003cint\u003e\u0026 memo, int n) {\n    // base case \n    if (n == 1 || n == 2) return 1;\n    // 已经计算过\n    if (memo[n] != 0) return memo[n];\n    memo[n] = helper(memo, n - 1) + \n                helper(memo, n - 2);\n    return memo[n];\n}\n现在，画出递归树，你就知道「备忘录」到底做了什么。\n动态规划解题套路框架\n26\n\n实际上，带「备忘录」的递归算法，把⼀棵存在巨量冗余的递归树通过「剪\n枝」，改造成了⼀幅不存在冗余的递归图，极⼤减少了⼦问题（即递归图中\n节点）的个数。\n递归算法的时间复杂度怎么算？⼦问题个数乘以解决⼀个⼦问题需要的时\n间。\n动态规划解题套路框架\n27\n\n⼦问题个数，即图中节点的总数，由于本算法不存在冗余计算，⼦问题就是\n f(1) ,  f(2) ,  f(3)  ...  f(20) ，数量和输⼊规模 n = 20 成正⽐，所以⼦问\n题个数为 O(n)。\n解决⼀个⼦问题的时间，同上，没有什么循环，时间为 O(1)。\n所以，本算法的时间复杂度是 O(n)。⽐起暴⼒算法，是降维打击。\n⾄此，带备忘录的递归解法的效率已经和迭代的动态规划解法⼀样了。实际\n上，这种解法和迭代的动态规划已经差不多了，只不过这种⽅法叫做「⾃顶\n向下」，动态规划叫做「⾃底向上」。\n啥叫「⾃顶向下」？注意我们刚才画的递归树（或者说图），是从上向下延\n伸，都是从⼀个规模较⼤的原问题⽐如说  f(20) ，向下逐渐分解规模，直\n到  f(1)  和  f(2)  触底，然后逐层返回答案，这就叫「⾃顶向下」。\n啥叫「⾃底向上」？反过来，我们直接从最底下，最简单，问题规模最⼩的\n f(1)  和  f(2)  开始往上推，直到推到我们想要的答案  f(20) ，这就是动\n态规划的思路，这也是为什么动态规划⼀般都脱离了递归，⽽是由循环迭代\n完成计算。\n3、dp 数组的迭代解法\n有了上⼀步「备忘录」的启发，我们可以把这个「备忘录」独⽴出来成为⼀\n张表，就叫做 DP table 吧，在这张表上完成「⾃底向上」的推算岂不美哉！\nint fib(int N) {\n    vector\u003cint\u003e dp(N + 1, 0);\n    // base case\n    dp[1] = dp[2] = 1;\n    for (int i = 3; i \u003c= N; i++)\n        dp[i] = dp[i - 1] + dp[i - 2];\n    return dp[N];\n}\n动态规划解题套路框架\n28\n\n画个图就很好理解了，⽽且你发现这个 DP table 特别像之前那个「剪枝」后\n的结果，只是反过来算⽽已。实际上，带备忘录的递归解法中的「备忘\n录」，最终完成后就是这个 DP table，所以说这两种解法其实是差不多的，\n⼤部分情况下，效率也基本相同。\n这⾥，引出「状态转移⽅程」这个名词，实际上就是描述问题结构的数学形\n式：\n为啥叫「状态转移⽅程」？为了听起来⾼端。你把 f(n) 想做⼀个状态 n，这\n个状态 n 是由状态 n - 1 和状态 n - 2 相加转移⽽来，这就叫状态转移，仅此\n⽽已。\n你会发现，上⾯的⼏种解法中的所有操作，例如 return f(n - 1) + f(n - 2)，\ndp[i] = dp[i - 1] + dp[i - 2]，以及对备忘录或 DP table 的初始化操作，都是围\n绕这个⽅程式的不同表现形式。可⻅列出「状态转移⽅程」的重要性，它是\n解决问题的核⼼。很容易发现，其实状态转移⽅程直接代表着暴⼒解法。\n动态规划解题套路框架\n29\n\n千万不要看不起暴⼒解，动态规划问题最困难的就是写出状态转移⽅程，即\n这个暴⼒解。优化⽅法⽆⾮是⽤备忘录或者 DP table，再⽆奥妙可⾔。\n这个例⼦的最后，讲⼀个细节优化。细⼼的读者会发现，根据斐波那契数列\n的状态转移⽅程，当前状态只和之前的两个状态有关，其实并不需要那么⻓\n的⼀个 DP table 来存储所有的状态，只要想办法存储之前的两个状态就⾏\n了。所以，可以进⼀步优化，把空间复杂度降为 O(1)：\nint fib(int n) {\n    if (n == 2 || n == 1) \n        return 1;\n    int prev = 1, curr = 1;\n    for (int i = 3; i \u003c= n; i++) {\n        int sum = prev + curr;\n        prev = curr;\n        curr = sum;\n    }\n    return curr;\n}\n有⼈会问，动态规划的另⼀个重要特性「最优⼦结构」，怎么没有涉及？下\n⾯会涉及。斐波那契数列的例⼦严格来说不算动态规划，因为没有涉及求最\n值，以上旨在演⽰算法设计螺旋上升的过程。下⾯，看第⼆个例⼦，凑零钱\n问题。\n⼆、凑零钱问题\n先看下题⽬：给你  k  种⾯值的硬币，⾯值分别为  c1, c2 ... ck ，每种硬\n币的数量⽆限，再给⼀个总⾦额  amount ，问你最少需要⼏枚硬币凑出这个\n⾦额，如果不可能凑出，算法返回 -1 。算法的函数签名如下：\n// coins 中是可选硬币⾯值，amount 是⽬标⾦额\nint coinChange(int[] coins, int amount);\n动态规划解题套路框架\n30\n\n⽐如说  k = 3 ，⾯值分别为 1，2，5，总⾦额  amount = 11 。那么最少需\n要 3 枚硬币凑出，即 11 = 5 + 5 + 1。\n你认为计算机应该如何解决这个问题？显然，就是把所有肯能的凑硬币⽅法\n都穷举出来，然后找找看最少需要多少枚硬币。\n1、暴⼒递归\n⾸先，这个问题是动态规划问题，因为它具有「最优⼦结构」的。要符合\n「最优⼦结构」，⼦问题间必须互相独⽴。啥叫相互独⽴？你肯定不想看数\n学证明，我⽤⼀个直观的例⼦来讲解。\n⽐如说，你的原问题是考出最⾼的总成绩，那么你的⼦问题就是要把语⽂考\n到最⾼，数学考到最⾼…… 为了每门课考到最⾼，你要把每门课相应的选\n择题分数拿到最⾼，填空题分数拿到最⾼…… 当然，最终就是你每门课都\n是满分，这就是最⾼的总成绩。\n得到了正确的结果：最⾼的总成绩就是总分。因为这个过程符合最优⼦结\n构，“每门科⽬考到最⾼”这些⼦问题是互相独⽴，互不⼲扰的。\n但是，如果加⼀个条件：你的语⽂成绩和数学成绩会互相制约，此消彼⻓。\n这样的话，显然你能考到的最⾼总成绩就达不到总分了，按刚才那个思路就\n会得到错误的结果。因为⼦问题并不独⽴，语⽂数学成绩⽆法同时最优，所\n以最优⼦结构被破坏。\n回到凑零钱问题，为什么说它符合最优⼦结构呢？⽐如你想求  amount =\n11  时的最少硬币数（原问题），如果你知道凑出  amount = 10  的最少硬币\n数（⼦问题），你只需要把⼦问题的答案加⼀（再选⼀枚⾯值为 1 的硬币）\n就是原问题的答案，因为硬币的数量是没有限制的，⼦问题之间没有相互\n制，是互相独⽴的。\n那么，既然知道了这是个动态规划问题，就要思考如何列出正确的状态转移\n⽅程？\n先确定「状态」，也就是原问题和⼦问题中变化的变量。由于硬币数量⽆\n限，所以唯⼀的状态就是⽬标⾦额  amount 。\n动态规划解题套路框架\n31\n\n然后确定  dp  函数的定义：当前的⽬标⾦额是  n ，⾄少需要  dp(n)  个硬\n币凑出该⾦额。\n然后确定「选择」并择优，也就是对于每个状态，可以做出什么选择改变当\n前状态。具体到这个问题，⽆论当的⽬标⾦额是多少，选择就是从⾯额列表\n coins  中选择⼀个硬币，然后⽬标⾦额就会减少：\n# 伪码框架\ndef coinChange(coins: List[int], amount: int):\n    # 定义：要凑出⾦额 n，⾄少要 dp(n) 个硬币\n    def dp(n):\n        # 做选择，选择需要硬币最少的那个结果\n        for coin in coins:\n            res = min(res, 1 + dp(n - coin))\n        return res\n    # 我们要求的问题是 dp(amount)\n    return dp(amount)\n最后明确 base case，显然⽬标⾦额为 0 时，所需硬币数量为 0；当⽬标⾦额\n⼩于 0 时，⽆解，返回 -1：\ndef coinChange(coins: List[int], amount: int):\n    def dp(n):\n        # base case\n        if n == 0: return 0\n        if n \u003c 0: return -1\n        # 求最⼩值，所以初始化为正⽆穷\n        res = float('INF')\n        for coin in coins:\n            subproblem = dp(n - coin)\n            # ⼦问题⽆解，跳过\n            if subproblem == -1: continue\n            res = min(res, 1 + subproblem)\n        return res if res != float('INF') else -1\n    return dp(amount)\n动态规划解题套路框架\n32\n\n⾄此，状态转移⽅程其实已经完成了，以上算法已经是暴⼒解法了，以上代\n码的数学形式就是状态转移⽅程：\n⾄此，这个问题其实就解决了，只不过需要消除⼀下重叠⼦问题，⽐如\n amount = 11, coins = {1,2,5}  时画出递归树看看：\n时间复杂度分析：⼦问题总数 x 每个⼦问题的时间。\n⼦问题总数为递归树节点个数，这个⽐较难看出来，是 O(n^k)，总之是指\n数级别的。每个⼦问题中含有⼀个 for 循环，复杂度为 O(k)。所以总时间复\n杂度为 O(k * n^k)，指数级别。\n2、带备忘录的递归\n只需要稍加修改，就可以通过备忘录消除⼦问题：\ndef coinChange(coins: List[int], amount: int):\n    # 备忘录\n动态规划解题套路框架\n33\n\n    memo = dict()\n    def dp(n):\n        # 查备忘录，避免重复计算\n        if n in memo: return memo[n]\n        if n == 0: return 0\n        if n \u003c 0: return -1\n        res = float('INF')\n        for coin in coins:\n            subproblem = dp(n - coin)\n            if subproblem == -1: continue\n            res = min(res, 1 + subproblem)\n        # 记⼊备忘录\n        memo[n] = res if res != float('INF') else -1\n        return memo[n]\n    return dp(amount)\n不画图了，很显然「备忘录」⼤⼤减⼩了⼦问题数⽬，完全消除了⼦问题的\n冗余，所以⼦问题总数不会超过⾦额数 n，即⼦问题数⽬为 O(n)。处理⼀个\n⼦问题的时间不变，仍是 O(k)，所以总的时间复杂度是 O(kn)。\n3、dp 数组的迭代解法\n当然，我们也可以⾃底向上使⽤ dp table 来消除重叠⼦问题， dp  数组的定\n义和刚才  dp  函数类似，定义也是⼀样的：\n dp[i] = x  表⽰，当⽬标⾦额为  i  时，⾄少需要  x  枚硬币。\nint coinChange(vector\u003cint\u003e\u0026 coins, int amount) {\n    // 数组⼤⼩为 amount + 1，初始值也为 amount + 1\n    vector\u003cint\u003e dp(amount + 1, amount + 1);\n    // base case\n    dp[0] = 0;\n    for (int i = 0; i \u003c dp.size(); i++) {\n        // 内层 for 在求所有⼦问题 + 1 的最⼩值\n        for (int coin : coins) {\n            // ⼦问题⽆解，跳过\n            if (i - coin \u003c 0) continue;\n            dp[i] = min(dp[i], 1 + dp[i - coin]);\n动态规划解题套路框架\n34\n\n        }\n    }\n    return (dp[amount] == amount + 1) ? -1 : dp[amount];\n}\nPS：为啥  dp  数组初始化为  amount + 1  呢，因为凑成  amount  ⾦额的硬\n币数最多只可能等于  amount （全⽤ 1 元⾯值的硬币），所以初始化为\n amount + 1  就相当于初始化为正⽆穷，便于后续取最⼩值。\n三、最后总结\n第⼀个斐波那契数列的问题，解释了如何通过「备忘录」或者「dp table」\n的⽅法来优化递归树，并且明确了这两种⽅法本质上是⼀样的，只是⾃顶向\n下和⾃底向上的不同⽽已。\n第⼆个凑零钱的问题，展⽰了如何流程化确定「状态转移⽅程」，只要通过\n状态转移⽅程写出暴⼒递归解，剩下的也就是优化递归树，消除重叠⼦问题\n⽽已。\n如果你不太了解动态规划，还能看到这⾥，真得给你⿎掌，相信你已经掌握\n了这个算法的设计技巧。\n动态规划解题套路框架\n35\n\n计算机解决问题其实没有任何奇技淫巧，它唯⼀的解决办法就是穷举，穷举\n所有可能性。算法设计⽆⾮就是先思考“如何穷举”，然后再追求“如何聪明\n地穷举”。\n列出动态转移⽅程，就是在解决“如何穷举”的问题。之所以说它难，⼀是因\n为很多穷举需要递归实现，⼆是因为有的问题本⾝的解空间复杂，不那么容\n易穷举完整。\n备忘录、DP table 就是在追求“如何聪明地穷举”。⽤空间换时间的思路，是\n降低时间复杂度的不⼆法门，除此之外，试问，还能玩出啥花活？\n＿＿＿＿＿＿＿＿＿＿＿＿＿\n刷算法，学套路，认准 labuladong。\n本⼩抄即将出版，关注 labuladong 公众号或 ongline book 查看更新⽂章，\n后台回复「进群」可进刷题群，labuladong 带你⽇穿 LeetCode。\n动态规划解题套路框架\n36\n\n回溯算法详解\n学算法，认准 labuladong 就够了！\n这篇⽂章是很久之前的⼀篇《回溯算法详解》的进阶版，之前那篇不够清\n楚，就不必看了，看这篇就⾏。把框架给你讲清楚，你会发现回溯算法问题\n都是⼀个套路。\n废话不多说，直接上回溯算法框架。解决⼀个回溯问题，实际上就是⼀个决\n策树的遍历过程。你只需要思考 3 个问题：\n1、路径：也就是已经做出的选择。\n2、选择列表：也就是你当前可以做的选择。\n3、结束条件：也就是到达决策树底层，⽆法再做选择的条件。\n如果你不理解这三个词语的解释，没关系，我们后⾯会⽤「全排列」和「N\n皇后问题」这两个经典的回溯算法问题来帮你理解这些词语是什么意思，现\n在你先留着印象。\n代码⽅⾯，回溯算法的框架：\nresult = []\ndef backtrack(路径, 选择列表):\n    if 满⾜结束条件:\n        result.add(路径)\n        return\n    for 选择 in 选择列表:\n        做选择\n        backtrack(路径, 选择列表)\n        撤销选择\n其核⼼就是 for 循环⾥⾯的递归，在递归调⽤之前「做选择」，在递归调⽤\n之后「撤销选择」，特别简单。\n回溯算法解题套路框架\n37"])</script><script>self.__next_f.push([1,"4:[\"$\",\"main\",null,{\"style\":{\"maxWidth\":760,\"margin\":\"0 auto\",\"padding\":\"16px\",\"minHeight\":\"100vh\"},\"children\":[[\"$\",\"$Lc\",null,{\"href\":\"/columns/\",\"style\":{\"display\":\"inline-block\",\"marginBottom\":\"12px\",\"fontSize\":\"13px\"},\"children\":\"← 返回专栏\"}],[\"$\",\"div\",null,{\"style\":{\"fontSize\":\"12px\",\"color\":\"var(--text-tertiary)\",\"marginBottom\":\"4px\"},\"children\":[\"📕\",\" \",\"labuladong 算法小抄\"]}],[\"$\",\"h1\",null,{\"style\":{\"fontSize\":\"22px\",\"fontWeight\":700,\"margin\":\"0 0 16px\"},\"children\":\"动态规划解题套路框架\"}],[\"$\",\"$Ld\",null,{\"children\":\"$e\"}],false]}]\n"])</script><script>self.__next_f.push([1,"a:[[\"$\",\"meta\",\"0\",{\"name\":\"viewport\",\"content\":\"width=device-width, initial-scale=1\"}],[\"$\",\"meta\",\"1\",{\"name\":\"theme-color\",\"content\":\"#f97316\"}]]\n"])</script><script>self.__next_f.push([1,"8:[[\"$\",\"meta\",\"0\",{\"charSet\":\"utf-8\"}],[\"$\",\"title\",\"1\",{\"children\":\"动态规划解题套路框架 - 算法面试\"}],[\"$\",\"meta\",\"2\",{\"name\":\"description\",\"content\":\"LeetCode 热题 100 完整 Java 题解、逐题动画、知识专栏与智能间隔复习。\"}],[\"$\",\"meta\",\"3\",{\"name\":\"application-name\",\"content\":\"算法面试\"}],[\"$\",\"link\",\"4\",{\"rel\":\"manifest\",\"href\":\"/algorithm-interview/manifest.json\",\"crossOrigin\":\"$undefined\"}],[\"$\",\"meta\",\"5\",{\"name\":\"keywords\",\"content\":\"LeetCode,热题100,算法面试,Java题解,数据结构,动态规划,面试刷题\"}],[\"$\",\"meta\",\"6\",{\"name\":\"mobile-web-app-capable\",\"content\":\"yes\"}],[\"$\",\"meta\",\"7\",{\"name\":\"apple-mobile-web-app-title\",\"content\":\"算法面试\"}],[\"$\",\"meta\",\"8\",{\"name\":\"apple-mobile-web-app-status-bar-style\",\"content\":\"default\"}],[\"$\",\"meta\",\"9\",{\"property\":\"og:title\",\"content\":\"算法面试题库\"}],[\"$\",\"meta\",\"10\",{\"property\":\"og:description\",\"content\":\"LeetCode 热题 100 完整 Java 题解、逐题动画、知识专栏与智能复习\"}],[\"$\",\"meta\",\"11\",{\"property\":\"og:site_name\",\"content\":\"算法面试题库\"}],[\"$\",\"meta\",\"12\",{\"property\":\"og:locale\",\"content\":\"zh_CN\"}],[\"$\",\"meta\",\"13\",{\"property\":\"og:type\",\"content\":\"website\"}],[\"$\",\"meta\",\"14\",{\"name\":\"twitter:card\",\"content\":\"summary\"}],[\"$\",\"meta\",\"15\",{\"name\":\"twitter:title\",\"content\":\"算法面试题库\"}],[\"$\",\"meta\",\"16\",{\"name\":\"twitter:description\",\"content\":\"LeetCode 热题 100 完整 Java 题解、逐题动画、知识专栏与智能复习\"}]]\n"])</script><script>self.__next_f.push([1,"6:null\n"])</script></body></html>

@@ -1,0 +1,154 @@
+1:"$Sreact.fragment"
+2:I[5244,[],""]
+3:I[3866,[],""]
+5:I[6213,[],"OutletBoundary"]
+7:I[6213,[],"MetadataBoundary"]
+9:I[6213,[],"ViewportBoundary"]
+b:I[4835,[],""]
+:HL["/algorithm-interview/_next/static/css/c1e787639001e16b.css","style"]
+0:{"P":null,"b":"xos97fAiWtKfKXI6hZLx4","p":"/algorithm-interview","c":["","question","128",""],"i":false,"f":[[["",{"children":["question",{"children":[["lcId","128","d"],{"children":["__PAGE__",{}]}]}]},"$undefined","$undefined",true],["",["$","$1","c",{"children":[[["$","link","0",{"rel":"stylesheet","href":"/algorithm-interview/_next/static/css/c1e787639001e16b.css","precedence":"next","crossOrigin":"$undefined","nonce":"$undefined"}]],["$","html",null,{"lang":"zh","children":[["$","head",null,{"children":["$","script",null,{"dangerouslySetInnerHTML":{"__html":"\ntry {\n  var raw = localStorage.getItem('algo-interview');\n  var theme = 'light';\n  if (raw) { var p = JSON.parse(raw); theme = (p.state && p.state.theme) || 'light'; }\n  if (theme === 'dark') {\n    document.documentElement.classList.add('dark');\n    document.documentElement.setAttribute('data-theme', 'dark');\n  }\n} catch (e) {}\n"}}]}],["$","body",null,{"children":[["$","$L2",null,{"parallelRouterKey":"children","segmentPath":["children"],"error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L3",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":[[],[["$","title",null,{"children":"404: This page could not be found."}],["$","div",null,{"style":{"fontFamily":"system-ui,\"Segoe UI\",Roboto,Helvetica,Arial,sans-serif,\"Apple Color Emoji\",\"Segoe UI Emoji\"","height":"100vh","textAlign":"center","display":"flex","flexDirection":"column","alignItems":"center","justifyContent":"center"},"children":["$","div",null,{"children":[["$","style",null,{"dangerouslySetInnerHTML":{"__html":"body{color:#000;background:#fff;margin:0}.next-error-h1{border-right:1px solid rgba(0,0,0,.3)}@media (prefers-color-scheme:dark){body{color:#fff;background:#000}.next-error-h1{border-right:1px solid rgba(255,255,255,.3)}}"}}],["$","h1",null,{"className":"next-error-h1","style":{"display":"inline-block","margin":"0 20px 0 0","padding":"0 23px 0 0","fontSize":24,"fontWeight":500,"verticalAlign":"top","lineHeight":"49px"},"children":404}],["$","div",null,{"style":{"display":"inline-block"},"children":["$","h2",null,{"style":{"fontSize":14,"fontWeight":400,"lineHeight":"49px","margin":0},"children":"This page could not be found."}]}]]}]}]]],"forbidden":"$undefined","unauthorized":"$undefined"}],["$","script",null,{"dangerouslySetInnerHTML":{"__html":"\nif ('serviceWorker' in navigator) {\n  window.addEventListener('load', function () {\n    navigator.serviceWorker.register('/algorithm-interview/sw.js').catch(function () {});\n  });\n}\n"}}]]}]]}]]}],{"children":["question",["$","$1","c",{"children":[null,["$","$L2",null,{"parallelRouterKey":"children","segmentPath":["children","question","children"],"error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L3",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","forbidden":"$undefined","unauthorized":"$undefined"}]]}],{"children":[["lcId","128","d"],["$","$1","c",{"children":[null,["$","$L2",null,{"parallelRouterKey":"children","segmentPath":["children","question","children","$0:f:0:1:2:children:2:children:0","children"],"error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L3",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","forbidden":"$undefined","unauthorized":"$undefined"}]]}],{"children":["__PAGE__",["$","$1","c",{"children":["$L4",null,["$","$L5",null,{"children":"$L6"}]]}],{},null,false]},null,false]},null,false]},null,false],["$","$1","h",{"children":[null,["$","$1","9qsAv0TQ_7SkTDiiNkq0j",{"children":[["$","$L7",null,{"children":"$L8"}],["$","$L9",null,{"children":"$La"}],null]}]]}],false]],"m":"$undefined","G":["$b","$undefined"],"s":false,"S":true}
+c:I[8173,["173","static/chunks/173-69860a4742bb7020.js","829","static/chunks/829-7533e70598480772.js","937","static/chunks/937-ef36a5ac4bc37a7e.js","447","static/chunks/447-06af9414e164c047.js","8","static/chunks/app/question/%5BlcId%5D/page-478b0d2a69e222f2.js"],""]
+d:I[3447,["173","static/chunks/173-69860a4742bb7020.js","829","static/chunks/829-7533e70598480772.js","937","static/chunks/937-ef36a5ac4bc37a7e.js","447","static/chunks/447-06af9414e164c047.js","8","static/chunks/app/question/%5BlcId%5D/page-478b0d2a69e222f2.js"],"default"]
+e:T1b0f,# 128. 最长连续序列
+
+> 难度：**Medium** | 分类：哈希 | 标签：并查集, 数组, 哈希表
+
+> 🔗 力扣链接：[https://leetcode.cn/problems/longest-consecutive-sequence/](https://leetcode.cn/problems/longest-consecutive-sequence/)
+
+## 📝 题目描述
+
+给你一个未排序的整数数组 `nums`，找出数字连续的最长序列的长度。要求算法的时间复杂度为 `O(n)`。
+
+"连续序列"是指整数之间差为 1 的序列，比如 `[3, 4, 5, 6]`。不要求在原数组中连续排列。
+
+- 题号：128
+- 题目名：最长连续序列
+- 难度：中等
+- 题型：哈希
+- 为什么选这题：它是哈希集合"判存在"的经典应用，核心技巧是"只从序列起点开始扩展"，面试中考得很多。
+
+## 🧠 思考路径
+
+排序后找连续序列是最直观的思路，但排序需要 `O(n log n)`，不满足题目要求。
+
+用哈希集合可以在 `O(1)` 时间内判断一个数是否存在。关键问题是：如何避免重复扫描同一段序列？
+
+答案是：**只从序列的起点开始扩展**。如果一个数 `num` 的前驱 `num - 1` 不在集合中，说明 `num` 是某个连续序列的起点。从这个起点开始，逐个检查 `num + 1, num + 2, ...` 是否存在，统计长度。如果 `num - 1` 存在，就跳过——因为这段序列会从更小的起点被完整扫描。
+
+这样每个数最多被访问两次（一次判断是否是起点，一次在某个序列中被扩展），总时间 `O(n)`。
+
+## 💻 Java 题解
+
+### 解法 1：HashSet 枚举序列起点
+
+把所有数放入 HashSet。只从序列起点（num-1 不在集合中）开始向后枚举，保证 O(n)。
+
+- ⏱ 时间复杂度：`O(n)`
+- 💾 空间复杂度：`O(n)`
+
+```java
+class Solution {
+    public int longestConsecutive(int[] nums) {
+        Set<Integer> set = new HashSet<>();
+        for (int n : nums) set.add(n);
+        int maxLen = 0;
+        for (int n : set) {
+            // 只有序列起点才开始计数
+            if (!set.contains(n - 1)) {
+                int cur = n, len = 1;
+                while (set.contains(cur + 1)) {
+                    cur++; len++;
+                }
+                maxLen = Math.max(maxLen, len);
+            }
+        }
+        return maxLen;
+    }
+}
+```
+
+**关键点：**
+- 只从序列起点开始计数
+- 每个元素最多被访问两次 → O(n)
+- set.contains(n-1) 判断是否为起点
+
+**执行步骤：**
+1. 全部元素放入 HashSet
+1. 遍历集合中每个元素
+1. 若 num-1 不在集合中 → 这是序列起点
+1. 从起点向后数连续序列长度
+1. 更新最大值
+
+
+## ⚠️ 易错点
+
+- 判断"是否是起点"的条件是 `num - 1 not in set`，不是 `num + 1 not in set`。前者保证只从序列最左端开始扩展。
+- 遍历集合而不是数组，可以避免重复元素导致重复计算。
+- 空数组的最大长度是 0，不是 1。
+- 不要对数组排序，那样是 `O(n log n)`。
+
+- 不要对每个元素都向后枚举——会变成 O(n²)
+
+- 起点判断条件是 n-1 不在集合中
+
+## 📊 复杂度分析
+
+- 时间复杂度：`O(n)`。虽然有两层循环，但内层循环总共执行次数不超过 `n`，因为每个数字只会在一个序列中被扩展一次。
+- 空间复杂度：`O(n)`。哈希集合存储所有数字。
+
+## 🏢 实际业务应用
+
+- 日志分析中的"连续错误检测"：服务器每秒产生错误码，找出最长连续出错的时间段（秒数连续且都有错误），用于监控告警。
+- 用户行为分析中的"连续活跃天数"：统计用户最长连续登录的天数，用于评估用户粘性和流失风险。
+- 库存管理中的"连续缺货检测"：商品 ID 连续的一段范围内都缺货，找出最长的缺货序列，用于供应链预警。
+
+- 日志分析中的"连续错误检测"：服务器每秒产生错误码，找出最长连续出错的时间段（秒数连续且都有错误），用于监控告警。
+- 用户行为分析中的"连续活跃天数"：统计用户最长连续登录的天数，用于评估用户粘性和流失风险。
+- 库存管理中的"连续缺货检测"：商品 ID 连续的一段范围内都缺货，找出最长的缺货序列，用于供应链预警。
+
+## 📖 形象类比
+
+可以把它类比成《水浒传》里梁山泊招纳好汉的编号问题。
+
+每招纳一个好汉就分配一个编号。宋江想找出"编号连续的好汉最长有多长"。他先查名册：如果编号 `k-1` 的人不在名册上，说明 `k` 是一段连续编号的起点，就从 `k` 开始往后数，直到下一个编号不在名册上。这样不会重复数同一段人，每个人最多被数一次。
+
+对应关系是：
+
+- "好汉编号"对应数组中的数字
+- "名册"对应哈希集合
+- "编号连续"对应连续序列
+- "只从起点往后数"对应 `num - 1 not in set` 的判断
+
+可以把它类比成《水浒传》里梁山泊招纳好汉的编号问题。
+
+每招纳一个好汉就分配一个编号。宋江想找出"编号连续的好汉最长有多长"。他先查名册：如果编号 `k-1` 的人不在名册上，说明 `k` 是一段连续编号的起点，就从 `k` 开始往后数，直到下一个编号不在名册上。这样不会重复数同一段人，每个人最多被数一次。
+
+对应关系是：
+
+- "好汉编号"对应数组中的数字
+- "名册"对应哈希集合
+- "编号连续"对应连续序列
+- "只从起点往后数"对应 `num - 1 not in set` 的判断
+
+小松鼠收集了很多编号不同的松果，想找出编号连续最长的一串。它先把所有编号放进一个小本子（哈希集合），然后逐个检查：如果"编号减一"的小本子里没有，就说明这是连续串的起点。从起点开始往后数，直到碰到断档。这样每个编号最多被数一次，效率很高。
+
+小松鼠收集了很多编号不同的松果，想找出编号连续最长的一串。它先把所有编号放进一个小本子（哈希集合），然后逐个检查：如果"编号减一"的小本子里没有，就说明这是连续串的起点。从起点开始往后数，直到碰到断档。这样每个编号最多被数一次，效率很高。
+
+## 🎵 记忆口诀
+
+查前驱无则起，逐一向右数。
+
+查前驱无则起，逐一向右数。
+
+## 🔗 延伸练习
+
+- `1. 两数之和`：同样是哈希的 `O(1)` 查找，从"查补数"到"查相邻"。
+- `298. 二叉树最长连续序列`：从数组扩展到二叉树，序列需要沿父子关系连续。
+- `674. 最长连续递增序列`：数组中连续递增的子序列，不需要哈希，直接遍历即可。
+
+- `1. 两数之和`：同样是哈希的 `O(1)` 查找，从"查补数"到"查相邻"。
+- `298. 二叉树最长连续序列`：从数组扩展到二叉树，序列需要沿父子关系连续。
+- `674. 最长连续递增序列`：数组中连续递增的子序列，不需要哈希，直接遍历即可。4:["$","main",null,{"className":"detail-main","style":{"maxWidth":760,"margin":"0 auto","padding":"16px","minHeight":"100vh"},"children":[["$","$Lc",null,{"href":"/","style":{"display":"inline-block","marginBottom":"12px","fontSize":"13px"},"children":"← 返回题库"}],["$","h1",null,{"style":{"fontSize":"22px","fontWeight":700,"margin":"0 0 4px"},"children":[["$","span",null,{"style":{"marginRight":"6px"},"children":"#️⃣"}],128,". ","最长连续序列"]}],["$","$Ld",null,{"q":{"id":"0128","lcId":128,"slug":"longest-consecutive-sequence","title":"最长连续序列","question":"最长连续序列","answer":"$e","difficulty":"Medium","category":"hash","categories":["hash"],"tags":["并查集","数组","哈希表"],"url":"https://leetcode.cn/problems/longest-consecutive-sequence/","planOrder":3,"hasViz":true,"hasDiagram":false,"feynman":{"essence":"给你一个未排序的整数数组 `nums`，找出数字连续的最长序列的长度。要求算法的时间复杂度为 `O(n)`。  \"连续序列\"是指整数之间差为 1 的序列，比如 `[3, 4, 5, 6]`。不要求在原","analogy":"","key_points":[]},"first_principle":{"problem":"","axioms":[],"rebuild":""}}}]]}]
+a:[["$","meta","0",{"name":"viewport","content":"width=device-width, initial-scale=1"}],["$","meta","1",{"name":"theme-color","content":"#f97316"}]]
+8:[["$","meta","0",{"charSet":"utf-8"}],["$","title","1",{"children":"128. 最长连续序列 - 算法面试"}],["$","meta","2",{"name":"description","content":"给你一个未排序的整数数组 `nums`，找出数字连续的最长序列的长度。要求算法的时间复杂度为 `O(n)`。  \"连续序列\"是指整数之间差为 1 的序列，比如 `[3, 4, 5, 6]`。不要求在原"}],["$","meta","3",{"name":"application-name","content":"算法面试"}],["$","link","4",{"rel":"manifest","href":"/algorithm-interview/manifest.json","crossOrigin":"$undefined"}],["$","meta","5",{"name":"keywords","content":"最长连续序列,LeetCode 128,Medium,并查集,数组,哈希表"}],["$","meta","6",{"name":"mobile-web-app-capable","content":"yes"}],["$","meta","7",{"name":"apple-mobile-web-app-title","content":"算法面试"}],["$","meta","8",{"name":"apple-mobile-web-app-status-bar-style","content":"default"}],["$","meta","9",{"property":"og:title","content":"128. 最长连续序列"}],["$","meta","10",{"property":"og:description","content":"给你一个未排序的整数数组 `nums`，找出数字连续的最长序列的长度。要求算法的时间复杂度为 `O(n)`。  \"连续序列\"是指整数之间差为 1 的序列，比如 `[3, 4, 5, 6]`。不要求在原"}],["$","meta","11",{"property":"og:locale","content":"zh_CN"}],["$","meta","12",{"property":"og:type","content":"article"}],["$","meta","13",{"name":"twitter:card","content":"summary"}],["$","meta","14",{"name":"twitter:title","content":"128. 最长连续序列"}],["$","meta","15",{"name":"twitter:description","content":"给你一个未排序的整数数组 `nums`，找出数字连续的最长序列的长度。要求算法的时间复杂度为 `O(n)`。  \"连续序列\"是指整数之间差为 1 的序列，比如 `[3, 4, 5, 6]`。不要求在原"}]]
+6:null

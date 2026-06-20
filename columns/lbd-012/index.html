@@ -1,0 +1,153 @@
+<!DOCTYPE html><html lang="zh"><head><meta charSet="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="/algorithm-interview/_next/static/css/c1e787639001e16b.css" data-precedence="next"/><link rel="preload" as="script" fetchPriority="low" href="/algorithm-interview/_next/static/chunks/webpack-65b8ce4c1158f96f.js"/><script src="/algorithm-interview/_next/static/chunks/4bd1b696-899926250d3992f1.js" async=""></script><script src="/algorithm-interview/_next/static/chunks/517-b6df7dad4ff96d0b.js" async=""></script><script src="/algorithm-interview/_next/static/chunks/main-app-9e7bfff32fd8ebe9.js" async=""></script><script src="/algorithm-interview/_next/static/chunks/173-69860a4742bb7020.js" async=""></script><script src="/algorithm-interview/_next/static/chunks/829-7533e70598480772.js" async=""></script><script src="/algorithm-interview/_next/static/chunks/app/columns/%5Bslug%5D/page-58fc1d8f5085c1ff.js" async=""></script><meta name="theme-color" content="#f97316"/><title>经典动态规划：子集背包问题 - 算法面试</title><meta name="description" content="LeetCode 热题 100 完整 Java 题解、逐题动画、知识专栏与智能间隔复习。"/><meta name="application-name" content="算法面试"/><link rel="manifest" href="/algorithm-interview/manifest.json"/><meta name="keywords" content="LeetCode,热题100,算法面试,Java题解,数据结构,动态规划,面试刷题"/><meta name="mobile-web-app-capable" content="yes"/><meta name="apple-mobile-web-app-title" content="算法面试"/><meta name="apple-mobile-web-app-status-bar-style" content="default"/><meta property="og:title" content="算法面试题库"/><meta property="og:description" content="LeetCode 热题 100 完整 Java 题解、逐题动画、知识专栏与智能复习"/><meta property="og:site_name" content="算法面试题库"/><meta property="og:locale" content="zh_CN"/><meta property="og:type" content="website"/><meta name="twitter:card" content="summary"/><meta name="twitter:title" content="算法面试题库"/><meta name="twitter:description" content="LeetCode 热题 100 完整 Java 题解、逐题动画、知识专栏与智能复习"/><script>
+try {
+  var raw = localStorage.getItem('algo-interview');
+  var theme = 'light';
+  if (raw) { var p = JSON.parse(raw); theme = (p.state && p.state.theme) || 'light'; }
+  if (theme === 'dark') {
+    document.documentElement.classList.add('dark');
+    document.documentElement.setAttribute('data-theme', 'dark');
+  }
+} catch (e) {}
+</script><script src="/algorithm-interview/_next/static/chunks/polyfills-42372ed130431b0a.js" noModule=""></script></head><body><main style="max-width:760px;margin:0 auto;padding:16px;min-height:100vh"><a style="display:inline-block;margin-bottom:12px;font-size:13px" href="/algorithm-interview/columns/">← 返回专栏</a><div style="font-size:12px;color:var(--text-tertiary);margin-bottom:4px">📕<!-- --> <!-- -->labuladong 算法小抄</div><h1 style="font-size:22px;font-weight:700;margin:0 0 16px">经典动态规划：子集背包问题</h1><div class="prose max-w-none" style="font-size:14px;color:var(--text)"><h1>经典动态规划：子集背包问题</h1>
+<p>背包问题变体之⼦集分割
+学算法，认准 labuladong 就够了！
+上篇⽂章 经典动态规划：0-1 背包问题 详解了通⽤的 0-1 背包问题，今天来
+看看背包问题的思想能够如何运⽤到其他算法题⽬。
+⽽且，不是经常有读者问，怎么将⼆维动态规划压缩成⼀维动态规划吗？这
+就是状态压缩，很容易的，本⽂也会提及这种技巧。
+⼀、问题分析
+先看⼀下题⽬：
+经典动态规划：⼦集背包问题
+104</p>
+<p>算法的函数签名如下：
+// 输⼊⼀个集合，返回是否能够分割成和相等的两个⼦集
+bool canPartition(vector<!-- -->&lt;int&gt;<!-- -->&amp; nums);
+对于这个问题，看起来和背包没有任何关系，为什么说它是背包问题呢？
+⾸先回忆⼀下背包问题⼤致的描述是什么：
+给你⼀个可装载重量为  W  的背包和  N  个物品，每个物品有重量和价值两
+个属性。其中第  i  个物品的重量为  wt[i] ，价值为  val[i] ，现在让你⽤
+这个背包装物品，最多能装的价值是多少？
+那么对于这个问题，我们可以先对集合求和，得出  sum ，把问题转化为背
+包问题：
+经典动态规划：⼦集背包问题
+105</p>
+<p>给⼀个可装载重量为  sum / 2  的背包和  N  个物品，每个物品的重量为
+nums[i] 。现在让你装物品，是否存在⼀种装法，能够恰好将背包装满？
+你看，这就是背包问题的模型，甚⾄⽐我们之前的经典背包问题还要简单⼀
+些，下⾯我们就直接转换成背包问题，开始套前⽂讲过的背包问题框架即
+可。
+⼆、解法分析
+第⼀步要明确两点，「状态」和「选择」。
+这个前⽂ 经典动态规划：背包问题 已经详细解释过了，状态就是「背包的
+容量」和「可选择的物品」，选择就是「装进背包」或者「不装进背包」。
+第⼆步要明确  dp  数组的定义。
+按照背包问题的套路，可以给出如下定义：
+dp[i][j] = x  表⽰，对于前  i  个物品，当前背包的容量为  j  时，若  x
+为  true ，则说明可以恰好将背包装满，若  x  为  false ，则说明不能恰
+好将背包装满。
+⽐如说，如果  dp[4][9] = true ，其含义为：对于容量为 9 的背包，若只是
+⽤钱 4 个物品，可以有⼀种⽅法把背包恰好装满。
+或者说对于本题，含义是对于给定的集合中，若只对前 4 个数字进⾏选择，
+存在⼀个⼦集的和可以恰好凑出 9。
+根据这个定义，我们想求的最终答案就是  dp[N][sum/2] ，base case 就是
+dp[..][0] = true  和  dp[0][..] = false ，因为背包没有空间的时候，就相
+当于装满了，⽽当没有物品可选择的时候，肯定没办法装满背包。
+第三步，根据「选择」，思考状态转移的逻辑。
+回想刚才的  dp  数组含义，可以根据「选择」对  dp[i][j]  得到以下状态
+转移：
+经典动态规划：⼦集背包问题
+106</p>
+<p>如果不把  nums[i]  算⼊⼦集，或者说你不把这第  i  个物品装⼊背包，那
+么是否能够恰好装满背包，取决于上⼀个状态  dp[i-1][j] ，继承之前的结
+果。
+如果把  nums[i]  算⼊⼦集，或者说你把这第  i  个物品装⼊了背包，那么
+是否能够恰好装满背包，取决于状态  dp[i - 1][j-nums[i-1]] 。
+⾸先，由于  i  是从 1 开始的，⽽数组索引是从 0 开始的，所以第  i  个物
+品的重量应该是  nums[i-1] ，这⼀点不要搞混。
+dp[i - 1][j-nums[i-1]]  也很好理解：你如果装了第  i  个物品，就要看背
+包的剩余重量  j - nums[i-1]  限制下是否能够被恰好装满。
+换句话说，如果  j - nums[i-1]  的重量可以被恰好装满，那么只要把第  i
+个物品装进去，也可恰好装满  j  的重量；否则的话，重量  j  肯定是装不
+满的。
+最后⼀步，把伪码翻译成代码，处理⼀些边界情况。
+以下是我的 C++ 代码，完全翻译了之前的思路，并处理了⼀些边界情况：
+bool canPartition(vector<!-- -->&lt;int&gt;<!-- -->&amp; nums) {
+int sum = 0;
+for (int num : nums) sum += num;
+// 和为奇数时，不可能划分成两个和相等的集合
+if (sum % 2 != 0) return false;
+int n = nums.size();
+sum = sum / 2;
+vector&lt;vector<!-- -->&lt;bool&gt;<!-- -->&gt;
+dp(n + 1, vector<!-- -->&lt;bool&gt;<!-- -->(sum + 1, false));
+// base case
+for (int i = 0; i &lt;= n; i++)
+dp[i][0] = true;
+for (int i = 1; i &lt;= n; i++) {
+for (int j = 1; j &lt;= sum; j++) {
+if (j - nums[i - 1] &lt; 0) {
+// 背包容量不⾜，不能装⼊第 i 个物品
+dp[i][j] = dp[i - 1][j];
+} else {
+经典动态规划：⼦集背包问题
+107</p>
+<pre><code>            // 装⼊或不装⼊背包
+            dp[i][j] = dp[i - 1][j] | dp[i - 1][j-nums[i-1]];
+        }
+    }
+}
+return dp[n][sum];
+</code></pre>
+<p>}
+三、进⾏状态压缩
+再进⼀步，是否可以优化这个代码呢？注意到  dp[i][j]  都是通过上⼀⾏
+dp[i-1][..]  转移过来的，之前的数据都不会再使⽤了。
+所以，我们可以进⾏状态压缩，将⼆维  dp  数组压缩为⼀维，节约空间复
+杂度：
+bool canPartition(vector<!-- -->&lt;int&gt;<!-- -->&amp; nums) {
+int sum = 0, n = nums.size();
+for (int num : nums) sum += num;
+if (sum % 2 != 0) return false;
+sum = sum / 2;
+vector<!-- -->&lt;bool&gt;<!-- --> dp(sum + 1, false);
+// base case
+dp[0] = true;
+for (int i = 0; i &lt; n; i++)
+for (int j = sum; j &gt;= 0; j--)
+if (j - nums[i] &gt;= 0)
+dp[j] = dp[j] || dp[j - nums[i]];
+return dp[sum];
+}
+这就是状态压缩，其实这段代码和之前的解法思路完全相同，只在⼀⾏
+dp  数组上操作， i  每进⾏⼀轮迭代， dp[j]  其实就相当于  dp[i-1]
+[j] ，所以只需要⼀维数组就够⽤了。
+经典动态规划：⼦集背包问题
+108</p>
+<p>唯⼀需要注意的是  j  应该从后往前反向遍历，因为每个物品（或者说数
+字）只能⽤⼀次，以免之前的结果影响其他的结果。
+⾄此，⼦集切割的问题就完全解决了，时间复杂度 O(n*sum)，空间复杂度
+O(sum)。
+＿＿＿＿＿＿＿＿＿＿＿＿＿
+刷算法，学套路，认准 labuladong。
+本⼩抄即将出版，关注 labuladong 公众号或 ongline book 查看更新⽂章，
+后台回复「进群」可进刷题群，labuladong 带你⽇穿 LeetCode。
+经典动态规划：⼦集背包问题
+109</p>
+<p>背包问题之零钱兑换
+学算法，认准 labuladong 就够了！
+零钱兑换 2 是另⼀种典型背包问题的变体，我们前⽂已经讲了 经典动态规
+划：0-1 背包问题 和 背包问题变体：相等⼦集分割。
+希望你已经看过前两篇⽂章，看过了动态规划和背包问题的套路，这篇继续
+按照背包问题的套路，列举⼀个背包问题的变形。
+本⽂聊的是 LeetCode 第 518 题 Coin Change 2，题⽬如下：
+int change(int amount, int[] coins);
+PS：⾄于 Coin Change 1，在我们前⽂ 动态规划套路详解 写过。
+我们可以把这个问题转化为背包问题的描述形式：
+经典动态规划：完全背包问题
+110</p></div></main><script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function () {
+    navigator.serviceWorker.register('/algorithm-interview/sw.js').catch(function () {});
+  });
+}
+</script><script src="/algorithm-interview/_next/static/chunks/webpack-65b8ce4c1158f96f.js" async=""></script><script>(self.__next_f=self.__next_f||[]).push([0])</script><script>self.__next_f.push([1,"1:\"$Sreact.fragment\"\n2:I[5244,[],\"\"]\n3:I[3866,[],\"\"]\n5:I[6213,[],\"OutletBoundary\"]\n7:I[6213,[],\"MetadataBoundary\"]\n9:I[6213,[],\"ViewportBoundary\"]\nb:I[4835,[],\"\"]\n:HL[\"/algorithm-interview/_next/static/css/c1e787639001e16b.css\",\"style\"]\n"])</script><script>self.__next_f.push([1,"0:{\"P\":null,\"b\":\"xos97fAiWtKfKXI6hZLx4\",\"p\":\"/algorithm-interview\",\"c\":[\"\",\"columns\",\"lbd-012\",\"\"],\"i\":false,\"f\":[[[\"\",{\"children\":[\"columns\",{\"children\":[[\"slug\",\"lbd-012\",\"d\"],{\"children\":[\"__PAGE__\",{}]}]}]},\"$undefined\",\"$undefined\",true],[\"\",[\"$\",\"$1\",\"c\",{\"children\":[[[\"$\",\"link\",\"0\",{\"rel\":\"stylesheet\",\"href\":\"/algorithm-interview/_next/static/css/c1e787639001e16b.css\",\"precedence\":\"next\",\"crossOrigin\":\"$undefined\",\"nonce\":\"$undefined\"}]],[\"$\",\"html\",null,{\"lang\":\"zh\",\"children\":[[\"$\",\"head\",null,{\"children\":[\"$\",\"script\",null,{\"dangerouslySetInnerHTML\":{\"__html\":\"\\ntry {\\n  var raw = localStorage.getItem('algo-interview');\\n  var theme = 'light';\\n  if (raw) { var p = JSON.parse(raw); theme = (p.state \u0026\u0026 p.state.theme) || 'light'; }\\n  if (theme === 'dark') {\\n    document.documentElement.classList.add('dark');\\n    document.documentElement.setAttribute('data-theme', 'dark');\\n  }\\n} catch (e) {}\\n\"}}]}],[\"$\",\"body\",null,{\"children\":[[\"$\",\"$L2\",null,{\"parallelRouterKey\":\"children\",\"segmentPath\":[\"children\"],\"error\":\"$undefined\",\"errorStyles\":\"$undefined\",\"errorScripts\":\"$undefined\",\"template\":[\"$\",\"$L3\",null,{}],\"templateStyles\":\"$undefined\",\"templateScripts\":\"$undefined\",\"notFound\":[[],[[\"$\",\"title\",null,{\"children\":\"404: This page could not be found.\"}],[\"$\",\"div\",null,{\"style\":{\"fontFamily\":\"system-ui,\\\"Segoe UI\\\",Roboto,Helvetica,Arial,sans-serif,\\\"Apple Color Emoji\\\",\\\"Segoe UI Emoji\\\"\",\"height\":\"100vh\",\"textAlign\":\"center\",\"display\":\"flex\",\"flexDirection\":\"column\",\"alignItems\":\"center\",\"justifyContent\":\"center\"},\"children\":[\"$\",\"div\",null,{\"children\":[[\"$\",\"style\",null,{\"dangerouslySetInnerHTML\":{\"__html\":\"body{color:#000;background:#fff;margin:0}.next-error-h1{border-right:1px solid rgba(0,0,0,.3)}@media (prefers-color-scheme:dark){body{color:#fff;background:#000}.next-error-h1{border-right:1px solid rgba(255,255,255,.3)}}\"}}],[\"$\",\"h1\",null,{\"className\":\"next-error-h1\",\"style\":{\"display\":\"inline-block\",\"margin\":\"0 20px 0 0\",\"padding\":\"0 23px 0 0\",\"fontSize\":24,\"fontWeight\":500,\"verticalAlign\":\"top\",\"lineHeight\":\"49px\"},\"children\":404}],[\"$\",\"div\",null,{\"style\":{\"display\":\"inline-block\"},\"children\":[\"$\",\"h2\",null,{\"style\":{\"fontSize\":14,\"fontWeight\":400,\"lineHeight\":\"49px\",\"margin\":0},\"children\":\"This page could not be found.\"}]}]]}]}]]],\"forbidden\":\"$undefined\",\"unauthorized\":\"$undefined\"}],[\"$\",\"script\",null,{\"dangerouslySetInnerHTML\":{\"__html\":\"\\nif ('serviceWorker' in navigator) {\\n  window.addEventListener('load', function () {\\n    navigator.serviceWorker.register('/algorithm-interview/sw.js').catch(function () {});\\n  });\\n}\\n\"}}]]}]]}]]}],{\"children\":[\"columns\",[\"$\",\"$1\",\"c\",{\"children\":[null,[\"$\",\"$L2\",null,{\"parallelRouterKey\":\"children\",\"segmentPath\":[\"children\",\"columns\",\"children\"],\"error\":\"$undefined\",\"errorStyles\":\"$undefined\",\"errorScripts\":\"$undefined\",\"template\":[\"$\",\"$L3\",null,{}],\"templateStyles\":\"$undefined\",\"templateScripts\":\"$undefined\",\"notFound\":\"$undefined\",\"forbidden\":\"$undefined\",\"unauthorized\":\"$undefined\"}]]}],{\"children\":[[\"slug\",\"lbd-012\",\"d\"],[\"$\",\"$1\",\"c\",{\"children\":[null,[\"$\",\"$L2\",null,{\"parallelRouterKey\":\"children\",\"segmentPath\":[\"children\",\"columns\",\"children\",\"$0:f:0:1:2:children:2:children:0\",\"children\"],\"error\":\"$undefined\",\"errorStyles\":\"$undefined\",\"errorScripts\":\"$undefined\",\"template\":[\"$\",\"$L3\",null,{}],\"templateStyles\":\"$undefined\",\"templateScripts\":\"$undefined\",\"notFound\":\"$undefined\",\"forbidden\":\"$undefined\",\"unauthorized\":\"$undefined\"}]]}],{\"children\":[\"__PAGE__\",[\"$\",\"$1\",\"c\",{\"children\":[\"$L4\",null,[\"$\",\"$L5\",null,{\"children\":\"$L6\"}]]}],{},null,false]},null,false]},null,false]},null,false],[\"$\",\"$1\",\"h\",{\"children\":[null,[\"$\",\"$1\",\"XGuiId0mzqW1LpkwQXMMc\",{\"children\":[[\"$\",\"$L7\",null,{\"children\":\"$L8\"}],[\"$\",\"$L9\",null,{\"children\":\"$La\"}],null]}]]}],false]],\"m\":\"$undefined\",\"G\":[\"$b\",\"$undefined\"],\"s\":false,\"S\":true}\n"])</script><script>self.__next_f.push([1,"c:I[8173,[\"173\",\"static/chunks/173-69860a4742bb7020.js\",\"829\",\"static/chunks/829-7533e70598480772.js\",\"306\",\"static/chunks/app/columns/%5Bslug%5D/page-58fc1d8f5085c1ff.js\"],\"\"]\nd:I[4780,[\"173\",\"static/chunks/173-69860a4742bb7020.js\",\"829\",\"static/chunks/829-7533e70598480772.js\",\"306\",\"static/chunks/app/columns/%5Bslug%5D/page-58fc1d8f5085c1ff.js\"],\"default\"]\ne:T1c0d,"])</script><script>self.__next_f.push([1,"# 经典动态规划：子集背包问题\n\n背包问题变体之⼦集分割\n学算法，认准 labuladong 就够了！\n上篇⽂章 经典动态规划：0-1 背包问题 详解了通⽤的 0-1 背包问题，今天来\n看看背包问题的思想能够如何运⽤到其他算法题⽬。\n⽽且，不是经常有读者问，怎么将⼆维动态规划压缩成⼀维动态规划吗？这\n就是状态压缩，很容易的，本⽂也会提及这种技巧。\n⼀、问题分析\n先看⼀下题⽬：\n经典动态规划：⼦集背包问题\n104\n\n算法的函数签名如下：\n// 输⼊⼀个集合，返回是否能够分割成和相等的两个⼦集\nbool canPartition(vector\u003cint\u003e\u0026 nums);\n对于这个问题，看起来和背包没有任何关系，为什么说它是背包问题呢？\n⾸先回忆⼀下背包问题⼤致的描述是什么：\n给你⼀个可装载重量为  W  的背包和  N  个物品，每个物品有重量和价值两\n个属性。其中第  i  个物品的重量为  wt[i] ，价值为  val[i] ，现在让你⽤\n这个背包装物品，最多能装的价值是多少？\n那么对于这个问题，我们可以先对集合求和，得出  sum ，把问题转化为背\n包问题：\n经典动态规划：⼦集背包问题\n105\n\n给⼀个可装载重量为  sum / 2  的背包和  N  个物品，每个物品的重量为\n nums[i] 。现在让你装物品，是否存在⼀种装法，能够恰好将背包装满？\n你看，这就是背包问题的模型，甚⾄⽐我们之前的经典背包问题还要简单⼀\n些，下⾯我们就直接转换成背包问题，开始套前⽂讲过的背包问题框架即\n可。\n⼆、解法分析\n第⼀步要明确两点，「状态」和「选择」。\n这个前⽂ 经典动态规划：背包问题 已经详细解释过了，状态就是「背包的\n容量」和「可选择的物品」，选择就是「装进背包」或者「不装进背包」。\n第⼆步要明确  dp  数组的定义。\n按照背包问题的套路，可以给出如下定义：\n dp[i][j] = x  表⽰，对于前  i  个物品，当前背包的容量为  j  时，若  x \n为  true ，则说明可以恰好将背包装满，若  x  为  false ，则说明不能恰\n好将背包装满。\n⽐如说，如果  dp[4][9] = true ，其含义为：对于容量为 9 的背包，若只是\n⽤钱 4 个物品，可以有⼀种⽅法把背包恰好装满。\n或者说对于本题，含义是对于给定的集合中，若只对前 4 个数字进⾏选择，\n存在⼀个⼦集的和可以恰好凑出 9。\n根据这个定义，我们想求的最终答案就是  dp[N][sum/2] ，base case 就是\n dp[..][0] = true  和  dp[0][..] = false ，因为背包没有空间的时候，就相\n当于装满了，⽽当没有物品可选择的时候，肯定没办法装满背包。\n第三步，根据「选择」，思考状态转移的逻辑。\n回想刚才的  dp  数组含义，可以根据「选择」对  dp[i][j]  得到以下状态\n转移：\n经典动态规划：⼦集背包问题\n106\n\n如果不把  nums[i]  算⼊⼦集，或者说你不把这第  i  个物品装⼊背包，那\n么是否能够恰好装满背包，取决于上⼀个状态  dp[i-1][j] ，继承之前的结\n果。\n如果把  nums[i]  算⼊⼦集，或者说你把这第  i  个物品装⼊了背包，那么\n是否能够恰好装满背包，取决于状态  dp[i - 1][j-nums[i-1]] 。\n⾸先，由于  i  是从 1 开始的，⽽数组索引是从 0 开始的，所以第  i  个物\n品的重量应该是  nums[i-1] ，这⼀点不要搞混。\n dp[i - 1][j-nums[i-1]]  也很好理解：你如果装了第  i  个物品，就要看背\n包的剩余重量  j - nums[i-1]  限制下是否能够被恰好装满。\n换句话说，如果  j - nums[i-1]  的重量可以被恰好装满，那么只要把第  i \n个物品装进去，也可恰好装满  j  的重量；否则的话，重量  j  肯定是装不\n满的。\n最后⼀步，把伪码翻译成代码，处理⼀些边界情况。\n以下是我的 C++ 代码，完全翻译了之前的思路，并处理了⼀些边界情况：\nbool canPartition(vector\u003cint\u003e\u0026 nums) {\n    int sum = 0;\n    for (int num : nums) sum += num;\n    // 和为奇数时，不可能划分成两个和相等的集合\n    if (sum % 2 != 0) return false;\n    int n = nums.size();\n    sum = sum / 2;\n    vector\u003cvector\u003cbool\u003e\u003e \n        dp(n + 1, vector\u003cbool\u003e(sum + 1, false));\n    // base case\n    for (int i = 0; i \u003c= n; i++)\n        dp[i][0] = true;\n    for (int i = 1; i \u003c= n; i++) {\n        for (int j = 1; j \u003c= sum; j++) {\n            if (j - nums[i - 1] \u003c 0) {\n               // 背包容量不⾜，不能装⼊第 i 个物品\n                dp[i][j] = dp[i - 1][j]; \n            } else {\n经典动态规划：⼦集背包问题\n107\n\n                // 装⼊或不装⼊背包\n                dp[i][j] = dp[i - 1][j] | dp[i - 1][j-nums[i-1]];\n            }\n        }\n    }\n    return dp[n][sum];\n}\n三、进⾏状态压缩\n再进⼀步，是否可以优化这个代码呢？注意到  dp[i][j]  都是通过上⼀⾏\n dp[i-1][..]  转移过来的，之前的数据都不会再使⽤了。\n所以，我们可以进⾏状态压缩，将⼆维  dp  数组压缩为⼀维，节约空间复\n杂度：\nbool canPartition(vector\u003cint\u003e\u0026 nums) {\n    int sum = 0, n = nums.size();\n    for (int num : nums) sum += num;\n    if (sum % 2 != 0) return false;\n    sum = sum / 2;\n    vector\u003cbool\u003e dp(sum + 1, false);\n    // base case\n    dp[0] = true;\n    for (int i = 0; i \u003c n; i++) \n        for (int j = sum; j \u003e= 0; j--) \n            if (j - nums[i] \u003e= 0) \n                dp[j] = dp[j] || dp[j - nums[i]];\n    return dp[sum];\n}\n这就是状态压缩，其实这段代码和之前的解法思路完全相同，只在⼀⾏\n dp  数组上操作， i  每进⾏⼀轮迭代， dp[j]  其实就相当于  dp[i-1]\n[j] ，所以只需要⼀维数组就够⽤了。\n经典动态规划：⼦集背包问题\n108\n\n唯⼀需要注意的是  j  应该从后往前反向遍历，因为每个物品（或者说数\n字）只能⽤⼀次，以免之前的结果影响其他的结果。\n⾄此，⼦集切割的问题就完全解决了，时间复杂度 O(n*sum)，空间复杂度\nO(sum)。\n＿＿＿＿＿＿＿＿＿＿＿＿＿\n刷算法，学套路，认准 labuladong。\n本⼩抄即将出版，关注 labuladong 公众号或 ongline book 查看更新⽂章，\n后台回复「进群」可进刷题群，labuladong 带你⽇穿 LeetCode。\n经典动态规划：⼦集背包问题\n109\n\n背包问题之零钱兑换\n学算法，认准 labuladong 就够了！\n零钱兑换 2 是另⼀种典型背包问题的变体，我们前⽂已经讲了 经典动态规\n划：0-1 背包问题 和 背包问题变体：相等⼦集分割。\n希望你已经看过前两篇⽂章，看过了动态规划和背包问题的套路，这篇继续\n按照背包问题的套路，列举⼀个背包问题的变形。\n本⽂聊的是 LeetCode 第 518 题 Coin Change 2，题⽬如下：\nint change(int amount, int[] coins);\nPS：⾄于 Coin Change 1，在我们前⽂ 动态规划套路详解 写过。\n我们可以把这个问题转化为背包问题的描述形式：\n经典动态规划：完全背包问题\n110"])</script><script>self.__next_f.push([1,"4:[\"$\",\"main\",null,{\"style\":{\"maxWidth\":760,\"margin\":\"0 auto\",\"padding\":\"16px\",\"minHeight\":\"100vh\"},\"children\":[[\"$\",\"$Lc\",null,{\"href\":\"/columns/\",\"style\":{\"display\":\"inline-block\",\"marginBottom\":\"12px\",\"fontSize\":\"13px\"},\"children\":\"← 返回专栏\"}],[\"$\",\"div\",null,{\"style\":{\"fontSize\":\"12px\",\"color\":\"var(--text-tertiary)\",\"marginBottom\":\"4px\"},\"children\":[\"📕\",\" \",\"labuladong 算法小抄\"]}],[\"$\",\"h1\",null,{\"style\":{\"fontSize\":\"22px\",\"fontWeight\":700,\"margin\":\"0 0 16px\"},\"children\":\"经典动态规划：子集背包问题\"}],[\"$\",\"$Ld\",null,{\"children\":\"$e\"}],false]}]\n"])</script><script>self.__next_f.push([1,"a:[[\"$\",\"meta\",\"0\",{\"name\":\"viewport\",\"content\":\"width=device-width, initial-scale=1\"}],[\"$\",\"meta\",\"1\",{\"name\":\"theme-color\",\"content\":\"#f97316\"}]]\n"])</script><script>self.__next_f.push([1,"8:[[\"$\",\"meta\",\"0\",{\"charSet\":\"utf-8\"}],[\"$\",\"title\",\"1\",{\"children\":\"经典动态规划：子集背包问题 - 算法面试\"}],[\"$\",\"meta\",\"2\",{\"name\":\"description\",\"content\":\"LeetCode 热题 100 完整 Java 题解、逐题动画、知识专栏与智能间隔复习。\"}],[\"$\",\"meta\",\"3\",{\"name\":\"application-name\",\"content\":\"算法面试\"}],[\"$\",\"link\",\"4\",{\"rel\":\"manifest\",\"href\":\"/algorithm-interview/manifest.json\",\"crossOrigin\":\"$undefined\"}],[\"$\",\"meta\",\"5\",{\"name\":\"keywords\",\"content\":\"LeetCode,热题100,算法面试,Java题解,数据结构,动态规划,面试刷题\"}],[\"$\",\"meta\",\"6\",{\"name\":\"mobile-web-app-capable\",\"content\":\"yes\"}],[\"$\",\"meta\",\"7\",{\"name\":\"apple-mobile-web-app-title\",\"content\":\"算法面试\"}],[\"$\",\"meta\",\"8\",{\"name\":\"apple-mobile-web-app-status-bar-style\",\"content\":\"default\"}],[\"$\",\"meta\",\"9\",{\"property\":\"og:title\",\"content\":\"算法面试题库\"}],[\"$\",\"meta\",\"10\",{\"property\":\"og:description\",\"content\":\"LeetCode 热题 100 完整 Java 题解、逐题动画、知识专栏与智能复习\"}],[\"$\",\"meta\",\"11\",{\"property\":\"og:site_name\",\"content\":\"算法面试题库\"}],[\"$\",\"meta\",\"12\",{\"property\":\"og:locale\",\"content\":\"zh_CN\"}],[\"$\",\"meta\",\"13\",{\"property\":\"og:type\",\"content\":\"website\"}],[\"$\",\"meta\",\"14\",{\"name\":\"twitter:card\",\"content\":\"summary\"}],[\"$\",\"meta\",\"15\",{\"name\":\"twitter:title\",\"content\":\"算法面试题库\"}],[\"$\",\"meta\",\"16\",{\"name\":\"twitter:description\",\"content\":\"LeetCode 热题 100 完整 Java 题解、逐题动画、知识专栏与智能复习\"}]]\n"])</script><script>self.__next_f.push([1,"6:null\n"])</script></body></html>

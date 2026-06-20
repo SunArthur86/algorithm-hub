@@ -1,0 +1,164 @@
+1:"$Sreact.fragment"
+2:I[5244,[],""]
+3:I[3866,[],""]
+5:I[6213,[],"OutletBoundary"]
+7:I[6213,[],"MetadataBoundary"]
+9:I[6213,[],"ViewportBoundary"]
+b:I[4835,[],""]
+:HL["/algorithm-interview/_next/static/css/c1e787639001e16b.css","style"]
+0:{"P":null,"b":"xos97fAiWtKfKXI6hZLx4","p":"/algorithm-interview","c":["","question","131",""],"i":false,"f":[[["",{"children":["question",{"children":[["lcId","131","d"],{"children":["__PAGE__",{}]}]}]},"$undefined","$undefined",true],["",["$","$1","c",{"children":[[["$","link","0",{"rel":"stylesheet","href":"/algorithm-interview/_next/static/css/c1e787639001e16b.css","precedence":"next","crossOrigin":"$undefined","nonce":"$undefined"}]],["$","html",null,{"lang":"zh","children":[["$","head",null,{"children":["$","script",null,{"dangerouslySetInnerHTML":{"__html":"\ntry {\n  var raw = localStorage.getItem('algo-interview');\n  var theme = 'light';\n  if (raw) { var p = JSON.parse(raw); theme = (p.state && p.state.theme) || 'light'; }\n  if (theme === 'dark') {\n    document.documentElement.classList.add('dark');\n    document.documentElement.setAttribute('data-theme', 'dark');\n  }\n} catch (e) {}\n"}}]}],["$","body",null,{"children":[["$","$L2",null,{"parallelRouterKey":"children","segmentPath":["children"],"error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L3",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":[[],[["$","title",null,{"children":"404: This page could not be found."}],["$","div",null,{"style":{"fontFamily":"system-ui,\"Segoe UI\",Roboto,Helvetica,Arial,sans-serif,\"Apple Color Emoji\",\"Segoe UI Emoji\"","height":"100vh","textAlign":"center","display":"flex","flexDirection":"column","alignItems":"center","justifyContent":"center"},"children":["$","div",null,{"children":[["$","style",null,{"dangerouslySetInnerHTML":{"__html":"body{color:#000;background:#fff;margin:0}.next-error-h1{border-right:1px solid rgba(0,0,0,.3)}@media (prefers-color-scheme:dark){body{color:#fff;background:#000}.next-error-h1{border-right:1px solid rgba(255,255,255,.3)}}"}}],["$","h1",null,{"className":"next-error-h1","style":{"display":"inline-block","margin":"0 20px 0 0","padding":"0 23px 0 0","fontSize":24,"fontWeight":500,"verticalAlign":"top","lineHeight":"49px"},"children":404}],["$","div",null,{"style":{"display":"inline-block"},"children":["$","h2",null,{"style":{"fontSize":14,"fontWeight":400,"lineHeight":"49px","margin":0},"children":"This page could not be found."}]}]]}]}]]],"forbidden":"$undefined","unauthorized":"$undefined"}],["$","script",null,{"dangerouslySetInnerHTML":{"__html":"\nif ('serviceWorker' in navigator) {\n  window.addEventListener('load', function () {\n    navigator.serviceWorker.register('/algorithm-interview/sw.js').catch(function () {});\n  });\n}\n"}}]]}]]}]]}],{"children":["question",["$","$1","c",{"children":[null,["$","$L2",null,{"parallelRouterKey":"children","segmentPath":["children","question","children"],"error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L3",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","forbidden":"$undefined","unauthorized":"$undefined"}]]}],{"children":[["lcId","131","d"],["$","$1","c",{"children":[null,["$","$L2",null,{"parallelRouterKey":"children","segmentPath":["children","question","children","$0:f:0:1:2:children:2:children:0","children"],"error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L3",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","forbidden":"$undefined","unauthorized":"$undefined"}]]}],{"children":["__PAGE__",["$","$1","c",{"children":["$L4",null,["$","$L5",null,{"children":"$L6"}]]}],{},null,false]},null,false]},null,false]},null,false],["$","$1","h",{"children":[null,["$","$1","omEH5YGp3SeF-zulw0SZw",{"children":[["$","$L7",null,{"children":"$L8"}],["$","$L9",null,{"children":"$La"}],null]}]]}],false]],"m":"$undefined","G":["$b","$undefined"],"s":false,"S":true}
+c:I[8173,["173","static/chunks/173-69860a4742bb7020.js","829","static/chunks/829-7533e70598480772.js","937","static/chunks/937-ef36a5ac4bc37a7e.js","447","static/chunks/447-06af9414e164c047.js","8","static/chunks/app/question/%5BlcId%5D/page-478b0d2a69e222f2.js"],""]
+d:I[3447,["173","static/chunks/173-69860a4742bb7020.js","829","static/chunks/829-7533e70598480772.js","937","static/chunks/937-ef36a5ac4bc37a7e.js","447","static/chunks/447-06af9414e164c047.js","8","static/chunks/app/question/%5BlcId%5D/page-478b0d2a69e222f2.js"],"default"]
+e:T1e48,# 131. 分割回文串
+
+> 难度：**Medium** | 分类：回溯 | 标签：字符串, 动态规划, 回溯
+
+> 🔗 力扣链接：[https://leetcode.cn/problems/palindrome-partitioning/](https://leetcode.cn/problems/palindrome-partitioning/)
+
+## 📝 题目描述
+
+给你一个字符串 `s`，请把它分成若干子串，使得每个子串都是回文串。返回所有可能的分割方案。
+
+比如 `"aab"` 可以分成 `[["a","a","b"],["aa","b"]]`。重点不是"能不能判断回文"，而是"怎么系统地枚举出所有合法的切法"。
+
+- 题号：131
+- 题目名：分割回文串
+- 难度：中等
+- 题型：回溯
+- 为什么选这题：它是回溯法的经典入门题，能帮你建立"做选择 → 走到底 → 退回来换一条路"的核心直觉。
+
+## 🧠 思考路径
+
+最直觉的想法：从第一个字符开始，尝试不同长度的切割。切出一段回文子串后，对剩下的部分继续切；如果某一段不是回文，就跳过这种切法。
+
+这个过程天然是一棵决策树：每个位置决定"在哪里切一刀"。树的每一层是当前切分的位置，每条路径是一种完整的分割方案。
+
+关键在于：走到某一步时，如果当前的切法已经让某段不是回文了，后面的尝试毫无意义——直接回头。这就是"回溯"的精髓：**发现此路不通，立刻掉头，不继续浪费**。
+
+所以这题的关键词不是"切字符串"，而是"在决策树上做深度优先搜索，遇到非法状态就剪枝回退"。
+
+## 💻 Java 题解
+
+### 解法 1：回溯 + 回文判断
+
+从start遍历end，如果s[start..end]是回文，递归分割end+1后面的部分。
+
+- ⏱ 时间复杂度：`O(n×2ⁿ)`
+- 💾 空间复杂度：`O(n)`
+
+```java
+class Solution {
+    public List<List<String>> partition(String s) {
+        List<List<String>> result = new ArrayList<>();
+        backtrack(s, 0, new ArrayList<>(), result);
+        return result;
+    }
+    private void backtrack(String s, int start, List<String> path, List<List<String>> result) {
+        if (start == s.length()) { result.add(new ArrayList<>(path)); return; }
+        for (int end = start; end < s.length(); end++) {
+            if (isPalindrome(s, start, end)) {
+                path.add(s.substring(start, end + 1));
+                backtrack(s, end + 1, path, result);
+                path.remove(path.size() - 1);
+            }
+        }
+    }
+    private boolean isPalindrome(String s, int l, int r) {
+        while (l < r) if (s.charAt(l++) != s.charAt(r--)) return false;
+        return true;
+    }
+}
+```
+
+**关键点：**
+- 遍历所有可能的分割点
+- 只对回文子串递归
+- start==s.length() 收集结果
+
+**执行步骤：**
+1. 从start遍历end
+1. 判断s[start..end]是否回文
+1. 是→递归分割剩余
+1. 回溯
+
+
+## ⚠️ 易错点
+
+- 回溯后别忘了 `pop` 撤销选择，否则路径会越攒越多。
+- 回文判断可以用 `s == s[::-1]` 快速实现，也可以预处理一个二维 DP 表来加速重复查询。
+- 子串范围是 `s[start:end+1]`，注意右端点是闭区间。
+- 收集结果时要拷贝一份 `path[:]`，不能直接加入引用，否则后续 pop 会影响已存结果。
+
+- substring(start, end+1) 注意+1
+
+- 只对回文子串才继续分割
+
+## 📊 复杂度分析
+
+- 时间复杂度：`O(n · 2ⁿ)`。最坏情况下每个位置都切或不切，有 `2ⁿ` 种分割方案，每种方案需要 `O(n)` 判断回文。
+- 空间复杂度：`O(n)`。递归深度最多 `n` 层，`path` 最多存 `n` 个子串。
+
+## 🏢 实际业务应用
+
+- 文本排版系统中，把一段话按语义断句，每句必须满足某些约束（比如长度限制、关键词完整性），本质上就是在候选断点之间做搜索和剪枝。
+- 正则表达式的匹配引擎，遇到分支（如 `a|b`）时，就是典型的回溯过程——先试一条路，不匹配就退回来试另一条。
+- 编译器的语法分析中，某些歧义语法需要尝试不同的推导路径，回溯是核心机制。
+
+- 文本排版系统中，把一段话按语义断句，每句必须满足某些约束（比如长度限制、关键词完整性），本质上就是在候选断点之间做搜索和剪枝。
+- 正则表达式的匹配引擎，遇到分支（如 `a|b`）时，就是典型的回溯过程——先试一条路，不匹配就退回来试另一条。
+- 编译器的语法分析中，某些歧义语法需要尝试不同的推导路径，回溯是核心机制。
+
+## 📖 形象类比
+
+可以把它类比成《西游记》里唐僧师徒到达一个到处是岔路的山洞。
+
+每到一处分岔口，孙悟空先探一条路。如果发现这条路越走越窄、前方是死胡同（当前子串不是回文），他就立刻拔根毫毛标记"此路不通"，原路返回上一个岔口换一条路。只有走到出口（字符串切割完毕），才把这条完整路径记下来。
+
+对应关系是：
+
+- "岔路口"对应字符串的每个位置 `start`
+- "每条路"对应一种切割长度 `end - start + 1`
+- "死胡同检查"对应回文判断
+- "原路返回"对应回溯的 `pop` 操作
+- "记下完整路径"对应把 `path` 加入 `result`
+
+这段记忆的关键是：不是一条路走到底就不回头，而是走不通就退，换路再试。
+
+可以把它类比成《西游记》里唐僧师徒到达一个到处是岔路的山洞。
+
+每到一处分岔口，孙悟空先探一条路。如果发现这条路越走越窄、前方是死胡同（当前子串不是回文），他就立刻拔根毫毛标记"此路不通"，原路返回上一个岔口换一条路。只有走到出口（字符串切割完毕），才把这条完整路径记下来。
+
+对应关系是：
+
+- "岔路口"对应字符串的每个位置 `start`
+- "每条路"对应一种切割长度 `end - start + 1`
+- "死胡同检查"对应回文判断
+- "原路返回"对应回溯的 `pop` 操作
+- "记下完整路径"对应把 `path` 加入 `result`
+
+这段记忆的关键是：不是一条路走到底就不回头，而是走不通就退，换路再试。
+
+小狐狸在森林小路上采蘑菇，必须按照蘑菇颜色的回文规律来分组。它从路边第一朵蘑菇开始，一朵一朵地往后看。如果当前这小段颜色序列是回文的，就摘下来放篮子里，继续往后走；如果不是回文，就再往后多看一朵，重新判断。
+
+每次走完整条路（所有蘑菇都分好了），小狐狸就把篮子里的分组抄一份到笔记本上。然后退回上一步，把最后放进篮子的那组倒出来，换个分法再试。
+
+小狐狸在森林小路上采蘑菇，必须按照蘑菇颜色的回文规律来分组。它从路边第一朵蘑菇开始，一朵一朵地往后看。如果当前这小段颜色序列是回文的，就摘下来放篮子里，继续往后走；如果不是回文，就再往后多看一朵，重新判断。
+
+每次走完整条路（所有蘑菇都分好了），小狐狸就把篮子里的分组抄一份到笔记本上。然后退回上一步，把最后放进篮子的那组倒出来，换个分法再试。
+
+## 🎵 记忆口诀
+
+切一刀，查回文，合法就往下走；到头收集，回头换路。
+
+切一刀，查回文，合法就往下走；到头收集，回头换路。
+
+## 🔗 延伸练习
+
+- `132. 分割回文串 II`：从"列出所有方案"变成"最少切几刀"，需要把回溯换成动态规划。
+- `93. 复原 IP 地址`：同样是在字符串上做切割，但约束从"回文"变成了"合法 IP 段"。
+
+- `132. 分割回文串 II`：从"列出所有方案"变成"最少切几刀"，需要把回溯换成动态规划。
+- `93. 复原 IP 地址`：同样是在字符串上做切割，但约束从"回文"变成了"合法 IP 段"。4:["$","main",null,{"className":"detail-main","style":{"maxWidth":760,"margin":"0 auto","padding":"16px","minHeight":"100vh"},"children":[["$","$Lc",null,{"href":"/","style":{"display":"inline-block","marginBottom":"12px","fontSize":"13px"},"children":"← 返回题库"}],["$","h1",null,{"style":{"fontSize":"22px","fontWeight":700,"margin":"0 0 4px"},"children":[["$","span",null,{"style":{"marginRight":"6px"},"children":"↩️"}],131,". ","分割回文串"]}],["$","$Ld",null,{"q":{"id":"0131","lcId":131,"slug":"palindrome-partitioning","title":"分割回文串","question":"分割回文串","answer":"$e","difficulty":"Medium","category":"backtracking","categories":["backtracking"],"tags":["字符串","动态规划","回溯"],"url":"https://leetcode.cn/problems/palindrome-partitioning/","planOrder":61,"hasViz":true,"hasDiagram":false,"feynman":{"essence":"给你一个字符串 `s`，请把它分成若干子串，使得每个子串都是回文串。返回所有可能的分割方案。  比如 `\"aab\"` 可以分成 `[[\"a\",\"a\",\"b\"],[\"aa\",\"b\"]]`。重点不是\"能不","analogy":"","key_points":[]},"first_principle":{"problem":"","axioms":[],"rebuild":""}}}]]}]
+a:[["$","meta","0",{"name":"viewport","content":"width=device-width, initial-scale=1"}],["$","meta","1",{"name":"theme-color","content":"#f97316"}]]
+8:[["$","meta","0",{"charSet":"utf-8"}],["$","title","1",{"children":"131. 分割回文串 - 算法面试"}],["$","meta","2",{"name":"description","content":"给你一个字符串 `s`，请把它分成若干子串，使得每个子串都是回文串。返回所有可能的分割方案。  比如 `\"aab\"` 可以分成 `[[\"a\",\"a\",\"b\"],[\"aa\",\"b\"]]`。重点不是\"能不"}],["$","meta","3",{"name":"application-name","content":"算法面试"}],["$","link","4",{"rel":"manifest","href":"/algorithm-interview/manifest.json","crossOrigin":"$undefined"}],["$","meta","5",{"name":"keywords","content":"分割回文串,LeetCode 131,Medium,字符串,动态规划,回溯"}],["$","meta","6",{"name":"mobile-web-app-capable","content":"yes"}],["$","meta","7",{"name":"apple-mobile-web-app-title","content":"算法面试"}],["$","meta","8",{"name":"apple-mobile-web-app-status-bar-style","content":"default"}],["$","meta","9",{"property":"og:title","content":"131. 分割回文串"}],["$","meta","10",{"property":"og:description","content":"给你一个字符串 `s`，请把它分成若干子串，使得每个子串都是回文串。返回所有可能的分割方案。  比如 `\"aab\"` 可以分成 `[[\"a\",\"a\",\"b\"],[\"aa\",\"b\"]]`。重点不是\"能不"}],["$","meta","11",{"property":"og:locale","content":"zh_CN"}],["$","meta","12",{"property":"og:type","content":"article"}],["$","meta","13",{"name":"twitter:card","content":"summary"}],["$","meta","14",{"name":"twitter:title","content":"131. 分割回文串"}],["$","meta","15",{"name":"twitter:description","content":"给你一个字符串 `s`，请把它分成若干子串，使得每个子串都是回文串。返回所有可能的分割方案。  比如 `\"aab\"` 可以分成 `[[\"a\",\"a\",\"b\"],[\"aa\",\"b\"]]`。重点不是\"能不"}]]
+6:null

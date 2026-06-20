@@ -1,0 +1,296 @@
+<!DOCTYPE html><html lang="zh"><head><meta charSet="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="/algorithm-interview/_next/static/css/c1e787639001e16b.css" data-precedence="next"/><link rel="preload" as="script" fetchPriority="low" href="/algorithm-interview/_next/static/chunks/webpack-65b8ce4c1158f96f.js"/><script src="/algorithm-interview/_next/static/chunks/4bd1b696-899926250d3992f1.js" async=""></script><script src="/algorithm-interview/_next/static/chunks/517-b6df7dad4ff96d0b.js" async=""></script><script src="/algorithm-interview/_next/static/chunks/main-app-9e7bfff32fd8ebe9.js" async=""></script><script src="/algorithm-interview/_next/static/chunks/173-69860a4742bb7020.js" async=""></script><script src="/algorithm-interview/_next/static/chunks/829-7533e70598480772.js" async=""></script><script src="/algorithm-interview/_next/static/chunks/app/columns/%5Bslug%5D/page-58fc1d8f5085c1ff.js" async=""></script><meta name="theme-color" content="#f97316"/><title>设计Twitter - 算法面试</title><meta name="description" content="LeetCode 热题 100 完整 Java 题解、逐题动画、知识专栏与智能间隔复习。"/><meta name="application-name" content="算法面试"/><link rel="manifest" href="/algorithm-interview/manifest.json"/><meta name="keywords" content="LeetCode,热题100,算法面试,Java题解,数据结构,动态规划,面试刷题"/><meta name="mobile-web-app-capable" content="yes"/><meta name="apple-mobile-web-app-title" content="算法面试"/><meta name="apple-mobile-web-app-status-bar-style" content="default"/><meta property="og:title" content="算法面试题库"/><meta property="og:description" content="LeetCode 热题 100 完整 Java 题解、逐题动画、知识专栏与智能复习"/><meta property="og:site_name" content="算法面试题库"/><meta property="og:locale" content="zh_CN"/><meta property="og:type" content="website"/><meta name="twitter:card" content="summary"/><meta name="twitter:title" content="算法面试题库"/><meta name="twitter:description" content="LeetCode 热题 100 完整 Java 题解、逐题动画、知识专栏与智能复习"/><script>
+try {
+  var raw = localStorage.getItem('algo-interview');
+  var theme = 'light';
+  if (raw) { var p = JSON.parse(raw); theme = (p.state && p.state.theme) || 'light'; }
+  if (theme === 'dark') {
+    document.documentElement.classList.add('dark');
+    document.documentElement.setAttribute('data-theme', 'dark');
+  }
+} catch (e) {}
+</script><script src="/algorithm-interview/_next/static/chunks/polyfills-42372ed130431b0a.js" noModule=""></script></head><body><main style="max-width:760px;margin:0 auto;padding:16px;min-height:100vh"><a style="display:inline-block;margin-bottom:12px;font-size:13px" href="/algorithm-interview/columns/">← 返回专栏</a><div style="font-size:12px;color:var(--text-tertiary);margin-bottom:4px">📕<!-- --> <!-- -->labuladong 算法小抄</div><h1 style="font-size:22px;font-weight:700;margin:0 0 16px">设计Twitter</h1><div class="prose max-w-none" style="font-size:14px;color:var(--text)"><h1>设计Twitter</h1>
+<p>设计Twitter
+学算法，认准 labuladong 就够了！
+「design Twitter」是 LeetCode 上第 355 道题⽬，不仅题⽬本⾝很有意思，
+⽽且把合并多个有序链表的算法和⾯向对象设计（OO design）结合起来
+了，很有实际意义，本⽂就带⼤家来看看这道题。
+⾄于 Twitter 的什么功能跟算法有关系，等我们描述⼀下题⽬要求就知道
+了。
+⼀、题⽬及应⽤场景简介
+Twitter 和微博功能差不多，我们主要要实现这样⼏个 API：
+class Twitter {
+/** user 发表⼀条 tweet 动态 <em>/
+public void postTweet(int userId, int tweetId) {}
+/</em>* 返回该 user 关注的⼈（包括他⾃⼰）最近的动态 id，
+最多 10 条，⽽且这些动态必须按从新到旧的时间线顺序排列。<em>/
+public List<!-- -->&lt;Integer&gt;<!-- --> getNewsFeed(int userId) {}
+/** follower 关注 followee，如果 Id 不存在则新建 <em>/
+public void follow(int followerId, int followeeId) {}
+/</em></em> follower 取关 followee，如果 Id 不存在则什么都不做 */
+public void unfollow(int followerId, int followeeId) {}
+}
+举个具体的例⼦，⽅便⼤家理解 API 的具体⽤法：
+Twitter twitter = new Twitter();
+设计Twitter
+274</p>
+<p>twitter.postTweet(1, 5);
+// ⽤户 1 发送了⼀条新推⽂ 5
+twitter.getNewsFeed(1);
+// return [5]，因为⾃⼰是关注⾃⼰的
+twitter.follow(1, 2);
+// ⽤户 1 关注了⽤户 2
+twitter.postTweet(2, 6);
+// ⽤户2发送了⼀个新推⽂ (id = 6)
+twitter.getNewsFeed(1);
+// return [6, 5]
+// 解释：⽤户 1 关注了⾃⼰和⽤户 2，所以返回他们的最近推⽂
+// ⽽且 6 必须在 5 之前，因为 6 是最近发送的
+twitter.unfollow(1, 2);
+// ⽤户 1 取消关注了⽤户 2
+twitter.getNewsFeed(1);
+// return [5]
+这个场景在我们的现实⽣活中⾮常常⻅。拿朋友圈举例，⽐如我刚加到⼥神
+的微信，然后我去刷新⼀下我的朋友圈动态，那么⼥神的动态就会出现在我
+的动态列表，⽽且会和其他动态按时间排好序。只不过 Twitter 是单向关
+注，微信好友相当于双向关注。除⾮，被屏蔽...
+这⼏个 API 中⼤部分都很好实现，最核⼼的功能难点应该是
+getNewsFeed ，因为返回的结果必须在时间上有序，但问题是⽤户的关注是
+动态变化的，怎么办？
+这⾥就涉及到算法了：如果我们把每个⽤户各⾃的推⽂存储在链表⾥，每个
+链表节点存储⽂章 id 和⼀个时间戳 time（记录发帖时间以便⽐较），⽽且
+这个链表是按 time 有序的，那么如果某个⽤户关注了 k 个⽤户，我们就可
+以⽤合并 k 个有序链表的算法合并出有序的推⽂列表，正确地
+getNewsFeed  了！
+设计Twitter
+275</p>
+<p>具体的算法等会讲解。不过，就算我们掌握了算法，应该如何编程表⽰⽤户
+user 和推⽂动态 tweet 才能把算法流畅地⽤出来呢？这就涉及简单的⾯向对
+象设计了，下⾯我们来由浅⼊深，⼀步⼀步进⾏设计。
+⼆、⾯向对象设计
+根据刚才的分析，我们需要⼀个 User 类，储存 user 信息，还需要⼀个
+Tweet 类，储存推⽂信息，并且要作为链表的节点。所以我们先搭建⼀下整
+体的框架：
+class Twitter {
+private static int timestamp = 0;
+private static class Tweet {}
+private static class User {}
+/* 还有那⼏个 API ⽅法 */
+public void postTweet(int userId, int tweetId) {}
+public List<!-- -->&lt;Integer&gt;<!-- --> getNewsFeed(int userId) {}
+public void follow(int followerId, int followeeId) {}
+public void unfollow(int followerId, int followeeId) {}
+}
+之所以要把 Tweet 和 User 类放到 Twitter 类⾥⾯，是因为 Tweet 类必须要⽤
+到⼀个全局时间戳 timestamp，⽽ User 类⼜需要⽤到 Tweet 类记录⽤户发送
+的推⽂，所以它们都作为内部类。不过为了清晰和简洁，下⽂会把每个内部
+类和 API ⽅法单独拿出来实现。
+1、Tweet 类的实现
+根据前⾯的分析，Tweet 类很容易实现：每个 Tweet 实例需要记录⾃⼰的
+tweetId 和发表时间 time，⽽且作为链表节点，要有⼀个指向下⼀个节点的
+next 指针。
+class Tweet {
+private int id;
+private int time;
+private Tweet next;
+设计Twitter
+276</p>
+<pre><code>// 需要传⼊推⽂内容（id）和发⽂时间
+public Tweet(int id, int time) {
+    this.id = id;
+    this.time = time;
+    this.next = null;
+}
+</code></pre>
+<p>}
+2、User 类的实现
+我们根据实际场景想⼀想，⼀个⽤户需要存储的信息有 userId，关注列表，
+以及该⽤户发过的推⽂列表。其中关注列表应该⽤集合（Hash Set）这种数
+据结构来存，因为不能重复，⽽且需要快速查找；推⽂列表应该由链表这种
+数据结构储存，以便于进⾏有序合并的操作。画个图理解⼀下：
+设计Twitter
+277</p>
+<p>除此之外，根据⾯向对象的设计原则，「关注」「取关」和「发⽂」应该是
+User 的⾏为，况且关注列表和推⽂列表也存储在 User 类中，所以我们也应
+该给 User 添加 follow，unfollow 和 post 这⼏个⽅法：
+// static int timestamp = 0
+class User {
+private int id;
+public Set<!-- -->&lt;Integer&gt;<!-- --> followed;
+// ⽤户发表的推⽂链表头结点
+public Tweet head;
+public User(int userId) {
+followed = new HashSet&lt;&gt;();
+this.id = userId;
+this.head = null;
+// 关注⼀下⾃⼰
+follow(id);
+}
+public void follow(int userId) {
+followed.add(userId);
+}
+设计Twitter
+278</p>
+<pre><code>public void unfollow(int userId) {
+    // 不可以取关⾃⼰
+    if (userId != this.id)
+        followed.remove(userId);
+}
+public void post(int tweetId) {
+    Tweet twt = new Tweet(tweetId, timestamp);
+    timestamp++;
+    // 将新建的推⽂插⼊链表头
+    // 越靠前的推⽂ time 值越⼤
+    twt.next = head;
+    head = twt;
+}
+</code></pre>
+<p>}
+3、⼏个 API ⽅法的实现
+class Twitter {
+private static int timestamp = 0;
+private static class Tweet {...}
+private static class User {...}
+// 我们需要⼀个映射将 userId 和 User 对象对应起来
+private HashMap&lt;Integer, User&gt; userMap = new HashMap&lt;&gt;();
+/** user 发表⼀条 tweet 动态 <em>/
+public void postTweet(int userId, int tweetId) {
+// 若 userId 不存在，则新建
+if (!userMap.containsKey(userId))
+userMap.put(userId, new User(userId));
+User u = userMap.get(userId);
+u.post(tweetId);
+}
+/</em>* follower 关注 followee */
+public void follow(int followerId, int followeeId) {
+// 若 follower 不存在，则新建
+if(!userMap.containsKey(followerId)){
+User u = new User(followerId);
+userMap.put(followerId, u);
+设计Twitter
+279</p>
+<pre><code>    }
+    // 若 followee 不存在，则新建
+    if(!userMap.containsKey(followeeId)){
+        User u = new User(followeeId);
+        userMap.put(followeeId, u);
+    }
+    userMap.get(followerId).follow(followeeId);
+}
+/** follower 取关 followee，如果 Id 不存在则什么都不做 */
+public void unfollow(int followerId, int followeeId) {
+    if (userMap.containsKey(followerId)) {
+        User flwer = userMap.get(followerId);
+        flwer.unfollow(followeeId);
+    }
+}
+/** 返回该 user 关注的⼈（包括他⾃⼰）最近的动态 id，
+最多 10 条，⽽且这些动态必须按从新到旧的时间线顺序排列。*/
+public List&lt;Integer&gt; getNewsFeed(int userId) {
+    // 需要理解算法，⻅下⽂
+}
+</code></pre>
+<p>}
+三、算法设计
+实现合并 k 个有序链表的算法需要⽤到优先级队列（Priority Queue），这种
+数据结构是「⼆叉堆」最重要的应⽤，你可以理解为它可以对插⼊的元素⾃
+动排序。乱序的元素插⼊其中就被放到了正确的位置，可以按照从⼩到⼤
+（或从⼤到⼩）有序地取出元素。
+PriorityQueue pq</p>
+<h1>乱序插⼊</h1>
+<p>for i in {2,4,1,9,6}:
+pq.add(i)
+while pq not empty:
+# 每次取出第⼀个（最⼩）元素
+print(pq.pop())</p>
+<h1>输出有序：1,2,4,6,9</h1>
+<p>设计Twitter
+280</p>
+<p>借助这种⽜逼的数据结构⽀持，我们就很容易实现这个核⼼功能了。注意我
+们把优先级队列设为按 time 属性从⼤到⼩降序排列，因为 time 越⼤意味着
+时间越近，应该排在前⾯：
+public List<!-- -->&lt;Integer&gt;<!-- --> getNewsFeed(int userId) {
+List<!-- -->&lt;Integer&gt;<!-- --> res = new ArrayList&lt;&gt;();
+if (!userMap.containsKey(userId)) return res;
+// 关注列表的⽤户 Id
+Set<!-- -->&lt;Integer&gt;<!-- --> users = userMap.get(userId).followed;
+// ⾃动通过 time 属性从⼤到⼩排序，容量为 users 的⼤⼩
+PriorityQueue<!-- -->&lt;Tweet&gt;<!-- --> pq =
+new PriorityQueue&lt;&gt;(users.size(), (a, b)-&gt;(b.time - a.time));
+// 先将所有链表头节点插⼊优先级队列
+for (int id : users) {
+Tweet twt = userMap.get(id).head;
+if (twt == null) continue;
+pq.add(twt);
+}
+while (!pq.isEmpty()) {
+// 最多返回 10 条就够了
+if (res.size() == 10) break;
+// 弹出 time 值最⼤的（最近发表的）
+Tweet twt = pq.poll();
+res.add(twt.id);
+// 将下⼀篇 Tweet 插⼊进⾏排序
+if (twt.next != null)
+pq.add(twt.next);
+}
+return res;
+}
+这个过程是这样的，下⾯是我制作的⼀个 GIF 图描述合并链表的过程。假
+设有三个 Tweet 链表按 time 属性降序排列，我们把他们降序合并添加到 res
+中。注意图中链表节点中的数字是 time 属性，不是 id 属性：
+【PDF格式⽆法显⽰GIF⽂件 设计Twitter/merge.gif，可移步公众号查看】
+设计Twitter
+281</p>
+<p>⾄此，这道⼀个极其简化的 Twitter 时间线功能就设计完毕了。
+四、最后总结
+本⽂运⽤简单的⾯向对象技巧和合并 k 个有序链表的算法设计了⼀套简化的
+时间线功能，这个功能其实⼴泛地运⽤在许多社交应⽤中。
+我们先合理地设计出 User 和 Tweet 两个类，然后基于这个设计之上运⽤算
+法解决了最重要的⼀个功能。可⻅实际应⽤中的算法并不是孤⽴存在的，需
+要和其他知识混合运⽤，才能发挥实际价值。
+当然，实际应⽤中的社交 App 数据量是巨⼤的，考虑到数据库的读写性
+能，我们的设计可能承受不住流量压⼒，还是有些太简化了。⽽且实际的应
+⽤都是⼀个极其庞⼤的⼯程，⽐如下图，是 Twitter 这样的社交⽹站⼤致的
+系统结构：
+设计Twitter
+282</p>
+<p>我们解决的问题应该只能算 Timeline Service 模块的⼀⼩部分，功能越多，
+系统的复杂性可能是指数级增⻓的。所以说合理的顶层设计⼗分重要，其作
+⽤是远超某⼀个算法的。
+最后，Github 上有⼀个优秀的开源项⽬，专门收集了很多⼤型系统设计的
+案例和解析，⽽且有中⽂版本，上⾯这个图也出⾃该项⽬。对系统设计感兴
+趣的读者可以点击 这⾥ 查看。
+PS：本⽂前两张图⽚和 GIF 是我第⼀次尝试⽤平板的绘图软件制作的，花
+了很多时间，尤其是 GIF 图，需要⼀帧⼀帧制作。如果本⽂内容对你有帮
+助，点个赞分个享，⿎励⼀下我呗！
+设计Twitter
+283</p>
+<p>＿＿＿＿＿＿＿＿＿＿＿＿＿
+刷算法，学套路，认准 labuladong。
+本⼩抄即将出版，关注 labuladong 公众号或 ongline book 查看更新⽂章，
+后台回复「进群」可进刷题群，labuladong 带你⽇穿 LeetCode。
+设计Twitter
+284</p>
+<p>递归反转链表的⼀部分
+学算法，认准 labuladong 就够了！
+反转单链表的迭代实现不是⼀个困难的事情，但是递归实现就有点难度了，
+如果再加⼀点难度，让你仅仅反转单链表中的⼀部分，你是否能够递归实现
+呢？
+本⽂就来由浅⼊深，step by step 地解决这个问题。如果你还不会递归地反转
+单链表也没关系，本⽂会从递归反转整个单链表开始拓展，只要你明⽩单链
+表的结构，相信你能够有所收获。
+// 单链表节点的结构
+public class ListNode {
+int val;
+ListNode next;
+ListNode(int x) { val = x; }
+}
+什么叫反转单链表的⼀部分呢，就是给你⼀个索引区间，让你把单链表中这
+部分元素反转，其他部分不变：
+递归反转链表的⼀部分
+285</p></div></main><script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function () {
+    navigator.serviceWorker.register('/algorithm-interview/sw.js').catch(function () {});
+  });
+}
+</script><script src="/algorithm-interview/_next/static/chunks/webpack-65b8ce4c1158f96f.js" async=""></script><script>(self.__next_f=self.__next_f||[]).push([0])</script><script>self.__next_f.push([1,"1:\"$Sreact.fragment\"\n2:I[5244,[],\"\"]\n3:I[3866,[],\"\"]\n5:I[6213,[],\"OutletBoundary\"]\n7:I[6213,[],\"MetadataBoundary\"]\n9:I[6213,[],\"ViewportBoundary\"]\nb:I[4835,[],\"\"]\n:HL[\"/algorithm-interview/_next/static/css/c1e787639001e16b.css\",\"style\"]\n"])</script><script>self.__next_f.push([1,"0:{\"P\":null,\"b\":\"xos97fAiWtKfKXI6hZLx4\",\"p\":\"/algorithm-interview\",\"c\":[\"\",\"columns\",\"lbd-039\",\"\"],\"i\":false,\"f\":[[[\"\",{\"children\":[\"columns\",{\"children\":[[\"slug\",\"lbd-039\",\"d\"],{\"children\":[\"__PAGE__\",{}]}]}]},\"$undefined\",\"$undefined\",true],[\"\",[\"$\",\"$1\",\"c\",{\"children\":[[[\"$\",\"link\",\"0\",{\"rel\":\"stylesheet\",\"href\":\"/algorithm-interview/_next/static/css/c1e787639001e16b.css\",\"precedence\":\"next\",\"crossOrigin\":\"$undefined\",\"nonce\":\"$undefined\"}]],[\"$\",\"html\",null,{\"lang\":\"zh\",\"children\":[[\"$\",\"head\",null,{\"children\":[\"$\",\"script\",null,{\"dangerouslySetInnerHTML\":{\"__html\":\"\\ntry {\\n  var raw = localStorage.getItem('algo-interview');\\n  var theme = 'light';\\n  if (raw) { var p = JSON.parse(raw); theme = (p.state \u0026\u0026 p.state.theme) || 'light'; }\\n  if (theme === 'dark') {\\n    document.documentElement.classList.add('dark');\\n    document.documentElement.setAttribute('data-theme', 'dark');\\n  }\\n} catch (e) {}\\n\"}}]}],[\"$\",\"body\",null,{\"children\":[[\"$\",\"$L2\",null,{\"parallelRouterKey\":\"children\",\"segmentPath\":[\"children\"],\"error\":\"$undefined\",\"errorStyles\":\"$undefined\",\"errorScripts\":\"$undefined\",\"template\":[\"$\",\"$L3\",null,{}],\"templateStyles\":\"$undefined\",\"templateScripts\":\"$undefined\",\"notFound\":[[],[[\"$\",\"title\",null,{\"children\":\"404: This page could not be found.\"}],[\"$\",\"div\",null,{\"style\":{\"fontFamily\":\"system-ui,\\\"Segoe UI\\\",Roboto,Helvetica,Arial,sans-serif,\\\"Apple Color Emoji\\\",\\\"Segoe UI Emoji\\\"\",\"height\":\"100vh\",\"textAlign\":\"center\",\"display\":\"flex\",\"flexDirection\":\"column\",\"alignItems\":\"center\",\"justifyContent\":\"center\"},\"children\":[\"$\",\"div\",null,{\"children\":[[\"$\",\"style\",null,{\"dangerouslySetInnerHTML\":{\"__html\":\"body{color:#000;background:#fff;margin:0}.next-error-h1{border-right:1px solid rgba(0,0,0,.3)}@media (prefers-color-scheme:dark){body{color:#fff;background:#000}.next-error-h1{border-right:1px solid rgba(255,255,255,.3)}}\"}}],[\"$\",\"h1\",null,{\"className\":\"next-error-h1\",\"style\":{\"display\":\"inline-block\",\"margin\":\"0 20px 0 0\",\"padding\":\"0 23px 0 0\",\"fontSize\":24,\"fontWeight\":500,\"verticalAlign\":\"top\",\"lineHeight\":\"49px\"},\"children\":404}],[\"$\",\"div\",null,{\"style\":{\"display\":\"inline-block\"},\"children\":[\"$\",\"h2\",null,{\"style\":{\"fontSize\":14,\"fontWeight\":400,\"lineHeight\":\"49px\",\"margin\":0},\"children\":\"This page could not be found.\"}]}]]}]}]]],\"forbidden\":\"$undefined\",\"unauthorized\":\"$undefined\"}],[\"$\",\"script\",null,{\"dangerouslySetInnerHTML\":{\"__html\":\"\\nif ('serviceWorker' in navigator) {\\n  window.addEventListener('load', function () {\\n    navigator.serviceWorker.register('/algorithm-interview/sw.js').catch(function () {});\\n  });\\n}\\n\"}}]]}]]}]]}],{\"children\":[\"columns\",[\"$\",\"$1\",\"c\",{\"children\":[null,[\"$\",\"$L2\",null,{\"parallelRouterKey\":\"children\",\"segmentPath\":[\"children\",\"columns\",\"children\"],\"error\":\"$undefined\",\"errorStyles\":\"$undefined\",\"errorScripts\":\"$undefined\",\"template\":[\"$\",\"$L3\",null,{}],\"templateStyles\":\"$undefined\",\"templateScripts\":\"$undefined\",\"notFound\":\"$undefined\",\"forbidden\":\"$undefined\",\"unauthorized\":\"$undefined\"}]]}],{\"children\":[[\"slug\",\"lbd-039\",\"d\"],[\"$\",\"$1\",\"c\",{\"children\":[null,[\"$\",\"$L2\",null,{\"parallelRouterKey\":\"children\",\"segmentPath\":[\"children\",\"columns\",\"children\",\"$0:f:0:1:2:children:2:children:0\",\"children\"],\"error\":\"$undefined\",\"errorStyles\":\"$undefined\",\"errorScripts\":\"$undefined\",\"template\":[\"$\",\"$L3\",null,{}],\"templateStyles\":\"$undefined\",\"templateScripts\":\"$undefined\",\"notFound\":\"$undefined\",\"forbidden\":\"$undefined\",\"unauthorized\":\"$undefined\"}]]}],{\"children\":[\"__PAGE__\",[\"$\",\"$1\",\"c\",{\"children\":[\"$L4\",null,[\"$\",\"$L5\",null,{\"children\":\"$L6\"}]]}],{},null,false]},null,false]},null,false]},null,false],[\"$\",\"$1\",\"h\",{\"children\":[null,[\"$\",\"$1\",\"J-VcmkWy021i0ODr5ohmW\",{\"children\":[[\"$\",\"$L7\",null,{\"children\":\"$L8\"}],[\"$\",\"$L9\",null,{\"children\":\"$La\"}],null]}]]}],false]],\"m\":\"$undefined\",\"G\":[\"$b\",\"$undefined\"],\"s\":false,\"S\":true}\n"])</script><script>self.__next_f.push([1,"c:I[8173,[\"173\",\"static/chunks/173-69860a4742bb7020.js\",\"829\",\"static/chunks/829-7533e70598480772.js\",\"306\",\"static/chunks/app/columns/%5Bslug%5D/page-58fc1d8f5085c1ff.js\"],\"\"]\nd:I[4780,[\"173\",\"static/chunks/173-69860a4742bb7020.js\",\"829\",\"static/chunks/829-7533e70598480772.js\",\"306\",\"static/chunks/app/columns/%5Bslug%5D/page-58fc1d8f5085c1ff.js\"],\"default\"]\ne:T30ab,"])</script><script>self.__next_f.push([1,"# 设计Twitter\n\n设计Twitter\n学算法，认准 labuladong 就够了！\n「design Twitter」是 LeetCode 上第 355 道题⽬，不仅题⽬本⾝很有意思，\n⽽且把合并多个有序链表的算法和⾯向对象设计（OO design）结合起来\n了，很有实际意义，本⽂就带⼤家来看看这道题。\n⾄于 Twitter 的什么功能跟算法有关系，等我们描述⼀下题⽬要求就知道\n了。\n⼀、题⽬及应⽤场景简介\nTwitter 和微博功能差不多，我们主要要实现这样⼏个 API：\nclass Twitter {\n    /** user 发表⼀条 tweet 动态 */\n    public void postTweet(int userId, int tweetId) {}\n    /** 返回该 user 关注的⼈（包括他⾃⼰）最近的动态 id，\n    最多 10 条，⽽且这些动态必须按从新到旧的时间线顺序排列。*/\n    public List\u003cInteger\u003e getNewsFeed(int userId) {}\n    /** follower 关注 followee，如果 Id 不存在则新建 */\n    public void follow(int followerId, int followeeId) {}\n    /** follower 取关 followee，如果 Id 不存在则什么都不做 */\n    public void unfollow(int followerId, int followeeId) {}\n}\n举个具体的例⼦，⽅便⼤家理解 API 的具体⽤法：\nTwitter twitter = new Twitter();\n设计Twitter\n274\n\ntwitter.postTweet(1, 5);\n// ⽤户 1 发送了⼀条新推⽂ 5\ntwitter.getNewsFeed(1);\n// return [5]，因为⾃⼰是关注⾃⼰的\ntwitter.follow(1, 2);\n// ⽤户 1 关注了⽤户 2\ntwitter.postTweet(2, 6);\n// ⽤户2发送了⼀个新推⽂ (id = 6)\ntwitter.getNewsFeed(1);\n// return [6, 5]\n// 解释：⽤户 1 关注了⾃⼰和⽤户 2，所以返回他们的最近推⽂\n// ⽽且 6 必须在 5 之前，因为 6 是最近发送的\ntwitter.unfollow(1, 2);\n// ⽤户 1 取消关注了⽤户 2\ntwitter.getNewsFeed(1);\n// return [5]\n这个场景在我们的现实⽣活中⾮常常⻅。拿朋友圈举例，⽐如我刚加到⼥神\n的微信，然后我去刷新⼀下我的朋友圈动态，那么⼥神的动态就会出现在我\n的动态列表，⽽且会和其他动态按时间排好序。只不过 Twitter 是单向关\n注，微信好友相当于双向关注。除⾮，被屏蔽...\n这⼏个 API 中⼤部分都很好实现，最核⼼的功能难点应该是\n getNewsFeed ，因为返回的结果必须在时间上有序，但问题是⽤户的关注是\n动态变化的，怎么办？\n这⾥就涉及到算法了：如果我们把每个⽤户各⾃的推⽂存储在链表⾥，每个\n链表节点存储⽂章 id 和⼀个时间戳 time（记录发帖时间以便⽐较），⽽且\n这个链表是按 time 有序的，那么如果某个⽤户关注了 k 个⽤户，我们就可\n以⽤合并 k 个有序链表的算法合并出有序的推⽂列表，正确地\n getNewsFeed  了！\n设计Twitter\n275\n\n具体的算法等会讲解。不过，就算我们掌握了算法，应该如何编程表⽰⽤户\nuser 和推⽂动态 tweet 才能把算法流畅地⽤出来呢？这就涉及简单的⾯向对\n象设计了，下⾯我们来由浅⼊深，⼀步⼀步进⾏设计。\n⼆、⾯向对象设计\n根据刚才的分析，我们需要⼀个 User 类，储存 user 信息，还需要⼀个\nTweet 类，储存推⽂信息，并且要作为链表的节点。所以我们先搭建⼀下整\n体的框架：\nclass Twitter {\n    private static int timestamp = 0;\n    private static class Tweet {}\n    private static class User {}\n    /* 还有那⼏个 API ⽅法 */\n    public void postTweet(int userId, int tweetId) {}\n    public List\u003cInteger\u003e getNewsFeed(int userId) {}\n    public void follow(int followerId, int followeeId) {}\n    public void unfollow(int followerId, int followeeId) {}\n}\n之所以要把 Tweet 和 User 类放到 Twitter 类⾥⾯，是因为 Tweet 类必须要⽤\n到⼀个全局时间戳 timestamp，⽽ User 类⼜需要⽤到 Tweet 类记录⽤户发送\n的推⽂，所以它们都作为内部类。不过为了清晰和简洁，下⽂会把每个内部\n类和 API ⽅法单独拿出来实现。\n1、Tweet 类的实现\n根据前⾯的分析，Tweet 类很容易实现：每个 Tweet 实例需要记录⾃⼰的\ntweetId 和发表时间 time，⽽且作为链表节点，要有⼀个指向下⼀个节点的\nnext 指针。\nclass Tweet {\n    private int id;\n    private int time;\n    private Tweet next;\n设计Twitter\n276\n\n    // 需要传⼊推⽂内容（id）和发⽂时间\n    public Tweet(int id, int time) {\n        this.id = id;\n        this.time = time;\n        this.next = null;\n    }\n}\n2、User 类的实现\n我们根据实际场景想⼀想，⼀个⽤户需要存储的信息有 userId，关注列表，\n以及该⽤户发过的推⽂列表。其中关注列表应该⽤集合（Hash Set）这种数\n据结构来存，因为不能重复，⽽且需要快速查找；推⽂列表应该由链表这种\n数据结构储存，以便于进⾏有序合并的操作。画个图理解⼀下：\n设计Twitter\n277\n\n除此之外，根据⾯向对象的设计原则，「关注」「取关」和「发⽂」应该是\nUser 的⾏为，况且关注列表和推⽂列表也存储在 User 类中，所以我们也应\n该给 User 添加 follow，unfollow 和 post 这⼏个⽅法：\n// static int timestamp = 0\nclass User {\n    private int id;\n    public Set\u003cInteger\u003e followed;\n    // ⽤户发表的推⽂链表头结点\n    public Tweet head;\n    public User(int userId) {\n        followed = new HashSet\u003c\u003e();\n        this.id = userId;\n        this.head = null;\n        // 关注⼀下⾃⼰\n        follow(id);\n    }\n    public void follow(int userId) {\n        followed.add(userId);\n    }\n设计Twitter\n278\n\n    public void unfollow(int userId) {\n        // 不可以取关⾃⼰\n        if (userId != this.id)\n            followed.remove(userId);\n    }\n    public void post(int tweetId) {\n        Tweet twt = new Tweet(tweetId, timestamp);\n        timestamp++;\n        // 将新建的推⽂插⼊链表头\n        // 越靠前的推⽂ time 值越⼤\n        twt.next = head;\n        head = twt;\n    }\n}\n3、⼏个 API ⽅法的实现\nclass Twitter {\n    private static int timestamp = 0;\n    private static class Tweet {...}\n    private static class User {...}\n    // 我们需要⼀个映射将 userId 和 User 对象对应起来\n    private HashMap\u003cInteger, User\u003e userMap = new HashMap\u003c\u003e();\n    /** user 发表⼀条 tweet 动态 */\n    public void postTweet(int userId, int tweetId) {\n        // 若 userId 不存在，则新建\n        if (!userMap.containsKey(userId))\n            userMap.put(userId, new User(userId));\n        User u = userMap.get(userId);\n        u.post(tweetId);\n    }\n    /** follower 关注 followee */\n    public void follow(int followerId, int followeeId) {\n        // 若 follower 不存在，则新建\n        if(!userMap.containsKey(followerId)){\n            User u = new User(followerId);\n            userMap.put(followerId, u);\n设计Twitter\n279\n\n        }\n        // 若 followee 不存在，则新建\n        if(!userMap.containsKey(followeeId)){\n            User u = new User(followeeId);\n            userMap.put(followeeId, u);\n        }\n        userMap.get(followerId).follow(followeeId);\n    }\n    /** follower 取关 followee，如果 Id 不存在则什么都不做 */\n    public void unfollow(int followerId, int followeeId) {\n        if (userMap.containsKey(followerId)) {\n            User flwer = userMap.get(followerId);\n            flwer.unfollow(followeeId);\n        }\n    }\n    /** 返回该 user 关注的⼈（包括他⾃⼰）最近的动态 id，\n    最多 10 条，⽽且这些动态必须按从新到旧的时间线顺序排列。*/\n    public List\u003cInteger\u003e getNewsFeed(int userId) {\n        // 需要理解算法，⻅下⽂\n    }\n}\n三、算法设计\n实现合并 k 个有序链表的算法需要⽤到优先级队列（Priority Queue），这种\n数据结构是「⼆叉堆」最重要的应⽤，你可以理解为它可以对插⼊的元素⾃\n动排序。乱序的元素插⼊其中就被放到了正确的位置，可以按照从⼩到⼤\n（或从⼤到⼩）有序地取出元素。\nPriorityQueue pq\n# 乱序插⼊\nfor i in {2,4,1,9,6}:\n    pq.add(i)\nwhile pq not empty:\n    # 每次取出第⼀个（最⼩）元素\n    print(pq.pop())\n# 输出有序：1,2,4,6,9\n设计Twitter\n280\n\n借助这种⽜逼的数据结构⽀持，我们就很容易实现这个核⼼功能了。注意我\n们把优先级队列设为按 time 属性从⼤到⼩降序排列，因为 time 越⼤意味着\n时间越近，应该排在前⾯：\npublic List\u003cInteger\u003e getNewsFeed(int userId) {\n    List\u003cInteger\u003e res = new ArrayList\u003c\u003e();\n    if (!userMap.containsKey(userId)) return res;\n    // 关注列表的⽤户 Id\n    Set\u003cInteger\u003e users = userMap.get(userId).followed;\n    // ⾃动通过 time 属性从⼤到⼩排序，容量为 users 的⼤⼩\n    PriorityQueue\u003cTweet\u003e pq = \n        new PriorityQueue\u003c\u003e(users.size(), (a, b)-\u003e(b.time - a.time));\n    // 先将所有链表头节点插⼊优先级队列\n    for (int id : users) {\n        Tweet twt = userMap.get(id).head;\n        if (twt == null) continue;\n        pq.add(twt);\n    }\n    while (!pq.isEmpty()) {\n        // 最多返回 10 条就够了\n        if (res.size() == 10) break;\n        // 弹出 time 值最⼤的（最近发表的）\n        Tweet twt = pq.poll();\n        res.add(twt.id);\n        // 将下⼀篇 Tweet 插⼊进⾏排序\n        if (twt.next != null) \n            pq.add(twt.next);\n    }\n    return res;\n}\n这个过程是这样的，下⾯是我制作的⼀个 GIF 图描述合并链表的过程。假\n设有三个 Tweet 链表按 time 属性降序排列，我们把他们降序合并添加到 res\n中。注意图中链表节点中的数字是 time 属性，不是 id 属性：\n【PDF格式⽆法显⽰GIF⽂件 设计Twitter/merge.gif，可移步公众号查看】\n设计Twitter\n281\n\n⾄此，这道⼀个极其简化的 Twitter 时间线功能就设计完毕了。\n四、最后总结\n本⽂运⽤简单的⾯向对象技巧和合并 k 个有序链表的算法设计了⼀套简化的\n时间线功能，这个功能其实⼴泛地运⽤在许多社交应⽤中。\n我们先合理地设计出 User 和 Tweet 两个类，然后基于这个设计之上运⽤算\n法解决了最重要的⼀个功能。可⻅实际应⽤中的算法并不是孤⽴存在的，需\n要和其他知识混合运⽤，才能发挥实际价值。\n当然，实际应⽤中的社交 App 数据量是巨⼤的，考虑到数据库的读写性\n能，我们的设计可能承受不住流量压⼒，还是有些太简化了。⽽且实际的应\n⽤都是⼀个极其庞⼤的⼯程，⽐如下图，是 Twitter 这样的社交⽹站⼤致的\n系统结构：\n设计Twitter\n282\n\n我们解决的问题应该只能算 Timeline Service 模块的⼀⼩部分，功能越多，\n系统的复杂性可能是指数级增⻓的。所以说合理的顶层设计⼗分重要，其作\n⽤是远超某⼀个算法的。\n最后，Github 上有⼀个优秀的开源项⽬，专门收集了很多⼤型系统设计的\n案例和解析，⽽且有中⽂版本，上⾯这个图也出⾃该项⽬。对系统设计感兴\n趣的读者可以点击 这⾥ 查看。\nPS：本⽂前两张图⽚和 GIF 是我第⼀次尝试⽤平板的绘图软件制作的，花\n了很多时间，尤其是 GIF 图，需要⼀帧⼀帧制作。如果本⽂内容对你有帮\n助，点个赞分个享，⿎励⼀下我呗！\n设计Twitter\n283\n\n＿＿＿＿＿＿＿＿＿＿＿＿＿\n刷算法，学套路，认准 labuladong。\n本⼩抄即将出版，关注 labuladong 公众号或 ongline book 查看更新⽂章，\n后台回复「进群」可进刷题群，labuladong 带你⽇穿 LeetCode。\n设计Twitter\n284\n\n递归反转链表的⼀部分\n学算法，认准 labuladong 就够了！\n反转单链表的迭代实现不是⼀个困难的事情，但是递归实现就有点难度了，\n如果再加⼀点难度，让你仅仅反转单链表中的⼀部分，你是否能够递归实现\n呢？\n本⽂就来由浅⼊深，step by step 地解决这个问题。如果你还不会递归地反转\n单链表也没关系，本⽂会从递归反转整个单链表开始拓展，只要你明⽩单链\n表的结构，相信你能够有所收获。\n// 单链表节点的结构\npublic class ListNode {\n    int val;\n    ListNode next;\n    ListNode(int x) { val = x; }\n}\n什么叫反转单链表的⼀部分呢，就是给你⼀个索引区间，让你把单链表中这\n部分元素反转，其他部分不变：\n递归反转链表的⼀部分\n285"])</script><script>self.__next_f.push([1,"4:[\"$\",\"main\",null,{\"style\":{\"maxWidth\":760,\"margin\":\"0 auto\",\"padding\":\"16px\",\"minHeight\":\"100vh\"},\"children\":[[\"$\",\"$Lc\",null,{\"href\":\"/columns/\",\"style\":{\"display\":\"inline-block\",\"marginBottom\":\"12px\",\"fontSize\":\"13px\"},\"children\":\"← 返回专栏\"}],[\"$\",\"div\",null,{\"style\":{\"fontSize\":\"12px\",\"color\":\"var(--text-tertiary)\",\"marginBottom\":\"4px\"},\"children\":[\"📕\",\" \",\"labuladong 算法小抄\"]}],[\"$\",\"h1\",null,{\"style\":{\"fontSize\":\"22px\",\"fontWeight\":700,\"margin\":\"0 0 16px\"},\"children\":\"设计Twitter\"}],[\"$\",\"$Ld\",null,{\"children\":\"$e\"}],false]}]\n"])</script><script>self.__next_f.push([1,"a:[[\"$\",\"meta\",\"0\",{\"name\":\"viewport\",\"content\":\"width=device-width, initial-scale=1\"}],[\"$\",\"meta\",\"1\",{\"name\":\"theme-color\",\"content\":\"#f97316\"}]]\n"])</script><script>self.__next_f.push([1,"8:[[\"$\",\"meta\",\"0\",{\"charSet\":\"utf-8\"}],[\"$\",\"title\",\"1\",{\"children\":\"设计Twitter - 算法面试\"}],[\"$\",\"meta\",\"2\",{\"name\":\"description\",\"content\":\"LeetCode 热题 100 完整 Java 题解、逐题动画、知识专栏与智能间隔复习。\"}],[\"$\",\"meta\",\"3\",{\"name\":\"application-name\",\"content\":\"算法面试\"}],[\"$\",\"link\",\"4\",{\"rel\":\"manifest\",\"href\":\"/algorithm-interview/manifest.json\",\"crossOrigin\":\"$undefined\"}],[\"$\",\"meta\",\"5\",{\"name\":\"keywords\",\"content\":\"LeetCode,热题100,算法面试,Java题解,数据结构,动态规划,面试刷题\"}],[\"$\",\"meta\",\"6\",{\"name\":\"mobile-web-app-capable\",\"content\":\"yes\"}],[\"$\",\"meta\",\"7\",{\"name\":\"apple-mobile-web-app-title\",\"content\":\"算法面试\"}],[\"$\",\"meta\",\"8\",{\"name\":\"apple-mobile-web-app-status-bar-style\",\"content\":\"default\"}],[\"$\",\"meta\",\"9\",{\"property\":\"og:title\",\"content\":\"算法面试题库\"}],[\"$\",\"meta\",\"10\",{\"property\":\"og:description\",\"content\":\"LeetCode 热题 100 完整 Java 题解、逐题动画、知识专栏与智能复习\"}],[\"$\",\"meta\",\"11\",{\"property\":\"og:site_name\",\"content\":\"算法面试题库\"}],[\"$\",\"meta\",\"12\",{\"property\":\"og:locale\",\"content\":\"zh_CN\"}],[\"$\",\"meta\",\"13\",{\"property\":\"og:type\",\"content\":\"website\"}],[\"$\",\"meta\",\"14\",{\"name\":\"twitter:card\",\"content\":\"summary\"}],[\"$\",\"meta\",\"15\",{\"name\":\"twitter:title\",\"content\":\"算法面试题库\"}],[\"$\",\"meta\",\"16\",{\"name\":\"twitter:description\",\"content\":\"LeetCode 热题 100 完整 Java 题解、逐题动画、知识专栏与智能复习\"}]]\n"])</script><script>self.__next_f.push([1,"6:null\n"])</script></body></html>

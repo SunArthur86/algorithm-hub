@@ -1,0 +1,159 @@
+<!DOCTYPE html><html lang="zh"><head><meta charSet="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="/algorithm-interview/_next/static/css/c1e787639001e16b.css" data-precedence="next"/><link rel="preload" as="script" fetchPriority="low" href="/algorithm-interview/_next/static/chunks/webpack-65b8ce4c1158f96f.js"/><script src="/algorithm-interview/_next/static/chunks/4bd1b696-899926250d3992f1.js" async=""></script><script src="/algorithm-interview/_next/static/chunks/517-b6df7dad4ff96d0b.js" async=""></script><script src="/algorithm-interview/_next/static/chunks/main-app-9e7bfff32fd8ebe9.js" async=""></script><script src="/algorithm-interview/_next/static/chunks/173-69860a4742bb7020.js" async=""></script><script src="/algorithm-interview/_next/static/chunks/829-7533e70598480772.js" async=""></script><script src="/algorithm-interview/_next/static/chunks/app/columns/%5Bslug%5D/page-58fc1d8f5085c1ff.js" async=""></script><meta name="theme-color" content="#f97316"/><title>如何k个一组反转链表 - 算法面试</title><meta name="description" content="LeetCode 热题 100 完整 Java 题解、逐题动画、知识专栏与智能间隔复习。"/><meta name="application-name" content="算法面试"/><link rel="manifest" href="/algorithm-interview/manifest.json"/><meta name="keywords" content="LeetCode,热题100,算法面试,Java题解,数据结构,动态规划,面试刷题"/><meta name="mobile-web-app-capable" content="yes"/><meta name="apple-mobile-web-app-title" content="算法面试"/><meta name="apple-mobile-web-app-status-bar-style" content="default"/><meta property="og:title" content="算法面试题库"/><meta property="og:description" content="LeetCode 热题 100 完整 Java 题解、逐题动画、知识专栏与智能复习"/><meta property="og:site_name" content="算法面试题库"/><meta property="og:locale" content="zh_CN"/><meta property="og:type" content="website"/><meta name="twitter:card" content="summary"/><meta name="twitter:title" content="算法面试题库"/><meta name="twitter:description" content="LeetCode 热题 100 完整 Java 题解、逐题动画、知识专栏与智能复习"/><script>
+try {
+  var raw = localStorage.getItem('algo-interview');
+  var theme = 'light';
+  if (raw) { var p = JSON.parse(raw); theme = (p.state && p.state.theme) || 'light'; }
+  if (theme === 'dark') {
+    document.documentElement.classList.add('dark');
+    document.documentElement.setAttribute('data-theme', 'dark');
+  }
+} catch (e) {}
+</script><script src="/algorithm-interview/_next/static/chunks/polyfills-42372ed130431b0a.js" noModule=""></script></head><body><main style="max-width:760px;margin:0 auto;padding:16px;min-height:100vh"><a style="display:inline-block;margin-bottom:12px;font-size:13px" href="/algorithm-interview/columns/">← 返回专栏</a><div style="font-size:12px;color:var(--text-tertiary);margin-bottom:4px">📕<!-- --> <!-- -->labuladong 算法小抄</div><h1 style="font-size:22px;font-weight:700;margin:0 0 16px">如何k个一组反转链表</h1><div class="prose max-w-none" style="font-size:14px;color:var(--text)"><h1>如何k个一组反转链表</h1>
+<p>如何k个⼀组反转链表
+学算法，认准 labuladong 就够了！
+之前的⽂章「递归反转链表的⼀部分」讲了如何递归地反转⼀部分链表，有
+读者就问如何迭代地反转链表，这篇⽂章解决的问题也需要反转链表的函
+数，我们不妨就⽤迭代⽅式来解决。
+本⽂要解决「K 个⼀组反转链表」，不难理解：
+这个问题经常在⾯经中看到，⽽且 LeetCode 上难度是 Hard，它真的有那么
+难吗？
+对于基本数据结构的算法问题其实都不难，只要结合特点⼀点点拆解分析，
+⼀般都没啥难点。下⾯我们就来拆解⼀下这个问题。
+⼀、分析问题
+⾸先，前⽂学习数据结构的框架思维提到过，链表是⼀种兼具递归和迭代性
+质的数据结构，认真思考⼀下可以发现这个问题具有递归性质。
+如何k个⼀组反转链表
+437</p>
+<p>什么叫递归性质？直接上图理解，⽐如说我们对这个链表调⽤
+reverseKGroup(head, 2) ，即以 2 个节点为⼀组反转链表：
+如果我设法把前 2 个节点反转，那么后⾯的那些节点怎么处理？后⾯的这些
+节点也是⼀条链表，⽽且规模（⻓度）⽐原来这条链表⼩，这就叫⼦问题。
+我们可以直接递归调⽤  reverseKGroup(cur, 2) ，因为⼦问题和原问题的结
+构完全相同，这就是所谓的递归性质。
+如何k个⼀组反转链表
+438</p>
+<p>发现了递归性质，就可以得到⼤致的算法流程：
+1、先反转以  head  开头的  k  个元素。
+2、将第  k + 1  个元素作为  head  递归调⽤  reverseKGroup  函数。
+3、将上述两个过程的结果连接起来。
+如何k个⼀组反转链表
+439</p>
+<p>整体思路就是这样了，最后⼀点值得注意的是，递归函数都有个 base case，
+对于这个问题是什么呢？
+题⽬说了，如果最后的元素不⾜  k  个，就保持不变。这就是 base case，待
+会会在代码⾥体现。
+⼆、代码实现
+⾸先，我们要实现⼀个  reverse  函数反转⼀个区间之内的元素。在此之前
+我们再简化⼀下，给定链表头结点，如何反转整个链表？
+// 反转以 a 为头结点的链表
+ListNode reverse(ListNode a) {
+ListNode pre, cur, nxt;
+pre = null; cur = a; nxt = a;
+while (cur != null) {
+nxt = cur.next;
+// 逐个结点反转
+cur.next = pre;
+// 更新指针位置
+pre = cur;
+cur = nxt;
+}
+// 返回反转后的头结点
+如何k个⼀组反转链表
+440</p>
+<pre><code>return pre;
+</code></pre>
+<p>}
+【PDF格式⽆法显⽰GIF⽂件 kgroup/8.gif，可移步公众号查看】
+这次使⽤迭代思路来实现的，借助动画理解应该很容易。
+「反转以  a  为头结点的链表」其实就是「反转  a  到 null 之间的结点」，
+那么如果让你「反转  a  到  b  之间的结点」，你会不会？
+只要更改函数签名，并把上⾯的代码中  null  改成  b  即可：
+/** 反转区间 [a, b) 的元素，注意是左闭右开 */
+ListNode reverse(ListNode a, ListNode b) {
+ListNode pre, cur, nxt;
+pre = null; cur = a; nxt = a;
+// while 终⽌的条件改⼀下就⾏了
+while (cur != b) {
+nxt = cur.next;
+cur.next = pre;
+pre = cur;
+cur = nxt;
+}
+// 返回反转后的头结点
+return pre;
+}
+现在我们迭代实现了反转部分链表的功能，接下来就按照之前的逻辑编写
+reverseKGroup  函数即可：
+ListNode reverseKGroup(ListNode head, int k) {
+if (head == null) return null;
+// 区间 [a, b) 包含 k 个待反转元素
+ListNode a, b;
+a = b = head;
+for (int i = 0; i &lt; k; i++) {
+// 不⾜ k 个，不需要反转，base case
+if (b == null) return head;
+b = b.next;
+}
+如何k个⼀组反转链表
+441</p>
+<pre><code>// 反转前 k 个元素
+ListNode newHead = reverse(a, b);
+// 递归反转后续链表并连接起来
+a.next = reverseKGroup(b, k);
+return newHead;
+</code></pre>
+<p>}
+解释⼀下  for  循环之后的⼏句代码，注意  reverse  函数是反转区间  [a,
+b) ，所以情形是这样的：
+递归部分就不展开了，整个函数递归完成之后就是这个结果，完全符合题
+意：
+如何k个⼀组反转链表
+442</p>
+<p>三、最后说两句
+从阅读量上看，基本数据结构相关的算法⽂章看的⼈都不多，我想说这是要
+吃亏的。
+⼤家喜欢看动态规划相关的问题，可能因为⾯试很常⻅，但就我个⼈理解，
+很多算法思想都是源于数据结构的。我们公众号的成名之作之⼀，「学习数
+据结构的框架思维」就提过，什么动规、回溯、分治算法，其实都是树的遍
+历，树这种结构它不就是个多叉链表吗？你能处理基本数据结构的问题，解
+决⼀般的算法问题应该也不会太费事。
+那么如何分解问题、发现递归性质呢？这个只能多练习，也许后续可以专门
+写⼀篇⽂章来探讨⼀下，本⽂就到此为⽌吧，希望对⼤家有帮助！
+＿＿＿＿＿＿＿＿＿＿＿＿＿
+刷算法，学套路，认准 labuladong。
+本⼩抄即将出版，关注 labuladong 公众号或 ongline book 查看更新⽂章，
+后台回复「进群」可进刷题群，labuladong 带你⽇穿 LeetCode。
+如何k个⼀组反转链表
+443</p>
+<p>如何k个⼀组反转链表
+444</p>
+<p>如何判定括号合法性
+学算法，认准 labuladong 就够了！
+对括号的合法性判断是⼀个很常⻅且实⽤的问题，⽐如说我们写的代码，编
+辑器和编译器都会检查括号是否正确闭合。⽽且我们的代码可能会包含三种
+括号  <a href=""></a>{} ，判断起来有⼀点难度。
+本⽂就来聊⼀道关于括号合法性判断的算法题，相信能加深你对栈这种数据
+结构的理解。
+题⽬很简单，输⼊⼀个字符串，其中包含  <a href=""></a>{}  六种括号，请你判断这
+个字符串组成的括号是否合法。
+Input: &quot;()[]{}&quot;
+Output: true
+Input: &quot;([)]&quot;
+Output: false
+Input: &quot;{[]}&quot;
+Output: true
+解决这个问题之前，我们先降低难度，思考⼀下，如果只有⼀种括号
+() ，应该如何判断字符串组成的括号是否合法呢？
+⼀、处理⼀种括号
+字符串中只有圆括号，如果想让括号字符串合法，那么必须做到：
+每个右括号  )  的左边必须有⼀个左括号  (  和它匹配。
+⽐如说字符串  ()))((  中，中间的两个右括号左边就没有左括号匹配，所
+以这个括号组合是不合法的。
+如何判定括号合法性
+445</p></div></main><script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function () {
+    navigator.serviceWorker.register('/algorithm-interview/sw.js').catch(function () {});
+  });
+}
+</script><script src="/algorithm-interview/_next/static/chunks/webpack-65b8ce4c1158f96f.js" async=""></script><script>(self.__next_f=self.__next_f||[]).push([0])</script><script>self.__next_f.push([1,"1:\"$Sreact.fragment\"\n2:I[5244,[],\"\"]\n3:I[3866,[],\"\"]\n5:I[6213,[],\"OutletBoundary\"]\n7:I[6213,[],\"MetadataBoundary\"]\n9:I[6213,[],\"ViewportBoundary\"]\nb:I[4835,[],\"\"]\n:HL[\"/algorithm-interview/_next/static/css/c1e787639001e16b.css\",\"style\"]\n"])</script><script>self.__next_f.push([1,"0:{\"P\":null,\"b\":\"xos97fAiWtKfKXI6hZLx4\",\"p\":\"/algorithm-interview\",\"c\":[\"\",\"columns\",\"lbd-065\",\"\"],\"i\":false,\"f\":[[[\"\",{\"children\":[\"columns\",{\"children\":[[\"slug\",\"lbd-065\",\"d\"],{\"children\":[\"__PAGE__\",{}]}]}]},\"$undefined\",\"$undefined\",true],[\"\",[\"$\",\"$1\",\"c\",{\"children\":[[[\"$\",\"link\",\"0\",{\"rel\":\"stylesheet\",\"href\":\"/algorithm-interview/_next/static/css/c1e787639001e16b.css\",\"precedence\":\"next\",\"crossOrigin\":\"$undefined\",\"nonce\":\"$undefined\"}]],[\"$\",\"html\",null,{\"lang\":\"zh\",\"children\":[[\"$\",\"head\",null,{\"children\":[\"$\",\"script\",null,{\"dangerouslySetInnerHTML\":{\"__html\":\"\\ntry {\\n  var raw = localStorage.getItem('algo-interview');\\n  var theme = 'light';\\n  if (raw) { var p = JSON.parse(raw); theme = (p.state \u0026\u0026 p.state.theme) || 'light'; }\\n  if (theme === 'dark') {\\n    document.documentElement.classList.add('dark');\\n    document.documentElement.setAttribute('data-theme', 'dark');\\n  }\\n} catch (e) {}\\n\"}}]}],[\"$\",\"body\",null,{\"children\":[[\"$\",\"$L2\",null,{\"parallelRouterKey\":\"children\",\"segmentPath\":[\"children\"],\"error\":\"$undefined\",\"errorStyles\":\"$undefined\",\"errorScripts\":\"$undefined\",\"template\":[\"$\",\"$L3\",null,{}],\"templateStyles\":\"$undefined\",\"templateScripts\":\"$undefined\",\"notFound\":[[],[[\"$\",\"title\",null,{\"children\":\"404: This page could not be found.\"}],[\"$\",\"div\",null,{\"style\":{\"fontFamily\":\"system-ui,\\\"Segoe UI\\\",Roboto,Helvetica,Arial,sans-serif,\\\"Apple Color Emoji\\\",\\\"Segoe UI Emoji\\\"\",\"height\":\"100vh\",\"textAlign\":\"center\",\"display\":\"flex\",\"flexDirection\":\"column\",\"alignItems\":\"center\",\"justifyContent\":\"center\"},\"children\":[\"$\",\"div\",null,{\"children\":[[\"$\",\"style\",null,{\"dangerouslySetInnerHTML\":{\"__html\":\"body{color:#000;background:#fff;margin:0}.next-error-h1{border-right:1px solid rgba(0,0,0,.3)}@media (prefers-color-scheme:dark){body{color:#fff;background:#000}.next-error-h1{border-right:1px solid rgba(255,255,255,.3)}}\"}}],[\"$\",\"h1\",null,{\"className\":\"next-error-h1\",\"style\":{\"display\":\"inline-block\",\"margin\":\"0 20px 0 0\",\"padding\":\"0 23px 0 0\",\"fontSize\":24,\"fontWeight\":500,\"verticalAlign\":\"top\",\"lineHeight\":\"49px\"},\"children\":404}],[\"$\",\"div\",null,{\"style\":{\"display\":\"inline-block\"},\"children\":[\"$\",\"h2\",null,{\"style\":{\"fontSize\":14,\"fontWeight\":400,\"lineHeight\":\"49px\",\"margin\":0},\"children\":\"This page could not be found.\"}]}]]}]}]]],\"forbidden\":\"$undefined\",\"unauthorized\":\"$undefined\"}],[\"$\",\"script\",null,{\"dangerouslySetInnerHTML\":{\"__html\":\"\\nif ('serviceWorker' in navigator) {\\n  window.addEventListener('load', function () {\\n    navigator.serviceWorker.register('/algorithm-interview/sw.js').catch(function () {});\\n  });\\n}\\n\"}}]]}]]}]]}],{\"children\":[\"columns\",[\"$\",\"$1\",\"c\",{\"children\":[null,[\"$\",\"$L2\",null,{\"parallelRouterKey\":\"children\",\"segmentPath\":[\"children\",\"columns\",\"children\"],\"error\":\"$undefined\",\"errorStyles\":\"$undefined\",\"errorScripts\":\"$undefined\",\"template\":[\"$\",\"$L3\",null,{}],\"templateStyles\":\"$undefined\",\"templateScripts\":\"$undefined\",\"notFound\":\"$undefined\",\"forbidden\":\"$undefined\",\"unauthorized\":\"$undefined\"}]]}],{\"children\":[[\"slug\",\"lbd-065\",\"d\"],[\"$\",\"$1\",\"c\",{\"children\":[null,[\"$\",\"$L2\",null,{\"parallelRouterKey\":\"children\",\"segmentPath\":[\"children\",\"columns\",\"children\",\"$0:f:0:1:2:children:2:children:0\",\"children\"],\"error\":\"$undefined\",\"errorStyles\":\"$undefined\",\"errorScripts\":\"$undefined\",\"template\":[\"$\",\"$L3\",null,{}],\"templateStyles\":\"$undefined\",\"templateScripts\":\"$undefined\",\"notFound\":\"$undefined\",\"forbidden\":\"$undefined\",\"unauthorized\":\"$undefined\"}]]}],{\"children\":[\"__PAGE__\",[\"$\",\"$1\",\"c\",{\"children\":[\"$L4\",null,[\"$\",\"$L5\",null,{\"children\":\"$L6\"}]]}],{},null,false]},null,false]},null,false]},null,false],[\"$\",\"$1\",\"h\",{\"children\":[null,[\"$\",\"$1\",\"uOUYV4fxpZO79Rwr6AKXy\",{\"children\":[[\"$\",\"$L7\",null,{\"children\":\"$L8\"}],[\"$\",\"$L9\",null,{\"children\":\"$La\"}],null]}]]}],false]],\"m\":\"$undefined\",\"G\":[\"$b\",\"$undefined\"],\"s\":false,\"S\":true}\n"])</script><script>self.__next_f.push([1,"c:I[8173,[\"173\",\"static/chunks/173-69860a4742bb7020.js\",\"829\",\"static/chunks/829-7533e70598480772.js\",\"306\",\"static/chunks/app/columns/%5Bslug%5D/page-58fc1d8f5085c1ff.js\"],\"\"]\nd:I[4780,[\"173\",\"static/chunks/173-69860a4742bb7020.js\",\"829\",\"static/chunks/829-7533e70598480772.js\",\"306\",\"static/chunks/app/columns/%5Bslug%5D/page-58fc1d8f5085c1ff.js\"],\"default\"]\ne:T1997,"])</script><script>self.__next_f.push([1,"# 如何k个一组反转链表\n\n如何k个⼀组反转链表\n学算法，认准 labuladong 就够了！\n之前的⽂章「递归反转链表的⼀部分」讲了如何递归地反转⼀部分链表，有\n读者就问如何迭代地反转链表，这篇⽂章解决的问题也需要反转链表的函\n数，我们不妨就⽤迭代⽅式来解决。\n本⽂要解决「K 个⼀组反转链表」，不难理解：\n这个问题经常在⾯经中看到，⽽且 LeetCode 上难度是 Hard，它真的有那么\n难吗？\n对于基本数据结构的算法问题其实都不难，只要结合特点⼀点点拆解分析，\n⼀般都没啥难点。下⾯我们就来拆解⼀下这个问题。\n⼀、分析问题\n⾸先，前⽂学习数据结构的框架思维提到过，链表是⼀种兼具递归和迭代性\n质的数据结构，认真思考⼀下可以发现这个问题具有递归性质。\n如何k个⼀组反转链表\n437\n\n什么叫递归性质？直接上图理解，⽐如说我们对这个链表调⽤\n reverseKGroup(head, 2) ，即以 2 个节点为⼀组反转链表：\n如果我设法把前 2 个节点反转，那么后⾯的那些节点怎么处理？后⾯的这些\n节点也是⼀条链表，⽽且规模（⻓度）⽐原来这条链表⼩，这就叫⼦问题。\n我们可以直接递归调⽤  reverseKGroup(cur, 2) ，因为⼦问题和原问题的结\n构完全相同，这就是所谓的递归性质。\n如何k个⼀组反转链表\n438\n\n发现了递归性质，就可以得到⼤致的算法流程：\n1、先反转以  head  开头的  k  个元素。\n2、将第  k + 1  个元素作为  head  递归调⽤  reverseKGroup  函数。\n3、将上述两个过程的结果连接起来。\n如何k个⼀组反转链表\n439\n\n整体思路就是这样了，最后⼀点值得注意的是，递归函数都有个 base case，\n对于这个问题是什么呢？\n题⽬说了，如果最后的元素不⾜  k  个，就保持不变。这就是 base case，待\n会会在代码⾥体现。\n⼆、代码实现\n⾸先，我们要实现⼀个  reverse  函数反转⼀个区间之内的元素。在此之前\n我们再简化⼀下，给定链表头结点，如何反转整个链表？\n// 反转以 a 为头结点的链表\nListNode reverse(ListNode a) {\n    ListNode pre, cur, nxt;\n    pre = null; cur = a; nxt = a;\n    while (cur != null) {\n        nxt = cur.next;\n        // 逐个结点反转\n        cur.next = pre;\n        // 更新指针位置\n        pre = cur;\n        cur = nxt;\n    }\n    // 返回反转后的头结点\n如何k个⼀组反转链表\n440\n\n    return pre;\n}\n【PDF格式⽆法显⽰GIF⽂件 kgroup/8.gif，可移步公众号查看】\n这次使⽤迭代思路来实现的，借助动画理解应该很容易。\n「反转以  a  为头结点的链表」其实就是「反转  a  到 null 之间的结点」，\n那么如果让你「反转  a  到  b  之间的结点」，你会不会？\n只要更改函数签名，并把上⾯的代码中  null  改成  b  即可：\n/** 反转区间 [a, b) 的元素，注意是左闭右开 */\nListNode reverse(ListNode a, ListNode b) {\n    ListNode pre, cur, nxt;\n    pre = null; cur = a; nxt = a;\n    // while 终⽌的条件改⼀下就⾏了\n    while (cur != b) {\n        nxt = cur.next;\n        cur.next = pre;\n        pre = cur;\n        cur = nxt;\n    }\n    // 返回反转后的头结点\n    return pre;\n}\n现在我们迭代实现了反转部分链表的功能，接下来就按照之前的逻辑编写\n reverseKGroup  函数即可：\nListNode reverseKGroup(ListNode head, int k) {\n    if (head == null) return null;\n    // 区间 [a, b) 包含 k 个待反转元素\n    ListNode a, b;\n    a = b = head;\n    for (int i = 0; i \u003c k; i++) {\n        // 不⾜ k 个，不需要反转，base case\n        if (b == null) return head;\n        b = b.next;\n    }\n如何k个⼀组反转链表\n441\n\n    // 反转前 k 个元素\n    ListNode newHead = reverse(a, b);\n    // 递归反转后续链表并连接起来\n    a.next = reverseKGroup(b, k);\n    return newHead;\n}\n解释⼀下  for  循环之后的⼏句代码，注意  reverse  函数是反转区间  [a,\nb) ，所以情形是这样的：\n递归部分就不展开了，整个函数递归完成之后就是这个结果，完全符合题\n意：\n如何k个⼀组反转链表\n442\n\n三、最后说两句\n从阅读量上看，基本数据结构相关的算法⽂章看的⼈都不多，我想说这是要\n吃亏的。\n⼤家喜欢看动态规划相关的问题，可能因为⾯试很常⻅，但就我个⼈理解，\n很多算法思想都是源于数据结构的。我们公众号的成名之作之⼀，「学习数\n据结构的框架思维」就提过，什么动规、回溯、分治算法，其实都是树的遍\n历，树这种结构它不就是个多叉链表吗？你能处理基本数据结构的问题，解\n决⼀般的算法问题应该也不会太费事。\n那么如何分解问题、发现递归性质呢？这个只能多练习，也许后续可以专门\n写⼀篇⽂章来探讨⼀下，本⽂就到此为⽌吧，希望对⼤家有帮助！\n＿＿＿＿＿＿＿＿＿＿＿＿＿\n刷算法，学套路，认准 labuladong。\n本⼩抄即将出版，关注 labuladong 公众号或 ongline book 查看更新⽂章，\n后台回复「进群」可进刷题群，labuladong 带你⽇穿 LeetCode。\n如何k个⼀组反转链表\n443\n\n如何k个⼀组反转链表\n444\n\n如何判定括号合法性\n学算法，认准 labuladong 就够了！\n对括号的合法性判断是⼀个很常⻅且实⽤的问题，⽐如说我们写的代码，编\n辑器和编译器都会检查括号是否正确闭合。⽽且我们的代码可能会包含三种\n括号  [](){} ，判断起来有⼀点难度。\n本⽂就来聊⼀道关于括号合法性判断的算法题，相信能加深你对栈这种数据\n结构的理解。\n题⽬很简单，输⼊⼀个字符串，其中包含  [](){}  六种括号，请你判断这\n个字符串组成的括号是否合法。\nInput: \"()[]{}\"\nOutput: true\nInput: \"([)]\"\nOutput: false\nInput: \"{[]}\"\nOutput: true\n解决这个问题之前，我们先降低难度，思考⼀下，如果只有⼀种括号\n () ，应该如何判断字符串组成的括号是否合法呢？\n⼀、处理⼀种括号\n字符串中只有圆括号，如果想让括号字符串合法，那么必须做到：\n每个右括号  )  的左边必须有⼀个左括号  (  和它匹配。\n⽐如说字符串  ()))((  中，中间的两个右括号左边就没有左括号匹配，所\n以这个括号组合是不合法的。\n如何判定括号合法性\n445"])</script><script>self.__next_f.push([1,"4:[\"$\",\"main\",null,{\"style\":{\"maxWidth\":760,\"margin\":\"0 auto\",\"padding\":\"16px\",\"minHeight\":\"100vh\"},\"children\":[[\"$\",\"$Lc\",null,{\"href\":\"/columns/\",\"style\":{\"display\":\"inline-block\",\"marginBottom\":\"12px\",\"fontSize\":\"13px\"},\"children\":\"← 返回专栏\"}],[\"$\",\"div\",null,{\"style\":{\"fontSize\":\"12px\",\"color\":\"var(--text-tertiary)\",\"marginBottom\":\"4px\"},\"children\":[\"📕\",\" \",\"labuladong 算法小抄\"]}],[\"$\",\"h1\",null,{\"style\":{\"fontSize\":\"22px\",\"fontWeight\":700,\"margin\":\"0 0 16px\"},\"children\":\"如何k个一组反转链表\"}],[\"$\",\"$Ld\",null,{\"children\":\"$e\"}],false]}]\n"])</script><script>self.__next_f.push([1,"a:[[\"$\",\"meta\",\"0\",{\"name\":\"viewport\",\"content\":\"width=device-width, initial-scale=1\"}],[\"$\",\"meta\",\"1\",{\"name\":\"theme-color\",\"content\":\"#f97316\"}]]\n"])</script><script>self.__next_f.push([1,"8:[[\"$\",\"meta\",\"0\",{\"charSet\":\"utf-8\"}],[\"$\",\"title\",\"1\",{\"children\":\"如何k个一组反转链表 - 算法面试\"}],[\"$\",\"meta\",\"2\",{\"name\":\"description\",\"content\":\"LeetCode 热题 100 完整 Java 题解、逐题动画、知识专栏与智能间隔复习。\"}],[\"$\",\"meta\",\"3\",{\"name\":\"application-name\",\"content\":\"算法面试\"}],[\"$\",\"link\",\"4\",{\"rel\":\"manifest\",\"href\":\"/algorithm-interview/manifest.json\",\"crossOrigin\":\"$undefined\"}],[\"$\",\"meta\",\"5\",{\"name\":\"keywords\",\"content\":\"LeetCode,热题100,算法面试,Java题解,数据结构,动态规划,面试刷题\"}],[\"$\",\"meta\",\"6\",{\"name\":\"mobile-web-app-capable\",\"content\":\"yes\"}],[\"$\",\"meta\",\"7\",{\"name\":\"apple-mobile-web-app-title\",\"content\":\"算法面试\"}],[\"$\",\"meta\",\"8\",{\"name\":\"apple-mobile-web-app-status-bar-style\",\"content\":\"default\"}],[\"$\",\"meta\",\"9\",{\"property\":\"og:title\",\"content\":\"算法面试题库\"}],[\"$\",\"meta\",\"10\",{\"property\":\"og:description\",\"content\":\"LeetCode 热题 100 完整 Java 题解、逐题动画、知识专栏与智能复习\"}],[\"$\",\"meta\",\"11\",{\"property\":\"og:site_name\",\"content\":\"算法面试题库\"}],[\"$\",\"meta\",\"12\",{\"property\":\"og:locale\",\"content\":\"zh_CN\"}],[\"$\",\"meta\",\"13\",{\"property\":\"og:type\",\"content\":\"website\"}],[\"$\",\"meta\",\"14\",{\"name\":\"twitter:card\",\"content\":\"summary\"}],[\"$\",\"meta\",\"15\",{\"name\":\"twitter:title\",\"content\":\"算法面试题库\"}],[\"$\",\"meta\",\"16\",{\"name\":\"twitter:description\",\"content\":\"LeetCode 热题 100 完整 Java 题解、逐题动画、知识专栏与智能复习\"}]]\n"])</script><script>self.__next_f.push([1,"6:null\n"])</script></body></html>

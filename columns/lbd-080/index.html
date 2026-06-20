@@ -1,0 +1,250 @@
+<!DOCTYPE html><html lang="zh"><head><meta charSet="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="/algorithm-interview/_next/static/css/c1e787639001e16b.css" data-precedence="next"/><link rel="preload" as="script" fetchPriority="low" href="/algorithm-interview/_next/static/chunks/webpack-65b8ce4c1158f96f.js"/><script src="/algorithm-interview/_next/static/chunks/4bd1b696-899926250d3992f1.js" async=""></script><script src="/algorithm-interview/_next/static/chunks/517-b6df7dad4ff96d0b.js" async=""></script><script src="/algorithm-interview/_next/static/chunks/main-app-9e7bfff32fd8ebe9.js" async=""></script><script src="/algorithm-interview/_next/static/chunks/173-69860a4742bb7020.js" async=""></script><script src="/algorithm-interview/_next/static/chunks/829-7533e70598480772.js" async=""></script><script src="/algorithm-interview/_next/static/chunks/app/columns/%5Bslug%5D/page-58fc1d8f5085c1ff.js" async=""></script><meta name="theme-color" content="#f97316"/><title>加密算法的前身今世 - 算法面试</title><meta name="description" content="LeetCode 热题 100 完整 Java 题解、逐题动画、知识专栏与智能间隔复习。"/><meta name="application-name" content="算法面试"/><link rel="manifest" href="/algorithm-interview/manifest.json"/><meta name="keywords" content="LeetCode,热题100,算法面试,Java题解,数据结构,动态规划,面试刷题"/><meta name="mobile-web-app-capable" content="yes"/><meta name="apple-mobile-web-app-title" content="算法面试"/><meta name="apple-mobile-web-app-status-bar-style" content="default"/><meta property="og:title" content="算法面试题库"/><meta property="og:description" content="LeetCode 热题 100 完整 Java 题解、逐题动画、知识专栏与智能复习"/><meta property="og:site_name" content="算法面试题库"/><meta property="og:locale" content="zh_CN"/><meta property="og:type" content="website"/><meta name="twitter:card" content="summary"/><meta name="twitter:title" content="算法面试题库"/><meta name="twitter:description" content="LeetCode 热题 100 完整 Java 题解、逐题动画、知识专栏与智能复习"/><script>
+try {
+  var raw = localStorage.getItem('algo-interview');
+  var theme = 'light';
+  if (raw) { var p = JSON.parse(raw); theme = (p.state && p.state.theme) || 'light'; }
+  if (theme === 'dark') {
+    document.documentElement.classList.add('dark');
+    document.documentElement.setAttribute('data-theme', 'dark');
+  }
+} catch (e) {}
+</script><script src="/algorithm-interview/_next/static/chunks/polyfills-42372ed130431b0a.js" noModule=""></script></head><body><main style="max-width:760px;margin:0 auto;padding:16px;min-height:100vh"><a style="display:inline-block;margin-bottom:12px;font-size:13px" href="/algorithm-interview/columns/">← 返回专栏</a><div style="font-size:12px;color:var(--text-tertiary);margin-bottom:4px">📕<!-- --> <!-- -->labuladong 算法小抄</div><h1 style="font-size:22px;font-weight:700;margin:0 0 16px">加密算法的前身今世</h1><div class="prose max-w-none" style="font-size:14px;color:var(--text)"><h1>加密算法的前身今世</h1>
+<p>密码算法的前世今⽣
+学算法，认准 labuladong 就够了！
+说到密码，我们第⼀个想到的就是登陆账户的密码，但是从密码学的⾓度来
+看，这种根本就不算合格的密码。
+为什么呢，因为我们的账户密码，是依靠隐蔽性来达到加密作⽤：密码藏在
+我⼼⾥，你不知道，所以你登不上我的账户。
+然⽽密码技术认为，「保密」信息总有⼀天会被扒出来，所以加密算法不应
+该依靠「保密」来保证机密性，⽽应该做到：即便知道了加密算法，依然⽆
+计可施。说的魔幻⼀点就是，告诉你我的密码，你依然不知道我的密码。
+最⽞学的就是 Diffie-Hellman 密钥交换算法，我当初就觉得很惊奇，两个⼈
+当着你的⾯互相报⼏个数字，他们就可以拥有⼀个共同的秘密，⽽你却根本
+不可能算出来这个秘密。下⽂会着重介绍⼀下这个算法。
+本⽂讨论的密码技术要解决的主要是信息传输中的加密和解密问题。要假设
+数据传输过程是不安全的，所有信息都在被窃听的，所以发送端要把信息加
+密，接收⽅收到信息之后，肯定得知道如何解密。有意思的是，如果你能够
+让接收者知道如何解密，那么窃听者不是也能够知道如何解密了吗？
+下⾯，我们会介绍对称加密算法、密钥交换算法、⾮对称加密算法、数字签
+名、公钥证书，看看解决安全传输问题的⼀路坎坷波折。
+⼀、对称性加密
+对称性密码，也叫共享密钥密码，顾名思义，这种加密⽅式⽤相同的密钥进
+⾏加密和解密。
+⽐如我说⼀种最简单的对称加密的⽅法。⾸先我们知道信息都可以表⽰成
+0/1 ⽐特序列，也知道相同的两个⽐特序列做异或运算的结果为 0。
+加密算法的前⾝今世
+543</p>
+<p>那么我们就可以⽣成⼀个⻓度和原始信息⼀样的随机⽐特序列作为密钥，然
+后⽤它对原始信息做异或运算，就⽣成了密⽂。反之，再⽤该密钥对密⽂做
+⼀次异或运算，就可以恢复原始信息。
+这是⼀个简单例⼦，不过有些过于简单，有很多问题。⽐如密钥的⻓度和原
+始信息完全⼀致，如果原始信息很⼤，密钥也会⼀样⼤，⽽且⽣成⼤量真随
+机⽐特序列的计算开销也⽐较⼤。
+当然，有很多更复杂优秀的对称加密算法解决了这些问题，⽐如 Rijndael 算
+法、三重 DES 算法等等。它们从算法上是⽆懈可击的，也就是拥有巨⼤的
+密钥空间，基本⽆法暴⼒破解，⽽且加密过程相对快速。
+但是，⼀切对称加密算法的软肋在于密钥的配送。加密和解密⽤同⼀个密
+钥，发送⽅必须设法把密钥发送给接收⽅。如果窃听者有能⼒窃取密⽂，肯
+定也可以窃取密钥，那么再⽆懈可击的算法依然不攻⾃破。
+所以，下⾯介绍两种解决密钥配送问题最常⻅的算法，分别是 Diffie-
+Hellman 密钥交换算法和⾮对称加密算法。
+⼆、密钥交换算法
+我们所说的密钥⼀般就是⼀个很⼤的数字，算法⽤这个数加密、解密。问题
+在于，信道是不安全的，所有发出的数据都会被窃取。换句话说，有没有⼀
+种办法，能够让两个⼈在众⽬睽睽之下，光明正⼤地交换⼀个秘密，把对称
+性密钥安全地送到接收⽅的⼿中？
+Diffie-Hellman 密钥交换算法可以做到。准确的说，该算法并不是把⼀个秘
+密安全地「送给」对⽅，⽽是通过⼀些共享的数字，双⽅「⼼中」各⾃「⽣
+成」了⼀个相同的秘密，⽽且双⽅的这个秘密，是第三⽅窃听者⽆法⽣成
+的。
+也许这就是传说中的⼼有灵犀⼀点通吧。
+加密算法的前⾝今世
+544</p>
+<p>这个算法规则不算复杂，你甚⾄都可以找个朋友尝试⼀下共享秘密，等会我
+会简单画出它的基本流程。在此之前，需要明确⼀个问题：并不是所有运算
+都有逆运算。
+最简单的例⼦就是我们熟知的单向散列函数，给⼀个数字  a  和⼀个散列函
+数  f ，你可以很快计算出  f(a) ，但是如果给你  f(a)  和  f ，推出  a
+是⼀件基本做不到的事。密钥交换算法之所以看起来如此⽞幻，就是利⽤了
+这种不可逆的性质。
+下⾯，看下密钥交换算法的流程是什么，按照命名惯例，准备执⾏密钥交换
+算法的双⽅称为 Alice 和 Bob，在⽹络中企图窃取他俩通信内容的坏⼈称为
+Hack 吧。
+⾸先，Alice 和 Bob 协商出两个数字  N  和  G  作为⽣成元，当然协商过程
+可以被窃听者 Hack 窃取，所以我把这两个数画到中间，代表三⽅都知道：
+现在 Alice 和 Bob ⼼中各⾃想⼀个数字出来，分别称为  A  和  B  吧：
+加密算法的前⾝今世
+545</p>
+<p>现在 Alice 将⾃⼰⼼⾥的这个数字  A  和  G  通过某些运算得出⼀个数
+AG ，然后发给 Bob；Bob 将⾃⼰⼼⾥的数  B  和  G  通过相同的运算得出
+⼀个数  BG ，然后发给 Alice：
+现在的情况变成这样了：
+加密算法的前⾝今世
+546</p>
+<p>注意，类似刚才举的散列函数的例⼦，知道  AG  和  G ，并不能反推出  A
+是多少， BG  同理。
+那么，Alice 可以通过  BG  和⾃⼰的  A  通过某些运算得到⼀个数  ABG ，
+Bob 也可以通过  AG  和⾃⼰的  B  通过某些运算得到  ABG ，这个数就是
+Alice 和 Bob 共有的秘密。
+⽽对于 Hack，可以窃取传输过程中的  G ， AG ， BG ，但是由于计算不可
+逆，怎么都⽆法结合出  ABG  这个数字。
+加密算法的前⾝今世
+547</p>
+<p>以上就是基本流程，⾄于具体的数字取值是有讲究的，运算⽅法在百度上很
+容易找到，限于篇幅我就不具体写了。
+该算法可以在第三者窃听的前提下，算出⼀个别⼈⽆法算出的秘密作为对称
+性加密算法的密钥，开始对称加密的通信。
+对于该算法，Hack ⼜想到⼀种破解⽅法，不是窃听 Alice 和 Bob 的通信数
+据，⽽是直接同时冒充 Alice 和 Bob 的⾝份，也就是我们说的「中间⼈攻
+击」：
+加密算法的前⾝今世
+548</p>
+<p>这样，双⽅根本⽆法察觉在和 Hack 共享秘密，后果就是 Hack 可以解密甚
+⾄修改数据。
+可⻅，密钥交换算法也不算完全解决了密钥配送问题，缺陷在于⽆法核实对
+⽅⾝份。所以密钥交换算法之前⼀般要核实对⽅⾝份，⽐如使⽤数字签名。
+三、⾮对称加密
+⾮对称加密的思路就是，⼲脆别偷偷摸摸传输密钥了，我把加密密钥和解密
+密钥分开，公钥⽤于加密，私钥⽤于解密。只把公钥传送给对⽅，然后对⽅
+开始给我发送加密的数据，我⽤私钥就可以解密。⾄于窃听者，拿到公钥和
+加密数据也没⽤，因为只有我⼿上的私钥才能解密。
+可以这样想，私钥是钥匙，⽽公钥是锁，可以把锁公开出去，让别⼈把数据
+锁起来发给我；⽽钥匙⼀定要留在⾃⼰⼿⾥，⽤于解锁。我们常⻅的 RSA
+算法就是典型的⾮对称加密算法，具体实现⽐较复杂，我就不写了，⽹上很
+多资料。
+在实际应⽤中，⾮对称性加密的运算速度要⽐对称性加密慢很多的，所以传
+输⼤量数据时，⼀般不会⽤公钥直接加密数据，⽽是加密对称性加密的密
+钥，传输给对⽅，然后双⽅使⽤对称性加密算法传输数据。
+加密算法的前⾝今世
+549</p>
+<p>需要注意的是，类似 Diffie-Hellman 算法，⾮对称加密算法也⽆法确定通信
+双⽅的⾝份，依然会遭到中间⼈攻击。⽐如 Hack 拦截 Bob 发出的公钥，然
+后冒充 Bob 的⾝份给 Alice 发送⾃⼰的公钥，那么不知情的 Alice 就会把私
+密数据⽤ Hack 的公钥加密，Hack 可以通过私钥解密窃取。
+那么，Diffie-Hellman 算法和 RSA ⾮对称加密算法都可以⼀定程度上解决密
+钥配送的问题，也具有相同的缺陷，⼆者的应⽤场景有什么区别呢？
+简单来说，根据两种算法的基本原理就可以看出来：
+如果双⽅有⼀个对称加密⽅案，希望加密通信，⽽且不能让别⼈得到钥匙，
+那么可以使⽤ Diffie-Hellman 算法交换密钥。
+如果你希望任何⼈都可以对信息加密，⽽只有你能够解密，那么就使⽤
+RSA ⾮对称加密算法，公布公钥。
+下⾯，我们尝试着解决认证发送⽅⾝份的问题。
+四、数字签名
+刚才说⾮对称加密，把公钥公开⽤于他⼈对数据加密然后发给你，只有⽤你
+⼿上对应的私钥才能将密⽂解密。其实，私钥也可⽤⽤来加密数据的，对于
+RSA 算法，私钥加密的数据只有公钥才能解开。
+数字签名也是利⽤了⾮对称性密钥的特性，但是和公钥加密完全颠倒过来：
+仍然公布公钥，但是⽤你的私钥加密数据，然后把加密的数据公布出去，这
+就是数字签名。
+你可能问，这有什么⽤，公钥可以解开私钥加密，我还加密发出去，不是多
+此⼀举吗？
+是的，但是数字签名的作⽤本来就不是保证数据的机密性，⽽是证明你的⾝
+份，证明这些数据确实是由你本⼈发出的。
+加密算法的前⾝今世
+550</p>
+<p>你想想，你的私钥加密的数据，只有你的公钥才能解开，那么如果⼀份加密
+数据能够被你的公钥解开，不就说明这份数据是你（私钥持有者）本⼈发布
+的吗？
+当然，加密数据仅仅是⼀个签名，签名应该和数据⼀同发出，具体流程应该
+是：
+1、Bob ⽣成公钥和私钥，然后把公钥公布出去，私钥⾃⼰保留。
+2、⽤私钥加密数据作为签名，然后将数据附带着签名⼀同发布出去。
+3、Alice 收到数据和签名，需要检查此份数据是否是 Bob 所发出，于是⽤
+Bob 之前发出的公钥尝试解密签名，将收到的数据和签名解密后的结果作对
+⽐，如果完全相同，说明数据没被篡改，且确实由 Bob 发出。
+为什么 Alice 这么肯定呢，毕竟数据和签名是两部分，都可以被掉包呀？原
+因如下：
+1、如果有⼈修改了数据，那么 Alice 解密签名之后，对⽐发现⼆者不⼀
+致，察觉出异常。
+2、如果有⼈替换了签名，那么 Alice ⽤ Bob 的公钥只能解出⼀串乱码，显
+然和数据不⼀致。
+3、也许有⼈企图修改数据，然后将修改之后的数据制成签名，使得 Alice
+的对⽐⽆法发现不⼀致；但是⼀旦解开签名，就不可能再重新⽣成 Bob 的
+签名了，因为没有 Bob 的私钥。
+综上，数字签名可以⼀定程度上认证数据的来源。之所以说是⼀定程度上，
+是因为这种⽅式依然可能受到中间⼈攻击。⼀旦涉及公钥的发布，接收⽅就
+可能收到中间⼈的假公钥，进⾏错误的认证，这个问题始终避免不了。
+说来可笑，数字签名就是验证对⽅⾝份的⼀种⽅式，但是前提是对⽅的⾝份
+必须是真的... 这似乎陷⼊⼀个先有鸡还是先有蛋的死循环，要想确定对⽅的
+⾝份，必须有⼀个信任的源头，否则的话，再多的流程也只是在转移问题，
+⽽不是真正解决问题。
+加密算法的前⾝今世
+551</p>
+<p>五、公钥证书
+证书其实就是公钥 + 签名，由第三⽅认证机构颁发。引⼊可信任的第三
+⽅，是终结信任循环的⼀种可⾏⽅案。
+证书认证的流程⼤致如下：
+1、Bob 去可信任的认证机构证实本⼈真实⾝份，并提供⾃⼰的公钥。
+2、Alice 想跟 Bob 通信，⾸先向认证机构请求 Bob 的公钥，认证机构会把
+⼀张证书（Bob 的公钥以及⾃⼰对其公钥的签名）发送给 Alice。
+3、Alice 检查签名，确定该公钥确实由这家认证机构发送，中途未被篡改。
+4、Alice 通过这个公钥加密数据，开始和 Bob 通信。
+PS：以上只是为了说明，证书只需要安装⼀次，并不需要每次都向认证机
+构请求；⼀般是服务器直接给客户端发送证书，⽽不是认证机构。
+也许有⼈问，Alice 要想通过数字签名确定证书的有效性，前提是要有该机
+构的（认证）公钥，这不是⼜回到刚才的死循环了吗？
+加密算法的前⾝今世
+552</p>
+<p>我们安装的正规浏览器中都预存了正规认证机构的证书（包含其公钥），⽤
+于确认机构⾝份，所以说证书的认证是可信的。
+Bob 向机构提供公钥的过程中，需要提供很多个⼈信息进⾏⾝份验证，⽐较
+严格，所以说也算是可靠的。
+获得了 Bob 的可信公钥，Alice 和 Bob 之间的通信基于加密算法的保护，是
+完全⽆懈可击的。
+现在的正规⽹站，⼤都使⽤ HTTPS 协议，就是在 HTTP 协议和 TCP 协议之
+间加了⼀个 SSL/TLS 安全层。在你的浏览器和⽹站服务器完成 TCP 握⼿
+后，SSL 协议层也会进⾏ SSL 握⼿交换安全参数，其中就包含该⽹站的证
+书，以便浏览器验证站点⾝份。SSL 安全层验证完成之后，上层的 HTTP 协
+议内容都会被加密，保证数据的安全传输。
+这样⼀来，传统的中间⼈攻击就⼏乎没有了⽣存空间，攻击⼿段只能由技术
+缺陷转变为坑蒙拐骗。事实上，这种⼿段的效果反⽽更⾼效，⽐如我就发现
+⽹上不少下载⽹站发布的浏览器，不仅包含乱七⼋糟的导航和收藏⽹址，还
+包含⼀些不正规的认证机构证书。任何⼈都可以申请证书，这些不正规证书
+很可能造成安全隐患。
+六、最后总结
+对称性加密算法使⽤同⼀个密钥加密和解密，难以破解，加密速度较快，但
+是存在密钥配送问题。
+Diffie-Hellman 密钥交换算法可以让双⽅「⼼有灵犀⼀点通」，⼀定程度解
+决密钥配送问题，但是⽆法验证通信⽅的⾝份，所以可能受到中间⼈攻击。
+⾮对称性加密算法⽣成⼀对⼉密钥，把加密和解密的⼯作分开了。
+RSA 算法作为经典的⾮对称加密算法，有两种⽤途：如果⽤于加密，可以
+把公钥发布出去⽤于加密，只有⾃⼰的私钥可以解密，保证了数据的机密
+性；如果⽤于数字签名，把公钥发布出去后，⽤私钥加密数据作为签名，以
+加密算法的前⾝今世
+553</p>
+<p>证明该数据由私钥持有者所发送。但是⽆论那种⽤法，涉及公钥的发布，都
+⽆法避免中间⼈攻击。
+公钥证书就是公钥 + 签名，由可信任的第三⽅认证机构颁发。由于正规浏
+览器都预装了可信的认证机构的公钥，所以可以有效防⽌中间⼈攻击。
+HTTPS 协议中的 SSL/TLS 安全层会组合使⽤以上⼏种加密⽅式，所以说不
+要安装⾮正规的浏览器，不要乱安装未知来源的证书。
+密码技术只是安全的⼀⼩部分，即便是通过正规机构认证的 HTTPS 站点，
+也不意味着可信任，只能说明其数据传输是安全的。技术永远不可能真正保
+护你，最重要的还是得提⾼个⼈的安全防范意识，多留⼼眼⼉，谨慎处理敏
+感数据。
+＿＿＿＿＿＿＿＿＿＿＿＿＿
+刷算法，学套路，认准 labuladong。
+本⼩抄即将出版，关注 labuladong 公众号或 ongline book 查看更新⽂章，
+后台回复「进群」可进刷题群，labuladong 带你⽇穿 LeetCode。
+加密算法的前⾝今世
+554</p>
+<p>在线刷题学习平台
+学算法，认准 labuladong 就够了！
+虽说我没事就喜欢喷应试教育，但我也从应试教育中发现了⼀个窍门：如果
+能够以刷题的形式学习某项技能，效率和效果是最佳的。对于技术的学习，
+我经常⾯临的困境是，理论知识知道的不少，但是有的场景实在⽆法模拟，
+缺少亲⾃动⼿实践的机会，如果能有⼀本带标准答案的习题册让我刷刷就好
+了。
+所以在学习新技术时，我⾸先会去搜索是否有在线刷题平台，你还别说，有
+的⼤神真就做了很不错的在线练习平台，下⾯就介绍⼏个平台，分别是学习
+Git、SQL、正则表达式的在线练习平台。
+⼀、练习 Git
+这是个叫做 Learning Git Branching 的项⽬，是我⼀定要推荐的：
+Git/SQL/正则表达式的在线练习平台
+555</p></div></main><script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function () {
+    navigator.serviceWorker.register('/algorithm-interview/sw.js').catch(function () {});
+  });
+}
+</script><script src="/algorithm-interview/_next/static/chunks/webpack-65b8ce4c1158f96f.js" async=""></script><script>(self.__next_f=self.__next_f||[]).push([0])</script><script>self.__next_f.push([1,"1:\"$Sreact.fragment\"\n2:I[5244,[],\"\"]\n3:I[3866,[],\"\"]\n5:I[6213,[],\"OutletBoundary\"]\n7:I[6213,[],\"MetadataBoundary\"]\n9:I[6213,[],\"ViewportBoundary\"]\nb:I[4835,[],\"\"]\n:HL[\"/algorithm-interview/_next/static/css/c1e787639001e16b.css\",\"style\"]\n"])</script><script>self.__next_f.push([1,"0:{\"P\":null,\"b\":\"xos97fAiWtKfKXI6hZLx4\",\"p\":\"/algorithm-interview\",\"c\":[\"\",\"columns\",\"lbd-080\",\"\"],\"i\":false,\"f\":[[[\"\",{\"children\":[\"columns\",{\"children\":[[\"slug\",\"lbd-080\",\"d\"],{\"children\":[\"__PAGE__\",{}]}]}]},\"$undefined\",\"$undefined\",true],[\"\",[\"$\",\"$1\",\"c\",{\"children\":[[[\"$\",\"link\",\"0\",{\"rel\":\"stylesheet\",\"href\":\"/algorithm-interview/_next/static/css/c1e787639001e16b.css\",\"precedence\":\"next\",\"crossOrigin\":\"$undefined\",\"nonce\":\"$undefined\"}]],[\"$\",\"html\",null,{\"lang\":\"zh\",\"children\":[[\"$\",\"head\",null,{\"children\":[\"$\",\"script\",null,{\"dangerouslySetInnerHTML\":{\"__html\":\"\\ntry {\\n  var raw = localStorage.getItem('algo-interview');\\n  var theme = 'light';\\n  if (raw) { var p = JSON.parse(raw); theme = (p.state \u0026\u0026 p.state.theme) || 'light'; }\\n  if (theme === 'dark') {\\n    document.documentElement.classList.add('dark');\\n    document.documentElement.setAttribute('data-theme', 'dark');\\n  }\\n} catch (e) {}\\n\"}}]}],[\"$\",\"body\",null,{\"children\":[[\"$\",\"$L2\",null,{\"parallelRouterKey\":\"children\",\"segmentPath\":[\"children\"],\"error\":\"$undefined\",\"errorStyles\":\"$undefined\",\"errorScripts\":\"$undefined\",\"template\":[\"$\",\"$L3\",null,{}],\"templateStyles\":\"$undefined\",\"templateScripts\":\"$undefined\",\"notFound\":[[],[[\"$\",\"title\",null,{\"children\":\"404: This page could not be found.\"}],[\"$\",\"div\",null,{\"style\":{\"fontFamily\":\"system-ui,\\\"Segoe UI\\\",Roboto,Helvetica,Arial,sans-serif,\\\"Apple Color Emoji\\\",\\\"Segoe UI Emoji\\\"\",\"height\":\"100vh\",\"textAlign\":\"center\",\"display\":\"flex\",\"flexDirection\":\"column\",\"alignItems\":\"center\",\"justifyContent\":\"center\"},\"children\":[\"$\",\"div\",null,{\"children\":[[\"$\",\"style\",null,{\"dangerouslySetInnerHTML\":{\"__html\":\"body{color:#000;background:#fff;margin:0}.next-error-h1{border-right:1px solid rgba(0,0,0,.3)}@media (prefers-color-scheme:dark){body{color:#fff;background:#000}.next-error-h1{border-right:1px solid rgba(255,255,255,.3)}}\"}}],[\"$\",\"h1\",null,{\"className\":\"next-error-h1\",\"style\":{\"display\":\"inline-block\",\"margin\":\"0 20px 0 0\",\"padding\":\"0 23px 0 0\",\"fontSize\":24,\"fontWeight\":500,\"verticalAlign\":\"top\",\"lineHeight\":\"49px\"},\"children\":404}],[\"$\",\"div\",null,{\"style\":{\"display\":\"inline-block\"},\"children\":[\"$\",\"h2\",null,{\"style\":{\"fontSize\":14,\"fontWeight\":400,\"lineHeight\":\"49px\",\"margin\":0},\"children\":\"This page could not be found.\"}]}]]}]}]]],\"forbidden\":\"$undefined\",\"unauthorized\":\"$undefined\"}],[\"$\",\"script\",null,{\"dangerouslySetInnerHTML\":{\"__html\":\"\\nif ('serviceWorker' in navigator) {\\n  window.addEventListener('load', function () {\\n    navigator.serviceWorker.register('/algorithm-interview/sw.js').catch(function () {});\\n  });\\n}\\n\"}}]]}]]}]]}],{\"children\":[\"columns\",[\"$\",\"$1\",\"c\",{\"children\":[null,[\"$\",\"$L2\",null,{\"parallelRouterKey\":\"children\",\"segmentPath\":[\"children\",\"columns\",\"children\"],\"error\":\"$undefined\",\"errorStyles\":\"$undefined\",\"errorScripts\":\"$undefined\",\"template\":[\"$\",\"$L3\",null,{}],\"templateStyles\":\"$undefined\",\"templateScripts\":\"$undefined\",\"notFound\":\"$undefined\",\"forbidden\":\"$undefined\",\"unauthorized\":\"$undefined\"}]]}],{\"children\":[[\"slug\",\"lbd-080\",\"d\"],[\"$\",\"$1\",\"c\",{\"children\":[null,[\"$\",\"$L2\",null,{\"parallelRouterKey\":\"children\",\"segmentPath\":[\"children\",\"columns\",\"children\",\"$0:f:0:1:2:children:2:children:0\",\"children\"],\"error\":\"$undefined\",\"errorStyles\":\"$undefined\",\"errorScripts\":\"$undefined\",\"template\":[\"$\",\"$L3\",null,{}],\"templateStyles\":\"$undefined\",\"templateScripts\":\"$undefined\",\"notFound\":\"$undefined\",\"forbidden\":\"$undefined\",\"unauthorized\":\"$undefined\"}]]}],{\"children\":[\"__PAGE__\",[\"$\",\"$1\",\"c\",{\"children\":[\"$L4\",null,[\"$\",\"$L5\",null,{\"children\":\"$L6\"}]]}],{},null,false]},null,false]},null,false]},null,false],[\"$\",\"$1\",\"h\",{\"children\":[null,[\"$\",\"$1\",\"jeIgN8oiEnIkDsPFZOr1J\",{\"children\":[[\"$\",\"$L7\",null,{\"children\":\"$L8\"}],[\"$\",\"$L9\",null,{\"children\":\"$La\"}],null]}]]}],false]],\"m\":\"$undefined\",\"G\":[\"$b\",\"$undefined\"],\"s\":false,\"S\":true}\n"])</script><script>self.__next_f.push([1,"c:I[8173,[\"173\",\"static/chunks/173-69860a4742bb7020.js\",\"829\",\"static/chunks/829-7533e70598480772.js\",\"306\",\"static/chunks/app/columns/%5Bslug%5D/page-58fc1d8f5085c1ff.js\"],\"\"]\nd:I[4780,[\"173\",\"static/chunks/173-69860a4742bb7020.js\",\"829\",\"static/chunks/829-7533e70598480772.js\",\"306\",\"static/chunks/app/columns/%5Bslug%5D/page-58fc1d8f5085c1ff.js\"],\"default\"]\ne:T3ff9,"])</script><script>self.__next_f.push([1,"# 加密算法的前身今世\n\n密码算法的前世今⽣\n学算法，认准 labuladong 就够了！\n说到密码，我们第⼀个想到的就是登陆账户的密码，但是从密码学的⾓度来\n看，这种根本就不算合格的密码。\n为什么呢，因为我们的账户密码，是依靠隐蔽性来达到加密作⽤：密码藏在\n我⼼⾥，你不知道，所以你登不上我的账户。\n然⽽密码技术认为，「保密」信息总有⼀天会被扒出来，所以加密算法不应\n该依靠「保密」来保证机密性，⽽应该做到：即便知道了加密算法，依然⽆\n计可施。说的魔幻⼀点就是，告诉你我的密码，你依然不知道我的密码。\n最⽞学的就是 Diffie-Hellman 密钥交换算法，我当初就觉得很惊奇，两个⼈\n当着你的⾯互相报⼏个数字，他们就可以拥有⼀个共同的秘密，⽽你却根本\n不可能算出来这个秘密。下⽂会着重介绍⼀下这个算法。\n本⽂讨论的密码技术要解决的主要是信息传输中的加密和解密问题。要假设\n数据传输过程是不安全的，所有信息都在被窃听的，所以发送端要把信息加\n密，接收⽅收到信息之后，肯定得知道如何解密。有意思的是，如果你能够\n让接收者知道如何解密，那么窃听者不是也能够知道如何解密了吗？\n下⾯，我们会介绍对称加密算法、密钥交换算法、⾮对称加密算法、数字签\n名、公钥证书，看看解决安全传输问题的⼀路坎坷波折。\n⼀、对称性加密\n对称性密码，也叫共享密钥密码，顾名思义，这种加密⽅式⽤相同的密钥进\n⾏加密和解密。\n⽐如我说⼀种最简单的对称加密的⽅法。⾸先我们知道信息都可以表⽰成\n0/1 ⽐特序列，也知道相同的两个⽐特序列做异或运算的结果为 0。\n加密算法的前⾝今世\n543\n\n那么我们就可以⽣成⼀个⻓度和原始信息⼀样的随机⽐特序列作为密钥，然\n后⽤它对原始信息做异或运算，就⽣成了密⽂。反之，再⽤该密钥对密⽂做\n⼀次异或运算，就可以恢复原始信息。\n这是⼀个简单例⼦，不过有些过于简单，有很多问题。⽐如密钥的⻓度和原\n始信息完全⼀致，如果原始信息很⼤，密钥也会⼀样⼤，⽽且⽣成⼤量真随\n机⽐特序列的计算开销也⽐较⼤。\n当然，有很多更复杂优秀的对称加密算法解决了这些问题，⽐如 Rijndael 算\n法、三重 DES 算法等等。它们从算法上是⽆懈可击的，也就是拥有巨⼤的\n密钥空间，基本⽆法暴⼒破解，⽽且加密过程相对快速。\n但是，⼀切对称加密算法的软肋在于密钥的配送。加密和解密⽤同⼀个密\n钥，发送⽅必须设法把密钥发送给接收⽅。如果窃听者有能⼒窃取密⽂，肯\n定也可以窃取密钥，那么再⽆懈可击的算法依然不攻⾃破。\n所以，下⾯介绍两种解决密钥配送问题最常⻅的算法，分别是 Diffie-\nHellman 密钥交换算法和⾮对称加密算法。\n⼆、密钥交换算法\n我们所说的密钥⼀般就是⼀个很⼤的数字，算法⽤这个数加密、解密。问题\n在于，信道是不安全的，所有发出的数据都会被窃取。换句话说，有没有⼀\n种办法，能够让两个⼈在众⽬睽睽之下，光明正⼤地交换⼀个秘密，把对称\n性密钥安全地送到接收⽅的⼿中？\nDiffie-Hellman 密钥交换算法可以做到。准确的说，该算法并不是把⼀个秘\n密安全地「送给」对⽅，⽽是通过⼀些共享的数字，双⽅「⼼中」各⾃「⽣\n成」了⼀个相同的秘密，⽽且双⽅的这个秘密，是第三⽅窃听者⽆法⽣成\n的。\n也许这就是传说中的⼼有灵犀⼀点通吧。\n加密算法的前⾝今世\n544\n\n这个算法规则不算复杂，你甚⾄都可以找个朋友尝试⼀下共享秘密，等会我\n会简单画出它的基本流程。在此之前，需要明确⼀个问题：并不是所有运算\n都有逆运算。\n最简单的例⼦就是我们熟知的单向散列函数，给⼀个数字  a  和⼀个散列函\n数  f ，你可以很快计算出  f(a) ，但是如果给你  f(a)  和  f ，推出  a \n是⼀件基本做不到的事。密钥交换算法之所以看起来如此⽞幻，就是利⽤了\n这种不可逆的性质。\n下⾯，看下密钥交换算法的流程是什么，按照命名惯例，准备执⾏密钥交换\n算法的双⽅称为 Alice 和 Bob，在⽹络中企图窃取他俩通信内容的坏⼈称为\nHack 吧。\n⾸先，Alice 和 Bob 协商出两个数字  N  和  G  作为⽣成元，当然协商过程\n可以被窃听者 Hack 窃取，所以我把这两个数画到中间，代表三⽅都知道：\n现在 Alice 和 Bob ⼼中各⾃想⼀个数字出来，分别称为  A  和  B  吧：\n加密算法的前⾝今世\n545\n\n现在 Alice 将⾃⼰⼼⾥的这个数字  A  和  G  通过某些运算得出⼀个数\n AG ，然后发给 Bob；Bob 将⾃⼰⼼⾥的数  B  和  G  通过相同的运算得出\n⼀个数  BG ，然后发给 Alice：\n现在的情况变成这样了：\n加密算法的前⾝今世\n546\n\n注意，类似刚才举的散列函数的例⼦，知道  AG  和  G ，并不能反推出  A \n是多少， BG  同理。\n那么，Alice 可以通过  BG  和⾃⼰的  A  通过某些运算得到⼀个数  ABG ，\nBob 也可以通过  AG  和⾃⼰的  B  通过某些运算得到  ABG ，这个数就是\nAlice 和 Bob 共有的秘密。\n⽽对于 Hack，可以窃取传输过程中的  G ， AG ， BG ，但是由于计算不可\n逆，怎么都⽆法结合出  ABG  这个数字。\n加密算法的前⾝今世\n547\n\n以上就是基本流程，⾄于具体的数字取值是有讲究的，运算⽅法在百度上很\n容易找到，限于篇幅我就不具体写了。\n该算法可以在第三者窃听的前提下，算出⼀个别⼈⽆法算出的秘密作为对称\n性加密算法的密钥，开始对称加密的通信。\n对于该算法，Hack ⼜想到⼀种破解⽅法，不是窃听 Alice 和 Bob 的通信数\n据，⽽是直接同时冒充 Alice 和 Bob 的⾝份，也就是我们说的「中间⼈攻\n击」：\n加密算法的前⾝今世\n548\n\n这样，双⽅根本⽆法察觉在和 Hack 共享秘密，后果就是 Hack 可以解密甚\n⾄修改数据。\n可⻅，密钥交换算法也不算完全解决了密钥配送问题，缺陷在于⽆法核实对\n⽅⾝份。所以密钥交换算法之前⼀般要核实对⽅⾝份，⽐如使⽤数字签名。\n三、⾮对称加密\n⾮对称加密的思路就是，⼲脆别偷偷摸摸传输密钥了，我把加密密钥和解密\n密钥分开，公钥⽤于加密，私钥⽤于解密。只把公钥传送给对⽅，然后对⽅\n开始给我发送加密的数据，我⽤私钥就可以解密。⾄于窃听者，拿到公钥和\n加密数据也没⽤，因为只有我⼿上的私钥才能解密。\n可以这样想，私钥是钥匙，⽽公钥是锁，可以把锁公开出去，让别⼈把数据\n锁起来发给我；⽽钥匙⼀定要留在⾃⼰⼿⾥，⽤于解锁。我们常⻅的 RSA\n算法就是典型的⾮对称加密算法，具体实现⽐较复杂，我就不写了，⽹上很\n多资料。\n在实际应⽤中，⾮对称性加密的运算速度要⽐对称性加密慢很多的，所以传\n输⼤量数据时，⼀般不会⽤公钥直接加密数据，⽽是加密对称性加密的密\n钥，传输给对⽅，然后双⽅使⽤对称性加密算法传输数据。\n加密算法的前⾝今世\n549\n\n需要注意的是，类似 Diffie-Hellman 算法，⾮对称加密算法也⽆法确定通信\n双⽅的⾝份，依然会遭到中间⼈攻击。⽐如 Hack 拦截 Bob 发出的公钥，然\n后冒充 Bob 的⾝份给 Alice 发送⾃⼰的公钥，那么不知情的 Alice 就会把私\n密数据⽤ Hack 的公钥加密，Hack 可以通过私钥解密窃取。\n那么，Diffie-Hellman 算法和 RSA ⾮对称加密算法都可以⼀定程度上解决密\n钥配送的问题，也具有相同的缺陷，⼆者的应⽤场景有什么区别呢？\n简单来说，根据两种算法的基本原理就可以看出来：\n如果双⽅有⼀个对称加密⽅案，希望加密通信，⽽且不能让别⼈得到钥匙，\n那么可以使⽤ Diffie-Hellman 算法交换密钥。\n如果你希望任何⼈都可以对信息加密，⽽只有你能够解密，那么就使⽤\nRSA ⾮对称加密算法，公布公钥。\n下⾯，我们尝试着解决认证发送⽅⾝份的问题。\n四、数字签名\n刚才说⾮对称加密，把公钥公开⽤于他⼈对数据加密然后发给你，只有⽤你\n⼿上对应的私钥才能将密⽂解密。其实，私钥也可⽤⽤来加密数据的，对于\nRSA 算法，私钥加密的数据只有公钥才能解开。\n数字签名也是利⽤了⾮对称性密钥的特性，但是和公钥加密完全颠倒过来：\n仍然公布公钥，但是⽤你的私钥加密数据，然后把加密的数据公布出去，这\n就是数字签名。\n你可能问，这有什么⽤，公钥可以解开私钥加密，我还加密发出去，不是多\n此⼀举吗？\n是的，但是数字签名的作⽤本来就不是保证数据的机密性，⽽是证明你的⾝\n份，证明这些数据确实是由你本⼈发出的。\n加密算法的前⾝今世\n550\n\n你想想，你的私钥加密的数据，只有你的公钥才能解开，那么如果⼀份加密\n数据能够被你的公钥解开，不就说明这份数据是你（私钥持有者）本⼈发布\n的吗？\n当然，加密数据仅仅是⼀个签名，签名应该和数据⼀同发出，具体流程应该\n是：\n1、Bob ⽣成公钥和私钥，然后把公钥公布出去，私钥⾃⼰保留。\n2、⽤私钥加密数据作为签名，然后将数据附带着签名⼀同发布出去。\n3、Alice 收到数据和签名，需要检查此份数据是否是 Bob 所发出，于是⽤\nBob 之前发出的公钥尝试解密签名，将收到的数据和签名解密后的结果作对\n⽐，如果完全相同，说明数据没被篡改，且确实由 Bob 发出。\n为什么 Alice 这么肯定呢，毕竟数据和签名是两部分，都可以被掉包呀？原\n因如下：\n1、如果有⼈修改了数据，那么 Alice 解密签名之后，对⽐发现⼆者不⼀\n致，察觉出异常。\n2、如果有⼈替换了签名，那么 Alice ⽤ Bob 的公钥只能解出⼀串乱码，显\n然和数据不⼀致。\n3、也许有⼈企图修改数据，然后将修改之后的数据制成签名，使得 Alice\n的对⽐⽆法发现不⼀致；但是⼀旦解开签名，就不可能再重新⽣成 Bob 的\n签名了，因为没有 Bob 的私钥。\n综上，数字签名可以⼀定程度上认证数据的来源。之所以说是⼀定程度上，\n是因为这种⽅式依然可能受到中间⼈攻击。⼀旦涉及公钥的发布，接收⽅就\n可能收到中间⼈的假公钥，进⾏错误的认证，这个问题始终避免不了。\n说来可笑，数字签名就是验证对⽅⾝份的⼀种⽅式，但是前提是对⽅的⾝份\n必须是真的... 这似乎陷⼊⼀个先有鸡还是先有蛋的死循环，要想确定对⽅的\n⾝份，必须有⼀个信任的源头，否则的话，再多的流程也只是在转移问题，\n⽽不是真正解决问题。\n加密算法的前⾝今世\n551\n\n五、公钥证书\n证书其实就是公钥 + 签名，由第三⽅认证机构颁发。引⼊可信任的第三\n⽅，是终结信任循环的⼀种可⾏⽅案。\n证书认证的流程⼤致如下：\n1、Bob 去可信任的认证机构证实本⼈真实⾝份，并提供⾃⼰的公钥。\n2、Alice 想跟 Bob 通信，⾸先向认证机构请求 Bob 的公钥，认证机构会把\n⼀张证书（Bob 的公钥以及⾃⼰对其公钥的签名）发送给 Alice。\n3、Alice 检查签名，确定该公钥确实由这家认证机构发送，中途未被篡改。\n4、Alice 通过这个公钥加密数据，开始和 Bob 通信。\nPS：以上只是为了说明，证书只需要安装⼀次，并不需要每次都向认证机\n构请求；⼀般是服务器直接给客户端发送证书，⽽不是认证机构。\n也许有⼈问，Alice 要想通过数字签名确定证书的有效性，前提是要有该机\n构的（认证）公钥，这不是⼜回到刚才的死循环了吗？\n加密算法的前⾝今世\n552\n\n我们安装的正规浏览器中都预存了正规认证机构的证书（包含其公钥），⽤\n于确认机构⾝份，所以说证书的认证是可信的。\nBob 向机构提供公钥的过程中，需要提供很多个⼈信息进⾏⾝份验证，⽐较\n严格，所以说也算是可靠的。\n获得了 Bob 的可信公钥，Alice 和 Bob 之间的通信基于加密算法的保护，是\n完全⽆懈可击的。\n现在的正规⽹站，⼤都使⽤ HTTPS 协议，就是在 HTTP 协议和 TCP 协议之\n间加了⼀个 SSL/TLS 安全层。在你的浏览器和⽹站服务器完成 TCP 握⼿\n后，SSL 协议层也会进⾏ SSL 握⼿交换安全参数，其中就包含该⽹站的证\n书，以便浏览器验证站点⾝份。SSL 安全层验证完成之后，上层的 HTTP 协\n议内容都会被加密，保证数据的安全传输。\n这样⼀来，传统的中间⼈攻击就⼏乎没有了⽣存空间，攻击⼿段只能由技术\n缺陷转变为坑蒙拐骗。事实上，这种⼿段的效果反⽽更⾼效，⽐如我就发现\n⽹上不少下载⽹站发布的浏览器，不仅包含乱七⼋糟的导航和收藏⽹址，还\n包含⼀些不正规的认证机构证书。任何⼈都可以申请证书，这些不正规证书\n很可能造成安全隐患。\n六、最后总结\n对称性加密算法使⽤同⼀个密钥加密和解密，难以破解，加密速度较快，但\n是存在密钥配送问题。\nDiffie-Hellman 密钥交换算法可以让双⽅「⼼有灵犀⼀点通」，⼀定程度解\n决密钥配送问题，但是⽆法验证通信⽅的⾝份，所以可能受到中间⼈攻击。\n⾮对称性加密算法⽣成⼀对⼉密钥，把加密和解密的⼯作分开了。\nRSA 算法作为经典的⾮对称加密算法，有两种⽤途：如果⽤于加密，可以\n把公钥发布出去⽤于加密，只有⾃⼰的私钥可以解密，保证了数据的机密\n性；如果⽤于数字签名，把公钥发布出去后，⽤私钥加密数据作为签名，以\n加密算法的前⾝今世\n553\n\n证明该数据由私钥持有者所发送。但是⽆论那种⽤法，涉及公钥的发布，都\n⽆法避免中间⼈攻击。\n公钥证书就是公钥 + 签名，由可信任的第三⽅认证机构颁发。由于正规浏\n览器都预装了可信的认证机构的公钥，所以可以有效防⽌中间⼈攻击。\nHTTPS 协议中的 SSL/TLS 安全层会组合使⽤以上⼏种加密⽅式，所以说不\n要安装⾮正规的浏览器，不要乱安装未知来源的证书。\n密码技术只是安全的⼀⼩部分，即便是通过正规机构认证的 HTTPS 站点，\n也不意味着可信任，只能说明其数据传输是安全的。技术永远不可能真正保\n护你，最重要的还是得提⾼个⼈的安全防范意识，多留⼼眼⼉，谨慎处理敏\n感数据。\n＿＿＿＿＿＿＿＿＿＿＿＿＿\n刷算法，学套路，认准 labuladong。\n本⼩抄即将出版，关注 labuladong 公众号或 ongline book 查看更新⽂章，\n后台回复「进群」可进刷题群，labuladong 带你⽇穿 LeetCode。\n加密算法的前⾝今世\n554\n\n在线刷题学习平台\n学算法，认准 labuladong 就够了！\n虽说我没事就喜欢喷应试教育，但我也从应试教育中发现了⼀个窍门：如果\n能够以刷题的形式学习某项技能，效率和效果是最佳的。对于技术的学习，\n我经常⾯临的困境是，理论知识知道的不少，但是有的场景实在⽆法模拟，\n缺少亲⾃动⼿实践的机会，如果能有⼀本带标准答案的习题册让我刷刷就好\n了。\n所以在学习新技术时，我⾸先会去搜索是否有在线刷题平台，你还别说，有\n的⼤神真就做了很不错的在线练习平台，下⾯就介绍⼏个平台，分别是学习\nGit、SQL、正则表达式的在线练习平台。\n⼀、练习 Git\n这是个叫做 Learning Git Branching 的项⽬，是我⼀定要推荐的：\nGit/SQL/正则表达式的在线练习平台\n555"])</script><script>self.__next_f.push([1,"4:[\"$\",\"main\",null,{\"style\":{\"maxWidth\":760,\"margin\":\"0 auto\",\"padding\":\"16px\",\"minHeight\":\"100vh\"},\"children\":[[\"$\",\"$Lc\",null,{\"href\":\"/columns/\",\"style\":{\"display\":\"inline-block\",\"marginBottom\":\"12px\",\"fontSize\":\"13px\"},\"children\":\"← 返回专栏\"}],[\"$\",\"div\",null,{\"style\":{\"fontSize\":\"12px\",\"color\":\"var(--text-tertiary)\",\"marginBottom\":\"4px\"},\"children\":[\"📕\",\" \",\"labuladong 算法小抄\"]}],[\"$\",\"h1\",null,{\"style\":{\"fontSize\":\"22px\",\"fontWeight\":700,\"margin\":\"0 0 16px\"},\"children\":\"加密算法的前身今世\"}],[\"$\",\"$Ld\",null,{\"children\":\"$e\"}],false]}]\n"])</script><script>self.__next_f.push([1,"a:[[\"$\",\"meta\",\"0\",{\"name\":\"viewport\",\"content\":\"width=device-width, initial-scale=1\"}],[\"$\",\"meta\",\"1\",{\"name\":\"theme-color\",\"content\":\"#f97316\"}]]\n"])</script><script>self.__next_f.push([1,"8:[[\"$\",\"meta\",\"0\",{\"charSet\":\"utf-8\"}],[\"$\",\"title\",\"1\",{\"children\":\"加密算法的前身今世 - 算法面试\"}],[\"$\",\"meta\",\"2\",{\"name\":\"description\",\"content\":\"LeetCode 热题 100 完整 Java 题解、逐题动画、知识专栏与智能间隔复习。\"}],[\"$\",\"meta\",\"3\",{\"name\":\"application-name\",\"content\":\"算法面试\"}],[\"$\",\"link\",\"4\",{\"rel\":\"manifest\",\"href\":\"/algorithm-interview/manifest.json\",\"crossOrigin\":\"$undefined\"}],[\"$\",\"meta\",\"5\",{\"name\":\"keywords\",\"content\":\"LeetCode,热题100,算法面试,Java题解,数据结构,动态规划,面试刷题\"}],[\"$\",\"meta\",\"6\",{\"name\":\"mobile-web-app-capable\",\"content\":\"yes\"}],[\"$\",\"meta\",\"7\",{\"name\":\"apple-mobile-web-app-title\",\"content\":\"算法面试\"}],[\"$\",\"meta\",\"8\",{\"name\":\"apple-mobile-web-app-status-bar-style\",\"content\":\"default\"}],[\"$\",\"meta\",\"9\",{\"property\":\"og:title\",\"content\":\"算法面试题库\"}],[\"$\",\"meta\",\"10\",{\"property\":\"og:description\",\"content\":\"LeetCode 热题 100 完整 Java 题解、逐题动画、知识专栏与智能复习\"}],[\"$\",\"meta\",\"11\",{\"property\":\"og:site_name\",\"content\":\"算法面试题库\"}],[\"$\",\"meta\",\"12\",{\"property\":\"og:locale\",\"content\":\"zh_CN\"}],[\"$\",\"meta\",\"13\",{\"property\":\"og:type\",\"content\":\"website\"}],[\"$\",\"meta\",\"14\",{\"name\":\"twitter:card\",\"content\":\"summary\"}],[\"$\",\"meta\",\"15\",{\"name\":\"twitter:title\",\"content\":\"算法面试题库\"}],[\"$\",\"meta\",\"16\",{\"name\":\"twitter:description\",\"content\":\"LeetCode 热题 100 完整 Java 题解、逐题动画、知识专栏与智能复习\"}]]\n"])</script><script>self.__next_f.push([1,"6:null\n"])</script></body></html>

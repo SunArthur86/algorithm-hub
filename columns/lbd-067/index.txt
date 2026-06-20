@@ -1,0 +1,144 @@
+1:"$Sreact.fragment"
+2:I[5244,[],""]
+3:I[3866,[],""]
+5:I[6213,[],"OutletBoundary"]
+7:I[6213,[],"MetadataBoundary"]
+9:I[6213,[],"ViewportBoundary"]
+b:I[4835,[],""]
+:HL["/algorithm-interview/_next/static/css/c1e787639001e16b.css","style"]
+0:{"P":null,"b":"xos97fAiWtKfKXI6hZLx4","p":"/algorithm-interview","c":["","columns","lbd-067",""],"i":false,"f":[[["",{"children":["columns",{"children":[["slug","lbd-067","d"],{"children":["__PAGE__",{}]}]}]},"$undefined","$undefined",true],["",["$","$1","c",{"children":[[["$","link","0",{"rel":"stylesheet","href":"/algorithm-interview/_next/static/css/c1e787639001e16b.css","precedence":"next","crossOrigin":"$undefined","nonce":"$undefined"}]],["$","html",null,{"lang":"zh","children":[["$","head",null,{"children":["$","script",null,{"dangerouslySetInnerHTML":{"__html":"\ntry {\n  var raw = localStorage.getItem('algo-interview');\n  var theme = 'light';\n  if (raw) { var p = JSON.parse(raw); theme = (p.state && p.state.theme) || 'light'; }\n  if (theme === 'dark') {\n    document.documentElement.classList.add('dark');\n    document.documentElement.setAttribute('data-theme', 'dark');\n  }\n} catch (e) {}\n"}}]}],["$","body",null,{"children":[["$","$L2",null,{"parallelRouterKey":"children","segmentPath":["children"],"error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L3",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":[[],[["$","title",null,{"children":"404: This page could not be found."}],["$","div",null,{"style":{"fontFamily":"system-ui,\"Segoe UI\",Roboto,Helvetica,Arial,sans-serif,\"Apple Color Emoji\",\"Segoe UI Emoji\"","height":"100vh","textAlign":"center","display":"flex","flexDirection":"column","alignItems":"center","justifyContent":"center"},"children":["$","div",null,{"children":[["$","style",null,{"dangerouslySetInnerHTML":{"__html":"body{color:#000;background:#fff;margin:0}.next-error-h1{border-right:1px solid rgba(0,0,0,.3)}@media (prefers-color-scheme:dark){body{color:#fff;background:#000}.next-error-h1{border-right:1px solid rgba(255,255,255,.3)}}"}}],["$","h1",null,{"className":"next-error-h1","style":{"display":"inline-block","margin":"0 20px 0 0","padding":"0 23px 0 0","fontSize":24,"fontWeight":500,"verticalAlign":"top","lineHeight":"49px"},"children":404}],["$","div",null,{"style":{"display":"inline-block"},"children":["$","h2",null,{"style":{"fontSize":14,"fontWeight":400,"lineHeight":"49px","margin":0},"children":"This page could not be found."}]}]]}]}]]],"forbidden":"$undefined","unauthorized":"$undefined"}],["$","script",null,{"dangerouslySetInnerHTML":{"__html":"\nif ('serviceWorker' in navigator) {\n  window.addEventListener('load', function () {\n    navigator.serviceWorker.register('/algorithm-interview/sw.js').catch(function () {});\n  });\n}\n"}}]]}]]}]]}],{"children":["columns",["$","$1","c",{"children":[null,["$","$L2",null,{"parallelRouterKey":"children","segmentPath":["children","columns","children"],"error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L3",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","forbidden":"$undefined","unauthorized":"$undefined"}]]}],{"children":[["slug","lbd-067","d"],["$","$1","c",{"children":[null,["$","$L2",null,{"parallelRouterKey":"children","segmentPath":["children","columns","children","$0:f:0:1:2:children:2:children:0","children"],"error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L3",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","forbidden":"$undefined","unauthorized":"$undefined"}]]}],{"children":["__PAGE__",["$","$1","c",{"children":["$L4",null,["$","$L5",null,{"children":"$L6"}]]}],{},null,false]},null,false]},null,false]},null,false],["$","$1","h",{"children":[null,["$","$1","jgt2sCbmdQ518Hcw4nkDc",{"children":[["$","$L7",null,{"children":"$L8"}],["$","$L9",null,{"children":"$La"}],null]}]]}],false]],"m":"$undefined","G":["$b","$undefined"],"s":false,"S":true}
+c:I[8173,["173","static/chunks/173-69860a4742bb7020.js","829","static/chunks/829-7533e70598480772.js","306","static/chunks/app/columns/%5Bslug%5D/page-58fc1d8f5085c1ff.js"],""]
+d:I[4780,["173","static/chunks/173-69860a4742bb7020.js","829","static/chunks/829-7533e70598480772.js","306","static/chunks/app/columns/%5Bslug%5D/page-58fc1d8f5085c1ff.js"],"default"]
+e:T18b7,# 如何寻找缺失的元素
+
+如何寻找消失的元素
+学算法，认准 labuladong 就够了！
+之前也有⽂章写过⼏个有趣的智⼒题，今天再聊⼀道巧妙的题⽬。
+题⽬⾮常简单：
+给⼀个⻓度为 n 的数组，其索引应该在  [0,n) ，但是现在你要装进去 n + 1
+个元素  [0,n] ，那么肯定有⼀个元素装不下嘛，请你找出这个缺失的元
+素。
+这道题不难的，我们应该很容易想到，把这个数组排个序，然后遍历⼀遍，
+不就很容易找到缺失的那个元素了吗？
+或者说，借助数据结构的特性，⽤⼀个 HashSet 把数组⾥出现的数字都储存
+下来，再遍历  [0,n]  之间的数字，去 HashSet 中查询，也可以很容易查出
+那个缺失的元素。
+排序解法的时间复杂度是 O(NlogN)，HashSet 的解法时间复杂度是 O(N)，
+但是还需要 O(N) 的空间复杂度存储 HashSet。
+如何寻找缺失的元素
+448
+
+第三种⽅法是位运算。
+对于异或运算（ ^ ），我们知道它有⼀个特殊性质：⼀个数和它本⾝做异
+或运算结果为 0，⼀个数和 0 做异或运算还是它本⾝。
+⽽且异或运算满⾜交换律和结合律，也就是说：
+2 ^ 3 ^ 2 = 3 ^ (2 ^ 2) = 3 ^ 0 = 3
+⽽这道题索就可以通过这些性质巧妙算出缺失的那个元素。⽐如说  nums =
+[0,3,1,4] ：
+为了容易理解，我们假设先把索引补⼀位，然后让每个元素和⾃⼰相等的索
+引相对应：
+如何寻找缺失的元素
+449
+
+这样做了之后，就可以发现除了缺失元素之外，所有的索引和元素都组成⼀
+对⼉了，现在如果把这个落单的索引 2 找出来，也就找到了缺失的那个元
+素。
+如何找这个落单的数字呢，只要把所有的元素和索引做异或运算，成对⼉的
+数字都会消为 0，只有这个落单的元素会剩下，也就达到了我们的⽬的。
+int missingNumber(int[] nums) {
+    int n = nums.length;
+    int res = 0;
+    // 先和新补的索引异或⼀下
+    res ^= n;
+    // 和其他的元素、索引做异或
+    for (int i = 0; i < n; i++)
+        res ^= i ^ nums[i];
+    return res;
+}
+如何寻找缺失的元素
+450
+
+由于异或运算满⾜交换律和结合律，所以总是能把成对⼉的数字消去，留下
+缺失的那个元素的。
+⾄此，时间复杂度 O(N)，空间复杂度 O(1)，已经达到了最优，我们是否就
+应该打道回府了呢？
+如果这样想，说明我们受算法的毒害太深，随着我们学习的知识越来越多，
+反⽽容易陷⼊思维定式，这个问题其实还有⼀个特别简单的解法：等差数列
+求和公式。
+题⽬的意思可以这样理解：现在有个等差数列 0, 1, 2,..., n，其中少了某⼀个
+数字，请你把它找出来。那这个数字不就是  sum(0,1,..n) - sum(nums) 
+嘛？
+int missingNumber(int[] nums) {
+    int n = nums.length;
+    // 公式：(⾸项 + 末项) * 项数 / 2
+    int expect = (0 + n) * (n + 1) / 2;
+    int sum = 0;
+    for (int x : nums) 
+        sum += x;
+    return expect - sum;
+如何寻找缺失的元素
+451
+
+你看，这种解法应该是最简单的，但说实话，我⾃⼰也没想到这个解法，⽽
+且我去问了⼏个⼤佬，他们也没想到这个最简单的思路。相反，如果去问⼀
+个初中⽣，他也许很快就能想到。
+做到这⼀步了，我们是否就应该打道回府了呢？
+如果这样想，说明我们对细节的把控还差点⽕候。在⽤求和公式计算
+ expect  时，你考虑过整型溢出吗？如果相乘的结果太⼤导致溢出，那么结
+果肯定是错误的。
+刚才我们的思路是把两个和都加出来然后相减，为了避免溢出，⼲脆⼀边求
+和⼀边减算了。很类似刚才位运算解法的思路，仍然假设  nums =
+[0,3,1,4] ，先补⼀位索引再让元素跟索引配对：
+我们让每个索引减去其对应的元素，再把相减的结果加起来，不就是那个缺
+失的元素吗？
+public int missingNumber(int[] nums) {
+    int n = nums.length;
+    int res = 0;
+    // 新补的索引
+    res += n - 0;
+    // 剩下索引和元素的差加起来
+    for (int i = 0; i < n; i++) 
+        res += i - nums[i];
+    return res;
+}
+如何寻找缺失的元素
+452
+
+由于加减法满⾜交换律和结合律，所以总是能把成对⼉的数字消去，留下缺
+失的那个元素的。
+⾄此这道算法题⽬经历九曲⼗⼋弯，终于再也没有什么坑了。
+＿＿＿＿＿＿＿＿＿＿＿＿＿
+刷算法，学套路，认准 labuladong。
+本⼩抄即将出版，关注 labuladong 公众号或 ongline book 查看更新⽂章，
+后台回复「进群」可进刷题群，labuladong 带你⽇穿 LeetCode。
+如何寻找缺失的元素
+453
+
+如何寻找缺失和重复的元素
+学算法，认准 labuladong 就够了！
+今天就聊⼀道很看起来简单却⼗分巧妙的问题，寻找缺失和重复的元素。之
+前的⼀篇⽂章「寻找缺失元素」也写过类似的问题，不过这次的和上次的问
+题使⽤的技巧不同。
+这是 LeetCode 645 题，我来描述⼀下这个题⽬：
+给⼀个⻓度为  N  的数组  nums ，其中本来装着  [1..N]  这  N  个元素，⽆
+序。但是现在出现了⼀些错误， nums  中的⼀个元素出现了重复，也就同时
+导致了另⼀个元素的缺失。请你写⼀个算法，找到  nums  中的重复元素和
+缺失元素的值。
+// 返回两个数字，分别是 {dup, missing}
+vector<int> findErrorNums(vector<int>& nums);
+⽐如说输⼊： nums = [1,2,2,4] ，算法返回  [2,3] 。
+其实很容易解决这个问题，先遍历⼀次数组，⽤⼀个哈希表记录每个数字出
+现的次数，然后遍历⼀次  [1..N] ，看看那个元素重复出现，那个元素没有
+出现，就 OK 了。
+但问题是，这个常规解法需要⼀个哈希表，也就是 O(N) 的空间复杂度。你
+看题⽬给的条件那么巧，在  [1..N]  的⼏个数字中恰好有⼀个重复，⼀个
+缺失，事出反常必有妖，对吧。
+O(N) 的时间复杂度遍历数组是⽆法避免的，所以我们可以想想办法如何降
+低空间复杂度，是否可以在 O(1) 的空间复杂度之下找到重复和确实的元素
+呢？
+思路分析
+如何同时寻找缺失和重复的元素
+4544:["$","main",null,{"style":{"maxWidth":760,"margin":"0 auto","padding":"16px","minHeight":"100vh"},"children":[["$","$Lc",null,{"href":"/columns/","style":{"display":"inline-block","marginBottom":"12px","fontSize":"13px"},"children":"← 返回专栏"}],["$","div",null,{"style":{"fontSize":"12px","color":"var(--text-tertiary)","marginBottom":"4px"},"children":["📕"," ","labuladong 算法小抄"]}],["$","h1",null,{"style":{"fontSize":"22px","fontWeight":700,"margin":"0 0 16px"},"children":"如何寻找缺失的元素"}],["$","$Ld",null,{"children":"$e"}],false]}]
+a:[["$","meta","0",{"name":"viewport","content":"width=device-width, initial-scale=1"}],["$","meta","1",{"name":"theme-color","content":"#f97316"}]]
+8:[["$","meta","0",{"charSet":"utf-8"}],["$","title","1",{"children":"如何寻找缺失的元素 - 算法面试"}],["$","meta","2",{"name":"description","content":"LeetCode 热题 100 完整 Java 题解、逐题动画、知识专栏与智能间隔复习。"}],["$","meta","3",{"name":"application-name","content":"算法面试"}],["$","link","4",{"rel":"manifest","href":"/algorithm-interview/manifest.json","crossOrigin":"$undefined"}],["$","meta","5",{"name":"keywords","content":"LeetCode,热题100,算法面试,Java题解,数据结构,动态规划,面试刷题"}],["$","meta","6",{"name":"mobile-web-app-capable","content":"yes"}],["$","meta","7",{"name":"apple-mobile-web-app-title","content":"算法面试"}],["$","meta","8",{"name":"apple-mobile-web-app-status-bar-style","content":"default"}],["$","meta","9",{"property":"og:title","content":"算法面试题库"}],["$","meta","10",{"property":"og:description","content":"LeetCode 热题 100 完整 Java 题解、逐题动画、知识专栏与智能复习"}],["$","meta","11",{"property":"og:site_name","content":"算法面试题库"}],["$","meta","12",{"property":"og:locale","content":"zh_CN"}],["$","meta","13",{"property":"og:type","content":"website"}],["$","meta","14",{"name":"twitter:card","content":"summary"}],["$","meta","15",{"name":"twitter:title","content":"算法面试题库"}],["$","meta","16",{"name":"twitter:description","content":"LeetCode 热题 100 完整 Java 题解、逐题动画、知识专栏与智能复习"}]]
+6:null

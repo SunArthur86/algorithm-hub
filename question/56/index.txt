@@ -1,0 +1,140 @@
+1:"$Sreact.fragment"
+2:I[5244,[],""]
+3:I[3866,[],""]
+5:I[6213,[],"OutletBoundary"]
+7:I[6213,[],"MetadataBoundary"]
+9:I[6213,[],"ViewportBoundary"]
+b:I[4835,[],""]
+:HL["/algorithm-interview/_next/static/css/c1e787639001e16b.css","style"]
+0:{"P":null,"b":"xos97fAiWtKfKXI6hZLx4","p":"/algorithm-interview","c":["","question","56",""],"i":false,"f":[[["",{"children":["question",{"children":[["lcId","56","d"],{"children":["__PAGE__",{}]}]}]},"$undefined","$undefined",true],["",["$","$1","c",{"children":[[["$","link","0",{"rel":"stylesheet","href":"/algorithm-interview/_next/static/css/c1e787639001e16b.css","precedence":"next","crossOrigin":"$undefined","nonce":"$undefined"}]],["$","html",null,{"lang":"zh","children":[["$","head",null,{"children":["$","script",null,{"dangerouslySetInnerHTML":{"__html":"\ntry {\n  var raw = localStorage.getItem('algo-interview');\n  var theme = 'light';\n  if (raw) { var p = JSON.parse(raw); theme = (p.state && p.state.theme) || 'light'; }\n  if (theme === 'dark') {\n    document.documentElement.classList.add('dark');\n    document.documentElement.setAttribute('data-theme', 'dark');\n  }\n} catch (e) {}\n"}}]}],["$","body",null,{"children":[["$","$L2",null,{"parallelRouterKey":"children","segmentPath":["children"],"error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L3",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":[[],[["$","title",null,{"children":"404: This page could not be found."}],["$","div",null,{"style":{"fontFamily":"system-ui,\"Segoe UI\",Roboto,Helvetica,Arial,sans-serif,\"Apple Color Emoji\",\"Segoe UI Emoji\"","height":"100vh","textAlign":"center","display":"flex","flexDirection":"column","alignItems":"center","justifyContent":"center"},"children":["$","div",null,{"children":[["$","style",null,{"dangerouslySetInnerHTML":{"__html":"body{color:#000;background:#fff;margin:0}.next-error-h1{border-right:1px solid rgba(0,0,0,.3)}@media (prefers-color-scheme:dark){body{color:#fff;background:#000}.next-error-h1{border-right:1px solid rgba(255,255,255,.3)}}"}}],["$","h1",null,{"className":"next-error-h1","style":{"display":"inline-block","margin":"0 20px 0 0","padding":"0 23px 0 0","fontSize":24,"fontWeight":500,"verticalAlign":"top","lineHeight":"49px"},"children":404}],["$","div",null,{"style":{"display":"inline-block"},"children":["$","h2",null,{"style":{"fontSize":14,"fontWeight":400,"lineHeight":"49px","margin":0},"children":"This page could not be found."}]}]]}]}]]],"forbidden":"$undefined","unauthorized":"$undefined"}],["$","script",null,{"dangerouslySetInnerHTML":{"__html":"\nif ('serviceWorker' in navigator) {\n  window.addEventListener('load', function () {\n    navigator.serviceWorker.register('/algorithm-interview/sw.js').catch(function () {});\n  });\n}\n"}}]]}]]}]]}],{"children":["question",["$","$1","c",{"children":[null,["$","$L2",null,{"parallelRouterKey":"children","segmentPath":["children","question","children"],"error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L3",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","forbidden":"$undefined","unauthorized":"$undefined"}]]}],{"children":[["lcId","56","d"],["$","$1","c",{"children":[null,["$","$L2",null,{"parallelRouterKey":"children","segmentPath":["children","question","children","$0:f:0:1:2:children:2:children:0","children"],"error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L3",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","forbidden":"$undefined","unauthorized":"$undefined"}]]}],{"children":["__PAGE__",["$","$1","c",{"children":["$L4",null,["$","$L5",null,{"children":"$L6"}]]}],{},null,false]},null,false]},null,false]},null,false],["$","$1","h",{"children":[null,["$","$1","G8hAXDnJi4VrLZUkhHoze",{"children":[["$","$L7",null,{"children":"$L8"}],["$","$L9",null,{"children":"$La"}],null]}]]}],false]],"m":"$undefined","G":["$b","$undefined"],"s":false,"S":true}
+c:I[8173,["173","static/chunks/173-69860a4742bb7020.js","829","static/chunks/829-7533e70598480772.js","937","static/chunks/937-ef36a5ac4bc37a7e.js","447","static/chunks/447-06af9414e164c047.js","8","static/chunks/app/question/%5BlcId%5D/page-478b0d2a69e222f2.js"],""]
+d:I[3447,["173","static/chunks/173-69860a4742bb7020.js","829","static/chunks/829-7533e70598480772.js","937","static/chunks/937-ef36a5ac4bc37a7e.js","447","static/chunks/447-06af9414e164c047.js","8","static/chunks/app/question/%5BlcId%5D/page-478b0d2a69e222f2.js"],"default"]
+e:T1aed,# 56. 合并区间
+
+> 难度：**Medium** | 分类：普通数组 | 标签：数组, 排序
+
+> 🔗 力扣链接：[https://leetcode.cn/problems/merge-intervals/](https://leetcode.cn/problems/merge-intervals/)
+
+## 📝 题目描述
+
+给你一堆区间，每个区间有起点和终点。如果两个区间有重叠（或首尾相接），就把它们合并成一个更大的区间。最终返回一组互不重叠的区间，且这组区间恰好覆盖原来所有区间。
+
+- 题号：56
+- 题目名：合并区间
+- 难度：中等
+- 题型：数组
+- 为什么选这题：区间合并是面试高频考点，"先排序再扫描"的套路在日历、排班等场景反复出现。
+
+## 🧠 思考路径
+
+直接的想法：两两比较区间，有重叠就合并。但这样 `O(n²)` 比较太慢，而且合并后产生的新区间可能又要和之前的比较，搞不清楚顺序。
+
+关键观察：如果按起点从小到大排序，重叠的区间一定会相邻。排序后从左到右扫描，拿"当前区间"和"结果里最后一个区间"比较：如果当前起点 <= 上一条的终点，说明有重叠，合并（更新终点为两者终点的较大值）；否则，没有重叠，把当前区间直接加入结果。
+
+排序保证了"前面的区间终点一定 <= 后面的区间终点"吗？不一定，但排序后前面的起点一定 <= 后面的起点，所以只需看终点即可。
+
+## 💻 Java 题解
+
+### 解法 1：排序 + 合并
+
+按区间起点排序。遍历时如果当前区间起点<=上一个的终点，合并；否则新增。
+
+- ⏱ 时间复杂度：`O(n log n)`
+- 💾 空间复杂度：`O(n)`
+
+```java
+class Solution {
+    public int[][] merge(int[][] intervals) {
+        Arrays.sort(intervals, (a, b) -> a[0] - b[0]);
+        List<int[]> result = new ArrayList<>();
+        for (int[] interval : intervals) {
+            if (!result.isEmpty() && interval[0] <= result.get(result.size()-1)[1])
+                result.get(result.size()-1)[1] = Math.max(result.get(result.size()-1)[1], interval[1]);
+            else
+                result.add(interval);
+        }
+        return result.toArray(new int[0][]);
+    }
+}
+```
+
+**关键点：**
+- 按起点排序
+- 重叠条件：当前start<=上一end
+- 合并时取较大的end
+
+**执行步骤：**
+1. 按起点排序
+1. 遍历比较与前一个的终点
+1. 重叠则合并，否则新增
+
+
+## ⚠️ 易错点
+
+- 必须先排序！不排序就直接扫描，会漏掉不相邻的重叠区间。
+- 合并时终点要取 `max`，不是简单替换：比如 `[1, 5]` 和 `[2, 3]` 重叠，合并后是 `[1, 5]`，不是 `[1, 3]`。
+- 题目说"首尾相接也算重叠"：`[1, 4]` 和 `[4, 5]` 要合并成 `[1, 5]`，判断条件是 `<=`，不是 `<`。
+
+- 合并时要更新end为max不是覆盖
+
+## 📊 复杂度分析
+
+- 时间复杂度：`O(n log n)`。排序占主导，扫描是 `O(n)`。
+- 空间复杂度：`O(n)`。最坏情况所有区间都不重叠，结果数组大小为 `n`（不算排序的额外空间）。
+
+## 🏢 实际业务应用
+
+- 日历系统的空闲时段计算：多个会议时间段可能有重叠，合并后得到"被占用的时间段"，再取反就是空闲时段。Google Calendar、Outlook 都在做这件事。
+- 网络安全中的 IP 段合并：防火墙规则可能包含大量重叠的 IP 范围，合并后减少规则数量，提升匹配效率。
+- 版本控制系统中的冲突范围：多人编辑同一文件时，合并各人的修改区间，找出所有冲突区域。
+- 物流系统的配送时间窗口合并：多个订单的配送时间窗口可能重叠，合并后统一安排一趟配送。
+
+- 日历系统的空闲时段计算：多个会议时间段可能有重叠，合并后得到"被占用的时间段"，再取反就是空闲时段。Google Calendar、Outlook 都在做这件事。
+- 网络安全中的 IP 段合并：防火墙规则可能包含大量重叠的 IP 范围，合并后减少规则数量，提升匹配效率。
+- 版本控制系统中的冲突范围：多人编辑同一文件时，合并各人的修改区间，找出所有冲突区域。
+- 物流系统的配送时间窗口合并：多个订单的配送时间窗口可能重叠，合并后统一安排一趟配送。
+
+## 📖 形象类比
+
+《红楼梦》中，王熙凤管理大观园的工程进度，多支施工队各自报上了自己的施工时间段。有些队伍的工期有重叠，需要合并成一个大工期来统筹安排。
+
+对应关系：
+
+- "区间"对应"施工队的工作时间段"
+- "排序"对应"按开工时间把各队排好"
+- "起点 <= 终点则合并"对应"后一队开工早于前一队收工，说明有交集，合并成一段大工期"
+- "互不重叠的结果"对应"最终的施工总表，各段互不重叠"
+
+核心：先排序消除乱序问题，再一趟扫描合并相邻重叠。
+
+《红楼梦》中，王熙凤管理大观园的工程进度，多支施工队各自报上了自己的施工时间段。有些队伍的工期有重叠，需要合并成一个大工期来统筹安排。
+
+对应关系：
+
+- "区间"对应"施工队的工作时间段"
+- "排序"对应"按开工时间把各队排好"
+- "起点 <= 终点则合并"对应"后一队开工早于前一队收工，说明有交集，合并成一段大工期"
+- "互不重叠的结果"对应"最终的施工总表，各段互不重叠"
+
+核心：先排序消除乱序问题，再一趟扫描合并相邻重叠。
+
+小熊在森林里收集蜂蜜，它记下了每罐蜂蜜的保质期（开始日期和结束日期）。有些保质期是重叠的，小熊按开始日期排好序，然后从前往后看：如果后一罐的开始日期在前一罐的结束日期之前，就把两段保质期合并成更长的一段。最后它得到了几段互不重叠的"安全食用期"。
+
+小熊在森林里收集蜂蜜，它记下了每罐蜂蜜的保质期（开始日期和结束日期）。有些保质期是重叠的，小熊按开始日期排好序，然后从前往后看：如果后一罐的开始日期在前一罐的结束日期之前，就把两段保质期合并成更长的一段。最后它得到了几段互不重叠的"安全食用期"。
+
+## 🎵 记忆口诀
+
+先排序，再扫一遍，重叠就合并。
+
+先排序，再扫一遍，重叠就合并。
+
+## 🔗 延伸练习
+
+- `57. 插入区间`：在一个已经排好序的无重叠区间列表中插入一个新区间，并合并。是本题的单次插入版本。
+- `435. 无重叠区间`：反过来，问最少删除几个区间才能让剩下的都不重叠。排序+贪心的思路和本题一脉相承。
+
+- `57. 插入区间`：在一个已经排好序的无重叠区间列表中插入一个新区间，并合并。是本题的单次插入版本。
+- `435. 无重叠区间`：反过来，问最少删除几个区间才能让剩下的都不重叠。排序+贪心的思路和本题一脉相承。4:["$","main",null,{"className":"detail-main","style":{"maxWidth":760,"margin":"0 auto","padding":"16px","minHeight":"100vh"},"children":[["$","$Lc",null,{"href":"/","style":{"display":"inline-block","marginBottom":"12px","fontSize":"13px"},"children":"← 返回题库"}],["$","h1",null,{"style":{"fontSize":"22px","fontWeight":700,"margin":"0 0 4px"},"children":[["$","span",null,{"style":{"marginRight":"6px"},"children":"📊"}],56,". ","合并区间"]}],["$","$Ld",null,{"q":{"id":"0056","lcId":56,"slug":"merge-intervals","title":"合并区间","question":"合并区间","answer":"$e","difficulty":"Medium","category":"array","categories":["array"],"tags":["数组","排序"],"url":"https://leetcode.cn/problems/merge-intervals/","planOrder":14,"hasViz":true,"hasDiagram":false,"feynman":{"essence":"给你一堆区间，每个区间有起点和终点。如果两个区间有重叠（或首尾相接），就把它们合并成一个更大的区间。最终返回一组互不重叠的区间，且这组区间恰好覆盖原来所有区间。","analogy":"","key_points":[]},"first_principle":{"problem":"","axioms":[],"rebuild":""}}}]]}]
+a:[["$","meta","0",{"name":"viewport","content":"width=device-width, initial-scale=1"}],["$","meta","1",{"name":"theme-color","content":"#f97316"}]]
+8:[["$","meta","0",{"charSet":"utf-8"}],["$","title","1",{"children":"56. 合并区间 - 算法面试"}],["$","meta","2",{"name":"description","content":"给你一堆区间，每个区间有起点和终点。如果两个区间有重叠（或首尾相接），就把它们合并成一个更大的区间。最终返回一组互不重叠的区间，且这组区间恰好覆盖原来所有区间。"}],["$","meta","3",{"name":"application-name","content":"算法面试"}],["$","link","4",{"rel":"manifest","href":"/algorithm-interview/manifest.json","crossOrigin":"$undefined"}],["$","meta","5",{"name":"keywords","content":"合并区间,LeetCode 56,Medium,数组,排序"}],["$","meta","6",{"name":"mobile-web-app-capable","content":"yes"}],["$","meta","7",{"name":"apple-mobile-web-app-title","content":"算法面试"}],["$","meta","8",{"name":"apple-mobile-web-app-status-bar-style","content":"default"}],["$","meta","9",{"property":"og:title","content":"56. 合并区间"}],["$","meta","10",{"property":"og:description","content":"给你一堆区间，每个区间有起点和终点。如果两个区间有重叠（或首尾相接），就把它们合并成一个更大的区间。最终返回一组互不重叠的区间，且这组区间恰好覆盖原来所有区间。"}],["$","meta","11",{"property":"og:locale","content":"zh_CN"}],["$","meta","12",{"property":"og:type","content":"article"}],["$","meta","13",{"name":"twitter:card","content":"summary"}],["$","meta","14",{"name":"twitter:title","content":"56. 合并区间"}],["$","meta","15",{"name":"twitter:description","content":"给你一堆区间，每个区间有起点和终点。如果两个区间有重叠（或首尾相接），就把它们合并成一个更大的区间。最终返回一组互不重叠的区间，且这组区间恰好覆盖原来所有区间。"}]]
+6:null

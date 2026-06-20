@@ -1,0 +1,272 @@
+<!DOCTYPE html><html lang="zh"><head><meta charSet="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="/algorithm-interview/_next/static/css/c1e787639001e16b.css" data-precedence="next"/><link rel="preload" as="script" fetchPriority="low" href="/algorithm-interview/_next/static/chunks/webpack-65b8ce4c1158f96f.js"/><script src="/algorithm-interview/_next/static/chunks/4bd1b696-899926250d3992f1.js" async=""></script><script src="/algorithm-interview/_next/static/chunks/517-b6df7dad4ff96d0b.js" async=""></script><script src="/algorithm-interview/_next/static/chunks/main-app-9e7bfff32fd8ebe9.js" async=""></script><script src="/algorithm-interview/_next/static/chunks/173-69860a4742bb7020.js" async=""></script><script src="/algorithm-interview/_next/static/chunks/829-7533e70598480772.js" async=""></script><script src="/algorithm-interview/_next/static/chunks/app/columns/%5Bslug%5D/page-58fc1d8f5085c1ff.js" async=""></script><meta name="theme-color" content="#f97316"/><title>经典动态规划：高楼扔鸡蛋（进阶） - 算法面试</title><meta name="description" content="LeetCode 热题 100 完整 Java 题解、逐题动画、知识专栏与智能间隔复习。"/><meta name="application-name" content="算法面试"/><link rel="manifest" href="/algorithm-interview/manifest.json"/><meta name="keywords" content="LeetCode,热题100,算法面试,Java题解,数据结构,动态规划,面试刷题"/><meta name="mobile-web-app-capable" content="yes"/><meta name="apple-mobile-web-app-title" content="算法面试"/><meta name="apple-mobile-web-app-status-bar-style" content="default"/><meta property="og:title" content="算法面试题库"/><meta property="og:description" content="LeetCode 热题 100 完整 Java 题解、逐题动画、知识专栏与智能复习"/><meta property="og:site_name" content="算法面试题库"/><meta property="og:locale" content="zh_CN"/><meta property="og:type" content="website"/><meta name="twitter:card" content="summary"/><meta name="twitter:title" content="算法面试题库"/><meta name="twitter:description" content="LeetCode 热题 100 完整 Java 题解、逐题动画、知识专栏与智能复习"/><script>
+try {
+  var raw = localStorage.getItem('algo-interview');
+  var theme = 'light';
+  if (raw) { var p = JSON.parse(raw); theme = (p.state && p.state.theme) || 'light'; }
+  if (theme === 'dark') {
+    document.documentElement.classList.add('dark');
+    document.documentElement.setAttribute('data-theme', 'dark');
+  }
+} catch (e) {}
+</script><script src="/algorithm-interview/_next/static/chunks/polyfills-42372ed130431b0a.js" noModule=""></script></head><body><main style="max-width:760px;margin:0 auto;padding:16px;min-height:100vh"><a style="display:inline-block;margin-bottom:12px;font-size:13px" href="/algorithm-interview/columns/">← 返回专栏</a><div style="font-size:12px;color:var(--text-tertiary);margin-bottom:4px">📕<!-- --> <!-- -->labuladong 算法小抄</div><h1 style="font-size:22px;font-weight:700;margin:0 0 16px">经典动态规划：高楼扔鸡蛋（进阶）</h1><div class="prose max-w-none" style="font-size:14px;color:var(--text)"><h1>经典动态规划：高楼扔鸡蛋（进阶）</h1>
+<p>经典动态规划问题：⾼楼扔鸡蛋（进
+阶）
+学算法，认准 labuladong 就够了！
+上篇⽂章聊了⾼楼扔鸡蛋问题，讲了⼀种效率不是很⾼，但是较为容易理解
+的动态规划解法。后台很多读者问如何更⾼效地解决这个问题，今天就谈两
+种思路，来优化⼀下这个问题，分别是⼆分查找优化和重新定义状态转移。
+如果还不知道⾼楼扔鸡蛋问题的读者可以看下「经典动态规划：⾼楼扔鸡
+蛋」，那篇⽂章详解了题⽬的含义和基本的动态规划解题思路，请确保理解
+前⽂，因为今天的优化都是基于这个基本解法的。
+⼆分搜索的优化思路也许是我们可以尽⼒尝试写出的，⽽修改状态转移的解
+法可能是不容易想到的，可以借此⻅识⼀下动态规划算法设计的⽞妙，当做
+思维拓展。
+⼆分搜索优化
+之前提到过这个解法，核⼼是因为状态转移⽅程的单调性，这⾥可以具体展
+开看看。
+⾸先简述⼀下原始动态规划的思路：
+1、暴⼒穷举尝试在所有楼层  1 &lt;= i &lt;= N  扔鸡蛋，每次选择尝试次数最少
+的那⼀层；
+2、每次扔鸡蛋有两种可能，要么碎，要么没碎；
+3、如果鸡蛋碎了， F  应该在第  i  层下⾯，否则， F  应该在第  i  层上
+⾯；
+经典动态规划：⾼楼扔鸡蛋（进阶）
+140</p>
+<p>4、鸡蛋是碎了还是没碎，取决于哪种情况下尝试次数更多，因为我们想求
+的是最坏情况下的结果。
+核⼼的状态转移代码是这段：</p>
+<h1>当前状态为 K 个鸡蛋，⾯对 N 层楼</h1>
+<h1>返回这个状态下的最优结果</h1>
+<p>def dp(K, N):
+for 1 &lt;= i &lt;= N:
+# 最坏情况下的最少扔鸡蛋次数
+res = min(res,
+max(
+dp(K - 1, i - 1), # 碎
+dp(K, N - i)      # 没碎
+) + 1 # 在第 i 楼扔了⼀次
+)
+return res
+这个 for 循环就是下⾯这个状态转移⽅程的具体代码实现：
+如果能够理解这个状态转移⽅程，那么就很容易理解⼆分查找的优化思路。
+⾸先我们根据  dp(K, N)  数组的定义（有  K  个鸡蛋⾯对  N  层楼，最少需
+要扔⼏次），很容易知道  K  固定时，这个函数随着  N  的增加⼀定是单调
+递增的，⽆论你策略多聪明，楼层增加测试次数⼀定要增加。
+那么注意  dp(K - 1, i - 1)  和  dp(K, N - i)  这两个函数，其中  i  是从 1
+到  N  单增的，如果我们固定  K  和  N ，把这两个函数看做关于  i  的函
+数，前者随着  i  的增加应该也是单调递增的，⽽后者随着  i  的增加应该
+是单调递减的：
+经典动态规划：⾼楼扔鸡蛋（进阶）
+141</p>
+<p>这时候求⼆者的较⼤值，再求这些最⼤值之中的最⼩值，其实就是求这两条
+直线交点，也就是红⾊折线的最低点嘛。
+我们前⽂「⼆分查找只能⽤来查找元素吗」讲过，⼆分查找的运⽤很⼴泛，
+形如下⾯这种形式的 for 循环代码：
+for (int i = 0; i &lt; n; i++) {
+if (isOK(i))
+return i;
+}
+都很有可能可以运⽤⼆分查找来优化线性搜索的复杂度，回顾这两个  dp
+函数的曲线，我们要找的最低点其实就是这种情况：
+for (int i = 1; i &lt;= N; i++) {
+if (dp(K - 1, i - 1) == dp(K, N - i))
+return dp(K, N - i);
+}
+熟悉⼆分搜索的同学肯定敏感地想到了，这不就是相当于求 Valley（⼭⾕）
+值嘛，可以⽤⼆分查找来快速寻找这个点的，直接看代码吧，整体的思路还
+是⼀样，只是加快了搜索速度：
+经典动态规划：⾼楼扔鸡蛋（进阶）
+142</p>
+<p>def superEggDrop(self, K: int, N: int) -&gt; int:
+memo = dict()
+def dp(K, N):
+if K == 1: return N
+if N == 0: return 0
+if (K, N) in memo:
+return memo[(K, N)]
+# for 1 &lt;= i &lt;= N:
+#     res = min(res,
+#             max(
+#                 dp(K - 1, i - 1),
+#                 dp(K, N - i)<br/>
+<!-- -->#                 ) + 1
+#             )
+res = float(&#x27;INF&#x27;)
+# ⽤⼆分搜索代替线性搜索
+lo, hi = 1, N
+while lo &lt;= hi:
+mid = (lo + hi) // 2
+broken = dp(K - 1, mid - 1) # 碎
+not_broken = dp(K, N - mid) # 没碎
+# res = min(max(碎，没碎) + 1)
+if broken &gt; not_broken:
+hi = mid - 1
+res = min(res, broken + 1)
+else:
+lo = mid + 1
+res = min(res, not_broken + 1)
+memo[(K, N)] = res
+return res
+return dp(K, N)
+这个算法的时间复杂度是多少呢？动态规划算法的时间复杂度就是⼦问题个
+数 × 函数本⾝的复杂度。
+经典动态规划：⾼楼扔鸡蛋（进阶）
+143</p>
+<p>函数本⾝的复杂度就是忽略递归部分的复杂度，这⾥  dp  函数中⽤了⼀个
+⼆分搜索，所以函数本⾝的复杂度是 O(logN)。
+⼦问题个数也就是不同状态组合的总数，显然是两个状态的乘积，也就是
+O(KN)。
+所以算法的总时间复杂度是 O(K<em>N</em>logN), 空间复杂度 O(KN)。效率上⽐之
+前的算法 O(KN^2) 要⾼效⼀些。
+重新定义状态转移
+前⽂「不同定义有不同解法」就提过，找动态规划的状态转移本就是⻅仁⻅
+智，⽐较⽞学的事情，不同的状态定义可以衍⽣出不同的解法，其解法和复
+杂程度都可能有巨⼤差异。这⾥就是⼀个很好的例⼦。
+再回顾⼀下我们之前定义的  dp  数组含义：
+def dp(k, n) -&gt; int</p>
+<h1>当前状态为 k 个鸡蛋，⾯对 n 层楼</h1>
+<h1>返回这个状态下最少的扔鸡蛋次数</h1>
+<p>⽤ dp 数组表⽰的话也是⼀样的：
+dp[k][n] = m</p>
+<h1>当前状态为 k 个鸡蛋，⾯对 n 层楼</h1>
+<h1>这个状态下最少的扔鸡蛋次数为 m</h1>
+<p>按照这个定义，就是确定当前的鸡蛋个数和⾯对的楼层数，就知道最⼩扔鸡
+蛋次数。最终我们想要的答案就是  dp(K, N)  的结果。
+这种思路下，肯定要穷举所有可能的扔法的，⽤⼆分搜索优化也只是做了
+「剪枝」，减⼩了搜索空间，但本质思路没有变，还是穷举。
+现在，我们稍微修改  dp  数组的定义，确定当前的鸡蛋个数和最多允许的
+扔鸡蛋次数，就知道能够确定  F  的最⾼楼层数。具体来说是这个意思：
+经典动态规划：⾼楼扔鸡蛋（进阶）
+144</p>
+<p>dp[k][m] = n</p>
+<h1>当前有 k 个鸡蛋，可以尝试扔 m 次鸡蛋</h1>
+<h1>这个状态下，最坏情况下最多能确切测试⼀栋 n 层的楼</h1>
+<h1>⽐如说 dp[1][7] = 7 表⽰：</h1>
+<h1>现在有 1 个鸡蛋，允许你扔 7 次;</h1>
+<h1>这个状态下最多给你 7 层楼，</h1>
+<h1>使得你可以确定楼层 F 使得鸡蛋恰好摔不碎</h1>
+<h1>（⼀层⼀层线性探查嘛）</h1>
+<p>这其实就是我们原始思路的⼀个「反向」版本，我们先不管这种思路的状态
+转移怎么写，先来思考⼀下这种定义之下，最终想求的答案是什么？
+我们最终要求的其实是扔鸡蛋次数  m ，但是这时候  m  在状态之中⽽不是
+dp  数组的结果，可以这样处理：
+int superEggDrop(int K, int N) {
+int m = 0;
+while (dp[K][m] &lt; N) {
+m++;
+// 状态转移...
+}
+return m;
+}
+题⽬不是给你  K  鸡蛋， N  层楼，让你求最坏情况下最少的测试次数  m
+吗？ while  循环结束的条件是  dp[K][m] == N ，也就是给你  K  个鸡蛋，
+测试  m  次，最坏情况下最多能测试  N  层楼。
+注意看这两段描述，是完全⼀样的！所以说这样组织代码是正确的，关键就
+是状态转移⽅程怎么找呢？还得从我们原始的思路开始讲。之前的解法配了
+这样图帮助⼤家理解状态转移思路：
+经典动态规划：⾼楼扔鸡蛋（进阶）
+145</p>
+<p>经典动态规划：⾼楼扔鸡蛋（进阶）
+146</p>
+<p>这个图描述的仅仅是某⼀个楼层  i ，原始解法还得线性或者⼆分扫描所有
+楼层，要求最⼤值、最⼩值。但是现在这种  dp  定义根本不需要这些了，
+基于下⾯两个事实：
+1、⽆论你在哪层楼扔鸡蛋，鸡蛋只可能摔碎或者没摔碎，碎了的话就测楼
+下，没碎的话就测楼上。
+2、⽆论你上楼还是下楼，总的楼层数 = 楼上的楼层数 + 楼下的楼层数 +
+1（当前这层楼）。
+根据这个特点，可以写出下⾯的状态转移⽅程：
+dp[k][m] = dp[k][m - 1] + dp[k - 1][m - 1] + 1
+dp[k][m - 1]  就是楼上的楼层数，因为鸡蛋个数  k  不变，也就是鸡蛋没
+碎，扔鸡蛋次数  m  减⼀；
+dp[k - 1][m - 1]  就是楼下的楼层数，因为鸡蛋个数  k  减⼀，也就是鸡
+蛋碎了，同时扔鸡蛋次数  m  减⼀。
+PS：这个  m  为什么要减⼀⽽不是加⼀？之前定义得很清楚，这个  m  是⼀
+个允许的次数上界，⽽不是扔了⼏次。
+经典动态规划：⾼楼扔鸡蛋（进阶）
+147</p>
+<p>经典动态规划：⾼楼扔鸡蛋（进阶）
+148</p>
+<p>⾄此，整个思路就完成了，只要把状态转移⽅程填进框架即可：
+int superEggDrop(int K, int N) {
+// m 最多不会超过 N 次（线性扫描）
+int[][] dp = new int[K + 1][N + 1];
+// base case:
+// dp[0][..] = 0
+// dp[..][0] = 0
+// Java 默认初始化数组都为 0
+int m = 0;
+while (dp[K][m] &lt; N) {
+m++;
+for (int k = 1; k &lt;= K; k++)
+dp[k][m] = dp[k][m - 1] + dp[k - 1][m - 1] + 1;
+}
+return m;
+}
+如果你还觉得这段代码有点难以理解，其实它就等同于这样写：
+for (int m = 1; dp[K][m] &lt; N; m++)
+for (int k = 1; k &lt;= K; k++)
+dp[k][m] = dp[k][m - 1] + dp[k - 1][m - 1] + 1;
+看到这种代码形式就熟悉多了吧，因为我们要求的不是  dp  数组⾥的值，
+⽽是某个符合条件的索引  m ，所以⽤  while  循环来找到这个  m  ⽽已。
+这个算法的时间复杂度是多少？很明显就是两个嵌套循环的复杂度
+O(KN)。
+另外注意到  dp[m][k]  转移只和左边和左上的两个状态有关，所以很容易优
+化成⼀维  dp  数组，这⾥就不写了。
+还可以再优化
+再往下就要⽤⼀些数学⽅法了，不具体展开，就简单提⼀下思路吧。
+经典动态规划：⾼楼扔鸡蛋（进阶）
+149</p>
+<p>在刚才的思路之上，注意函数  dp(m, k)  是随着  m  单增的，因为鸡蛋个数
+k  不变时，允许的测试次数越多，可测试的楼层就越⾼。
+这⾥⼜可以借助⼆分搜索算法快速逼近  dp[K][m] == N  这个终⽌条件，时
+间复杂度进⼀步下降为 O(KlogN)，我们可以设  g(k, m) = ……
+算了算了，打住吧。我觉得我们能够写出 O(K<em>N</em>logN) 的⼆分优化算法就
+⾏了，后⾯的这些解法呢，听个响⿎个掌就⾏了，把欲望限制在能⼒的范围
+之内才能拥有快乐！
+不过可以肯定的是，根据⼆分搜索代替线性扫描  m  的取值，代码的⼤致框
+架肯定是修改穷举  m  的 for 循环：
+// 把线性搜索改成⼆分搜索
+// for (int m = 1; dp[K][m] &lt; N; m++)
+int lo = 1, hi = N;
+while (lo &lt; hi) {
+int mid = (lo + hi) / 2;
+if (... &lt; N) {
+lo = ...
+} else {
+hi = ...
+}
+for (int k = 1; k &lt;= K; k++)
+// 状态转移⽅程
+}
+简单总结⼀下吧，第⼀个⼆分优化是利⽤了  dp  函数的单调性，⽤⼆分查
+找技巧快速搜索答案；第⼆种优化是巧妙地修改了状态转移⽅程，简化了求
+解了流程，但相应的，解题逻辑⽐较难以想到；后续还可以⽤⼀些数学⽅法
+和⼆分搜索进⼀步优化第⼆种解法，不过看了看镜⼦中的发量，算了。
+本⽂终，希望对你有⼀点启发。
+＿＿＿＿＿＿＿＿＿＿＿＿＿
+刷算法，学套路，认准 labuladong。
+经典动态规划：⾼楼扔鸡蛋（进阶）
+150</p>
+<p>本⼩抄即将出版，关注 labuladong 公众号或 ongline book 查看更新⽂章，
+后台回复「进群」可进刷题群，labuladong 带你⽇穿 LeetCode。
+经典动态规划：⾼楼扔鸡蛋（进阶）
+151</p>
+<p>经典动态规划：戳⽓球
+学好算法全靠套路，认准 labuladong 就够了。
+读完本⽂，你不仅学会了算法套路，还可以顺便去 LeetCode 上拿下如下题
+⽬：
+312.戳⽓球
+今天我们要聊的这道题「Burst Balloon」和之前我们写过的那篇 经典动态规
+划：⾼楼扔鸡蛋问题 分析过的⾼楼扔鸡蛋问题类似，知名度很⾼，但难度
+确实也很⼤。因此 labuladong 公众号就给这道题赐个座，来看⼀看这道题⽬
+到底有多难。
+它是 LeetCode 第 312 题，题⽬如下：
+经典动态规划：戳⽓球
+152</p></div></main><script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function () {
+    navigator.serviceWorker.register('/algorithm-interview/sw.js').catch(function () {});
+  });
+}
+</script><script src="/algorithm-interview/_next/static/chunks/webpack-65b8ce4c1158f96f.js" async=""></script><script>(self.__next_f=self.__next_f||[]).push([0])</script><script>self.__next_f.push([1,"1:\"$Sreact.fragment\"\n2:I[5244,[],\"\"]\n3:I[3866,[],\"\"]\n5:I[6213,[],\"OutletBoundary\"]\n7:I[6213,[],\"MetadataBoundary\"]\n9:I[6213,[],\"ViewportBoundary\"]\nb:I[4835,[],\"\"]\n:HL[\"/algorithm-interview/_next/static/css/c1e787639001e16b.css\",\"style\"]\n"])</script><script>self.__next_f.push([1,"0:{\"P\":null,\"b\":\"xos97fAiWtKfKXI6hZLx4\",\"p\":\"/algorithm-interview\",\"c\":[\"\",\"columns\",\"lbd-021\",\"\"],\"i\":false,\"f\":[[[\"\",{\"children\":[\"columns\",{\"children\":[[\"slug\",\"lbd-021\",\"d\"],{\"children\":[\"__PAGE__\",{}]}]}]},\"$undefined\",\"$undefined\",true],[\"\",[\"$\",\"$1\",\"c\",{\"children\":[[[\"$\",\"link\",\"0\",{\"rel\":\"stylesheet\",\"href\":\"/algorithm-interview/_next/static/css/c1e787639001e16b.css\",\"precedence\":\"next\",\"crossOrigin\":\"$undefined\",\"nonce\":\"$undefined\"}]],[\"$\",\"html\",null,{\"lang\":\"zh\",\"children\":[[\"$\",\"head\",null,{\"children\":[\"$\",\"script\",null,{\"dangerouslySetInnerHTML\":{\"__html\":\"\\ntry {\\n  var raw = localStorage.getItem('algo-interview');\\n  var theme = 'light';\\n  if (raw) { var p = JSON.parse(raw); theme = (p.state \u0026\u0026 p.state.theme) || 'light'; }\\n  if (theme === 'dark') {\\n    document.documentElement.classList.add('dark');\\n    document.documentElement.setAttribute('data-theme', 'dark');\\n  }\\n} catch (e) {}\\n\"}}]}],[\"$\",\"body\",null,{\"children\":[[\"$\",\"$L2\",null,{\"parallelRouterKey\":\"children\",\"segmentPath\":[\"children\"],\"error\":\"$undefined\",\"errorStyles\":\"$undefined\",\"errorScripts\":\"$undefined\",\"template\":[\"$\",\"$L3\",null,{}],\"templateStyles\":\"$undefined\",\"templateScripts\":\"$undefined\",\"notFound\":[[],[[\"$\",\"title\",null,{\"children\":\"404: This page could not be found.\"}],[\"$\",\"div\",null,{\"style\":{\"fontFamily\":\"system-ui,\\\"Segoe UI\\\",Roboto,Helvetica,Arial,sans-serif,\\\"Apple Color Emoji\\\",\\\"Segoe UI Emoji\\\"\",\"height\":\"100vh\",\"textAlign\":\"center\",\"display\":\"flex\",\"flexDirection\":\"column\",\"alignItems\":\"center\",\"justifyContent\":\"center\"},\"children\":[\"$\",\"div\",null,{\"children\":[[\"$\",\"style\",null,{\"dangerouslySetInnerHTML\":{\"__html\":\"body{color:#000;background:#fff;margin:0}.next-error-h1{border-right:1px solid rgba(0,0,0,.3)}@media (prefers-color-scheme:dark){body{color:#fff;background:#000}.next-error-h1{border-right:1px solid rgba(255,255,255,.3)}}\"}}],[\"$\",\"h1\",null,{\"className\":\"next-error-h1\",\"style\":{\"display\":\"inline-block\",\"margin\":\"0 20px 0 0\",\"padding\":\"0 23px 0 0\",\"fontSize\":24,\"fontWeight\":500,\"verticalAlign\":\"top\",\"lineHeight\":\"49px\"},\"children\":404}],[\"$\",\"div\",null,{\"style\":{\"display\":\"inline-block\"},\"children\":[\"$\",\"h2\",null,{\"style\":{\"fontSize\":14,\"fontWeight\":400,\"lineHeight\":\"49px\",\"margin\":0},\"children\":\"This page could not be found.\"}]}]]}]}]]],\"forbidden\":\"$undefined\",\"unauthorized\":\"$undefined\"}],[\"$\",\"script\",null,{\"dangerouslySetInnerHTML\":{\"__html\":\"\\nif ('serviceWorker' in navigator) {\\n  window.addEventListener('load', function () {\\n    navigator.serviceWorker.register('/algorithm-interview/sw.js').catch(function () {});\\n  });\\n}\\n\"}}]]}]]}]]}],{\"children\":[\"columns\",[\"$\",\"$1\",\"c\",{\"children\":[null,[\"$\",\"$L2\",null,{\"parallelRouterKey\":\"children\",\"segmentPath\":[\"children\",\"columns\",\"children\"],\"error\":\"$undefined\",\"errorStyles\":\"$undefined\",\"errorScripts\":\"$undefined\",\"template\":[\"$\",\"$L3\",null,{}],\"templateStyles\":\"$undefined\",\"templateScripts\":\"$undefined\",\"notFound\":\"$undefined\",\"forbidden\":\"$undefined\",\"unauthorized\":\"$undefined\"}]]}],{\"children\":[[\"slug\",\"lbd-021\",\"d\"],[\"$\",\"$1\",\"c\",{\"children\":[null,[\"$\",\"$L2\",null,{\"parallelRouterKey\":\"children\",\"segmentPath\":[\"children\",\"columns\",\"children\",\"$0:f:0:1:2:children:2:children:0\",\"children\"],\"error\":\"$undefined\",\"errorStyles\":\"$undefined\",\"errorScripts\":\"$undefined\",\"template\":[\"$\",\"$L3\",null,{}],\"templateStyles\":\"$undefined\",\"templateScripts\":\"$undefined\",\"notFound\":\"$undefined\",\"forbidden\":\"$undefined\",\"unauthorized\":\"$undefined\"}]]}],{\"children\":[\"__PAGE__\",[\"$\",\"$1\",\"c\",{\"children\":[\"$L4\",null,[\"$\",\"$L5\",null,{\"children\":\"$L6\"}]]}],{},null,false]},null,false]},null,false]},null,false],[\"$\",\"$1\",\"h\",{\"children\":[null,[\"$\",\"$1\",\"cVxZrFEM99TW7p5aZTKIB\",{\"children\":[[\"$\",\"$L7\",null,{\"children\":\"$L8\"}],[\"$\",\"$L9\",null,{\"children\":\"$La\"}],null]}]]}],false]],\"m\":\"$undefined\",\"G\":[\"$b\",\"$undefined\"],\"s\":false,\"S\":true}\n"])</script><script>self.__next_f.push([1,"c:I[8173,[\"173\",\"static/chunks/173-69860a4742bb7020.js\",\"829\",\"static/chunks/829-7533e70598480772.js\",\"306\",\"static/chunks/app/columns/%5Bslug%5D/page-58fc1d8f5085c1ff.js\"],\"\"]\nd:I[4780,[\"173\",\"static/chunks/173-69860a4742bb7020.js\",\"829\",\"static/chunks/829-7533e70598480772.js\",\"306\",\"static/chunks/app/columns/%5Bslug%5D/page-58fc1d8f5085c1ff.js\"],\"default\"]\ne:T31eb,"])</script><script>self.__next_f.push([1,"# 经典动态规划：高楼扔鸡蛋（进阶）\n\n经典动态规划问题：⾼楼扔鸡蛋（进\n阶）\n学算法，认准 labuladong 就够了！\n上篇⽂章聊了⾼楼扔鸡蛋问题，讲了⼀种效率不是很⾼，但是较为容易理解\n的动态规划解法。后台很多读者问如何更⾼效地解决这个问题，今天就谈两\n种思路，来优化⼀下这个问题，分别是⼆分查找优化和重新定义状态转移。\n如果还不知道⾼楼扔鸡蛋问题的读者可以看下「经典动态规划：⾼楼扔鸡\n蛋」，那篇⽂章详解了题⽬的含义和基本的动态规划解题思路，请确保理解\n前⽂，因为今天的优化都是基于这个基本解法的。\n⼆分搜索的优化思路也许是我们可以尽⼒尝试写出的，⽽修改状态转移的解\n法可能是不容易想到的，可以借此⻅识⼀下动态规划算法设计的⽞妙，当做\n思维拓展。\n⼆分搜索优化\n之前提到过这个解法，核⼼是因为状态转移⽅程的单调性，这⾥可以具体展\n开看看。\n⾸先简述⼀下原始动态规划的思路：\n1、暴⼒穷举尝试在所有楼层  1 \u003c= i \u003c= N  扔鸡蛋，每次选择尝试次数最少\n的那⼀层；\n2、每次扔鸡蛋有两种可能，要么碎，要么没碎；\n3、如果鸡蛋碎了， F  应该在第  i  层下⾯，否则， F  应该在第  i  层上\n⾯；\n经典动态规划：⾼楼扔鸡蛋（进阶）\n140\n\n4、鸡蛋是碎了还是没碎，取决于哪种情况下尝试次数更多，因为我们想求\n的是最坏情况下的结果。\n核⼼的状态转移代码是这段：\n# 当前状态为 K 个鸡蛋，⾯对 N 层楼\n# 返回这个状态下的最优结果\ndef dp(K, N):\n    for 1 \u003c= i \u003c= N:\n        # 最坏情况下的最少扔鸡蛋次数\n        res = min(res, \n                  max( \n                        dp(K - 1, i - 1), # 碎\n                        dp(K, N - i)      # 没碎\n                     ) + 1 # 在第 i 楼扔了⼀次\n                 )\n    return res\n这个 for 循环就是下⾯这个状态转移⽅程的具体代码实现：\n如果能够理解这个状态转移⽅程，那么就很容易理解⼆分查找的优化思路。\n⾸先我们根据  dp(K, N)  数组的定义（有  K  个鸡蛋⾯对  N  层楼，最少需\n要扔⼏次），很容易知道  K  固定时，这个函数随着  N  的增加⼀定是单调\n递增的，⽆论你策略多聪明，楼层增加测试次数⼀定要增加。\n那么注意  dp(K - 1, i - 1)  和  dp(K, N - i)  这两个函数，其中  i  是从 1\n到  N  单增的，如果我们固定  K  和  N ，把这两个函数看做关于  i  的函\n数，前者随着  i  的增加应该也是单调递增的，⽽后者随着  i  的增加应该\n是单调递减的：\n经典动态规划：⾼楼扔鸡蛋（进阶）\n141\n\n这时候求⼆者的较⼤值，再求这些最⼤值之中的最⼩值，其实就是求这两条\n直线交点，也就是红⾊折线的最低点嘛。\n我们前⽂「⼆分查找只能⽤来查找元素吗」讲过，⼆分查找的运⽤很⼴泛，\n形如下⾯这种形式的 for 循环代码：\nfor (int i = 0; i \u003c n; i++) {\n    if (isOK(i))\n        return i;\n}\n都很有可能可以运⽤⼆分查找来优化线性搜索的复杂度，回顾这两个  dp \n函数的曲线，我们要找的最低点其实就是这种情况：\nfor (int i = 1; i \u003c= N; i++) {\n    if (dp(K - 1, i - 1) == dp(K, N - i))\n        return dp(K, N - i);\n}\n熟悉⼆分搜索的同学肯定敏感地想到了，这不就是相当于求 Valley（⼭⾕）\n值嘛，可以⽤⼆分查找来快速寻找这个点的，直接看代码吧，整体的思路还\n是⼀样，只是加快了搜索速度：\n经典动态规划：⾼楼扔鸡蛋（进阶）\n142\n\ndef superEggDrop(self, K: int, N: int) -\u003e int:\n    memo = dict()\n    def dp(K, N):\n        if K == 1: return N\n        if N == 0: return 0\n        if (K, N) in memo:\n            return memo[(K, N)]\n        # for 1 \u003c= i \u003c= N:\n        #     res = min(res, \n        #             max( \n        #                 dp(K - 1, i - 1), \n        #                 dp(K, N - i)      \n        #                 ) + 1 \n        #             )\n        res = float('INF')\n        # ⽤⼆分搜索代替线性搜索\n        lo, hi = 1, N\n        while lo \u003c= hi:\n            mid = (lo + hi) // 2\n            broken = dp(K - 1, mid - 1) # 碎\n            not_broken = dp(K, N - mid) # 没碎\n            # res = min(max(碎，没碎) + 1)\n            if broken \u003e not_broken:\n                hi = mid - 1\n                res = min(res, broken + 1)\n            else:\n                lo = mid + 1\n                res = min(res, not_broken + 1)\n        memo[(K, N)] = res\n        return res\n    return dp(K, N)\n这个算法的时间复杂度是多少呢？动态规划算法的时间复杂度就是⼦问题个\n数 × 函数本⾝的复杂度。\n经典动态规划：⾼楼扔鸡蛋（进阶）\n143\n\n函数本⾝的复杂度就是忽略递归部分的复杂度，这⾥  dp  函数中⽤了⼀个\n⼆分搜索，所以函数本⾝的复杂度是 O(logN)。\n⼦问题个数也就是不同状态组合的总数，显然是两个状态的乘积，也就是\nO(KN)。\n所以算法的总时间复杂度是 O(K*N*logN), 空间复杂度 O(KN)。效率上⽐之\n前的算法 O(KN^2) 要⾼效⼀些。\n重新定义状态转移\n前⽂「不同定义有不同解法」就提过，找动态规划的状态转移本就是⻅仁⻅\n智，⽐较⽞学的事情，不同的状态定义可以衍⽣出不同的解法，其解法和复\n杂程度都可能有巨⼤差异。这⾥就是⼀个很好的例⼦。\n再回顾⼀下我们之前定义的  dp  数组含义：\ndef dp(k, n) -\u003e int\n# 当前状态为 k 个鸡蛋，⾯对 n 层楼\n# 返回这个状态下最少的扔鸡蛋次数\n⽤ dp 数组表⽰的话也是⼀样的：\ndp[k][n] = m\n# 当前状态为 k 个鸡蛋，⾯对 n 层楼\n# 这个状态下最少的扔鸡蛋次数为 m\n按照这个定义，就是确定当前的鸡蛋个数和⾯对的楼层数，就知道最⼩扔鸡\n蛋次数。最终我们想要的答案就是  dp(K, N)  的结果。\n这种思路下，肯定要穷举所有可能的扔法的，⽤⼆分搜索优化也只是做了\n「剪枝」，减⼩了搜索空间，但本质思路没有变，还是穷举。\n现在，我们稍微修改  dp  数组的定义，确定当前的鸡蛋个数和最多允许的\n扔鸡蛋次数，就知道能够确定  F  的最⾼楼层数。具体来说是这个意思：\n经典动态规划：⾼楼扔鸡蛋（进阶）\n144\n\ndp[k][m] = n\n# 当前有 k 个鸡蛋，可以尝试扔 m 次鸡蛋\n# 这个状态下，最坏情况下最多能确切测试⼀栋 n 层的楼\n# ⽐如说 dp[1][7] = 7 表⽰：\n# 现在有 1 个鸡蛋，允许你扔 7 次;\n# 这个状态下最多给你 7 层楼，\n# 使得你可以确定楼层 F 使得鸡蛋恰好摔不碎\n# （⼀层⼀层线性探查嘛）\n这其实就是我们原始思路的⼀个「反向」版本，我们先不管这种思路的状态\n转移怎么写，先来思考⼀下这种定义之下，最终想求的答案是什么？\n我们最终要求的其实是扔鸡蛋次数  m ，但是这时候  m  在状态之中⽽不是\n dp  数组的结果，可以这样处理：\nint superEggDrop(int K, int N) {\n    int m = 0;\n    while (dp[K][m] \u003c N) {\n        m++;\n        // 状态转移...\n    }\n    return m;\n}\n题⽬不是给你  K  鸡蛋， N  层楼，让你求最坏情况下最少的测试次数  m \n吗？ while  循环结束的条件是  dp[K][m] == N ，也就是给你  K  个鸡蛋，\n测试  m  次，最坏情况下最多能测试  N  层楼。\n注意看这两段描述，是完全⼀样的！所以说这样组织代码是正确的，关键就\n是状态转移⽅程怎么找呢？还得从我们原始的思路开始讲。之前的解法配了\n这样图帮助⼤家理解状态转移思路：\n经典动态规划：⾼楼扔鸡蛋（进阶）\n145\n\n经典动态规划：⾼楼扔鸡蛋（进阶）\n146\n\n这个图描述的仅仅是某⼀个楼层  i ，原始解法还得线性或者⼆分扫描所有\n楼层，要求最⼤值、最⼩值。但是现在这种  dp  定义根本不需要这些了，\n基于下⾯两个事实：\n1、⽆论你在哪层楼扔鸡蛋，鸡蛋只可能摔碎或者没摔碎，碎了的话就测楼\n下，没碎的话就测楼上。\n2、⽆论你上楼还是下楼，总的楼层数 = 楼上的楼层数 + 楼下的楼层数 +\n1（当前这层楼）。\n根据这个特点，可以写出下⾯的状态转移⽅程：\n dp[k][m] = dp[k][m - 1] + dp[k - 1][m - 1] + 1 \n dp[k][m - 1]  就是楼上的楼层数，因为鸡蛋个数  k  不变，也就是鸡蛋没\n碎，扔鸡蛋次数  m  减⼀；\n dp[k - 1][m - 1]  就是楼下的楼层数，因为鸡蛋个数  k  减⼀，也就是鸡\n蛋碎了，同时扔鸡蛋次数  m  减⼀。\nPS：这个  m  为什么要减⼀⽽不是加⼀？之前定义得很清楚，这个  m  是⼀\n个允许的次数上界，⽽不是扔了⼏次。\n经典动态规划：⾼楼扔鸡蛋（进阶）\n147\n\n经典动态规划：⾼楼扔鸡蛋（进阶）\n148\n\n⾄此，整个思路就完成了，只要把状态转移⽅程填进框架即可：\nint superEggDrop(int K, int N) {\n    // m 最多不会超过 N 次（线性扫描）\n    int[][] dp = new int[K + 1][N + 1];\n    // base case:\n    // dp[0][..] = 0\n    // dp[..][0] = 0\n    // Java 默认初始化数组都为 0\n    int m = 0;\n    while (dp[K][m] \u003c N) {\n        m++;\n        for (int k = 1; k \u003c= K; k++)\n            dp[k][m] = dp[k][m - 1] + dp[k - 1][m - 1] + 1;\n    }\n    return m;\n}\n如果你还觉得这段代码有点难以理解，其实它就等同于这样写：\nfor (int m = 1; dp[K][m] \u003c N; m++)\n    for (int k = 1; k \u003c= K; k++)\n        dp[k][m] = dp[k][m - 1] + dp[k - 1][m - 1] + 1;\n看到这种代码形式就熟悉多了吧，因为我们要求的不是  dp  数组⾥的值，\n⽽是某个符合条件的索引  m ，所以⽤  while  循环来找到这个  m  ⽽已。\n这个算法的时间复杂度是多少？很明显就是两个嵌套循环的复杂度\nO(KN)。\n另外注意到  dp[m][k]  转移只和左边和左上的两个状态有关，所以很容易优\n化成⼀维  dp  数组，这⾥就不写了。\n还可以再优化\n再往下就要⽤⼀些数学⽅法了，不具体展开，就简单提⼀下思路吧。\n经典动态规划：⾼楼扔鸡蛋（进阶）\n149\n\n在刚才的思路之上，注意函数  dp(m, k)  是随着  m  单增的，因为鸡蛋个数\n k  不变时，允许的测试次数越多，可测试的楼层就越⾼。\n这⾥⼜可以借助⼆分搜索算法快速逼近  dp[K][m] == N  这个终⽌条件，时\n间复杂度进⼀步下降为 O(KlogN)，我们可以设  g(k, m) = ……\n算了算了，打住吧。我觉得我们能够写出 O(K*N*logN) 的⼆分优化算法就\n⾏了，后⾯的这些解法呢，听个响⿎个掌就⾏了，把欲望限制在能⼒的范围\n之内才能拥有快乐！\n不过可以肯定的是，根据⼆分搜索代替线性扫描  m  的取值，代码的⼤致框\n架肯定是修改穷举  m  的 for 循环：\n// 把线性搜索改成⼆分搜索\n// for (int m = 1; dp[K][m] \u003c N; m++)\nint lo = 1, hi = N;\nwhile (lo \u003c hi) {\n    int mid = (lo + hi) / 2;\n    if (... \u003c N) {\n        lo = ...\n    } else {\n        hi = ...\n    }\n    for (int k = 1; k \u003c= K; k++)\n        // 状态转移⽅程\n}\n简单总结⼀下吧，第⼀个⼆分优化是利⽤了  dp  函数的单调性，⽤⼆分查\n找技巧快速搜索答案；第⼆种优化是巧妙地修改了状态转移⽅程，简化了求\n解了流程，但相应的，解题逻辑⽐较难以想到；后续还可以⽤⼀些数学⽅法\n和⼆分搜索进⼀步优化第⼆种解法，不过看了看镜⼦中的发量，算了。\n本⽂终，希望对你有⼀点启发。\n＿＿＿＿＿＿＿＿＿＿＿＿＿\n刷算法，学套路，认准 labuladong。\n经典动态规划：⾼楼扔鸡蛋（进阶）\n150\n\n本⼩抄即将出版，关注 labuladong 公众号或 ongline book 查看更新⽂章，\n后台回复「进群」可进刷题群，labuladong 带你⽇穿 LeetCode。\n经典动态规划：⾼楼扔鸡蛋（进阶）\n151\n\n经典动态规划：戳⽓球\n学好算法全靠套路，认准 labuladong 就够了。\n读完本⽂，你不仅学会了算法套路，还可以顺便去 LeetCode 上拿下如下题\n⽬：\n312.戳⽓球\n今天我们要聊的这道题「Burst Balloon」和之前我们写过的那篇 经典动态规\n划：⾼楼扔鸡蛋问题 分析过的⾼楼扔鸡蛋问题类似，知名度很⾼，但难度\n确实也很⼤。因此 labuladong 公众号就给这道题赐个座，来看⼀看这道题⽬\n到底有多难。\n它是 LeetCode 第 312 题，题⽬如下：\n经典动态规划：戳⽓球\n152"])</script><script>self.__next_f.push([1,"4:[\"$\",\"main\",null,{\"style\":{\"maxWidth\":760,\"margin\":\"0 auto\",\"padding\":\"16px\",\"minHeight\":\"100vh\"},\"children\":[[\"$\",\"$Lc\",null,{\"href\":\"/columns/\",\"style\":{\"display\":\"inline-block\",\"marginBottom\":\"12px\",\"fontSize\":\"13px\"},\"children\":\"← 返回专栏\"}],[\"$\",\"div\",null,{\"style\":{\"fontSize\":\"12px\",\"color\":\"var(--text-tertiary)\",\"marginBottom\":\"4px\"},\"children\":[\"📕\",\" \",\"labuladong 算法小抄\"]}],[\"$\",\"h1\",null,{\"style\":{\"fontSize\":\"22px\",\"fontWeight\":700,\"margin\":\"0 0 16px\"},\"children\":\"经典动态规划：高楼扔鸡蛋（进阶）\"}],[\"$\",\"$Ld\",null,{\"children\":\"$e\"}],false]}]\n"])</script><script>self.__next_f.push([1,"a:[[\"$\",\"meta\",\"0\",{\"name\":\"viewport\",\"content\":\"width=device-width, initial-scale=1\"}],[\"$\",\"meta\",\"1\",{\"name\":\"theme-color\",\"content\":\"#f97316\"}]]\n"])</script><script>self.__next_f.push([1,"8:[[\"$\",\"meta\",\"0\",{\"charSet\":\"utf-8\"}],[\"$\",\"title\",\"1\",{\"children\":\"经典动态规划：高楼扔鸡蛋（进阶） - 算法面试\"}],[\"$\",\"meta\",\"2\",{\"name\":\"description\",\"content\":\"LeetCode 热题 100 完整 Java 题解、逐题动画、知识专栏与智能间隔复习。\"}],[\"$\",\"meta\",\"3\",{\"name\":\"application-name\",\"content\":\"算法面试\"}],[\"$\",\"link\",\"4\",{\"rel\":\"manifest\",\"href\":\"/algorithm-interview/manifest.json\",\"crossOrigin\":\"$undefined\"}],[\"$\",\"meta\",\"5\",{\"name\":\"keywords\",\"content\":\"LeetCode,热题100,算法面试,Java题解,数据结构,动态规划,面试刷题\"}],[\"$\",\"meta\",\"6\",{\"name\":\"mobile-web-app-capable\",\"content\":\"yes\"}],[\"$\",\"meta\",\"7\",{\"name\":\"apple-mobile-web-app-title\",\"content\":\"算法面试\"}],[\"$\",\"meta\",\"8\",{\"name\":\"apple-mobile-web-app-status-bar-style\",\"content\":\"default\"}],[\"$\",\"meta\",\"9\",{\"property\":\"og:title\",\"content\":\"算法面试题库\"}],[\"$\",\"meta\",\"10\",{\"property\":\"og:description\",\"content\":\"LeetCode 热题 100 完整 Java 题解、逐题动画、知识专栏与智能复习\"}],[\"$\",\"meta\",\"11\",{\"property\":\"og:site_name\",\"content\":\"算法面试题库\"}],[\"$\",\"meta\",\"12\",{\"property\":\"og:locale\",\"content\":\"zh_CN\"}],[\"$\",\"meta\",\"13\",{\"property\":\"og:type\",\"content\":\"website\"}],[\"$\",\"meta\",\"14\",{\"name\":\"twitter:card\",\"content\":\"summary\"}],[\"$\",\"meta\",\"15\",{\"name\":\"twitter:title\",\"content\":\"算法面试题库\"}],[\"$\",\"meta\",\"16\",{\"name\":\"twitter:description\",\"content\":\"LeetCode 热题 100 完整 Java 题解、逐题动画、知识专栏与智能复习\"}]]\n"])</script><script>self.__next_f.push([1,"6:null\n"])</script></body></html>

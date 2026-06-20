@@ -1,0 +1,146 @@
+1:"$Sreact.fragment"
+2:I[5244,[],""]
+3:I[3866,[],""]
+5:I[6213,[],"OutletBoundary"]
+7:I[6213,[],"MetadataBoundary"]
+9:I[6213,[],"ViewportBoundary"]
+b:I[4835,[],""]
+:HL["/algorithm-interview/_next/static/css/c1e787639001e16b.css","style"]
+0:{"P":null,"b":"xos97fAiWtKfKXI6hZLx4","p":"/algorithm-interview","c":["","question","114",""],"i":false,"f":[[["",{"children":["question",{"children":[["lcId","114","d"],{"children":["__PAGE__",{}]}]}]},"$undefined","$undefined",true],["",["$","$1","c",{"children":[[["$","link","0",{"rel":"stylesheet","href":"/algorithm-interview/_next/static/css/c1e787639001e16b.css","precedence":"next","crossOrigin":"$undefined","nonce":"$undefined"}]],["$","html",null,{"lang":"zh","children":[["$","head",null,{"children":["$","script",null,{"dangerouslySetInnerHTML":{"__html":"\ntry {\n  var raw = localStorage.getItem('algo-interview');\n  var theme = 'light';\n  if (raw) { var p = JSON.parse(raw); theme = (p.state && p.state.theme) || 'light'; }\n  if (theme === 'dark') {\n    document.documentElement.classList.add('dark');\n    document.documentElement.setAttribute('data-theme', 'dark');\n  }\n} catch (e) {}\n"}}]}],["$","body",null,{"children":[["$","$L2",null,{"parallelRouterKey":"children","segmentPath":["children"],"error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L3",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":[[],[["$","title",null,{"children":"404: This page could not be found."}],["$","div",null,{"style":{"fontFamily":"system-ui,\"Segoe UI\",Roboto,Helvetica,Arial,sans-serif,\"Apple Color Emoji\",\"Segoe UI Emoji\"","height":"100vh","textAlign":"center","display":"flex","flexDirection":"column","alignItems":"center","justifyContent":"center"},"children":["$","div",null,{"children":[["$","style",null,{"dangerouslySetInnerHTML":{"__html":"body{color:#000;background:#fff;margin:0}.next-error-h1{border-right:1px solid rgba(0,0,0,.3)}@media (prefers-color-scheme:dark){body{color:#fff;background:#000}.next-error-h1{border-right:1px solid rgba(255,255,255,.3)}}"}}],["$","h1",null,{"className":"next-error-h1","style":{"display":"inline-block","margin":"0 20px 0 0","padding":"0 23px 0 0","fontSize":24,"fontWeight":500,"verticalAlign":"top","lineHeight":"49px"},"children":404}],["$","div",null,{"style":{"display":"inline-block"},"children":["$","h2",null,{"style":{"fontSize":14,"fontWeight":400,"lineHeight":"49px","margin":0},"children":"This page could not be found."}]}]]}]}]]],"forbidden":"$undefined","unauthorized":"$undefined"}],["$","script",null,{"dangerouslySetInnerHTML":{"__html":"\nif ('serviceWorker' in navigator) {\n  window.addEventListener('load', function () {\n    navigator.serviceWorker.register('/algorithm-interview/sw.js').catch(function () {});\n  });\n}\n"}}]]}]]}]]}],{"children":["question",["$","$1","c",{"children":[null,["$","$L2",null,{"parallelRouterKey":"children","segmentPath":["children","question","children"],"error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L3",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","forbidden":"$undefined","unauthorized":"$undefined"}]]}],{"children":[["lcId","114","d"],["$","$1","c",{"children":[null,["$","$L2",null,{"parallelRouterKey":"children","segmentPath":["children","question","children","$0:f:0:1:2:children:2:children:0","children"],"error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L3",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","forbidden":"$undefined","unauthorized":"$undefined"}]]}],{"children":["__PAGE__",["$","$1","c",{"children":["$L4",null,["$","$L5",null,{"children":"$L6"}]]}],{},null,false]},null,false]},null,false]},null,false],["$","$1","h",{"children":[null,["$","$1","iTOYWHzE9R-u-OOsFN29u",{"children":[["$","$L7",null,{"children":"$L8"}],["$","$L9",null,{"children":"$La"}],null]}]]}],false]],"m":"$undefined","G":["$b","$undefined"],"s":false,"S":true}
+c:I[8173,["173","static/chunks/173-69860a4742bb7020.js","829","static/chunks/829-7533e70598480772.js","937","static/chunks/937-ef36a5ac4bc37a7e.js","447","static/chunks/447-06af9414e164c047.js","8","static/chunks/app/question/%5BlcId%5D/page-478b0d2a69e222f2.js"],""]
+d:I[3447,["173","static/chunks/173-69860a4742bb7020.js","829","static/chunks/829-7533e70598480772.js","937","static/chunks/937-ef36a5ac4bc37a7e.js","447","static/chunks/447-06af9414e164c047.js","8","static/chunks/app/question/%5BlcId%5D/page-478b0d2a69e222f2.js"],"default"]
+e:T198d,# 114. 二叉树展开为链表
+
+> 难度：**Medium** | 分类：二叉树 | 标签：栈, 树, 深度优先搜索, 链表, 二叉树
+
+> 🔗 力扣链接：[https://leetcode.cn/problems/flatten-binary-tree-to-linked-list/](https://leetcode.cn/problems/flatten-binary-tree-to-linked-list/)
+
+## 📝 题目描述
+
+给你一棵二叉树，请你将它展开为一条单链表。展开的规则是：按照前序遍历的顺序，所有节点只有右子节点，左子节点全部为空。要求原地修改，不返回新树。
+
+直观理解就是：把树"拍扁"，让它变成一条向右延伸的链。
+
+- 题号：114
+- 题目名：二叉树展开为链表
+- 难度：中等
+- 题型：二叉树
+- 为什么选这题：它考查的是对二叉树指针操作的理解，要求原地修改，是面试中高频的"手速题"。
+
+## 🧠 思考路径
+
+前序遍历的顺序是"根 → 左 → 右"。展开后，每个节点的右指针指向前序遍历中的下一个节点。
+
+**思路一：先序遍历 + 数组记录**。先用前序遍历把所有节点按顺序存进数组，然后遍历数组，把每个节点的左指针置空、右指针指向下一个节点。这需要 `O(n)` 额外空间。
+
+**思路二：递归后序遍历（推荐）**。从后往前处理。利用一个全局变量 `prev` 记录上一个处理过的节点。按"右 → 左 → 根"的顺序遍历（前序遍历的逆序），每处理一个节点就把它接到 `prev` 前面。这样不需要额外数组。
+
+**思路三：迭代法（Morris 风格）**。找到当前节点左子树的最右节点，把当前节点的右子树接到这个最右节点的右边，然后把左子树移到右边。`O(1)` 空间。
+
+## 💻 Java 题解
+
+### 解法 1：反向后序遍历（O(1)空间）
+
+按 右→左→根 的顺序遍历（后序的逆序），用全局 prev 指针连接。
+
+- ⏱ 时间复杂度：`O(n)`
+- 💾 空间复杂度：`O(1)`
+
+```java
+class Solution {
+    TreeNode prev = null;
+    public void flatten(TreeNode root) {
+        if (root == null) return;
+        flatten(root.right);
+        flatten(root.left);
+        root.right = prev;
+        root.left = null;
+        prev = root;
+    }
+}
+```
+
+**关键点：**
+- 先右后左的后序遍历
+- prev 指向前一个处理的节点
+- 处理顺序：最右→→根
+
+**执行步骤：**
+1. 递归右子树
+1. 递归左子树
+1. root.right=prev, root.left=null
+1. prev=root
+
+
+## ⚠️ 易错点
+
+- 必须先把右子树接好，再移动左子树。顺序反了会丢失右子树。
+- 迭代法中，找"左子树的最右节点"时，是沿着右指针走到底，不是沿左指针。
+- 递归法必须按"右 → 左 → 根"的顺序处理，不能按正常的"根 → 左 → 右"。因为我们需要从尾部向前拼接。
+- 题目要求原地修改，不要新建节点。
+
+- 先递归右再递归左
+
+- 记得 left=null
+
+## 📊 复杂度分析
+
+- 时间复杂度：`O(n)`。每个节点只被访问一次。
+- 空间复杂度：递归法 `O(h)`（递归栈），迭代法 `O(1)`。
+
+## 🏢 实际业务应用
+
+- 导航菜单系统中，将多层嵌套的树形菜单展开为扁平的列表展示（面包屑导航），方便移动端渲染。
+- 文件系统目录结构转成一维路径列表，用于批量操作（打包、同步、搜索）。
+- 评论系统中，将嵌套的回复树展平为按时间顺序排列的列表，用于简化前端渲染逻辑。
+
+- 导航菜单系统中，将多层嵌套的树形菜单展开为扁平的列表展示（面包屑导航），方便移动端渲染。
+- 文件系统目录结构转成一维路径列表，用于批量操作（打包、同步、搜索）。
+- 评论系统中，将嵌套的回复树展平为按时间顺序排列的列表，用于简化前端渲染逻辑。
+
+## 📖 形象类比
+
+可以把它类比成《红楼梦》里贾府的家谱整理。
+
+贾府的家谱是一棵大树，有嫡系和旁系的分支（左子树和右子树）。朝廷要按辈分顺序（前序遍历）整理一份单线名单。于是族长把每个分支"拍平"——先把旁系接到嫡系的末尾，再把嫡系提到前面。最终家谱从一棵树变成了一条按辈分排列的单链名单。
+
+对应关系是：
+
+- "贾府家谱树"对应二叉树
+- "按辈分的单线名单"对应展开后的链表
+- "旁系接嫡系末尾"对应右子树接到前驱节点
+- "嫡系提到前面"对应左子树移到右边
+
+可以把它类比成《红楼梦》里贾府的家谱整理。
+
+贾府的家谱是一棵大树，有嫡系和旁系的分支（左子树和右子树）。朝廷要按辈分顺序（前序遍历）整理一份单线名单。于是族长把每个分支"拍平"——先把旁系接到嫡系的末尾，再把嫡系提到前面。最终家谱从一棵树变成了一条按辈分排列的单链名单。
+
+对应关系是：
+
+- "贾府家谱树"对应二叉树
+- "按辈分的单线名单"对应展开后的链表
+- "旁系接嫡系末尾"对应右子树接到前驱节点
+- "嫡系提到前面"对应左子树移到右边
+
+猫头鹰老师让小动物们排成一队报数。但小动物们站成了树形的阵型——每个动物左边站一个，右边站一个。猫头鹰说："按从上到下、先左后右的顺序，排成一条直线。"于是每个动物先把右边的队伍接到左边队伍的最后面，然后自己往右移，直到所有人都排成一条笔直的队伍。
+
+猫头鹰老师让小动物们排成一队报数。但小动物们站成了树形的阵型——每个动物左边站一个，右边站一个。猫头鹰说："按从上到下、先左后右的顺序，排成一条直线。"于是每个动物先把右边的队伍接到左边队伍的最后面，然后自己往右移，直到所有人都排成一条笔直的队伍。
+
+## 🎵 记忆口诀
+
+左接右尾，右移左空。
+
+左接右尾，右移左空。
+
+## 🔗 延伸练习
+
+- `144. 二叉树的前序遍历`：理解前序遍历顺序是本题的基础。
+- `430. 扁平化多级双向链表`：从二叉树扩展到多级链表的扁平化，思路类似但需要处理双向指针。
+- `897. 递增顺序搜索树`：按中序遍历展开为链表，和本题按前序展开形成对比。
+
+- `144. 二叉树的前序遍历`：理解前序遍历顺序是本题的基础。
+- `430. 扁平化多级双向链表`：从二叉树扩展到多级链表的扁平化，思路类似但需要处理双向指针。
+- `897. 递增顺序搜索树`：按中序遍历展开为链表，和本题按前序展开形成对比。4:["$","main",null,{"className":"detail-main","style":{"maxWidth":760,"margin":"0 auto","padding":"16px","minHeight":"100vh"},"children":[["$","$Lc",null,{"href":"/","style":{"display":"inline-block","marginBottom":"12px","fontSize":"13px"},"children":"← 返回题库"}],["$","h1",null,{"style":{"fontSize":"22px","fontWeight":700,"margin":"0 0 4px"},"children":[["$","span",null,{"style":{"marginRight":"6px"},"children":"🌳"}],114,". ","二叉树展开为链表"]}],["$","$Ld",null,{"q":{"id":"0114","lcId":114,"slug":"flatten-binary-tree-to-linked-list","title":"二叉树展开为链表","question":"二叉树展开为链表","answer":"$e","difficulty":"Medium","category":"binary-tree","categories":["binary-tree"],"tags":["栈","树","深度优先搜索","链表","二叉树"],"url":"https://leetcode.cn/problems/flatten-binary-tree-to-linked-list/","planOrder":46,"hasViz":true,"hasDiagram":false,"feynman":{"essence":"给你一棵二叉树，请你将它展开为一条单链表。展开的规则是：按照前序遍历的顺序，所有节点只有右子节点，左子节点全部为空。要求原地修改，不返回新树。  直观理解就是：把树\"拍扁\"，让它变成一条向右延伸的链。","analogy":"","key_points":[]},"first_principle":{"problem":"","axioms":[],"rebuild":""}}}]]}]
+a:[["$","meta","0",{"name":"viewport","content":"width=device-width, initial-scale=1"}],["$","meta","1",{"name":"theme-color","content":"#f97316"}]]
+8:[["$","meta","0",{"charSet":"utf-8"}],["$","title","1",{"children":"114. 二叉树展开为链表 - 算法面试"}],["$","meta","2",{"name":"description","content":"给你一棵二叉树，请你将它展开为一条单链表。展开的规则是：按照前序遍历的顺序，所有节点只有右子节点，左子节点全部为空。要求原地修改，不返回新树。  直观理解就是：把树\"拍扁\"，让它变成一条向右延伸的链。"}],["$","meta","3",{"name":"application-name","content":"算法面试"}],["$","link","4",{"rel":"manifest","href":"/algorithm-interview/manifest.json","crossOrigin":"$undefined"}],["$","meta","5",{"name":"keywords","content":"二叉树展开为链表,LeetCode 114,Medium,栈,树,深度优先搜索,链表,二叉树"}],["$","meta","6",{"name":"mobile-web-app-capable","content":"yes"}],["$","meta","7",{"name":"apple-mobile-web-app-title","content":"算法面试"}],["$","meta","8",{"name":"apple-mobile-web-app-status-bar-style","content":"default"}],["$","meta","9",{"property":"og:title","content":"114. 二叉树展开为链表"}],["$","meta","10",{"property":"og:description","content":"给你一棵二叉树，请你将它展开为一条单链表。展开的规则是：按照前序遍历的顺序，所有节点只有右子节点，左子节点全部为空。要求原地修改，不返回新树。  直观理解就是：把树\"拍扁\"，让它变成一条向右延伸的链。"}],["$","meta","11",{"property":"og:locale","content":"zh_CN"}],["$","meta","12",{"property":"og:type","content":"article"}],["$","meta","13",{"name":"twitter:card","content":"summary"}],["$","meta","14",{"name":"twitter:title","content":"114. 二叉树展开为链表"}],["$","meta","15",{"name":"twitter:description","content":"给你一棵二叉树，请你将它展开为一条单链表。展开的规则是：按照前序遍历的顺序，所有节点只有右子节点，左子节点全部为空。要求原地修改，不返回新树。  直观理解就是：把树\"拍扁\"，让它变成一条向右延伸的链。"}]]
+6:null

@@ -1,0 +1,92 @@
+<!DOCTYPE html><html lang="zh"><head><meta charSet="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="/algorithm-interview/_next/static/css/c1e787639001e16b.css" data-precedence="next"/><link rel="preload" as="script" fetchPriority="low" href="/algorithm-interview/_next/static/chunks/webpack-65b8ce4c1158f96f.js"/><script src="/algorithm-interview/_next/static/chunks/4bd1b696-899926250d3992f1.js" async=""></script><script src="/algorithm-interview/_next/static/chunks/517-b6df7dad4ff96d0b.js" async=""></script><script src="/algorithm-interview/_next/static/chunks/main-app-9e7bfff32fd8ebe9.js" async=""></script><script src="/algorithm-interview/_next/static/chunks/173-69860a4742bb7020.js" async=""></script><script src="/algorithm-interview/_next/static/chunks/829-7533e70598480772.js" async=""></script><script src="/algorithm-interview/_next/static/chunks/app/columns/%5Bslug%5D/page-58fc1d8f5085c1ff.js" async=""></script><meta name="theme-color" content="#f97316"/><title>我写了首诗，把滑动窗口算法算法变成了默写题 - 算法面试</title><meta name="description" content="LeetCode 热题 100 完整 Java 题解、逐题动画、知识专栏与智能间隔复习。"/><meta name="application-name" content="算法面试"/><link rel="manifest" href="/algorithm-interview/manifest.json"/><meta name="keywords" content="LeetCode,热题100,算法面试,Java题解,数据结构,动态规划,面试刷题"/><meta name="mobile-web-app-capable" content="yes"/><meta name="apple-mobile-web-app-title" content="算法面试"/><meta name="apple-mobile-web-app-status-bar-style" content="default"/><meta property="og:title" content="算法面试题库"/><meta property="og:description" content="LeetCode 热题 100 完整 Java 题解、逐题动画、知识专栏与智能复习"/><meta property="og:site_name" content="算法面试题库"/><meta property="og:locale" content="zh_CN"/><meta property="og:type" content="website"/><meta name="twitter:card" content="summary"/><meta name="twitter:title" content="算法面试题库"/><meta name="twitter:description" content="LeetCode 热题 100 完整 Java 题解、逐题动画、知识专栏与智能复习"/><script>
+try {
+  var raw = localStorage.getItem('algo-interview');
+  var theme = 'light';
+  if (raw) { var p = JSON.parse(raw); theme = (p.state && p.state.theme) || 'light'; }
+  if (theme === 'dark') {
+    document.documentElement.classList.add('dark');
+    document.documentElement.setAttribute('data-theme', 'dark');
+  }
+} catch (e) {}
+</script><script src="/algorithm-interview/_next/static/chunks/polyfills-42372ed130431b0a.js" noModule=""></script></head><body><main style="max-width:760px;margin:0 auto;padding:16px;min-height:100vh"><a style="display:inline-block;margin-bottom:12px;font-size:13px" href="/algorithm-interview/columns/">← 返回专栏</a><div style="font-size:12px;color:var(--text-tertiary);margin-bottom:4px">📕<!-- --> <!-- -->labuladong 算法小抄</div><h1 style="font-size:22px;font-weight:700;margin:0 0 16px">我写了首诗，把滑动窗口算法算法变成了默写题</h1><div class="prose max-w-none" style="font-size:14px;color:var(--text)"><h1>我写了首诗，把滑动窗口算法算法变成了默写题</h1>
+<p>滑动窗⼝算法框架
+学好算法全靠套路，认准 labuladong 就够了。
+读完本⽂，你不仅学会了算法套路，还可以顺便去 LeetCode 上拿下如下题
+⽬：
+76.最⼩覆盖⼦串
+567.字符串的排列
+438.找到字符串中所有字⺟异位词
+3.⽆重复字符的最⻓⼦串
+鉴于前⽂ ⼆分搜索框架详解 的那⾸《⼆分搜索升天词》很受好评，并在⺠
+间⼴为流传，成为安睡助眠的⼀剂良⽅，今天在滑动窗⼝算法框架中，我再
+次编写⼀⾸⼩诗来歌颂滑动窗⼝算法的伟⼤：
+我写了⾸诗，把滑动窗⼝算法算法变成了默写题
+80</p>
+<p>关于双指针的快慢指针和左右指针的⽤法，可以参⻅前⽂ 双指针技巧汇
+总，本⽂就解决⼀类最难掌握的双指针技巧：滑动窗⼝技巧。总结出⼀套框
+架，可以保你闭着眼睛都能写出正确的解法。
+说起滑动窗⼝算法，很多读者都会头疼。这个算法技巧的思路⾮常简单，就
+是维护⼀个窗⼝，不断滑动，然后更新答案么。LeetCode 上有起码 10 道运
+⽤滑动窗⼝算法的题⽬，难度都是中等和困难。该算法的⼤致逻辑如下：
+int left = 0, right = 0;
+我写了⾸诗，把滑动窗⼝算法算法变成了默写题
+81</p>
+<p>while (right &lt; s.size()) {`
+// 增⼤窗⼝
+window.add(s[right]);
+right++;
+while (window needs shrink) {
+// 缩⼩窗⼝
+window.remove(s[left]);
+left++;
+}
+}
+这个算法技巧的时间复杂度是 O(N)，⽐字符串暴⼒算法要⾼效得多。
+其实困扰⼤家的，不是算法的思路，⽽是各种细节问题。⽐如说如何向窗⼝
+中添加新元素，如何缩⼩窗⼝，在窗⼝滑动的哪个阶段更新结果。即便你明
+⽩了这些细节，也容易出 bug，找 bug 还不知道怎么找，真的挺让⼈⼼烦
+的。
+所以今天我就写⼀套滑动窗⼝算法的代码框架，我连再哪⾥做输出 debug
+都给你写好了，以后遇到相关的问题，你就默写出来如下框架然后改三个地
+⽅就⾏，还不会出 bug：
+＿＿＿＿＿＿＿＿＿＿＿＿＿
+由于格式原因，本⽂只能在 labuladong 公众号查看，关注后可直接搜索本站
+内容：
+我写了⾸诗，把滑动窗⼝算法算法变成了默写题
+82</p>
+<p>我写了⾸诗，把滑动窗⼝算法算法变成了默写题
+83</p>
+<p>团灭 LeetCode 股票买卖问题
+学算法，认准 labuladong 就够了！
+很多读者抱怨 LeetCode 的股票系列问题奇技淫巧太多，如果⾯试真的遇到
+这类问题，基本不会想到那些巧妙的办法，怎么办？所以本⽂拒绝奇技淫
+巧，⽽是稳扎稳打，只⽤⼀种通⽤⽅法解决所⽤问题，以不变应万变。
+这篇⽂章⽤状态机的技巧来解决，可以全部提交通过。不要觉得这个名词⾼
+⼤上，⽂学词汇⽽已，实际上就是 DP table，看⼀眼就明⽩了。
+先随便抽出⼀道题，看看别⼈的解法：
+int maxProfit(vector<!-- -->&lt;int&gt;<!-- -->&amp; prices) {
+if(prices.empty()) return 0;
+int s1=-prices[0],s2=INT_MIN,s3=INT_MIN,s4=INT_MIN;
+for(int i=1;i&lt;prices.size();++i) {<br/>
+<!-- -->s1 = max(s1, -prices[i]);
+s2 = max(s2, s1+prices[i]);
+s3 = max(s3, s2-prices[i]);
+s4 = max(s4, s3+prices[i]);
+}
+return max(0,s4);
+}
+能看懂吧？会做了吗？不可能的，你看不懂，这才正常。就算你勉强看懂
+了，下⼀个问题你还是做不出来。为什么别⼈能写出这么诡异却⼜⾼效的解
+法呢？因为这类问题是有框架的，但是⼈家不会告诉你的，因为⼀旦告诉
+你，你五分钟就学会了，该算法题就不再神秘，变得不堪⼀击了。
+本⽂就来告诉你这个框架，然后带着你⼀道⼀道秒杀。这篇⽂章⽤状态机的
+技巧来解决，可以全部提交通过。不要觉得这个名词⾼⼤上，⽂学词汇⽽
+已，实际上就是 DP table，看⼀眼就明⽩了。
+⼀个⽅法团灭 LeetCode 股票买卖问题
+84</p></div></main><script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function () {
+    navigator.serviceWorker.register('/algorithm-interview/sw.js').catch(function () {});
+  });
+}
+</script><script src="/algorithm-interview/_next/static/chunks/webpack-65b8ce4c1158f96f.js" async=""></script><script>(self.__next_f=self.__next_f||[]).push([0])</script><script>self.__next_f.push([1,"1:\"$Sreact.fragment\"\n2:I[5244,[],\"\"]\n3:I[3866,[],\"\"]\n5:I[6213,[],\"OutletBoundary\"]\n7:I[6213,[],\"MetadataBoundary\"]\n9:I[6213,[],\"ViewportBoundary\"]\nb:I[4835,[],\"\"]\n:HL[\"/algorithm-interview/_next/static/css/c1e787639001e16b.css\",\"style\"]\n"])</script><script>self.__next_f.push([1,"0:{\"P\":null,\"b\":\"xos97fAiWtKfKXI6hZLx4\",\"p\":\"/algorithm-interview\",\"c\":[\"\",\"columns\",\"lbd-007\",\"\"],\"i\":false,\"f\":[[[\"\",{\"children\":[\"columns\",{\"children\":[[\"slug\",\"lbd-007\",\"d\"],{\"children\":[\"__PAGE__\",{}]}]}]},\"$undefined\",\"$undefined\",true],[\"\",[\"$\",\"$1\",\"c\",{\"children\":[[[\"$\",\"link\",\"0\",{\"rel\":\"stylesheet\",\"href\":\"/algorithm-interview/_next/static/css/c1e787639001e16b.css\",\"precedence\":\"next\",\"crossOrigin\":\"$undefined\",\"nonce\":\"$undefined\"}]],[\"$\",\"html\",null,{\"lang\":\"zh\",\"children\":[[\"$\",\"head\",null,{\"children\":[\"$\",\"script\",null,{\"dangerouslySetInnerHTML\":{\"__html\":\"\\ntry {\\n  var raw = localStorage.getItem('algo-interview');\\n  var theme = 'light';\\n  if (raw) { var p = JSON.parse(raw); theme = (p.state \u0026\u0026 p.state.theme) || 'light'; }\\n  if (theme === 'dark') {\\n    document.documentElement.classList.add('dark');\\n    document.documentElement.setAttribute('data-theme', 'dark');\\n  }\\n} catch (e) {}\\n\"}}]}],[\"$\",\"body\",null,{\"children\":[[\"$\",\"$L2\",null,{\"parallelRouterKey\":\"children\",\"segmentPath\":[\"children\"],\"error\":\"$undefined\",\"errorStyles\":\"$undefined\",\"errorScripts\":\"$undefined\",\"template\":[\"$\",\"$L3\",null,{}],\"templateStyles\":\"$undefined\",\"templateScripts\":\"$undefined\",\"notFound\":[[],[[\"$\",\"title\",null,{\"children\":\"404: This page could not be found.\"}],[\"$\",\"div\",null,{\"style\":{\"fontFamily\":\"system-ui,\\\"Segoe UI\\\",Roboto,Helvetica,Arial,sans-serif,\\\"Apple Color Emoji\\\",\\\"Segoe UI Emoji\\\"\",\"height\":\"100vh\",\"textAlign\":\"center\",\"display\":\"flex\",\"flexDirection\":\"column\",\"alignItems\":\"center\",\"justifyContent\":\"center\"},\"children\":[\"$\",\"div\",null,{\"children\":[[\"$\",\"style\",null,{\"dangerouslySetInnerHTML\":{\"__html\":\"body{color:#000;background:#fff;margin:0}.next-error-h1{border-right:1px solid rgba(0,0,0,.3)}@media (prefers-color-scheme:dark){body{color:#fff;background:#000}.next-error-h1{border-right:1px solid rgba(255,255,255,.3)}}\"}}],[\"$\",\"h1\",null,{\"className\":\"next-error-h1\",\"style\":{\"display\":\"inline-block\",\"margin\":\"0 20px 0 0\",\"padding\":\"0 23px 0 0\",\"fontSize\":24,\"fontWeight\":500,\"verticalAlign\":\"top\",\"lineHeight\":\"49px\"},\"children\":404}],[\"$\",\"div\",null,{\"style\":{\"display\":\"inline-block\"},\"children\":[\"$\",\"h2\",null,{\"style\":{\"fontSize\":14,\"fontWeight\":400,\"lineHeight\":\"49px\",\"margin\":0},\"children\":\"This page could not be found.\"}]}]]}]}]]],\"forbidden\":\"$undefined\",\"unauthorized\":\"$undefined\"}],[\"$\",\"script\",null,{\"dangerouslySetInnerHTML\":{\"__html\":\"\\nif ('serviceWorker' in navigator) {\\n  window.addEventListener('load', function () {\\n    navigator.serviceWorker.register('/algorithm-interview/sw.js').catch(function () {});\\n  });\\n}\\n\"}}]]}]]}]]}],{\"children\":[\"columns\",[\"$\",\"$1\",\"c\",{\"children\":[null,[\"$\",\"$L2\",null,{\"parallelRouterKey\":\"children\",\"segmentPath\":[\"children\",\"columns\",\"children\"],\"error\":\"$undefined\",\"errorStyles\":\"$undefined\",\"errorScripts\":\"$undefined\",\"template\":[\"$\",\"$L3\",null,{}],\"templateStyles\":\"$undefined\",\"templateScripts\":\"$undefined\",\"notFound\":\"$undefined\",\"forbidden\":\"$undefined\",\"unauthorized\":\"$undefined\"}]]}],{\"children\":[[\"slug\",\"lbd-007\",\"d\"],[\"$\",\"$1\",\"c\",{\"children\":[null,[\"$\",\"$L2\",null,{\"parallelRouterKey\":\"children\",\"segmentPath\":[\"children\",\"columns\",\"children\",\"$0:f:0:1:2:children:2:children:0\",\"children\"],\"error\":\"$undefined\",\"errorStyles\":\"$undefined\",\"errorScripts\":\"$undefined\",\"template\":[\"$\",\"$L3\",null,{}],\"templateStyles\":\"$undefined\",\"templateScripts\":\"$undefined\",\"notFound\":\"$undefined\",\"forbidden\":\"$undefined\",\"unauthorized\":\"$undefined\"}]]}],{\"children\":[\"__PAGE__\",[\"$\",\"$1\",\"c\",{\"children\":[\"$L4\",null,[\"$\",\"$L5\",null,{\"children\":\"$L6\"}]]}],{},null,false]},null,false]},null,false]},null,false],[\"$\",\"$1\",\"h\",{\"children\":[null,[\"$\",\"$1\",\"h6TW-h12w7H_lL9RO7fo8\",{\"children\":[[\"$\",\"$L7\",null,{\"children\":\"$L8\"}],[\"$\",\"$L9\",null,{\"children\":\"$La\"}],null]}]]}],false]],\"m\":\"$undefined\",\"G\":[\"$b\",\"$undefined\"],\"s\":false,\"S\":true}\n"])</script><script>self.__next_f.push([1,"c:I[8173,[\"173\",\"static/chunks/173-69860a4742bb7020.js\",\"829\",\"static/chunks/829-7533e70598480772.js\",\"306\",\"static/chunks/app/columns/%5Bslug%5D/page-58fc1d8f5085c1ff.js\"],\"\"]\nd:I[4780,[\"173\",\"static/chunks/173-69860a4742bb7020.js\",\"829\",\"static/chunks/829-7533e70598480772.js\",\"306\",\"static/chunks/app/columns/%5Bslug%5D/page-58fc1d8f5085c1ff.js\"],\"default\"]\ne:Tfed,"])</script><script>self.__next_f.push([1,"# 我写了首诗，把滑动窗口算法算法变成了默写题\n\n滑动窗⼝算法框架\n学好算法全靠套路，认准 labuladong 就够了。\n读完本⽂，你不仅学会了算法套路，还可以顺便去 LeetCode 上拿下如下题\n⽬：\n76.最⼩覆盖⼦串\n567.字符串的排列\n438.找到字符串中所有字⺟异位词\n3.⽆重复字符的最⻓⼦串\n鉴于前⽂ ⼆分搜索框架详解 的那⾸《⼆分搜索升天词》很受好评，并在⺠\n间⼴为流传，成为安睡助眠的⼀剂良⽅，今天在滑动窗⼝算法框架中，我再\n次编写⼀⾸⼩诗来歌颂滑动窗⼝算法的伟⼤：\n我写了⾸诗，把滑动窗⼝算法算法变成了默写题\n80\n\n关于双指针的快慢指针和左右指针的⽤法，可以参⻅前⽂ 双指针技巧汇\n总，本⽂就解决⼀类最难掌握的双指针技巧：滑动窗⼝技巧。总结出⼀套框\n架，可以保你闭着眼睛都能写出正确的解法。\n说起滑动窗⼝算法，很多读者都会头疼。这个算法技巧的思路⾮常简单，就\n是维护⼀个窗⼝，不断滑动，然后更新答案么。LeetCode 上有起码 10 道运\n⽤滑动窗⼝算法的题⽬，难度都是中等和困难。该算法的⼤致逻辑如下：\nint left = 0, right = 0;\n我写了⾸诗，把滑动窗⼝算法算法变成了默写题\n81\n\nwhile (right \u003c s.size()) {`\n    // 增⼤窗⼝\n    window.add(s[right]);\n    right++;\n    while (window needs shrink) {\n        // 缩⼩窗⼝\n        window.remove(s[left]);\n        left++;\n    }\n}\n这个算法技巧的时间复杂度是 O(N)，⽐字符串暴⼒算法要⾼效得多。\n其实困扰⼤家的，不是算法的思路，⽽是各种细节问题。⽐如说如何向窗⼝\n中添加新元素，如何缩⼩窗⼝，在窗⼝滑动的哪个阶段更新结果。即便你明\n⽩了这些细节，也容易出 bug，找 bug 还不知道怎么找，真的挺让⼈⼼烦\n的。\n所以今天我就写⼀套滑动窗⼝算法的代码框架，我连再哪⾥做输出 debug\n都给你写好了，以后遇到相关的问题，你就默写出来如下框架然后改三个地\n⽅就⾏，还不会出 bug：\n＿＿＿＿＿＿＿＿＿＿＿＿＿\n由于格式原因，本⽂只能在 labuladong 公众号查看，关注后可直接搜索本站\n内容：\n我写了⾸诗，把滑动窗⼝算法算法变成了默写题\n82\n\n我写了⾸诗，把滑动窗⼝算法算法变成了默写题\n83\n\n团灭 LeetCode 股票买卖问题\n学算法，认准 labuladong 就够了！\n很多读者抱怨 LeetCode 的股票系列问题奇技淫巧太多，如果⾯试真的遇到\n这类问题，基本不会想到那些巧妙的办法，怎么办？所以本⽂拒绝奇技淫\n巧，⽽是稳扎稳打，只⽤⼀种通⽤⽅法解决所⽤问题，以不变应万变。\n这篇⽂章⽤状态机的技巧来解决，可以全部提交通过。不要觉得这个名词⾼\n⼤上，⽂学词汇⽽已，实际上就是 DP table，看⼀眼就明⽩了。\n先随便抽出⼀道题，看看别⼈的解法：\nint maxProfit(vector\u003cint\u003e\u0026 prices) {\n    if(prices.empty()) return 0;\n    int s1=-prices[0],s2=INT_MIN,s3=INT_MIN,s4=INT_MIN;\n    for(int i=1;i\u003cprices.size();++i) {            \n        s1 = max(s1, -prices[i]);\n        s2 = max(s2, s1+prices[i]);\n        s3 = max(s3, s2-prices[i]);\n        s4 = max(s4, s3+prices[i]);\n    }\n    return max(0,s4);\n}\n能看懂吧？会做了吗？不可能的，你看不懂，这才正常。就算你勉强看懂\n了，下⼀个问题你还是做不出来。为什么别⼈能写出这么诡异却⼜⾼效的解\n法呢？因为这类问题是有框架的，但是⼈家不会告诉你的，因为⼀旦告诉\n你，你五分钟就学会了，该算法题就不再神秘，变得不堪⼀击了。\n本⽂就来告诉你这个框架，然后带着你⼀道⼀道秒杀。这篇⽂章⽤状态机的\n技巧来解决，可以全部提交通过。不要觉得这个名词⾼⼤上，⽂学词汇⽽\n已，实际上就是 DP table，看⼀眼就明⽩了。\n⼀个⽅法团灭 LeetCode 股票买卖问题\n84"])</script><script>self.__next_f.push([1,"4:[\"$\",\"main\",null,{\"style\":{\"maxWidth\":760,\"margin\":\"0 auto\",\"padding\":\"16px\",\"minHeight\":\"100vh\"},\"children\":[[\"$\",\"$Lc\",null,{\"href\":\"/columns/\",\"style\":{\"display\":\"inline-block\",\"marginBottom\":\"12px\",\"fontSize\":\"13px\"},\"children\":\"← 返回专栏\"}],[\"$\",\"div\",null,{\"style\":{\"fontSize\":\"12px\",\"color\":\"var(--text-tertiary)\",\"marginBottom\":\"4px\"},\"children\":[\"📕\",\" \",\"labuladong 算法小抄\"]}],[\"$\",\"h1\",null,{\"style\":{\"fontSize\":\"22px\",\"fontWeight\":700,\"margin\":\"0 0 16px\"},\"children\":\"我写了首诗，把滑动窗口算法算法变成了默写题\"}],[\"$\",\"$Ld\",null,{\"children\":\"$e\"}],false]}]\n"])</script><script>self.__next_f.push([1,"a:[[\"$\",\"meta\",\"0\",{\"name\":\"viewport\",\"content\":\"width=device-width, initial-scale=1\"}],[\"$\",\"meta\",\"1\",{\"name\":\"theme-color\",\"content\":\"#f97316\"}]]\n"])</script><script>self.__next_f.push([1,"8:[[\"$\",\"meta\",\"0\",{\"charSet\":\"utf-8\"}],[\"$\",\"title\",\"1\",{\"children\":\"我写了首诗，把滑动窗口算法算法变成了默写题 - 算法面试\"}],[\"$\",\"meta\",\"2\",{\"name\":\"description\",\"content\":\"LeetCode 热题 100 完整 Java 题解、逐题动画、知识专栏与智能间隔复习。\"}],[\"$\",\"meta\",\"3\",{\"name\":\"application-name\",\"content\":\"算法面试\"}],[\"$\",\"link\",\"4\",{\"rel\":\"manifest\",\"href\":\"/algorithm-interview/manifest.json\",\"crossOrigin\":\"$undefined\"}],[\"$\",\"meta\",\"5\",{\"name\":\"keywords\",\"content\":\"LeetCode,热题100,算法面试,Java题解,数据结构,动态规划,面试刷题\"}],[\"$\",\"meta\",\"6\",{\"name\":\"mobile-web-app-capable\",\"content\":\"yes\"}],[\"$\",\"meta\",\"7\",{\"name\":\"apple-mobile-web-app-title\",\"content\":\"算法面试\"}],[\"$\",\"meta\",\"8\",{\"name\":\"apple-mobile-web-app-status-bar-style\",\"content\":\"default\"}],[\"$\",\"meta\",\"9\",{\"property\":\"og:title\",\"content\":\"算法面试题库\"}],[\"$\",\"meta\",\"10\",{\"property\":\"og:description\",\"content\":\"LeetCode 热题 100 完整 Java 题解、逐题动画、知识专栏与智能复习\"}],[\"$\",\"meta\",\"11\",{\"property\":\"og:site_name\",\"content\":\"算法面试题库\"}],[\"$\",\"meta\",\"12\",{\"property\":\"og:locale\",\"content\":\"zh_CN\"}],[\"$\",\"meta\",\"13\",{\"property\":\"og:type\",\"content\":\"website\"}],[\"$\",\"meta\",\"14\",{\"name\":\"twitter:card\",\"content\":\"summary\"}],[\"$\",\"meta\",\"15\",{\"name\":\"twitter:title\",\"content\":\"算法面试题库\"}],[\"$\",\"meta\",\"16\",{\"name\":\"twitter:description\",\"content\":\"LeetCode 热题 100 完整 Java 题解、逐题动画、知识专栏与智能复习\"}]]\n"])</script><script>self.__next_f.push([1,"6:null\n"])</script></body></html>

@@ -1,0 +1,156 @@
+1:"$Sreact.fragment"
+2:I[5244,[],""]
+3:I[3866,[],""]
+5:I[6213,[],"OutletBoundary"]
+7:I[6213,[],"MetadataBoundary"]
+9:I[6213,[],"ViewportBoundary"]
+b:I[4835,[],""]
+:HL["/algorithm-interview/_next/static/css/c1e787639001e16b.css","style"]
+0:{"P":null,"b":"xos97fAiWtKfKXI6hZLx4","p":"/algorithm-interview","c":["","question","238",""],"i":false,"f":[[["",{"children":["question",{"children":[["lcId","238","d"],{"children":["__PAGE__",{}]}]}]},"$undefined","$undefined",true],["",["$","$1","c",{"children":[[["$","link","0",{"rel":"stylesheet","href":"/algorithm-interview/_next/static/css/c1e787639001e16b.css","precedence":"next","crossOrigin":"$undefined","nonce":"$undefined"}]],["$","html",null,{"lang":"zh","children":[["$","head",null,{"children":["$","script",null,{"dangerouslySetInnerHTML":{"__html":"\ntry {\n  var raw = localStorage.getItem('algo-interview');\n  var theme = 'light';\n  if (raw) { var p = JSON.parse(raw); theme = (p.state && p.state.theme) || 'light'; }\n  if (theme === 'dark') {\n    document.documentElement.classList.add('dark');\n    document.documentElement.setAttribute('data-theme', 'dark');\n  }\n} catch (e) {}\n"}}]}],["$","body",null,{"children":[["$","$L2",null,{"parallelRouterKey":"children","segmentPath":["children"],"error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L3",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":[[],[["$","title",null,{"children":"404: This page could not be found."}],["$","div",null,{"style":{"fontFamily":"system-ui,\"Segoe UI\",Roboto,Helvetica,Arial,sans-serif,\"Apple Color Emoji\",\"Segoe UI Emoji\"","height":"100vh","textAlign":"center","display":"flex","flexDirection":"column","alignItems":"center","justifyContent":"center"},"children":["$","div",null,{"children":[["$","style",null,{"dangerouslySetInnerHTML":{"__html":"body{color:#000;background:#fff;margin:0}.next-error-h1{border-right:1px solid rgba(0,0,0,.3)}@media (prefers-color-scheme:dark){body{color:#fff;background:#000}.next-error-h1{border-right:1px solid rgba(255,255,255,.3)}}"}}],["$","h1",null,{"className":"next-error-h1","style":{"display":"inline-block","margin":"0 20px 0 0","padding":"0 23px 0 0","fontSize":24,"fontWeight":500,"verticalAlign":"top","lineHeight":"49px"},"children":404}],["$","div",null,{"style":{"display":"inline-block"},"children":["$","h2",null,{"style":{"fontSize":14,"fontWeight":400,"lineHeight":"49px","margin":0},"children":"This page could not be found."}]}]]}]}]]],"forbidden":"$undefined","unauthorized":"$undefined"}],["$","script",null,{"dangerouslySetInnerHTML":{"__html":"\nif ('serviceWorker' in navigator) {\n  window.addEventListener('load', function () {\n    navigator.serviceWorker.register('/algorithm-interview/sw.js').catch(function () {});\n  });\n}\n"}}]]}]]}]]}],{"children":["question",["$","$1","c",{"children":[null,["$","$L2",null,{"parallelRouterKey":"children","segmentPath":["children","question","children"],"error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L3",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","forbidden":"$undefined","unauthorized":"$undefined"}]]}],{"children":[["lcId","238","d"],["$","$1","c",{"children":[null,["$","$L2",null,{"parallelRouterKey":"children","segmentPath":["children","question","children","$0:f:0:1:2:children:2:children:0","children"],"error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L3",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","forbidden":"$undefined","unauthorized":"$undefined"}]]}],{"children":["__PAGE__",["$","$1","c",{"children":["$L4",null,["$","$L5",null,{"children":"$L6"}]]}],{},null,false]},null,false]},null,false]},null,false],["$","$1","h",{"children":[null,["$","$1","mKUORg5XzdKxpEg9t17-_",{"children":[["$","$L7",null,{"children":"$L8"}],["$","$L9",null,{"children":"$La"}],null]}]]}],false]],"m":"$undefined","G":["$b","$undefined"],"s":false,"S":true}
+c:I[8173,["173","static/chunks/173-69860a4742bb7020.js","829","static/chunks/829-7533e70598480772.js","937","static/chunks/937-ef36a5ac4bc37a7e.js","447","static/chunks/447-06af9414e164c047.js","8","static/chunks/app/question/%5BlcId%5D/page-478b0d2a69e222f2.js"],""]
+d:I[3447,["173","static/chunks/173-69860a4742bb7020.js","829","static/chunks/829-7533e70598480772.js","937","static/chunks/937-ef36a5ac4bc37a7e.js","447","static/chunks/447-06af9414e164c047.js","8","static/chunks/app/question/%5BlcId%5D/page-478b0d2a69e222f2.js"],"default"]
+e:T1bb6,# 238. 除自身以外数组的乘积
+
+> 难度：**Medium** | 分类：普通数组 | 标签：数组, 前缀和
+
+> 🔗 力扣链接：[https://leetcode.cn/problems/product-of-array-except-self/](https://leetcode.cn/problems/product-of-array-except-self/)
+
+## 📝 题目描述
+
+给你一个整数数组 `nums`，返回一个数组 `answer`，使得 `answer[i]` 等于 `nums` 中除 `nums[i]` 之外其余各元素的乘积。要求时间复杂度 `O(n)`，且不使用除法。
+
+重点不在"怎么算乘积"，而在"怎么把每个位置左边所有数的乘积和右边所有数的乘积组合起来"。
+
+- 题号：238
+- 题目名：除自身以外数组的乘积
+- 难度：中等
+- 题型：数组
+- 为什么选这题：它是前缀思想的经典变体——从"前缀和"升级到"前缀积 × 后缀积"，不使用除法的约束让这道题的设计非常优雅。
+
+## 🧠 思考路径
+
+如果允许用除法，最简单的做法是先算所有数的总乘积，然后每个位置除以自己。但题目不允许，而且如果有零存在，除法也会出错。
+
+换个角度：对于位置 `i`，`answer[i]` 等于"它左边所有数的乘积"乘以"它右边所有数的乘积"。如果我能预先算出每个位置左边和右边的累积乘积，直接相乘就是答案。
+
+具体做法是两遍遍历：
+1. 第一遍从左到右，计算每个位置左侧所有数的乘积（前缀积），存入 `answer` 数组。
+2. 第二遍从右到左，用一个变量 `right` 维护右侧的累积乘积，直接乘到 `answer[i]` 上。
+
+这样不需要额外的数组（除了返回的 `answer`），空间复杂度满足 `O(1)` 的要求。
+
+这题的关键词不是"算乘积"，而是"前缀积从左扫一遍，后缀积从右扫一遍，两两相乘"。
+
+## 💻 Java 题解
+
+### 解法 1：前缀积 × 后缀积
+
+result[i] = 左边所有数的积 × 右边所有数的积。两次遍历：先正向求前缀积，再反向乘后缀积。
+
+- ⏱ 时间复杂度：`O(n)`
+- 💾 空间复杂度：`O(1)`
+
+```java
+class Solution {
+    public int[] productExceptSelf(int[] nums) {
+        int n = nums.length;
+        int[] result = new int[n];
+        result[0] = 1;
+        // 前缀积
+        for (int i = 1; i < n; i++)
+            result[i] = result[i-1] * nums[i-1];
+        // 后缀积
+        int right = 1;
+        for (int i = n - 1; i >= 0; i--) {
+            result[i] *= right;
+            right *= nums[i];
+        }
+        return result;
+    }
+}
+```
+
+**关键点：**
+- 先填前缀积
+- 再用right变量反向乘后缀积
+- result数组不算额外空间→O(1)
+
+**执行步骤：**
+1. result[i] = nums[0..i-1]的积
+1. 反向遍历乘以nums[i+1..n-1]的积
+
+
+## ⚠️ 易错点
+
+- 第一遍遍历时，`answer[i] = left` 必须在 `left *= nums[i]` 之前，否则会把自身也算进去。
+- `answer` 数组初始值要全设为 `1`，不是 `0`。
+- 第二遍遍历是从右往左（`n-1` 到 `0`），方向别写反。
+- 题目要求不算额外空间，所以用 `answer` 数组同时充当前缀积的存储。
+
+- right 变量初始化为1
+
+- O(1)空间需要用result数组本身
+
+## 📊 复杂度分析
+
+- 时间复杂度：`O(n)`。两遍遍历，各 `O(n)`。
+- 空间复杂度：`O(1)`（不算返回的 `answer` 数组）。只用两个变量 `left` 和 `right`。
+
+## 🏢 实际业务应用
+
+- 金融分析中，计算某一天"排除自身后其他所有交易量的乘积"，用于敏感性分析，和这题的前缀/后缀分解思路一致。
+- 图像处理中，对每个像素计算"周围所有像素亮度的乘积"（排除自身），用于某些滤波算法。
+- 推荐系统里，对每个商品计算"其他所有商品评分的乘积"作为基线分数，排除当前商品避免自身干扰。
+
+- 金融分析中，计算某一天"排除自身后其他所有交易量的乘积"，用于敏感性分析，和这题的前缀/后缀分解思路一致。
+- 图像处理中，对每个像素计算"周围所有像素亮度的乘积"（排除自身），用于某些滤波算法。
+- 推荐系统里，对每个商品计算"其他所有商品评分的乘积"作为基线分数，排除当前商品避免自身干扰。
+
+## 📖 形象类比
+
+可以把它类比成《水浒传》里梁山泊给每位好汉评"搭档综合实力分"的场景。
+
+宋江给每位好汉打一个分数：这个分数等于"站在他左边所有人的战力乘积"乘以"站在他右边所有人的战力乘积"。先从左到右走一遍，记下每个人左边所有人的战力乘积；再从右到左走一遍，记下每个人右边所有人的战力乘积。最后两个乘在一起——不包含自己，但包含了其他所有人的贡献。
+
+对应关系是：
+
+- "左边所有人的战力乘积"对应前缀积
+- "右边所有人的战力乘积"对应后缀积
+- "两个乘在一起"对应 `answer[i] = 前缀 × 后缀`
+- "不包含自己"对应当前位置不参与乘积
+
+这段记忆的关键是：前缀积从左扫，后缀积从右扫，两遍下来每个位置的答案就有了。
+
+可以把它类比成《水浒传》里梁山泊给每位好汉评"搭档综合实力分"的场景。
+
+宋江给每位好汉打一个分数：这个分数等于"站在他左边所有人的战力乘积"乘以"站在他右边所有人的战力乘积"。先从左到右走一遍，记下每个人左边所有人的战力乘积；再从右到左走一遍，记下每个人右边所有人的战力乘积。最后两个乘在一起——不包含自己，但包含了其他所有人的贡献。
+
+对应关系是：
+
+- "左边所有人的战力乘积"对应前缀积
+- "右边所有人的战力乘积"对应后缀积
+- "两个乘在一起"对应 `answer[i] = 前缀 × 后缀`
+- "不包含自己"对应当前位置不参与乘积
+
+这段记忆的关键是：前缀积从左扫，后缀积从右扫，两遍下来每个位置的答案就有了。
+
+小熊给每棵树评"邻居丰收指数"——不算自己，只算其他所有树的果实数的乘积。它先从左往右走，记下每棵树左边所有树的果实乘积；再从右往左走，记下右边所有树的果实乘积。两个数一乘，就是这棵树的邻居丰收指数。
+
+小熊给每棵树评"邻居丰收指数"——不算自己，只算其他所有树的果实数的乘积。它先从左往右走，记下每棵树左边所有树的果实乘积；再从右往左走，记下右边所有树的果实乘积。两个数一乘，就是这棵树的邻居丰收指数。
+
+## 🎵 记忆口诀
+
+左边扫一遍记前缀，右边扫一遍乘后缀。
+
+左边扫一遍记前缀，右边扫一遍乘后缀。
+
+## 🔗 延伸练习
+
+- `152. 乘积最大子数组`：同样是乘积，但要求连续子数组的最大乘积，需要维护最大和最小值。
+- `42. 接雨水`：同样用到前缀/后缀的思想（前缀最大值和后缀最大值）。
+
+- `152. 乘积最大子数组`：同样是乘积，但要求连续子数组的最大乘积，需要维护最大和最小值。
+- `42. 接雨水`：同样用到前缀/后缀的思想（前缀最大值和后缀最大值）。4:["$","main",null,{"className":"detail-main","style":{"maxWidth":760,"margin":"0 auto","padding":"16px","minHeight":"100vh"},"children":[["$","$Lc",null,{"href":"/","style":{"display":"inline-block","marginBottom":"12px","fontSize":"13px"},"children":"← 返回题库"}],["$","h1",null,{"style":{"fontSize":"22px","fontWeight":700,"margin":"0 0 4px"},"children":[["$","span",null,{"style":{"marginRight":"6px"},"children":"📊"}],238,". ","除自身以外数组的乘积"]}],["$","$Ld",null,{"q":{"id":"0238","lcId":238,"slug":"product-of-array-except-self","title":"除自身以外数组的乘积","question":"除自身以外数组的乘积","answer":"$e","difficulty":"Medium","category":"array","categories":["array"],"tags":["数组","前缀和"],"url":"https://leetcode.cn/problems/product-of-array-except-self/","planOrder":16,"hasViz":true,"hasDiagram":false,"feynman":{"essence":"给你一个整数数组 `nums`，返回一个数组 `answer`，使得 `answer[i]` 等于 `nums` 中除 `nums[i]` 之外其余各元素的乘积。要求时间复杂度 `O(n)`，且不使用","analogy":"","key_points":[]},"first_principle":{"problem":"","axioms":[],"rebuild":""}}}]]}]
+a:[["$","meta","0",{"name":"viewport","content":"width=device-width, initial-scale=1"}],["$","meta","1",{"name":"theme-color","content":"#f97316"}]]
+8:[["$","meta","0",{"charSet":"utf-8"}],["$","title","1",{"children":"238. 除自身以外数组的乘积 - 算法面试"}],["$","meta","2",{"name":"description","content":"给你一个整数数组 `nums`，返回一个数组 `answer`，使得 `answer[i]` 等于 `nums` 中除 `nums[i]` 之外其余各元素的乘积。要求时间复杂度 `O(n)`，且不使用"}],["$","meta","3",{"name":"application-name","content":"算法面试"}],["$","link","4",{"rel":"manifest","href":"/algorithm-interview/manifest.json","crossOrigin":"$undefined"}],["$","meta","5",{"name":"keywords","content":"除自身以外数组的乘积,LeetCode 238,Medium,数组,前缀和"}],["$","meta","6",{"name":"mobile-web-app-capable","content":"yes"}],["$","meta","7",{"name":"apple-mobile-web-app-title","content":"算法面试"}],["$","meta","8",{"name":"apple-mobile-web-app-status-bar-style","content":"default"}],["$","meta","9",{"property":"og:title","content":"238. 除自身以外数组的乘积"}],["$","meta","10",{"property":"og:description","content":"给你一个整数数组 `nums`，返回一个数组 `answer`，使得 `answer[i]` 等于 `nums` 中除 `nums[i]` 之外其余各元素的乘积。要求时间复杂度 `O(n)`，且不使用"}],["$","meta","11",{"property":"og:locale","content":"zh_CN"}],["$","meta","12",{"property":"og:type","content":"article"}],["$","meta","13",{"name":"twitter:card","content":"summary"}],["$","meta","14",{"name":"twitter:title","content":"238. 除自身以外数组的乘积"}],["$","meta","15",{"name":"twitter:description","content":"给你一个整数数组 `nums`，返回一个数组 `answer`，使得 `answer[i]` 等于 `nums` 中除 `nums[i]` 之外其余各元素的乘积。要求时间复杂度 `O(n)`，且不使用"}]]
+6:null

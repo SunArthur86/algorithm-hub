@@ -1,0 +1,167 @@
+1:"$Sreact.fragment"
+2:I[5244,[],""]
+3:I[3866,[],""]
+5:I[6213,[],"OutletBoundary"]
+7:I[6213,[],"MetadataBoundary"]
+9:I[6213,[],"ViewportBoundary"]
+b:I[4835,[],""]
+:HL["/algorithm-interview/_next/static/css/c1e787639001e16b.css","style"]
+0:{"P":null,"b":"xos97fAiWtKfKXI6hZLx4","p":"/algorithm-interview","c":["","question","208",""],"i":false,"f":[[["",{"children":["question",{"children":[["lcId","208","d"],{"children":["__PAGE__",{}]}]}]},"$undefined","$undefined",true],["",["$","$1","c",{"children":[[["$","link","0",{"rel":"stylesheet","href":"/algorithm-interview/_next/static/css/c1e787639001e16b.css","precedence":"next","crossOrigin":"$undefined","nonce":"$undefined"}]],["$","html",null,{"lang":"zh","children":[["$","head",null,{"children":["$","script",null,{"dangerouslySetInnerHTML":{"__html":"\ntry {\n  var raw = localStorage.getItem('algo-interview');\n  var theme = 'light';\n  if (raw) { var p = JSON.parse(raw); theme = (p.state && p.state.theme) || 'light'; }\n  if (theme === 'dark') {\n    document.documentElement.classList.add('dark');\n    document.documentElement.setAttribute('data-theme', 'dark');\n  }\n} catch (e) {}\n"}}]}],["$","body",null,{"children":[["$","$L2",null,{"parallelRouterKey":"children","segmentPath":["children"],"error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L3",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":[[],[["$","title",null,{"children":"404: This page could not be found."}],["$","div",null,{"style":{"fontFamily":"system-ui,\"Segoe UI\",Roboto,Helvetica,Arial,sans-serif,\"Apple Color Emoji\",\"Segoe UI Emoji\"","height":"100vh","textAlign":"center","display":"flex","flexDirection":"column","alignItems":"center","justifyContent":"center"},"children":["$","div",null,{"children":[["$","style",null,{"dangerouslySetInnerHTML":{"__html":"body{color:#000;background:#fff;margin:0}.next-error-h1{border-right:1px solid rgba(0,0,0,.3)}@media (prefers-color-scheme:dark){body{color:#fff;background:#000}.next-error-h1{border-right:1px solid rgba(255,255,255,.3)}}"}}],["$","h1",null,{"className":"next-error-h1","style":{"display":"inline-block","margin":"0 20px 0 0","padding":"0 23px 0 0","fontSize":24,"fontWeight":500,"verticalAlign":"top","lineHeight":"49px"},"children":404}],["$","div",null,{"style":{"display":"inline-block"},"children":["$","h2",null,{"style":{"fontSize":14,"fontWeight":400,"lineHeight":"49px","margin":0},"children":"This page could not be found."}]}]]}]}]]],"forbidden":"$undefined","unauthorized":"$undefined"}],["$","script",null,{"dangerouslySetInnerHTML":{"__html":"\nif ('serviceWorker' in navigator) {\n  window.addEventListener('load', function () {\n    navigator.serviceWorker.register('/algorithm-interview/sw.js').catch(function () {});\n  });\n}\n"}}]]}]]}]]}],{"children":["question",["$","$1","c",{"children":[null,["$","$L2",null,{"parallelRouterKey":"children","segmentPath":["children","question","children"],"error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L3",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","forbidden":"$undefined","unauthorized":"$undefined"}]]}],{"children":[["lcId","208","d"],["$","$1","c",{"children":[null,["$","$L2",null,{"parallelRouterKey":"children","segmentPath":["children","question","children","$0:f:0:1:2:children:2:children:0","children"],"error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L3",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","forbidden":"$undefined","unauthorized":"$undefined"}]]}],{"children":["__PAGE__",["$","$1","c",{"children":["$L4",null,["$","$L5",null,{"children":"$L6"}]]}],{},null,false]},null,false]},null,false]},null,false],["$","$1","h",{"children":[null,["$","$1","Q3IwPe4TMFsM57NYjQj6_",{"children":[["$","$L7",null,{"children":"$L8"}],["$","$L9",null,{"children":"$La"}],null]}]]}],false]],"m":"$undefined","G":["$b","$undefined"],"s":false,"S":true}
+c:I[8173,["173","static/chunks/173-69860a4742bb7020.js","829","static/chunks/829-7533e70598480772.js","937","static/chunks/937-ef36a5ac4bc37a7e.js","447","static/chunks/447-06af9414e164c047.js","8","static/chunks/app/question/%5BlcId%5D/page-478b0d2a69e222f2.js"],""]
+d:I[3447,["173","static/chunks/173-69860a4742bb7020.js","829","static/chunks/829-7533e70598480772.js","937","static/chunks/937-ef36a5ac4bc37a7e.js","447","static/chunks/447-06af9414e164c047.js","8","static/chunks/app/question/%5BlcId%5D/page-478b0d2a69e222f2.js"],"default"]
+e:T1ec9,# 208. 实现 Trie (前缀树)
+
+> 难度：**Medium** | 分类：图论 | 标签：设计, 字典树, 哈希表, 字符串
+
+> 🔗 力扣链接：[https://leetcode.cn/problems/implement-trie-prefix-tree/](https://leetcode.cn/problems/implement-trie-prefix-tree/)
+
+## 📝 题目描述
+
+实现一个 Trie（前缀树），支持三种操作：插入字符串 `insert`、搜索单词 `search`、判断前缀是否存在 `startsWith`。
+
+重点不在"会不会用现成的字典"，而在"怎么用一棵树把公共前缀压缩存储"。
+
+- 题号：208
+- 题目名：实现 Trie (前缀树)
+- 难度：中等
+- 题型：字典树
+- 为什么选这题：它是字典树的标准实现题，掌握它就能理解搜索引擎、输入法联想背后的核心数据结构。
+
+## 🧠 思考路径
+
+如果用哈希表存所有单词，搜索单词是 `O(1)`，但判断前缀是否存在就很麻烦——你需要枚举所有可能的后续字符。而且空间浪费大，"abc"和"abd"的公共前缀"ab"存了两遍。
+
+前缀树的思路是：把公共前缀合并到一条路径上。从根节点出发，每个节点有 26 个子节点槽位（对应 26 个字母）。插入一个单词时，沿着已有的路径走，走到没有对应字符的位置就创建新节点。在单词结束的节点上做一个标记，表示"到这里是一个完整的单词"。
+
+搜索时沿着树走，如果走不通说明单词不存在；走通了但终点没有"完整单词"标记，说明这个序列只是某个更长单词的前缀。`startsWith` 只需要检查路径是否走得通，不要求终点有标记。
+
+这题的关键词不是"存单词"，而是"用树共享公共前缀"。
+
+## 💻 Java 题解
+
+### 解法 1：标准Trie实现
+
+每个节点维护children[26]和isEnd。insert逐字符创建节点，search和startsWith逐字符查找。
+
+- ⏱ 时间复杂度：`O(m) per op`
+- 💾 空间复杂度：`O(m×n)`
+
+```java
+class Trie {
+    class Node { Node[] children = new Node[26]; boolean isEnd; }
+    private Node root;
+    public Trie() { root = new Node(); }
+    public void insert(String word) {
+        Node curr = root;
+        for (char c : word.toCharArray()) {
+            int idx = c - 'a';
+            if (curr.children[idx] == null) curr.children[idx] = new Node();
+            curr = curr.children[idx];
+        }
+        curr.isEnd = true;
+    }
+    public boolean search(String word) {
+        Node node = find(word);
+        return node != null && node.isEnd;
+    }
+    public boolean startsWith(String prefix) {
+        return find(prefix) != null;
+    }
+    private Node find(String s) {
+        Node curr = root;
+        for (char c : s.toCharArray()) {
+            int idx = c - 'a';
+            if (curr.children[idx] == null) return null;
+            curr = curr.children[idx];
+        }
+        return curr;
+    }
+}
+```
+
+**关键点：**
+- children[26] 子节点数组
+- isEnd 标记单词结束
+- search vs startsWith 区别
+
+**执行步骤：**
+1. insert: 逐字符创建/遍历节点
+1. search: 找到节点且isEnd=true
+1. startsWith: 只需找到节点
+
+
+## ⚠️ 易错点
+
+- `search` 和 `startsWith` 的区别：前者要求路径走通 **且** 终点有标记；后者只要求路径走通。
+- 插入时不要忘了在最后一个节点设 `is_end = True`，否则 `search` 永远返回 `False`。
+- Java 用数组 `TrieNode[26]` 存子节点时，索引是 `c - 'a'`，注意输入只有小写字母。
+
+- search 要检查 isEnd，startsWith 不需要
+
+## 📊 复杂度分析
+
+- 时间复杂度：`insert`、`search`、`startsWith` 均为 `O(L)`，`L` 为字符串长度。
+- 空间复杂度：`O(N × L)`，`N` 为插入的单词数，`L` 为平均长度。公共前缀被共享，实际空间更优。
+
+## 🏢 实际业务应用
+
+- 搜索引擎的自动补全：用户每输入一个字符，就在 Trie 中走一步，实时返回以当前输入为前缀的所有建议词。
+- 中文输入法的候选词联想：拼音序列映射到汉字，Trie 的路径匹配对应拼音输入，叶子节点对应候选词。
+- 路由器的 IP 路由表查找：IP 前缀匹配和最长前缀匹配，本质上就是 Trie 的路径搜索。
+
+- 搜索引擎的自动补全：用户每输入一个字符，就在 Trie 中走一步，实时返回以当前输入为前缀的所有建议词。
+- 中文输入法的候选词联想：拼音序列映射到汉字，Trie 的路径匹配对应拼音输入，叶子节点对应候选词。
+- 路由器的 IP 路由表查找：IP 前缀匹配和最长前缀匹配，本质上就是 Trie 的路径搜索。
+
+## 📖 形象类比
+
+可以把它类比成《三国演义》里曹操的"地名索引"系统。
+
+曹操每攻下一座城，就让书记官在一张大地图上标出路线：从许都出发，经过哪些关口到达这座城。如果两座城前半段路相同（公共前缀），就共用同一条路线标记，只在分叉处标出不同方向。查某条路是否存在，就像 `startsWith`；查这条路终点是不是一座具体的城（而不是只到某个关口），就像 `search`。
+
+对应关系是：
+
+- "Trie 的根节点"对应许都（出发点）
+- "每条路径"对应从许都出发的行军路线
+- "公共前缀"对应多支军队共享的同一段路
+- "is_end 标记"对应路线终点是一座城（而非中途关口）
+- "search"对应查某条路是否通到具体城池
+- "startsWith"对应查某条路至少通到某个关口
+
+这段记忆的关键是：相同的路只走一遍，在分叉处才分开。
+
+可以把它类比成《三国演义》里曹操的"地名索引"系统。
+
+曹操每攻下一座城，就让书记官在一张大地图上标出路线：从许都出发，经过哪些关口到达这座城。如果两座城前半段路相同（公共前缀），就共用同一条路线标记，只在分叉处标出不同方向。查某条路是否存在，就像 `startsWith`；查这条路终点是不是一座具体的城（而不是只到某个关口），就像 `search`。
+
+对应关系是：
+
+- "Trie 的根节点"对应许都（出发点）
+- "每条路径"对应从许都出发的行军路线
+- "公共前缀"对应多支军队共享的同一段路
+- "is_end 标记"对应路线终点是一座城（而非中途关口）
+- "search"对应查某条路是否通到具体城池
+- "startsWith"对应查某条路至少通到某个关口
+
+这段记忆的关键是：相同的路只走一遍，在分叉处才分开。
+
+小蚂蚁在泥土里挖了一套地下通道，每条通道用字母标记。当多只蚂蚁都要去类似的目的地（比如 "apple" 和 "app"），它们共享前半段通道 "a-p-p"，在最后才各挖各的。每到一个终点，蚂蚁就放一颗小石子做标记（is_end），这样后来者一看就知道："这条路走得通，而且这里是个完整的目的地，不只是个中转站。"
+
+小蚂蚁在泥土里挖了一套地下通道，每条通道用字母标记。当多只蚂蚁都要去类似的目的地（比如 "apple" 和 "app"），它们共享前半段通道 "a-p-p"，在最后才各挖各的。每到一个终点，蚂蚁就放一颗小石子做标记（is_end），这样后来者一看就知道："这条路走得通，而且这里是个完整的目的地，不只是个中转站。"
+
+## 🎵 记忆口诀
+
+沿路走，不通就建；终点加标记，搜索看标记。
+
+沿路走，不通就建；终点加标记，搜索看标记。
+
+## 🔗 延伸练习
+
+- `211. 添加与搜索单词`：本题的进阶版，搜索时支持通配符 `.`,需要回溯搜索所有子节点。
+- `212. 单词搜索 II`：Trie + DFS 回溯的组合，在二维网格中批量查找单词。
+
+- `211. 添加与搜索单词`：本题的进阶版，搜索时支持通配符 `.`,需要回溯搜索所有子节点。
+- `212. 单词搜索 II`：Trie + DFS 回溯的组合，在二维网格中批量查找单词。4:["$","main",null,{"className":"detail-main","style":{"maxWidth":760,"margin":"0 auto","padding":"16px","minHeight":"100vh"},"children":[["$","$Lc",null,{"href":"/","style":{"display":"inline-block","marginBottom":"12px","fontSize":"13px"},"children":"← 返回题库"}],["$","h1",null,{"style":{"fontSize":"22px","fontWeight":700,"margin":"0 0 4px"},"children":[["$","span",null,{"style":{"marginRight":"6px"},"children":"🕸️"}],208,". ","实现 Trie (前缀树)"]}],["$","$Ld",null,{"q":{"id":"0208","lcId":208,"slug":"implement-trie-prefix-tree","title":"实现 Trie (前缀树)","question":"实现 Trie (前缀树)","answer":"$e","difficulty":"Medium","category":"graph","categories":["graph"],"tags":["设计","字典树","哈希表","字符串"],"url":"https://leetcode.cn/problems/implement-trie-prefix-tree/","planOrder":54,"hasViz":true,"hasDiagram":false,"feynman":{"essence":"实现一个 Trie（前缀树），支持三种操作：插入字符串 `insert`、搜索单词 `search`、判断前缀是否存在 `startsWith`。  重点不在\"会不会用现成的字典\"，而在\"怎么用一棵树","analogy":"","key_points":[]},"first_principle":{"problem":"","axioms":[],"rebuild":""}}}]]}]
+a:[["$","meta","0",{"name":"viewport","content":"width=device-width, initial-scale=1"}],["$","meta","1",{"name":"theme-color","content":"#f97316"}]]
+8:[["$","meta","0",{"charSet":"utf-8"}],["$","title","1",{"children":"208. 实现 Trie (前缀树) - 算法面试"}],["$","meta","2",{"name":"description","content":"实现一个 Trie（前缀树），支持三种操作：插入字符串 `insert`、搜索单词 `search`、判断前缀是否存在 `startsWith`。  重点不在\"会不会用现成的字典\"，而在\"怎么用一棵树"}],["$","meta","3",{"name":"application-name","content":"算法面试"}],["$","link","4",{"rel":"manifest","href":"/algorithm-interview/manifest.json","crossOrigin":"$undefined"}],["$","meta","5",{"name":"keywords","content":"实现 Trie (前缀树),LeetCode 208,Medium,设计,字典树,哈希表,字符串"}],["$","meta","6",{"name":"mobile-web-app-capable","content":"yes"}],["$","meta","7",{"name":"apple-mobile-web-app-title","content":"算法面试"}],["$","meta","8",{"name":"apple-mobile-web-app-status-bar-style","content":"default"}],["$","meta","9",{"property":"og:title","content":"208. 实现 Trie (前缀树)"}],["$","meta","10",{"property":"og:description","content":"实现一个 Trie（前缀树），支持三种操作：插入字符串 `insert`、搜索单词 `search`、判断前缀是否存在 `startsWith`。  重点不在\"会不会用现成的字典\"，而在\"怎么用一棵树"}],["$","meta","11",{"property":"og:locale","content":"zh_CN"}],["$","meta","12",{"property":"og:type","content":"article"}],["$","meta","13",{"name":"twitter:card","content":"summary"}],["$","meta","14",{"name":"twitter:title","content":"208. 实现 Trie (前缀树)"}],["$","meta","15",{"name":"twitter:description","content":"实现一个 Trie（前缀树），支持三种操作：插入字符串 `insert`、搜索单词 `search`、判断前缀是否存在 `startsWith`。  重点不在\"会不会用现成的字典\"，而在\"怎么用一棵树"}]]
+6:null

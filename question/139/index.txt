@@ -1,0 +1,151 @@
+1:"$Sreact.fragment"
+2:I[5244,[],""]
+3:I[3866,[],""]
+5:I[6213,[],"OutletBoundary"]
+7:I[6213,[],"MetadataBoundary"]
+9:I[6213,[],"ViewportBoundary"]
+b:I[4835,[],""]
+:HL["/algorithm-interview/_next/static/css/c1e787639001e16b.css","style"]
+0:{"P":null,"b":"xos97fAiWtKfKXI6hZLx4","p":"/algorithm-interview","c":["","question","139",""],"i":false,"f":[[["",{"children":["question",{"children":[["lcId","139","d"],{"children":["__PAGE__",{}]}]}]},"$undefined","$undefined",true],["",["$","$1","c",{"children":[[["$","link","0",{"rel":"stylesheet","href":"/algorithm-interview/_next/static/css/c1e787639001e16b.css","precedence":"next","crossOrigin":"$undefined","nonce":"$undefined"}]],["$","html",null,{"lang":"zh","children":[["$","head",null,{"children":["$","script",null,{"dangerouslySetInnerHTML":{"__html":"\ntry {\n  var raw = localStorage.getItem('algo-interview');\n  var theme = 'light';\n  if (raw) { var p = JSON.parse(raw); theme = (p.state && p.state.theme) || 'light'; }\n  if (theme === 'dark') {\n    document.documentElement.classList.add('dark');\n    document.documentElement.setAttribute('data-theme', 'dark');\n  }\n} catch (e) {}\n"}}]}],["$","body",null,{"children":[["$","$L2",null,{"parallelRouterKey":"children","segmentPath":["children"],"error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L3",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":[[],[["$","title",null,{"children":"404: This page could not be found."}],["$","div",null,{"style":{"fontFamily":"system-ui,\"Segoe UI\",Roboto,Helvetica,Arial,sans-serif,\"Apple Color Emoji\",\"Segoe UI Emoji\"","height":"100vh","textAlign":"center","display":"flex","flexDirection":"column","alignItems":"center","justifyContent":"center"},"children":["$","div",null,{"children":[["$","style",null,{"dangerouslySetInnerHTML":{"__html":"body{color:#000;background:#fff;margin:0}.next-error-h1{border-right:1px solid rgba(0,0,0,.3)}@media (prefers-color-scheme:dark){body{color:#fff;background:#000}.next-error-h1{border-right:1px solid rgba(255,255,255,.3)}}"}}],["$","h1",null,{"className":"next-error-h1","style":{"display":"inline-block","margin":"0 20px 0 0","padding":"0 23px 0 0","fontSize":24,"fontWeight":500,"verticalAlign":"top","lineHeight":"49px"},"children":404}],["$","div",null,{"style":{"display":"inline-block"},"children":["$","h2",null,{"style":{"fontSize":14,"fontWeight":400,"lineHeight":"49px","margin":0},"children":"This page could not be found."}]}]]}]}]]],"forbidden":"$undefined","unauthorized":"$undefined"}],["$","script",null,{"dangerouslySetInnerHTML":{"__html":"\nif ('serviceWorker' in navigator) {\n  window.addEventListener('load', function () {\n    navigator.serviceWorker.register('/algorithm-interview/sw.js').catch(function () {});\n  });\n}\n"}}]]}]]}]]}],{"children":["question",["$","$1","c",{"children":[null,["$","$L2",null,{"parallelRouterKey":"children","segmentPath":["children","question","children"],"error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L3",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","forbidden":"$undefined","unauthorized":"$undefined"}]]}],{"children":[["lcId","139","d"],["$","$1","c",{"children":[null,["$","$L2",null,{"parallelRouterKey":"children","segmentPath":["children","question","children","$0:f:0:1:2:children:2:children:0","children"],"error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L3",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","forbidden":"$undefined","unauthorized":"$undefined"}]]}],{"children":["__PAGE__",["$","$1","c",{"children":["$L4",null,["$","$L5",null,{"children":"$L6"}]]}],{},null,false]},null,false]},null,false]},null,false],["$","$1","h",{"children":[null,["$","$1","1mN4S49oWo7EhFyENZ3X-",{"children":[["$","$L7",null,{"children":"$L8"}],["$","$L9",null,{"children":"$La"}],null]}]]}],false]],"m":"$undefined","G":["$b","$undefined"],"s":false,"S":true}
+c:I[8173,["173","static/chunks/173-69860a4742bb7020.js","829","static/chunks/829-7533e70598480772.js","937","static/chunks/937-ef36a5ac4bc37a7e.js","447","static/chunks/447-06af9414e164c047.js","8","static/chunks/app/question/%5BlcId%5D/page-478b0d2a69e222f2.js"],""]
+d:I[3447,["173","static/chunks/173-69860a4742bb7020.js","829","static/chunks/829-7533e70598480772.js","937","static/chunks/937-ef36a5ac4bc37a7e.js","447","static/chunks/447-06af9414e164c047.js","8","static/chunks/app/question/%5BlcId%5D/page-478b0d2a69e222f2.js"],"default"]
+e:T1c0a,# 139. 单词拆分
+
+> 难度：**Medium** | 分类：动态规划 | 标签：数组, 哈希表, 字符串, 动态规划
+
+> 🔗 力扣链接：[https://leetcode.cn/problems/word-break/](https://leetcode.cn/problems/word-break/)
+
+## 📝 题目描述
+
+给你一个字符串 `s` 和一个字典 `wordDict`（字符串列表）。判断 `s` 能否被拆分成若干个字典中出现的单词。单词可以重复使用。
+
+比如 `s = "leetcode"`, `wordDict = ["leet", "code"]`，返回 `True`。重点不在"拆出所有方案"，而在"能不能拆"。
+
+- 题号：139
+- 题目名：单词拆分
+- 难度：中等
+- 题型：动态规划
+- 为什么选这题：它是子串匹配类 DP 的代表题，"能否拼出来"的判断模式在很多场景都会出现。
+
+## 🧠 思考路径
+
+最直觉的想法是递归：从 `s` 开头尝试匹配字典里的每个单词，匹配成功就对剩余部分递归判断。但这样会有大量重复计算——比如 `"aaaaab"` 匹配 `"a"` 时，`"aaaab"` 会被反复计算。
+
+加上记忆化就能变成 `O(n²)`，但 DP 更简洁。
+
+设 `dp[i]` 表示 `s[0..i-1]`（前 `i` 个字符）能否被拆分。对于每个位置 `i`，枚举所有 `j < i`：如果 `dp[j]` 为 `True`（前 `j` 个字符能拆分），且 `s[j..i-1]` 在字典里，那 `dp[i] = True`。
+
+初始条件 `dp[0] = True`（空字符串一定能拆分）。
+
+所以这题的关键词不是"拆字符串"，而是"用 DP 记录每个前缀是否可拆，逐步推出整串"。
+
+## 💻 Java 题解
+
+### 解法 1：动态规划
+
+dp[i]=true表示s[0..i)可拆分。对每个i，检查是否存在单词w使得s[i-w.len..i)==w 且 dp[i-w.len]==true。
+
+- ⏱ 时间复杂度：`O(n×m)`
+- 💾 空间复杂度：`O(n)`
+
+```java
+class Solution {
+    public boolean wordBreak(String s, List<String> wordDict) {
+        Set<String> dict = new HashSet<>(wordDict);
+        boolean[] dp = new boolean[s.length() + 1];
+        dp[0] = true;
+        for (int i = 1; i <= s.length(); i++)
+            for (int j = 0; j < i; j++)
+                if (dp[j] && dict.contains(s.substring(j, i))) {
+                    dp[i] = true; break;
+                }
+        return dp[s.length()];
+    }
+}
+```
+
+**关键点：**
+- dp[0]=true 空串可拆分
+- 双重循环i和j
+- substring(j,i)
+
+**执行步骤：**
+1. dp[0]=true
+1. 对每个i枚举j
+1. dp[j]==true且s[j..i)在字典中→dp[i]=true
+
+
+## ⚠️ 易错点
+
+- `dp` 数组长度是 `n + 1`，不是 `n`，因为 `dp[0]` 对应空串。
+- `s[j:i]` 是左闭右开，对应 `s` 的第 `j` 到第 `i-1` 个字符。
+- 字典要转成 `set`，否则每次 `in` 查询是 `O(m)`（m 是字典大小），总复杂度会变成 `O(n² · m)`。
+- `dp[0] = True` 是边界条件，不能漏，否则后面全为 `False`。
+
+- dp[0]=true 是关键base case
+
+## 📊 复杂度分析
+
+- 时间复杂度：`O(n²)`。两层循环，每次子串查询 `O(1)`（set）。
+- 空间复杂度：`O(n + m)`。`dp` 数组 `O(n)`，字典集合 `O(m)`。
+
+## 🏢 实际业务应用
+
+- 搜索引擎的分词系统：判断用户输入的查询能否被拆分成合法的词组，直接影响搜索结果的召回。
+- 密码强度检测中的"字典词检测"：判断密码是否由字典中的常见词拼接而成，如果是则判定为弱密码。
+- 自然语言处理的分词预处理：中文分词中，判断一个句子能否被词表完全覆盖，是最基础的分词可行性检查。
+
+- 搜索引擎的分词系统：判断用户输入的查询能否被拆分成合法的词组，直接影响搜索结果的召回。
+- 密码强度检测中的"字典词检测"：判断密码是否由字典中的常见词拼接而成，如果是则判定为弱密码。
+- 自然语言处理的分词预处理：中文分词中，判断一个句子能否被词表完全覆盖，是最基础的分词可行性检查。
+
+## 📖 形象类比
+
+可以把它类比成《西游记》里孙悟空识别妖精变化的口诀。
+
+唐僧念的是一长串咒语（字符串 `s`），悟空手里有一本"妖精真名册"（字典 `wordDict`）。他需要判断这串咒语能否被拆成若干个妖精的真名。悟空从咒语开头开始，每到一处就回头看看前面有没有已经认出来的部分（`dp[j]` 为真），再看看从那里到当前位置是不是一个妖精的真名（子串在字典里）。如果能接上，就标记当前位置也认出来了。
+
+对应关系是：
+
+- "咒语"对应字符串 `s`
+- "妖精真名册"对应字典 `wordDict`
+- "已经认出来的部分"对应 `dp[j] = True`
+- "从认出的位置到当前位置是不是真名"对应 `s[j:i] in word_set`
+- "标记当前位置也认出来了"对应 `dp[i] = True`
+
+这段记忆的关键是：每个位置回头找一个"合法的前驱 + 合法的衔接词"。
+
+可以把它类比成《西游记》里孙悟空识别妖精变化的口诀。
+
+唐僧念的是一长串咒语（字符串 `s`），悟空手里有一本"妖精真名册"（字典 `wordDict`）。他需要判断这串咒语能否被拆成若干个妖精的真名。悟空从咒语开头开始，每到一处就回头看看前面有没有已经认出来的部分（`dp[j]` 为真），再看看从那里到当前位置是不是一个妖精的真名（子串在字典里）。如果能接上，就标记当前位置也认出来了。
+
+对应关系是：
+
+- "咒语"对应字符串 `s`
+- "妖精真名册"对应字典 `wordDict`
+- "已经认出来的部分"对应 `dp[j] = True`
+- "从认出的位置到当前位置是不是真名"对应 `s[j:i] in word_set`
+- "标记当前位置也认出来了"对应 `dp[i] = True`
+
+这段记忆的关键是：每个位置回头找一个"合法的前驱 + 合法的衔接词"。
+
+小刺猬在森林路上铺石头路，必须用指定的"花纹石板"（字典里的单词）拼接。它从路的一头开始铺，每到一处就回头看：之前铺到哪个位置是对的（dp 为真），从那个位置到当前位置的这段空缺，有没有一块花纹石板刚好能填上。如果能，这个位置也标记为"铺对了"。走完整条路，看最后一处是不是"铺对了"就知道能不能铺完。
+
+小刺猬在森林路上铺石头路，必须用指定的"花纹石板"（字典里的单词）拼接。它从路的一头开始铺，每到一处就回头看：之前铺到哪个位置是对的（dp 为真），从那个位置到当前位置的这段空缺，有没有一块花纹石板刚好能填上。如果能，这个位置也标记为"铺对了"。走完整条路，看最后一处是不是"铺对了"就知道能不能铺完。
+
+## 🎵 记忆口诀
+
+dp[0] 空，dp[i] 回头找；前能拆，后是词，当前位置就通过。
+
+dp[0] 空，dp[i] 回头找；前能拆，后是词，当前位置就通过。
+
+## 🔗 延伸练习
+
+- `140. 单词拆分 II`：从"能不能拆"变成"列出所有拆法"，需要回溯 + 记忆化。
+- `132. 分割回文串 II`：结构类似，但约束从"在字典里"变成了"是回文"。
+
+- `140. 单词拆分 II`：从"能不能拆"变成"列出所有拆法"，需要回溯 + 记忆化。
+- `132. 分割回文串 II`：结构类似，但约束从"在字典里"变成了"是回文"。4:["$","main",null,{"className":"detail-main","style":{"maxWidth":760,"margin":"0 auto","padding":"16px","minHeight":"100vh"},"children":[["$","$Lc",null,{"href":"/","style":{"display":"inline-block","marginBottom":"12px","fontSize":"13px"},"children":"← 返回题库"}],["$","h1",null,{"style":{"fontSize":"22px","fontWeight":700,"margin":"0 0 4px"},"children":[["$","span",null,{"style":{"marginRight":"6px"},"children":"🧩"}],139,". ","单词拆分"]}],["$","$Ld",null,{"q":{"id":"0139","lcId":139,"slug":"word-break","title":"单词拆分","question":"单词拆分","answer":"$e","difficulty":"Medium","category":"dynamic-programming","categories":["dynamic-programming"],"tags":["数组","哈希表","字符串","动态规划"],"url":"https://leetcode.cn/problems/word-break/","planOrder":86,"hasViz":true,"hasDiagram":false,"feynman":{"essence":"给你一个字符串 `s` 和一个字典 `wordDict`（字符串列表）。判断 `s` 能否被拆分成若干个字典中出现的单词。单词可以重复使用。  比如 `s = \"leetcode\"`, `wordDi","analogy":"","key_points":[]},"first_principle":{"problem":"","axioms":[],"rebuild":""}}}]]}]
+a:[["$","meta","0",{"name":"viewport","content":"width=device-width, initial-scale=1"}],["$","meta","1",{"name":"theme-color","content":"#f97316"}]]
+8:[["$","meta","0",{"charSet":"utf-8"}],["$","title","1",{"children":"139. 单词拆分 - 算法面试"}],["$","meta","2",{"name":"description","content":"给你一个字符串 `s` 和一个字典 `wordDict`（字符串列表）。判断 `s` 能否被拆分成若干个字典中出现的单词。单词可以重复使用。  比如 `s = \"leetcode\"`, `wordDi"}],["$","meta","3",{"name":"application-name","content":"算法面试"}],["$","link","4",{"rel":"manifest","href":"/algorithm-interview/manifest.json","crossOrigin":"$undefined"}],["$","meta","5",{"name":"keywords","content":"单词拆分,LeetCode 139,Medium,数组,哈希表,字符串,动态规划"}],["$","meta","6",{"name":"mobile-web-app-capable","content":"yes"}],["$","meta","7",{"name":"apple-mobile-web-app-title","content":"算法面试"}],["$","meta","8",{"name":"apple-mobile-web-app-status-bar-style","content":"default"}],["$","meta","9",{"property":"og:title","content":"139. 单词拆分"}],["$","meta","10",{"property":"og:description","content":"给你一个字符串 `s` 和一个字典 `wordDict`（字符串列表）。判断 `s` 能否被拆分成若干个字典中出现的单词。单词可以重复使用。  比如 `s = \"leetcode\"`, `wordDi"}],["$","meta","11",{"property":"og:locale","content":"zh_CN"}],["$","meta","12",{"property":"og:type","content":"article"}],["$","meta","13",{"name":"twitter:card","content":"summary"}],["$","meta","14",{"name":"twitter:title","content":"139. 单词拆分"}],["$","meta","15",{"name":"twitter:description","content":"给你一个字符串 `s` 和一个字典 `wordDict`（字符串列表）。判断 `s` 能否被拆分成若干个字典中出现的单词。单词可以重复使用。  比如 `s = \"leetcode\"`, `wordDi"}]]
+6:null

@@ -1,0 +1,124 @@
+1:"$Sreact.fragment"
+2:I[5244,[],""]
+3:I[3866,[],""]
+5:I[6213,[],"OutletBoundary"]
+7:I[6213,[],"MetadataBoundary"]
+9:I[6213,[],"ViewportBoundary"]
+b:I[4835,[],""]
+:HL["/algorithm-interview/_next/static/css/c1e787639001e16b.css","style"]
+0:{"P":null,"b":"xos97fAiWtKfKXI6hZLx4","p":"/algorithm-interview","c":["","columns","lbd-054",""],"i":false,"f":[[["",{"children":["columns",{"children":[["slug","lbd-054","d"],{"children":["__PAGE__",{}]}]}]},"$undefined","$undefined",true],["",["$","$1","c",{"children":[[["$","link","0",{"rel":"stylesheet","href":"/algorithm-interview/_next/static/css/c1e787639001e16b.css","precedence":"next","crossOrigin":"$undefined","nonce":"$undefined"}]],["$","html",null,{"lang":"zh","children":[["$","head",null,{"children":["$","script",null,{"dangerouslySetInnerHTML":{"__html":"\ntry {\n  var raw = localStorage.getItem('algo-interview');\n  var theme = 'light';\n  if (raw) { var p = JSON.parse(raw); theme = (p.state && p.state.theme) || 'light'; }\n  if (theme === 'dark') {\n    document.documentElement.classList.add('dark');\n    document.documentElement.setAttribute('data-theme', 'dark');\n  }\n} catch (e) {}\n"}}]}],["$","body",null,{"children":[["$","$L2",null,{"parallelRouterKey":"children","segmentPath":["children"],"error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L3",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":[[],[["$","title",null,{"children":"404: This page could not be found."}],["$","div",null,{"style":{"fontFamily":"system-ui,\"Segoe UI\",Roboto,Helvetica,Arial,sans-serif,\"Apple Color Emoji\",\"Segoe UI Emoji\"","height":"100vh","textAlign":"center","display":"flex","flexDirection":"column","alignItems":"center","justifyContent":"center"},"children":["$","div",null,{"children":[["$","style",null,{"dangerouslySetInnerHTML":{"__html":"body{color:#000;background:#fff;margin:0}.next-error-h1{border-right:1px solid rgba(0,0,0,.3)}@media (prefers-color-scheme:dark){body{color:#fff;background:#000}.next-error-h1{border-right:1px solid rgba(255,255,255,.3)}}"}}],["$","h1",null,{"className":"next-error-h1","style":{"display":"inline-block","margin":"0 20px 0 0","padding":"0 23px 0 0","fontSize":24,"fontWeight":500,"verticalAlign":"top","lineHeight":"49px"},"children":404}],["$","div",null,{"style":{"display":"inline-block"},"children":["$","h2",null,{"style":{"fontSize":14,"fontWeight":400,"lineHeight":"49px","margin":0},"children":"This page could not be found."}]}]]}]}]]],"forbidden":"$undefined","unauthorized":"$undefined"}],["$","script",null,{"dangerouslySetInnerHTML":{"__html":"\nif ('serviceWorker' in navigator) {\n  window.addEventListener('load', function () {\n    navigator.serviceWorker.register('/algorithm-interview/sw.js').catch(function () {});\n  });\n}\n"}}]]}]]}]]}],{"children":["columns",["$","$1","c",{"children":[null,["$","$L2",null,{"parallelRouterKey":"children","segmentPath":["children","columns","children"],"error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L3",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","forbidden":"$undefined","unauthorized":"$undefined"}]]}],{"children":[["slug","lbd-054","d"],["$","$1","c",{"children":[null,["$","$L2",null,{"parallelRouterKey":"children","segmentPath":["children","columns","children","$0:f:0:1:2:children:2:children:0","children"],"error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L3",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","forbidden":"$undefined","unauthorized":"$undefined"}]]}],{"children":["__PAGE__",["$","$1","c",{"children":["$L4",null,["$","$L5",null,{"children":"$L6"}]]}],{},null,false]},null,false]},null,false]},null,false],["$","$1","h",{"children":[null,["$","$1","UGMzzzzTZetiMNVKuHR6m",{"children":[["$","$L7",null,{"children":"$L8"}],["$","$L9",null,{"children":"$La"}],null]}]]}],false]],"m":"$undefined","G":["$b","$undefined"],"s":false,"S":true}
+c:I[8173,["173","static/chunks/173-69860a4742bb7020.js","829","static/chunks/829-7533e70598480772.js","306","static/chunks/app/columns/%5Bslug%5D/page-58fc1d8f5085c1ff.js"],""]
+d:I[4780,["173","static/chunks/173-69860a4742bb7020.js","829","static/chunks/829-7533e70598480772.js","306","static/chunks/app/columns/%5Bslug%5D/page-58fc1d8f5085c1ff.js"],"default"]
+e:T1188,# 区间调度之区间交集问题
+
+区间交集问题
+学算法，认准 labuladong 就够了！
+本⽂是区间系列问题的第三篇，前两篇分别讲了区间的最⼤不相交⼦集和重
+叠区间的合并，今天再写⼀个算法，可以快速找出两组区间的交集。
+先看下题⽬，LeetCode 第 986 题就是这个问题：
+题⽬很好理解，就是让你找交集，注意区间都是闭区间。
+区间调度之区间交集问题
+373
+
+思路
+解决区间问题的思路⼀般是先排序，以便操作，不过题⽬说已经排好序了，
+那么可以⽤两个索引指针在  A  和  B  中游⾛，把交集找出来，代码⼤概是
+这样的：
+# A, B 形如 [[0,2],[5,10]...]
+def intervalIntersection(A, B):
+    i, j = 0, 0
+    res = []
+    while i < len(A) and j < len(B):
+        # ...
+        j += 1
+        i += 1
+    return res
+不难，我们先⽼⽼实实分析⼀下各种情况。
+⾸先，对于两个区间，我们⽤  [a1,a2]  和  [b1,b2]  表⽰在  A  和  B  中的
+两个区间，那么什么情况下这两个区间没有交集呢：
+只有这两种情况，写成代码的条件判断就是这样：
+区间调度之区间交集问题
+374
+
+if b2 < a1 or a2 < b1:
+    [a1,a2] 和 [b1,b2] ⽆交集
+那么，什么情况下，两个区间存在交集呢？根据命题的否定，上⾯逻辑的否
+命题就是存在交集的条件：
+# 不等号取反，or 也要变成 and
+if b2 >= a1 and a2 >= b1:
+    [a1,a2] 和 [b1,b2] 存在交集
+接下来，两个区间存在交集的情况有哪些呢？穷举出来：
+这很简单吧，就这四种情况⽽已。那么接下来思考，这⼏种情况下，交集是
+否有什么共同点呢？
+区间调度之区间交集问题
+375
+
+我们惊奇地发现，交集区间是有规律的！如果交集区间是  [c1,c2] ，那么
+ c1=max(a1,b1) ， c2=min(a2,b2) ！这⼀点就是寻找交集的核⼼，我们把代
+码更进⼀步：
+while i < len(A) and j < len(B):
+    a1, a2 = A[i][0], A[i][1]
+    b1, b2 = B[j][0], B[j][1]
+    if b2 >= a1 and a2 >= b1:
+        res.append([max(a1, b1), min(a2, b2)])
+    # ...
+最后⼀步，我们的指针  i  和  j  肯定要前进（递增）的，什么时候应该前
+进呢？
+【PDF格式⽆法显⽰GIF⽂件 intersection/4.gif，可移步公众号查看】
+结合动画⽰例就很好理解了，是否前进，只取决于  a2  和  b2  的⼤⼩关
+系：
+while i < len(A) and j < len(B):
+    # ...
+    if b2 < a2:
+        j += 1
+区间调度之区间交集问题
+376
+
+    else:
+        i += 1
+代码
+# A, B 形如 [[0,2],[5,10]...]
+def intervalIntersection(A, B):
+    i, j = 0, 0 # 双指针
+    res = []
+    while i < len(A) and j < len(B):
+        a1, a2 = A[i][0], A[i][1]
+        b1, b2 = B[j][0], B[j][1]
+        # 两个区间存在交集
+        if b2 >= a1 and a2 >= b1:
+            # 计算出交集，加⼊ res
+            res.append([max(a1, b1), min(a2, b2)])
+        # 指针前进
+        if b2 < a2: j += 1
+        else:       i += 1
+    return res
+总结⼀下，区间类问题看起来都⽐较复杂，情况很多难以处理，但实际上通
+过观察各种不同情况之间的共性可以发现规律，⽤简洁的代码就能处理。
+另外，区间问题没啥特别厉害的奇技淫巧，其操作也朴实⽆华，但其应⽤却
+⼗分⼴泛。
+＿＿＿＿＿＿＿＿＿＿＿＿＿
+刷算法，学套路，认准 labuladong。
+本⼩抄即将出版，关注 labuladong 公众号或 ongline book 查看更新⽂章，
+后台回复「进群」可进刷题群，labuladong 带你⽇穿 LeetCode。
+区间调度之区间交集问题
+377
+
+区间调度之区间交集问题
+378
+
+信封嵌套问题
+学算法，认准 labuladong 就够了！
+很多算法问题都需要排序技巧，其难点不在于排序本⾝，⽽是需要巧妙地排
+序进⾏预处理，将算法问题进⾏转换，为之后的操作打下基础。
+信封嵌套问题就需要先按特定的规则排序，之后就转换为⼀个 最⻓递增⼦
+序列问题，可以⽤前⽂ ⼆分查找详解 的技巧来解决了。
+⼀、题⽬概述
+信封嵌套问题是个很有意思且经常出现在⽣活中的问题，先看下题⽬：
+这道题⽬其实是最⻓递增⼦序列（Longes Increasing Subsequence，简写为
+LIS）的⼀个变种，因为很显然，每次合法的嵌套是⼤的套⼩的，相当于找
+⼀个最⻓递增的⼦序列，其⻓度就是最多能嵌套的信封个数。
+信封嵌套问题
+3794:["$","main",null,{"style":{"maxWidth":760,"margin":"0 auto","padding":"16px","minHeight":"100vh"},"children":[["$","$Lc",null,{"href":"/columns/","style":{"display":"inline-block","marginBottom":"12px","fontSize":"13px"},"children":"← 返回专栏"}],["$","div",null,{"style":{"fontSize":"12px","color":"var(--text-tertiary)","marginBottom":"4px"},"children":["📕"," ","labuladong 算法小抄"]}],["$","h1",null,{"style":{"fontSize":"22px","fontWeight":700,"margin":"0 0 16px"},"children":"区间调度之区间交集问题"}],["$","$Ld",null,{"children":"$e"}],false]}]
+a:[["$","meta","0",{"name":"viewport","content":"width=device-width, initial-scale=1"}],["$","meta","1",{"name":"theme-color","content":"#f97316"}]]
+8:[["$","meta","0",{"charSet":"utf-8"}],["$","title","1",{"children":"区间调度之区间交集问题 - 算法面试"}],["$","meta","2",{"name":"description","content":"LeetCode 热题 100 完整 Java 题解、逐题动画、知识专栏与智能间隔复习。"}],["$","meta","3",{"name":"application-name","content":"算法面试"}],["$","link","4",{"rel":"manifest","href":"/algorithm-interview/manifest.json","crossOrigin":"$undefined"}],["$","meta","5",{"name":"keywords","content":"LeetCode,热题100,算法面试,Java题解,数据结构,动态规划,面试刷题"}],["$","meta","6",{"name":"mobile-web-app-capable","content":"yes"}],["$","meta","7",{"name":"apple-mobile-web-app-title","content":"算法面试"}],["$","meta","8",{"name":"apple-mobile-web-app-status-bar-style","content":"default"}],["$","meta","9",{"property":"og:title","content":"算法面试题库"}],["$","meta","10",{"property":"og:description","content":"LeetCode 热题 100 完整 Java 题解、逐题动画、知识专栏与智能复习"}],["$","meta","11",{"property":"og:site_name","content":"算法面试题库"}],["$","meta","12",{"property":"og:locale","content":"zh_CN"}],["$","meta","13",{"property":"og:type","content":"website"}],["$","meta","14",{"name":"twitter:card","content":"summary"}],["$","meta","15",{"name":"twitter:title","content":"算法面试题库"}],["$","meta","16",{"name":"twitter:description","content":"LeetCode 热题 100 完整 Java 题解、逐题动画、知识专栏与智能复习"}]]
+6:null

@@ -1,0 +1,150 @@
+1:"$Sreact.fragment"
+2:I[5244,[],""]
+3:I[3866,[],""]
+5:I[6213,[],"OutletBoundary"]
+7:I[6213,[],"MetadataBoundary"]
+9:I[6213,[],"ViewportBoundary"]
+b:I[4835,[],""]
+:HL["/algorithm-interview/_next/static/css/c1e787639001e16b.css","style"]
+0:{"P":null,"b":"xos97fAiWtKfKXI6hZLx4","p":"/algorithm-interview","c":["","columns","lbd-029",""],"i":false,"f":[[["",{"children":["columns",{"children":[["slug","lbd-029","d"],{"children":["__PAGE__",{}]}]}]},"$undefined","$undefined",true],["",["$","$1","c",{"children":[[["$","link","0",{"rel":"stylesheet","href":"/algorithm-interview/_next/static/css/c1e787639001e16b.css","precedence":"next","crossOrigin":"$undefined","nonce":"$undefined"}]],["$","html",null,{"lang":"zh","children":[["$","head",null,{"children":["$","script",null,{"dangerouslySetInnerHTML":{"__html":"\ntry {\n  var raw = localStorage.getItem('algo-interview');\n  var theme = 'light';\n  if (raw) { var p = JSON.parse(raw); theme = (p.state && p.state.theme) || 'light'; }\n  if (theme === 'dark') {\n    document.documentElement.classList.add('dark');\n    document.documentElement.setAttribute('data-theme', 'dark');\n  }\n} catch (e) {}\n"}}]}],["$","body",null,{"children":[["$","$L2",null,{"parallelRouterKey":"children","segmentPath":["children"],"error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L3",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":[[],[["$","title",null,{"children":"404: This page could not be found."}],["$","div",null,{"style":{"fontFamily":"system-ui,\"Segoe UI\",Roboto,Helvetica,Arial,sans-serif,\"Apple Color Emoji\",\"Segoe UI Emoji\"","height":"100vh","textAlign":"center","display":"flex","flexDirection":"column","alignItems":"center","justifyContent":"center"},"children":["$","div",null,{"children":[["$","style",null,{"dangerouslySetInnerHTML":{"__html":"body{color:#000;background:#fff;margin:0}.next-error-h1{border-right:1px solid rgba(0,0,0,.3)}@media (prefers-color-scheme:dark){body{color:#fff;background:#000}.next-error-h1{border-right:1px solid rgba(255,255,255,.3)}}"}}],["$","h1",null,{"className":"next-error-h1","style":{"display":"inline-block","margin":"0 20px 0 0","padding":"0 23px 0 0","fontSize":24,"fontWeight":500,"verticalAlign":"top","lineHeight":"49px"},"children":404}],["$","div",null,{"style":{"display":"inline-block"},"children":["$","h2",null,{"style":{"fontSize":14,"fontWeight":400,"lineHeight":"49px","margin":0},"children":"This page could not be found."}]}]]}]}]]],"forbidden":"$undefined","unauthorized":"$undefined"}],["$","script",null,{"dangerouslySetInnerHTML":{"__html":"\nif ('serviceWorker' in navigator) {\n  window.addEventListener('load', function () {\n    navigator.serviceWorker.register('/algorithm-interview/sw.js').catch(function () {});\n  });\n}\n"}}]]}]]}]]}],{"children":["columns",["$","$1","c",{"children":[null,["$","$L2",null,{"parallelRouterKey":"children","segmentPath":["children","columns","children"],"error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L3",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","forbidden":"$undefined","unauthorized":"$undefined"}]]}],{"children":[["slug","lbd-029","d"],["$","$1","c",{"children":[null,["$","$L2",null,{"parallelRouterKey":"children","segmentPath":["children","columns","children","$0:f:0:1:2:children:2:children:0","children"],"error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L3",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","forbidden":"$undefined","unauthorized":"$undefined"}]]}],{"children":["__PAGE__",["$","$1","c",{"children":["$L4",null,["$","$L5",null,{"children":"$L6"}]]}],{},null,false]},null,false]},null,false]},null,false],["$","$1","h",{"children":[null,["$","$1","QjQZcGhR01wMk8myIxARz",{"children":[["$","$L7",null,{"children":"$L8"}],["$","$L9",null,{"children":"$La"}],null]}]]}],false]],"m":"$undefined","G":["$b","$undefined"],"s":false,"S":true}
+c:I[8173,["173","static/chunks/173-69860a4742bb7020.js","829","static/chunks/829-7533e70598480772.js","306","static/chunks/app/columns/%5Bslug%5D/page-58fc1d8f5085c1ff.js"],""]
+d:I[4780,["173","static/chunks/173-69860a4742bb7020.js","829","static/chunks/829-7533e70598480772.js","306","static/chunks/app/columns/%5Bslug%5D/page-58fc1d8f5085c1ff.js"],"default"]
+e:T1925,# 贪心算法之区间调度问题
+
+贪⼼算法之区间调度问题
+学算法，认准 labuladong 就够了！
+什么是贪⼼算法呢？贪⼼算法可以认为是动态规划算法的⼀个特例，相⽐动
+态规划，使⽤贪⼼算法需要满⾜更多的条件（贪⼼选择性质），但是效率⽐
+动态规划要⾼。
+⽐如说⼀个算法问题使⽤暴⼒解法需要指数级时间，如果能使⽤动态规划消
+除重叠⼦问题，就可以降到多项式级别的时间，如果满⾜贪⼼选择性质，那
+么可以进⼀步降低时间复杂度，达到线性级别的。
+什么是贪⼼选择性质呢，简单说就是：每⼀步都做出⼀个局部最优的选择，
+最终的结果就是全局最优。注意哦，这是⼀种特殊性质，其实只有⼀部分问
+题拥有这个性质。
+⽐如你⾯前放着 100 张⼈⺠币，你只能拿⼗张，怎么才能拿最多的⾯额？显
+然每次选择剩下钞票中⾯值最⼤的⼀张，最后你的选择⼀定是最优的。
+然⽽，⼤部分问题明显不具有贪⼼选择性质。⽐如打⽃地主，对⼿出对⼉
+三，按照贪⼼策略，你应该出尽可能⼩的牌刚好压制住对⽅，但现实情况我
+们甚⾄可能会出王炸。这种情况就不能⽤贪⼼算法，⽽得使⽤动态规划解
+决，参⻅前⽂「动态规划解决博弈问题」。
+⼀、问题概述
+⾔归正传，本⽂解决⼀个很经典的贪⼼算法问题 Interval Scheduling（区间
+调度问题）。给你很多形如  [start, end]  的闭区间，请你设计⼀个算法，
+算出这些区间中最多有⼏个互不相交的区间。
+int intervalSchedule(int[][] intvs) {}
+贪⼼算法之区间调度问题
+208
+
+举个例⼦， intvs = [[1,3], [2,4], [3,6]] ，这些区间最多有 2 个区间互不
+相交，即  [[1,3], [3,6]] ，你的算法应该返回 2。注意边界相同并不算相
+交。
+这个问题在⽣活中的应⽤⼴泛，⽐如你今天有好⼏个活动，每个活动都可以
+⽤区间  [start, end]  表⽰开始和结束的时间，请问你今天最多能参加⼏个
+活动呢？显然你⼀个⼈不能同时参加两个活动，所以说这个问题就是求这些
+时间区间的最⼤不相交⼦集。
+⼆、贪⼼解法
+这个问题有许多看起来不错的贪⼼思路，却都不能得到正确答案。⽐如说：
+也许我们可以每次选择可选区间中开始最早的那个？但是可能存在某些区间
+开始很早，但是很⻓，使得我们错误地错过了⼀些短的区间。或者我们每次
+选择可选区间中最短的那个？或者选择出现冲突最少的那个区间？这些⽅案
+都能很容易举出反例，不是正确的⽅案。
+正确的思路其实很简单，可以分为以下三步：
+1. 从区间集合 intvs 中选择⼀个区间 x，这个 x 是在当前所有区间中结束
+最早的（end 最⼩）。
+2. 把所有与 x 区间相交的区间从区间集合 intvs 中删除。
+3. 重复步骤 1 和 2，直到 intvs 为空为⽌。之前选出的那些 x 就是最⼤不
+相交⼦集。
+把这个思路实现成算法的话，可以按每个区间的  end  数值升序排序，因为
+这样处理之后实现步骤 1 和步骤 2 都⽅便很多:
+【PDF格式⽆法显⽰GIF⽂件 interval/1.gif，可移步公众号查看】
+现在来实现算法，对于步骤 1，由于我们预先按照  end  排了序，所以选择
+x 是很容易的。关键在于，如何去除与 x 相交的区间，选择下⼀轮循环的 x
+呢？
+贪⼼算法之区间调度问题
+209
+
+由于我们事先排了序，不难发现所有与 x 相交的区间必然会与 x 的  end  相
+交；如果⼀个区间不想与 x 的  end  相交，它的  start  必须要⼤于（或等
+于）x 的  end ：
+看下代码：
+public int intervalSchedule(int[][] intvs) {
+    if (intvs.length == 0) return 0;
+    // 按 end 升序排序
+    Arrays.sort(intvs, new Comparator<int[]>() {
+        public int compare(int[] a, int[] b) {
+            return a[1] - b[1];
+        }
+    });
+    // ⾄少有⼀个区间不相交
+    int count = 1;
+    // 排序后，第⼀个区间就是 x
+    int x_end = intvs[0][1];
+    for (int[] interval : intvs) {
+        int start = interval[0];
+        if (start >= x_end) {
+            // 找到下⼀个选择的区间了
+            count++;
+            x_end = interval[1];
+        }
+贪⼼算法之区间调度问题
+210
+
+    }
+    return count;
+}
+三、应⽤举例
+下⾯举例⼏道 LeetCode 题⽬应⽤⼀下区间调度算法。
+第 435 题，⽆重叠区间：
+我们已经会求最多有⼏个区间不会重叠了，那么剩下的不就是⾄少需要去除
+的区间吗？
+int eraseOverlapIntervals(int[][] intervals) {
+    int n = intervals.length;
+    return n - intervalSchedule(intervals);
+}
+第 452 题，⽤最少的箭头射爆⽓球：
+贪⼼算法之区间调度问题
+211
+
+其实稍微思考⼀下，这个问题和区间调度算法⼀模⼀样！如果最多有  n  个
+不重叠的区间，那么就⾄少需要  n  个箭头穿透所有区间：
+贪⼼算法之区间调度问题
+212
+
+只是有⼀点不⼀样，在  intervalSchedule  算法中，如果两个区间的边界触
+碰，不算重叠；⽽按照这道题⽬的描述，箭头如果碰到⽓球的边界⽓球也会
+爆炸，所以说相当于区间的边界触碰也算重叠：
+所以只要将之前的算法稍作修改，就是这道题⽬的答案：
+int findMinArrowShots(int[][] intvs) {
+    // ...
+贪⼼算法之区间调度问题
+213
+
+    for (int[] interval : intvs) {
+        int start = interval[0];
+        // 把 >= 改成 > 就⾏了
+        if (start > x_end) {
+            count++;
+            x_end = interval[1];
+        }
+    }
+    return count;
+}
+＿＿＿＿＿＿＿＿＿＿＿＿＿
+刷算法，学套路，认准 labuladong。
+本⼩抄即将出版，关注 labuladong 公众号或 ongline book 查看更新⽂章，
+后台回复「进群」可进刷题群，labuladong 带你⽇穿 LeetCode。
+贪⼼算法之区间调度问题
+214
+
+数据结构系列
+学算法，认准 labuladong 就够了！
+这⼀章主要是⼀些特殊的数据结构设计，⽐如单调栈解决 Next Greater
+Number，单调队列解决滑动窗⼝问题；还有常⽤数据结构的操作，⽐如链
+表、树、⼆叉堆。
+欢迎关注我的公众号 labuladong，⽅便获得最新的优质⽂章：
+第⼆章、数据结构系列
+2154:["$","main",null,{"style":{"maxWidth":760,"margin":"0 auto","padding":"16px","minHeight":"100vh"},"children":[["$","$Lc",null,{"href":"/columns/","style":{"display":"inline-block","marginBottom":"12px","fontSize":"13px"},"children":"← 返回专栏"}],["$","div",null,{"style":{"fontSize":"12px","color":"var(--text-tertiary)","marginBottom":"4px"},"children":["📕"," ","labuladong 算法小抄"]}],["$","h1",null,{"style":{"fontSize":"22px","fontWeight":700,"margin":"0 0 16px"},"children":"贪心算法之区间调度问题"}],["$","$Ld",null,{"children":"$e"}],false]}]
+a:[["$","meta","0",{"name":"viewport","content":"width=device-width, initial-scale=1"}],["$","meta","1",{"name":"theme-color","content":"#f97316"}]]
+8:[["$","meta","0",{"charSet":"utf-8"}],["$","title","1",{"children":"贪心算法之区间调度问题 - 算法面试"}],["$","meta","2",{"name":"description","content":"LeetCode 热题 100 完整 Java 题解、逐题动画、知识专栏与智能间隔复习。"}],["$","meta","3",{"name":"application-name","content":"算法面试"}],["$","link","4",{"rel":"manifest","href":"/algorithm-interview/manifest.json","crossOrigin":"$undefined"}],["$","meta","5",{"name":"keywords","content":"LeetCode,热题100,算法面试,Java题解,数据结构,动态规划,面试刷题"}],["$","meta","6",{"name":"mobile-web-app-capable","content":"yes"}],["$","meta","7",{"name":"apple-mobile-web-app-title","content":"算法面试"}],["$","meta","8",{"name":"apple-mobile-web-app-status-bar-style","content":"default"}],["$","meta","9",{"property":"og:title","content":"算法面试题库"}],["$","meta","10",{"property":"og:description","content":"LeetCode 热题 100 完整 Java 题解、逐题动画、知识专栏与智能复习"}],["$","meta","11",{"property":"og:site_name","content":"算法面试题库"}],["$","meta","12",{"property":"og:locale","content":"zh_CN"}],["$","meta","13",{"property":"og:type","content":"website"}],["$","meta","14",{"name":"twitter:card","content":"summary"}],["$","meta","15",{"name":"twitter:title","content":"算法面试题库"}],["$","meta","16",{"name":"twitter:description","content":"LeetCode 热题 100 完整 Java 题解、逐题动画、知识专栏与智能复习"}]]
+6:null

@@ -1,0 +1,169 @@
+1:"$Sreact.fragment"
+2:I[5244,[],""]
+3:I[3866,[],""]
+5:I[6213,[],"OutletBoundary"]
+7:I[6213,[],"MetadataBoundary"]
+9:I[6213,[],"ViewportBoundary"]
+b:I[4835,[],""]
+:HL["/algorithm-interview/_next/static/css/c1e787639001e16b.css","style"]
+0:{"P":null,"b":"xos97fAiWtKfKXI6hZLx4","p":"/algorithm-interview","c":["","question","138",""],"i":false,"f":[[["",{"children":["question",{"children":[["lcId","138","d"],{"children":["__PAGE__",{}]}]}]},"$undefined","$undefined",true],["",["$","$1","c",{"children":[[["$","link","0",{"rel":"stylesheet","href":"/algorithm-interview/_next/static/css/c1e787639001e16b.css","precedence":"next","crossOrigin":"$undefined","nonce":"$undefined"}]],["$","html",null,{"lang":"zh","children":[["$","head",null,{"children":["$","script",null,{"dangerouslySetInnerHTML":{"__html":"\ntry {\n  var raw = localStorage.getItem('algo-interview');\n  var theme = 'light';\n  if (raw) { var p = JSON.parse(raw); theme = (p.state && p.state.theme) || 'light'; }\n  if (theme === 'dark') {\n    document.documentElement.classList.add('dark');\n    document.documentElement.setAttribute('data-theme', 'dark');\n  }\n} catch (e) {}\n"}}]}],["$","body",null,{"children":[["$","$L2",null,{"parallelRouterKey":"children","segmentPath":["children"],"error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L3",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":[[],[["$","title",null,{"children":"404: This page could not be found."}],["$","div",null,{"style":{"fontFamily":"system-ui,\"Segoe UI\",Roboto,Helvetica,Arial,sans-serif,\"Apple Color Emoji\",\"Segoe UI Emoji\"","height":"100vh","textAlign":"center","display":"flex","flexDirection":"column","alignItems":"center","justifyContent":"center"},"children":["$","div",null,{"children":[["$","style",null,{"dangerouslySetInnerHTML":{"__html":"body{color:#000;background:#fff;margin:0}.next-error-h1{border-right:1px solid rgba(0,0,0,.3)}@media (prefers-color-scheme:dark){body{color:#fff;background:#000}.next-error-h1{border-right:1px solid rgba(255,255,255,.3)}}"}}],["$","h1",null,{"className":"next-error-h1","style":{"display":"inline-block","margin":"0 20px 0 0","padding":"0 23px 0 0","fontSize":24,"fontWeight":500,"verticalAlign":"top","lineHeight":"49px"},"children":404}],["$","div",null,{"style":{"display":"inline-block"},"children":["$","h2",null,{"style":{"fontSize":14,"fontWeight":400,"lineHeight":"49px","margin":0},"children":"This page could not be found."}]}]]}]}]]],"forbidden":"$undefined","unauthorized":"$undefined"}],["$","script",null,{"dangerouslySetInnerHTML":{"__html":"\nif ('serviceWorker' in navigator) {\n  window.addEventListener('load', function () {\n    navigator.serviceWorker.register('/algorithm-interview/sw.js').catch(function () {});\n  });\n}\n"}}]]}]]}]]}],{"children":["question",["$","$1","c",{"children":[null,["$","$L2",null,{"parallelRouterKey":"children","segmentPath":["children","question","children"],"error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L3",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","forbidden":"$undefined","unauthorized":"$undefined"}]]}],{"children":[["lcId","138","d"],["$","$1","c",{"children":[null,["$","$L2",null,{"parallelRouterKey":"children","segmentPath":["children","question","children","$0:f:0:1:2:children:2:children:0","children"],"error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L3",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","forbidden":"$undefined","unauthorized":"$undefined"}]]}],{"children":["__PAGE__",["$","$1","c",{"children":["$L4",null,["$","$L5",null,{"children":"$L6"}]]}],{},null,false]},null,false]},null,false]},null,false],["$","$1","h",{"children":[null,["$","$1","_wNHds_6rKRoHcGAcAArJ",{"children":[["$","$L7",null,{"children":"$L8"}],["$","$L9",null,{"children":"$La"}],null]}]]}],false]],"m":"$undefined","G":["$b","$undefined"],"s":false,"S":true}
+c:I[8173,["173","static/chunks/173-69860a4742bb7020.js","829","static/chunks/829-7533e70598480772.js","937","static/chunks/937-ef36a5ac4bc37a7e.js","447","static/chunks/447-06af9414e164c047.js","8","static/chunks/app/question/%5BlcId%5D/page-478b0d2a69e222f2.js"],""]
+d:I[3447,["173","static/chunks/173-69860a4742bb7020.js","829","static/chunks/829-7533e70598480772.js","937","static/chunks/937-ef36a5ac4bc37a7e.js","447","static/chunks/447-06af9414e164c047.js","8","static/chunks/app/question/%5BlcId%5D/page-478b0d2a69e222f2.js"],"default"]
+e:T1f7a,# 138. 随机链表的复制
+
+> 难度：**Medium** | 分类：链表 | 标签：哈希表, 链表
+
+> 🔗 力扣链接：[https://leetcode.cn/problems/copy-list-with-random-pointer/](https://leetcode.cn/problems/copy-list-with-random-pointer/)
+
+## 📝 题目描述
+
+给你一个链表，每个节点除了 `next` 指针外，还有一个 `random` 指针，可以指向链表中的任意节点或 `null`。请返回这个链表的深拷贝。
+
+新链表中的节点必须是全新的对象，结构和原链表完全一致（包括 `next` 和 `random` 的指向关系）。重点不在"顺着 next 复制"，而在"random 指针怎么正确指向新节点"。
+
+- 题号：138
+- 题目名：随机链表的复制
+- 难度：中等
+- 题型：链表
+- 为什么选这题：它从普通的链表复制升级为带随机指针的复制，是链表操作和哈希映射的综合训练。
+
+## 🧠 思考路径
+
+如果只有 `next` 指针，顺着走一遍就能复制完。但 `random` 指针可能指向前面的节点——如果那个节点还没创建副本，`random` 就无法设置。
+
+最直觉的做法是用哈希表：第一遍遍历创建所有新节点并存入映射 `原节点 → 新节点`，第二遍遍历设置 `next` 和 `random`，通过查表找到对应的新节点。时间和空间都是 `O(n)`。
+
+还有一道巧妙的 `O(1)` 空间解法：把新节点"穿插"在原节点后面。即对每个原节点 `A`，创建新节点 `A'`，让 `A.next = A'`，`A'.next = B`。这样设置 `random` 时，`A'.random = A.random.next`（因为原节点的下一个就是它的副本）。最后再拆开两条链表。
+
+所以这题的关键词不是"复制链表"，而是"用映射保证 random 指向正确的副本"。
+
+## 💻 Java 题解
+
+### 解法 1：插入复制节点 + 拆分
+
+第一步：在每个节点后插入复制节点。第二步：设置 random 指针（copy.random = original.random.next）。第三步：拆分两个链表。
+
+- ⏱ 时间复杂度：`O(n)`
+- 💾 空间复杂度：`O(1)`
+
+```java
+class Solution {
+    public Node copyRandomList(Node head) {
+        if (head == null) return null;
+        // 1. 插入复制节点
+        Node curr = head;
+        while (curr != null) {
+            Node copy = new Node(curr.val);
+            copy.next = curr.next;
+            curr.next = copy;
+            curr = copy.next;
+        }
+        // 2. 设置 random
+        curr = head;
+        while (curr != null) {
+            if (curr.random != null) curr.next.random = curr.random.next;
+            curr = curr.next.next;
+        }
+        // 3. 拆分
+        curr = head;
+        Node newHead = head.next;
+        while (curr != null) {
+            Node copy = curr.next;
+            curr.next = copy.next;
+            if (copy.next != null) copy.next = copy.next.next;
+            curr = curr.next;
+        }
+        return newHead;
+    }
+}
+```
+
+**关键点：**
+- 三步走：插入→设置random→拆分
+- O(1) 空间不使用 HashMap
+- copy.random = curr.random.next
+
+**执行步骤：**
+1. 每个节点后插入复制节点
+1. 设置复制节点的 random
+1. 拆分两个链表
+
+
+## ⚠️ 易错点
+
+- 哈希表法中，`mapping.get(cur.next)` 可能返回 `null`（当 `cur.next` 为 null 时），用 `get` 而不是 `getOrDefault` 就行，null 自动处理。
+- 穿插法中，设置 `random` 时要检查 `cur.random != null`，因为 `null` 没有 `next`。
+- 拆链表时，`cur.next = cur.next.next` 恢复原链表，`copyCur.next = cur.next` 提取新链表，两步顺序不能反。
+- 两种方法都能通过，哈希表法更直观，穿插法更省空间。
+
+- random 可能为 null 要检查
+
+- 拆分时注意 copy.next 的更新
+
+## 📊 复杂度分析
+
+- 时间复杂度：`O(n)`。无论哪种方法都遍历 2-3 次。
+- 空间复杂度：哈希表法 `O(n)`，穿插法 `O(1)`。
+
+## 🏢 实际业务应用
+
+- 深度克隆复杂对象：前端框架中，组件树有父子关系（next）和跨层级引用（random），克隆组件树时需要保证引用拓扑正确。
+- 文档编辑器的复制粘贴：复制一段富文本时，内容之间有锚点引用（类似 random），粘贴后引用必须指向新文档中的对应位置。
+- 数据库的快照机制：克隆一组有外键关联的记录，外键可以跨表（类似 random），需要保证新记录的外键指向新的目标。
+
+- 深度克隆复杂对象：前端框架中，组件树有父子关系（next）和跨层级引用（random），克隆组件树时需要保证引用拓扑正确。
+- 文档编辑器的复制粘贴：复制一段富文本时，内容之间有锚点引用（类似 random），粘贴后引用必须指向新文档中的对应位置。
+- 数据库的快照机制：克隆一组有外键关联的记录，外键可以跨表（类似 random），需要保证新记录的外键指向新的目标。
+
+## 📖 形象类比
+
+可以把它类比成《红楼梦》里贾母安排丫鬟搬新院子。
+
+每个丫鬟有一个"直属上级"（next 指针）和一个"可以随时请教的嬷嬷"（random 指针）。搬到新院子后，人事关系必须保持不变，但人必须是新招的。王熙凤的方案是：先给每个老丫鬟配一个"影子替身"，记在花名册上（哈希表）；然后逐个替身安排直属上级和请教嬷嬷，都通过花名册找到对应的替身。
+
+对应关系是：
+
+- "老丫鬟"对应原链表节点
+- "影子替身"对应新链表节点
+- "花名册"对应哈希表映射
+- "直属上级"对应 next 指针
+- "请教嬷嬷"对应 random 指针
+- "通过花名册找替身"对应查表设置指针
+
+这段记忆的关键是：先建映射再设指针，random 指向的是替身而不是本人。
+
+可以把它类比成《红楼梦》里贾母安排丫鬟搬新院子。
+
+每个丫鬟有一个"直属上级"（next 指针）和一个"可以随时请教的嬷嬷"（random 指针）。搬到新院子后，人事关系必须保持不变，但人必须是新招的。王熙凤的方案是：先给每个老丫鬟配一个"影子替身"，记在花名册上（哈希表）；然后逐个替身安排直属上级和请教嬷嬷，都通过花名册找到对应的替身。
+
+对应关系是：
+
+- "老丫鬟"对应原链表节点
+- "影子替身"对应新链表节点
+- "花名册"对应哈希表映射
+- "直属上级"对应 next 指针
+- "请教嬷嬷"对应 random 指针
+- "通过花名册找替身"对应查表设置指针
+
+这段记忆的关键是：先建映射再设指针，random 指向的是替身而不是本人。
+
+蚂蚁搬家时，每只蚂蚁知道自己下一只跟着谁（next），还认识一只"好朋友蚂蚁"可以随时串门（random）。搬到新家后，蚁后给每只老蚂蚁安排一个"影子蚂蚁"。影子蚂蚁不认识彼此，但蚁后拿着对照表一一介绍："你的邻居是这只影子，你的好朋友是那只影子。"搬家结束，新蚁群的关系和老蚁群一模一样。
+
+蚂蚁搬家时，每只蚂蚁知道自己下一只跟着谁（next），还认识一只"好朋友蚂蚁"可以随时串门（random）。搬到新家后，蚁后给每只老蚂蚁安排一个"影子蚂蚁"。影子蚂蚁不认识彼此，但蚁后拿着对照表一一介绍："你的邻居是这只影子，你的好朋友是那只影子。"搬家结束，新蚁群的关系和老蚁群一模一样。
+
+## 🎵 记忆口诀
+
+先建映射再连线，random 查表找替身；穿插法则更省地，拆链恢复两不误。
+
+先建映射再连线，random 查表找替身；穿插法则更省地，拆链恢复两不误。
+
+## 🔗 延伸练习
+
+- `133. 克隆图`：从链表升级到图，random 变成了邻居列表，但核心思路（映射表去重）完全一样。
+- `146. LRU 缓存`：同样是链表 + 哈希表的综合运用，但侧重于缓存淘汰策略。
+
+- `133. 克隆图`：从链表升级到图，random 变成了邻居列表，但核心思路（映射表去重）完全一样。
+- `146. LRU 缓存`：同样是链表 + 哈希表的综合运用，但侧重于缓存淘汰策略。4:["$","main",null,{"className":"detail-main","style":{"maxWidth":760,"margin":"0 auto","padding":"16px","minHeight":"100vh"},"children":[["$","$Lc",null,{"href":"/","style":{"display":"inline-block","marginBottom":"12px","fontSize":"13px"},"children":"← 返回题库"}],["$","h1",null,{"style":{"fontSize":"22px","fontWeight":700,"margin":"0 0 4px"},"children":[["$","span",null,{"style":{"marginRight":"6px"},"children":"⛓️"}],138,". ","随机链表的复制"]}],["$","$Ld",null,{"q":{"id":"0138","lcId":138,"slug":"copy-list-with-random-pointer","title":"随机链表的复制","question":"随机链表的复制","answer":"$e","difficulty":"Medium","category":"linked-list","categories":["linked-list"],"tags":["哈希表","链表"],"url":"https://leetcode.cn/problems/copy-list-with-random-pointer/","planOrder":32,"hasViz":true,"hasDiagram":false,"feynman":{"essence":"给你一个链表，每个节点除了 `next` 指针外，还有一个 `random` 指针，可以指向链表中的任意节点或 `null`。请返回这个链表的深拷贝。  新链表中的节点必须是全新的对象，结构和原链表完","analogy":"","key_points":[]},"first_principle":{"problem":"","axioms":[],"rebuild":""}}}]]}]
+a:[["$","meta","0",{"name":"viewport","content":"width=device-width, initial-scale=1"}],["$","meta","1",{"name":"theme-color","content":"#f97316"}]]
+8:[["$","meta","0",{"charSet":"utf-8"}],["$","title","1",{"children":"138. 随机链表的复制 - 算法面试"}],["$","meta","2",{"name":"description","content":"给你一个链表，每个节点除了 `next` 指针外，还有一个 `random` 指针，可以指向链表中的任意节点或 `null`。请返回这个链表的深拷贝。  新链表中的节点必须是全新的对象，结构和原链表完"}],["$","meta","3",{"name":"application-name","content":"算法面试"}],["$","link","4",{"rel":"manifest","href":"/algorithm-interview/manifest.json","crossOrigin":"$undefined"}],["$","meta","5",{"name":"keywords","content":"随机链表的复制,LeetCode 138,Medium,哈希表,链表"}],["$","meta","6",{"name":"mobile-web-app-capable","content":"yes"}],["$","meta","7",{"name":"apple-mobile-web-app-title","content":"算法面试"}],["$","meta","8",{"name":"apple-mobile-web-app-status-bar-style","content":"default"}],["$","meta","9",{"property":"og:title","content":"138. 随机链表的复制"}],["$","meta","10",{"property":"og:description","content":"给你一个链表，每个节点除了 `next` 指针外，还有一个 `random` 指针，可以指向链表中的任意节点或 `null`。请返回这个链表的深拷贝。  新链表中的节点必须是全新的对象，结构和原链表完"}],["$","meta","11",{"property":"og:locale","content":"zh_CN"}],["$","meta","12",{"property":"og:type","content":"article"}],["$","meta","13",{"name":"twitter:card","content":"summary"}],["$","meta","14",{"name":"twitter:title","content":"138. 随机链表的复制"}],["$","meta","15",{"name":"twitter:description","content":"给你一个链表，每个节点除了 `next` 指针外，还有一个 `random` 指针，可以指向链表中的任意节点或 `null`。请返回这个链表的深拷贝。  新链表中的节点必须是全新的对象，结构和原链表完"}]]
+6:null

@@ -1,0 +1,149 @@
+1:"$Sreact.fragment"
+2:I[5244,[],""]
+3:I[3866,[],""]
+5:I[6213,[],"OutletBoundary"]
+7:I[6213,[],"MetadataBoundary"]
+9:I[6213,[],"ViewportBoundary"]
+b:I[4835,[],""]
+:HL["/algorithm-interview/_next/static/css/c1e787639001e16b.css","style"]
+0:{"P":null,"b":"xos97fAiWtKfKXI6hZLx4","p":"/algorithm-interview","c":["","question","283",""],"i":false,"f":[[["",{"children":["question",{"children":[["lcId","283","d"],{"children":["__PAGE__",{}]}]}]},"$undefined","$undefined",true],["",["$","$1","c",{"children":[[["$","link","0",{"rel":"stylesheet","href":"/algorithm-interview/_next/static/css/c1e787639001e16b.css","precedence":"next","crossOrigin":"$undefined","nonce":"$undefined"}]],["$","html",null,{"lang":"zh","children":[["$","head",null,{"children":["$","script",null,{"dangerouslySetInnerHTML":{"__html":"\ntry {\n  var raw = localStorage.getItem('algo-interview');\n  var theme = 'light';\n  if (raw) { var p = JSON.parse(raw); theme = (p.state && p.state.theme) || 'light'; }\n  if (theme === 'dark') {\n    document.documentElement.classList.add('dark');\n    document.documentElement.setAttribute('data-theme', 'dark');\n  }\n} catch (e) {}\n"}}]}],["$","body",null,{"children":[["$","$L2",null,{"parallelRouterKey":"children","segmentPath":["children"],"error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L3",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":[[],[["$","title",null,{"children":"404: This page could not be found."}],["$","div",null,{"style":{"fontFamily":"system-ui,\"Segoe UI\",Roboto,Helvetica,Arial,sans-serif,\"Apple Color Emoji\",\"Segoe UI Emoji\"","height":"100vh","textAlign":"center","display":"flex","flexDirection":"column","alignItems":"center","justifyContent":"center"},"children":["$","div",null,{"children":[["$","style",null,{"dangerouslySetInnerHTML":{"__html":"body{color:#000;background:#fff;margin:0}.next-error-h1{border-right:1px solid rgba(0,0,0,.3)}@media (prefers-color-scheme:dark){body{color:#fff;background:#000}.next-error-h1{border-right:1px solid rgba(255,255,255,.3)}}"}}],["$","h1",null,{"className":"next-error-h1","style":{"display":"inline-block","margin":"0 20px 0 0","padding":"0 23px 0 0","fontSize":24,"fontWeight":500,"verticalAlign":"top","lineHeight":"49px"},"children":404}],["$","div",null,{"style":{"display":"inline-block"},"children":["$","h2",null,{"style":{"fontSize":14,"fontWeight":400,"lineHeight":"49px","margin":0},"children":"This page could not be found."}]}]]}]}]]],"forbidden":"$undefined","unauthorized":"$undefined"}],["$","script",null,{"dangerouslySetInnerHTML":{"__html":"\nif ('serviceWorker' in navigator) {\n  window.addEventListener('load', function () {\n    navigator.serviceWorker.register('/algorithm-interview/sw.js').catch(function () {});\n  });\n}\n"}}]]}]]}]]}],{"children":["question",["$","$1","c",{"children":[null,["$","$L2",null,{"parallelRouterKey":"children","segmentPath":["children","question","children"],"error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L3",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","forbidden":"$undefined","unauthorized":"$undefined"}]]}],{"children":[["lcId","283","d"],["$","$1","c",{"children":[null,["$","$L2",null,{"parallelRouterKey":"children","segmentPath":["children","question","children","$0:f:0:1:2:children:2:children:0","children"],"error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L3",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","forbidden":"$undefined","unauthorized":"$undefined"}]]}],{"children":["__PAGE__",["$","$1","c",{"children":["$L4",null,["$","$L5",null,{"children":"$L6"}]]}],{},null,false]},null,false]},null,false]},null,false],["$","$1","h",{"children":[null,["$","$1","TG9-uDmcCZjxX9nZyXMiS",{"children":[["$","$L7",null,{"children":"$L8"}],["$","$L9",null,{"children":"$La"}],null]}]]}],false]],"m":"$undefined","G":["$b","$undefined"],"s":false,"S":true}
+c:I[8173,["173","static/chunks/173-69860a4742bb7020.js","829","static/chunks/829-7533e70598480772.js","937","static/chunks/937-ef36a5ac4bc37a7e.js","447","static/chunks/447-06af9414e164c047.js","8","static/chunks/app/question/%5BlcId%5D/page-478b0d2a69e222f2.js"],""]
+d:I[3447,["173","static/chunks/173-69860a4742bb7020.js","829","static/chunks/829-7533e70598480772.js","937","static/chunks/937-ef36a5ac4bc37a7e.js","447","static/chunks/447-06af9414e164c047.js","8","static/chunks/app/question/%5BlcId%5D/page-478b0d2a69e222f2.js"],"default"]
+e:T15ac,# 283. 移动零
+
+> 难度：**Easy** | 分类：双指针 | 标签：数组, 双指针
+
+> 🔗 力扣链接：[https://leetcode.cn/problems/move-zeroes/](https://leetcode.cn/problems/move-zeroes/)
+
+## 📝 题目描述
+
+给你一个数组，把所有的 0 移到数组末尾，同时保持非零元素的原始顺序。原地操作。
+
+重点不在"怎么排序"，而在"怎么用 O(n) 时间、O(1) 空间一次到位"。
+
+- 题号：283
+- 题目名：移动零
+- 难度：简单
+- 题型：双指针
+- 为什么选这题：它是双指针"快慢指针"最经典的应用，代码简洁，思想通用。
+
+## 🧠 思考路径
+
+最直接的想法是用额外数组，把非零元素复制过去再补零。但要求原地操作。
+
+用双指针：慢指针 `slow` 指向"下一个非零元素应该放的位置"，快指针 `fast` 遍历数组。每遇到一个非零元素，就把它放到 `slow` 的位置，`slow` 后移。遍历结束后，从 `slow` 到末尾全部填零。
+
+更简洁的写法：遇到非零就和 `slow` 交换（即使 `slow == fast` 也没关系），这样一步到位，不需要最后补零。
+
+所以这题的关键词不是"移动零"，而是"快指针找非零，慢指针标位置，交换"。
+
+## 💻 Java 题解
+
+### 解法 1：双指针一次遍历
+
+慢指针指向下一个非零位置。快指针遍历数组，遇到非零就交换到慢指针位置，慢指针前进。
+
+- ⏱ 时间复杂度：`O(n)`
+- 💾 空间复杂度：`O(1)`
+
+```java
+class Solution {
+    public void moveZeroes(int[] nums) {
+        int slow = 0;
+        for (int fast = 0; fast < nums.length; fast++) {
+            if (nums[fast] != 0) {
+                int temp = nums[slow];
+                nums[slow] = nums[fast];
+                nums[fast] = temp;
+                slow++;
+            }
+        }
+    }
+}
+```
+
+**关键点：**
+- 原地操作 O(1) 空间
+- 交换而非覆盖——保持非零元素顺序
+- 慢指针始终指向下一个非零应放的位置
+
+**执行步骤：**
+1. slow=0, fast=0
+1. fast 遍历数组
+1. 遇到非零：交换 nums[slow] 和 nums[fast]，slow++
+1. fast 继续前进
+
+
+## ⚠️ 易错点
+
+- 交换写法比"先移动非零再补零"更简洁，且保持稳定性（非零元素相对顺序不变）。
+- `slow == fast` 时交换是自己和自己交换，不影响结果。
+- 不要用覆盖写法（先移后补零），容易出错。
+
+- 不能用覆盖法后补零——题目要求原地修改
+
+- 交换确保非零元素顺序不变
+
+## 📊 复杂度分析
+
+- 时间复杂度：`O(n)`。
+- 空间复杂度：`O(1)`。
+
+## 🏢 实际业务应用
+
+- 数据清洗中，把无效数据（用 0 或 null 表示）移到末尾，保持有效数据的顺序。
+- 文件系统中，把已删除的文件块集中到末尾，便于空间回收。
+- 日志处理中，把空行移到末尾，保持有效日志的顺序。
+
+- 数据清洗中，把无效数据（用 0 或 null 表示）移到末尾，保持有效数据的顺序。
+- 文件系统中，把已删除的文件块集中到末尾，便于空间回收。
+- 日志处理中，把空行移到末尾，保持有效日志的顺序。
+
+## 📖 形象类比
+
+可以把它类比成《水浒传》里梁山排座次时"把空位挪到后面"。
+
+一百零八将按编号排列，但有些位置空着（用 0 表示）。宋江让两个人配合：一个人（快指针）从头到尾走，看到有人的位置就告诉另一个人（慢指针）；另一个人把有人的位置一个一个往前填。最后空位自然都到了末尾。
+
+对应关系是：
+
+- "0"对应空位
+- "快指针"对应从头走到尾检查的人
+- "慢指针"对应负责往前填的人
+- "交换"对应把有人位置挪到前面
+
+这段记忆的关键是：快指针找非零，慢指针标下一个放的位置，交换即可。
+
+可以把它类比成《水浒传》里梁山排座次时"把空位挪到后面"。
+
+一百零八将按编号排列，但有些位置空着（用 0 表示）。宋江让两个人配合：一个人（快指针）从头到尾走，看到有人的位置就告诉另一个人（慢指针）；另一个人把有人的位置一个一个往前填。最后空位自然都到了末尾。
+
+对应关系是：
+
+- "0"对应空位
+- "快指针"对应从头走到尾检查的人
+- "慢指针"对应负责往前填的人
+- "交换"对应把有人位置挪到前面
+
+这段记忆的关键是：快指针找非零，慢指针标下一个放的位置，交换即可。
+
+小兔子整理胡萝卜筐，有些筐格是空的。它用两只手：右手从头到尾扫，看到有胡萝卜的格子就和左手位置的格子交换，左手每次换完往后移一格。扫完一遍，所有胡萝卜都在前面，空格都在后面。
+
+小兔子整理胡萝卜筐，有些筐格是空的。它用两只手：右手从头到尾扫，看到有胡萝卜的格子就和左手位置的格子交换，左手每次换完往后移一格。扫完一遍，所有胡萝卜都在前面，空格都在后面。
+
+## 🎵 记忆口诀
+
+快找非零慢标位，找到就交换慢后移。
+
+快找非零慢标位，找到就交换慢后移。
+
+## 🔗 延伸练习
+
+- `27. 移除元素`：几乎一样的思路，只是"移除"特定值而不是移零。
+- `80. 删除有序数组中的重复项 II`：快慢指针的另一个应用，允许最多两次重复。
+
+- `27. 移除元素`：几乎一样的思路，只是"移除"特定值而不是移零。
+- `80. 删除有序数组中的重复项 II`：快慢指针的另一个应用，允许最多两次重复。4:["$","main",null,{"className":"detail-main","style":{"maxWidth":760,"margin":"0 auto","padding":"16px","minHeight":"100vh"},"children":[["$","$Lc",null,{"href":"/","style":{"display":"inline-block","marginBottom":"12px","fontSize":"13px"},"children":"← 返回题库"}],["$","h1",null,{"style":{"fontSize":"22px","fontWeight":700,"margin":"0 0 4px"},"children":[["$","span",null,{"style":{"marginRight":"6px"},"children":"🔀"}],283,". ","移动零"]}],["$","$Ld",null,{"q":{"id":"0283","lcId":283,"slug":"move-zeroes","title":"移动零","question":"移动零","answer":"$e","difficulty":"Easy","category":"two-pointers","categories":["two-pointers"],"tags":["数组","双指针"],"url":"https://leetcode.cn/problems/move-zeroes/","planOrder":4,"hasViz":true,"hasDiagram":false,"feynman":{"essence":"给你一个数组，把所有的 0 移到数组末尾，同时保持非零元素的原始顺序。原地操作。  重点不在\"怎么排序\"，而在\"怎么用 O(n) 时间、O(1) 空间一次到位\"。","analogy":"","key_points":[]},"first_principle":{"problem":"","axioms":[],"rebuild":""}}}]]}]
+a:[["$","meta","0",{"name":"viewport","content":"width=device-width, initial-scale=1"}],["$","meta","1",{"name":"theme-color","content":"#f97316"}]]
+8:[["$","meta","0",{"charSet":"utf-8"}],["$","title","1",{"children":"283. 移动零 - 算法面试"}],["$","meta","2",{"name":"description","content":"给你一个数组，把所有的 0 移到数组末尾，同时保持非零元素的原始顺序。原地操作。  重点不在\"怎么排序\"，而在\"怎么用 O(n) 时间、O(1) 空间一次到位\"。"}],["$","meta","3",{"name":"application-name","content":"算法面试"}],["$","link","4",{"rel":"manifest","href":"/algorithm-interview/manifest.json","crossOrigin":"$undefined"}],["$","meta","5",{"name":"keywords","content":"移动零,LeetCode 283,Easy,数组,双指针"}],["$","meta","6",{"name":"mobile-web-app-capable","content":"yes"}],["$","meta","7",{"name":"apple-mobile-web-app-title","content":"算法面试"}],["$","meta","8",{"name":"apple-mobile-web-app-status-bar-style","content":"default"}],["$","meta","9",{"property":"og:title","content":"283. 移动零"}],["$","meta","10",{"property":"og:description","content":"给你一个数组，把所有的 0 移到数组末尾，同时保持非零元素的原始顺序。原地操作。  重点不在\"怎么排序\"，而在\"怎么用 O(n) 时间、O(1) 空间一次到位\"。"}],["$","meta","11",{"property":"og:locale","content":"zh_CN"}],["$","meta","12",{"property":"og:type","content":"article"}],["$","meta","13",{"name":"twitter:card","content":"summary"}],["$","meta","14",{"name":"twitter:title","content":"283. 移动零"}],["$","meta","15",{"name":"twitter:description","content":"给你一个数组，把所有的 0 移到数组末尾，同时保持非零元素的原始顺序。原地操作。  重点不在\"怎么排序\"，而在\"怎么用 O(n) 时间、O(1) 空间一次到位\"。"}]]
+6:null

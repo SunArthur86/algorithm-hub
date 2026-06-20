@@ -1,0 +1,166 @@
+1:"$Sreact.fragment"
+2:I[5244,[],""]
+3:I[3866,[],""]
+5:I[6213,[],"OutletBoundary"]
+7:I[6213,[],"MetadataBoundary"]
+9:I[6213,[],"ViewportBoundary"]
+b:I[4835,[],""]
+:HL["/algorithm-interview/_next/static/css/c1e787639001e16b.css","style"]
+0:{"P":null,"b":"xos97fAiWtKfKXI6hZLx4","p":"/algorithm-interview","c":["","columns","lbd-060",""],"i":false,"f":[[["",{"children":["columns",{"children":[["slug","lbd-060","d"],{"children":["__PAGE__",{}]}]}]},"$undefined","$undefined",true],["",["$","$1","c",{"children":[[["$","link","0",{"rel":"stylesheet","href":"/algorithm-interview/_next/static/css/c1e787639001e16b.css","precedence":"next","crossOrigin":"$undefined","nonce":"$undefined"}]],["$","html",null,{"lang":"zh","children":[["$","head",null,{"children":["$","script",null,{"dangerouslySetInnerHTML":{"__html":"\ntry {\n  var raw = localStorage.getItem('algo-interview');\n  var theme = 'light';\n  if (raw) { var p = JSON.parse(raw); theme = (p.state && p.state.theme) || 'light'; }\n  if (theme === 'dark') {\n    document.documentElement.classList.add('dark');\n    document.documentElement.setAttribute('data-theme', 'dark');\n  }\n} catch (e) {}\n"}}]}],["$","body",null,{"children":[["$","$L2",null,{"parallelRouterKey":"children","segmentPath":["children"],"error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L3",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":[[],[["$","title",null,{"children":"404: This page could not be found."}],["$","div",null,{"style":{"fontFamily":"system-ui,\"Segoe UI\",Roboto,Helvetica,Arial,sans-serif,\"Apple Color Emoji\",\"Segoe UI Emoji\"","height":"100vh","textAlign":"center","display":"flex","flexDirection":"column","alignItems":"center","justifyContent":"center"},"children":["$","div",null,{"children":[["$","style",null,{"dangerouslySetInnerHTML":{"__html":"body{color:#000;background:#fff;margin:0}.next-error-h1{border-right:1px solid rgba(0,0,0,.3)}@media (prefers-color-scheme:dark){body{color:#fff;background:#000}.next-error-h1{border-right:1px solid rgba(255,255,255,.3)}}"}}],["$","h1",null,{"className":"next-error-h1","style":{"display":"inline-block","margin":"0 20px 0 0","padding":"0 23px 0 0","fontSize":24,"fontWeight":500,"verticalAlign":"top","lineHeight":"49px"},"children":404}],["$","div",null,{"style":{"display":"inline-block"},"children":["$","h2",null,{"style":{"fontSize":14,"fontWeight":400,"lineHeight":"49px","margin":0},"children":"This page could not be found."}]}]]}]}]]],"forbidden":"$undefined","unauthorized":"$undefined"}],["$","script",null,{"dangerouslySetInnerHTML":{"__html":"\nif ('serviceWorker' in navigator) {\n  window.addEventListener('load', function () {\n    navigator.serviceWorker.register('/algorithm-interview/sw.js').catch(function () {});\n  });\n}\n"}}]]}]]}]]}],{"children":["columns",["$","$1","c",{"children":[null,["$","$L2",null,{"parallelRouterKey":"children","segmentPath":["children","columns","children"],"error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L3",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","forbidden":"$undefined","unauthorized":"$undefined"}]]}],{"children":[["slug","lbd-060","d"],["$","$1","c",{"children":[null,["$","$L2",null,{"parallelRouterKey":"children","segmentPath":["children","columns","children","$0:f:0:1:2:children:2:children:0","children"],"error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L3",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","forbidden":"$undefined","unauthorized":"$undefined"}]]}],{"children":["__PAGE__",["$","$1","c",{"children":["$L4",null,["$","$L5",null,{"children":"$L6"}]]}],{},null,false]},null,false]},null,false]},null,false],["$","$1","h",{"children":[null,["$","$1","dVIuGlbUfLjsZVvHQEGrr",{"children":[["$","$L7",null,{"children":"$L8"}],["$","$L9",null,{"children":"$La"}],null]}]]}],false]],"m":"$undefined","G":["$b","$undefined"],"s":false,"S":true}
+c:I[8173,["173","static/chunks/173-69860a4742bb7020.js","829","static/chunks/829-7533e70598480772.js","306","static/chunks/app/columns/%5Bslug%5D/page-58fc1d8f5085c1ff.js"],""]
+d:I[4780,["173","static/chunks/173-69860a4742bb7020.js","829","static/chunks/829-7533e70598480772.js","306","static/chunks/app/columns/%5Bslug%5D/page-58fc1d8f5085c1ff.js"],"default"]
+e:T16d3,# 如何运用二分查找算法
+
+如何运⽤⼆分查找算法
+学算法，认准 labuladong 就够了！
+⼆分查找到底有能运⽤在哪⾥？
+最常⻅的就是教科书上的例⼦，在有序数组中搜索给定的某个⽬标值的索
+引。再推⼴⼀点，如果⽬标值存在重复，修改版的⼆分查找可以返回⽬标值
+的左侧边界索引或者右侧边界索引。
+PS：以上提到的三种⼆分查找算法形式在前⽂「⼆分查找详解」有代码详
+解，如果没看过强烈建议看看。
+抛开有序数组这个枯燥的数据结构，⼆分查找如何运⽤到实际的算法问题中
+呢？当搜索空间有序的时候，就可以通过⼆分搜索「剪枝」，⼤幅提升效
+率。
+说起来⽞乎得很，本⽂先⽤⼀个具体的「Koko 吃⾹蕉」的问题来举个例
+⼦。
+⼀、问题分析
+如何运⽤⼆分查找算法
+409
+
+也就是说，Koko 每⼩时最多吃⼀堆⾹蕉，如果吃不下的话留到下⼀⼩时再
+吃；如果吃完了这⼀堆还有胃⼝，也只会等到下⼀⼩时才会吃下⼀堆。在这
+个条件下，让我们确定 Koko 吃⾹蕉的最⼩速度（根/⼩时）。
+如果直接给你这个情景，你能想到哪⾥能⽤到⼆分查找算法吗？如果没有⻅
+过类似的问题，恐怕是很难把这个问题和⼆分查找联系起来的。
+那么我们先抛开⼆分查找技巧，想想如何暴⼒解决这个问题呢？
+⾸先，算法要求的是「 H  ⼩时内吃完⾹蕉的最⼩速度」，我们不妨称为
+ speed ，请问  speed  最⼤可能为多少，最少可能为多少呢？
+显然最少为 1，最⼤为  max(piles) ，因为⼀⼩时最多只能吃⼀堆⾹蕉。那
+么暴⼒解法就很简单了，只要从 1 开始穷举到  max(piles) ，⼀旦发现发现
+某个值可以在  H  ⼩时内吃完所有⾹蕉，这个值就是最⼩速度：
+如何运⽤⼆分查找算法
+410
+
+int minEatingSpeed(int[] piles, int H) {
+    // piles 数组的最⼤值
+    int max = getMax(piles);
+    for (int speed = 1; speed < max; speed++) {
+        // 以 speed 是否能在 H ⼩时内吃完⾹蕉
+        if (canFinish(piles, speed, H))
+            return speed;
+    }
+    return max;
+}
+注意这个 for 循环，就是在连续的空间线性搜索，这就是⼆分查找可以发挥
+作⽤的标志。由于我们要求的是最⼩速度，所以可以⽤⼀个搜索左侧边界的
+⼆分查找来代替线性搜索，提升效率：
+int minEatingSpeed(int[] piles, int H) {
+    // 套⽤搜索左侧边界的算法框架
+    int left = 1, right = getMax(piles) + 1;
+    while (left < right) {
+        // 防⽌溢出
+        int mid = left + (right - left) / 2;
+        if (canFinish(piles, mid, H)) {
+            right = mid;
+        } else {
+            left = mid + 1;
+        }
+    }
+    return left;
+}
+PS：如果对于这个⼆分查找算法的细节问题有疑问，建议看下前⽂「⼆分
+查找详解」搜索左侧边界的算法模板，这⾥不展开了。
+剩下的辅助函数也很简单，可以⼀步步拆解实现：
+// 时间复杂度 O(N)
+boolean canFinish(int[] piles, int speed, int H) {
+    int time = 0;
+    for (int n : piles) {
+如何运⽤⼆分查找算法
+411
+
+        time += timeOf(n, speed);
+    }
+    return time <= H;
+}
+int timeOf(int n, int speed) {
+    return (n / speed) + ((n % speed > 0) ? 1 : 0);
+}
+int getMax(int[] piles) {
+    int max = 0;
+    for (int n : piles)
+        max = Math.max(n, max);
+    return max;
+}
+⾄此，借助⼆分查找技巧，算法的时间复杂度为 O(NlogN)。
+⼆、扩展延伸
+类似的，再看⼀道运输问题：
+如何运⽤⼆分查找算法
+412
+
+要在  D  天内运输完所有货物，货物不可分割，如何确定运输的最⼩载重呢
+（下⽂称为  cap ）？
+其实本质上和 Koko 吃⾹蕉的问题⼀样的，⾸先确定  cap  的最⼩值和最⼤
+值分别为  max(weights)  和  sum(weights) 。
+我们要求最⼩载重，所以可以⽤搜索左侧边界的⼆分查找算法优化线性搜
+索：
+// 寻找左侧边界的⼆分查找
+int shipWithinDays(int[] weights, int D) {
+    // 载重可能的最⼩值
+    int left = getMax(weights);
+    // 载重可能的最⼤值 + 1
+    int right = getSum(weights) + 1;
+    while (left < right) {
+如何运⽤⼆分查找算法
+413
+
+        int mid = left + (right - left) / 2;
+        if (canFinish(weights, D, mid)) {
+            right = mid;
+        } else {
+            left = mid + 1;
+        }
+    }
+    return left;
+}
+// 如果载重为 cap，是否能在 D 天内运完货物？
+boolean canFinish(int[] w, int D, int cap) {
+    int i = 0;
+    for (int day = 0; day < D; day++) {
+        int maxCap = cap;
+        while ((maxCap -= w[i]) >= 0) {
+            i++;
+            if (i == w.length)
+                return true;
+        }
+    }
+    return false;
+}
+通过这两个例⼦，你是否明⽩了⼆分查找在实际问题中的应⽤？
+for (int i = 0; i < n; i++)
+    if (isOK(i))
+        return ans;
+＿＿＿＿＿＿＿＿＿＿＿＿＿
+刷算法，学套路，认准 labuladong。
+本⼩抄即将出版，关注 labuladong 公众号或 ongline book 查看更新⽂章，
+后台回复「进群」可进刷题群，labuladong 带你⽇穿 LeetCode。
+如何运⽤⼆分查找算法
+414
+
+如何运⽤⼆分查找算法
+415
+
+接⾬⽔问题详解
+学算法，认准 labuladong 就够了！
+接⾬⽔这道题⽬挺有意思，在⾯试题中出现频率还挺⾼的，本⽂就来步步优
+化，讲解⼀下这道题。
+先看⼀下题⽬：
+就是⽤⼀个数组表⽰⼀个条形图，问你这个条形图最多能接多少⽔。
+int trap(int[] height);
+下⾯就来由浅⼊深介绍暴⼒解法 -> 备忘录解法 -> 双指针解法，在 O(N) 时
+间 O(1) 空间内解决这个问题。
+如何⾼效解决接⾬⽔问题
+4164:["$","main",null,{"style":{"maxWidth":760,"margin":"0 auto","padding":"16px","minHeight":"100vh"},"children":[["$","$Lc",null,{"href":"/columns/","style":{"display":"inline-block","marginBottom":"12px","fontSize":"13px"},"children":"← 返回专栏"}],["$","div",null,{"style":{"fontSize":"12px","color":"var(--text-tertiary)","marginBottom":"4px"},"children":["📕"," ","labuladong 算法小抄"]}],["$","h1",null,{"style":{"fontSize":"22px","fontWeight":700,"margin":"0 0 16px"},"children":"如何运用二分查找算法"}],["$","$Ld",null,{"children":"$e"}],false]}]
+a:[["$","meta","0",{"name":"viewport","content":"width=device-width, initial-scale=1"}],["$","meta","1",{"name":"theme-color","content":"#f97316"}]]
+8:[["$","meta","0",{"charSet":"utf-8"}],["$","title","1",{"children":"如何运用二分查找算法 - 算法面试"}],["$","meta","2",{"name":"description","content":"LeetCode 热题 100 完整 Java 题解、逐题动画、知识专栏与智能间隔复习。"}],["$","meta","3",{"name":"application-name","content":"算法面试"}],["$","link","4",{"rel":"manifest","href":"/algorithm-interview/manifest.json","crossOrigin":"$undefined"}],["$","meta","5",{"name":"keywords","content":"LeetCode,热题100,算法面试,Java题解,数据结构,动态规划,面试刷题"}],["$","meta","6",{"name":"mobile-web-app-capable","content":"yes"}],["$","meta","7",{"name":"apple-mobile-web-app-title","content":"算法面试"}],["$","meta","8",{"name":"apple-mobile-web-app-status-bar-style","content":"default"}],["$","meta","9",{"property":"og:title","content":"算法面试题库"}],["$","meta","10",{"property":"og:description","content":"LeetCode 热题 100 完整 Java 题解、逐题动画、知识专栏与智能复习"}],["$","meta","11",{"property":"og:site_name","content":"算法面试题库"}],["$","meta","12",{"property":"og:locale","content":"zh_CN"}],["$","meta","13",{"property":"og:type","content":"website"}],["$","meta","14",{"name":"twitter:card","content":"summary"}],["$","meta","15",{"name":"twitter:title","content":"算法面试题库"}],["$","meta","16",{"name":"twitter:description","content":"LeetCode 热题 100 完整 Java 题解、逐题动画、知识专栏与智能复习"}]]
+6:null

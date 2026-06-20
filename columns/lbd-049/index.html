@@ -1,0 +1,137 @@
+<!DOCTYPE html><html lang="zh"><head><meta charSet="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="/algorithm-interview/_next/static/css/c1e787639001e16b.css" data-precedence="next"/><link rel="preload" as="script" fetchPriority="low" href="/algorithm-interview/_next/static/chunks/webpack-65b8ce4c1158f96f.js"/><script src="/algorithm-interview/_next/static/chunks/4bd1b696-899926250d3992f1.js" async=""></script><script src="/algorithm-interview/_next/static/chunks/517-b6df7dad4ff96d0b.js" async=""></script><script src="/algorithm-interview/_next/static/chunks/main-app-9e7bfff32fd8ebe9.js" async=""></script><script src="/algorithm-interview/_next/static/chunks/173-69860a4742bb7020.js" async=""></script><script src="/algorithm-interview/_next/static/chunks/829-7533e70598480772.js" async=""></script><script src="/algorithm-interview/_next/static/chunks/app/columns/%5Bslug%5D/page-58fc1d8f5085c1ff.js" async=""></script><meta name="theme-color" content="#f97316"/><title>烧饼排序 - 算法面试</title><meta name="description" content="LeetCode 热题 100 完整 Java 题解、逐题动画、知识专栏与智能间隔复习。"/><meta name="application-name" content="算法面试"/><link rel="manifest" href="/algorithm-interview/manifest.json"/><meta name="keywords" content="LeetCode,热题100,算法面试,Java题解,数据结构,动态规划,面试刷题"/><meta name="mobile-web-app-capable" content="yes"/><meta name="apple-mobile-web-app-title" content="算法面试"/><meta name="apple-mobile-web-app-status-bar-style" content="default"/><meta property="og:title" content="算法面试题库"/><meta property="og:description" content="LeetCode 热题 100 完整 Java 题解、逐题动画、知识专栏与智能复习"/><meta property="og:site_name" content="算法面试题库"/><meta property="og:locale" content="zh_CN"/><meta property="og:type" content="website"/><meta name="twitter:card" content="summary"/><meta name="twitter:title" content="算法面试题库"/><meta name="twitter:description" content="LeetCode 热题 100 完整 Java 题解、逐题动画、知识专栏与智能复习"/><script>
+try {
+  var raw = localStorage.getItem('algo-interview');
+  var theme = 'light';
+  if (raw) { var p = JSON.parse(raw); theme = (p.state && p.state.theme) || 'light'; }
+  if (theme === 'dark') {
+    document.documentElement.classList.add('dark');
+    document.documentElement.setAttribute('data-theme', 'dark');
+  }
+} catch (e) {}
+</script><script src="/algorithm-interview/_next/static/chunks/polyfills-42372ed130431b0a.js" noModule=""></script></head><body><main style="max-width:760px;margin:0 auto;padding:16px;min-height:100vh"><a style="display:inline-block;margin-bottom:12px;font-size:13px" href="/algorithm-interview/columns/">← 返回专栏</a><div style="font-size:12px;color:var(--text-tertiary);margin-bottom:4px">📕<!-- --> <!-- -->labuladong 算法小抄</div><h1 style="font-size:22px;font-weight:700;margin:0 0 16px">烧饼排序</h1><div class="prose max-w-none" style="font-size:14px;color:var(--text)"><h1>烧饼排序</h1>
+<p>烧饼排序
+学算法，认准 labuladong 就够了！
+烧饼排序是个很有意思的实际问题：假设盘⼦上有  n  块⾯积⼤⼩不⼀的烧
+饼，你如何⽤⼀把锅铲进⾏若⼲次翻转，让这些烧饼的⼤⼩有序（⼩的在
+上，⼤的在下）？
+设想⼀下⽤锅铲翻转⼀堆烧饼的情景，其实是有⼀点限制的，我们每次只能
+将最上⾯的若⼲块饼⼦翻转：
+烧饼排序
+336</p>
+<p>我们的问题是，如何使⽤算法得到⼀个翻转序列，使得烧饼堆变得有序？
+⾸先，需要把这个问题抽象，⽤数组来表⽰烧饼堆：
+如何解决这个问题呢？其实类似上篇⽂章 递归反转链表的⼀部分，这也是
+需要递归思想的。
+⼀、思路分析
+为什么说这个问题有递归性质呢？⽐如说我们需要实现这样⼀个函数：
+// cakes 是⼀堆烧饼，函数会将前 n 个烧饼排序
+void sort(int[] cakes, int n);
+如果我们找到了前  n  个烧饼中最⼤的那个，然后设法将这个饼⼦翻转到最
+底下：
+烧饼排序
+337</p>
+<p>那么，原问题的规模就可以减⼩，递归调⽤  pancakeSort(A, n-1)  即可：
+接下来，对于上⾯的这  n - 1  块饼，如何排序呢？还是先从中找到最⼤的
+⼀块饼，然后把这块饼放到底下，再递归调⽤  pancakeSort(A, n-1-1) ……
+你看，这就是递归性质，总结⼀下思路就是：
+1、找到  n  个饼中最⼤的那个。
+烧饼排序
+338</p>
+<p>2、把这个最⼤的饼移到最底下。
+3、递归调⽤  pancakeSort(A, n - 1) 。
+base case： n == 1  时，排序 1 个饼时不需要翻转。
+那么，最后剩下个问题，如何设法将某块烧饼翻到最后呢？
+其实很简单，⽐如第 3 块饼是最⼤的，我们想把它换到最后，也就是换到第
+n  块。可以这样操作：
+1、⽤锅铲将前 3 块饼翻转⼀下，这样最⼤的饼就翻到了最上⾯。
+2、⽤锅铲将前  n  块饼全部翻转，这样最⼤的饼就翻到了第  n  块，也就
+是最后⼀块。
+以上两个流程理解之后，基本就可以写出解法了，不过题⽬要求我们写出具
+体的反转操作序列，这也很简单，只要在每次翻转烧饼时记录下来就⾏了。
+⼆、代码实现
+只要把上述的思路⽤代码实现即可，唯⼀需要注意的是，数组索引从 0 开
+始，⽽我们要返回的结果是从 1 开始算的。
+// 记录反转操作序列
+LinkedList<!-- -->&lt;Integer&gt;<!-- --> res = new LinkedList&lt;&gt;();
+List<!-- -->&lt;Integer&gt;<!-- --> pancakeSort(int[] cakes) {
+sort(cakes, cakes.length);
+return res;
+}
+void sort(int[] cakes, int n) {
+// base case
+if (n == 1) return;
+// 寻找最⼤饼的索引
+int maxCake = 0;
+int maxCakeIndex = 0;
+for (int i = 0; i &lt; n; i++)
+烧饼排序
+339</p>
+<pre><code>    if (cakes[i] &gt; maxCake) {
+        maxCakeIndex = i;
+        maxCake = cakes[i];
+    }
+// 第⼀次翻转，将最⼤饼翻到最上⾯
+reverse(cakes, 0, maxCakeIndex);
+res.add(maxCakeIndex + 1);
+// 第⼆次翻转，将最⼤饼翻到最下⾯
+reverse(cakes, 0, n - 1);
+res.add(n);
+// 递归调⽤
+sort(cakes, n - 1);
+</code></pre>
+<p>}
+void reverse(int[] arr, int i, int j) {
+while (i &lt; j) {
+int temp = arr[i];
+arr[i] = arr[j];
+arr[j] = temp;
+i++; j--;
+}
+}
+通过刚才的详细解释，这段代码应该是很清晰了。
+算法的时间复杂度很容易计算，因为递归调⽤的次数是  n ，每次递归调⽤
+都需要⼀次 for 循环，时间复杂度是 O(n)，所以总的复杂度是 O(n^2)。
+最后，我们可以思考⼀个问题​：按照我们这个思路，得出的操作序列⻓度应
+该为​  2(n - 1) ，因为每次递归都要进⾏ 2 次翻转并记录操作，总共有  n
+层递归，但由于 base case 直接返回结果，不进⾏翻转，所以最终的操作序
+列⻓度应该是固定的  2(n - 1) 。
+显然，这个结果不是最优的（最短的），⽐如说⼀堆煎饼  [3,2,4,1] ，我
+们的算法得到的翻转序列是  [3,4,2,3,1,2] ，但是最快捷的翻转⽅法应该是
+[2,3,4] ：
+烧饼排序
+340</p>
+<p>初始状态 ：[3,2,4,1] 翻前 2 个：[2,3,4,1] 翻前 3 个：[4,3,2,1] 翻前 4 个：
+[1,2,3,4]
+如果要求你的算法计算排序烧饼的最短操作序列，你该如何计算呢？或者
+说，解决这种求最优解法的问题，核⼼思路什么，⼀定需要使⽤什么算法技
+巧呢？
+不妨分享⼀下你的思考。
+＿＿＿＿＿＿＿＿＿＿＿＿＿
+刷算法，学套路，认准 labuladong。
+本⼩抄即将出版，关注 labuladong 公众号或 ongline book 查看更新⽂章，
+后台回复「进群」可进刷题群，labuladong 带你⽇穿 LeetCode。
+烧饼排序
+341</p>
+<p>前缀和技巧
+学算法，认准 labuladong 就够了！
+今天来聊⼀道简单却⼗分巧妙的算法问题：算出⼀共有⼏个和为 k 的⼦数
+组。
+那我把所有⼦数组都穷举出来，算它们的和，看看谁的和等于 k 不就⾏了。
+关键是，如何快速得到某个⼦数组的和呢，⽐如说给你⼀个数组  nums ，让
+你实现⼀个接⼝  sum(i, j) ，这个接⼝要返回  nums[i..j]  的和，⽽且会被
+多次调⽤，你怎么实现这个接⼝呢？
+因为接⼝要被多次调⽤，显然不能每次都去遍历  nums[i..j] ，有没有⼀种
+快速的⽅法在 O(1) 时间内算出  nums[i..j]  呢？这就需要前缀和技巧了。
+⼀、什么是前缀和
+前缀和的思路是这样的，对于⼀个给定的数组  nums ，我们额外开辟⼀个前
+缀和数组进⾏预处理：
+int n = nums.length;
+// 前缀和数组
+前缀和技巧
+342</p></div></main><script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function () {
+    navigator.serviceWorker.register('/algorithm-interview/sw.js').catch(function () {});
+  });
+}
+</script><script src="/algorithm-interview/_next/static/chunks/webpack-65b8ce4c1158f96f.js" async=""></script><script>(self.__next_f=self.__next_f||[]).push([0])</script><script>self.__next_f.push([1,"1:\"$Sreact.fragment\"\n2:I[5244,[],\"\"]\n3:I[3866,[],\"\"]\n5:I[6213,[],\"OutletBoundary\"]\n7:I[6213,[],\"MetadataBoundary\"]\n9:I[6213,[],\"ViewportBoundary\"]\nb:I[4835,[],\"\"]\n:HL[\"/algorithm-interview/_next/static/css/c1e787639001e16b.css\",\"style\"]\n"])</script><script>self.__next_f.push([1,"0:{\"P\":null,\"b\":\"xos97fAiWtKfKXI6hZLx4\",\"p\":\"/algorithm-interview\",\"c\":[\"\",\"columns\",\"lbd-049\",\"\"],\"i\":false,\"f\":[[[\"\",{\"children\":[\"columns\",{\"children\":[[\"slug\",\"lbd-049\",\"d\"],{\"children\":[\"__PAGE__\",{}]}]}]},\"$undefined\",\"$undefined\",true],[\"\",[\"$\",\"$1\",\"c\",{\"children\":[[[\"$\",\"link\",\"0\",{\"rel\":\"stylesheet\",\"href\":\"/algorithm-interview/_next/static/css/c1e787639001e16b.css\",\"precedence\":\"next\",\"crossOrigin\":\"$undefined\",\"nonce\":\"$undefined\"}]],[\"$\",\"html\",null,{\"lang\":\"zh\",\"children\":[[\"$\",\"head\",null,{\"children\":[\"$\",\"script\",null,{\"dangerouslySetInnerHTML\":{\"__html\":\"\\ntry {\\n  var raw = localStorage.getItem('algo-interview');\\n  var theme = 'light';\\n  if (raw) { var p = JSON.parse(raw); theme = (p.state \u0026\u0026 p.state.theme) || 'light'; }\\n  if (theme === 'dark') {\\n    document.documentElement.classList.add('dark');\\n    document.documentElement.setAttribute('data-theme', 'dark');\\n  }\\n} catch (e) {}\\n\"}}]}],[\"$\",\"body\",null,{\"children\":[[\"$\",\"$L2\",null,{\"parallelRouterKey\":\"children\",\"segmentPath\":[\"children\"],\"error\":\"$undefined\",\"errorStyles\":\"$undefined\",\"errorScripts\":\"$undefined\",\"template\":[\"$\",\"$L3\",null,{}],\"templateStyles\":\"$undefined\",\"templateScripts\":\"$undefined\",\"notFound\":[[],[[\"$\",\"title\",null,{\"children\":\"404: This page could not be found.\"}],[\"$\",\"div\",null,{\"style\":{\"fontFamily\":\"system-ui,\\\"Segoe UI\\\",Roboto,Helvetica,Arial,sans-serif,\\\"Apple Color Emoji\\\",\\\"Segoe UI Emoji\\\"\",\"height\":\"100vh\",\"textAlign\":\"center\",\"display\":\"flex\",\"flexDirection\":\"column\",\"alignItems\":\"center\",\"justifyContent\":\"center\"},\"children\":[\"$\",\"div\",null,{\"children\":[[\"$\",\"style\",null,{\"dangerouslySetInnerHTML\":{\"__html\":\"body{color:#000;background:#fff;margin:0}.next-error-h1{border-right:1px solid rgba(0,0,0,.3)}@media (prefers-color-scheme:dark){body{color:#fff;background:#000}.next-error-h1{border-right:1px solid rgba(255,255,255,.3)}}\"}}],[\"$\",\"h1\",null,{\"className\":\"next-error-h1\",\"style\":{\"display\":\"inline-block\",\"margin\":\"0 20px 0 0\",\"padding\":\"0 23px 0 0\",\"fontSize\":24,\"fontWeight\":500,\"verticalAlign\":\"top\",\"lineHeight\":\"49px\"},\"children\":404}],[\"$\",\"div\",null,{\"style\":{\"display\":\"inline-block\"},\"children\":[\"$\",\"h2\",null,{\"style\":{\"fontSize\":14,\"fontWeight\":400,\"lineHeight\":\"49px\",\"margin\":0},\"children\":\"This page could not be found.\"}]}]]}]}]]],\"forbidden\":\"$undefined\",\"unauthorized\":\"$undefined\"}],[\"$\",\"script\",null,{\"dangerouslySetInnerHTML\":{\"__html\":\"\\nif ('serviceWorker' in navigator) {\\n  window.addEventListener('load', function () {\\n    navigator.serviceWorker.register('/algorithm-interview/sw.js').catch(function () {});\\n  });\\n}\\n\"}}]]}]]}]]}],{\"children\":[\"columns\",[\"$\",\"$1\",\"c\",{\"children\":[null,[\"$\",\"$L2\",null,{\"parallelRouterKey\":\"children\",\"segmentPath\":[\"children\",\"columns\",\"children\"],\"error\":\"$undefined\",\"errorStyles\":\"$undefined\",\"errorScripts\":\"$undefined\",\"template\":[\"$\",\"$L3\",null,{}],\"templateStyles\":\"$undefined\",\"templateScripts\":\"$undefined\",\"notFound\":\"$undefined\",\"forbidden\":\"$undefined\",\"unauthorized\":\"$undefined\"}]]}],{\"children\":[[\"slug\",\"lbd-049\",\"d\"],[\"$\",\"$1\",\"c\",{\"children\":[null,[\"$\",\"$L2\",null,{\"parallelRouterKey\":\"children\",\"segmentPath\":[\"children\",\"columns\",\"children\",\"$0:f:0:1:2:children:2:children:0\",\"children\"],\"error\":\"$undefined\",\"errorStyles\":\"$undefined\",\"errorScripts\":\"$undefined\",\"template\":[\"$\",\"$L3\",null,{}],\"templateStyles\":\"$undefined\",\"templateScripts\":\"$undefined\",\"notFound\":\"$undefined\",\"forbidden\":\"$undefined\",\"unauthorized\":\"$undefined\"}]]}],{\"children\":[\"__PAGE__\",[\"$\",\"$1\",\"c\",{\"children\":[\"$L4\",null,[\"$\",\"$L5\",null,{\"children\":\"$L6\"}]]}],{},null,false]},null,false]},null,false]},null,false],[\"$\",\"$1\",\"h\",{\"children\":[null,[\"$\",\"$1\",\"GNrw8lJXzhrIWjafAdQbn\",{\"children\":[[\"$\",\"$L7\",null,{\"children\":\"$L8\"}],[\"$\",\"$L9\",null,{\"children\":\"$La\"}],null]}]]}],false]],\"m\":\"$undefined\",\"G\":[\"$b\",\"$undefined\"],\"s\":false,\"S\":true}\n"])</script><script>self.__next_f.push([1,"c:I[8173,[\"173\",\"static/chunks/173-69860a4742bb7020.js\",\"829\",\"static/chunks/829-7533e70598480772.js\",\"306\",\"static/chunks/app/columns/%5Bslug%5D/page-58fc1d8f5085c1ff.js\"],\"\"]\nd:I[4780,[\"173\",\"static/chunks/173-69860a4742bb7020.js\",\"829\",\"static/chunks/829-7533e70598480772.js\",\"306\",\"static/chunks/app/columns/%5Bslug%5D/page-58fc1d8f5085c1ff.js\"],\"default\"]\ne:T1609,"])</script><script>self.__next_f.push([1,"# 烧饼排序\n\n烧饼排序\n学算法，认准 labuladong 就够了！\n烧饼排序是个很有意思的实际问题：假设盘⼦上有  n  块⾯积⼤⼩不⼀的烧\n饼，你如何⽤⼀把锅铲进⾏若⼲次翻转，让这些烧饼的⼤⼩有序（⼩的在\n上，⼤的在下）？\n设想⼀下⽤锅铲翻转⼀堆烧饼的情景，其实是有⼀点限制的，我们每次只能\n将最上⾯的若⼲块饼⼦翻转：\n烧饼排序\n336\n\n我们的问题是，如何使⽤算法得到⼀个翻转序列，使得烧饼堆变得有序？\n⾸先，需要把这个问题抽象，⽤数组来表⽰烧饼堆：\n如何解决这个问题呢？其实类似上篇⽂章 递归反转链表的⼀部分，这也是\n需要递归思想的。\n⼀、思路分析\n为什么说这个问题有递归性质呢？⽐如说我们需要实现这样⼀个函数：\n// cakes 是⼀堆烧饼，函数会将前 n 个烧饼排序\nvoid sort(int[] cakes, int n);\n如果我们找到了前  n  个烧饼中最⼤的那个，然后设法将这个饼⼦翻转到最\n底下：\n烧饼排序\n337\n\n那么，原问题的规模就可以减⼩，递归调⽤  pancakeSort(A, n-1)  即可：\n接下来，对于上⾯的这  n - 1  块饼，如何排序呢？还是先从中找到最⼤的\n⼀块饼，然后把这块饼放到底下，再递归调⽤  pancakeSort(A, n-1-1) ……\n你看，这就是递归性质，总结⼀下思路就是：\n1、找到  n  个饼中最⼤的那个。\n烧饼排序\n338\n\n2、把这个最⼤的饼移到最底下。\n3、递归调⽤  pancakeSort(A, n - 1) 。\nbase case： n == 1  时，排序 1 个饼时不需要翻转。\n那么，最后剩下个问题，如何设法将某块烧饼翻到最后呢？\n其实很简单，⽐如第 3 块饼是最⼤的，我们想把它换到最后，也就是换到第\n n  块。可以这样操作：\n1、⽤锅铲将前 3 块饼翻转⼀下，这样最⼤的饼就翻到了最上⾯。\n2、⽤锅铲将前  n  块饼全部翻转，这样最⼤的饼就翻到了第  n  块，也就\n是最后⼀块。\n以上两个流程理解之后，基本就可以写出解法了，不过题⽬要求我们写出具\n体的反转操作序列，这也很简单，只要在每次翻转烧饼时记录下来就⾏了。\n⼆、代码实现\n只要把上述的思路⽤代码实现即可，唯⼀需要注意的是，数组索引从 0 开\n始，⽽我们要返回的结果是从 1 开始算的。\n// 记录反转操作序列\nLinkedList\u003cInteger\u003e res = new LinkedList\u003c\u003e();\nList\u003cInteger\u003e pancakeSort(int[] cakes) {\n    sort(cakes, cakes.length);\n    return res;\n}\nvoid sort(int[] cakes, int n) {\n    // base case\n    if (n == 1) return;\n    // 寻找最⼤饼的索引\n    int maxCake = 0;\n    int maxCakeIndex = 0;\n    for (int i = 0; i \u003c n; i++)\n烧饼排序\n339\n\n        if (cakes[i] \u003e maxCake) {\n            maxCakeIndex = i;\n            maxCake = cakes[i];\n        }\n    // 第⼀次翻转，将最⼤饼翻到最上⾯\n    reverse(cakes, 0, maxCakeIndex);\n    res.add(maxCakeIndex + 1);\n    // 第⼆次翻转，将最⼤饼翻到最下⾯\n    reverse(cakes, 0, n - 1);\n    res.add(n);\n    // 递归调⽤\n    sort(cakes, n - 1);\n}\nvoid reverse(int[] arr, int i, int j) {\n    while (i \u003c j) {\n        int temp = arr[i];\n        arr[i] = arr[j];\n        arr[j] = temp;\n        i++; j--;\n    }\n}\n通过刚才的详细解释，这段代码应该是很清晰了。\n算法的时间复杂度很容易计算，因为递归调⽤的次数是  n ，每次递归调⽤\n都需要⼀次 for 循环，时间复杂度是 O(n)，所以总的复杂度是 O(n^2)。\n最后，我们可以思考⼀个问题​：按照我们这个思路，得出的操作序列⻓度应\n该为​  2(n - 1) ，因为每次递归都要进⾏ 2 次翻转并记录操作，总共有  n \n层递归，但由于 base case 直接返回结果，不进⾏翻转，所以最终的操作序\n列⻓度应该是固定的  2(n - 1) 。\n显然，这个结果不是最优的（最短的），⽐如说⼀堆煎饼  [3,2,4,1] ，我\n们的算法得到的翻转序列是  [3,4,2,3,1,2] ，但是最快捷的翻转⽅法应该是\n [2,3,4] ：\n烧饼排序\n340\n\n初始状态 ：[3,2,4,1] 翻前 2 个：[2,3,4,1] 翻前 3 个：[4,3,2,1] 翻前 4 个：\n[1,2,3,4]\n如果要求你的算法计算排序烧饼的最短操作序列，你该如何计算呢？或者\n说，解决这种求最优解法的问题，核⼼思路什么，⼀定需要使⽤什么算法技\n巧呢？\n不妨分享⼀下你的思考。\n＿＿＿＿＿＿＿＿＿＿＿＿＿\n刷算法，学套路，认准 labuladong。\n本⼩抄即将出版，关注 labuladong 公众号或 ongline book 查看更新⽂章，\n后台回复「进群」可进刷题群，labuladong 带你⽇穿 LeetCode。\n烧饼排序\n341\n\n前缀和技巧\n学算法，认准 labuladong 就够了！\n今天来聊⼀道简单却⼗分巧妙的算法问题：算出⼀共有⼏个和为 k 的⼦数\n组。\n那我把所有⼦数组都穷举出来，算它们的和，看看谁的和等于 k 不就⾏了。\n关键是，如何快速得到某个⼦数组的和呢，⽐如说给你⼀个数组  nums ，让\n你实现⼀个接⼝  sum(i, j) ，这个接⼝要返回  nums[i..j]  的和，⽽且会被\n多次调⽤，你怎么实现这个接⼝呢？\n因为接⼝要被多次调⽤，显然不能每次都去遍历  nums[i..j] ，有没有⼀种\n快速的⽅法在 O(1) 时间内算出  nums[i..j]  呢？这就需要前缀和技巧了。\n⼀、什么是前缀和\n前缀和的思路是这样的，对于⼀个给定的数组  nums ，我们额外开辟⼀个前\n缀和数组进⾏预处理：\nint n = nums.length;\n// 前缀和数组\n前缀和技巧\n342"])</script><script>self.__next_f.push([1,"4:[\"$\",\"main\",null,{\"style\":{\"maxWidth\":760,\"margin\":\"0 auto\",\"padding\":\"16px\",\"minHeight\":\"100vh\"},\"children\":[[\"$\",\"$Lc\",null,{\"href\":\"/columns/\",\"style\":{\"display\":\"inline-block\",\"marginBottom\":\"12px\",\"fontSize\":\"13px\"},\"children\":\"← 返回专栏\"}],[\"$\",\"div\",null,{\"style\":{\"fontSize\":\"12px\",\"color\":\"var(--text-tertiary)\",\"marginBottom\":\"4px\"},\"children\":[\"📕\",\" \",\"labuladong 算法小抄\"]}],[\"$\",\"h1\",null,{\"style\":{\"fontSize\":\"22px\",\"fontWeight\":700,\"margin\":\"0 0 16px\"},\"children\":\"烧饼排序\"}],[\"$\",\"$Ld\",null,{\"children\":\"$e\"}],false]}]\n"])</script><script>self.__next_f.push([1,"a:[[\"$\",\"meta\",\"0\",{\"name\":\"viewport\",\"content\":\"width=device-width, initial-scale=1\"}],[\"$\",\"meta\",\"1\",{\"name\":\"theme-color\",\"content\":\"#f97316\"}]]\n"])</script><script>self.__next_f.push([1,"8:[[\"$\",\"meta\",\"0\",{\"charSet\":\"utf-8\"}],[\"$\",\"title\",\"1\",{\"children\":\"烧饼排序 - 算法面试\"}],[\"$\",\"meta\",\"2\",{\"name\":\"description\",\"content\":\"LeetCode 热题 100 完整 Java 题解、逐题动画、知识专栏与智能间隔复习。\"}],[\"$\",\"meta\",\"3\",{\"name\":\"application-name\",\"content\":\"算法面试\"}],[\"$\",\"link\",\"4\",{\"rel\":\"manifest\",\"href\":\"/algorithm-interview/manifest.json\",\"crossOrigin\":\"$undefined\"}],[\"$\",\"meta\",\"5\",{\"name\":\"keywords\",\"content\":\"LeetCode,热题100,算法面试,Java题解,数据结构,动态规划,面试刷题\"}],[\"$\",\"meta\",\"6\",{\"name\":\"mobile-web-app-capable\",\"content\":\"yes\"}],[\"$\",\"meta\",\"7\",{\"name\":\"apple-mobile-web-app-title\",\"content\":\"算法面试\"}],[\"$\",\"meta\",\"8\",{\"name\":\"apple-mobile-web-app-status-bar-style\",\"content\":\"default\"}],[\"$\",\"meta\",\"9\",{\"property\":\"og:title\",\"content\":\"算法面试题库\"}],[\"$\",\"meta\",\"10\",{\"property\":\"og:description\",\"content\":\"LeetCode 热题 100 完整 Java 题解、逐题动画、知识专栏与智能复习\"}],[\"$\",\"meta\",\"11\",{\"property\":\"og:site_name\",\"content\":\"算法面试题库\"}],[\"$\",\"meta\",\"12\",{\"property\":\"og:locale\",\"content\":\"zh_CN\"}],[\"$\",\"meta\",\"13\",{\"property\":\"og:type\",\"content\":\"website\"}],[\"$\",\"meta\",\"14\",{\"name\":\"twitter:card\",\"content\":\"summary\"}],[\"$\",\"meta\",\"15\",{\"name\":\"twitter:title\",\"content\":\"算法面试题库\"}],[\"$\",\"meta\",\"16\",{\"name\":\"twitter:description\",\"content\":\"LeetCode 热题 100 完整 Java 题解、逐题动画、知识专栏与智能复习\"}]]\n"])</script><script>self.__next_f.push([1,"6:null\n"])</script></body></html>

@@ -1,0 +1,165 @@
+1:"$Sreact.fragment"
+2:I[5244,[],""]
+3:I[3866,[],""]
+5:I[6213,[],"OutletBoundary"]
+7:I[6213,[],"MetadataBoundary"]
+9:I[6213,[],"ViewportBoundary"]
+b:I[4835,[],""]
+:HL["/algorithm-interview/_next/static/css/c1e787639001e16b.css","style"]
+0:{"P":null,"b":"xos97fAiWtKfKXI6hZLx4","p":"/algorithm-interview","c":["","columns","lbd-070",""],"i":false,"f":[[["",{"children":["columns",{"children":[["slug","lbd-070","d"],{"children":["__PAGE__",{}]}]}]},"$undefined","$undefined",true],["",["$","$1","c",{"children":[[["$","link","0",{"rel":"stylesheet","href":"/algorithm-interview/_next/static/css/c1e787639001e16b.css","precedence":"next","crossOrigin":"$undefined","nonce":"$undefined"}]],["$","html",null,{"lang":"zh","children":[["$","head",null,{"children":["$","script",null,{"dangerouslySetInnerHTML":{"__html":"\ntry {\n  var raw = localStorage.getItem('algo-interview');\n  var theme = 'light';\n  if (raw) { var p = JSON.parse(raw); theme = (p.state && p.state.theme) || 'light'; }\n  if (theme === 'dark') {\n    document.documentElement.classList.add('dark');\n    document.documentElement.setAttribute('data-theme', 'dark');\n  }\n} catch (e) {}\n"}}]}],["$","body",null,{"children":[["$","$L2",null,{"parallelRouterKey":"children","segmentPath":["children"],"error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L3",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":[[],[["$","title",null,{"children":"404: This page could not be found."}],["$","div",null,{"style":{"fontFamily":"system-ui,\"Segoe UI\",Roboto,Helvetica,Arial,sans-serif,\"Apple Color Emoji\",\"Segoe UI Emoji\"","height":"100vh","textAlign":"center","display":"flex","flexDirection":"column","alignItems":"center","justifyContent":"center"},"children":["$","div",null,{"children":[["$","style",null,{"dangerouslySetInnerHTML":{"__html":"body{color:#000;background:#fff;margin:0}.next-error-h1{border-right:1px solid rgba(0,0,0,.3)}@media (prefers-color-scheme:dark){body{color:#fff;background:#000}.next-error-h1{border-right:1px solid rgba(255,255,255,.3)}}"}}],["$","h1",null,{"className":"next-error-h1","style":{"display":"inline-block","margin":"0 20px 0 0","padding":"0 23px 0 0","fontSize":24,"fontWeight":500,"verticalAlign":"top","lineHeight":"49px"},"children":404}],["$","div",null,{"style":{"display":"inline-block"},"children":["$","h2",null,{"style":{"fontSize":14,"fontWeight":400,"lineHeight":"49px","margin":0},"children":"This page could not be found."}]}]]}]}]]],"forbidden":"$undefined","unauthorized":"$undefined"}],["$","script",null,{"dangerouslySetInnerHTML":{"__html":"\nif ('serviceWorker' in navigator) {\n  window.addEventListener('load', function () {\n    navigator.serviceWorker.register('/algorithm-interview/sw.js').catch(function () {});\n  });\n}\n"}}]]}]]}]]}],{"children":["columns",["$","$1","c",{"children":[null,["$","$L2",null,{"parallelRouterKey":"children","segmentPath":["children","columns","children"],"error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L3",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","forbidden":"$undefined","unauthorized":"$undefined"}]]}],{"children":[["slug","lbd-070","d"],["$","$1","c",{"children":[null,["$","$L2",null,{"parallelRouterKey":"children","segmentPath":["children","columns","children","$0:f:0:1:2:children:2:children:0","children"],"error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L3",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","forbidden":"$undefined","unauthorized":"$undefined"}]]}],{"children":["__PAGE__",["$","$1","c",{"children":["$L4",null,["$","$L5",null,{"children":"$L6"}]]}],{},null,false]},null,false]},null,false]},null,false],["$","$1","h",{"children":[null,["$","$1","M1xwJ_t0zKXtR8n0DpPwc",{"children":[["$","$L7",null,{"children":"$L8"}],["$","$L9",null,{"children":"$La"}],null]}]]}],false]],"m":"$undefined","G":["$b","$undefined"],"s":false,"S":true}
+c:I[8173,["173","static/chunks/173-69860a4742bb7020.js","829","static/chunks/829-7533e70598480772.js","306","static/chunks/app/columns/%5Bslug%5D/page-58fc1d8f5085c1ff.js"],""]
+d:I[4780,["173","static/chunks/173-69860a4742bb7020.js","829","static/chunks/829-7533e70598480772.js","306","static/chunks/app/columns/%5Bslug%5D/page-58fc1d8f5085c1ff.js"],"default"]
+e:T1f66,# 如何在无限序列中随机抽取元素
+
+随机算法之⽔塘抽样算法
+学算法，认准 labuladong 就够了！
+我最近在 LeetCode 上做到两道⾮常有意思的题⽬，382 和 398 题，关于⽔
+塘抽样算法（Reservoir Sampling），本质上是⼀种随机概率算法，解法应该
+说会者不难，难者不会。
+我第⼀次⻅到这个算法问题是⾕歌的⼀道算法题：给你⼀个未知⻓度的链
+表，请你设计⼀个算法，只能遍历⼀次，随机地返回链表中的⼀个节点。
+这⾥说的随机是均匀随机（uniform random），也就是说，如果有  n  个元
+素，每个元素被选中的概率都是  1/n ，不可以有统计意义上的偏差。
+⼀般的想法就是，我先遍历⼀遍链表，得到链表的总⻓度  n ，再⽣成⼀个
+ [1,n]  之间的随机数为索引，然后找到索引对应的节点，不就是⼀个随机
+的节点了吗？
+但题⽬说了，只能遍历⼀次，意味着这种思路不可⾏。题⽬还可以再泛化，
+给⼀个未知⻓度的序列，如何在其中随机地选择  k  个元素？想要解决这个
+问题，就需要著名的⽔塘抽样算法了。
+算法实现
+先解决只抽取⼀个元素的问题，这个问题的难点在于，随机选择是「动态」
+的，⽐如说你现在你有 5 个元素，你已经随机选取了其中的某个元素  a  作
+为结果，但是现在再给你⼀个新元素  b ，你应该留着  a  还是将  b  作为
+结果呢，以什么逻辑选择  a  和  b  呢，怎么证明你的选择⽅法在概率上是
+公平的呢？
+先说结论，当你遇到第  i  个元素时，应该有  1/i  的概率选择该元素， 1
+- 1/i  的概率保持原有的选择。看代码容易理解这个思路：
+如何在⽆限序列中随机抽取元素
+467
+
+/* 返回链表中⼀个随机节点的值 */
+int getRandom(ListNode head) {
+    Random r = new Random();
+    int i = 0, res = 0;
+    ListNode p = head;
+    // while 循环遍历链表
+    while (p != null) {
+        // ⽣成⼀个 [0, i) 之间的整数
+        // 这个整数等于 0 的概率就是 1/i
+        if (r.nextInt(++i) == 0) {
+            res = p.val;
+        }
+        p = p.next;
+    }
+    return res;
+}
+对于概率算法，代码往往都是很浅显的，但是这种问题的关键在于证明，你
+的算法为什么是对的？为什么每次以  1/i  的概率更新结果就可以保证结果
+是平均随机（uniform random）？
+证明：假设总共有  n  个元素，我们要的随机性⽆⾮就是每个元素被选择的
+概率都是  1/n  对吧，那么对于第  i  个元素，它被选择的概率就是：
+第  i  个元素被选择的概率是  1/i ，第  i+1  次不被替换的概率是  1 -
+1/(i+1) ，以此类推，相乘就是第  i  个元素最终被选中的概率，就是
+ 1/n 。
+因此，该算法的逻辑是正确的。
+如何在⽆限序列中随机抽取元素
+468
+
+同理，如果要随机选择  k  个数，只要在第  i  个元素处以  k/i  的概率选
+择该元素，以  1 - k/i  的概率保持原有选择即可。代码如下：
+/* 返回链表中 k 个随机节点的值 */
+int[] getRandom(ListNode head, int k) {
+    Random r = new Random();
+    int[] res = new int[k];
+    ListNode p = head;
+    // 前 k 个元素先默认选上
+    for (int j = 0; j < k && p != null; j++) {
+        res[j] = p.val;
+        p = p.next;
+    }
+    int i = k;
+    // while 循环遍历链表
+    while (p != null) {
+        // ⽣成⼀个 [0, i) 之间的整数
+        int j = r.nextInt(++i);
+        // 这个整数⼩于 k 的概率就是 k/i
+        if (j < k) {
+            res[j] = p.val;
+        }
+        p = p.next;
+    }
+    return res;
+}
+对于数学证明，和上⾯区别不⼤：
+如何在⽆限序列中随机抽取元素
+469
+
+因为虽然每次更新选择的概率增⼤了  k  倍，但是选到具体第  i  个元素的
+概率还是要乘  1/k ，也就回到了上⼀个推导。
+拓展延伸
+以上的抽样算法时间复杂度是 O(n)，但不是最优的⽅法，更优化的算法基
+于⼏何分布（geometric distribution），时间复杂度为 O(k + klog(n/k))。由于
+涉及的数学知识⽐较多，这⾥就不列出了，有兴趣的读者可以⾃⾏搜索⼀
+下。
+还有⼀种思路是基于「Fisher–Yates 洗牌算法」的。随机抽取  k  个元素，
+等价于对所有元素洗牌，然后选取前  k  个。只不过，洗牌算法需要对元素
+的随机访问，所以只能对数组这类⽀持随机存储的数据结构有效。
+另外有⼀种思路也⽐较有启发意义：给每⼀个元素关联⼀个随机数，然后把
+每个元素插⼊⼀个容量为  k  的⼆叉堆（优先级队列）按照配对的随机数进
+⾏排序，最后剩下的  k  个元素也是随机的。
+这个⽅案看起来似乎有点多此⼀举，因为插⼊⼆叉堆需要 O(logk) 的时间复
+杂度，所以整个抽样算法就需要 O(nlogk) 的复杂度，还不如我们最开始的
+算法。但是，这种思路可以指导我们解决加权随机抽样算法，权重越⾼，被
+随机选中的概率相应增⼤，这种情况在现实⽣活中是很常⻅的，⽐如你不往
+游戏⾥充钱，就永远抽不到⽪肤。
+最后，我想说随机算法虽然不多，但其实很有技巧的，读者不妨思考两个常
+⻅且看起来很简单的问题：
+1、如何对带有权重的样本进⾏加权随机抽取？⽐如给你⼀个数组  w ，每
+个元素  w[i]  代表权重，请你写⼀个算法，按照权重随机抽取索引。⽐如
+ w = [1,99] ，算法抽到索引 0 的概率是 1%，抽到索引 1 的概率是 99%。
+2、实现⼀个⽣成器类，构造函数传⼊⼀个很⻓的数组，请你实现
+ randomGet  ⽅法，每次调⽤随机返回数组中的⼀个元素，多次调⽤不能重
+复返回相同索引的元素。要求不能对该数组进⾏任何形式的修改，且操作的
+时间复杂度是 O(1)。
+如何在⽆限序列中随机抽取元素
+470
+
+这两个问题都是⽐较困难的，以后有时间我会写⼀写相关的⽂章。
+＿＿＿＿＿＿＿＿＿＿＿＿＿
+刷算法，学套路，认准 labuladong。
+本⼩抄即将出版，关注 labuladong 公众号或 ongline book 查看更新⽂章，
+后台回复「进群」可进刷题群，labuladong 带你⽇穿 LeetCode。
+如何在⽆限序列中随机抽取元素
+471
+
+如何调度考⽣的座位
+学算法，认准 labuladong 就够了！
+这是 LeetCode 第 885 题，有趣且具有⼀定技巧性。这种题⽬并不像动态规
+划这类算法拼智商，⽽是看你对常⽤数据结构的理解和写代码的⽔平，个⼈
+认为值得重视和学习。
+另外说句题外话，很多读者都问，算法框架是如何总结出来的，其实框架反
+⽽是慢慢从细节⾥抠出来的。希望⼤家看了我们的⽂章之后，最好能抽时间
+把相关的问题亲⾃做⼀做，纸上得来终觉浅，绝知此事要躬⾏嘛。
+先来描述⼀下题⽬：假设有⼀个考场，考场有⼀排共  N  个座位，索引分别
+是  [0..N-1] ，考⽣会陆续进⼊考场考试，并且可能在任何时候离开考场。
+你作为考官，要安排考⽣们的座位，满⾜：每当⼀个学⽣进⼊时，你需要最
+⼤化他和最近其他⼈的距离；如果有多个这样的座位，安排到他到索引最⼩
+的那个座位。这很符合实际情况对吧，
+也就是请你实现下⾯这样⼀个类：
+class ExamRoom {
+    // 构造函数，传⼊座位总数 N
+    public ExamRoom(int N);
+    // 来了⼀名考⽣，返回你给他分配的座位
+    public int seat();
+    // 坐在 p 位置的考⽣离开了
+    // 可以认为 p 位置⼀定坐有考⽣
+    public void leave(int p);
+}
+⽐⽅说考场有 5 个座位，分别是  [0..4] ：
+第⼀名考⽣进⼊时（调⽤  seat() ），坐在任何位置都⾏，但是要给他安排
+索引最⼩的位置，也就是返回位置 0。
+如何调度考⽣的座位
+4724:["$","main",null,{"style":{"maxWidth":760,"margin":"0 auto","padding":"16px","minHeight":"100vh"},"children":[["$","$Lc",null,{"href":"/columns/","style":{"display":"inline-block","marginBottom":"12px","fontSize":"13px"},"children":"← 返回专栏"}],["$","div",null,{"style":{"fontSize":"12px","color":"var(--text-tertiary)","marginBottom":"4px"},"children":["📕"," ","labuladong 算法小抄"]}],["$","h1",null,{"style":{"fontSize":"22px","fontWeight":700,"margin":"0 0 16px"},"children":"如何在无限序列中随机抽取元素"}],["$","$Ld",null,{"children":"$e"}],false]}]
+a:[["$","meta","0",{"name":"viewport","content":"width=device-width, initial-scale=1"}],["$","meta","1",{"name":"theme-color","content":"#f97316"}]]
+8:[["$","meta","0",{"charSet":"utf-8"}],["$","title","1",{"children":"如何在无限序列中随机抽取元素 - 算法面试"}],["$","meta","2",{"name":"description","content":"LeetCode 热题 100 完整 Java 题解、逐题动画、知识专栏与智能间隔复习。"}],["$","meta","3",{"name":"application-name","content":"算法面试"}],["$","link","4",{"rel":"manifest","href":"/algorithm-interview/manifest.json","crossOrigin":"$undefined"}],["$","meta","5",{"name":"keywords","content":"LeetCode,热题100,算法面试,Java题解,数据结构,动态规划,面试刷题"}],["$","meta","6",{"name":"mobile-web-app-capable","content":"yes"}],["$","meta","7",{"name":"apple-mobile-web-app-title","content":"算法面试"}],["$","meta","8",{"name":"apple-mobile-web-app-status-bar-style","content":"default"}],["$","meta","9",{"property":"og:title","content":"算法面试题库"}],["$","meta","10",{"property":"og:description","content":"LeetCode 热题 100 完整 Java 题解、逐题动画、知识专栏与智能复习"}],["$","meta","11",{"property":"og:site_name","content":"算法面试题库"}],["$","meta","12",{"property":"og:locale","content":"zh_CN"}],["$","meta","13",{"property":"og:type","content":"website"}],["$","meta","14",{"name":"twitter:card","content":"summary"}],["$","meta","15",{"name":"twitter:title","content":"算法面试题库"}],["$","meta","16",{"name":"twitter:description","content":"LeetCode 热题 100 完整 Java 题解、逐题动画、知识专栏与智能复习"}]]
+6:null

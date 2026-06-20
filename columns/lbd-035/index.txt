@@ -1,0 +1,260 @@
+1:"$Sreact.fragment"
+2:I[5244,[],""]
+3:I[3866,[],""]
+5:I[6213,[],"OutletBoundary"]
+7:I[6213,[],"MetadataBoundary"]
+9:I[6213,[],"ViewportBoundary"]
+b:I[4835,[],""]
+:HL["/algorithm-interview/_next/static/css/c1e787639001e16b.css","style"]
+0:{"P":null,"b":"xos97fAiWtKfKXI6hZLx4","p":"/algorithm-interview","c":["","columns","lbd-035",""],"i":false,"f":[[["",{"children":["columns",{"children":[["slug","lbd-035","d"],{"children":["__PAGE__",{}]}]}]},"$undefined","$undefined",true],["",["$","$1","c",{"children":[[["$","link","0",{"rel":"stylesheet","href":"/algorithm-interview/_next/static/css/c1e787639001e16b.css","precedence":"next","crossOrigin":"$undefined","nonce":"$undefined"}]],["$","html",null,{"lang":"zh","children":[["$","head",null,{"children":["$","script",null,{"dangerouslySetInnerHTML":{"__html":"\ntry {\n  var raw = localStorage.getItem('algo-interview');\n  var theme = 'light';\n  if (raw) { var p = JSON.parse(raw); theme = (p.state && p.state.theme) || 'light'; }\n  if (theme === 'dark') {\n    document.documentElement.classList.add('dark');\n    document.documentElement.setAttribute('data-theme', 'dark');\n  }\n} catch (e) {}\n"}}]}],["$","body",null,{"children":[["$","$L2",null,{"parallelRouterKey":"children","segmentPath":["children"],"error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L3",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":[[],[["$","title",null,{"children":"404: This page could not be found."}],["$","div",null,{"style":{"fontFamily":"system-ui,\"Segoe UI\",Roboto,Helvetica,Arial,sans-serif,\"Apple Color Emoji\",\"Segoe UI Emoji\"","height":"100vh","textAlign":"center","display":"flex","flexDirection":"column","alignItems":"center","justifyContent":"center"},"children":["$","div",null,{"children":[["$","style",null,{"dangerouslySetInnerHTML":{"__html":"body{color:#000;background:#fff;margin:0}.next-error-h1{border-right:1px solid rgba(0,0,0,.3)}@media (prefers-color-scheme:dark){body{color:#fff;background:#000}.next-error-h1{border-right:1px solid rgba(255,255,255,.3)}}"}}],["$","h1",null,{"className":"next-error-h1","style":{"display":"inline-block","margin":"0 20px 0 0","padding":"0 23px 0 0","fontSize":24,"fontWeight":500,"verticalAlign":"top","lineHeight":"49px"},"children":404}],["$","div",null,{"style":{"display":"inline-block"},"children":["$","h2",null,{"style":{"fontSize":14,"fontWeight":400,"lineHeight":"49px","margin":0},"children":"This page could not be found."}]}]]}]}]]],"forbidden":"$undefined","unauthorized":"$undefined"}],["$","script",null,{"dangerouslySetInnerHTML":{"__html":"\nif ('serviceWorker' in navigator) {\n  window.addEventListener('load', function () {\n    navigator.serviceWorker.register('/algorithm-interview/sw.js').catch(function () {});\n  });\n}\n"}}]]}]]}]]}],{"children":["columns",["$","$1","c",{"children":[null,["$","$L2",null,{"parallelRouterKey":"children","segmentPath":["children","columns","children"],"error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L3",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","forbidden":"$undefined","unauthorized":"$undefined"}]]}],{"children":[["slug","lbd-035","d"],["$","$1","c",{"children":[null,["$","$L2",null,{"parallelRouterKey":"children","segmentPath":["children","columns","children","$0:f:0:1:2:children:2:children:0","children"],"error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L3",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","forbidden":"$undefined","unauthorized":"$undefined"}]]}],{"children":["__PAGE__",["$","$1","c",{"children":["$L4",null,["$","$L5",null,{"children":"$L6"}]]}],{},null,false]},null,false]},null,false]},null,false],["$","$1","h",{"children":[null,["$","$1","gHB4G0rcOOUgVA0OSmWxk",{"children":[["$","$L7",null,{"children":"$L8"}],["$","$L9",null,{"children":"$La"}],null]}]]}],false]],"m":"$undefined","G":["$b","$undefined"],"s":false,"S":true}
+c:I[8173,["173","static/chunks/173-69860a4742bb7020.js","829","static/chunks/829-7533e70598480772.js","306","static/chunks/app/columns/%5Bslug%5D/page-58fc1d8f5085c1ff.js"],""]
+d:I[4780,["173","static/chunks/173-69860a4742bb7020.js","829","static/chunks/829-7533e70598480772.js","306","static/chunks/app/columns/%5Bslug%5D/page-58fc1d8f5085c1ff.js"],"default"]
+e:T297d,# 二叉搜索树操作集锦
+
+⼆叉搜索树操作集锦
+学算法，认准 labuladong 就够了！
+通过之前的⽂章框架思维，⼆叉树的遍历框架应该已经印到你的脑⼦⾥了，
+这篇⽂章就来实操⼀下，看看框架思维是怎么灵活运⽤，秒杀⼀切⼆叉树问
+题的。
+⼆叉树算法的设计的总路线：明确⼀个节点要做的事情，然后剩下的事抛给
+框架。
+void traverse(TreeNode root) {
+    // root 需要做什么？在这做。
+    // 其他的不⽤ root 操⼼，抛给框架
+    traverse(root.left);
+    traverse(root.right);
+}
+举两个简单的例⼦体会⼀下这个思路，热热⾝。
+1. 如何把⼆叉树所有的节点中的值加⼀？
+void plusOne(TreeNode root) {
+    if (root == null) return;
+    root.val += 1;
+    plusOne(root.left);
+    plusOne(root.right);
+}
+2. 如何判断两棵⼆叉树是否完全相同？
+boolean isSameTree(TreeNode root1, TreeNode root2) {
+    // 都为空的话，显然相同
+    if (root1 == null && root2 == null) return true;
+⼆叉搜索树操作集锦
+248
+
+    // ⼀个为空，⼀个⾮空，显然不同
+    if (root1 == null || root2 == null) return false;
+    // 两个都⾮空，但 val 不⼀样也不⾏
+    if (root1.val != root2.val) return false;
+    // root1 和 root2 该⽐的都⽐完了
+    return isSameTree(root1.left, root2.left)
+        && isSameTree(root1.right, root2.right);
+}
+借助框架，上⾯这两个例⼦不难理解吧？如果可以理解，那么所有⼆叉树算
+法你都能解决。
+⼆叉搜索树（Binary Search Tree，简称 BST）是⼀种很常⽤的的⼆叉树。它
+的定义是：⼀个⼆叉树中，任意节点的值要⼤于等于左⼦树所有节点的值，
+且要⼩于等于右边⼦树的所有节点的值。
+如下就是⼀个符合定义的 BST：
+⼆叉搜索树操作集锦
+249
+
+下⾯实现 BST 的基础操作：判断 BST 的合法性、增、删、查。其
+中“删”和“判断合法性”略微复杂。
+零、判断 BST 的合法性
+这⾥是有坑的哦，我们按照刚才的思路，每个节点⾃⼰要做的事不就是⽐较
+⾃⼰和左右孩⼦吗？看起来应该这样写代码：
+boolean isValidBST(TreeNode root) {
+    if (root == null) return true;
+    if (root.left != null && root.val <= root.left.val) return false;
+    if (root.right != null && root.val >= root.right.val) return fals
+e;
+    return isValidBST(root.left)
+        && isValidBST(root.right);
+}
+但是这个算法出现了错误，BST 的每个节点应该要⼩于右边⼦树的所有节
+点，下⾯这个⼆叉树显然不是 BST，但是我们的算法会把它判定为 BST。
+出现错误，不要慌张，框架没有错，⼀定是某个细节问题没注意到。我们重
+新看⼀下 BST 的定义，root 需要做的不只是和左右⼦节点⽐较，⽽是要整
+个左⼦树和右⼦树所有节点⽐较。怎么办，鞭⻓莫及啊！
+⼆叉搜索树操作集锦
+250
+
+这种情况，我们可以使⽤辅助函数，增加函数参数列表，在参数中携带额外
+信息，请看正确的代码：
+boolean isValidBST(TreeNode root) {
+    return isValidBST(root, null, null);
+}
+boolean isValidBST(TreeNode root, TreeNode min, TreeNode max) {
+    if (root == null) return true;
+    if (min != null && root.val <= min.val) return false;
+    if (max != null && root.val >= max.val) return false;
+    return isValidBST(root.left, min, root) 
+        && isValidBST(root.right, root, max);
+}
+⼀、在 BST 中查找⼀个数是否存在
+根据我们的指导思想，可以这样写代码：
+boolean isInBST(TreeNode root, int target) {
+    if (root == null) return false;
+    if (root.val == target) return true;
+    return isInBST(root.left, target)
+        || isInBST(root.right, target);
+}
+这样写完全正确，充分证明了你的框架性思维已经养成。现在你可以考虑⼀
+点细节问题了：如何充分利⽤信息，把 BST 这个“左⼩右⼤”的特性⽤上？
+很简单，其实不需要递归地搜索两边，类似⼆分查找思想，根据 target 和
+root.val 的⼤⼩⽐较，就能排除⼀边。我们把上⾯的思路稍稍改动：
+boolean isInBST(TreeNode root, int target) {
+    if (root == null) return false;
+    if (root.val == target)
+        return true;
+    if (root.val < target) 
+        return isInBST(root.right, target);
+⼆叉搜索树操作集锦
+251
+
+    if (root.val > target)
+        return isInBST(root.left, target);
+    // root 该做的事做完了，顺带把框架也完成了，妙
+}
+于是，我们对原始框架进⾏改造，抽象出⼀套针对 BST 的遍历框架：
+void BST(TreeNode root, int target) {
+    if (root.val == target)
+        // 找到⽬标，做点什么
+    if (root.val < target) 
+        BST(root.right, target);
+    if (root.val > target)
+        BST(root.left, target);
+}
+⼆、在 BST 中插⼊⼀个数
+对数据结构的操作⽆⾮遍历 + 访问，遍历就是“找”，访问就是“改”。具体到
+这个问题，插⼊⼀个数，就是先找到插⼊位置，然后进⾏插⼊操作。
+上⼀个问题，我们总结了 BST 中的遍历框架，就是“找”的问题。直接套框
+架，加上“改”的操作即可。⼀旦涉及“改”，函数就要返回 TreeNode 类型，
+并且对递归调⽤的返回值进⾏接收。
+TreeNode insertIntoBST(TreeNode root, int val) {
+    // 找到空位置插⼊新节点
+    if (root == null) return new TreeNode(val);
+    // if (root.val == val)
+    //     BST 中⼀般不会插⼊已存在元素
+    if (root.val < val) 
+        root.right = insertIntoBST(root.right, val);
+    if (root.val > val) 
+        root.left = insertIntoBST(root.left, val);
+    return root;
+}
+三、在 BST 中删除⼀个数
+⼆叉搜索树操作集锦
+252
+
+这个问题稍微复杂，不过你有框架指导，难不住你。跟插⼊操作类似，
+先“找”再“改”，先把框架写出来再说：
+TreeNode deleteNode(TreeNode root, int key) {
+    if (root.val == key) {
+        // 找到啦，进⾏删除
+    } else if (root.val > key) {
+        root.left = deleteNode(root.left, key);
+    } else if (root.val < key) {
+        root.right = deleteNode(root.right, key);
+    }
+    return root;
+}
+找到⽬标节点了，⽐⽅说是节点 A，如何删除这个节点，这是难点。因为删
+除节点的同时不能破坏 BST 的性质。有三种情况，⽤图⽚来说明。
+情况 1：A 恰好是末端节点，两个⼦节点都为空，那么它可以当场去世了。
+图⽚来⾃ LeetCode 
+if (root.left == null && root.right == null)
+    return null;
+情况 2：A 只有⼀个⾮空⼦节点，那么它要让这个孩⼦接替⾃⼰的位置。
+⼆叉搜索树操作集锦
+253
+
+图⽚来⾃ LeetCode 
+// 排除了情况 1 之后
+if (root.left == null) return root.right;
+if (root.right == null) return root.left;
+情况 3：A 有两个⼦节点，⿇烦了，为了不破坏 BST 的性质，A 必须找到
+左⼦树中最⼤的那个节点，或者右⼦树中最⼩的那个节点来接替⾃⼰。我们
+以第⼆种⽅式讲解。
+图⽚来⾃ LeetCode 
+if (root.left != null && root.right != null) {
+    // 找到右⼦树的最⼩节点
+    TreeNode minNode = getMin(root.right);
+    // 把 root 改成 minNode
+    root.val = minNode.val;
+    // 转⽽去删除 minNode
+    root.right = deleteNode(root.right, minNode.val);
+}
+三种情况分析完毕，填⼊框架，简化⼀下代码：
+⼆叉搜索树操作集锦
+254
+
+TreeNode deleteNode(TreeNode root, int key) {
+    if (root == null) return null;
+    if (root.val == key) {
+        // 这两个 if 把情况 1 和 2 都正确处理了
+        if (root.left == null) return root.right;
+        if (root.right == null) return root.left;
+        // 处理情况 3
+        TreeNode minNode = getMin(root.right);
+        root.val = minNode.val;
+        root.right = deleteNode(root.right, minNode.val);
+    } else if (root.val > key) {
+        root.left = deleteNode(root.left, key);
+    } else if (root.val < key) {
+        root.right = deleteNode(root.right, key);
+    }
+    return root;
+}
+TreeNode getMin(TreeNode node) {
+    // BST 最左边的就是最⼩的
+    while (node.left != null) node = node.left;
+    return node;
+}
+删除操作就完成了。注意⼀下，这个删除操作并不完美，因为我们⼀般不会
+通过 root.val = minNode.val 修改节点内部的值来交换节点，⽽是通过⼀系列
+略微复杂的链表操作交换 root 和 minNode 两个节点。因为具体应⽤中，val
+域可能会很⼤，修改起来很耗时，⽽链表操作⽆⾮改⼀改指针，⽽不会去碰
+内部数据。
+但这⾥忽略这个细节，旨在突出 BST 基本操作的共性，以及借助框架逐层
+细化问题的思维⽅式。
+四、最后总结
+通过这篇⽂章，你学会了如下⼏个技巧：
+1. ⼆叉树算法设计的总路线：把当前节点要做的事做好，其他的交给递归
+框架，不⽤当前节点操⼼。
+⼆叉搜索树操作集锦
+255
+
+2. 如果当前节点会对下⾯的⼦节点有整体影响，可以通过辅助函数增⻓参
+数列表，借助参数传递信息。
+3. 在⼆叉树框架之上，扩展出⼀套 BST 遍历框架：
+void BST(TreeNode root, int target) {
+ if (root.val == target)
+     // 找到⽬标，做点什么
+ if (root.val < target) 
+     BST(root.right, target);
+ if (root.val > target)
+     BST(root.left, target);
+}
+4. 掌握了 BST 的基本操作。
+＿＿＿＿＿＿＿＿＿＿＿＿＿
+刷算法，学套路，认准 labuladong。
+本⼩抄即将出版，关注 labuladong 公众号或 ongline book 查看更新⽂章，
+后台回复「进群」可进刷题群，labuladong 带你⽇穿 LeetCode。
+⼆叉搜索树操作集锦
+256
+
+快速计算完全⼆叉树的节点
+学好算法全靠套路，认准 labuladong 就够了。
+读完本⽂，你不仅学会了算法套路，还可以顺便去 LeetCode 上拿下如下题
+⽬：
+222.完全⼆叉树的节点个数
+如果让你数⼀下⼀棵普通⼆叉树有多少个节点，这很简单，只要在⼆叉树的
+遍历框架上加⼀点代码就⾏了。
+但是，如果给你⼀棵完全⼆叉树，让你计算它的节点个数，你会不会？算法
+的时间复杂度是多少？这个算法的时间复杂度应该是 O(logN*logN)，如果
+你⼼中的算法没有达到⾼效，那么本⽂就是给你写的。
+⾸先要明确⼀下两个关于⼆叉树的名词「完全⼆叉树」和「满⼆叉树」。
+我们说的完全⼆叉树如下图，每⼀层都是紧凑靠左排列的：
+如何计算完全⼆叉树的节点数
+2574:["$","main",null,{"style":{"maxWidth":760,"margin":"0 auto","padding":"16px","minHeight":"100vh"},"children":[["$","$Lc",null,{"href":"/columns/","style":{"display":"inline-block","marginBottom":"12px","fontSize":"13px"},"children":"← 返回专栏"}],["$","div",null,{"style":{"fontSize":"12px","color":"var(--text-tertiary)","marginBottom":"4px"},"children":["📕"," ","labuladong 算法小抄"]}],["$","h1",null,{"style":{"fontSize":"22px","fontWeight":700,"margin":"0 0 16px"},"children":"二叉搜索树操作集锦"}],["$","$Ld",null,{"children":"$e"}],false]}]
+a:[["$","meta","0",{"name":"viewport","content":"width=device-width, initial-scale=1"}],["$","meta","1",{"name":"theme-color","content":"#f97316"}]]
+8:[["$","meta","0",{"charSet":"utf-8"}],["$","title","1",{"children":"二叉搜索树操作集锦 - 算法面试"}],["$","meta","2",{"name":"description","content":"LeetCode 热题 100 完整 Java 题解、逐题动画、知识专栏与智能间隔复习。"}],["$","meta","3",{"name":"application-name","content":"算法面试"}],["$","link","4",{"rel":"manifest","href":"/algorithm-interview/manifest.json","crossOrigin":"$undefined"}],["$","meta","5",{"name":"keywords","content":"LeetCode,热题100,算法面试,Java题解,数据结构,动态规划,面试刷题"}],["$","meta","6",{"name":"mobile-web-app-capable","content":"yes"}],["$","meta","7",{"name":"apple-mobile-web-app-title","content":"算法面试"}],["$","meta","8",{"name":"apple-mobile-web-app-status-bar-style","content":"default"}],["$","meta","9",{"property":"og:title","content":"算法面试题库"}],["$","meta","10",{"property":"og:description","content":"LeetCode 热题 100 完整 Java 题解、逐题动画、知识专栏与智能复习"}],["$","meta","11",{"property":"og:site_name","content":"算法面试题库"}],["$","meta","12",{"property":"og:locale","content":"zh_CN"}],["$","meta","13",{"property":"og:type","content":"website"}],["$","meta","14",{"name":"twitter:card","content":"summary"}],["$","meta","15",{"name":"twitter:title","content":"算法面试题库"}],["$","meta","16",{"name":"twitter:description","content":"LeetCode 热题 100 完整 Java 题解、逐题动画、知识专栏与智能复习"}]]
+6:null

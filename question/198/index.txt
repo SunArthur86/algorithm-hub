@@ -1,0 +1,145 @@
+1:"$Sreact.fragment"
+2:I[5244,[],""]
+3:I[3866,[],""]
+5:I[6213,[],"OutletBoundary"]
+7:I[6213,[],"MetadataBoundary"]
+9:I[6213,[],"ViewportBoundary"]
+b:I[4835,[],""]
+:HL["/algorithm-interview/_next/static/css/c1e787639001e16b.css","style"]
+0:{"P":null,"b":"xos97fAiWtKfKXI6hZLx4","p":"/algorithm-interview","c":["","question","198",""],"i":false,"f":[[["",{"children":["question",{"children":[["lcId","198","d"],{"children":["__PAGE__",{}]}]}]},"$undefined","$undefined",true],["",["$","$1","c",{"children":[[["$","link","0",{"rel":"stylesheet","href":"/algorithm-interview/_next/static/css/c1e787639001e16b.css","precedence":"next","crossOrigin":"$undefined","nonce":"$undefined"}]],["$","html",null,{"lang":"zh","children":[["$","head",null,{"children":["$","script",null,{"dangerouslySetInnerHTML":{"__html":"\ntry {\n  var raw = localStorage.getItem('algo-interview');\n  var theme = 'light';\n  if (raw) { var p = JSON.parse(raw); theme = (p.state && p.state.theme) || 'light'; }\n  if (theme === 'dark') {\n    document.documentElement.classList.add('dark');\n    document.documentElement.setAttribute('data-theme', 'dark');\n  }\n} catch (e) {}\n"}}]}],["$","body",null,{"children":[["$","$L2",null,{"parallelRouterKey":"children","segmentPath":["children"],"error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L3",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":[[],[["$","title",null,{"children":"404: This page could not be found."}],["$","div",null,{"style":{"fontFamily":"system-ui,\"Segoe UI\",Roboto,Helvetica,Arial,sans-serif,\"Apple Color Emoji\",\"Segoe UI Emoji\"","height":"100vh","textAlign":"center","display":"flex","flexDirection":"column","alignItems":"center","justifyContent":"center"},"children":["$","div",null,{"children":[["$","style",null,{"dangerouslySetInnerHTML":{"__html":"body{color:#000;background:#fff;margin:0}.next-error-h1{border-right:1px solid rgba(0,0,0,.3)}@media (prefers-color-scheme:dark){body{color:#fff;background:#000}.next-error-h1{border-right:1px solid rgba(255,255,255,.3)}}"}}],["$","h1",null,{"className":"next-error-h1","style":{"display":"inline-block","margin":"0 20px 0 0","padding":"0 23px 0 0","fontSize":24,"fontWeight":500,"verticalAlign":"top","lineHeight":"49px"},"children":404}],["$","div",null,{"style":{"display":"inline-block"},"children":["$","h2",null,{"style":{"fontSize":14,"fontWeight":400,"lineHeight":"49px","margin":0},"children":"This page could not be found."}]}]]}]}]]],"forbidden":"$undefined","unauthorized":"$undefined"}],["$","script",null,{"dangerouslySetInnerHTML":{"__html":"\nif ('serviceWorker' in navigator) {\n  window.addEventListener('load', function () {\n    navigator.serviceWorker.register('/algorithm-interview/sw.js').catch(function () {});\n  });\n}\n"}}]]}]]}]]}],{"children":["question",["$","$1","c",{"children":[null,["$","$L2",null,{"parallelRouterKey":"children","segmentPath":["children","question","children"],"error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L3",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","forbidden":"$undefined","unauthorized":"$undefined"}]]}],{"children":[["lcId","198","d"],["$","$1","c",{"children":[null,["$","$L2",null,{"parallelRouterKey":"children","segmentPath":["children","question","children","$0:f:0:1:2:children:2:children:0","children"],"error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L3",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","forbidden":"$undefined","unauthorized":"$undefined"}]]}],{"children":["__PAGE__",["$","$1","c",{"children":["$L4",null,["$","$L5",null,{"children":"$L6"}]]}],{},null,false]},null,false]},null,false]},null,false],["$","$1","h",{"children":[null,["$","$1","cwKPbW0TvfxNLdpnzDqLW",{"children":[["$","$L7",null,{"children":"$L8"}],["$","$L9",null,{"children":"$La"}],null]}]]}],false]],"m":"$undefined","G":["$b","$undefined"],"s":false,"S":true}
+c:I[8173,["173","static/chunks/173-69860a4742bb7020.js","829","static/chunks/829-7533e70598480772.js","937","static/chunks/937-ef36a5ac4bc37a7e.js","447","static/chunks/447-06af9414e164c047.js","8","static/chunks/app/question/%5BlcId%5D/page-478b0d2a69e222f2.js"],""]
+d:I[3447,["173","static/chunks/173-69860a4742bb7020.js","829","static/chunks/829-7533e70598480772.js","937","static/chunks/937-ef36a5ac4bc37a7e.js","447","static/chunks/447-06af9414e164c047.js","8","static/chunks/app/question/%5BlcId%5D/page-478b0d2a69e222f2.js"],"default"]
+e:T13b1,# 198. 打家劫舍
+
+> 难度：**Medium** | 分类：动态规划 | 标签：数组, 动态规划
+
+> 🔗 力扣链接：[https://leetcode.cn/problems/house-robber/](https://leetcode.cn/problems/house-robber/)
+
+## 📝 题目描述
+
+给你一个数组 `nums`，`nums[i]` 代表第 i 家的金额。你不能同时抢相邻的两家。求能抢到的最大总金额。
+
+- 题号：198
+- 题目名：打家劫舍
+- 难度：中等
+- 题型：动态规划
+- 为什么选这题：它是最经典的"一维 DP、两个选择"问题——每个位置只有"抢"或"不抢"两个动作，是所有 DP 入门者必须掌握的模板。
+
+## 🧠 思考路径
+
+站在第 i 家门口，有两个选择：
+
+- 抢这家：那第 i-1 家不能抢，最大金额是"前 i-2 家的最大金额 + 当前金额"。
+- 不抢这家：最大金额就是"前 i-1 家的最大金额"。
+
+所以 `dp[i] = max(dp[i-1], dp[i-2] + nums[i])`。
+
+初始化：`dp[0] = nums[0]`，`dp[1] = max(nums[0], nums[1])`。
+
+空间优化：只需要两个变量 `prev2` 和 `prev1` 滚动更新。
+
+## 💻 Java 题解
+
+### 解法 1：动态规划（空间优化）
+
+dp[i]=max(不偷=dp[i-1], 偷=dp[i-2]+nums[i])。两个变量滚动。
+
+- ⏱ 时间复杂度：`O(n)`
+- 💾 空间复杂度：`O(1)`
+
+```java
+class Solution {
+    public int rob(int[] nums) {
+        if (nums.length == 1) return nums[0];
+        int prev2 = nums[0], prev1 = Math.max(nums[0], nums[1]);
+        for (int i = 2; i < nums.length; i++) {
+            int curr = Math.max(prev1, prev2 + nums[i]);
+            prev2 = prev1; prev1 = curr;
+        }
+        return prev1;
+    }
+}
+```
+
+**关键点：**
+- dp[i]=max(dp[i-1], dp[i-2]+nums[i])
+- 偷或不偷两种选择
+- 两个变量滚动
+
+**执行步骤：**
+1. base case: dp[0]=nums[0], dp[1]=max(nums[0],nums[1])
+1. 递推
+1. 返回dp[n-1]
+
+
+## ⚠️ 易错点
+
+- 数组只有 1 个元素时要特殊处理，否则 `nums[1]` 会越界。
+- `prev2` 代表"前 i-2 家的最大值"，`prev1` 代表"前 i-1 家的最大值"，滚动时先更新 `prev2` 再更新 `prev1`。
+- 不能同时抢相邻两家，但可以隔一家抢。
+
+- n=1直接返回nums[0]
+
+## 📊 复杂度分析
+
+- 时间复杂度：`O(n)`，遍历一次。
+- 空间复杂度：`O(1)`，只用了两个变量。
+
+## 🏢 实际业务应用
+
+- 资源调度中的"不相邻选择"问题：比如任务排期中不能连续执行某些任务。
+- 投资决策中的"不能连续两天买入"约束下的最大收益。
+- 日程安排中"不能安排相邻时间段"的最优选择。
+
+- 资源调度中的"不相邻选择"问题：比如任务排期中不能连续执行某些任务。
+- 投资决策中的"不能连续两天买入"约束下的最大收益。
+- 日程安排中"不能安排相邻时间段"的最优选择。
+
+## 📖 形象类比
+
+可以类比成《水浒传》里时迁（鼓上蚤）夜里偷盗。
+
+时迁沿着一条街挨家挨户偷，但有个规矩：不能连续偷两家（太容易被发现）。每到一家门口，他要想：是偷这家（那上一家不能偷，只能用上上家的成果），还是跳过这家（保留上一家的成果）？他每次都选收益更大的方案。
+
+对应关系是：
+
+- "每家的财产"对应 `nums[i]`
+- "偷这家"对应 `prev2 + nums[i]`
+- "跳过这家"对应 `prev1`
+- "选收益更大的"对应 `max(prev1, prev2 + nums[i])`
+
+这段记忆的关键是：每个位置只有两个选择，取较大的那个。
+
+可以类比成《水浒传》里时迁（鼓上蚤）夜里偷盗。
+
+时迁沿着一条街挨家挨户偷，但有个规矩：不能连续偷两家（太容易被发现）。每到一家门口，他要想：是偷这家（那上一家不能偷，只能用上上家的成果），还是跳过这家（保留上一家的成果）？他每次都选收益更大的方案。
+
+对应关系是：
+
+- "每家的财产"对应 `nums[i]`
+- "偷这家"对应 `prev2 + nums[i]`
+- "跳过这家"对应 `prev1`
+- "选收益更大的"对应 `max(prev1, prev2 + nums[i])`
+
+这段记忆的关键是：每个位置只有两个选择，取较大的那个。
+
+小狐狸沿着河边偷鱼。每块石头上放了一筐鱼，但不能连续两块石头都偷（会留下气味）。小狐狸想：偷当前这块（加上隔一块的成果），还是跳过（保留上一块的成果）？每次选更多的那个。
+
+小狐狸沿着河边偷鱼。每块石头上放了一筐鱼，但不能连续两块石头都偷（会留下气味）。小狐狸想：偷当前这块（加上隔一块的成果），还是跳过（保留上一块的成果）？每次选更多的那个。
+
+## 🎵 记忆口诀
+
+抢就加前前，不抢就前，取最大值。
+
+抢就加前前，不抢就前，取最大值。
+
+## 🔗 延伸练习
+
+- `213. 打家劫舍 II`：街道变成环形，首尾不能同时抢。
+- `337. 打家劫舍 III`：从数组变成二叉树，需要树形 DP。
+
+- `213. 打家劫舍 II`：街道变成环形，首尾不能同时抢。
+- `337. 打家劫舍 III`：从数组变成二叉树，需要树形 DP。4:["$","main",null,{"className":"detail-main","style":{"maxWidth":760,"margin":"0 auto","padding":"16px","minHeight":"100vh"},"children":[["$","$Lc",null,{"href":"/","style":{"display":"inline-block","marginBottom":"12px","fontSize":"13px"},"children":"← 返回题库"}],["$","h1",null,{"style":{"fontSize":"22px","fontWeight":700,"margin":"0 0 4px"},"children":[["$","span",null,{"style":{"marginRight":"6px"},"children":"🧩"}],198,". ","打家劫舍"]}],["$","$Ld",null,{"q":{"id":"0198","lcId":198,"slug":"house-robber","title":"打家劫舍","question":"打家劫舍","answer":"$e","difficulty":"Medium","category":"dynamic-programming","categories":["dynamic-programming"],"tags":["数组","动态规划"],"url":"https://leetcode.cn/problems/house-robber/","planOrder":83,"hasViz":true,"hasDiagram":false,"feynman":{"essence":"给你一个数组 `nums`，`nums[i]` 代表第 i 家的金额。你不能同时抢相邻的两家。求能抢到的最大总金额。","analogy":"","key_points":[]},"first_principle":{"problem":"","axioms":[],"rebuild":""}}}]]}]
+a:[["$","meta","0",{"name":"viewport","content":"width=device-width, initial-scale=1"}],["$","meta","1",{"name":"theme-color","content":"#f97316"}]]
+8:[["$","meta","0",{"charSet":"utf-8"}],["$","title","1",{"children":"198. 打家劫舍 - 算法面试"}],["$","meta","2",{"name":"description","content":"给你一个数组 `nums`，`nums[i]` 代表第 i 家的金额。你不能同时抢相邻的两家。求能抢到的最大总金额。"}],["$","meta","3",{"name":"application-name","content":"算法面试"}],["$","link","4",{"rel":"manifest","href":"/algorithm-interview/manifest.json","crossOrigin":"$undefined"}],["$","meta","5",{"name":"keywords","content":"打家劫舍,LeetCode 198,Medium,数组,动态规划"}],["$","meta","6",{"name":"mobile-web-app-capable","content":"yes"}],["$","meta","7",{"name":"apple-mobile-web-app-title","content":"算法面试"}],["$","meta","8",{"name":"apple-mobile-web-app-status-bar-style","content":"default"}],["$","meta","9",{"property":"og:title","content":"198. 打家劫舍"}],["$","meta","10",{"property":"og:description","content":"给你一个数组 `nums`，`nums[i]` 代表第 i 家的金额。你不能同时抢相邻的两家。求能抢到的最大总金额。"}],["$","meta","11",{"property":"og:locale","content":"zh_CN"}],["$","meta","12",{"property":"og:type","content":"article"}],["$","meta","13",{"name":"twitter:card","content":"summary"}],["$","meta","14",{"name":"twitter:title","content":"198. 打家劫舍"}],["$","meta","15",{"name":"twitter:description","content":"给你一个数组 `nums`，`nums[i]` 代表第 i 家的金额。你不能同时抢相邻的两家。求能抢到的最大总金额。"}]]
+6:null

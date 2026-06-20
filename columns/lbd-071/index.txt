@@ -1,0 +1,239 @@
+1:"$Sreact.fragment"
+2:I[5244,[],""]
+3:I[3866,[],""]
+5:I[6213,[],"OutletBoundary"]
+7:I[6213,[],"MetadataBoundary"]
+9:I[6213,[],"ViewportBoundary"]
+b:I[4835,[],""]
+:HL["/algorithm-interview/_next/static/css/c1e787639001e16b.css","style"]
+0:{"P":null,"b":"xos97fAiWtKfKXI6hZLx4","p":"/algorithm-interview","c":["","columns","lbd-071",""],"i":false,"f":[[["",{"children":["columns",{"children":[["slug","lbd-071","d"],{"children":["__PAGE__",{}]}]}]},"$undefined","$undefined",true],["",["$","$1","c",{"children":[[["$","link","0",{"rel":"stylesheet","href":"/algorithm-interview/_next/static/css/c1e787639001e16b.css","precedence":"next","crossOrigin":"$undefined","nonce":"$undefined"}]],["$","html",null,{"lang":"zh","children":[["$","head",null,{"children":["$","script",null,{"dangerouslySetInnerHTML":{"__html":"\ntry {\n  var raw = localStorage.getItem('algo-interview');\n  var theme = 'light';\n  if (raw) { var p = JSON.parse(raw); theme = (p.state && p.state.theme) || 'light'; }\n  if (theme === 'dark') {\n    document.documentElement.classList.add('dark');\n    document.documentElement.setAttribute('data-theme', 'dark');\n  }\n} catch (e) {}\n"}}]}],["$","body",null,{"children":[["$","$L2",null,{"parallelRouterKey":"children","segmentPath":["children"],"error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L3",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":[[],[["$","title",null,{"children":"404: This page could not be found."}],["$","div",null,{"style":{"fontFamily":"system-ui,\"Segoe UI\",Roboto,Helvetica,Arial,sans-serif,\"Apple Color Emoji\",\"Segoe UI Emoji\"","height":"100vh","textAlign":"center","display":"flex","flexDirection":"column","alignItems":"center","justifyContent":"center"},"children":["$","div",null,{"children":[["$","style",null,{"dangerouslySetInnerHTML":{"__html":"body{color:#000;background:#fff;margin:0}.next-error-h1{border-right:1px solid rgba(0,0,0,.3)}@media (prefers-color-scheme:dark){body{color:#fff;background:#000}.next-error-h1{border-right:1px solid rgba(255,255,255,.3)}}"}}],["$","h1",null,{"className":"next-error-h1","style":{"display":"inline-block","margin":"0 20px 0 0","padding":"0 23px 0 0","fontSize":24,"fontWeight":500,"verticalAlign":"top","lineHeight":"49px"},"children":404}],["$","div",null,{"style":{"display":"inline-block"},"children":["$","h2",null,{"style":{"fontSize":14,"fontWeight":400,"lineHeight":"49px","margin":0},"children":"This page could not be found."}]}]]}]}]]],"forbidden":"$undefined","unauthorized":"$undefined"}],["$","script",null,{"dangerouslySetInnerHTML":{"__html":"\nif ('serviceWorker' in navigator) {\n  window.addEventListener('load', function () {\n    navigator.serviceWorker.register('/algorithm-interview/sw.js').catch(function () {});\n  });\n}\n"}}]]}]]}]]}],{"children":["columns",["$","$1","c",{"children":[null,["$","$L2",null,{"parallelRouterKey":"children","segmentPath":["children","columns","children"],"error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L3",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","forbidden":"$undefined","unauthorized":"$undefined"}]]}],{"children":[["slug","lbd-071","d"],["$","$1","c",{"children":[null,["$","$L2",null,{"parallelRouterKey":"children","segmentPath":["children","columns","children","$0:f:0:1:2:children:2:children:0","children"],"error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L3",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","forbidden":"$undefined","unauthorized":"$undefined"}]]}],{"children":["__PAGE__",["$","$1","c",{"children":["$L4",null,["$","$L5",null,{"children":"$L6"}]]}],{},null,false]},null,false]},null,false]},null,false],["$","$1","h",{"children":[null,["$","$1","YN0qijTwQTeT81qHKuJJT",{"children":[["$","$L7",null,{"children":"$L8"}],["$","$L9",null,{"children":"$La"}],null]}]]}],false]],"m":"$undefined","G":["$b","$undefined"],"s":false,"S":true}
+c:I[8173,["173","static/chunks/173-69860a4742bb7020.js","829","static/chunks/829-7533e70598480772.js","306","static/chunks/app/columns/%5Bslug%5D/page-58fc1d8f5085c1ff.js"],""]
+d:I[4780,["173","static/chunks/173-69860a4742bb7020.js","829","static/chunks/829-7533e70598480772.js","306","static/chunks/app/columns/%5Bslug%5D/page-58fc1d8f5085c1ff.js"],"default"]
+e:T288e,# 如何调度考生的座位
+
+如何调度考⽣的座位
+学算法，认准 labuladong 就够了！
+这是 LeetCode 第 885 题，有趣且具有⼀定技巧性。这种题⽬并不像动态规
+划这类算法拼智商，⽽是看你对常⽤数据结构的理解和写代码的⽔平，个⼈
+认为值得重视和学习。
+另外说句题外话，很多读者都问，算法框架是如何总结出来的，其实框架反
+⽽是慢慢从细节⾥抠出来的。希望⼤家看了我们的⽂章之后，最好能抽时间
+把相关的问题亲⾃做⼀做，纸上得来终觉浅，绝知此事要躬⾏嘛。
+先来描述⼀下题⽬：假设有⼀个考场，考场有⼀排共  N  个座位，索引分别
+是  [0..N-1] ，考⽣会陆续进⼊考场考试，并且可能在任何时候离开考场。
+你作为考官，要安排考⽣们的座位，满⾜：每当⼀个学⽣进⼊时，你需要最
+⼤化他和最近其他⼈的距离；如果有多个这样的座位，安排到他到索引最⼩
+的那个座位。这很符合实际情况对吧，
+也就是请你实现下⾯这样⼀个类：
+class ExamRoom {
+    // 构造函数，传⼊座位总数 N
+    public ExamRoom(int N);
+    // 来了⼀名考⽣，返回你给他分配的座位
+    public int seat();
+    // 坐在 p 位置的考⽣离开了
+    // 可以认为 p 位置⼀定坐有考⽣
+    public void leave(int p);
+}
+⽐⽅说考场有 5 个座位，分别是  [0..4] ：
+第⼀名考⽣进⼊时（调⽤  seat() ），坐在任何位置都⾏，但是要给他安排
+索引最⼩的位置，也就是返回位置 0。
+如何调度考⽣的座位
+472
+
+第⼆名学⽣进⼊时（再调⽤  seat() ），要和旁边的⼈距离最远，也就是返
+回位置 4。
+第三名学⽣进⼊时，要和旁边的⼈距离最远，应该做到中间，也就是座位
+2。
+如果再进⼀名学⽣，他可以坐在座位 1 或者 3，取较⼩的索引 1。
+以此类推。
+刚才所说的情况，没有调⽤  leave  函数，不过读者肯定能够发现规律：
+如果将每两个相邻的考⽣看做线段的两端点，新安排考⽣就是找最⻓的线
+段，然后让该考⽣在中间把这个线段「⼆分」，中点就是给他分配的座
+位。 leave(p)  其实就是去除端点  p ，使得相邻两个线段合并为⼀个。
+核⼼思路很简单对吧，所以这个问题实际上实在考察你对数据结构的理解。
+对于上述这个逻辑，你⽤什么数据结构来实现呢？
+⼀、思路分析
+根据上述思路，⾸先需要把坐在教室的学⽣抽象成线段，我们可以简单的⽤
+⼀个⼤⼩为 2 的数组表⽰。
+另外，思路需要我们找到「最⻓」的线段，还需要去除线段，增加线段。
+但凡遇到在动态过程中取最值的要求，肯定要使⽤有序数据结构，我们常⽤
+的数据结构就是⼆叉堆和平衡⼆叉搜索树了。⼆叉堆实现的优先级队列取最
+值的时间复杂度是 O(logN)，但是只能删除最⼤值。平衡⼆叉树也可以取最
+值，也可以修改、删除任意⼀个值，⽽且时间复杂度都是 O(logN)。
+综上，⼆叉堆不能满⾜  leave  操作，应该使⽤平衡⼆叉树。所以这⾥我们
+会⽤到 Java 的⼀种数据结构  TreeSet ，这是⼀种有序数据结构，底层由红
+⿊树维护有序性。
+如何调度考⽣的座位
+473
+
+这⾥顺便提⼀下，⼀说到集合（Set）或者映射（Map），有的读者可能就
+想当然的认为是哈希集合（HashSet）或者哈希表（HashMap），这样理解
+是有点问题的。
+因为哈希集合/映射底层是由哈希函数和数组实现的，特性是遍历⽆固定顺
+序，但是操作效率⾼，时间复杂度为 O(1)。
+⽽集合/映射还可以依赖其他底层数据结构，常⻅的就是红⿊树（⼀种平衡
+⼆叉搜索树），特性是⾃动维护其中元素的顺序，操作效率是 O(logN)。这
+种⼀般称为「有序集合/映射」。
+我们使⽤的  TreeSet  就是⼀个有序集合，⽬的就是为了保持线段⻓度的有
+序性，快速查找最⼤线段，快速删除和插⼊。
+⼆、简化问题
+⾸先，如果有多个可选座位，需要选择索引最⼩的座位对吧？我们先简化⼀
+下问题，暂时不管这个要求，实现上述思路。
+这个问题还⽤到⼀个常⽤的编程技巧，就是使⽤⼀个「虚拟线段」让算法正
+确启动，这就和链表相关的算法需要「虚拟头结点」⼀个道理。
+// 将端点 p 映射到以 p 为左端点的线段
+private Map<Integer, int[]> startMap;
+// 将端点 p 映射到以 p 为右端点的线段
+private Map<Integer, int[]> endMap;
+// 根据线段⻓度从⼩到⼤存放所有线段
+private TreeSet<int[]> pq;
+private int N;
+public ExamRoom(int N) {
+    this.N = N;
+    startMap = new HashMap<>();
+    endMap = new HashMap<>();
+    pq = new TreeSet<>((a, b) -> {
+        // 算出两个线段的⻓度
+        int distA = distance(a);
+        int distB = distance(b);
+如何调度考⽣的座位
+474
+
+        // ⻓度更⻓的更⼤，排后⾯
+        return distA - distB;
+    });
+    // 在有序集合中先放⼀个虚拟线段
+    addInterval(new int[] {-1, N});
+}
+/* 去除⼀个线段 */
+private void removeInterval(int[] intv) {
+    pq.remove(intv);
+    startMap.remove(intv[0]);
+    endMap.remove(intv[1]);
+}
+/* 增加⼀个线段 */
+private void addInterval(int[] intv) {
+    pq.add(intv);
+    startMap.put(intv[0], intv);
+    endMap.put(intv[1], intv);
+}
+/* 计算⼀个线段的⻓度 */
+private int distance(int[] intv) {
+    return intv[1] - intv[0] - 1;
+}
+「虚拟线段」其实就是为了将所有座位表⽰为⼀个线段：
+如何调度考⽣的座位
+475
+
+有了上述铺垫，主要 API  seat  和  leave  就可以写了：
+public int seat() {
+    // 从有序集合拿出最⻓的线段
+    int[] longest = pq.last();
+    int x = longest[0];
+    int y = longest[1];
+    int seat;
+    if (x == -1) { // 情况⼀
+        seat = 0;
+    } else if (y == N) { // 情况⼆
+        seat = N - 1;
+    } else { // 情况三
+        seat = (y - x) / 2 + x;
+    }
+    // 将最⻓的线段分成两段
+    int[] left = new int[] {x, seat};
+    int[] right = new int[] {seat, y};
+    removeInterval(longest);
+    addInterval(left);
+    addInterval(right);
+    return seat;
+}
+public void leave(int p) {
+    // 将 p 左右的线段找出来
+如何调度考⽣的座位
+476
+
+    int[] right = startMap.get(p);
+    int[] left = endMap.get(p);
+    // 合并两个线段成为⼀个线段
+    int[] merged = new int[] {left[0], right[1]};
+    removeInterval(left);
+    removeInterval(right);
+    addInterval(merged);
+}
+⾄此，算法就基本实现了，代码虽多，但思路很简单：找最⻓的线段，从中
+间分隔成两段，中点就是  seat()  的返回值；找  p  的左右线段，合并成⼀
+个线段，这就是  leave(p)  的逻辑。
+三、进阶问题
+但是，题⽬要求多个选择时选择索引最⼩的那个座位，我们刚才忽略了这个
+问题。⽐如下⾯这种情况会出错：
+如何调度考⽣的座位
+477
+
+现在有序集合⾥有线段  [0,4]  和  [4,9] ，那么最⻓线段  longest  就是后
+者，按照  seat  的逻辑，就会分割  [4,9] ，也就是返回座位 6。但正确答
+案应该是座位 2，因为 2 和 6 都满⾜最⼤化相邻考⽣距离的条件，⼆者应该
+取较⼩的。
+遇到题⽬的这种要求，解决⽅式就是修改有序数据结构的排序⽅式。具体到
+这个问题，就是修改  TreeMap  的⽐较函数逻辑：
+如何调度考⽣的座位
+478
+
+pq = new TreeSet<>((a, b) -> {
+    int distA = distance(a);
+    int distB = distance(b);
+    // 如果⻓度相同，就⽐较索引
+    if (distA == distB)
+        return b[0] - a[0];
+    return distA - distB;
+});
+除此之外，还要改变  distance  函数，不能简单地让它计算⼀个线段两个端
+点间的⻓度，⽽是让它计算该线段中点和端点之间的⻓度。
+private int distance(int[] intv) {
+    int x = intv[0];
+    int y = intv[1];
+    if (x == -1) return y;
+    if (y == N) return N - 1 - x;
+    // 中点和端点之间的⻓度
+    return (y - x) / 2;
+}
+这样， [0,4]  和  [4,9]  的  distance  值就相等了，算法会⽐较⼆者的索
+引，取较⼩的线段进⾏分割。到这⾥，这道算法题⽬算是完全解决了。
+如何调度考⽣的座位
+479
+
+四、最后总结
+本⽂聊的这个问题其实并不算难，虽然看起来代码很多。核⼼问题就是考察
+有序数据结构的理解和使⽤，来梳理⼀下。
+处理动态问题⼀般都会⽤到有序数据结构，⽐如平衡⼆叉搜索树和⼆叉堆，
+⼆者的时间复杂度差不多，但前者⽀持的操作更多。
+既然平衡⼆叉搜索树这么好⽤，还⽤⼆叉堆⼲嘛呢？因为⼆叉堆底层就是数
+组，实现简单啊，详⻅旧⽂「⼆叉堆详解」。你实现个红⿊树试试？操作复
+杂，⽽且消耗的空间相对来说会多⼀些。具体问题，还是要选择恰当的数据
+结构来解决。
+希望本⽂对⼤家有帮助。
+＿＿＿＿＿＿＿＿＿＿＿＿＿
+刷算法，学套路，认准 labuladong。
+本⼩抄即将出版，关注 labuladong 公众号或 ongline book 查看更新⽂章，
+后台回复「进群」可进刷题群，labuladong 带你⽇穿 LeetCode。
+如何调度考⽣的座位
+480
+
+Union-Find算法详解
+学算法，认准 labuladong 就够了！
+今天讲讲 Union-Find 算法，也就是常说的并查集算法，主要是解决图论中
+「动态连通性」问题的。名词很⾼端，其实特别好理解，等会解释，另外这
+个算法的应⽤都⾮常有趣。
+说起这个 Union-Find，应该算是我的「启蒙算法」了，因为《算法4》的开
+头就介绍了这款算法，可是把我秀翻了，感觉好精妙啊！后来刷了
+LeetCode，并查集相关的算法题⽬都⾮常有意思，⽽且《算法4》给的解法
+竟然还可以进⼀步优化，只要加⼀个微⼩的修改就可以把时间复杂度降到
+O(1)。
+废话不多说，直接上⼲货，先解释⼀下什么叫动态连通性吧。
+⼀、问题介绍
+简单说，动态连通性其实可以抽象成给⼀幅图连线。⽐如下⾯这幅图，总共
+有 10 个节点，他们互不相连，分别⽤ 0~9 标记：
+Union-Find算法详解
+4814:["$","main",null,{"style":{"maxWidth":760,"margin":"0 auto","padding":"16px","minHeight":"100vh"},"children":[["$","$Lc",null,{"href":"/columns/","style":{"display":"inline-block","marginBottom":"12px","fontSize":"13px"},"children":"← 返回专栏"}],["$","div",null,{"style":{"fontSize":"12px","color":"var(--text-tertiary)","marginBottom":"4px"},"children":["📕"," ","labuladong 算法小抄"]}],["$","h1",null,{"style":{"fontSize":"22px","fontWeight":700,"margin":"0 0 16px"},"children":"如何调度考生的座位"}],["$","$Ld",null,{"children":"$e"}],false]}]
+a:[["$","meta","0",{"name":"viewport","content":"width=device-width, initial-scale=1"}],["$","meta","1",{"name":"theme-color","content":"#f97316"}]]
+8:[["$","meta","0",{"charSet":"utf-8"}],["$","title","1",{"children":"如何调度考生的座位 - 算法面试"}],["$","meta","2",{"name":"description","content":"LeetCode 热题 100 完整 Java 题解、逐题动画、知识专栏与智能间隔复习。"}],["$","meta","3",{"name":"application-name","content":"算法面试"}],["$","link","4",{"rel":"manifest","href":"/algorithm-interview/manifest.json","crossOrigin":"$undefined"}],["$","meta","5",{"name":"keywords","content":"LeetCode,热题100,算法面试,Java题解,数据结构,动态规划,面试刷题"}],["$","meta","6",{"name":"mobile-web-app-capable","content":"yes"}],["$","meta","7",{"name":"apple-mobile-web-app-title","content":"算法面试"}],["$","meta","8",{"name":"apple-mobile-web-app-status-bar-style","content":"default"}],["$","meta","9",{"property":"og:title","content":"算法面试题库"}],["$","meta","10",{"property":"og:description","content":"LeetCode 热题 100 完整 Java 题解、逐题动画、知识专栏与智能复习"}],["$","meta","11",{"property":"og:site_name","content":"算法面试题库"}],["$","meta","12",{"property":"og:locale","content":"zh_CN"}],["$","meta","13",{"property":"og:type","content":"website"}],["$","meta","14",{"name":"twitter:card","content":"summary"}],["$","meta","15",{"name":"twitter:title","content":"算法面试题库"}],["$","meta","16",{"name":"twitter:description","content":"LeetCode 热题 100 完整 Java 题解、逐题动画、知识专栏与智能复习"}]]
+6:null

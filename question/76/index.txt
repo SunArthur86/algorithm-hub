@@ -1,0 +1,162 @@
+1:"$Sreact.fragment"
+2:I[5244,[],""]
+3:I[3866,[],""]
+5:I[6213,[],"OutletBoundary"]
+7:I[6213,[],"MetadataBoundary"]
+9:I[6213,[],"ViewportBoundary"]
+b:I[4835,[],""]
+:HL["/algorithm-interview/_next/static/css/c1e787639001e16b.css","style"]
+0:{"P":null,"b":"xos97fAiWtKfKXI6hZLx4","p":"/algorithm-interview","c":["","question","76",""],"i":false,"f":[[["",{"children":["question",{"children":[["lcId","76","d"],{"children":["__PAGE__",{}]}]}]},"$undefined","$undefined",true],["",["$","$1","c",{"children":[[["$","link","0",{"rel":"stylesheet","href":"/algorithm-interview/_next/static/css/c1e787639001e16b.css","precedence":"next","crossOrigin":"$undefined","nonce":"$undefined"}]],["$","html",null,{"lang":"zh","children":[["$","head",null,{"children":["$","script",null,{"dangerouslySetInnerHTML":{"__html":"\ntry {\n  var raw = localStorage.getItem('algo-interview');\n  var theme = 'light';\n  if (raw) { var p = JSON.parse(raw); theme = (p.state && p.state.theme) || 'light'; }\n  if (theme === 'dark') {\n    document.documentElement.classList.add('dark');\n    document.documentElement.setAttribute('data-theme', 'dark');\n  }\n} catch (e) {}\n"}}]}],["$","body",null,{"children":[["$","$L2",null,{"parallelRouterKey":"children","segmentPath":["children"],"error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L3",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":[[],[["$","title",null,{"children":"404: This page could not be found."}],["$","div",null,{"style":{"fontFamily":"system-ui,\"Segoe UI\",Roboto,Helvetica,Arial,sans-serif,\"Apple Color Emoji\",\"Segoe UI Emoji\"","height":"100vh","textAlign":"center","display":"flex","flexDirection":"column","alignItems":"center","justifyContent":"center"},"children":["$","div",null,{"children":[["$","style",null,{"dangerouslySetInnerHTML":{"__html":"body{color:#000;background:#fff;margin:0}.next-error-h1{border-right:1px solid rgba(0,0,0,.3)}@media (prefers-color-scheme:dark){body{color:#fff;background:#000}.next-error-h1{border-right:1px solid rgba(255,255,255,.3)}}"}}],["$","h1",null,{"className":"next-error-h1","style":{"display":"inline-block","margin":"0 20px 0 0","padding":"0 23px 0 0","fontSize":24,"fontWeight":500,"verticalAlign":"top","lineHeight":"49px"},"children":404}],["$","div",null,{"style":{"display":"inline-block"},"children":["$","h2",null,{"style":{"fontSize":14,"fontWeight":400,"lineHeight":"49px","margin":0},"children":"This page could not be found."}]}]]}]}]]],"forbidden":"$undefined","unauthorized":"$undefined"}],["$","script",null,{"dangerouslySetInnerHTML":{"__html":"\nif ('serviceWorker' in navigator) {\n  window.addEventListener('load', function () {\n    navigator.serviceWorker.register('/algorithm-interview/sw.js').catch(function () {});\n  });\n}\n"}}]]}]]}]]}],{"children":["question",["$","$1","c",{"children":[null,["$","$L2",null,{"parallelRouterKey":"children","segmentPath":["children","question","children"],"error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L3",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","forbidden":"$undefined","unauthorized":"$undefined"}]]}],{"children":[["lcId","76","d"],["$","$1","c",{"children":[null,["$","$L2",null,{"parallelRouterKey":"children","segmentPath":["children","question","children","$0:f:0:1:2:children:2:children:0","children"],"error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L3",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","forbidden":"$undefined","unauthorized":"$undefined"}]]}],{"children":["__PAGE__",["$","$1","c",{"children":["$L4",null,["$","$L5",null,{"children":"$L6"}]]}],{},null,false]},null,false]},null,false]},null,false],["$","$1","h",{"children":[null,["$","$1","TOHyPAlhmSUdMMIRiJnvg",{"children":[["$","$L7",null,{"children":"$L8"}],["$","$L9",null,{"children":"$La"}],null]}]]}],false]],"m":"$undefined","G":["$b","$undefined"],"s":false,"S":true}
+c:I[8173,["173","static/chunks/173-69860a4742bb7020.js","829","static/chunks/829-7533e70598480772.js","937","static/chunks/937-ef36a5ac4bc37a7e.js","447","static/chunks/447-06af9414e164c047.js","8","static/chunks/app/question/%5BlcId%5D/page-478b0d2a69e222f2.js"],""]
+d:I[3447,["173","static/chunks/173-69860a4742bb7020.js","829","static/chunks/829-7533e70598480772.js","937","static/chunks/937-ef36a5ac4bc37a7e.js","447","static/chunks/447-06af9414e164c047.js","8","static/chunks/app/question/%5BlcId%5D/page-478b0d2a69e222f2.js"],"default"]
+e:T1ea9,# 76. 最小覆盖子串
+
+> 难度：**Hard** | 分类：子串 | 标签：哈希表, 字符串, 滑动窗口
+
+> 🔗 力扣链接：[https://leetcode.cn/problems/minimum-window-substring/](https://leetcode.cn/problems/minimum-window-substring/)
+
+## 📝 题目描述
+
+给你两个字符串 `s` 和 `t`。在 `s` 中找一个最短的连续子串，使得这个子串包含了 `t` 中所有字符（包括重复字符）。返回这个子串，如果不存在就返回空串。
+
+比如 `s = "ADOBECODEBANC"`，`t = "ABC"`，答案是 `"BANC"`，因为它包含了 `A`、`B`、`C` 各至少一个，而且是所有满足条件中最短的。
+
+- 题号：76
+- 题目名：最小覆盖子串
+- 难度：困难
+- 题型：滑动窗口
+- 为什么选这题：它是滑动窗口的标杆题，涵盖了窗口扩张、收缩、合法性判断三大核心操作。
+
+## 🧠 思考路径
+
+暴力方法是枚举所有子串逐一检查，`O(n²)`。但可以用滑动窗口优化。
+
+关键思路：用两个指针 `left` 和 `right` 维护一个窗口。先不断右移 `right` 扩大窗口，直到窗口包含了 `t` 的所有字符；然后尝试右移 `left` 缩小窗口，直到窗口不再满足条件。每次窗口满足条件时记录最小长度。
+
+为了高效判断"窗口是否包含了 `t` 的所有字符"，用两个哈希表（或数组）分别统计 `t` 需要的字符频率和当前窗口中的字符频率。用一个计数器 `formed` 追踪已经满足要求的字符种类数。
+
+## 💻 Java 题解
+
+### 解法 1：滑动窗口（模板）
+
+用两个指针维护窗口。右指针扩展直到窗口包含 t 的所有字符，然后左指针收缩到最短。用 needMap 和 have 计数器跟踪。
+
+- ⏱ 时间复杂度：`O(n)`
+- 💾 空间复杂度：`O(m)`
+
+```java
+class Solution {
+    public String minWindow(String s, String t) {
+        Map<Character, Integer> need = new HashMap<>();
+        Map<Character, Integer> window = new HashMap<>();
+        for (char c : t.toCharArray()) need.merge(c, 1, Integer::sum);
+        int left = 0, right = 0, valid = 0;
+        int start = 0, minLen = Integer.MAX_VALUE;
+        while (right < s.length()) {
+            char c = s.charAt(right++);
+            if (need.containsKey(c)) {
+                window.merge(c, 1, Integer::sum);
+                if (window.get(c).equals(need.get(c))) valid++;
+            }
+            // 所有字符都满足时收缩
+            while (valid == need.size()) {
+                if (right - left < minLen) {
+                    start = left;
+                    minLen = right - left;
+                }
+                char d = s.charAt(left++);
+                if (need.containsKey(d)) {
+                    if (window.get(d).equals(need.get(d))) valid--;
+                    window.merge(d, -1, Integer::sum);
+                }
+            }
+        }
+        return minLen == Integer.MAX_VALUE ? "" : s.substring(start, start + minLen);
+    }
+}
+```
+
+**关键点：**
+- need 记录需要的字符及数量
+- valid 记录已满足的字符种类数
+- 先扩展再收缩的滑动窗口模板
+
+**执行步骤：**
+1. 统计 t 的字符频率
+1. 右指针扩展加入字符
+1. valid==need.size() 时开始收缩
+1. 收缩时更新最短长度
+
+
+## ⚠️ 易错点
+
+- `formed` 的更新时机：是 `window[ch] == need[ch]` 时才加一，不是 `>=`。否则会重复计数。
+- 缩小窗口时 `formed--` 的条件：是 `window[ch] < need[ch]`，即某个字符的窗口数量跌破需求量。
+- `t` 中可能有重复字符，所以需求量可能大于 `1`，不能用"字符是否存在"来判断。
+- 空串或 `s` 比 `t` 短的情况要提前返回。
+
+- valid 是满足的种类数不是总数
+
+- 收缩后要检查 valid 是否仍满足
+
+## 📊 复杂度分析
+
+- 时间复杂度：`O(|s| + |t|)`。左右指针各最多遍历 `s` 一次。
+- 空间复杂度：`O(1)`。字符集有限（ASCII 或 Unicode），哈希表大小固定。
+
+## 🏢 实际业务应用
+
+- 搜索引擎的关键词高亮：用户输入多个搜索词，要在文档中找到包含所有关键词的最短片段，高亮显示为"最佳摘要"。
+- 生物信息学的序列匹配：在 DNA 序列中寻找包含特定碱基组合的最短片段，用于基因定位。
+- 网络安全的关键词检测：在流量数据中检测包含一组敏感关键字的最小窗口，定位可疑通信片段。
+- 实时字幕的上下文截取：从连续语音识别结果中提取包含关键词的最短句子作为摘要。
+
+- 搜索引擎的关键词高亮：用户输入多个搜索词，要在文档中找到包含所有关键词的最短片段，高亮显示为"最佳摘要"。
+- 生物信息学的序列匹配：在 DNA 序列中寻找包含特定碱基组合的最短片段，用于基因定位。
+- 网络安全的关键词检测：在流量数据中检测包含一组敏感关键字的最小窗口，定位可疑通信片段。
+- 实时字幕的上下文截取：从连续语音识别结果中提取包含关键词的最短句子作为摘要。
+
+## 📖 形象类比
+
+可以类比《西游记》里唐僧取经需要集齐三件法器（`t` 中的字符）。
+
+唐僧一路西行（右指针移动），沿途收集法器。当三件都集齐后，他尝试把走过的路缩短——如果不回头走某段路也能集齐三件，那就从起点砍掉那段（左指针移动）。这样不断调整，最终找到最短的一段路程。
+
+对应关系：
+
+- "三件法器"对应 `t` 中的字符集
+- "西行沿途"对应右指针扫描 `s`
+- "砍掉不必要的路程"对应左指针收缩窗口
+- "集齐三件的最短路程"对应最小覆盖子串
+
+可以类比《西游记》里唐僧取经需要集齐三件法器（`t` 中的字符）。
+
+唐僧一路西行（右指针移动），沿途收集法器。当三件都集齐后，他尝试把走过的路缩短——如果不回头走某段路也能集齐三件，那就从起点砍掉那段（左指针移动）。这样不断调整，最终找到最短的一段路程。
+
+对应关系：
+
+- "三件法器"对应 `t` 中的字符集
+- "西行沿途"对应右指针扫描 `s`
+- "砍掉不必要的路程"对应左指针收缩窗口
+- "集齐三件的最短路程"对应最小覆盖子串
+
+小鹿在森林超市采购食材，菜单上写着需要面粉、鸡蛋和黄油。它推着购物车从货架一头走到另一头，遇到需要的食材就放进去。当三样都凑齐了，它开始回头看看——从车头到车尾中间有没有哪段可以不经过？如果能省掉开头的一段路程也还是三样齐全，那就把起点往后挪。最后它找到了最短的一条购物路线。
+
+小鹿在森林超市采购食材，菜单上写着需要面粉、鸡蛋和黄油。它推着购物车从货架一头走到另一头，遇到需要的食材就放进去。当三样都凑齐了，它开始回头看看——从车头到车尾中间有没有哪段可以不经过？如果能省掉开头的一段路程也还是三样齐全，那就把起点往后挪。最后它找到了最短的一条购物路线。
+
+## 🎵 记忆口诀
+
+右扩窗口凑齐字符，左缩窗口寻找最短；formed 计数追进度，需求窗口两表对。
+
+右扩窗口凑齐字符，左缩窗口寻找最短；formed 计数追进度，需求窗口两表对。
+
+## 🔗 延伸练习
+
+- `209. 长度最小的子数组`：简化版的最小窗口，目标从"包含指定字符"变成"总和大于等于 `target`"。
+- `438. 找到字符串中所有字母异位词`：窗口大小固定的滑动窗口，判断窗口内是否是 `t` 的排列。
+
+- `209. 长度最小的子数组`：简化版的最小窗口，目标从"包含指定字符"变成"总和大于等于 `target`"。
+- `438. 找到字符串中所有字母异位词`：窗口大小固定的滑动窗口，判断窗口内是否是 `t` 的排列。4:["$","main",null,{"className":"detail-main","style":{"maxWidth":760,"margin":"0 auto","padding":"16px","minHeight":"100vh"},"children":[["$","$Lc",null,{"href":"/","style":{"display":"inline-block","marginBottom":"12px","fontSize":"13px"},"children":"← 返回题库"}],["$","h1",null,{"style":{"fontSize":"22px","fontWeight":700,"margin":"0 0 4px"},"children":[["$","span",null,{"style":{"marginRight":"6px"},"children":"🔗"}],76,". ","最小覆盖子串"]}],["$","$Ld",null,{"q":{"id":"0076","lcId":76,"slug":"minimum-window-substring","title":"最小覆盖子串","question":"最小覆盖子串","answer":"$e","difficulty":"Hard","category":"substring","categories":["substring"],"tags":["哈希表","字符串","滑动窗口"],"url":"https://leetcode.cn/problems/minimum-window-substring/","planOrder":12,"hasViz":true,"hasDiagram":false,"feynman":{"essence":"给你两个字符串 `s` 和 `t`。在 `s` 中找一个最短的连续子串，使得这个子串包含了 `t` 中所有字符（包括重复字符）。返回这个子串，如果不存在就返回空串。  比如 `s = \"ADOBECO","analogy":"","key_points":[]},"first_principle":{"problem":"","axioms":[],"rebuild":""}}}]]}]
+a:[["$","meta","0",{"name":"viewport","content":"width=device-width, initial-scale=1"}],["$","meta","1",{"name":"theme-color","content":"#f97316"}]]
+8:[["$","meta","0",{"charSet":"utf-8"}],["$","title","1",{"children":"76. 最小覆盖子串 - 算法面试"}],["$","meta","2",{"name":"description","content":"给你两个字符串 `s` 和 `t`。在 `s` 中找一个最短的连续子串，使得这个子串包含了 `t` 中所有字符（包括重复字符）。返回这个子串，如果不存在就返回空串。  比如 `s = \"ADOBECO"}],["$","meta","3",{"name":"application-name","content":"算法面试"}],["$","link","4",{"rel":"manifest","href":"/algorithm-interview/manifest.json","crossOrigin":"$undefined"}],["$","meta","5",{"name":"keywords","content":"最小覆盖子串,LeetCode 76,Hard,哈希表,字符串,滑动窗口"}],["$","meta","6",{"name":"mobile-web-app-capable","content":"yes"}],["$","meta","7",{"name":"apple-mobile-web-app-title","content":"算法面试"}],["$","meta","8",{"name":"apple-mobile-web-app-status-bar-style","content":"default"}],["$","meta","9",{"property":"og:title","content":"76. 最小覆盖子串"}],["$","meta","10",{"property":"og:description","content":"给你两个字符串 `s` 和 `t`。在 `s` 中找一个最短的连续子串，使得这个子串包含了 `t` 中所有字符（包括重复字符）。返回这个子串，如果不存在就返回空串。  比如 `s = \"ADOBECO"}],["$","meta","11",{"property":"og:locale","content":"zh_CN"}],["$","meta","12",{"property":"og:type","content":"article"}],["$","meta","13",{"name":"twitter:card","content":"summary"}],["$","meta","14",{"name":"twitter:title","content":"76. 最小覆盖子串"}],["$","meta","15",{"name":"twitter:description","content":"给你两个字符串 `s` 和 `t`。在 `s` 中找一个最短的连续子串，使得这个子串包含了 `t` 中所有字符（包括重复字符）。返回这个子串，如果不存在就返回空串。  比如 `s = \"ADOBECO"}]]
+6:null

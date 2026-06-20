@@ -1,0 +1,175 @@
+1:"$Sreact.fragment"
+2:I[5244,[],""]
+3:I[3866,[],""]
+5:I[6213,[],"OutletBoundary"]
+7:I[6213,[],"MetadataBoundary"]
+9:I[6213,[],"ViewportBoundary"]
+b:I[4835,[],""]
+:HL["/algorithm-interview/_next/static/css/c1e787639001e16b.css","style"]
+0:{"P":null,"b":"xos97fAiWtKfKXI6hZLx4","p":"/algorithm-interview","c":["","columns","lbd-045",""],"i":false,"f":[[["",{"children":["columns",{"children":[["slug","lbd-045","d"],{"children":["__PAGE__",{}]}]}]},"$undefined","$undefined",true],["",["$","$1","c",{"children":[[["$","link","0",{"rel":"stylesheet","href":"/algorithm-interview/_next/static/css/c1e787639001e16b.css","precedence":"next","crossOrigin":"$undefined","nonce":"$undefined"}]],["$","html",null,{"lang":"zh","children":[["$","head",null,{"children":["$","script",null,{"dangerouslySetInnerHTML":{"__html":"\ntry {\n  var raw = localStorage.getItem('algo-interview');\n  var theme = 'light';\n  if (raw) { var p = JSON.parse(raw); theme = (p.state && p.state.theme) || 'light'; }\n  if (theme === 'dark') {\n    document.documentElement.classList.add('dark');\n    document.documentElement.setAttribute('data-theme', 'dark');\n  }\n} catch (e) {}\n"}}]}],["$","body",null,{"children":[["$","$L2",null,{"parallelRouterKey":"children","segmentPath":["children"],"error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L3",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":[[],[["$","title",null,{"children":"404: This page could not be found."}],["$","div",null,{"style":{"fontFamily":"system-ui,\"Segoe UI\",Roboto,Helvetica,Arial,sans-serif,\"Apple Color Emoji\",\"Segoe UI Emoji\"","height":"100vh","textAlign":"center","display":"flex","flexDirection":"column","alignItems":"center","justifyContent":"center"},"children":["$","div",null,{"children":[["$","style",null,{"dangerouslySetInnerHTML":{"__html":"body{color:#000;background:#fff;margin:0}.next-error-h1{border-right:1px solid rgba(0,0,0,.3)}@media (prefers-color-scheme:dark){body{color:#fff;background:#000}.next-error-h1{border-right:1px solid rgba(255,255,255,.3)}}"}}],["$","h1",null,{"className":"next-error-h1","style":{"display":"inline-block","margin":"0 20px 0 0","padding":"0 23px 0 0","fontSize":24,"fontWeight":500,"verticalAlign":"top","lineHeight":"49px"},"children":404}],["$","div",null,{"style":{"display":"inline-block"},"children":["$","h2",null,{"style":{"fontSize":14,"fontWeight":400,"lineHeight":"49px","margin":0},"children":"This page could not be found."}]}]]}]}]]],"forbidden":"$undefined","unauthorized":"$undefined"}],["$","script",null,{"dangerouslySetInnerHTML":{"__html":"\nif ('serviceWorker' in navigator) {\n  window.addEventListener('load', function () {\n    navigator.serviceWorker.register('/algorithm-interview/sw.js').catch(function () {});\n  });\n}\n"}}]]}]]}]]}],{"children":["columns",["$","$1","c",{"children":[null,["$","$L2",null,{"parallelRouterKey":"children","segmentPath":["children","columns","children"],"error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L3",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","forbidden":"$undefined","unauthorized":"$undefined"}]]}],{"children":[["slug","lbd-045","d"],["$","$1","c",{"children":[null,["$","$L2",null,{"parallelRouterKey":"children","segmentPath":["children","columns","children","$0:f:0:1:2:children:2:children:0","children"],"error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L3",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","forbidden":"$undefined","unauthorized":"$undefined"}]]}],{"children":["__PAGE__",["$","$1","c",{"children":["$L4",null,["$","$L5",null,{"children":"$L6"}]]}],{},null,false]},null,false]},null,false]},null,false],["$","$1","h",{"children":[null,["$","$1","9T8hj8ptCJi0rgnszXqQu",{"children":[["$","$L7",null,{"children":"$L8"}],["$","$L9",null,{"children":"$La"}],null]}]]}],false]],"m":"$undefined","G":["$b","$undefined"],"s":false,"S":true}
+c:I[8173,["173","static/chunks/173-69860a4742bb7020.js","829","static/chunks/829-7533e70598480772.js","306","static/chunks/app/columns/%5Bslug%5D/page-58fc1d8f5085c1ff.js"],""]
+d:I[4780,["173","static/chunks/173-69860a4742bb7020.js","829","static/chunks/829-7533e70598480772.js","306","static/chunks/app/columns/%5Bslug%5D/page-58fc1d8f5085c1ff.js"],"default"]
+e:T1f9c,# 回溯算法最佳实践：括号生成
+
+合法括号⽣成算法
+学算法，认准 labuladong 就够了！
+括号问题可以简单分成两类，⼀类是前⽂写过的 括号的合法性判断 ，⼀类
+是合法括号的⽣成。对于括号合法性的判断，主要是借助「栈」这种数据结
+构，⽽对于括号的⽣成，⼀般都要利⽤回溯递归的思想。
+关于回溯算法，我们前⽂写过⼀篇 回溯算法套路框架详解 反响⾮常好，读
+本⽂前应该读过那篇⽂章，这样你就能够进⼀步了解回溯算法的框架使⽤⽅
+法了。
+回到正题，括号⽣成算法是 LeetCode 第 22 题，要求如下：
+请你写⼀个算法，输⼊是⼀个正整数  n ，输出是  n  对⼉括号的所有合法
+组合，函数签名如下：
+vector<string> generateParenthesis(int n);
+⽐如说，输⼊  n=3 ，输出为如下 5 个字符串：
+"((()))", "(()())", "(())()", "()(())", "()()()"
+有关括号问题，你只要记住⼀个性质，思路就很容易想出来：
+1、⼀个「合法」括号组合的左括号数量⼀定等于右括号数量，这个很好理
+解。
+2、对于⼀个「合法」的括号字符串组合  p ，必然对于任何  0 <= i <
+len(p)  都有：⼦串  p[0..i]  中左括号的数量都⼤于或等于右括号的数量。
+如果不跟你说这个性质，可能不太容易发现，但是稍微想⼀下，其实很容易
+理解，因为从左往右算的话，肯定是左括号多嘛，到最后左右括号数量相
+等，说明这个括号组合是合法的。
+回溯算法最佳实践：括号⽣成
+313
+
+反之，⽐如这个括号组合  ))(( ，前⼏个⼦串都是右括号多于左括号，显然
+不是合法的括号组合。
+下⾯就来⼿把⼿实践⼀下回溯算法框架。
+回溯思路
+明⽩了合法括号的性质，如何把这道题和回溯算法扯上关系呢？
+算法输⼊⼀个整数  n ，让你计算  n  对⼉括号能组成⼏种合法的括号组
+合，可以改写成如下问题：
+现在有  2n  个位置，每个位置可以放置字符  (  或者  ) ，组成的所有括号
+组合中，有多少个是合法的？
+这个命题和题⽬的意思完全是⼀样的对吧，那么我们先想想如何得到全部
+ 2^(2n)  种组合，然后再根据我们刚才总结出的合法括号组合的性质筛选出
+合法的组合，不就完事⼉了？
+如何得到所有的组合呢？这就是标准的暴⼒穷举回溯框架啊，我们前⽂ 回
+溯算法套路框架详解 都总结过了：
+result = []
+def backtrack(路径, 选择列表):
+    if 满⾜结束条件:
+        result.add(路径)
+        return
+    for 选择 in 选择列表:
+        做选择
+        backtrack(路径, 选择列表)
+        撤销选择
+那么对于我们的需求，如何打印所有括号组合呢？套⼀下框架就出来了，伪
+码如下：
+void backtrack(int n, int i, string& track) {
+回溯算法最佳实践：括号⽣成
+314
+
+    // i 代表当前的位置，共 2n 个位置
+    // 穷举到最后⼀个位置了，得到⼀个⻓度为 2n 组合
+    if (i == 2 * n) {
+        print(track);
+        return;
+    }
+    // 对于每个位置可以是左括号或者右括号两种选择
+    for choice in ['(', ')'] {
+        track.push(choice); // 做选择
+        // 穷举下⼀个位置
+        backtrack(n, i + 1, track);
+        track.pop(choice); // 撤销选择
+    }
+}
+那么，现在能够打印所有括号组合了，如何从它们中筛选出合法的括号组合
+呢？​很简单，加⼏个条件进⾏「剪枝」就⾏了。
+对于  2n  个位置，必然有  n  个左括号， n  个右括号，所以我们不是简单
+的记录穷举位置  i ，⽽是⽤  left  记录还可以使⽤多少个左括号，⽤
+ right  记录还可以使⽤多少个右括号，这样就可以通过刚才总结的合法括
+号规律进⾏筛选了：
+vector<string> generateParenthesis(int n) {
+    if (n == 0) return {};
+    // 记录所有合法的括号组合
+    vector<string> res;
+    // 回溯过程中的路径
+    string track;
+    // 可⽤的左括号和右括号数量初始化为 n
+    backtrack(n, n, track, res);
+    return res;
+}
+// 可⽤的左括号数量为 left 个，可⽤的右括号数量为 rgiht 个
+void backtrack(int left, int right, 
+            string& track, vector<string>& res) {
+    // 若左括号剩下的多，说明不合法
+    if (right < left) return;
+    // 数量⼩于 0 肯定是不合法的
+回溯算法最佳实践：括号⽣成
+315
+
+    if (left < 0 || right < 0) return;
+    // 当所有括号都恰好⽤完时，得到⼀个合法的括号组合
+    if (left == 0 && right == 0) {
+        res.push_back(track);
+        return;
+    }
+    // 尝试放⼀个左括号
+    track.push_back('('); // 选择
+    backtrack(left - 1, right, track, res);
+    track.pop_back(); // 撤消选择
+    // 尝试放⼀个右括号
+    track.push_back(')'); // 选择
+    backtrack(left, right - 1, track, res);
+    track.pop_back(); ；// 撤消选择
+}
+这样，我们的算法就完成了，算法的复杂度是多少呢？这个⽐较难分析，对
+于递归相关的算法，时间复杂度这样计算（递归次数）*（递归函数本⾝的
+时间复杂度）。
+ backtrack  就是我们的递归函数，其中没有任何 for 循环代码，所以递归函
+数本⾝的时间复杂度是 O(1)，但关键是这个函数的递归次数是多少？换句
+话说，给定⼀个  n ， backtrack  函数递归被调⽤了多少次？
+我们前⾯怎么分析动态规划算法的递归次数的？主要是看「状态」的个数对
+吧。其实回溯算法和动态规划的本质都是穷举，只不过动态规划存在「重叠
+⼦问题」可以优化，⽽回溯算法不存在⽽已。
+所以说这⾥也可以⽤「状态」这个概念，对于  backtrack  函数，状态有三
+个，分别是  left, right, track ，这三个变量的所有组合个数就是
+ backtrack  函数的状态个数（调⽤次数）。
+ left  和  right  的组合好办，他俩取值就是 0~n 嘛，组合起来也就  n^2 
+种⽽已；这个  track  的⻓度虽然取在 0~2n，但对于每⼀个⻓度，它还有指
+数级的括号组合，这个是不好算的。
+回溯算法最佳实践：括号⽣成
+316
+
+说了这么多，就是想让⼤家知道这个算法的复杂度是指数级，⽽且不好算，
+这⾥就不具体展开了，是 $\frac{4^{n}}{\sqrt{n}}$，有兴趣的读者可以搜索
+⼀下「卡特兰数」相关的知识了解⼀下这个复杂度是怎么算的。
+＿＿＿＿＿＿＿＿＿＿＿＿＿
+刷算法，学套路，认准 labuladong。
+本⼩抄即将出版，关注 labuladong 公众号或 ongline book 查看更新⽂章，
+后台回复「进群」可进刷题群，labuladong 带你⽇穿 LeetCode。
+回溯算法最佳实践：括号⽣成
+317
+
+双指针技巧总结
+学算法，认准 labuladong 就够了！
+我把双指针技巧再分为两类，⼀类是「快慢指针」，⼀类是「左右指针」。
+前者解决主要解决链表中的问题，⽐如典型的判定链表中是否包含环；后者
+主要解决数组（或者字符串）中的问题，⽐如⼆分查找。
+⼀、快慢指针的常⻅算法
+快慢指针⼀般都初始化指向链表的头结点 head，前进时快指针 fast 在前，
+慢指针 slow 在后，巧妙解决⼀些链表中的问题。
+1、判定链表中是否含有环
+这应该属于链表最基本的操作了，如果读者已经知道这个技巧，可以跳过。
+单链表的特点是每个节点只知道下⼀个节点，所以⼀个指针的话⽆法判断链
+表中是否含有环的。
+如果链表中不含环，那么这个指针最终会遇到空指针 null 表⽰链表到头
+了，这还好说，可以判断该链表不含环。
+boolean hasCycle(ListNode head) {
+    while (head != null)
+        head = head.next;
+    return false;
+}
+但是如果链表中含有环，那么这个指针就会陷⼊死循环，因为环形数组中没
+有 null 指针作为尾部节点。
+双指针技巧总结
+3184:["$","main",null,{"style":{"maxWidth":760,"margin":"0 auto","padding":"16px","minHeight":"100vh"},"children":[["$","$Lc",null,{"href":"/columns/","style":{"display":"inline-block","marginBottom":"12px","fontSize":"13px"},"children":"← 返回专栏"}],["$","div",null,{"style":{"fontSize":"12px","color":"var(--text-tertiary)","marginBottom":"4px"},"children":["📕"," ","labuladong 算法小抄"]}],["$","h1",null,{"style":{"fontSize":"22px","fontWeight":700,"margin":"0 0 16px"},"children":"回溯算法最佳实践：括号生成"}],["$","$Ld",null,{"children":"$e"}],false]}]
+a:[["$","meta","0",{"name":"viewport","content":"width=device-width, initial-scale=1"}],["$","meta","1",{"name":"theme-color","content":"#f97316"}]]
+8:[["$","meta","0",{"charSet":"utf-8"}],["$","title","1",{"children":"回溯算法最佳实践：括号生成 - 算法面试"}],["$","meta","2",{"name":"description","content":"LeetCode 热题 100 完整 Java 题解、逐题动画、知识专栏与智能间隔复习。"}],["$","meta","3",{"name":"application-name","content":"算法面试"}],["$","link","4",{"rel":"manifest","href":"/algorithm-interview/manifest.json","crossOrigin":"$undefined"}],["$","meta","5",{"name":"keywords","content":"LeetCode,热题100,算法面试,Java题解,数据结构,动态规划,面试刷题"}],["$","meta","6",{"name":"mobile-web-app-capable","content":"yes"}],["$","meta","7",{"name":"apple-mobile-web-app-title","content":"算法面试"}],["$","meta","8",{"name":"apple-mobile-web-app-status-bar-style","content":"default"}],["$","meta","9",{"property":"og:title","content":"算法面试题库"}],["$","meta","10",{"property":"og:description","content":"LeetCode 热题 100 完整 Java 题解、逐题动画、知识专栏与智能复习"}],["$","meta","11",{"property":"og:site_name","content":"算法面试题库"}],["$","meta","12",{"property":"og:locale","content":"zh_CN"}],["$","meta","13",{"property":"og:type","content":"website"}],["$","meta","14",{"name":"twitter:card","content":"summary"}],["$","meta","15",{"name":"twitter:title","content":"算法面试题库"}],["$","meta","16",{"name":"twitter:description","content":"LeetCode 热题 100 完整 Java 题解、逐题动画、知识专栏与智能复习"}]]
+6:null

@@ -1,0 +1,174 @@
+<!DOCTYPE html><html lang="zh"><head><meta charSet="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="/algorithm-interview/_next/static/css/c1e787639001e16b.css" data-precedence="next"/><link rel="preload" as="script" fetchPriority="low" href="/algorithm-interview/_next/static/chunks/webpack-65b8ce4c1158f96f.js"/><script src="/algorithm-interview/_next/static/chunks/4bd1b696-899926250d3992f1.js" async=""></script><script src="/algorithm-interview/_next/static/chunks/517-b6df7dad4ff96d0b.js" async=""></script><script src="/algorithm-interview/_next/static/chunks/main-app-9e7bfff32fd8ebe9.js" async=""></script><script src="/algorithm-interview/_next/static/chunks/173-69860a4742bb7020.js" async=""></script><script src="/algorithm-interview/_next/static/chunks/829-7533e70598480772.js" async=""></script><script src="/algorithm-interview/_next/static/chunks/app/columns/%5Bslug%5D/page-58fc1d8f5085c1ff.js" async=""></script><meta name="theme-color" content="#f97316"/><title>算法学习之路 - 算法面试</title><meta name="description" content="LeetCode 热题 100 完整 Java 题解、逐题动画、知识专栏与智能间隔复习。"/><meta name="application-name" content="算法面试"/><link rel="manifest" href="/algorithm-interview/manifest.json"/><meta name="keywords" content="LeetCode,热题100,算法面试,Java题解,数据结构,动态规划,面试刷题"/><meta name="mobile-web-app-capable" content="yes"/><meta name="apple-mobile-web-app-title" content="算法面试"/><meta name="apple-mobile-web-app-status-bar-style" content="default"/><meta property="og:title" content="算法面试题库"/><meta property="og:description" content="LeetCode 热题 100 完整 Java 题解、逐题动画、知识专栏与智能复习"/><meta property="og:site_name" content="算法面试题库"/><meta property="og:locale" content="zh_CN"/><meta property="og:type" content="website"/><meta name="twitter:card" content="summary"/><meta name="twitter:title" content="算法面试题库"/><meta name="twitter:description" content="LeetCode 热题 100 完整 Java 题解、逐题动画、知识专栏与智能复习"/><script>
+try {
+  var raw = localStorage.getItem('algo-interview');
+  var theme = 'light';
+  if (raw) { var p = JSON.parse(raw); theme = (p.state && p.state.theme) || 'light'; }
+  if (theme === 'dark') {
+    document.documentElement.classList.add('dark');
+    document.documentElement.setAttribute('data-theme', 'dark');
+  }
+} catch (e) {}
+</script><script src="/algorithm-interview/_next/static/chunks/polyfills-42372ed130431b0a.js" noModule=""></script></head><body><main style="max-width:760px;margin:0 auto;padding:16px;min-height:100vh"><a style="display:inline-block;margin-bottom:12px;font-size:13px" href="/algorithm-interview/columns/">← 返回专栏</a><div style="font-size:12px;color:var(--text-tertiary);margin-bottom:4px">📕<!-- --> <!-- -->labuladong 算法小抄</div><h1 style="font-size:22px;font-weight:700;margin:0 0 16px">算法学习之路</h1><div class="prose max-w-none" style="font-size:14px;color:var(--text)"><h1>算法学习之路</h1>
+<p>算法学习之路
+学算法，认准 labuladong 就够了！
+之前发的那篇关于框架性思维的⽂章，我也发到了不少其他圈⼦，受到了⼤
+家的普遍好评，这⼀点我真的没想到，⾸先感谢⼤家的认可，我会更加努
+⼒，写出通俗易懂的算法⽂章。
+有很多朋友问我数据结构和算法到底该怎么学，尤其是很多朋友说⾃⼰是
+「⼩⽩」，感觉这些东⻄好难啊，就算看了之前的「框架思维」，也感觉⾃
+⼰刷题乏⼒，希望我能聊聊我从⼀个⾮科班⼩⽩⼀路是怎么学过来的。
+⾸先要给怀有这样疑问的朋友⿎掌，因为你现在已经「知道⾃⼰不知道」，
+⽽且开始尝试学习、刷题、寻求帮助，能做到这⼀点本⾝就是及其困难的。
+关于「框架性思维」，对于⼀个⼩⽩来说，可能暂时⽆法完全理解（如果你
+能理解，说明你⽔平已经不错啦，不是⼩⽩啦）。就像软件⼯程，对于我这
+种没带过项⽬的⼈来说，感觉其内容枯燥乏味，全是废话，但是对于⼀个带
+过团队的⼈，他就会觉得软件⼯程⾥的每⼀句话都是精华。暂时不太理解没
+关系，留个印象，功夫到了很快就明⽩了。
+下⾯写⼀写我⼀路过来的⼀些经验。如果你已经看过很多「如何⾼效刷题」
+「如何学习算法」的⽂章，却还是没有开始⾏动并坚持下去，本⽂的第五点
+就是写给你的。
+我觉得之所以有时候认为⾃⼰是「⼩⽩」，是由于知识某些⽅⾯的空⽩造成
+的。具体到数据结构的学习，⽆⾮就是两个问题搞得不太清楚：这是啥？有
+啥⽤？
+举个例⼦，⽐如说你看到了「栈」这个名词，⽼师可能会讲这些关键词：先
+进后出、函数堆栈等等。但是，对于初学者，这些描述属于⽂学词汇，没有
+实际价值，没有解决最基本的两个问题。如何回答这两个基本问题呢？回答
+「这是啥」需要看教科书，回答「有啥⽤」需要刷算法题。
+算法学习之路
+222</p>
+<p>⼀、这是啥？
+这个问题最容易解决，就像⼀层窗户纸，你只要随便找本书看两天，⾃⼰动
+⼿实现⼀个「队列」「栈」之类的数据结构，就能捅破这层窗户纸。
+这时候你就能理解「框架思维」⽂章中的前半部分了：数据结构⽆⾮就是数
+组、链表为⾻架的⼀些特定操作⽽已；每个数据结构实现的功能⽆⾮增删查
+改罢了。
+⽐如说「列队」这个数据结构，⽆⾮就是基于数组或者链表，实现 enqueue
+和 dequeue 两个⽅法。这两个⽅法就是增和删呀，连查和改的⽅法都不需
+要。
+⼆、有啥⽤？
+解决这个问题，就涉及算法的设计了，是个持久战，需要经常进⾏抽象思
+考，刷算法题，培养「计算机思维」。
+之前的⽂章讲了，算法就是对数据结构准确⽽巧妙的运⽤。常⽤算法问题也
+就那⼏⼤类，算法题⽆⾮就是不断变换场景，给那⼏个算法框架套上不同的
+⽪。刷题，就是在锻炼你的眼⼒，看你能不能看穿问题表象揪出相应的解法
+框架。
+⽐如说，让你求解⼀个迷宫，你要把这个问题层层抽象：迷宫 -&gt; 图的遍历 -</p>
+<blockquote>
+<p>N 叉树的遍历 -&gt; ⼆叉树的遍历。然后让框架指导你写具体的解法。
+抽象问题，直击本质，是刷题中你需要刻意培养的能⼒。
+三、如何看书
+直接推荐⼀本公认的好书，《算法第 4 版》，我⼀般简写成《算法4》。不
+要蜻蜓点⽔，这本书你能选择性的看上 50%，基本上就达到平均⽔平了。
+别怕这本书厚，因为起码有三分之⼀不⽤看，下⾯讲讲怎么看这本书。
+看书仍然遵循递归的思想：⾃顶向下，逐步求精。
+算法学习之路
+223</p>
+</blockquote>
+<p>这本书知识结构合理，讲解也清楚，所以可以按顺序学习。书中正⽂的算法
+代码⼀定要亲⾃敲⼀遍，因为这些真的是扎实的基础，要认真理解。不要以
+为⾃⼰看⼀遍就看懂了，不动⼿的话理解不了的。但是，开头部分的基础可
+以酌情跳过；书中的数学证明，如不影响对算法本⾝的理解，完全可以跳
+过；章节最后的练习题，也可以全部跳过。这样⼀来，这本书就薄了很多。
+相信读者现在已经认可了「框架性思维」的重要性，这种看书⽅式也是⼀种
+框架性策略，抓⼤放⼩，着重理解整体的知识架构，⽽忽略证明、练习题这
+种细节问题，即保持⾃⼰对新知识的好奇⼼，避免陷⼊⽆限的细节被劝退。
+当然，《算法4》到后⾯的内容也⽐较难了，⽐如那⼏个著名的串算法，以
+及正则表达式算法。这些属于「经典算法」，看个⼈接受能⼒吧，单说刷
+LeetCode 的话，基本⽤不上，量⼒⽽⾏即可。
+四、如何刷题
+⾸先声明⼀下，算法和数学⽔平没关系，和编程语⾔也没关系，你爱⽤什么
+语⾔⽤什么。算法，主要是培养⼀种新的思维⽅式。所谓「计算机思维」，
+就跟你考驾照⼀样，你以前骑⾃⾏⻋，有⼀套⾃⾏⻋的规则和技巧，现在你
+开汽⻋，就需要适应并练习开汽⻋的规则和技巧。
+LeetCode 上的算法题和前⾯说的「经典算法」不⼀样，我们权且称为「解
+闷算法」吧，因为很多题⽬都⽐较有趣，有种在做奥数题或者脑筋急转弯的
+感觉。⽐如说，让你⽤队列实现⼀个栈，或者⽤栈实现⼀个队列，以及不⽤
+加号做加法，开脑洞吧？
+当然，这些问题虽然看起来⽆厘头，实际⽣活中也⽤不到，但是想解决这些
+问题依然要靠数据结构以及对基础知识的理解，也许这就是很多公司⾯试都
+喜欢出这种「智⼒题」的原因。下⾯说⼏点技巧吧。
+尽量刷英⽂版的 LeetCode，中⽂版的“⼒扣”是阉割版，不仅很多题⽬没有
+答案，⽽且连个讨论区都没有。英⽂版的是真的很良⼼了，很多问题都有官
+⽅解答，详细易懂。⽽且讨论区（Discuss）也沉淀了⼤量优质内容，甚⾄
+好过官⽅解答。真正能打开你思路的，很可能是讨论区各路⼤神的思路荟
+萃。
+算法学习之路
+224</p>
+<p>PS：如果有的英⽂题⽬实在看不懂，有个⼩技巧，你在题⽬⻚⾯的 url ⾥加
+⼀个 -cn，即 <a href="https://leetcode.com/xxx">https://leetcode.com/xxx</a> 改成 <a href="https://leetcode-cn.com/xxx%EF%BC%8C%E8%BF%99%E6%A0%B7">https://leetcode-cn.com/xxx，这样</a>
+就能切换到相应的中⽂版⻚⾯查看。
+对于初学者，强烈建议从 Explore 菜单⾥最下⾯的 Learn 开始刷，这个专题
+就是专门教你学习数据结构和基本算法的，教学篇和相应的练习题结合，不
+要太良⼼。
+最近 Learn 专题⾥新增了⼀些内容，我们挑数据结构相关的内容刷就⾏了，
+像 Ruby，Machine Learning 就没必要刷了。刷完 Learn 专题的基础内容，基
+本就有能⼒去 Explore 菜单的 Interview 专题刷⾯试题，或者去 Problem 菜
+单，在真正的题海⾥遨游了。
+⽆论刷 Explore 还是 Problems 菜单，最好⼀个分类⼀个分类的刷，不要蜻蜓
+点⽔。⽐如说这⼏天就刷链表，刷完链表再去连刷⼏天⼆叉树。这样做是为
+了帮助你提取「框架」。⼀旦总结出针对⼀类问题的框架，解决同类问题可
+谓是⼿到擒来。
+五、道理我都懂，还是不能坚持下去
+这其实⽆关算法了，还是⽼⽣常谈的执⾏⼒的问题。不说什么破鸡汤了，我
+觉得解决办法就是「激起欲望」，注意我说的是欲望，⽽不是常说的兴趣，
+拿我⾃⼰说说吧。
+半年前我开始刷题，⽬的和⼤部分⼈都⼀样的，就是为毕业找⼯作做准备。
+只不过，⼤部分⼈是等到临近毕业了才开始刷，⽽我离毕业还有⼀阵⼦。这
+不是炫耀我多有觉悟，⽽是我承认⾃⼰的极度平凡。
+⾸先，我真的想找到⼀份不错的⼯作（谁都想吧？），我想要⾼薪呀！否则
+我在朋友⾯前，⼥神⾯前放下的骚话，最终都会反过来啪啪地打我的脸。我
+也是要恰饭，要⾯⼦，要虚荣⼼的嘛。赚钱，虚荣⼼，⾜以激起我的欲望
+了。
+但是，我不擅⻓ deadline 突击，我理解东⻄真的慢，所以⼲脆笨⻦先⻜了。
+智商不够，拿时间来补，我没能⼒两个⽉突击，⼲脆拉⻓战线，打他个两年
+游击战，我还不信耗不死算法这个强敌。事实证明，你如果认真学习⼀个
+算法学习之路
+225</p>
+<p>⽉，就能够取得⾁眼可⻅的进步了。
+现在，我依然在坚持刷题，⽽且为了另外⼀个原因，这个公众号。我没想到
+⾃⼰的⽂字竟然能够帮助到他⼈，甚⾄能得到认可。这也是虚荣⼼啊，我不
+能让读者失望啊，我想让更多的⼈认可（夸）我呀！
+以上，不光是坚持刷算法题吧，很多场景都适⽤。执⾏⼒是要靠「欲望」⽀
+撑的，我也是⼀凡⼈，只有那些看得⻅摸得着的东⻄才能使我快乐呀。读者
+不妨也尝试把刷题学习和⾃⼰的切⾝利益联系起来，这恐怕是坚持下去最简
+单直⽩的理由了。
+＿＿＿＿＿＿＿＿＿＿＿＿＿
+刷算法，学套路，认准 labuladong。
+本⼩抄即将出版，关注 labuladong 公众号或 ongline book 查看更新⽂章，
+后台回复「进群」可进刷题群，labuladong 带你⽇穿 LeetCode。
+算法学习之路
+226</p>
+<p>⼆叉堆详解实现优先级队列
+学算法，认准 labuladong 就够了！
+⼆叉堆（Binary Heap）没什么神秘，性质⽐⼆叉搜索树 BST 还简单。其主
+要操作就两个， sink （下沉）和  swim （上浮），⽤以维护⼆叉堆的性
+质。其主要应⽤有两个，⾸先是⼀种排序⽅法「堆排序」，第⼆是⼀种很有
+⽤的数据结构「优先级队列」。
+本⽂就以实现优先级队列（Priority Queue）为例，通过图⽚和⼈类的语⾔来
+描述⼀下⼆叉堆怎么运作的。
+⼀、⼆叉堆概览
+⾸先，⼆叉堆和⼆叉树有啥关系呢，为什么⼈们总数把⼆叉堆画成⼀棵⼆叉
+树？
+因为，⼆叉堆其实就是⼀种特殊的⼆叉树（完全⼆叉树），只不过存储在数
+组⾥。⼀般的链表⼆叉树，我们操作节点的指针，⽽在数组⾥，我们把数组
+索引作为指针：
+// ⽗节点的索引
+int parent(int root) {
+return root / 2;
+}
+// 左孩⼦的索引
+int left(int root) {
+return root * 2;
+}
+// 右孩⼦的索引
+int right(int root) {
+return root * 2 + 1;
+}
+⼆叉堆详解实现优先级队列
+227</p></div></main><script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function () {
+    navigator.serviceWorker.register('/algorithm-interview/sw.js').catch(function () {});
+  });
+}
+</script><script src="/algorithm-interview/_next/static/chunks/webpack-65b8ce4c1158f96f.js" async=""></script><script>(self.__next_f=self.__next_f||[]).push([0])</script><script>self.__next_f.push([1,"1:\"$Sreact.fragment\"\n2:I[5244,[],\"\"]\n3:I[3866,[],\"\"]\n5:I[6213,[],\"OutletBoundary\"]\n7:I[6213,[],\"MetadataBoundary\"]\n9:I[6213,[],\"ViewportBoundary\"]\nb:I[4835,[],\"\"]\n:HL[\"/algorithm-interview/_next/static/css/c1e787639001e16b.css\",\"style\"]\n"])</script><script>self.__next_f.push([1,"0:{\"P\":null,\"b\":\"xos97fAiWtKfKXI6hZLx4\",\"p\":\"/algorithm-interview\",\"c\":[\"\",\"columns\",\"lbd-032\",\"\"],\"i\":false,\"f\":[[[\"\",{\"children\":[\"columns\",{\"children\":[[\"slug\",\"lbd-032\",\"d\"],{\"children\":[\"__PAGE__\",{}]}]}]},\"$undefined\",\"$undefined\",true],[\"\",[\"$\",\"$1\",\"c\",{\"children\":[[[\"$\",\"link\",\"0\",{\"rel\":\"stylesheet\",\"href\":\"/algorithm-interview/_next/static/css/c1e787639001e16b.css\",\"precedence\":\"next\",\"crossOrigin\":\"$undefined\",\"nonce\":\"$undefined\"}]],[\"$\",\"html\",null,{\"lang\":\"zh\",\"children\":[[\"$\",\"head\",null,{\"children\":[\"$\",\"script\",null,{\"dangerouslySetInnerHTML\":{\"__html\":\"\\ntry {\\n  var raw = localStorage.getItem('algo-interview');\\n  var theme = 'light';\\n  if (raw) { var p = JSON.parse(raw); theme = (p.state \u0026\u0026 p.state.theme) || 'light'; }\\n  if (theme === 'dark') {\\n    document.documentElement.classList.add('dark');\\n    document.documentElement.setAttribute('data-theme', 'dark');\\n  }\\n} catch (e) {}\\n\"}}]}],[\"$\",\"body\",null,{\"children\":[[\"$\",\"$L2\",null,{\"parallelRouterKey\":\"children\",\"segmentPath\":[\"children\"],\"error\":\"$undefined\",\"errorStyles\":\"$undefined\",\"errorScripts\":\"$undefined\",\"template\":[\"$\",\"$L3\",null,{}],\"templateStyles\":\"$undefined\",\"templateScripts\":\"$undefined\",\"notFound\":[[],[[\"$\",\"title\",null,{\"children\":\"404: This page could not be found.\"}],[\"$\",\"div\",null,{\"style\":{\"fontFamily\":\"system-ui,\\\"Segoe UI\\\",Roboto,Helvetica,Arial,sans-serif,\\\"Apple Color Emoji\\\",\\\"Segoe UI Emoji\\\"\",\"height\":\"100vh\",\"textAlign\":\"center\",\"display\":\"flex\",\"flexDirection\":\"column\",\"alignItems\":\"center\",\"justifyContent\":\"center\"},\"children\":[\"$\",\"div\",null,{\"children\":[[\"$\",\"style\",null,{\"dangerouslySetInnerHTML\":{\"__html\":\"body{color:#000;background:#fff;margin:0}.next-error-h1{border-right:1px solid rgba(0,0,0,.3)}@media (prefers-color-scheme:dark){body{color:#fff;background:#000}.next-error-h1{border-right:1px solid rgba(255,255,255,.3)}}\"}}],[\"$\",\"h1\",null,{\"className\":\"next-error-h1\",\"style\":{\"display\":\"inline-block\",\"margin\":\"0 20px 0 0\",\"padding\":\"0 23px 0 0\",\"fontSize\":24,\"fontWeight\":500,\"verticalAlign\":\"top\",\"lineHeight\":\"49px\"},\"children\":404}],[\"$\",\"div\",null,{\"style\":{\"display\":\"inline-block\"},\"children\":[\"$\",\"h2\",null,{\"style\":{\"fontSize\":14,\"fontWeight\":400,\"lineHeight\":\"49px\",\"margin\":0},\"children\":\"This page could not be found.\"}]}]]}]}]]],\"forbidden\":\"$undefined\",\"unauthorized\":\"$undefined\"}],[\"$\",\"script\",null,{\"dangerouslySetInnerHTML\":{\"__html\":\"\\nif ('serviceWorker' in navigator) {\\n  window.addEventListener('load', function () {\\n    navigator.serviceWorker.register('/algorithm-interview/sw.js').catch(function () {});\\n  });\\n}\\n\"}}]]}]]}]]}],{\"children\":[\"columns\",[\"$\",\"$1\",\"c\",{\"children\":[null,[\"$\",\"$L2\",null,{\"parallelRouterKey\":\"children\",\"segmentPath\":[\"children\",\"columns\",\"children\"],\"error\":\"$undefined\",\"errorStyles\":\"$undefined\",\"errorScripts\":\"$undefined\",\"template\":[\"$\",\"$L3\",null,{}],\"templateStyles\":\"$undefined\",\"templateScripts\":\"$undefined\",\"notFound\":\"$undefined\",\"forbidden\":\"$undefined\",\"unauthorized\":\"$undefined\"}]]}],{\"children\":[[\"slug\",\"lbd-032\",\"d\"],[\"$\",\"$1\",\"c\",{\"children\":[null,[\"$\",\"$L2\",null,{\"parallelRouterKey\":\"children\",\"segmentPath\":[\"children\",\"columns\",\"children\",\"$0:f:0:1:2:children:2:children:0\",\"children\"],\"error\":\"$undefined\",\"errorStyles\":\"$undefined\",\"errorScripts\":\"$undefined\",\"template\":[\"$\",\"$L3\",null,{}],\"templateStyles\":\"$undefined\",\"templateScripts\":\"$undefined\",\"notFound\":\"$undefined\",\"forbidden\":\"$undefined\",\"unauthorized\":\"$undefined\"}]]}],{\"children\":[\"__PAGE__\",[\"$\",\"$1\",\"c\",{\"children\":[\"$L4\",null,[\"$\",\"$L5\",null,{\"children\":\"$L6\"}]]}],{},null,false]},null,false]},null,false]},null,false],[\"$\",\"$1\",\"h\",{\"children\":[null,[\"$\",\"$1\",\"qgBFfyhgHmMs48p2npmBA\",{\"children\":[[\"$\",\"$L7\",null,{\"children\":\"$L8\"}],[\"$\",\"$L9\",null,{\"children\":\"$La\"}],null]}]]}],false]],\"m\":\"$undefined\",\"G\":[\"$b\",\"$undefined\"],\"s\":false,\"S\":true}\n"])</script><script>self.__next_f.push([1,"c:I[8173,[\"173\",\"static/chunks/173-69860a4742bb7020.js\",\"829\",\"static/chunks/829-7533e70598480772.js\",\"306\",\"static/chunks/app/columns/%5Bslug%5D/page-58fc1d8f5085c1ff.js\"],\"\"]\nd:I[4780,[\"173\",\"static/chunks/173-69860a4742bb7020.js\",\"829\",\"static/chunks/829-7533e70598480772.js\",\"306\",\"static/chunks/app/columns/%5Bslug%5D/page-58fc1d8f5085c1ff.js\"],\"default\"]\ne:T2985,"])</script><script>self.__next_f.push([1,"# 算法学习之路\n\n算法学习之路\n学算法，认准 labuladong 就够了！\n之前发的那篇关于框架性思维的⽂章，我也发到了不少其他圈⼦，受到了⼤\n家的普遍好评，这⼀点我真的没想到，⾸先感谢⼤家的认可，我会更加努\n⼒，写出通俗易懂的算法⽂章。\n有很多朋友问我数据结构和算法到底该怎么学，尤其是很多朋友说⾃⼰是\n「⼩⽩」，感觉这些东⻄好难啊，就算看了之前的「框架思维」，也感觉⾃\n⼰刷题乏⼒，希望我能聊聊我从⼀个⾮科班⼩⽩⼀路是怎么学过来的。\n⾸先要给怀有这样疑问的朋友⿎掌，因为你现在已经「知道⾃⼰不知道」，\n⽽且开始尝试学习、刷题、寻求帮助，能做到这⼀点本⾝就是及其困难的。\n关于「框架性思维」，对于⼀个⼩⽩来说，可能暂时⽆法完全理解（如果你\n能理解，说明你⽔平已经不错啦，不是⼩⽩啦）。就像软件⼯程，对于我这\n种没带过项⽬的⼈来说，感觉其内容枯燥乏味，全是废话，但是对于⼀个带\n过团队的⼈，他就会觉得软件⼯程⾥的每⼀句话都是精华。暂时不太理解没\n关系，留个印象，功夫到了很快就明⽩了。\n下⾯写⼀写我⼀路过来的⼀些经验。如果你已经看过很多「如何⾼效刷题」\n「如何学习算法」的⽂章，却还是没有开始⾏动并坚持下去，本⽂的第五点\n就是写给你的。\n我觉得之所以有时候认为⾃⼰是「⼩⽩」，是由于知识某些⽅⾯的空⽩造成\n的。具体到数据结构的学习，⽆⾮就是两个问题搞得不太清楚：这是啥？有\n啥⽤？\n举个例⼦，⽐如说你看到了「栈」这个名词，⽼师可能会讲这些关键词：先\n进后出、函数堆栈等等。但是，对于初学者，这些描述属于⽂学词汇，没有\n实际价值，没有解决最基本的两个问题。如何回答这两个基本问题呢？回答\n「这是啥」需要看教科书，回答「有啥⽤」需要刷算法题。\n算法学习之路\n222\n\n⼀、这是啥？\n这个问题最容易解决，就像⼀层窗户纸，你只要随便找本书看两天，⾃⼰动\n⼿实现⼀个「队列」「栈」之类的数据结构，就能捅破这层窗户纸。\n这时候你就能理解「框架思维」⽂章中的前半部分了：数据结构⽆⾮就是数\n组、链表为⾻架的⼀些特定操作⽽已；每个数据结构实现的功能⽆⾮增删查\n改罢了。\n⽐如说「列队」这个数据结构，⽆⾮就是基于数组或者链表，实现 enqueue\n和 dequeue 两个⽅法。这两个⽅法就是增和删呀，连查和改的⽅法都不需\n要。\n⼆、有啥⽤？\n解决这个问题，就涉及算法的设计了，是个持久战，需要经常进⾏抽象思\n考，刷算法题，培养「计算机思维」。\n之前的⽂章讲了，算法就是对数据结构准确⽽巧妙的运⽤。常⽤算法问题也\n就那⼏⼤类，算法题⽆⾮就是不断变换场景，给那⼏个算法框架套上不同的\n⽪。刷题，就是在锻炼你的眼⼒，看你能不能看穿问题表象揪出相应的解法\n框架。\n⽐如说，让你求解⼀个迷宫，你要把这个问题层层抽象：迷宫 -\u003e 图的遍历 -\n\u003e N 叉树的遍历 -\u003e ⼆叉树的遍历。然后让框架指导你写具体的解法。\n抽象问题，直击本质，是刷题中你需要刻意培养的能⼒。\n三、如何看书\n直接推荐⼀本公认的好书，《算法第 4 版》，我⼀般简写成《算法4》。不\n要蜻蜓点⽔，这本书你能选择性的看上 50%，基本上就达到平均⽔平了。\n别怕这本书厚，因为起码有三分之⼀不⽤看，下⾯讲讲怎么看这本书。\n看书仍然遵循递归的思想：⾃顶向下，逐步求精。\n算法学习之路\n223\n\n这本书知识结构合理，讲解也清楚，所以可以按顺序学习。书中正⽂的算法\n代码⼀定要亲⾃敲⼀遍，因为这些真的是扎实的基础，要认真理解。不要以\n为⾃⼰看⼀遍就看懂了，不动⼿的话理解不了的。但是，开头部分的基础可\n以酌情跳过；书中的数学证明，如不影响对算法本⾝的理解，完全可以跳\n过；章节最后的练习题，也可以全部跳过。这样⼀来，这本书就薄了很多。\n相信读者现在已经认可了「框架性思维」的重要性，这种看书⽅式也是⼀种\n框架性策略，抓⼤放⼩，着重理解整体的知识架构，⽽忽略证明、练习题这\n种细节问题，即保持⾃⼰对新知识的好奇⼼，避免陷⼊⽆限的细节被劝退。\n当然，《算法4》到后⾯的内容也⽐较难了，⽐如那⼏个著名的串算法，以\n及正则表达式算法。这些属于「经典算法」，看个⼈接受能⼒吧，单说刷\nLeetCode 的话，基本⽤不上，量⼒⽽⾏即可。\n四、如何刷题\n⾸先声明⼀下，算法和数学⽔平没关系，和编程语⾔也没关系，你爱⽤什么\n语⾔⽤什么。算法，主要是培养⼀种新的思维⽅式。所谓「计算机思维」，\n就跟你考驾照⼀样，你以前骑⾃⾏⻋，有⼀套⾃⾏⻋的规则和技巧，现在你\n开汽⻋，就需要适应并练习开汽⻋的规则和技巧。\nLeetCode 上的算法题和前⾯说的「经典算法」不⼀样，我们权且称为「解\n闷算法」吧，因为很多题⽬都⽐较有趣，有种在做奥数题或者脑筋急转弯的\n感觉。⽐如说，让你⽤队列实现⼀个栈，或者⽤栈实现⼀个队列，以及不⽤\n加号做加法，开脑洞吧？\n当然，这些问题虽然看起来⽆厘头，实际⽣活中也⽤不到，但是想解决这些\n问题依然要靠数据结构以及对基础知识的理解，也许这就是很多公司⾯试都\n喜欢出这种「智⼒题」的原因。下⾯说⼏点技巧吧。\n尽量刷英⽂版的 LeetCode，中⽂版的“⼒扣”是阉割版，不仅很多题⽬没有\n答案，⽽且连个讨论区都没有。英⽂版的是真的很良⼼了，很多问题都有官\n⽅解答，详细易懂。⽽且讨论区（Discuss）也沉淀了⼤量优质内容，甚⾄\n好过官⽅解答。真正能打开你思路的，很可能是讨论区各路⼤神的思路荟\n萃。\n算法学习之路\n224\n\nPS：如果有的英⽂题⽬实在看不懂，有个⼩技巧，你在题⽬⻚⾯的 url ⾥加\n⼀个 -cn，即 https://leetcode.com/xxx 改成 https://leetcode-cn.com/xxx，这样\n就能切换到相应的中⽂版⻚⾯查看。\n对于初学者，强烈建议从 Explore 菜单⾥最下⾯的 Learn 开始刷，这个专题\n就是专门教你学习数据结构和基本算法的，教学篇和相应的练习题结合，不\n要太良⼼。\n最近 Learn 专题⾥新增了⼀些内容，我们挑数据结构相关的内容刷就⾏了，\n像 Ruby，Machine Learning 就没必要刷了。刷完 Learn 专题的基础内容，基\n本就有能⼒去 Explore 菜单的 Interview 专题刷⾯试题，或者去 Problem 菜\n单，在真正的题海⾥遨游了。\n⽆论刷 Explore 还是 Problems 菜单，最好⼀个分类⼀个分类的刷，不要蜻蜓\n点⽔。⽐如说这⼏天就刷链表，刷完链表再去连刷⼏天⼆叉树。这样做是为\n了帮助你提取「框架」。⼀旦总结出针对⼀类问题的框架，解决同类问题可\n谓是⼿到擒来。\n五、道理我都懂，还是不能坚持下去\n这其实⽆关算法了，还是⽼⽣常谈的执⾏⼒的问题。不说什么破鸡汤了，我\n觉得解决办法就是「激起欲望」，注意我说的是欲望，⽽不是常说的兴趣，\n拿我⾃⼰说说吧。\n半年前我开始刷题，⽬的和⼤部分⼈都⼀样的，就是为毕业找⼯作做准备。\n只不过，⼤部分⼈是等到临近毕业了才开始刷，⽽我离毕业还有⼀阵⼦。这\n不是炫耀我多有觉悟，⽽是我承认⾃⼰的极度平凡。\n⾸先，我真的想找到⼀份不错的⼯作（谁都想吧？），我想要⾼薪呀！否则\n我在朋友⾯前，⼥神⾯前放下的骚话，最终都会反过来啪啪地打我的脸。我\n也是要恰饭，要⾯⼦，要虚荣⼼的嘛。赚钱，虚荣⼼，⾜以激起我的欲望\n了。\n但是，我不擅⻓ deadline 突击，我理解东⻄真的慢，所以⼲脆笨⻦先⻜了。\n智商不够，拿时间来补，我没能⼒两个⽉突击，⼲脆拉⻓战线，打他个两年\n游击战，我还不信耗不死算法这个强敌。事实证明，你如果认真学习⼀个\n算法学习之路\n225\n\n⽉，就能够取得⾁眼可⻅的进步了。\n现在，我依然在坚持刷题，⽽且为了另外⼀个原因，这个公众号。我没想到\n⾃⼰的⽂字竟然能够帮助到他⼈，甚⾄能得到认可。这也是虚荣⼼啊，我不\n能让读者失望啊，我想让更多的⼈认可（夸）我呀！\n以上，不光是坚持刷算法题吧，很多场景都适⽤。执⾏⼒是要靠「欲望」⽀\n撑的，我也是⼀凡⼈，只有那些看得⻅摸得着的东⻄才能使我快乐呀。读者\n不妨也尝试把刷题学习和⾃⼰的切⾝利益联系起来，这恐怕是坚持下去最简\n单直⽩的理由了。\n＿＿＿＿＿＿＿＿＿＿＿＿＿\n刷算法，学套路，认准 labuladong。\n本⼩抄即将出版，关注 labuladong 公众号或 ongline book 查看更新⽂章，\n后台回复「进群」可进刷题群，labuladong 带你⽇穿 LeetCode。\n算法学习之路\n226\n\n⼆叉堆详解实现优先级队列\n学算法，认准 labuladong 就够了！\n⼆叉堆（Binary Heap）没什么神秘，性质⽐⼆叉搜索树 BST 还简单。其主\n要操作就两个， sink （下沉）和  swim （上浮），⽤以维护⼆叉堆的性\n质。其主要应⽤有两个，⾸先是⼀种排序⽅法「堆排序」，第⼆是⼀种很有\n⽤的数据结构「优先级队列」。\n本⽂就以实现优先级队列（Priority Queue）为例，通过图⽚和⼈类的语⾔来\n描述⼀下⼆叉堆怎么运作的。\n⼀、⼆叉堆概览\n⾸先，⼆叉堆和⼆叉树有啥关系呢，为什么⼈们总数把⼆叉堆画成⼀棵⼆叉\n树？\n因为，⼆叉堆其实就是⼀种特殊的⼆叉树（完全⼆叉树），只不过存储在数\n组⾥。⼀般的链表⼆叉树，我们操作节点的指针，⽽在数组⾥，我们把数组\n索引作为指针：\n// ⽗节点的索引\nint parent(int root) {\n    return root / 2;\n}\n// 左孩⼦的索引\nint left(int root) {\n    return root * 2;\n}\n// 右孩⼦的索引\nint right(int root) {\n    return root * 2 + 1;\n}\n⼆叉堆详解实现优先级队列\n227"])</script><script>self.__next_f.push([1,"4:[\"$\",\"main\",null,{\"style\":{\"maxWidth\":760,\"margin\":\"0 auto\",\"padding\":\"16px\",\"minHeight\":\"100vh\"},\"children\":[[\"$\",\"$Lc\",null,{\"href\":\"/columns/\",\"style\":{\"display\":\"inline-block\",\"marginBottom\":\"12px\",\"fontSize\":\"13px\"},\"children\":\"← 返回专栏\"}],[\"$\",\"div\",null,{\"style\":{\"fontSize\":\"12px\",\"color\":\"var(--text-tertiary)\",\"marginBottom\":\"4px\"},\"children\":[\"📕\",\" \",\"labuladong 算法小抄\"]}],[\"$\",\"h1\",null,{\"style\":{\"fontSize\":\"22px\",\"fontWeight\":700,\"margin\":\"0 0 16px\"},\"children\":\"算法学习之路\"}],[\"$\",\"$Ld\",null,{\"children\":\"$e\"}],false]}]\n"])</script><script>self.__next_f.push([1,"a:[[\"$\",\"meta\",\"0\",{\"name\":\"viewport\",\"content\":\"width=device-width, initial-scale=1\"}],[\"$\",\"meta\",\"1\",{\"name\":\"theme-color\",\"content\":\"#f97316\"}]]\n"])</script><script>self.__next_f.push([1,"8:[[\"$\",\"meta\",\"0\",{\"charSet\":\"utf-8\"}],[\"$\",\"title\",\"1\",{\"children\":\"算法学习之路 - 算法面试\"}],[\"$\",\"meta\",\"2\",{\"name\":\"description\",\"content\":\"LeetCode 热题 100 完整 Java 题解、逐题动画、知识专栏与智能间隔复习。\"}],[\"$\",\"meta\",\"3\",{\"name\":\"application-name\",\"content\":\"算法面试\"}],[\"$\",\"link\",\"4\",{\"rel\":\"manifest\",\"href\":\"/algorithm-interview/manifest.json\",\"crossOrigin\":\"$undefined\"}],[\"$\",\"meta\",\"5\",{\"name\":\"keywords\",\"content\":\"LeetCode,热题100,算法面试,Java题解,数据结构,动态规划,面试刷题\"}],[\"$\",\"meta\",\"6\",{\"name\":\"mobile-web-app-capable\",\"content\":\"yes\"}],[\"$\",\"meta\",\"7\",{\"name\":\"apple-mobile-web-app-title\",\"content\":\"算法面试\"}],[\"$\",\"meta\",\"8\",{\"name\":\"apple-mobile-web-app-status-bar-style\",\"content\":\"default\"}],[\"$\",\"meta\",\"9\",{\"property\":\"og:title\",\"content\":\"算法面试题库\"}],[\"$\",\"meta\",\"10\",{\"property\":\"og:description\",\"content\":\"LeetCode 热题 100 完整 Java 题解、逐题动画、知识专栏与智能复习\"}],[\"$\",\"meta\",\"11\",{\"property\":\"og:site_name\",\"content\":\"算法面试题库\"}],[\"$\",\"meta\",\"12\",{\"property\":\"og:locale\",\"content\":\"zh_CN\"}],[\"$\",\"meta\",\"13\",{\"property\":\"og:type\",\"content\":\"website\"}],[\"$\",\"meta\",\"14\",{\"name\":\"twitter:card\",\"content\":\"summary\"}],[\"$\",\"meta\",\"15\",{\"name\":\"twitter:title\",\"content\":\"算法面试题库\"}],[\"$\",\"meta\",\"16\",{\"name\":\"twitter:description\",\"content\":\"LeetCode 热题 100 完整 Java 题解、逐题动画、知识专栏与智能复习\"}]]\n"])</script><script>self.__next_f.push([1,"6:null\n"])</script></body></html>

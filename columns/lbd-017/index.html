@@ -1,0 +1,78 @@
+<!DOCTYPE html><html lang="zh"><head><meta charSet="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="/algorithm-interview/_next/static/css/c1e787639001e16b.css" data-precedence="next"/><link rel="preload" as="script" fetchPriority="low" href="/algorithm-interview/_next/static/chunks/webpack-65b8ce4c1158f96f.js"/><script src="/algorithm-interview/_next/static/chunks/4bd1b696-899926250d3992f1.js" async=""></script><script src="/algorithm-interview/_next/static/chunks/517-b6df7dad4ff96d0b.js" async=""></script><script src="/algorithm-interview/_next/static/chunks/main-app-9e7bfff32fd8ebe9.js" async=""></script><script src="/algorithm-interview/_next/static/chunks/173-69860a4742bb7020.js" async=""></script><script src="/algorithm-interview/_next/static/chunks/829-7533e70598480772.js" async=""></script><script src="/algorithm-interview/_next/static/chunks/app/columns/%5Bslug%5D/page-58fc1d8f5085c1ff.js" async=""></script><meta name="theme-color" content="#f97316"/><title>动态规划和回溯算法到底谁是谁爹？ - 算法面试</title><meta name="description" content="LeetCode 热题 100 完整 Java 题解、逐题动画、知识专栏与智能间隔复习。"/><meta name="application-name" content="算法面试"/><link rel="manifest" href="/algorithm-interview/manifest.json"/><meta name="keywords" content="LeetCode,热题100,算法面试,Java题解,数据结构,动态规划,面试刷题"/><meta name="mobile-web-app-capable" content="yes"/><meta name="apple-mobile-web-app-title" content="算法面试"/><meta name="apple-mobile-web-app-status-bar-style" content="default"/><meta property="og:title" content="算法面试题库"/><meta property="og:description" content="LeetCode 热题 100 完整 Java 题解、逐题动画、知识专栏与智能复习"/><meta property="og:site_name" content="算法面试题库"/><meta property="og:locale" content="zh_CN"/><meta property="og:type" content="website"/><meta name="twitter:card" content="summary"/><meta name="twitter:title" content="算法面试题库"/><meta name="twitter:description" content="LeetCode 热题 100 完整 Java 题解、逐题动画、知识专栏与智能复习"/><script>
+try {
+  var raw = localStorage.getItem('algo-interview');
+  var theme = 'light';
+  if (raw) { var p = JSON.parse(raw); theme = (p.state && p.state.theme) || 'light'; }
+  if (theme === 'dark') {
+    document.documentElement.classList.add('dark');
+    document.documentElement.setAttribute('data-theme', 'dark');
+  }
+} catch (e) {}
+</script><script src="/algorithm-interview/_next/static/chunks/polyfills-42372ed130431b0a.js" noModule=""></script></head><body><main style="max-width:760px;margin:0 auto;padding:16px;min-height:100vh"><a style="display:inline-block;margin-bottom:12px;font-size:13px" href="/algorithm-interview/columns/">← 返回专栏</a><div style="font-size:12px;color:var(--text-tertiary);margin-bottom:4px">📕<!-- --> <!-- -->labuladong 算法小抄</div><h1 style="font-size:22px;font-weight:700;margin:0 0 16px">动态规划和回溯算法到底谁是谁爹？</h1><div class="prose max-w-none" style="font-size:14px;color:var(--text)"><h1>动态规划和回溯算法到底谁是谁爹？</h1>
+<p>回溯算法和动态规划，谁是谁爹？
+学好算法全靠套路，认准 labuladong 就够了。
+相关推荐：
+我写了⾸诗，让你闭着眼睛也能写对⼆分搜索
+动态规划之⼦序列问题解题模板
+读完本⽂，你不仅学会了算法套路，还可以顺便去 LeetCode 上拿下如下题
+⽬：
+494.⽬标和
+我们前⽂经常说回溯算法和递归算法有点类似，有的问题如果实在想不出状
+态转移⽅程，尝试⽤回溯算法暴⼒解决也是⼀个聪明的策略，总⽐写不出来
+解法强。
+那么，回溯算法和动态规划到底是啥关系？它俩都涉及递归，算法模板看起
+来还挺像的，都涉及做「选择」，真的酷似⽗与⼦。
+动态规划和回溯算法到底谁是谁爹？
+119</p>
+<p>那么，它俩具体有啥区别呢？回溯算法和动态规划之间，是否可能互相转化
+呢？
+今天就⽤⼒扣第 494 题「⽬标和」来详细对⽐⼀下回溯算法和动态规划，真
+可谓群魔乱舞：
+注意，给出的例⼦  nums  全是 1，但实际上可以是任意正整数哦。
+动态规划和回溯算法到底谁是谁爹？
+120</p>
+<p>⼀、回溯思路
+其实我第⼀眼看到这个题⽬，花了两分钟就写出了⼀个回溯解法。
+任何算法的核⼼都是穷举，回溯算法就是⼀个暴⼒穷举算法，前⽂ 回溯算
+法解题框架 就写了回溯算法框架：
+def backtrack(路径, 选择列表):
+if 满⾜结束条件:
+result.add(路径)
+return
+for 选择 in 选择列表:
+做选择
+backtrack(路径, 选择列表)
+撤销选择
+＿＿＿＿＿＿＿＿＿＿＿＿＿
+由于格式原因，本⽂只能在 labuladong 公众号查看，关注后可直接搜索本站
+内容：
+动态规划和回溯算法到底谁是谁爹？
+121</p>
+<p>动态规划设计：最⻓递增⼦序列
+学好算法全靠套路，认准 labuladong 就够了。
+读完本⽂，你不仅学会了算法套路，还可以顺便去 LeetCode 上拿下如下题
+⽬：
+300.最⻓上升⼦序列
+也许有读者看了前⽂ 动态规划详解，学会了动态规划的套路：找到了问题
+的「状态」，明确了  dp  数组/函数的含义，定义了 base case；但是不知道
+如何确定「选择」，也就是不到状态转移的关系，依然写不出动态规划解
+法，怎么办？
+不要担⼼，动态规划的难点本来就在于寻找正确的状态转移⽅程，本⽂就借
+助经典的「最⻓递增⼦序列问题」来讲⼀讲设计动态规划的通⽤技巧：数学
+归纳思想。
+最⻓递增⼦序列（Longest Increasing Subsequence，简写 LIS）是⾮常经典的
+⼀个算法问题，⽐较容易想到的是动态规划解法，时间复杂度 O(N^2)，我
+们借这个问题来由浅⼊深讲解如何找状态转移⽅程，如何写出动态规划解
+法。⽐较难想到的是利⽤⼆分查找，时间复杂度是 O(NlogN)，我们通过⼀
+种简单的纸牌游戏来辅助理解这种巧妙的解法。
+＿＿＿＿＿＿＿＿＿＿＿＿＿
+由于格式原因，本⽂只能在 labuladong 公众号查看，关注后可直接搜索本站
+内容：
+动态规划设计：最⻓递增⼦序列
+122</p></div></main><script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function () {
+    navigator.serviceWorker.register('/algorithm-interview/sw.js').catch(function () {});
+  });
+}
+</script><script src="/algorithm-interview/_next/static/chunks/webpack-65b8ce4c1158f96f.js" async=""></script><script>(self.__next_f=self.__next_f||[]).push([0])</script><script>self.__next_f.push([1,"1:\"$Sreact.fragment\"\n2:I[5244,[],\"\"]\n3:I[3866,[],\"\"]\n5:I[6213,[],\"OutletBoundary\"]\n7:I[6213,[],\"MetadataBoundary\"]\n9:I[6213,[],\"ViewportBoundary\"]\nb:I[4835,[],\"\"]\n:HL[\"/algorithm-interview/_next/static/css/c1e787639001e16b.css\",\"style\"]\n"])</script><script>self.__next_f.push([1,"0:{\"P\":null,\"b\":\"xos97fAiWtKfKXI6hZLx4\",\"p\":\"/algorithm-interview\",\"c\":[\"\",\"columns\",\"lbd-017\",\"\"],\"i\":false,\"f\":[[[\"\",{\"children\":[\"columns\",{\"children\":[[\"slug\",\"lbd-017\",\"d\"],{\"children\":[\"__PAGE__\",{}]}]}]},\"$undefined\",\"$undefined\",true],[\"\",[\"$\",\"$1\",\"c\",{\"children\":[[[\"$\",\"link\",\"0\",{\"rel\":\"stylesheet\",\"href\":\"/algorithm-interview/_next/static/css/c1e787639001e16b.css\",\"precedence\":\"next\",\"crossOrigin\":\"$undefined\",\"nonce\":\"$undefined\"}]],[\"$\",\"html\",null,{\"lang\":\"zh\",\"children\":[[\"$\",\"head\",null,{\"children\":[\"$\",\"script\",null,{\"dangerouslySetInnerHTML\":{\"__html\":\"\\ntry {\\n  var raw = localStorage.getItem('algo-interview');\\n  var theme = 'light';\\n  if (raw) { var p = JSON.parse(raw); theme = (p.state \u0026\u0026 p.state.theme) || 'light'; }\\n  if (theme === 'dark') {\\n    document.documentElement.classList.add('dark');\\n    document.documentElement.setAttribute('data-theme', 'dark');\\n  }\\n} catch (e) {}\\n\"}}]}],[\"$\",\"body\",null,{\"children\":[[\"$\",\"$L2\",null,{\"parallelRouterKey\":\"children\",\"segmentPath\":[\"children\"],\"error\":\"$undefined\",\"errorStyles\":\"$undefined\",\"errorScripts\":\"$undefined\",\"template\":[\"$\",\"$L3\",null,{}],\"templateStyles\":\"$undefined\",\"templateScripts\":\"$undefined\",\"notFound\":[[],[[\"$\",\"title\",null,{\"children\":\"404: This page could not be found.\"}],[\"$\",\"div\",null,{\"style\":{\"fontFamily\":\"system-ui,\\\"Segoe UI\\\",Roboto,Helvetica,Arial,sans-serif,\\\"Apple Color Emoji\\\",\\\"Segoe UI Emoji\\\"\",\"height\":\"100vh\",\"textAlign\":\"center\",\"display\":\"flex\",\"flexDirection\":\"column\",\"alignItems\":\"center\",\"justifyContent\":\"center\"},\"children\":[\"$\",\"div\",null,{\"children\":[[\"$\",\"style\",null,{\"dangerouslySetInnerHTML\":{\"__html\":\"body{color:#000;background:#fff;margin:0}.next-error-h1{border-right:1px solid rgba(0,0,0,.3)}@media (prefers-color-scheme:dark){body{color:#fff;background:#000}.next-error-h1{border-right:1px solid rgba(255,255,255,.3)}}\"}}],[\"$\",\"h1\",null,{\"className\":\"next-error-h1\",\"style\":{\"display\":\"inline-block\",\"margin\":\"0 20px 0 0\",\"padding\":\"0 23px 0 0\",\"fontSize\":24,\"fontWeight\":500,\"verticalAlign\":\"top\",\"lineHeight\":\"49px\"},\"children\":404}],[\"$\",\"div\",null,{\"style\":{\"display\":\"inline-block\"},\"children\":[\"$\",\"h2\",null,{\"style\":{\"fontSize\":14,\"fontWeight\":400,\"lineHeight\":\"49px\",\"margin\":0},\"children\":\"This page could not be found.\"}]}]]}]}]]],\"forbidden\":\"$undefined\",\"unauthorized\":\"$undefined\"}],[\"$\",\"script\",null,{\"dangerouslySetInnerHTML\":{\"__html\":\"\\nif ('serviceWorker' in navigator) {\\n  window.addEventListener('load', function () {\\n    navigator.serviceWorker.register('/algorithm-interview/sw.js').catch(function () {});\\n  });\\n}\\n\"}}]]}]]}]]}],{\"children\":[\"columns\",[\"$\",\"$1\",\"c\",{\"children\":[null,[\"$\",\"$L2\",null,{\"parallelRouterKey\":\"children\",\"segmentPath\":[\"children\",\"columns\",\"children\"],\"error\":\"$undefined\",\"errorStyles\":\"$undefined\",\"errorScripts\":\"$undefined\",\"template\":[\"$\",\"$L3\",null,{}],\"templateStyles\":\"$undefined\",\"templateScripts\":\"$undefined\",\"notFound\":\"$undefined\",\"forbidden\":\"$undefined\",\"unauthorized\":\"$undefined\"}]]}],{\"children\":[[\"slug\",\"lbd-017\",\"d\"],[\"$\",\"$1\",\"c\",{\"children\":[null,[\"$\",\"$L2\",null,{\"parallelRouterKey\":\"children\",\"segmentPath\":[\"children\",\"columns\",\"children\",\"$0:f:0:1:2:children:2:children:0\",\"children\"],\"error\":\"$undefined\",\"errorStyles\":\"$undefined\",\"errorScripts\":\"$undefined\",\"template\":[\"$\",\"$L3\",null,{}],\"templateStyles\":\"$undefined\",\"templateScripts\":\"$undefined\",\"notFound\":\"$undefined\",\"forbidden\":\"$undefined\",\"unauthorized\":\"$undefined\"}]]}],{\"children\":[\"__PAGE__\",[\"$\",\"$1\",\"c\",{\"children\":[\"$L4\",null,[\"$\",\"$L5\",null,{\"children\":\"$L6\"}]]}],{},null,false]},null,false]},null,false]},null,false],[\"$\",\"$1\",\"h\",{\"children\":[null,[\"$\",\"$1\",\"eZsZ3KA4Oyb6NlR_5y0-S\",{\"children\":[[\"$\",\"$L7\",null,{\"children\":\"$L8\"}],[\"$\",\"$L9\",null,{\"children\":\"$La\"}],null]}]]}],false]],\"m\":\"$undefined\",\"G\":[\"$b\",\"$undefined\"],\"s\":false,\"S\":true}\n"])</script><script>self.__next_f.push([1,"c:I[8173,[\"173\",\"static/chunks/173-69860a4742bb7020.js\",\"829\",\"static/chunks/829-7533e70598480772.js\",\"306\",\"static/chunks/app/columns/%5Bslug%5D/page-58fc1d8f5085c1ff.js\"],\"\"]\nd:I[4780,[\"173\",\"static/chunks/173-69860a4742bb7020.js\",\"829\",\"static/chunks/829-7533e70598480772.js\",\"306\",\"static/chunks/app/columns/%5Bslug%5D/page-58fc1d8f5085c1ff.js\"],\"default\"]\ne:Tcb6,"])</script><script>self.__next_f.push([1,"# 动态规划和回溯算法到底谁是谁爹？\n\n回溯算法和动态规划，谁是谁爹？\n学好算法全靠套路，认准 labuladong 就够了。\n相关推荐：\n我写了⾸诗，让你闭着眼睛也能写对⼆分搜索\n动态规划之⼦序列问题解题模板\n读完本⽂，你不仅学会了算法套路，还可以顺便去 LeetCode 上拿下如下题\n⽬：\n494.⽬标和\n我们前⽂经常说回溯算法和递归算法有点类似，有的问题如果实在想不出状\n态转移⽅程，尝试⽤回溯算法暴⼒解决也是⼀个聪明的策略，总⽐写不出来\n解法强。\n那么，回溯算法和动态规划到底是啥关系？它俩都涉及递归，算法模板看起\n来还挺像的，都涉及做「选择」，真的酷似⽗与⼦。\n动态规划和回溯算法到底谁是谁爹？\n119\n\n那么，它俩具体有啥区别呢？回溯算法和动态规划之间，是否可能互相转化\n呢？\n今天就⽤⼒扣第 494 题「⽬标和」来详细对⽐⼀下回溯算法和动态规划，真\n可谓群魔乱舞：\n注意，给出的例⼦  nums  全是 1，但实际上可以是任意正整数哦。\n动态规划和回溯算法到底谁是谁爹？\n120\n\n⼀、回溯思路\n其实我第⼀眼看到这个题⽬，花了两分钟就写出了⼀个回溯解法。\n任何算法的核⼼都是穷举，回溯算法就是⼀个暴⼒穷举算法，前⽂ 回溯算\n法解题框架 就写了回溯算法框架：\ndef backtrack(路径, 选择列表):\n    if 满⾜结束条件:\n        result.add(路径)\n        return\n    for 选择 in 选择列表:\n        做选择\n        backtrack(路径, 选择列表)\n        撤销选择\n＿＿＿＿＿＿＿＿＿＿＿＿＿\n由于格式原因，本⽂只能在 labuladong 公众号查看，关注后可直接搜索本站\n内容：\n动态规划和回溯算法到底谁是谁爹？\n121\n\n动态规划设计：最⻓递增⼦序列\n学好算法全靠套路，认准 labuladong 就够了。\n读完本⽂，你不仅学会了算法套路，还可以顺便去 LeetCode 上拿下如下题\n⽬：\n300.最⻓上升⼦序列\n也许有读者看了前⽂ 动态规划详解，学会了动态规划的套路：找到了问题\n的「状态」，明确了  dp  数组/函数的含义，定义了 base case；但是不知道\n如何确定「选择」，也就是不到状态转移的关系，依然写不出动态规划解\n法，怎么办？\n不要担⼼，动态规划的难点本来就在于寻找正确的状态转移⽅程，本⽂就借\n助经典的「最⻓递增⼦序列问题」来讲⼀讲设计动态规划的通⽤技巧：数学\n归纳思想。\n最⻓递增⼦序列（Longest Increasing Subsequence，简写 LIS）是⾮常经典的\n⼀个算法问题，⽐较容易想到的是动态规划解法，时间复杂度 O(N^2)，我\n们借这个问题来由浅⼊深讲解如何找状态转移⽅程，如何写出动态规划解\n法。⽐较难想到的是利⽤⼆分查找，时间复杂度是 O(NlogN)，我们通过⼀\n种简单的纸牌游戏来辅助理解这种巧妙的解法。\n＿＿＿＿＿＿＿＿＿＿＿＿＿\n由于格式原因，本⽂只能在 labuladong 公众号查看，关注后可直接搜索本站\n内容：\n动态规划设计：最⻓递增⼦序列\n122"])</script><script>self.__next_f.push([1,"4:[\"$\",\"main\",null,{\"style\":{\"maxWidth\":760,\"margin\":\"0 auto\",\"padding\":\"16px\",\"minHeight\":\"100vh\"},\"children\":[[\"$\",\"$Lc\",null,{\"href\":\"/columns/\",\"style\":{\"display\":\"inline-block\",\"marginBottom\":\"12px\",\"fontSize\":\"13px\"},\"children\":\"← 返回专栏\"}],[\"$\",\"div\",null,{\"style\":{\"fontSize\":\"12px\",\"color\":\"var(--text-tertiary)\",\"marginBottom\":\"4px\"},\"children\":[\"📕\",\" \",\"labuladong 算法小抄\"]}],[\"$\",\"h1\",null,{\"style\":{\"fontSize\":\"22px\",\"fontWeight\":700,\"margin\":\"0 0 16px\"},\"children\":\"动态规划和回溯算法到底谁是谁爹？\"}],[\"$\",\"$Ld\",null,{\"children\":\"$e\"}],false]}]\n"])</script><script>self.__next_f.push([1,"a:[[\"$\",\"meta\",\"0\",{\"name\":\"viewport\",\"content\":\"width=device-width, initial-scale=1\"}],[\"$\",\"meta\",\"1\",{\"name\":\"theme-color\",\"content\":\"#f97316\"}]]\n"])</script><script>self.__next_f.push([1,"8:[[\"$\",\"meta\",\"0\",{\"charSet\":\"utf-8\"}],[\"$\",\"title\",\"1\",{\"children\":\"动态规划和回溯算法到底谁是谁爹？ - 算法面试\"}],[\"$\",\"meta\",\"2\",{\"name\":\"description\",\"content\":\"LeetCode 热题 100 完整 Java 题解、逐题动画、知识专栏与智能间隔复习。\"}],[\"$\",\"meta\",\"3\",{\"name\":\"application-name\",\"content\":\"算法面试\"}],[\"$\",\"link\",\"4\",{\"rel\":\"manifest\",\"href\":\"/algorithm-interview/manifest.json\",\"crossOrigin\":\"$undefined\"}],[\"$\",\"meta\",\"5\",{\"name\":\"keywords\",\"content\":\"LeetCode,热题100,算法面试,Java题解,数据结构,动态规划,面试刷题\"}],[\"$\",\"meta\",\"6\",{\"name\":\"mobile-web-app-capable\",\"content\":\"yes\"}],[\"$\",\"meta\",\"7\",{\"name\":\"apple-mobile-web-app-title\",\"content\":\"算法面试\"}],[\"$\",\"meta\",\"8\",{\"name\":\"apple-mobile-web-app-status-bar-style\",\"content\":\"default\"}],[\"$\",\"meta\",\"9\",{\"property\":\"og:title\",\"content\":\"算法面试题库\"}],[\"$\",\"meta\",\"10\",{\"property\":\"og:description\",\"content\":\"LeetCode 热题 100 完整 Java 题解、逐题动画、知识专栏与智能复习\"}],[\"$\",\"meta\",\"11\",{\"property\":\"og:site_name\",\"content\":\"算法面试题库\"}],[\"$\",\"meta\",\"12\",{\"property\":\"og:locale\",\"content\":\"zh_CN\"}],[\"$\",\"meta\",\"13\",{\"property\":\"og:type\",\"content\":\"website\"}],[\"$\",\"meta\",\"14\",{\"name\":\"twitter:card\",\"content\":\"summary\"}],[\"$\",\"meta\",\"15\",{\"name\":\"twitter:title\",\"content\":\"算法面试题库\"}],[\"$\",\"meta\",\"16\",{\"name\":\"twitter:description\",\"content\":\"LeetCode 热题 100 完整 Java 题解、逐题动画、知识专栏与智能复习\"}]]\n"])</script><script>self.__next_f.push([1,"6:null\n"])</script></body></html>

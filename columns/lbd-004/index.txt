@@ -1,0 +1,316 @@
+1:"$Sreact.fragment"
+2:I[5244,[],""]
+3:I[3866,[],""]
+5:I[6213,[],"OutletBoundary"]
+7:I[6213,[],"MetadataBoundary"]
+9:I[6213,[],"ViewportBoundary"]
+b:I[4835,[],""]
+:HL["/algorithm-interview/_next/static/css/c1e787639001e16b.css","style"]
+0:{"P":null,"b":"xos97fAiWtKfKXI6hZLx4","p":"/algorithm-interview","c":["","columns","lbd-004",""],"i":false,"f":[[["",{"children":["columns",{"children":[["slug","lbd-004","d"],{"children":["__PAGE__",{}]}]}]},"$undefined","$undefined",true],["",["$","$1","c",{"children":[[["$","link","0",{"rel":"stylesheet","href":"/algorithm-interview/_next/static/css/c1e787639001e16b.css","precedence":"next","crossOrigin":"$undefined","nonce":"$undefined"}]],["$","html",null,{"lang":"zh","children":[["$","head",null,{"children":["$","script",null,{"dangerouslySetInnerHTML":{"__html":"\ntry {\n  var raw = localStorage.getItem('algo-interview');\n  var theme = 'light';\n  if (raw) { var p = JSON.parse(raw); theme = (p.state && p.state.theme) || 'light'; }\n  if (theme === 'dark') {\n    document.documentElement.classList.add('dark');\n    document.documentElement.setAttribute('data-theme', 'dark');\n  }\n} catch (e) {}\n"}}]}],["$","body",null,{"children":[["$","$L2",null,{"parallelRouterKey":"children","segmentPath":["children"],"error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L3",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":[[],[["$","title",null,{"children":"404: This page could not be found."}],["$","div",null,{"style":{"fontFamily":"system-ui,\"Segoe UI\",Roboto,Helvetica,Arial,sans-serif,\"Apple Color Emoji\",\"Segoe UI Emoji\"","height":"100vh","textAlign":"center","display":"flex","flexDirection":"column","alignItems":"center","justifyContent":"center"},"children":["$","div",null,{"children":[["$","style",null,{"dangerouslySetInnerHTML":{"__html":"body{color:#000;background:#fff;margin:0}.next-error-h1{border-right:1px solid rgba(0,0,0,.3)}@media (prefers-color-scheme:dark){body{color:#fff;background:#000}.next-error-h1{border-right:1px solid rgba(255,255,255,.3)}}"}}],["$","h1",null,{"className":"next-error-h1","style":{"display":"inline-block","margin":"0 20px 0 0","padding":"0 23px 0 0","fontSize":24,"fontWeight":500,"verticalAlign":"top","lineHeight":"49px"},"children":404}],["$","div",null,{"style":{"display":"inline-block"},"children":["$","h2",null,{"style":{"fontSize":14,"fontWeight":400,"lineHeight":"49px","margin":0},"children":"This page could not be found."}]}]]}]}]]],"forbidden":"$undefined","unauthorized":"$undefined"}],["$","script",null,{"dangerouslySetInnerHTML":{"__html":"\nif ('serviceWorker' in navigator) {\n  window.addEventListener('load', function () {\n    navigator.serviceWorker.register('/algorithm-interview/sw.js').catch(function () {});\n  });\n}\n"}}]]}]]}]]}],{"children":["columns",["$","$1","c",{"children":[null,["$","$L2",null,{"parallelRouterKey":"children","segmentPath":["children","columns","children"],"error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L3",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","forbidden":"$undefined","unauthorized":"$undefined"}]]}],{"children":[["slug","lbd-004","d"],["$","$1","c",{"children":[null,["$","$L2",null,{"parallelRouterKey":"children","segmentPath":["children","columns","children","$0:f:0:1:2:children:2:children:0","children"],"error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L3",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","forbidden":"$undefined","unauthorized":"$undefined"}]]}],{"children":["__PAGE__",["$","$1","c",{"children":["$L4",null,["$","$L5",null,{"children":"$L6"}]]}],{},null,false]},null,false]},null,false]},null,false],["$","$1","h",{"children":[null,["$","$1","JKWRc0Gn3tNDmIYy-el1y",{"children":[["$","$L7",null,{"children":"$L8"}],["$","$L9",null,{"children":"$La"}],null]}]]}],false]],"m":"$undefined","G":["$b","$undefined"],"s":false,"S":true}
+c:I[8173,["173","static/chunks/173-69860a4742bb7020.js","829","static/chunks/829-7533e70598480772.js","306","static/chunks/app/columns/%5Bslug%5D/page-58fc1d8f5085c1ff.js"],""]
+d:I[4780,["173","static/chunks/173-69860a4742bb7020.js","829","static/chunks/829-7533e70598480772.js","306","static/chunks/app/columns/%5Bslug%5D/page-58fc1d8f5085c1ff.js"],"default"]
+e:T3784,# 回溯算法解题套路框架
+
+回溯算法详解
+学算法，认准 labuladong 就够了！
+这篇⽂章是很久之前的⼀篇《回溯算法详解》的进阶版，之前那篇不够清
+楚，就不必看了，看这篇就⾏。把框架给你讲清楚，你会发现回溯算法问题
+都是⼀个套路。
+废话不多说，直接上回溯算法框架。解决⼀个回溯问题，实际上就是⼀个决
+策树的遍历过程。你只需要思考 3 个问题：
+1、路径：也就是已经做出的选择。
+2、选择列表：也就是你当前可以做的选择。
+3、结束条件：也就是到达决策树底层，⽆法再做选择的条件。
+如果你不理解这三个词语的解释，没关系，我们后⾯会⽤「全排列」和「N
+皇后问题」这两个经典的回溯算法问题来帮你理解这些词语是什么意思，现
+在你先留着印象。
+代码⽅⾯，回溯算法的框架：
+result = []
+def backtrack(路径, 选择列表):
+    if 满⾜结束条件:
+        result.add(路径)
+        return
+    for 选择 in 选择列表:
+        做选择
+        backtrack(路径, 选择列表)
+        撤销选择
+其核⼼就是 for 循环⾥⾯的递归，在递归调⽤之前「做选择」，在递归调⽤
+之后「撤销选择」，特别简单。
+回溯算法解题套路框架
+37
+
+什么叫做选择和撤销选择呢，这个框架的底层原理是什么呢？下⾯我们就通
+过「全排列」这个问题来解开之前的疑惑，详细探究⼀下其中的奥妙！
+⼀、全排列问题
+我们在⾼中的时候就做过排列组合的数学题，我们也知道  n  个不重复的
+数，全排列共有 n! 个。
+PS：为了简单清晰起⻅，我们这次讨论的全排列问题不包含重复的数字。
+那么我们当时是怎么穷举全排列的呢？⽐⽅说给三个数  [1,2,3] ，你肯定
+不会⽆规律地乱穷举，⼀般是这样：
+先固定第⼀位为 1，然后第⼆位可以是 2，那么第三位只能是 3；然后可以
+把第⼆位变成 3，第三位就只能是 2 了；然后就只能变化第⼀位，变成 2，
+然后再穷举后两位……
+其实这就是回溯算法，我们⾼中⽆师⾃通就会⽤，或者有的同学直接画出如
+下这棵回溯树：
+只要从根遍历这棵树，记录路径上的数字，其实就是所有的全排列。我们不
+妨把这棵树称为回溯算法的「决策树」。
+回溯算法解题套路框架
+38
+
+为啥说这是决策树呢，因为你在每个节点上其实都在做决策。⽐如说你站在
+下图的红⾊节点上：
+你现在就在做决策，可以选择 1 那条树枝，也可以选择 3 那条树枝。为啥只
+能在 1 和 3 之中选择呢？因为 2 这个树枝在你⾝后，这个选择你之前做过
+了，⽽全排列是不允许重复使⽤数字的。
+现在可以解答开头的⼏个名词： [2]  就是「路径」，记录你已经做过的选
+择； [1,3]  就是「选择列表」，表⽰你当前可以做出的选择；「结束条
+件」就是遍历到树的底层，在这⾥就是选择列表为空的时候。
+如果明⽩了这⼏个名词，可以把「路径」和「选择」列表作为决策树上每个
+节点的属性，⽐如下图列出了⼏个节点的属性：
+回溯算法解题套路框架
+39
+
+我们定义的  backtrack  函数其实就像⼀个指针，在这棵树上游⾛，同时要
+正确维护每个节点的属性，每当⾛到树的底层，其「路径」就是⼀个全排
+列。
+再进⼀步，如何遍历⼀棵树？这个应该不难吧。回忆⼀下之前「学习数据结
+构的框架思维」写过，各种搜索问题其实都是树的遍历问题，⽽多叉树的遍
+历框架就是这样：
+void traverse(TreeNode root) {
+    for (TreeNode child : root.childern)
+        // 前序遍历需要的操作
+        traverse(child);
+        // 后序遍历需要的操作
+}
+⽽所谓的前序遍历和后序遍历，他们只是两个很有⽤的时间点，我给你画张
+图你就明⽩了：
+回溯算法解题套路框架
+40
+
+前序遍历的代码在进⼊某⼀个节点之前的那个时间点执⾏，后序遍历代码在
+离开某个节点之后的那个时间点执⾏。
+回想我们刚才说的，「路径」和「选择」是每个节点的属性，函数在树上游
+⾛要正确维护节点的属性，那么就要在这两个特殊时间点搞点动作：
+现在，你是否理解了回溯算法的这段核⼼框架？
+for 选择 in 选择列表:
+回溯算法解题套路框架
+41
+
+    # 做选择
+    将该选择从选择列表移除
+    路径.add(选择)
+    backtrack(路径, 选择列表)
+    # 撤销选择
+    路径.remove(选择)
+    将该选择再加⼊选择列表
+我们只要在递归之前做出选择，在递归之后撤销刚才的选择，就能正确得到
+每个节点的选择列表和路径。
+下⾯，直接看全排列代码：
+List<List<Integer>> res = new LinkedList<>();
+/* 主函数，输⼊⼀组不重复的数字，返回它们的全排列 */
+List<List<Integer>> permute(int[] nums) {
+    // 记录「路径」
+    LinkedList<Integer> track = new LinkedList<>();
+    backtrack(nums, track);
+    return res;
+}
+// 路径：记录在 track 中
+// 选择列表：nums 中不存在于 track 的那些元素
+// 结束条件：nums 中的元素全都在 track 中出现
+void backtrack(int[] nums, LinkedList<Integer> track) {
+    // 触发结束条件
+    if (track.size() == nums.length) {
+        res.add(new LinkedList(track));
+        return;
+    }
+    for (int i = 0; i < nums.length; i++) {
+        // 排除不合法的选择
+        if (track.contains(nums[i]))
+            continue;
+        // 做选择
+        track.add(nums[i]);
+        // 进⼊下⼀层决策树
+        backtrack(nums, track);
+        // 取消选择
+回溯算法解题套路框架
+42
+
+        track.removeLast();
+    }
+}
+我们这⾥稍微做了些变通，没有显式记录「选择列表」，⽽是通过  nums 
+和  track  推导出当前的选择列表：
+⾄此，我们就通过全排列问题详解了回溯算法的底层原理。当然，这个算法
+解决全排列不是很⾼效，应为对链表使⽤  contains  ⽅法需要 O(N) 的时间
+复杂度。有更好的⽅法通过交换元素达到⽬的，但是难理解⼀些，这⾥就不
+写了，有兴趣可以⾃⾏搜索⼀下。
+但是必须说明的是，不管怎么优化，都符合回溯框架，⽽且时间复杂度都不
+可能低于 O(N!)，因为穷举整棵决策树是⽆法避免的。这也是回溯算法的⼀
+个特点，不像动态规划存在重叠⼦问题可以优化，回溯算法就是纯暴⼒穷
+举，复杂度⼀般都很⾼。
+明⽩了全排列问题，就可以直接套回溯算法框架了，下⾯简单看看 N 皇后
+问题。
+⼆、N 皇后问题
+回溯算法解题套路框架
+43
+
+这个问题很经典了，简单解释⼀下：给你⼀个 N×N 的棋盘，让你放置 N 个
+皇后，使得它们不能互相攻击。
+PS：皇后可以攻击同⼀⾏、同⼀列、左上左下右上右下四个⽅向的任意单
+位。
+这个问题本质上跟全排列问题差不多，决策树的每⼀层表⽰棋盘上的每⼀
+⾏；每个节点可以做出的选择是，在该⾏的任意⼀列放置⼀个皇后。
+直接套⽤框架:
+vector<vector<string>> res;
+/* 输⼊棋盘边⻓ n，返回所有合法的放置 */
+vector<vector<string>> solveNQueens(int n) {
+    // '.' 表⽰空，'Q' 表⽰皇后，初始化空棋盘。
+    vector<string> board(n, string(n, '.'));
+    backtrack(board, 0);
+    return res;
+}
+// 路径：board 中⼩于 row 的那些⾏都已经成功放置了皇后
+// 选择列表：第 row ⾏的所有列都是放置皇后的选择
+// 结束条件：row 超过 board 的最后⼀⾏
+void backtrack(vector<string>& board, int row) {
+    // 触发结束条件
+    if (row == board.size()) {
+        res.push_back(board);
+        return;
+    }
+    int n = board[row].size();
+    for (int col = 0; col < n; col++) {
+        // 排除不合法选择
+        if (!isValid(board, row, col)) 
+            continue;
+        // 做选择
+        board[row][col] = 'Q';
+        // 进⼊下⼀⾏决策
+        backtrack(board, row + 1);
+        // 撤销选择
+        board[row][col] = '.';
+回溯算法解题套路框架
+44
+
+    }
+}
+这部分主要代码，其实跟全排列问题差不多， isValid  函数的实现也很简
+单：
+/* 是否可以在 board[row][col] 放置皇后？ */
+bool isValid(vector<string>& board, int row, int col) {
+    int n = board.size();
+    // 检查列是否有皇后互相冲突
+    for (int i = 0; i < n; i++) {
+        if (board[i][col] == 'Q')
+            return false;
+    }
+    // 检查右上⽅是否有皇后互相冲突
+    for (int i = row - 1, j = col + 1; 
+            i >= 0 && j < n; i--, j++) {
+        if (board[i][j] == 'Q')
+            return false;
+    }
+    // 检查左上⽅是否有皇后互相冲突
+    for (int i = row - 1, j = col - 1;
+            i >= 0 && j >= 0; i--, j--) {
+        if (board[i][j] == 'Q')
+            return false;
+    }
+    return true;
+}
+函数  backtrack  依然像个在决策树上游⾛的指针，通过  row  和  col  就可
+以表⽰函数遍历到的位置，通过  isValid  函数可以将不符合条件的情况剪
+枝：
+回溯算法解题套路框架
+45
+
+如果直接给你这么⼀⼤段解法代码，可能是懵逼的。但是现在明⽩了回溯算
+法的框架套路，还有啥难理解的呢？⽆⾮是改改做选择的⽅式，排除不合法
+选择的⽅式⽽已，只要框架存于⼼，你⾯对的只剩下⼩问题了。
+当  N = 8  时，就是⼋皇后问题，数学⼤佬⾼斯穷尽⼀⽣都没有数清楚⼋皇
+后问题到底有⼏种可能的放置⽅法，但是我们的算法只需要⼀秒就可以算出
+来所有可能的结果。
+不过真的不怪⾼斯。这个问题的复杂度确实⾮常⾼，看看我们的决策树，虽
+然有  isValid  函数剪枝，但是最坏时间复杂度仍然是 O(N^(N+1))，⽽且⽆
+法优化。如果  N = 10  的时候，计算就已经很耗时了。
+有的时候，我们并不想得到所有合法的答案，只想要⼀个答案，怎么办呢？
+⽐如解数独的算法，找所有解法复杂度太⾼，只要找到⼀种解法就可以。
+其实特别简单，只要稍微修改⼀下回溯算法的代码即可：
+// 函数找到⼀个答案后就返回 true
+bool backtrack(vector<string>& board, int row) {
+    // 触发结束条件
+    if (row == board.size()) {
+        res.push_back(board);
+        return true;
+回溯算法解题套路框架
+46
+
+    }
+    ...
+    for (int col = 0; col < n; col++) {
+        ...
+        board[row][col] = 'Q';
+        if (backtrack(board, row + 1))
+            return true;
+        board[row][col] = '.';
+    }
+    return false;
+}
+这样修改后，只要找到⼀个答案，for 循环的后续递归穷举都会被阻断。也
+许你可以在 N 皇后问题的代码框架上，稍加修改，写⼀个解数独的算法？
+三、最后总结
+回溯算法就是个多叉树的遍历问题，关键就是在前序遍历和后序遍历的位置
+做⼀些操作，算法框架如下：
+def backtrack(...):
+    for 选择 in 选择列表:
+        做选择
+        backtrack(...)
+        撤销选择
+写  backtrack  函数时，需要维护⾛过的「路径」和当前可以做的「选择列
+表」，当触发「结束条件」时，将「路径」记⼊结果集。
+其实想想看，回溯算法和动态规划是不是有点像呢？我们在动态规划系列⽂
+章中多次强调，动态规划的三个需要明确的点就是「状态」「选择」和
+「base case」，是不是就对应着⾛过的「路径」，当前的「选择列表」和
+「结束条件」？
+回溯算法解题套路框架
+47
+
+某种程度上说，动态规划的暴⼒求解阶段就是回溯算法。只是有的问题具有
+重叠⼦问题性质，可以⽤ dp table 或者备忘录优化，将递归树⼤幅剪枝，这
+就变成了动态规划。⽽今天的两个问题，都没有重叠⼦问题，也就是回溯算
+法问题了，复杂度⾮常⾼是不可避免的。
+＿＿＿＿＿＿＿＿＿＿＿＿＿
+刷算法，学套路，认准 labuladong。
+本⼩抄即将出版，关注 labuladong 公众号或 ongline book 查看更新⽂章，
+后台回复「进群」可进刷题群，labuladong 带你⽇穿 LeetCode。
+回溯算法解题套路框架
+48
+
+BFS 算法框架套路详解
+学算法，认准 labuladong 就够了！
+后台有很多⼈问起 BFS 和 DFS 的框架，今天就来说说吧。
+⾸先，你要说 labuladong 没写过 BFS 框架，这话没错，今天写个框架你背
+住就完事⼉了。但要是说没写过 DFS 框架，那你还真是说错了，其实 DFS
+算法就是回溯算法，我们前⽂ 回溯算法框架套路详解 就写过了，⽽且写得
+不是⼀般得好，建议好好复习。
+BFS 的核⼼思想应该不难理解的，就是把⼀些问题抽象成图，从⼀个点开
+始，向四周开始扩散。⼀般来说，我们写 BFS 算法都是⽤「队列」这种数
+据结构，每次将⼀个节点周围的所有节点加⼊队列。
+BFS 相对 DFS 的最主要的区别是：BFS 找到的路径⼀定是最短的，但代价
+就是空间复杂度⽐ DFS ⼤很多，⾄于为什么，我们后⾯介绍了框架就很容
+易看出来了。
+本⽂就由浅⼊深写两道 BFS 的典型题⽬，分别是「⼆叉树的最⼩⾼度」和
+「打开密码锁的最少步数」，⼿把⼿教你怎么写 BFS 算法。
+⼀、算法框架
+要说框架的话，我们先举例⼀下 BFS 出现的常⻅场景好吧，问题的本质就
+是让你在⼀幅「图」中找到从起点  start  到终点  target  的最近距离，这
+个例⼦听起来很枯燥，但是 BFS 算法问题其实都是在⼲这个事⼉，把枯燥
+的本质搞清楚了，再去欣赏各种问题的包装才能胸有成⽵嘛。
+这个⼴义的描述可以有各种变体，⽐如⾛迷宫，有的格⼦是围墙不能⾛，从
+起点到终点的最短距离是多少？如果这个迷宫带「传送门」可以瞬间传送
+呢？
+BFS 算法解题套路框架
+494:["$","main",null,{"style":{"maxWidth":760,"margin":"0 auto","padding":"16px","minHeight":"100vh"},"children":[["$","$Lc",null,{"href":"/columns/","style":{"display":"inline-block","marginBottom":"12px","fontSize":"13px"},"children":"← 返回专栏"}],["$","div",null,{"style":{"fontSize":"12px","color":"var(--text-tertiary)","marginBottom":"4px"},"children":["📕"," ","labuladong 算法小抄"]}],["$","h1",null,{"style":{"fontSize":"22px","fontWeight":700,"margin":"0 0 16px"},"children":"回溯算法解题套路框架"}],["$","$Ld",null,{"children":"$e"}],false]}]
+a:[["$","meta","0",{"name":"viewport","content":"width=device-width, initial-scale=1"}],["$","meta","1",{"name":"theme-color","content":"#f97316"}]]
+8:[["$","meta","0",{"charSet":"utf-8"}],["$","title","1",{"children":"回溯算法解题套路框架 - 算法面试"}],["$","meta","2",{"name":"description","content":"LeetCode 热题 100 完整 Java 题解、逐题动画、知识专栏与智能间隔复习。"}],["$","meta","3",{"name":"application-name","content":"算法面试"}],["$","link","4",{"rel":"manifest","href":"/algorithm-interview/manifest.json","crossOrigin":"$undefined"}],["$","meta","5",{"name":"keywords","content":"LeetCode,热题100,算法面试,Java题解,数据结构,动态规划,面试刷题"}],["$","meta","6",{"name":"mobile-web-app-capable","content":"yes"}],["$","meta","7",{"name":"apple-mobile-web-app-title","content":"算法面试"}],["$","meta","8",{"name":"apple-mobile-web-app-status-bar-style","content":"default"}],["$","meta","9",{"property":"og:title","content":"算法面试题库"}],["$","meta","10",{"property":"og:description","content":"LeetCode 热题 100 完整 Java 题解、逐题动画、知识专栏与智能复习"}],["$","meta","11",{"property":"og:site_name","content":"算法面试题库"}],["$","meta","12",{"property":"og:locale","content":"zh_CN"}],["$","meta","13",{"property":"og:type","content":"website"}],["$","meta","14",{"name":"twitter:card","content":"summary"}],["$","meta","15",{"name":"twitter:title","content":"算法面试题库"}],["$","meta","16",{"name":"twitter:description","content":"LeetCode 热题 100 完整 Java 题解、逐题动画、知识专栏与智能复习"}]]
+6:null

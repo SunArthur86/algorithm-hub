@@ -1,0 +1,97 @@
+1:"$Sreact.fragment"
+2:I[5244,[],""]
+3:I[3866,[],""]
+5:I[6213,[],"OutletBoundary"]
+7:I[6213,[],"MetadataBoundary"]
+9:I[6213,[],"ViewportBoundary"]
+b:I[4835,[],""]
+:HL["/algorithm-interview/_next/static/css/c1e787639001e16b.css","style"]
+0:{"P":null,"b":"xos97fAiWtKfKXI6hZLx4","p":"/algorithm-interview","c":["","columns","lbd-011",""],"i":false,"f":[[["",{"children":["columns",{"children":[["slug","lbd-011","d"],{"children":["__PAGE__",{}]}]}]},"$undefined","$undefined",true],["",["$","$1","c",{"children":[[["$","link","0",{"rel":"stylesheet","href":"/algorithm-interview/_next/static/css/c1e787639001e16b.css","precedence":"next","crossOrigin":"$undefined","nonce":"$undefined"}]],["$","html",null,{"lang":"zh","children":[["$","head",null,{"children":["$","script",null,{"dangerouslySetInnerHTML":{"__html":"\ntry {\n  var raw = localStorage.getItem('algo-interview');\n  var theme = 'light';\n  if (raw) { var p = JSON.parse(raw); theme = (p.state && p.state.theme) || 'light'; }\n  if (theme === 'dark') {\n    document.documentElement.classList.add('dark');\n    document.documentElement.setAttribute('data-theme', 'dark');\n  }\n} catch (e) {}\n"}}]}],["$","body",null,{"children":[["$","$L2",null,{"parallelRouterKey":"children","segmentPath":["children"],"error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L3",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":[[],[["$","title",null,{"children":"404: This page could not be found."}],["$","div",null,{"style":{"fontFamily":"system-ui,\"Segoe UI\",Roboto,Helvetica,Arial,sans-serif,\"Apple Color Emoji\",\"Segoe UI Emoji\"","height":"100vh","textAlign":"center","display":"flex","flexDirection":"column","alignItems":"center","justifyContent":"center"},"children":["$","div",null,{"children":[["$","style",null,{"dangerouslySetInnerHTML":{"__html":"body{color:#000;background:#fff;margin:0}.next-error-h1{border-right:1px solid rgba(0,0,0,.3)}@media (prefers-color-scheme:dark){body{color:#fff;background:#000}.next-error-h1{border-right:1px solid rgba(255,255,255,.3)}}"}}],["$","h1",null,{"className":"next-error-h1","style":{"display":"inline-block","margin":"0 20px 0 0","padding":"0 23px 0 0","fontSize":24,"fontWeight":500,"verticalAlign":"top","lineHeight":"49px"},"children":404}],["$","div",null,{"style":{"display":"inline-block"},"children":["$","h2",null,{"style":{"fontSize":14,"fontWeight":400,"lineHeight":"49px","margin":0},"children":"This page could not be found."}]}]]}]}]]],"forbidden":"$undefined","unauthorized":"$undefined"}],["$","script",null,{"dangerouslySetInnerHTML":{"__html":"\nif ('serviceWorker' in navigator) {\n  window.addEventListener('load', function () {\n    navigator.serviceWorker.register('/algorithm-interview/sw.js').catch(function () {});\n  });\n}\n"}}]]}]]}]]}],{"children":["columns",["$","$1","c",{"children":[null,["$","$L2",null,{"parallelRouterKey":"children","segmentPath":["children","columns","children"],"error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L3",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","forbidden":"$undefined","unauthorized":"$undefined"}]]}],{"children":[["slug","lbd-011","d"],["$","$1","c",{"children":[null,["$","$L2",null,{"parallelRouterKey":"children","segmentPath":["children","columns","children","$0:f:0:1:2:children:2:children:0","children"],"error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L3",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","forbidden":"$undefined","unauthorized":"$undefined"}]]}],{"children":["__PAGE__",["$","$1","c",{"children":["$L4",null,["$","$L5",null,{"children":"$L6"}]]}],{},null,false]},null,false]},null,false]},null,false],["$","$1","h",{"children":[null,["$","$1","dGom7em3-U5qv2KMqwEdI",{"children":[["$","$L7",null,{"children":"$L8"}],["$","$L9",null,{"children":"$La"}],null]}]]}],false]],"m":"$undefined","G":["$b","$undefined"],"s":false,"S":true}
+c:I[8173,["173","static/chunks/173-69860a4742bb7020.js","829","static/chunks/829-7533e70598480772.js","306","static/chunks/app/columns/%5Bslug%5D/page-58fc1d8f5085c1ff.js"],""]
+d:I[4780,["173","static/chunks/173-69860a4742bb7020.js","829","static/chunks/829-7533e70598480772.js","306","static/chunks/app/columns/%5Bslug%5D/page-58fc1d8f5085c1ff.js"],"default"]
+e:T1405,# 经典动态规划：高楼扔鸡蛋
+
+经典动态规划问题：⾼楼扔鸡蛋
+学好算法全靠套路，认准 labuladong 就够了。
+读完本⽂，你不仅学会了算法套路，还可以顺便去 LeetCode 上拿下如下题
+⽬：
+887.鸡蛋掉落
+今天要聊⼀个很经典的算法问题，若⼲层楼，若⼲个鸡蛋，让你算出最少的
+尝试次数，找到鸡蛋恰好摔不碎的那层楼。国内⼤⼚以及⾕歌脸书⾯试都经
+常考察这道题，只不过他们觉得扔鸡蛋太浪费，改成扔杯⼦，扔破碗什么
+的。
+具体的问题等会再说，但是这道题的解法技巧很多，光动态规划就好⼏种效
+率不同的思路，最后还有⼀种极其⾼效数学解法。秉承咱们号⼀贯的作⻛，
+拒绝奇技淫巧，拒绝过于诡异的技巧，因为这些技巧⽆法举⼀反三，学了也
+不划算。
+下⾯就来⽤我们⼀直强调的动态规划通⽤思路来研究⼀下这道题。
+⼀、解析题⽬
+题⽬是这样：你⾯前有⼀栋从 1 到  N  共  N  层的楼，然后给你  K  个鸡蛋
+（ K  ⾄少为 1）。现在确定这栋楼存在楼层  0 <= F <= N ，在这层楼将鸡
+蛋扔下去，鸡蛋恰好没摔碎（⾼于  F  的楼层都会碎，低于  F  的楼层都不
+会碎）。现在问你，最坏情况下，你⾄少要扔⼏次鸡蛋，才能确定这个楼层
+ F  呢？
+也就是让你找摔不碎鸡蛋的最⾼楼层  F ，但什么叫「最坏情况」下「⾄
+少」要扔⼏次呢？我们分别举个例⼦就明⽩了。
+经典动态规划：⾼楼扔鸡蛋
+101
+
+⽐⽅说现在先不管鸡蛋个数的限制，有 7 层楼，你怎么去找鸡蛋恰好摔碎的
+那层楼？
+最原始的⽅式就是线性扫描：我先在 1 楼扔⼀下，没碎，我再去 2 楼扔⼀
+下，没碎，我再去 3 楼……
+以这种策略，最坏情况应该就是我试到第 7 层鸡蛋也没碎（ F = 7 ），也
+就是我扔了 7 次鸡蛋。
+先在你应该理解什么叫做「最坏情况」下了，鸡蛋破碎⼀定发⽣在搜索区间
+穷尽时，不会说你在第 1 层摔⼀下鸡蛋就碎了，这是你运⽓好，不是最坏情
+况。
+现在再来理解⼀下什么叫「⾄少」要扔⼏次。依然不考虑鸡蛋个数限制，同
+样是 7 层楼，我们可以优化策略。
+最好的策略是使⽤⼆分查找思路，我先去第  (1 + 7) / 2 = 4  层扔⼀下：
+如果碎了说明  F  ⼩于 4，我就去第  (1 + 3) / 2 = 2  层试……
+如果没碎说明  F  ⼤于等于 4，我就去第  (5 + 7) / 2 = 6  层试……
+以这种策略，最坏情况应该是试到第 7 层鸡蛋还没碎（ F = 7 ），或者鸡
+蛋⼀直碎到第 1 层（ F = 0 ）。然⽽⽆论那种最坏情况，只需要试  log7 
+向上取整等于 3 次，⽐刚才尝试 7 次要少，这就是所谓的⾄少要扔⼏次。
+PS：这有点像 Big O 表⽰法计算​算法的复杂度。
+实际上，如果不限制鸡蛋个数的话，⼆分思路显然可以得到最少尝试的次
+数，但问题是，现在给你了鸡蛋个数的限制  K ，直接使⽤⼆分思路就不⾏
+了。
+⽐如说只给你 1 个鸡蛋，7 层楼，你敢⽤⼆分吗？你直接去第 4 层扔⼀下，
+如果鸡蛋没碎还好，但如果碎了你就没有鸡蛋继续测试了，⽆法确定鸡蛋恰
+好摔不碎的楼层  F  了。这种情况下只能⽤线性扫描的⽅法，算法返回结果
+应该是 7。
+经典动态规划：⾼楼扔鸡蛋
+102
+
+有的读者也许会有这种想法：⼆分查找排除楼层的速度⽆疑是最快的，那⼲
+脆先⽤⼆分查找，等到只剩 1 个鸡蛋的时候再执⾏线性扫描，这样得到的结
+果是不是就是最少的扔鸡蛋次数呢？
+很遗憾，并不是，⽐如说把楼层变⾼⼀些，100 层，给你 2 个鸡蛋，你在 50
+层扔⼀下，碎了，那就只能线性扫描 1〜49 层了，最坏情况下要扔 50 次。
+如果不要「⼆分」，变成「五分」「⼗分」都会⼤幅减少最坏情况下的尝试
+次数。⽐⽅说第⼀个鸡蛋每隔⼗层楼扔，在哪⾥碎了第⼆个鸡蛋⼀个个线性
+扫描，总共不会超过 20 次​。
+最优解其实是 14 次。最优策略⾮常多，⽽且并没有什么规律可⾔。
+说了这么多废话，就是确保⼤家理解了题⽬的意思，⽽且认识到这个题⽬确
+实复杂，就连我们⼿算都不容易，如何⽤算法解决呢？
+⼆、思路分析
+＿＿＿＿＿＿＿＿＿＿＿＿＿
+由于格式原因，本⽂只能在 labuladong 公众号查看，关注后可直接搜索本站
+内容：
+经典动态规划：⾼楼扔鸡蛋
+103
+
+背包问题变体之⼦集分割
+学算法，认准 labuladong 就够了！
+上篇⽂章 经典动态规划：0-1 背包问题 详解了通⽤的 0-1 背包问题，今天来
+看看背包问题的思想能够如何运⽤到其他算法题⽬。
+⽽且，不是经常有读者问，怎么将⼆维动态规划压缩成⼀维动态规划吗？这
+就是状态压缩，很容易的，本⽂也会提及这种技巧。
+⼀、问题分析
+先看⼀下题⽬：
+经典动态规划：⼦集背包问题
+1044:["$","main",null,{"style":{"maxWidth":760,"margin":"0 auto","padding":"16px","minHeight":"100vh"},"children":[["$","$Lc",null,{"href":"/columns/","style":{"display":"inline-block","marginBottom":"12px","fontSize":"13px"},"children":"← 返回专栏"}],["$","div",null,{"style":{"fontSize":"12px","color":"var(--text-tertiary)","marginBottom":"4px"},"children":["📕"," ","labuladong 算法小抄"]}],["$","h1",null,{"style":{"fontSize":"22px","fontWeight":700,"margin":"0 0 16px"},"children":"经典动态规划：高楼扔鸡蛋"}],["$","$Ld",null,{"children":"$e"}],false]}]
+a:[["$","meta","0",{"name":"viewport","content":"width=device-width, initial-scale=1"}],["$","meta","1",{"name":"theme-color","content":"#f97316"}]]
+8:[["$","meta","0",{"charSet":"utf-8"}],["$","title","1",{"children":"经典动态规划：高楼扔鸡蛋 - 算法面试"}],["$","meta","2",{"name":"description","content":"LeetCode 热题 100 完整 Java 题解、逐题动画、知识专栏与智能间隔复习。"}],["$","meta","3",{"name":"application-name","content":"算法面试"}],["$","link","4",{"rel":"manifest","href":"/algorithm-interview/manifest.json","crossOrigin":"$undefined"}],["$","meta","5",{"name":"keywords","content":"LeetCode,热题100,算法面试,Java题解,数据结构,动态规划,面试刷题"}],["$","meta","6",{"name":"mobile-web-app-capable","content":"yes"}],["$","meta","7",{"name":"apple-mobile-web-app-title","content":"算法面试"}],["$","meta","8",{"name":"apple-mobile-web-app-status-bar-style","content":"default"}],["$","meta","9",{"property":"og:title","content":"算法面试题库"}],["$","meta","10",{"property":"og:description","content":"LeetCode 热题 100 完整 Java 题解、逐题动画、知识专栏与智能复习"}],["$","meta","11",{"property":"og:site_name","content":"算法面试题库"}],["$","meta","12",{"property":"og:locale","content":"zh_CN"}],["$","meta","13",{"property":"og:type","content":"website"}],["$","meta","14",{"name":"twitter:card","content":"summary"}],["$","meta","15",{"name":"twitter:title","content":"算法面试题库"}],["$","meta","16",{"name":"twitter:description","content":"LeetCode 热题 100 完整 Java 题解、逐题动画、知识专栏与智能复习"}]]
+6:null

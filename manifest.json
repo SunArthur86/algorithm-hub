@@ -1,0 +1,12 @@
+{
+  "name": "算法面试题库",
+  "short_name": "算法面试",
+  "description": "LeetCode 热题 100 题解、逐题动画、知识专栏与智能复习",
+  "start_url": "/algorithm-interview/",
+  "scope": "/algorithm-interview/",
+  "display": "standalone",
+  "background_color": "#fafafa",
+  "theme_color": "#f97316",
+  "lang": "zh-CN",
+  "icons": []
+}

@@ -1,0 +1,146 @@
+1:"$Sreact.fragment"
+2:I[5244,[],""]
+3:I[3866,[],""]
+5:I[6213,[],"OutletBoundary"]
+7:I[6213,[],"MetadataBoundary"]
+9:I[6213,[],"ViewportBoundary"]
+b:I[4835,[],""]
+:HL["/algorithm-interview/_next/static/css/c1e787639001e16b.css","style"]
+0:{"P":null,"b":"xos97fAiWtKfKXI6hZLx4","p":"/algorithm-interview","c":["","question","322",""],"i":false,"f":[[["",{"children":["question",{"children":[["lcId","322","d"],{"children":["__PAGE__",{}]}]}]},"$undefined","$undefined",true],["",["$","$1","c",{"children":[[["$","link","0",{"rel":"stylesheet","href":"/algorithm-interview/_next/static/css/c1e787639001e16b.css","precedence":"next","crossOrigin":"$undefined","nonce":"$undefined"}]],["$","html",null,{"lang":"zh","children":[["$","head",null,{"children":["$","script",null,{"dangerouslySetInnerHTML":{"__html":"\ntry {\n  var raw = localStorage.getItem('algo-interview');\n  var theme = 'light';\n  if (raw) { var p = JSON.parse(raw); theme = (p.state && p.state.theme) || 'light'; }\n  if (theme === 'dark') {\n    document.documentElement.classList.add('dark');\n    document.documentElement.setAttribute('data-theme', 'dark');\n  }\n} catch (e) {}\n"}}]}],["$","body",null,{"children":[["$","$L2",null,{"parallelRouterKey":"children","segmentPath":["children"],"error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L3",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":[[],[["$","title",null,{"children":"404: This page could not be found."}],["$","div",null,{"style":{"fontFamily":"system-ui,\"Segoe UI\",Roboto,Helvetica,Arial,sans-serif,\"Apple Color Emoji\",\"Segoe UI Emoji\"","height":"100vh","textAlign":"center","display":"flex","flexDirection":"column","alignItems":"center","justifyContent":"center"},"children":["$","div",null,{"children":[["$","style",null,{"dangerouslySetInnerHTML":{"__html":"body{color:#000;background:#fff;margin:0}.next-error-h1{border-right:1px solid rgba(0,0,0,.3)}@media (prefers-color-scheme:dark){body{color:#fff;background:#000}.next-error-h1{border-right:1px solid rgba(255,255,255,.3)}}"}}],["$","h1",null,{"className":"next-error-h1","style":{"display":"inline-block","margin":"0 20px 0 0","padding":"0 23px 0 0","fontSize":24,"fontWeight":500,"verticalAlign":"top","lineHeight":"49px"},"children":404}],["$","div",null,{"style":{"display":"inline-block"},"children":["$","h2",null,{"style":{"fontSize":14,"fontWeight":400,"lineHeight":"49px","margin":0},"children":"This page could not be found."}]}]]}]}]]],"forbidden":"$undefined","unauthorized":"$undefined"}],["$","script",null,{"dangerouslySetInnerHTML":{"__html":"\nif ('serviceWorker' in navigator) {\n  window.addEventListener('load', function () {\n    navigator.serviceWorker.register('/algorithm-interview/sw.js').catch(function () {});\n  });\n}\n"}}]]}]]}]]}],{"children":["question",["$","$1","c",{"children":[null,["$","$L2",null,{"parallelRouterKey":"children","segmentPath":["children","question","children"],"error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L3",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","forbidden":"$undefined","unauthorized":"$undefined"}]]}],{"children":[["lcId","322","d"],["$","$1","c",{"children":[null,["$","$L2",null,{"parallelRouterKey":"children","segmentPath":["children","question","children","$0:f:0:1:2:children:2:children:0","children"],"error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L3",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","forbidden":"$undefined","unauthorized":"$undefined"}]]}],{"children":["__PAGE__",["$","$1","c",{"children":["$L4",null,["$","$L5",null,{"children":"$L6"}]]}],{},null,false]},null,false]},null,false]},null,false],["$","$1","h",{"children":[null,["$","$1","WX3PjkuQVB9grtPDr9Stt",{"children":[["$","$L7",null,{"children":"$L8"}],["$","$L9",null,{"children":"$La"}],null]}]]}],false]],"m":"$undefined","G":["$b","$undefined"],"s":false,"S":true}
+c:I[8173,["173","static/chunks/173-69860a4742bb7020.js","829","static/chunks/829-7533e70598480772.js","937","static/chunks/937-ef36a5ac4bc37a7e.js","447","static/chunks/447-06af9414e164c047.js","8","static/chunks/app/question/%5BlcId%5D/page-478b0d2a69e222f2.js"],""]
+d:I[3447,["173","static/chunks/173-69860a4742bb7020.js","829","static/chunks/829-7533e70598480772.js","937","static/chunks/937-ef36a5ac4bc37a7e.js","447","static/chunks/447-06af9414e164c047.js","8","static/chunks/app/question/%5BlcId%5D/page-478b0d2a69e222f2.js"],"default"]
+e:T1639,# 322. 零钱兑换
+
+> 难度：**Medium** | 分类：动态规划 | 标签：广度优先搜索, 数组, 动态规划
+
+> 🔗 力扣链接：[https://leetcode.cn/problems/coin-change/](https://leetcode.cn/problems/coin-change/)
+
+## 📝 题目描述
+
+给你不同面额的硬币 `coins` 和一个总金额 `amount`。每种硬币有无限多个。你要凑出这个总金额，且使用的硬币数量最少。如果凑不出来，返回 -1。
+
+关键不是"能不能凑出"（那只是一部分），而是"凑出来的方案中，硬币数最少的那个"。
+
+- 题号：322
+- 题目名：零钱兑换
+- 难度：Medium
+- 题型：动态规划
+- 为什么选这题：它是完全背包的入门题，用最直白的场景帮你建立"dp[i] = min(dp[i-coin] + 1)"的直觉。
+
+## 🧠 思考路径
+
+暴力做法：递归尝试每种硬币，对每个金额枚举用 0 个、1 个、2 个……直到金额不够。这是指数级复杂度。
+
+动态规划：定义 `dp[i]` 为凑出金额 `i` 需要的最少硬币数。转移方程：`dp[i] = min(dp[i - coin] + 1)`，对每种面额 `coin` 都试一下。如果 `i - coin >= 0` 且 `dp[i - coin]` 可达，就取最小值。
+
+初始化 `dp[0] = 0`，其余 `dp[i] = ∞`。最终如果 `dp[amount]` 仍是 `∞`，返回 -1。
+
+## 💻 Java 题解
+
+### 解法 1：动态规划（完全背包）
+
+dp[i]表示凑成金额i的最少硬币数。对每个金额枚举所有面值。
+
+- ⏱ 时间复杂度：`O(n×amount)`
+- 💾 空间复杂度：`O(amount)`
+
+```java
+class Solution {
+    public int coinChange(int[] coins, int amount) {
+        int[] dp = new int[amount + 1];
+        Arrays.fill(dp, amount + 1);
+        dp[0] = 0;
+        for (int i = 1; i <= amount; i++)
+            for (int coin : coins)
+                if (coin <= i) dp[i] = Math.min(dp[i], dp[i - coin] + 1);
+        return dp[amount] > amount ? -1 : dp[amount];
+    }
+}
+```
+
+**关键点：**
+- 初始化amount+1表示不可达
+- 完全背包：正向遍历
+- 最后检查是否可达
+
+**执行步骤：**
+1. 初始化dp
+1. 对每个金额枚举面值
+1. 返回dp[amount]或-1
+
+
+## ⚠️ 易错点
+
+- `dp[0] = 0` 是边界条件，凑出金额 0 不需要任何硬币。
+- Java 中用 `amount + 1` 代替无穷大更方便，因为最多只需要 `amount` 个 1 元硬币。
+- 硬币可以重复使用（完全背包），所以内层循环是金额而不是硬币数量。
+
+- 用amount+1初始化比MAX_VALUE更安全
+
+- coin<=i 才能使用
+
+## 📊 复杂度分析
+
+- 时间复杂度：`O(amount × n)`，`n` 是硬币种类数。
+- 空间复杂度：`O(amount)`，`dp` 数组。
+
+## 🏢 实际业务应用
+
+- 自动售货机的找零算法，用最少数量的硬币找零。
+- 数字货币交易所的最优交易路径，用最少的手续费/交易次数完成兑换。
+- 资源调度中的"最优分配"问题，比如用最少数量的服务器承载特定负载。
+- 快递包装优化，用最少数量的纸箱尺寸组合出目标体积。
+
+- 自动售货机的找零算法，用最少数量的硬币找零。
+- 数字货币交易所的最优交易路径，用最少的手续费/交易次数完成兑换。
+- 资源调度中的"最优分配"问题，比如用最少数量的服务器承载特定负载。
+- 快递包装优化，用最少数量的纸箱尺寸组合出目标体积。
+
+## 📖 形象类比
+
+可以把它类比成《西游记》中唐僧化缘凑斋饭的故事。
+
+唐僧需要凑够一定数量的斋饭，村民给他的碗有大有小（不同面额的硬币），每种碗可以用无限个。他要选择用最少数量的碗凑出所需的斋饭数量。他从小目标开始想："凑 1 碗用哪个碗？凑 2 碗用哪几个碗？……"直到凑到目标数量，每一步都取最少碗数。
+
+对应关系是：
+
+| 算法概念 | 故事角色/元素 |
+|---------|------------|
+| `coins` | 不同大小的碗 |
+| `amount` | 需要凑的斋饭数量 |
+| `dp[i]` | 凑 i 碗斋饭最少需要几只碗 |
+| `dp[i-coin] + 1` | 用一只 coin 大小的碗后，还差多少碗 |
+
+可以把它类比成《西游记》中唐僧化缘凑斋饭的故事。
+
+唐僧需要凑够一定数量的斋饭，村民给他的碗有大有小（不同面额的硬币），每种碗可以用无限个。他要选择用最少数量的碗凑出所需的斋饭数量。他从小目标开始想："凑 1 碗用哪个碗？凑 2 碗用哪几个碗？……"直到凑到目标数量，每一步都取最少碗数。
+
+对应关系是：
+
+| 算法概念 | 故事角色/元素 |
+|---------|------------|
+| `coins` | 不同大小的碗 |
+| `amount` | 需要凑的斋饭数量 |
+| `dp[i]` | 凑 i 碗斋饭最少需要几只碗 |
+| `dp[i-coin] + 1` | 用一只 coin 大小的碗后，还差多少碗 |
+
+小松鼠要用松果换核桃，不同大小的松果值不同数量的核桃。它想用最少的松果换到目标数量的核桃。它从"换 1 个核桃最少需要几颗松果"开始算，一直算到目标数量，每一步都选最优的松果面额。
+
+小松鼠要用松果换核桃，不同大小的松果值不同数量的核桃。它想用最少的松果换到目标数量的核桃。它从"换 1 个核桃最少需要几颗松果"开始算，一直算到目标数量，每一步都选最优的松果面额。
+
+## 🎵 记忆口诀
+
+每步试遍硬币，取最小加一。
+
+每步试遍硬币，取最小加一。
+
+## 🔗 延伸练习
+
+- `518. 零钱兑换 II`：从"最少硬币数"变成"有多少种凑法"。
+- `377. 组合总和 Ⅳ`：不同顺序算不同方案，求排列数。
+
+- `518. 零钱兑换 II`：从"最少硬币数"变成"有多少种凑法"。
+- `377. 组合总和 Ⅳ`：不同顺序算不同方案，求排列数。4:["$","main",null,{"className":"detail-main","style":{"maxWidth":760,"margin":"0 auto","padding":"16px","minHeight":"100vh"},"children":[["$","$Lc",null,{"href":"/","style":{"display":"inline-block","marginBottom":"12px","fontSize":"13px"},"children":"← 返回题库"}],["$","h1",null,{"style":{"fontSize":"22px","fontWeight":700,"margin":"0 0 4px"},"children":[["$","span",null,{"style":{"marginRight":"6px"},"children":"🧩"}],322,". ","零钱兑换"]}],["$","$Ld",null,{"q":{"id":"0322","lcId":322,"slug":"coin-change","title":"零钱兑换","question":"零钱兑换","answer":"$e","difficulty":"Medium","category":"dynamic-programming","categories":["dynamic-programming"],"tags":["广度优先搜索","数组","动态规划"],"url":"https://leetcode.cn/problems/coin-change/","planOrder":85,"hasViz":true,"hasDiagram":false,"feynman":{"essence":"给你不同面额的硬币 `coins` 和一个总金额 `amount`。每种硬币有无限多个。你要凑出这个总金额，且使用的硬币数量最少。如果凑不出来，返回 -1。  关键不是\"能不能凑出\"（那只是一部分），","analogy":"","key_points":[]},"first_principle":{"problem":"","axioms":[],"rebuild":""}}}]]}]
+a:[["$","meta","0",{"name":"viewport","content":"width=device-width, initial-scale=1"}],["$","meta","1",{"name":"theme-color","content":"#f97316"}]]
+8:[["$","meta","0",{"charSet":"utf-8"}],["$","title","1",{"children":"322. 零钱兑换 - 算法面试"}],["$","meta","2",{"name":"description","content":"给你不同面额的硬币 `coins` 和一个总金额 `amount`。每种硬币有无限多个。你要凑出这个总金额，且使用的硬币数量最少。如果凑不出来，返回 -1。  关键不是\"能不能凑出\"（那只是一部分），"}],["$","meta","3",{"name":"application-name","content":"算法面试"}],["$","link","4",{"rel":"manifest","href":"/algorithm-interview/manifest.json","crossOrigin":"$undefined"}],["$","meta","5",{"name":"keywords","content":"零钱兑换,LeetCode 322,Medium,广度优先搜索,数组,动态规划"}],["$","meta","6",{"name":"mobile-web-app-capable","content":"yes"}],["$","meta","7",{"name":"apple-mobile-web-app-title","content":"算法面试"}],["$","meta","8",{"name":"apple-mobile-web-app-status-bar-style","content":"default"}],["$","meta","9",{"property":"og:title","content":"322. 零钱兑换"}],["$","meta","10",{"property":"og:description","content":"给你不同面额的硬币 `coins` 和一个总金额 `amount`。每种硬币有无限多个。你要凑出这个总金额，且使用的硬币数量最少。如果凑不出来，返回 -1。  关键不是\"能不能凑出\"（那只是一部分），"}],["$","meta","11",{"property":"og:locale","content":"zh_CN"}],["$","meta","12",{"property":"og:type","content":"article"}],["$","meta","13",{"name":"twitter:card","content":"summary"}],["$","meta","14",{"name":"twitter:title","content":"322. 零钱兑换"}],["$","meta","15",{"name":"twitter:description","content":"给你不同面额的硬币 `coins` 和一个总金额 `amount`。每种硬币有无限多个。你要凑出这个总金额，且使用的硬币数量最少。如果凑不出来，返回 -1。  关键不是\"能不能凑出\"（那只是一部分），"}]]
+6:null

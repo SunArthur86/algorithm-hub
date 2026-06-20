@@ -1,0 +1,105 @@
+<!DOCTYPE html><html lang="zh"><head><meta charSet="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="/algorithm-interview/_next/static/css/c1e787639001e16b.css" data-precedence="next"/><link rel="preload" as="script" fetchPriority="low" href="/algorithm-interview/_next/static/chunks/webpack-65b8ce4c1158f96f.js"/><script src="/algorithm-interview/_next/static/chunks/4bd1b696-899926250d3992f1.js" async=""></script><script src="/algorithm-interview/_next/static/chunks/517-b6df7dad4ff96d0b.js" async=""></script><script src="/algorithm-interview/_next/static/chunks/main-app-9e7bfff32fd8ebe9.js" async=""></script><script src="/algorithm-interview/_next/static/chunks/173-69860a4742bb7020.js" async=""></script><script src="/algorithm-interview/_next/static/chunks/829-7533e70598480772.js" async=""></script><script src="/algorithm-interview/_next/static/chunks/app/columns/%5Bslug%5D/page-58fc1d8f5085c1ff.js" async=""></script><meta name="theme-color" content="#f97316"/><title>如何去除有序数组的重复元素 - 算法面试</title><meta name="description" content="LeetCode 热题 100 完整 Java 题解、逐题动画、知识专栏与智能间隔复习。"/><meta name="application-name" content="算法面试"/><link rel="manifest" href="/algorithm-interview/manifest.json"/><meta name="keywords" content="LeetCode,热题100,算法面试,Java题解,数据结构,动态规划,面试刷题"/><meta name="mobile-web-app-capable" content="yes"/><meta name="apple-mobile-web-app-title" content="算法面试"/><meta name="apple-mobile-web-app-status-bar-style" content="default"/><meta property="og:title" content="算法面试题库"/><meta property="og:description" content="LeetCode 热题 100 完整 Java 题解、逐题动画、知识专栏与智能复习"/><meta property="og:site_name" content="算法面试题库"/><meta property="og:locale" content="zh_CN"/><meta property="og:type" content="website"/><meta name="twitter:card" content="summary"/><meta name="twitter:title" content="算法面试题库"/><meta name="twitter:description" content="LeetCode 热题 100 完整 Java 题解、逐题动画、知识专栏与智能复习"/><script>
+try {
+  var raw = localStorage.getItem('algo-interview');
+  var theme = 'light';
+  if (raw) { var p = JSON.parse(raw); theme = (p.state && p.state.theme) || 'light'; }
+  if (theme === 'dark') {
+    document.documentElement.classList.add('dark');
+    document.documentElement.setAttribute('data-theme', 'dark');
+  }
+} catch (e) {}
+</script><script src="/algorithm-interview/_next/static/chunks/polyfills-42372ed130431b0a.js" noModule=""></script></head><body><main style="max-width:760px;margin:0 auto;padding:16px;min-height:100vh"><a style="display:inline-block;margin-bottom:12px;font-size:13px" href="/algorithm-interview/columns/">← 返回专栏</a><div style="font-size:12px;color:var(--text-tertiary);margin-bottom:4px">📕<!-- --> <!-- -->labuladong 算法小抄</div><h1 style="font-size:22px;font-weight:700;margin:0 0 16px">如何去除有序数组的重复元素</h1><div class="prose max-w-none" style="font-size:14px;color:var(--text)"><h1>如何去除有序数组的重复元素</h1>
+<p>如何去除有序数组的重复元素
+学算法，认准 labuladong 就够了！
+我们知道对于数组来说，在尾部插⼊、删除元素是⽐较⾼效的，时间复杂度
+是 O(1)，但是如果在中间或者开头插⼊、删除元素，就会涉及数据的搬
+移，时间复杂度为 O(N)，效率较低。
+所以对于⼀般处理数组的算法问题，我们要尽可能只对数组尾部的元素进⾏
+操作，以避免额外的时间复杂度。
+这篇⽂章讲讲如何对⼀个有序数组去重，先看下题⽬：
+显然，由于数组已经排序，所以重复的元素⼀定连在⼀起，找出它们并不
+难，但如果毎找到⼀个重复元素就⽴即删除它，就是在数组中间进⾏删除操
+作，整个时间复杂度是会达到 O(N^2)。⽽且题⽬要求我们原地修改，也就
+是说不能⽤辅助数组，空间复杂度得是 O(1)。
+如何去除有序数组的重复元素
+424</p>
+<p>其实，对于数组相关的算法问题，有⼀个通⽤的技巧：要尽量避免在中间删
+除元素，那我就想先办法把这个元素换到最后去。这样的话，最终待删除的
+元素都拖在数组尾部，⼀个⼀个 pop 掉就⾏了，每次操作的时间复杂度也就
+降低到 O(1) 了。
+按照这个思路呢，⼜可以衍⽣出解决类似需求的通⽤⽅式：双指针技巧。具
+体⼀点说，应该是快慢指针。
+我们让慢指针  slow  ⾛左后⾯，快指针  fast  ⾛在前⾯探路，找到⼀个不
+重复的元素就告诉  slow  并让  slow  前进⼀步。这样当  fast  指针遍历完
+整个数组  nums  后， nums[0..slow]  就是不重复元素，之后的所有元素都
+是重复元素。
+int removeDuplicates(int[] nums) {
+int n = nums.length;
+if (n == 0) return 0;
+int slow = 0, fast = 1;
+while (fast &lt; n) {
+if (nums[fast] != nums[slow]) {
+slow++;
+// 维护 nums[0..slow] ⽆重复
+nums[slow] = nums[fast];
+}
+fast++;
+}
+// ⻓度为索引 + 1
+return slow + 1;
+}
+看下算法执⾏的过程：
+【PDF格式⽆法显⽰GIF⽂件
+%E6%9C%89%E5%BA%8F%E6%95%B0%E7%BB%84%E5%8E%BB%E9%8
+7%8D/1.gif，可移步公众号查看】
+再简单扩展⼀下，如果给你⼀个有序链表，如何去重呢？其实和数组是⼀模
+⼀样的，唯⼀的区别是把数组赋值操作变成操作指针⽽已：
+如何去除有序数组的重复元素
+425</p>
+<p>ListNode deleteDuplicates(ListNode head) {
+if (head == null) return null;
+ListNode slow = head, fast = head.next;
+while (fast != null) {
+if (fast.val != slow.val) {
+// nums[slow] = nums[fast];
+slow.next = fast;
+// slow++;
+slow = slow.next;
+}
+// fast++
+fast = fast.next;
+}
+// 断开与后⾯重复元素的连接
+slow.next = null;
+return head;
+}
+【PDF格式⽆法显⽰GIF⽂件
+%E6%9C%89%E5%BA%8F%E6%95%B0%E7%BB%84%E5%8E%BB%E9%8
+7%8D/2.gif，可移步公众号查看】
+＿＿＿＿＿＿＿＿＿＿＿＿＿
+刷算法，学套路，认准 labuladong。
+本⼩抄即将出版，关注 labuladong 公众号或 ongline book 查看更新⽂章，
+后台回复「进群」可进刷题群，labuladong 带你⽇穿 LeetCode。
+如何去除有序数组的重复元素
+426</p>
+<p>如何寻找最⻓回⽂⼦串
+学好算法全靠套路，认准 labuladong 就够了。
+读完本⽂，你不仅学会了算法套路，还可以顺便去 LeetCode 上拿下如下题
+⽬：
+5.最⻓回⽂⼦串
+回⽂串是⾯试常常遇到的问题（虽然问题本⾝没啥意义），本⽂就告诉你回
+⽂串问题的核⼼思想是什么。
+⾸先，明确⼀下什：回⽂串就是正着读和反着读都⼀样的字符串。
+⽐如说字符串  aba  和  abba  都是回⽂串，因为它们对称，反过来还是和本
+⾝⼀样。反之，字符串  abac  就不是回⽂串。
+可以看到回⽂串的的⻓度可能是奇数，也可能是偶数，这就添加了回⽂串问
+题的难度，解决该类问题的核⼼是双指针。下⾯就通过⼀道最⻓回⽂⼦串的
+问题来具体理解⼀下回⽂串问题：
+如何寻找最⻓回⽂⼦串
+427</p></div></main><script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function () {
+    navigator.serviceWorker.register('/algorithm-interview/sw.js').catch(function () {});
+  });
+}
+</script><script src="/algorithm-interview/_next/static/chunks/webpack-65b8ce4c1158f96f.js" async=""></script><script>(self.__next_f=self.__next_f||[]).push([0])</script><script>self.__next_f.push([1,"1:\"$Sreact.fragment\"\n2:I[5244,[],\"\"]\n3:I[3866,[],\"\"]\n5:I[6213,[],\"OutletBoundary\"]\n7:I[6213,[],\"MetadataBoundary\"]\n9:I[6213,[],\"ViewportBoundary\"]\nb:I[4835,[],\"\"]\n:HL[\"/algorithm-interview/_next/static/css/c1e787639001e16b.css\",\"style\"]\n"])</script><script>self.__next_f.push([1,"0:{\"P\":null,\"b\":\"xos97fAiWtKfKXI6hZLx4\",\"p\":\"/algorithm-interview\",\"c\":[\"\",\"columns\",\"lbd-062\",\"\"],\"i\":false,\"f\":[[[\"\",{\"children\":[\"columns\",{\"children\":[[\"slug\",\"lbd-062\",\"d\"],{\"children\":[\"__PAGE__\",{}]}]}]},\"$undefined\",\"$undefined\",true],[\"\",[\"$\",\"$1\",\"c\",{\"children\":[[[\"$\",\"link\",\"0\",{\"rel\":\"stylesheet\",\"href\":\"/algorithm-interview/_next/static/css/c1e787639001e16b.css\",\"precedence\":\"next\",\"crossOrigin\":\"$undefined\",\"nonce\":\"$undefined\"}]],[\"$\",\"html\",null,{\"lang\":\"zh\",\"children\":[[\"$\",\"head\",null,{\"children\":[\"$\",\"script\",null,{\"dangerouslySetInnerHTML\":{\"__html\":\"\\ntry {\\n  var raw = localStorage.getItem('algo-interview');\\n  var theme = 'light';\\n  if (raw) { var p = JSON.parse(raw); theme = (p.state \u0026\u0026 p.state.theme) || 'light'; }\\n  if (theme === 'dark') {\\n    document.documentElement.classList.add('dark');\\n    document.documentElement.setAttribute('data-theme', 'dark');\\n  }\\n} catch (e) {}\\n\"}}]}],[\"$\",\"body\",null,{\"children\":[[\"$\",\"$L2\",null,{\"parallelRouterKey\":\"children\",\"segmentPath\":[\"children\"],\"error\":\"$undefined\",\"errorStyles\":\"$undefined\",\"errorScripts\":\"$undefined\",\"template\":[\"$\",\"$L3\",null,{}],\"templateStyles\":\"$undefined\",\"templateScripts\":\"$undefined\",\"notFound\":[[],[[\"$\",\"title\",null,{\"children\":\"404: This page could not be found.\"}],[\"$\",\"div\",null,{\"style\":{\"fontFamily\":\"system-ui,\\\"Segoe UI\\\",Roboto,Helvetica,Arial,sans-serif,\\\"Apple Color Emoji\\\",\\\"Segoe UI Emoji\\\"\",\"height\":\"100vh\",\"textAlign\":\"center\",\"display\":\"flex\",\"flexDirection\":\"column\",\"alignItems\":\"center\",\"justifyContent\":\"center\"},\"children\":[\"$\",\"div\",null,{\"children\":[[\"$\",\"style\",null,{\"dangerouslySetInnerHTML\":{\"__html\":\"body{color:#000;background:#fff;margin:0}.next-error-h1{border-right:1px solid rgba(0,0,0,.3)}@media (prefers-color-scheme:dark){body{color:#fff;background:#000}.next-error-h1{border-right:1px solid rgba(255,255,255,.3)}}\"}}],[\"$\",\"h1\",null,{\"className\":\"next-error-h1\",\"style\":{\"display\":\"inline-block\",\"margin\":\"0 20px 0 0\",\"padding\":\"0 23px 0 0\",\"fontSize\":24,\"fontWeight\":500,\"verticalAlign\":\"top\",\"lineHeight\":\"49px\"},\"children\":404}],[\"$\",\"div\",null,{\"style\":{\"display\":\"inline-block\"},\"children\":[\"$\",\"h2\",null,{\"style\":{\"fontSize\":14,\"fontWeight\":400,\"lineHeight\":\"49px\",\"margin\":0},\"children\":\"This page could not be found.\"}]}]]}]}]]],\"forbidden\":\"$undefined\",\"unauthorized\":\"$undefined\"}],[\"$\",\"script\",null,{\"dangerouslySetInnerHTML\":{\"__html\":\"\\nif ('serviceWorker' in navigator) {\\n  window.addEventListener('load', function () {\\n    navigator.serviceWorker.register('/algorithm-interview/sw.js').catch(function () {});\\n  });\\n}\\n\"}}]]}]]}]]}],{\"children\":[\"columns\",[\"$\",\"$1\",\"c\",{\"children\":[null,[\"$\",\"$L2\",null,{\"parallelRouterKey\":\"children\",\"segmentPath\":[\"children\",\"columns\",\"children\"],\"error\":\"$undefined\",\"errorStyles\":\"$undefined\",\"errorScripts\":\"$undefined\",\"template\":[\"$\",\"$L3\",null,{}],\"templateStyles\":\"$undefined\",\"templateScripts\":\"$undefined\",\"notFound\":\"$undefined\",\"forbidden\":\"$undefined\",\"unauthorized\":\"$undefined\"}]]}],{\"children\":[[\"slug\",\"lbd-062\",\"d\"],[\"$\",\"$1\",\"c\",{\"children\":[null,[\"$\",\"$L2\",null,{\"parallelRouterKey\":\"children\",\"segmentPath\":[\"children\",\"columns\",\"children\",\"$0:f:0:1:2:children:2:children:0\",\"children\"],\"error\":\"$undefined\",\"errorStyles\":\"$undefined\",\"errorScripts\":\"$undefined\",\"template\":[\"$\",\"$L3\",null,{}],\"templateStyles\":\"$undefined\",\"templateScripts\":\"$undefined\",\"notFound\":\"$undefined\",\"forbidden\":\"$undefined\",\"unauthorized\":\"$undefined\"}]]}],{\"children\":[\"__PAGE__\",[\"$\",\"$1\",\"c\",{\"children\":[\"$L4\",null,[\"$\",\"$L5\",null,{\"children\":\"$L6\"}]]}],{},null,false]},null,false]},null,false]},null,false],[\"$\",\"$1\",\"h\",{\"children\":[null,[\"$\",\"$1\",\"sc6IG3_NNQjVg4vrte6rO\",{\"children\":[[\"$\",\"$L7\",null,{\"children\":\"$L8\"}],[\"$\",\"$L9\",null,{\"children\":\"$La\"}],null]}]]}],false]],\"m\":\"$undefined\",\"G\":[\"$b\",\"$undefined\"],\"s\":false,\"S\":true}\n"])</script><script>self.__next_f.push([1,"c:I[8173,[\"173\",\"static/chunks/173-69860a4742bb7020.js\",\"829\",\"static/chunks/829-7533e70598480772.js\",\"306\",\"static/chunks/app/columns/%5Bslug%5D/page-58fc1d8f5085c1ff.js\"],\"\"]\nd:I[4780,[\"173\",\"static/chunks/173-69860a4742bb7020.js\",\"829\",\"static/chunks/829-7533e70598480772.js\",\"306\",\"static/chunks/app/columns/%5Bslug%5D/page-58fc1d8f5085c1ff.js\"],\"default\"]\ne:T1090,"])</script><script>self.__next_f.push([1,"# 如何去除有序数组的重复元素\n\n如何去除有序数组的重复元素\n学算法，认准 labuladong 就够了！\n我们知道对于数组来说，在尾部插⼊、删除元素是⽐较⾼效的，时间复杂度\n是 O(1)，但是如果在中间或者开头插⼊、删除元素，就会涉及数据的搬\n移，时间复杂度为 O(N)，效率较低。\n所以对于⼀般处理数组的算法问题，我们要尽可能只对数组尾部的元素进⾏\n操作，以避免额外的时间复杂度。\n这篇⽂章讲讲如何对⼀个有序数组去重，先看下题⽬：\n显然，由于数组已经排序，所以重复的元素⼀定连在⼀起，找出它们并不\n难，但如果毎找到⼀个重复元素就⽴即删除它，就是在数组中间进⾏删除操\n作，整个时间复杂度是会达到 O(N^2)。⽽且题⽬要求我们原地修改，也就\n是说不能⽤辅助数组，空间复杂度得是 O(1)。\n如何去除有序数组的重复元素\n424\n\n其实，对于数组相关的算法问题，有⼀个通⽤的技巧：要尽量避免在中间删\n除元素，那我就想先办法把这个元素换到最后去。这样的话，最终待删除的\n元素都拖在数组尾部，⼀个⼀个 pop 掉就⾏了，每次操作的时间复杂度也就\n降低到 O(1) 了。\n按照这个思路呢，⼜可以衍⽣出解决类似需求的通⽤⽅式：双指针技巧。具\n体⼀点说，应该是快慢指针。\n我们让慢指针  slow  ⾛左后⾯，快指针  fast  ⾛在前⾯探路，找到⼀个不\n重复的元素就告诉  slow  并让  slow  前进⼀步。这样当  fast  指针遍历完\n整个数组  nums  后， nums[0..slow]  就是不重复元素，之后的所有元素都\n是重复元素。\nint removeDuplicates(int[] nums) {\n    int n = nums.length;\n    if (n == 0) return 0;\n    int slow = 0, fast = 1;\n    while (fast \u003c n) {\n        if (nums[fast] != nums[slow]) {\n            slow++;\n            // 维护 nums[0..slow] ⽆重复\n            nums[slow] = nums[fast];\n        }\n        fast++;\n    }\n    // ⻓度为索引 + 1\n    return slow + 1;\n}\n看下算法执⾏的过程：\n【PDF格式⽆法显⽰GIF⽂件\n%E6%9C%89%E5%BA%8F%E6%95%B0%E7%BB%84%E5%8E%BB%E9%8\n7%8D/1.gif，可移步公众号查看】\n再简单扩展⼀下，如果给你⼀个有序链表，如何去重呢？其实和数组是⼀模\n⼀样的，唯⼀的区别是把数组赋值操作变成操作指针⽽已：\n如何去除有序数组的重复元素\n425\n\nListNode deleteDuplicates(ListNode head) {\n    if (head == null) return null;\n    ListNode slow = head, fast = head.next;\n    while (fast != null) {\n        if (fast.val != slow.val) {\n            // nums[slow] = nums[fast];\n            slow.next = fast;\n            // slow++;\n            slow = slow.next;\n        }\n        // fast++\n        fast = fast.next;\n    }\n    // 断开与后⾯重复元素的连接\n    slow.next = null;\n    return head;\n}\n【PDF格式⽆法显⽰GIF⽂件\n%E6%9C%89%E5%BA%8F%E6%95%B0%E7%BB%84%E5%8E%BB%E9%8\n7%8D/2.gif，可移步公众号查看】\n＿＿＿＿＿＿＿＿＿＿＿＿＿\n刷算法，学套路，认准 labuladong。\n本⼩抄即将出版，关注 labuladong 公众号或 ongline book 查看更新⽂章，\n后台回复「进群」可进刷题群，labuladong 带你⽇穿 LeetCode。\n如何去除有序数组的重复元素\n426\n\n如何寻找最⻓回⽂⼦串\n学好算法全靠套路，认准 labuladong 就够了。\n读完本⽂，你不仅学会了算法套路，还可以顺便去 LeetCode 上拿下如下题\n⽬：\n5.最⻓回⽂⼦串\n回⽂串是⾯试常常遇到的问题（虽然问题本⾝没啥意义），本⽂就告诉你回\n⽂串问题的核⼼思想是什么。\n⾸先，明确⼀下什：回⽂串就是正着读和反着读都⼀样的字符串。\n⽐如说字符串  aba  和  abba  都是回⽂串，因为它们对称，反过来还是和本\n⾝⼀样。反之，字符串  abac  就不是回⽂串。\n可以看到回⽂串的的⻓度可能是奇数，也可能是偶数，这就添加了回⽂串问\n题的难度，解决该类问题的核⼼是双指针。下⾯就通过⼀道最⻓回⽂⼦串的\n问题来具体理解⼀下回⽂串问题：\n如何寻找最⻓回⽂⼦串\n427"])</script><script>self.__next_f.push([1,"4:[\"$\",\"main\",null,{\"style\":{\"maxWidth\":760,\"margin\":\"0 auto\",\"padding\":\"16px\",\"minHeight\":\"100vh\"},\"children\":[[\"$\",\"$Lc\",null,{\"href\":\"/columns/\",\"style\":{\"display\":\"inline-block\",\"marginBottom\":\"12px\",\"fontSize\":\"13px\"},\"children\":\"← 返回专栏\"}],[\"$\",\"div\",null,{\"style\":{\"fontSize\":\"12px\",\"color\":\"var(--text-tertiary)\",\"marginBottom\":\"4px\"},\"children\":[\"📕\",\" \",\"labuladong 算法小抄\"]}],[\"$\",\"h1\",null,{\"style\":{\"fontSize\":\"22px\",\"fontWeight\":700,\"margin\":\"0 0 16px\"},\"children\":\"如何去除有序数组的重复元素\"}],[\"$\",\"$Ld\",null,{\"children\":\"$e\"}],false]}]\n"])</script><script>self.__next_f.push([1,"a:[[\"$\",\"meta\",\"0\",{\"name\":\"viewport\",\"content\":\"width=device-width, initial-scale=1\"}],[\"$\",\"meta\",\"1\",{\"name\":\"theme-color\",\"content\":\"#f97316\"}]]\n"])</script><script>self.__next_f.push([1,"8:[[\"$\",\"meta\",\"0\",{\"charSet\":\"utf-8\"}],[\"$\",\"title\",\"1\",{\"children\":\"如何去除有序数组的重复元素 - 算法面试\"}],[\"$\",\"meta\",\"2\",{\"name\":\"description\",\"content\":\"LeetCode 热题 100 完整 Java 题解、逐题动画、知识专栏与智能间隔复习。\"}],[\"$\",\"meta\",\"3\",{\"name\":\"application-name\",\"content\":\"算法面试\"}],[\"$\",\"link\",\"4\",{\"rel\":\"manifest\",\"href\":\"/algorithm-interview/manifest.json\",\"crossOrigin\":\"$undefined\"}],[\"$\",\"meta\",\"5\",{\"name\":\"keywords\",\"content\":\"LeetCode,热题100,算法面试,Java题解,数据结构,动态规划,面试刷题\"}],[\"$\",\"meta\",\"6\",{\"name\":\"mobile-web-app-capable\",\"content\":\"yes\"}],[\"$\",\"meta\",\"7\",{\"name\":\"apple-mobile-web-app-title\",\"content\":\"算法面试\"}],[\"$\",\"meta\",\"8\",{\"name\":\"apple-mobile-web-app-status-bar-style\",\"content\":\"default\"}],[\"$\",\"meta\",\"9\",{\"property\":\"og:title\",\"content\":\"算法面试题库\"}],[\"$\",\"meta\",\"10\",{\"property\":\"og:description\",\"content\":\"LeetCode 热题 100 完整 Java 题解、逐题动画、知识专栏与智能复习\"}],[\"$\",\"meta\",\"11\",{\"property\":\"og:site_name\",\"content\":\"算法面试题库\"}],[\"$\",\"meta\",\"12\",{\"property\":\"og:locale\",\"content\":\"zh_CN\"}],[\"$\",\"meta\",\"13\",{\"property\":\"og:type\",\"content\":\"website\"}],[\"$\",\"meta\",\"14\",{\"name\":\"twitter:card\",\"content\":\"summary\"}],[\"$\",\"meta\",\"15\",{\"name\":\"twitter:title\",\"content\":\"算法面试题库\"}],[\"$\",\"meta\",\"16\",{\"name\":\"twitter:description\",\"content\":\"LeetCode 热题 100 完整 Java 题解、逐题动画、知识专栏与智能复习\"}]]\n"])</script><script>self.__next_f.push([1,"6:null\n"])</script></body></html>

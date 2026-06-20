@@ -1,0 +1,218 @@
+<!DOCTYPE html><html lang="zh"><head><meta charSet="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="/algorithm-interview/_next/static/css/c1e787639001e16b.css" data-precedence="next"/><link rel="preload" as="script" fetchPriority="low" href="/algorithm-interview/_next/static/chunks/webpack-65b8ce4c1158f96f.js"/><script src="/algorithm-interview/_next/static/chunks/4bd1b696-899926250d3992f1.js" async=""></script><script src="/algorithm-interview/_next/static/chunks/517-b6df7dad4ff96d0b.js" async=""></script><script src="/algorithm-interview/_next/static/chunks/main-app-9e7bfff32fd8ebe9.js" async=""></script><script src="/algorithm-interview/_next/static/chunks/173-69860a4742bb7020.js" async=""></script><script src="/algorithm-interview/_next/static/chunks/829-7533e70598480772.js" async=""></script><script src="/algorithm-interview/_next/static/chunks/app/columns/%5Bslug%5D/page-58fc1d8f5085c1ff.js" async=""></script><meta name="theme-color" content="#f97316"/><title>Linux shell 的实用小技巧 - 算法面试</title><meta name="description" content="LeetCode 热题 100 完整 Java 题解、逐题动画、知识专栏与智能间隔复习。"/><meta name="application-name" content="算法面试"/><link rel="manifest" href="/algorithm-interview/manifest.json"/><meta name="keywords" content="LeetCode,热题100,算法面试,Java题解,数据结构,动态规划,面试刷题"/><meta name="mobile-web-app-capable" content="yes"/><meta name="apple-mobile-web-app-title" content="算法面试"/><meta name="apple-mobile-web-app-status-bar-style" content="default"/><meta property="og:title" content="算法面试题库"/><meta property="og:description" content="LeetCode 热题 100 完整 Java 题解、逐题动画、知识专栏与智能复习"/><meta property="og:site_name" content="算法面试题库"/><meta property="og:locale" content="zh_CN"/><meta property="og:type" content="website"/><meta name="twitter:card" content="summary"/><meta name="twitter:title" content="算法面试题库"/><meta name="twitter:description" content="LeetCode 热题 100 完整 Java 题解、逐题动画、知识专栏与智能复习"/><script>
+try {
+  var raw = localStorage.getItem('algo-interview');
+  var theme = 'light';
+  if (raw) { var p = JSON.parse(raw); theme = (p.state && p.state.theme) || 'light'; }
+  if (theme === 'dark') {
+    document.documentElement.classList.add('dark');
+    document.documentElement.setAttribute('data-theme', 'dark');
+  }
+} catch (e) {}
+</script><script src="/algorithm-interview/_next/static/chunks/polyfills-42372ed130431b0a.js" noModule=""></script></head><body><main style="max-width:760px;margin:0 auto;padding:16px;min-height:100vh"><a style="display:inline-block;margin-bottom:12px;font-size:13px" href="/algorithm-interview/columns/">← 返回专栏</a><div style="font-size:12px;color:var(--text-tertiary);margin-bottom:4px">📕<!-- --> <!-- -->labuladong 算法小抄</div><h1 style="font-size:22px;font-weight:700;margin:0 0 16px">Linux shell 的实用小技巧</h1><div class="prose max-w-none" style="font-size:14px;color:var(--text)"><h1>Linux shell 的实用小技巧</h1>
+<p>Linux shell 提⾼效率的技巧
+学算法，认准 labuladong 就够了！
+前⼏篇关于 Linux 的⽂章很受欢迎，很多读者都希望我多写写这⽅⾯的⽂
+章。我以后会定期分享⼀些 Linux 的实⽤⼩技巧，你⽤习惯之后可能就会和
+我⼀样，使⽤ Windows 就头疼。。。
+先说句题外话，⼤家总是问能不能装双系统，装什么 Linux 发⾏版⽐较好。
+这⾥统⼀回答⼀下，装双系统很简单的，⽹上很多教程；⾄于发⾏版，推荐
+Ubuntu，不要迷恋那些看起来⽜逼的⼩众发⾏版，我们的评判标准是是否
+稳定，是否拥有完善的社区⽀持，这两点 Ubuntu 桌⾯版⽆疑是最好的。我
+之前遇到蓝⽛键盘的适配问题，Ubuntu 社区上竟然有⼤佬直接写了个驱
+动，完美解决，真是意料之外。
+当然，你要是有时间爱折腾，可以随意。或者你有钱，你也不需要纠结
+Linux 发⾏版，玩 MacBook 吧，它也是基于 Linux 的。
+回归主题，我认为 Linux 的迷⼈之处在于完善的社区和许多⼩⽽美的⼯具，
+加之管道符、重定向等等漂亮的设计理念，可以将很多复杂的⼯作⾃动化。
+本⽂就介绍⼀些基本的 Linux shell 技巧，相信可以帮你提⾼⽣产⼒！
+输⼊相似⽂件名太⿇烦
+⽤花括号括起来的字符串⽤逗号连接，可以⾃动扩展，⾮常有⽤，直接看例
+⼦：
+$ echo {one,two,three}file
+onefile twofile threefile
+$ echo {one,two,three}{1,2,3}
+one1 one2 one3 two1 two2 two3 three1 three2 three3
+Linux shell 的实⽤⼩技巧
+528</p>
+<p>你看，花括号中的每个字符都可以和之后（或之前）的字符串进⾏组合拼
+接，注意花括号和其中的逗号不可以⽤空格分隔，否则会被认为是普通的字
+符串对待。
+这个技巧有什么实际⽤处呢？最简单有⽤的就是给  cp ,  mv ,  rm  等命令扩
+展参数：
+$ cp /very/long/path/file{,.bak}</p>
+<h1>给 file 复制⼀个叫做 file.bak 的副本</h1>
+<p>$ rm file{1,3,5}.txt</p>
+<h1>删除 file1.txt file3.txt file5.txt</h1>
+<p>$ mv *.{c,cpp} src/</p>
+<h1>将所有 .c 和 .cpp 为后缀的⽂件移⼊ src ⽂件夹</h1>
+<p>输⼊路径名称太⿇烦
+⽤  cd -  返回刚才呆的⽬录，直接看例⼦吧：
+$ pwd
+/very/long/path
+$ cd # 回到家⽬录瞅瞅
+$ pwd
+/home/labuladong
+$ cd - # 再返回刚才那个⽬录
+$ pwd
+/very/long/path
+特殊命令  !$  会替换成上⼀次命令最后的路径，直接看例⼦：</p>
+<h1>没有加可执⾏权限</h1>
+<p>$ /usr/bin/script.sh
+zsh: permission denied: /usr/bin/script.sh
+$ chmod +x !$
+chmod +x /usr/bin/script.sh
+Linux shell 的实⽤⼩技巧
+529</p>
+<p>特殊命令  !*  会替换成上⼀次命令输⼊的所有⽂件路径，直接看例⼦：</p>
+<h1>创建了三个脚本⽂件</h1>
+<p>$ file script1.sh script2.sh script3.sh</p>
+<h1>给它们全部加上可执⾏权限</h1>
+<p>$ chmod +x !*
+chmod +x script1.sh script2.sh script3.sh
+可以在环境变量  CDPATH  中加⼊你常⽤的⼯作⽬录，当  cd  命令在当前⽬
+录中找不到你指定的⽂件/⽬录时，会⾃动到  CDPATH  中的⽬录中寻找。
+⽐如说我常去  /var/log  ⽬录找⽇志，可以执⾏如下命令：
+$ export CDPATH=&#x27;~:/var/log&#x27;</p>
+<h1>cd 命令将会在 〜 ⽬录和 /var/log ⽬录扩展搜索</h1>
+<p>$ pwd
+/home/labuladong/musics
+$ cd mysql
+cd /var/log/mysql
+$ pwd
+/var/log/mysql
+$ cd my_pictures
+cd /home/labuladong/my_pictures
+这个技巧是⼗分好⽤的，这样就免了经常写完整的路径名称，节约不少时
+间。
+需要注意的是，以上操作是 bash ⽀持的，其他主流 shell 解释器当然都⽀持
+扩展  cd  命令的搜索⽬录，但可能不是修改  CDPATH  这个变量，具体的设
+置⽅法可以⾃⾏搜索。
+输⼊重复命令太⿇烦
+使⽤特殊命令  !! ，可以⾃动替换成上⼀次使⽤的命令：
+Linux shell 的实⽤⼩技巧
+530</p>
+<p>$ apt install net-tools
+E: Could not open lock file - open (13: Permission denied)
+$ sudo !!
+sudo apt install net-tools
+[sudo] password for fdl:
+有的命令很⻓，⼀时间想不起来具体参数了怎么办？
+对于 bash 终端，可以使⽤  Ctrl+R  快捷键反向搜索历史命令，之所以说是
+反向搜索，就是搜索最近⼀次输⼊的命令。
+⽐如按下  Ctrl+R  之后，输⼊  sudo ，bash 就会搜索出最近⼀次包含  sudo
+的命令，你回⻋之后就可以运⾏该命令了：
+(reverse-i-search)`sudo&#x27;: sudo apt install git
+但是这个⽅法有缺点：⾸先，该功能似乎只有 bash ⽀持，我⽤的 zsh 作为
+shell 终端，就⽤不了；第⼆，只能查找出⼀个（最近的）命令，如果我想
+找以前的某个命令，就没办法了。
+对于这种情况，我们最常⽤的⽅法是使⽤  history  命令配合管道符和
+grep  命令来寻找某个历史命令：</p>
+<h1>过滤出所有包含 config 字段的历史命令</h1>
+<p>$ history | grep &#x27;config&#x27;
+7352  ./configure
+7434  git config --global --unset https.proxy
+9609  ifconfig
+9985  clip -o | sed -z &#x27;s/\n/,\n/g&#x27; | clip
+10433  cd ~/.config
+你使⽤的所有 shell 命令都会被记录，前⾯的数字就表⽰这是第⼏个命令，
+找到你想重复使⽤的命令后，也不需要复制粘贴该命令，只要使⽤  !  + 你
+想重⽤的命令编号即可运⾏该命令。
+Linux shell 的实⽤⼩技巧
+531</p>
+<p>拿上⾯的例⼦，我想重新运⾏  git config  那条命令，就可以这样：
+$ !7434
+git config --global --unset https.proxy</p>
+<h1>运⾏完成</h1>
+<p>我觉得  history  加管道加  grep  这样打的字还是太多，可以在 你的 shell
+配置⽂件中（ .bashrc ， .zshrc  等） 中写这样⼀个函数：
+his()
+{
+history | grep &quot;$@&quot;
+}
+这样就不需要写那么多，只需要  his &#x27;some_keyword&#x27;  即可搜索历史命令。
+我⼀般不使⽤ bash 作为终端，我给⼤家推荐⼀款很好⽤的 shell 终端叫做
+zsh，这也是我⾃⼰使⽤的 shell。这款终端还可以扩展各种插件，⾮常好
+⽤，具体配置⽅法可⾃⾏搜索。
+其他⼩技巧
+1、 yes  命令⾃动输⼊字符  y  进⾏确认：
+我们安装某些软件的时候，可能有交互式的提问：
+$ sudo apt install XXX
+...
+XXX will use 996 MB disk space, continue? [y/n]
+⼀般情况下我们都是⼀路 y 到底，但如果我们想⾃动化⼀些软件的安装就很
+烦，遇到这种交互式提问就卡住了，还得⼿动处理。
+yes  命令可以帮助我们：
+Linux shell 的实⽤⼩技巧
+532</p>
+<p>$ yes | your_cmd
+这样就会⼀路⾃动  y  下去，不会停下让我们输⼊了。
+如果你读过前⽂Linux ⽂件描述符，就知道其原理很简单：
+你单独运⾏⼀下  yes  命令，发现它就是打印出⼀⼤堆字符 y，通过管道把
+输出和  your_cmd  的标准输⼊相连接，如果  your_cmd  ⼜提出⽆聊的问题，
+就会从标准输⼊读取数据，也就会读取到⼀个 y 和换⾏符，和你⼿动输⼊ y
+确认是⼀个效果。
+2、特殊变量  $?  记录上⼀次命令的返回值。
+在 Linux shell 中，遵循 C 语⾔的习惯，返回值为 0 的话就是程序正常退
+出，⾮ 0 值就是异常退出出。读取上⼀次命令的返回值在平时使⽤命令⾏时
+感觉没什么⽤，但是如果你想编写⼀些 shell 脚本，知道返回值⾮常有⽤。
+举个实际的例⼦，⽐如我的 Github 仓库 fucking-algorithm ，我需要给其中
+所有 markdown ⽂件最下⽅添加上⼀篇、下⼀篇、⽬录三个⻚脚链接，有的
+⽂章已经有了⻚脚，⼤部分都没有。
+为了防⽌重复添加，我必须知道⼀个 md ⽂件下⽅是否已添加，这时候就可
+以使⽤  $?  变量配合  grep  命令做到：
+#!/bin/bash
+filename=$1</p>
+<h1>查看⽂件尾部是否包含关键词</h1>
+<p>tail | grep &#x27;下⼀篇&#x27; $filename</p>
+<h1>grep 查找到匹配会返回 0，找不到则返回⾮ 0 值</h1>
+<p>[ $? -ne 0 ] &amp;&amp; { 添加⻚脚; }
+3、特殊变量  $$  记录当前进程的 PID。
+这个功能可能在平时使⽤时也不怎么⽤，但是在写 shell 脚本时也⾮常有
+⽤，⽐如说你要在  /tmp  创建临时⽂件，给⽂件起名字⼀直都是⾮常让⼈
+费脑⼦的，这时候可以使⽤  $$  变量扩展出当前进程的 PID 作为临时⽂件
+Linux shell 的实⽤⼩技巧
+533</p>
+<p>名，PID 在计算机中都是唯⼀的，所以绝不会重复，也不需要你记住临时⽂
+件的名字。
+好了，今天就分享这些技巧吧，如果⼤家对 Linux 有兴趣，可以点在看分
+享，数据不错的话下次再写点。
+＿＿＿＿＿＿＿＿＿＿＿＿＿
+刷算法，学套路，认准 labuladong。
+本⼩抄即将出版，关注 labuladong 公众号或 ongline book 查看更新⽂章，
+后台回复「进群」可进刷题群，labuladong 带你⽇穿 LeetCode。
+Linux shell 的实⽤⼩技巧
+534</p>
+<p>⼀⽂读懂 session 和 cookie
+学算法，认准 labuladong 就够了！
+cookie ⼤家应该都熟悉，⽐如说登录某些⽹站⼀段时间后，就要求你重新登
+录；再⽐如有的同学很喜欢玩爬⾍技术，有时候⽹站就是可以拦截住你的爬
+⾍，这些都和 cookie 有关。如果你明⽩了服务器后端对于 cookie 和 session
+的处理逻辑，就可以解释这些现象，甚⾄钻⼀些空⼦⽆限⽩嫖，待我慢慢道
+来。
+⼀、session 和 cookie 简介
+cookie 的出现是因为 HTTP 是⽆状态的⼀种协议，换句话说，服务器记不住
+你，可能你每刷新⼀次⽹⻚，就要重新输⼊⼀次账号密码进⾏登录。这显然
+是让⼈⽆法接受的，cookie 的作⽤就好⽐服务器给你贴个标签，然后你每次
+向服务器再发请求时，服务器就能够 cookie 认出你。
+抽象地概括⼀下：⼀个 cookie 可以认为是⼀个「变量」，形如
+name=value ，存储在浏览器；⼀个 session 可以理解为⼀种数据结构，多数
+情况是「映射」（键值对），存储在服务器上。
+注意，我说的是「⼀个」cookie 可以认为是⼀个变量，但是服务器可以⼀次
+设置多个 cookie，所以有时候说 cookie 是「⼀组」键值对⼉，这也可以说
+得通。
+cookie 可以在服务器端通过 HTTP 的 SetCookie 字段设置 cookie，⽐如我⽤
+Go 语⾔写的⼀个简单服务：
+func cookie(w http.ResponseWriter, r *http.Request) {
+// 设置了两个 cookie
+http.SetCookie(w, &amp;http.Cookie{
+Name:       &quot;name1&quot;,
+Value:      &quot;value1&quot;,
+})
+⼀⽂看懂 session 和 cookie
+535</p></div></main><script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function () {
+    navigator.serviceWorker.register('/algorithm-interview/sw.js').catch(function () {});
+  });
+}
+</script><script src="/algorithm-interview/_next/static/chunks/webpack-65b8ce4c1158f96f.js" async=""></script><script>(self.__next_f=self.__next_f||[]).push([0])</script><script>self.__next_f.push([1,"1:\"$Sreact.fragment\"\n2:I[5244,[],\"\"]\n3:I[3866,[],\"\"]\n5:I[6213,[],\"OutletBoundary\"]\n7:I[6213,[],\"MetadataBoundary\"]\n9:I[6213,[],\"ViewportBoundary\"]\nb:I[4835,[],\"\"]\n:HL[\"/algorithm-interview/_next/static/css/c1e787639001e16b.css\",\"style\"]\n"])</script><script>self.__next_f.push([1,"0:{\"P\":null,\"b\":\"xos97fAiWtKfKXI6hZLx4\",\"p\":\"/algorithm-interview\",\"c\":[\"\",\"columns\",\"lbd-078\",\"\"],\"i\":false,\"f\":[[[\"\",{\"children\":[\"columns\",{\"children\":[[\"slug\",\"lbd-078\",\"d\"],{\"children\":[\"__PAGE__\",{}]}]}]},\"$undefined\",\"$undefined\",true],[\"\",[\"$\",\"$1\",\"c\",{\"children\":[[[\"$\",\"link\",\"0\",{\"rel\":\"stylesheet\",\"href\":\"/algorithm-interview/_next/static/css/c1e787639001e16b.css\",\"precedence\":\"next\",\"crossOrigin\":\"$undefined\",\"nonce\":\"$undefined\"}]],[\"$\",\"html\",null,{\"lang\":\"zh\",\"children\":[[\"$\",\"head\",null,{\"children\":[\"$\",\"script\",null,{\"dangerouslySetInnerHTML\":{\"__html\":\"\\ntry {\\n  var raw = localStorage.getItem('algo-interview');\\n  var theme = 'light';\\n  if (raw) { var p = JSON.parse(raw); theme = (p.state \u0026\u0026 p.state.theme) || 'light'; }\\n  if (theme === 'dark') {\\n    document.documentElement.classList.add('dark');\\n    document.documentElement.setAttribute('data-theme', 'dark');\\n  }\\n} catch (e) {}\\n\"}}]}],[\"$\",\"body\",null,{\"children\":[[\"$\",\"$L2\",null,{\"parallelRouterKey\":\"children\",\"segmentPath\":[\"children\"],\"error\":\"$undefined\",\"errorStyles\":\"$undefined\",\"errorScripts\":\"$undefined\",\"template\":[\"$\",\"$L3\",null,{}],\"templateStyles\":\"$undefined\",\"templateScripts\":\"$undefined\",\"notFound\":[[],[[\"$\",\"title\",null,{\"children\":\"404: This page could not be found.\"}],[\"$\",\"div\",null,{\"style\":{\"fontFamily\":\"system-ui,\\\"Segoe UI\\\",Roboto,Helvetica,Arial,sans-serif,\\\"Apple Color Emoji\\\",\\\"Segoe UI Emoji\\\"\",\"height\":\"100vh\",\"textAlign\":\"center\",\"display\":\"flex\",\"flexDirection\":\"column\",\"alignItems\":\"center\",\"justifyContent\":\"center\"},\"children\":[\"$\",\"div\",null,{\"children\":[[\"$\",\"style\",null,{\"dangerouslySetInnerHTML\":{\"__html\":\"body{color:#000;background:#fff;margin:0}.next-error-h1{border-right:1px solid rgba(0,0,0,.3)}@media (prefers-color-scheme:dark){body{color:#fff;background:#000}.next-error-h1{border-right:1px solid rgba(255,255,255,.3)}}\"}}],[\"$\",\"h1\",null,{\"className\":\"next-error-h1\",\"style\":{\"display\":\"inline-block\",\"margin\":\"0 20px 0 0\",\"padding\":\"0 23px 0 0\",\"fontSize\":24,\"fontWeight\":500,\"verticalAlign\":\"top\",\"lineHeight\":\"49px\"},\"children\":404}],[\"$\",\"div\",null,{\"style\":{\"display\":\"inline-block\"},\"children\":[\"$\",\"h2\",null,{\"style\":{\"fontSize\":14,\"fontWeight\":400,\"lineHeight\":\"49px\",\"margin\":0},\"children\":\"This page could not be found.\"}]}]]}]}]]],\"forbidden\":\"$undefined\",\"unauthorized\":\"$undefined\"}],[\"$\",\"script\",null,{\"dangerouslySetInnerHTML\":{\"__html\":\"\\nif ('serviceWorker' in navigator) {\\n  window.addEventListener('load', function () {\\n    navigator.serviceWorker.register('/algorithm-interview/sw.js').catch(function () {});\\n  });\\n}\\n\"}}]]}]]}]]}],{\"children\":[\"columns\",[\"$\",\"$1\",\"c\",{\"children\":[null,[\"$\",\"$L2\",null,{\"parallelRouterKey\":\"children\",\"segmentPath\":[\"children\",\"columns\",\"children\"],\"error\":\"$undefined\",\"errorStyles\":\"$undefined\",\"errorScripts\":\"$undefined\",\"template\":[\"$\",\"$L3\",null,{}],\"templateStyles\":\"$undefined\",\"templateScripts\":\"$undefined\",\"notFound\":\"$undefined\",\"forbidden\":\"$undefined\",\"unauthorized\":\"$undefined\"}]]}],{\"children\":[[\"slug\",\"lbd-078\",\"d\"],[\"$\",\"$1\",\"c\",{\"children\":[null,[\"$\",\"$L2\",null,{\"parallelRouterKey\":\"children\",\"segmentPath\":[\"children\",\"columns\",\"children\",\"$0:f:0:1:2:children:2:children:0\",\"children\"],\"error\":\"$undefined\",\"errorStyles\":\"$undefined\",\"errorScripts\":\"$undefined\",\"template\":[\"$\",\"$L3\",null,{}],\"templateStyles\":\"$undefined\",\"templateScripts\":\"$undefined\",\"notFound\":\"$undefined\",\"forbidden\":\"$undefined\",\"unauthorized\":\"$undefined\"}]]}],{\"children\":[\"__PAGE__\",[\"$\",\"$1\",\"c\",{\"children\":[\"$L4\",null,[\"$\",\"$L5\",null,{\"children\":\"$L6\"}]]}],{},null,false]},null,false]},null,false]},null,false],[\"$\",\"$1\",\"h\",{\"children\":[null,[\"$\",\"$1\",\"bleMVQHNXUS99NsBIlQeF\",{\"children\":[[\"$\",\"$L7\",null,{\"children\":\"$L8\"}],[\"$\",\"$L9\",null,{\"children\":\"$La\"}],null]}]]}],false]],\"m\":\"$undefined\",\"G\":[\"$b\",\"$undefined\"],\"s\":false,\"S\":true}\n"])</script><script>self.__next_f.push([1,"c:I[8173,[\"173\",\"static/chunks/173-69860a4742bb7020.js\",\"829\",\"static/chunks/829-7533e70598480772.js\",\"306\",\"static/chunks/app/columns/%5Bslug%5D/page-58fc1d8f5085c1ff.js\"],\"\"]\nd:I[4780,[\"173\",\"static/chunks/173-69860a4742bb7020.js\",\"829\",\"static/chunks/829-7533e70598480772.js\",\"306\",\"static/chunks/app/columns/%5Bslug%5D/page-58fc1d8f5085c1ff.js\"],\"default\"]\ne:T28ae,"])</script><script>self.__next_f.push([1,"# Linux shell 的实用小技巧\n\nLinux shell 提⾼效率的技巧\n学算法，认准 labuladong 就够了！\n前⼏篇关于 Linux 的⽂章很受欢迎，很多读者都希望我多写写这⽅⾯的⽂\n章。我以后会定期分享⼀些 Linux 的实⽤⼩技巧，你⽤习惯之后可能就会和\n我⼀样，使⽤ Windows 就头疼。。。\n先说句题外话，⼤家总是问能不能装双系统，装什么 Linux 发⾏版⽐较好。\n这⾥统⼀回答⼀下，装双系统很简单的，⽹上很多教程；⾄于发⾏版，推荐\nUbuntu，不要迷恋那些看起来⽜逼的⼩众发⾏版，我们的评判标准是是否\n稳定，是否拥有完善的社区⽀持，这两点 Ubuntu 桌⾯版⽆疑是最好的。我\n之前遇到蓝⽛键盘的适配问题，Ubuntu 社区上竟然有⼤佬直接写了个驱\n动，完美解决，真是意料之外。\n当然，你要是有时间爱折腾，可以随意。或者你有钱，你也不需要纠结\nLinux 发⾏版，玩 MacBook 吧，它也是基于 Linux 的。\n回归主题，我认为 Linux 的迷⼈之处在于完善的社区和许多⼩⽽美的⼯具，\n加之管道符、重定向等等漂亮的设计理念，可以将很多复杂的⼯作⾃动化。\n本⽂就介绍⼀些基本的 Linux shell 技巧，相信可以帮你提⾼⽣产⼒！\n输⼊相似⽂件名太⿇烦\n⽤花括号括起来的字符串⽤逗号连接，可以⾃动扩展，⾮常有⽤，直接看例\n⼦：\n$ echo {one,two,three}file\nonefile twofile threefile\n$ echo {one,two,three}{1,2,3}\none1 one2 one3 two1 two2 two3 three1 three2 three3\nLinux shell 的实⽤⼩技巧\n528\n\n你看，花括号中的每个字符都可以和之后（或之前）的字符串进⾏组合拼\n接，注意花括号和其中的逗号不可以⽤空格分隔，否则会被认为是普通的字\n符串对待。\n这个技巧有什么实际⽤处呢？最简单有⽤的就是给  cp ,  mv ,  rm  等命令扩\n展参数：\n$ cp /very/long/path/file{,.bak}\n# 给 file 复制⼀个叫做 file.bak 的副本\n$ rm file{1,3,5}.txt\n# 删除 file1.txt file3.txt file5.txt\n$ mv *.{c,cpp} src/\n# 将所有 .c 和 .cpp 为后缀的⽂件移⼊ src ⽂件夹\n输⼊路径名称太⿇烦\n⽤  cd -  返回刚才呆的⽬录，直接看例⼦吧：\n$ pwd\n/very/long/path\n$ cd # 回到家⽬录瞅瞅\n$ pwd\n/home/labuladong\n$ cd - # 再返回刚才那个⽬录\n$ pwd\n/very/long/path\n特殊命令  !$  会替换成上⼀次命令最后的路径，直接看例⼦：\n# 没有加可执⾏权限\n$ /usr/bin/script.sh\nzsh: permission denied: /usr/bin/script.sh\n$ chmod +x !$\nchmod +x /usr/bin/script.sh\nLinux shell 的实⽤⼩技巧\n529\n\n特殊命令  !*  会替换成上⼀次命令输⼊的所有⽂件路径，直接看例⼦：\n# 创建了三个脚本⽂件\n$ file script1.sh script2.sh script3.sh\n# 给它们全部加上可执⾏权限\n$ chmod +x !*\nchmod +x script1.sh script2.sh script3.sh\n可以在环境变量  CDPATH  中加⼊你常⽤的⼯作⽬录，当  cd  命令在当前⽬\n录中找不到你指定的⽂件/⽬录时，会⾃动到  CDPATH  中的⽬录中寻找。\n⽐如说我常去  /var/log  ⽬录找⽇志，可以执⾏如下命令：\n$ export CDPATH='~:/var/log'\n# cd 命令将会在 〜 ⽬录和 /var/log ⽬录扩展搜索\n$ pwd\n/home/labuladong/musics\n$ cd mysql\ncd /var/log/mysql\n$ pwd\n/var/log/mysql\n$ cd my_pictures\ncd /home/labuladong/my_pictures\n这个技巧是⼗分好⽤的，这样就免了经常写完整的路径名称，节约不少时\n间。\n需要注意的是，以上操作是 bash ⽀持的，其他主流 shell 解释器当然都⽀持\n扩展  cd  命令的搜索⽬录，但可能不是修改  CDPATH  这个变量，具体的设\n置⽅法可以⾃⾏搜索。\n输⼊重复命令太⿇烦\n使⽤特殊命令  !! ，可以⾃动替换成上⼀次使⽤的命令：\nLinux shell 的实⽤⼩技巧\n530\n\n$ apt install net-tools\nE: Could not open lock file - open (13: Permission denied)\n$ sudo !!\nsudo apt install net-tools\n[sudo] password for fdl:\n有的命令很⻓，⼀时间想不起来具体参数了怎么办？\n对于 bash 终端，可以使⽤  Ctrl+R  快捷键反向搜索历史命令，之所以说是\n反向搜索，就是搜索最近⼀次输⼊的命令。\n⽐如按下  Ctrl+R  之后，输⼊  sudo ，bash 就会搜索出最近⼀次包含  sudo \n的命令，你回⻋之后就可以运⾏该命令了：\n(reverse-i-search)`sudo': sudo apt install git\n但是这个⽅法有缺点：⾸先，该功能似乎只有 bash ⽀持，我⽤的 zsh 作为\nshell 终端，就⽤不了；第⼆，只能查找出⼀个（最近的）命令，如果我想\n找以前的某个命令，就没办法了。\n对于这种情况，我们最常⽤的⽅法是使⽤  history  命令配合管道符和\n grep  命令来寻找某个历史命令：\n# 过滤出所有包含 config 字段的历史命令\n$ history | grep 'config'\n 7352  ./configure\n 7434  git config --global --unset https.proxy\n 9609  ifconfig\n 9985  clip -o | sed -z 's/\\n/,\\n/g' | clip\n10433  cd ~/.config\n你使⽤的所有 shell 命令都会被记录，前⾯的数字就表⽰这是第⼏个命令，\n找到你想重复使⽤的命令后，也不需要复制粘贴该命令，只要使⽤  !  + 你\n想重⽤的命令编号即可运⾏该命令。\nLinux shell 的实⽤⼩技巧\n531\n\n拿上⾯的例⼦，我想重新运⾏  git config  那条命令，就可以这样：\n$ !7434\ngit config --global --unset https.proxy\n# 运⾏完成\n我觉得  history  加管道加  grep  这样打的字还是太多，可以在 你的 shell\n配置⽂件中（ .bashrc ， .zshrc  等） 中写这样⼀个函数：\nhis()\n{\n    history | grep \"$@\"\n}\n这样就不需要写那么多，只需要  his 'some_keyword'  即可搜索历史命令。\n我⼀般不使⽤ bash 作为终端，我给⼤家推荐⼀款很好⽤的 shell 终端叫做\nzsh，这也是我⾃⼰使⽤的 shell。这款终端还可以扩展各种插件，⾮常好\n⽤，具体配置⽅法可⾃⾏搜索。\n其他⼩技巧\n1、 yes  命令⾃动输⼊字符  y  进⾏确认：\n我们安装某些软件的时候，可能有交互式的提问：\n$ sudo apt install XXX\n...\nXXX will use 996 MB disk space, continue? [y/n]\n⼀般情况下我们都是⼀路 y 到底，但如果我们想⾃动化⼀些软件的安装就很\n烦，遇到这种交互式提问就卡住了，还得⼿动处理。\n yes  命令可以帮助我们：\nLinux shell 的实⽤⼩技巧\n532\n\n$ yes | your_cmd\n这样就会⼀路⾃动  y  下去，不会停下让我们输⼊了。\n如果你读过前⽂Linux ⽂件描述符，就知道其原理很简单：\n你单独运⾏⼀下  yes  命令，发现它就是打印出⼀⼤堆字符 y，通过管道把\n输出和  your_cmd  的标准输⼊相连接，如果  your_cmd  ⼜提出⽆聊的问题，\n就会从标准输⼊读取数据，也就会读取到⼀个 y 和换⾏符，和你⼿动输⼊ y\n确认是⼀个效果。\n2、特殊变量  $?  记录上⼀次命令的返回值。\n在 Linux shell 中，遵循 C 语⾔的习惯，返回值为 0 的话就是程序正常退\n出，⾮ 0 值就是异常退出出。读取上⼀次命令的返回值在平时使⽤命令⾏时\n感觉没什么⽤，但是如果你想编写⼀些 shell 脚本，知道返回值⾮常有⽤。\n举个实际的例⼦，⽐如我的 Github 仓库 fucking-algorithm ，我需要给其中\n所有 markdown ⽂件最下⽅添加上⼀篇、下⼀篇、⽬录三个⻚脚链接，有的\n⽂章已经有了⻚脚，⼤部分都没有。\n为了防⽌重复添加，我必须知道⼀个 md ⽂件下⽅是否已添加，这时候就可\n以使⽤  $?  变量配合  grep  命令做到：\n#!/bin/bash\nfilename=$1\n# 查看⽂件尾部是否包含关键词\ntail | grep '下⼀篇' $filename\n# grep 查找到匹配会返回 0，找不到则返回⾮ 0 值\n[ $? -ne 0 ] \u0026\u0026 { 添加⻚脚; }\n3、特殊变量  $$  记录当前进程的 PID。\n这个功能可能在平时使⽤时也不怎么⽤，但是在写 shell 脚本时也⾮常有\n⽤，⽐如说你要在  /tmp  创建临时⽂件，给⽂件起名字⼀直都是⾮常让⼈\n费脑⼦的，这时候可以使⽤  $$  变量扩展出当前进程的 PID 作为临时⽂件\nLinux shell 的实⽤⼩技巧\n533\n\n名，PID 在计算机中都是唯⼀的，所以绝不会重复，也不需要你记住临时⽂\n件的名字。\n好了，今天就分享这些技巧吧，如果⼤家对 Linux 有兴趣，可以点在看分\n享，数据不错的话下次再写点。\n＿＿＿＿＿＿＿＿＿＿＿＿＿\n刷算法，学套路，认准 labuladong。\n本⼩抄即将出版，关注 labuladong 公众号或 ongline book 查看更新⽂章，\n后台回复「进群」可进刷题群，labuladong 带你⽇穿 LeetCode。\nLinux shell 的实⽤⼩技巧\n534\n\n⼀⽂读懂 session 和 cookie\n学算法，认准 labuladong 就够了！\ncookie ⼤家应该都熟悉，⽐如说登录某些⽹站⼀段时间后，就要求你重新登\n录；再⽐如有的同学很喜欢玩爬⾍技术，有时候⽹站就是可以拦截住你的爬\n⾍，这些都和 cookie 有关。如果你明⽩了服务器后端对于 cookie 和 session\n的处理逻辑，就可以解释这些现象，甚⾄钻⼀些空⼦⽆限⽩嫖，待我慢慢道\n来。\n⼀、session 和 cookie 简介\ncookie 的出现是因为 HTTP 是⽆状态的⼀种协议，换句话说，服务器记不住\n你，可能你每刷新⼀次⽹⻚，就要重新输⼊⼀次账号密码进⾏登录。这显然\n是让⼈⽆法接受的，cookie 的作⽤就好⽐服务器给你贴个标签，然后你每次\n向服务器再发请求时，服务器就能够 cookie 认出你。\n抽象地概括⼀下：⼀个 cookie 可以认为是⼀个「变量」，形如\n name=value ，存储在浏览器；⼀个 session 可以理解为⼀种数据结构，多数\n情况是「映射」（键值对），存储在服务器上。\n注意，我说的是「⼀个」cookie 可以认为是⼀个变量，但是服务器可以⼀次\n设置多个 cookie，所以有时候说 cookie 是「⼀组」键值对⼉，这也可以说\n得通。\ncookie 可以在服务器端通过 HTTP 的 SetCookie 字段设置 cookie，⽐如我⽤\nGo 语⾔写的⼀个简单服务：\nfunc cookie(w http.ResponseWriter, r *http.Request) {\n    // 设置了两个 cookie \n    http.SetCookie(w, \u0026http.Cookie{\n        Name:       \"name1\",\n        Value:      \"value1\",\n    })\n⼀⽂看懂 session 和 cookie\n535"])</script><script>self.__next_f.push([1,"4:[\"$\",\"main\",null,{\"style\":{\"maxWidth\":760,\"margin\":\"0 auto\",\"padding\":\"16px\",\"minHeight\":\"100vh\"},\"children\":[[\"$\",\"$Lc\",null,{\"href\":\"/columns/\",\"style\":{\"display\":\"inline-block\",\"marginBottom\":\"12px\",\"fontSize\":\"13px\"},\"children\":\"← 返回专栏\"}],[\"$\",\"div\",null,{\"style\":{\"fontSize\":\"12px\",\"color\":\"var(--text-tertiary)\",\"marginBottom\":\"4px\"},\"children\":[\"📕\",\" \",\"labuladong 算法小抄\"]}],[\"$\",\"h1\",null,{\"style\":{\"fontSize\":\"22px\",\"fontWeight\":700,\"margin\":\"0 0 16px\"},\"children\":\"Linux shell 的实用小技巧\"}],[\"$\",\"$Ld\",null,{\"children\":\"$e\"}],false]}]\n"])</script><script>self.__next_f.push([1,"a:[[\"$\",\"meta\",\"0\",{\"name\":\"viewport\",\"content\":\"width=device-width, initial-scale=1\"}],[\"$\",\"meta\",\"1\",{\"name\":\"theme-color\",\"content\":\"#f97316\"}]]\n"])</script><script>self.__next_f.push([1,"8:[[\"$\",\"meta\",\"0\",{\"charSet\":\"utf-8\"}],[\"$\",\"title\",\"1\",{\"children\":\"Linux shell 的实用小技巧 - 算法面试\"}],[\"$\",\"meta\",\"2\",{\"name\":\"description\",\"content\":\"LeetCode 热题 100 完整 Java 题解、逐题动画、知识专栏与智能间隔复习。\"}],[\"$\",\"meta\",\"3\",{\"name\":\"application-name\",\"content\":\"算法面试\"}],[\"$\",\"link\",\"4\",{\"rel\":\"manifest\",\"href\":\"/algorithm-interview/manifest.json\",\"crossOrigin\":\"$undefined\"}],[\"$\",\"meta\",\"5\",{\"name\":\"keywords\",\"content\":\"LeetCode,热题100,算法面试,Java题解,数据结构,动态规划,面试刷题\"}],[\"$\",\"meta\",\"6\",{\"name\":\"mobile-web-app-capable\",\"content\":\"yes\"}],[\"$\",\"meta\",\"7\",{\"name\":\"apple-mobile-web-app-title\",\"content\":\"算法面试\"}],[\"$\",\"meta\",\"8\",{\"name\":\"apple-mobile-web-app-status-bar-style\",\"content\":\"default\"}],[\"$\",\"meta\",\"9\",{\"property\":\"og:title\",\"content\":\"算法面试题库\"}],[\"$\",\"meta\",\"10\",{\"property\":\"og:description\",\"content\":\"LeetCode 热题 100 完整 Java 题解、逐题动画、知识专栏与智能复习\"}],[\"$\",\"meta\",\"11\",{\"property\":\"og:site_name\",\"content\":\"算法面试题库\"}],[\"$\",\"meta\",\"12\",{\"property\":\"og:locale\",\"content\":\"zh_CN\"}],[\"$\",\"meta\",\"13\",{\"property\":\"og:type\",\"content\":\"website\"}],[\"$\",\"meta\",\"14\",{\"name\":\"twitter:card\",\"content\":\"summary\"}],[\"$\",\"meta\",\"15\",{\"name\":\"twitter:title\",\"content\":\"算法面试题库\"}],[\"$\",\"meta\",\"16\",{\"name\":\"twitter:description\",\"content\":\"LeetCode 热题 100 完整 Java 题解、逐题动画、知识专栏与智能复习\"}]]\n"])</script><script>self.__next_f.push([1,"6:null\n"])</script></body></html>

@@ -1,0 +1,153 @@
+1:"$Sreact.fragment"
+2:I[5244,[],""]
+3:I[3866,[],""]
+5:I[6213,[],"OutletBoundary"]
+7:I[6213,[],"MetadataBoundary"]
+9:I[6213,[],"ViewportBoundary"]
+b:I[4835,[],""]
+:HL["/algorithm-interview/_next/static/css/c1e787639001e16b.css","style"]
+0:{"P":null,"b":"xos97fAiWtKfKXI6hZLx4","p":"/algorithm-interview","c":["","question","101",""],"i":false,"f":[[["",{"children":["question",{"children":[["lcId","101","d"],{"children":["__PAGE__",{}]}]}]},"$undefined","$undefined",true],["",["$","$1","c",{"children":[[["$","link","0",{"rel":"stylesheet","href":"/algorithm-interview/_next/static/css/c1e787639001e16b.css","precedence":"next","crossOrigin":"$undefined","nonce":"$undefined"}]],["$","html",null,{"lang":"zh","children":[["$","head",null,{"children":["$","script",null,{"dangerouslySetInnerHTML":{"__html":"\ntry {\n  var raw = localStorage.getItem('algo-interview');\n  var theme = 'light';\n  if (raw) { var p = JSON.parse(raw); theme = (p.state && p.state.theme) || 'light'; }\n  if (theme === 'dark') {\n    document.documentElement.classList.add('dark');\n    document.documentElement.setAttribute('data-theme', 'dark');\n  }\n} catch (e) {}\n"}}]}],["$","body",null,{"children":[["$","$L2",null,{"parallelRouterKey":"children","segmentPath":["children"],"error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L3",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":[[],[["$","title",null,{"children":"404: This page could not be found."}],["$","div",null,{"style":{"fontFamily":"system-ui,\"Segoe UI\",Roboto,Helvetica,Arial,sans-serif,\"Apple Color Emoji\",\"Segoe UI Emoji\"","height":"100vh","textAlign":"center","display":"flex","flexDirection":"column","alignItems":"center","justifyContent":"center"},"children":["$","div",null,{"children":[["$","style",null,{"dangerouslySetInnerHTML":{"__html":"body{color:#000;background:#fff;margin:0}.next-error-h1{border-right:1px solid rgba(0,0,0,.3)}@media (prefers-color-scheme:dark){body{color:#fff;background:#000}.next-error-h1{border-right:1px solid rgba(255,255,255,.3)}}"}}],["$","h1",null,{"className":"next-error-h1","style":{"display":"inline-block","margin":"0 20px 0 0","padding":"0 23px 0 0","fontSize":24,"fontWeight":500,"verticalAlign":"top","lineHeight":"49px"},"children":404}],["$","div",null,{"style":{"display":"inline-block"},"children":["$","h2",null,{"style":{"fontSize":14,"fontWeight":400,"lineHeight":"49px","margin":0},"children":"This page could not be found."}]}]]}]}]]],"forbidden":"$undefined","unauthorized":"$undefined"}],["$","script",null,{"dangerouslySetInnerHTML":{"__html":"\nif ('serviceWorker' in navigator) {\n  window.addEventListener('load', function () {\n    navigator.serviceWorker.register('/algorithm-interview/sw.js').catch(function () {});\n  });\n}\n"}}]]}]]}]]}],{"children":["question",["$","$1","c",{"children":[null,["$","$L2",null,{"parallelRouterKey":"children","segmentPath":["children","question","children"],"error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L3",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","forbidden":"$undefined","unauthorized":"$undefined"}]]}],{"children":[["lcId","101","d"],["$","$1","c",{"children":[null,["$","$L2",null,{"parallelRouterKey":"children","segmentPath":["children","question","children","$0:f:0:1:2:children:2:children:0","children"],"error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L3",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","forbidden":"$undefined","unauthorized":"$undefined"}]]}],{"children":["__PAGE__",["$","$1","c",{"children":["$L4",null,["$","$L5",null,{"children":"$L6"}]]}],{},null,false]},null,false]},null,false]},null,false],["$","$1","h",{"children":[null,["$","$1","priR4yXJwATxOZyEejg4u",{"children":[["$","$L7",null,{"children":"$L8"}],["$","$L9",null,{"children":"$La"}],null]}]]}],false]],"m":"$undefined","G":["$b","$undefined"],"s":false,"S":true}
+c:I[8173,["173","static/chunks/173-69860a4742bb7020.js","829","static/chunks/829-7533e70598480772.js","937","static/chunks/937-ef36a5ac4bc37a7e.js","447","static/chunks/447-06af9414e164c047.js","8","static/chunks/app/question/%5BlcId%5D/page-478b0d2a69e222f2.js"],""]
+d:I[3447,["173","static/chunks/173-69860a4742bb7020.js","829","static/chunks/829-7533e70598480772.js","937","static/chunks/937-ef36a5ac4bc37a7e.js","447","static/chunks/447-06af9414e164c047.js","8","static/chunks/app/question/%5BlcId%5D/page-478b0d2a69e222f2.js"],"default"]
+e:T1a65,# 101. 对称二叉树
+
+> 难度：**Easy** | 分类：二叉树 | 标签：树, 深度优先搜索, 广度优先搜索, 二叉树
+
+> 🔗 力扣链接：[https://leetcode.cn/problems/symmetric-tree/](https://leetcode.cn/problems/symmetric-tree/)
+
+## 📝 题目描述
+
+给你一棵二叉树的根节点 `root`，判断它是否是轴对称的。
+
+对称的定义：如果把这棵树沿中轴线对折，左右两边能完全重合。即左子树和右子树互为镜像。
+
+- 题号：101
+- 题目名：对称二叉树
+- 难度：简单
+- 题型：二叉树
+- 为什么选这题：它把"相同的树"的思路稍作变形——从"两棵树同步遍历"变成"一棵树的左右子树镜像比较"，是递归思维的经典变体。
+
+## 🧠 思考路径
+
+和"相同的树"类似，只不过比较的不是"同一位置"，而是"镜像位置"。
+
+两棵子树互为镜像，等价于：
+1. 根节点值相同
+2. 左子树的左子树和右子树的右子树互为镜像
+3. 左子树的右子树和右子树的左子树互为镜像
+
+即 `isMirror(left.left, right.right) and isMirror(left.right, right.left)`。
+
+递归和迭代都可以。迭代版本用队列实现，每次弹出两个节点，依次比较它们的外侧孩子和内侧孩子。
+
+## 💻 Java 题解
+
+### 解法 1：递归比较镜像
+
+比较左子树和右子树是否镜像对称。mirror(left,right): left.val==right.val 且 mirror(left.left,right.right) 且 mirror(left.right,right.left)。
+
+- ⏱ 时间复杂度：`O(n)`
+- 💾 空间复杂度：`O(h)`
+
+```java
+class Solution {
+    public boolean isSymmetric(TreeNode root) {
+        return mirror(root.left, root.right);
+    }
+    private boolean mirror(TreeNode a, TreeNode b) {
+        if (a == null && b == null) return true;
+        if (a == null || b == null) return false;
+        return a.val == b.val
+            && mirror(a.left, b.right)
+            && mirror(a.right, b.left);
+    }
+}
+```
+
+**关键点：**
+- mirror(left.left, right.right)
+- mirror(left.right, right.left)
+- 同时为 null 返回 true
+
+**执行步骤：**
+1. 比较根的左右子树
+1. 递归交叉比较
+1. 值相等且子树镜像对称
+
+
+## ⚠️ 易错点
+
+- 镜像比较的配对是"左的左 vs 右的右"和"左的右 vs 右的左"，不是"左的左 vs 右的左"。
+- 根节点本身不需要和谁比较，直接从 `root.left` 和 `root.right` 开始。
+- 空树（`root == null`）是对称的，但 LeetCode 保证至少有一个节点。
+- 迭代写法中队列每次弹出两个元素，入队也要成对入。
+
+- 一个为 null 一个不为 null 返回 false
+
+## 📊 复杂度分析
+
+- 时间复杂度：`O(n)`。每个节点访问一次。
+- 空间复杂度：`O(h)`（递归）或 `O(n)`（迭代队列）。最坏情况（完美二叉树）队列最多存 `n/2` 个节点。
+
+## 🏢 实际业务应用
+
+- 数据对称性校验：分布式系统中主从节点的数据拓扑是否对称，用于快速检测数据漂移。
+- 图像镜像检测：图像处理中判断一张图片左右是否对称，内部数据结构是二叉树形式的像素层级表示。
+- UI 布局对称性验证：前端框架中判断组件树的左右布局是否对称，用于自动化 UI 测试。
+- 数学公式的对称性分析：在符号计算中，判断表达式的左右子表达式是否对称，用于化简和优化。
+
+- 数据对称性校验：分布式系统中主从节点的数据拓扑是否对称，用于快速检测数据漂移。
+- 图像镜像检测：图像处理中判断一张图片左右是否对称，内部数据结构是二叉树形式的像素层级表示。
+- UI 布局对称性验证：前端框架中判断组件树的左右布局是否对称，用于自动化 UI 测试。
+- 数学公式的对称性分析：在符号计算中，判断表达式的左右子表达式是否对称，用于化简和优化。
+
+## 📖 形象类比
+
+可以把它类比成《三国演义》里诸葛亮排八阵图的场景。
+
+八阵图讲究左右对称，左翼的阵型和右翼的阵型互为镜像。诸葛亮巡视时，总是对比左边和右边的对应位置：左翼前排左边第三个士兵和右翼前排右边第三个士兵是否身高相同、兵器相同；左翼后排右边第一个骑兵和右翼后排左边第一个骑兵是否装备一致。
+
+对应关系是：
+
+- "二叉树"对应八阵图的阵型
+- "左子树"对应左翼阵型
+- "右子树"对应右翼阵型
+- "镜像比较"对应诸葛亮对比左右翼对应位置
+- "`p.left vs q.right`"对应左翼的左边 vs 右翼的右边
+
+这段记忆的关键是：镜像比较不是同位比较，而是"左的左 vs 右的右"。
+
+可以把它类比成《三国演义》里诸葛亮排八阵图的场景。
+
+八阵图讲究左右对称，左翼的阵型和右翼的阵型互为镜像。诸葛亮巡视时，总是对比左边和右边的对应位置：左翼前排左边第三个士兵和右翼前排右边第三个士兵是否身高相同、兵器相同；左翼后排右边第一个骑兵和右翼后排左边第一个骑兵是否装备一致。
+
+对应关系是：
+
+- "二叉树"对应八阵图的阵型
+- "左子树"对应左翼阵型
+- "右子树"对应右翼阵型
+- "镜像比较"对应诸葛亮对比左右翼对应位置
+- "`p.left vs q.right`"对应左翼的左边 vs 右翼的右边
+
+这段记忆的关键是：镜像比较不是同位比较，而是"左的左 vs 右的右"。
+
+小蝴蝶在湖边看到一棵大树的倒影，它好奇这棵树是不是真的左右对称。于是它飞到树的左边看了一根枝条，再飞到右边的对应位置看另一根。两根枝条上的果子数量和颜色都一样，小蝴蝶又往更深处飞去，看左边枝条的左分枝和右边枝条的右分枝……一直检查到最深的叶子，发现全都一一对应，这才认定这棵树真的是对称的。
+
+小蝴蝶在湖边看到一棵大树的倒影，它好奇这棵树是不是真的左右对称。于是它飞到树的左边看了一根枝条，再飞到右边的对应位置看另一根。两根枝条上的果子数量和颜色都一样，小蝴蝶又往更深处飞去，看左边枝条的左分枝和右边枝条的右分枝……一直检查到最深的叶子，发现全都一一对应，这才认定这棵树真的是对称的。
+
+## 🎵 记忆口诀
+
+左左比右右，左右比右左，镜像同步走。
+
+左左比右右，左右比右左，镜像同步走。
+
+## 🔗 延伸练习
+
+- `100. 相同的树`：本题的基础版，判断两棵树是否完全相同。
+- `572. 另一棵树的子树`：综合了"相同的树"和子树匹配的思路。
+
+- `100. 相同的树`：本题的基础版，判断两棵树是否完全相同。
+- `572. 另一棵树的子树`：综合了"相同的树"和子树匹配的思路。4:["$","main",null,{"className":"detail-main","style":{"maxWidth":760,"margin":"0 auto","padding":"16px","minHeight":"100vh"},"children":[["$","$Lc",null,{"href":"/","style":{"display":"inline-block","marginBottom":"12px","fontSize":"13px"},"children":"← 返回题库"}],["$","h1",null,{"style":{"fontSize":"22px","fontWeight":700,"margin":"0 0 4px"},"children":[["$","span",null,{"style":{"marginRight":"6px"},"children":"🌳"}],101,". ","对称二叉树"]}],["$","$Ld",null,{"q":{"id":"0101","lcId":101,"slug":"symmetric-tree","title":"对称二叉树","question":"对称二叉树","answer":"$e","difficulty":"Easy","category":"binary-tree","categories":["binary-tree"],"tags":["树","深度优先搜索","广度优先搜索","二叉树"],"url":"https://leetcode.cn/problems/symmetric-tree/","planOrder":39,"hasViz":true,"hasDiagram":false,"feynman":{"essence":"给你一棵二叉树的根节点 `root`，判断它是否是轴对称的。  对称的定义：如果把这棵树沿中轴线对折，左右两边能完全重合。即左子树和右子树互为镜像。","analogy":"","key_points":[]},"first_principle":{"problem":"","axioms":[],"rebuild":""}}}]]}]
+a:[["$","meta","0",{"name":"viewport","content":"width=device-width, initial-scale=1"}],["$","meta","1",{"name":"theme-color","content":"#f97316"}]]
+8:[["$","meta","0",{"charSet":"utf-8"}],["$","title","1",{"children":"101. 对称二叉树 - 算法面试"}],["$","meta","2",{"name":"description","content":"给你一棵二叉树的根节点 `root`，判断它是否是轴对称的。  对称的定义：如果把这棵树沿中轴线对折，左右两边能完全重合。即左子树和右子树互为镜像。"}],["$","meta","3",{"name":"application-name","content":"算法面试"}],["$","link","4",{"rel":"manifest","href":"/algorithm-interview/manifest.json","crossOrigin":"$undefined"}],["$","meta","5",{"name":"keywords","content":"对称二叉树,LeetCode 101,Easy,树,深度优先搜索,广度优先搜索,二叉树"}],["$","meta","6",{"name":"mobile-web-app-capable","content":"yes"}],["$","meta","7",{"name":"apple-mobile-web-app-title","content":"算法面试"}],["$","meta","8",{"name":"apple-mobile-web-app-status-bar-style","content":"default"}],["$","meta","9",{"property":"og:title","content":"101. 对称二叉树"}],["$","meta","10",{"property":"og:description","content":"给你一棵二叉树的根节点 `root`，判断它是否是轴对称的。  对称的定义：如果把这棵树沿中轴线对折，左右两边能完全重合。即左子树和右子树互为镜像。"}],["$","meta","11",{"property":"og:locale","content":"zh_CN"}],["$","meta","12",{"property":"og:type","content":"article"}],["$","meta","13",{"name":"twitter:card","content":"summary"}],["$","meta","14",{"name":"twitter:title","content":"101. 对称二叉树"}],["$","meta","15",{"name":"twitter:description","content":"给你一棵二叉树的根节点 `root`，判断它是否是轴对称的。  对称的定义：如果把这棵树沿中轴线对折，左右两边能完全重合。即左子树和右子树互为镜像。"}]]
+6:null

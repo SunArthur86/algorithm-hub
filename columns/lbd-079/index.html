@@ -1,0 +1,211 @@
+<!DOCTYPE html><html lang="zh"><head><meta charSet="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="/algorithm-interview/_next/static/css/c1e787639001e16b.css" data-precedence="next"/><link rel="preload" as="script" fetchPriority="low" href="/algorithm-interview/_next/static/chunks/webpack-65b8ce4c1158f96f.js"/><script src="/algorithm-interview/_next/static/chunks/4bd1b696-899926250d3992f1.js" async=""></script><script src="/algorithm-interview/_next/static/chunks/517-b6df7dad4ff96d0b.js" async=""></script><script src="/algorithm-interview/_next/static/chunks/main-app-9e7bfff32fd8ebe9.js" async=""></script><script src="/algorithm-interview/_next/static/chunks/173-69860a4742bb7020.js" async=""></script><script src="/algorithm-interview/_next/static/chunks/829-7533e70598480772.js" async=""></script><script src="/algorithm-interview/_next/static/chunks/app/columns/%5Bslug%5D/page-58fc1d8f5085c1ff.js" async=""></script><meta name="theme-color" content="#f97316"/><title>一文看懂 session 和 cookie - 算法面试</title><meta name="description" content="LeetCode 热题 100 完整 Java 题解、逐题动画、知识专栏与智能间隔复习。"/><meta name="application-name" content="算法面试"/><link rel="manifest" href="/algorithm-interview/manifest.json"/><meta name="keywords" content="LeetCode,热题100,算法面试,Java题解,数据结构,动态规划,面试刷题"/><meta name="mobile-web-app-capable" content="yes"/><meta name="apple-mobile-web-app-title" content="算法面试"/><meta name="apple-mobile-web-app-status-bar-style" content="default"/><meta property="og:title" content="算法面试题库"/><meta property="og:description" content="LeetCode 热题 100 完整 Java 题解、逐题动画、知识专栏与智能复习"/><meta property="og:site_name" content="算法面试题库"/><meta property="og:locale" content="zh_CN"/><meta property="og:type" content="website"/><meta name="twitter:card" content="summary"/><meta name="twitter:title" content="算法面试题库"/><meta name="twitter:description" content="LeetCode 热题 100 完整 Java 题解、逐题动画、知识专栏与智能复习"/><script>
+try {
+  var raw = localStorage.getItem('algo-interview');
+  var theme = 'light';
+  if (raw) { var p = JSON.parse(raw); theme = (p.state && p.state.theme) || 'light'; }
+  if (theme === 'dark') {
+    document.documentElement.classList.add('dark');
+    document.documentElement.setAttribute('data-theme', 'dark');
+  }
+} catch (e) {}
+</script><script src="/algorithm-interview/_next/static/chunks/polyfills-42372ed130431b0a.js" noModule=""></script></head><body><main style="max-width:760px;margin:0 auto;padding:16px;min-height:100vh"><a style="display:inline-block;margin-bottom:12px;font-size:13px" href="/algorithm-interview/columns/">← 返回专栏</a><div style="font-size:12px;color:var(--text-tertiary);margin-bottom:4px">📕<!-- --> <!-- -->labuladong 算法小抄</div><h1 style="font-size:22px;font-weight:700;margin:0 0 16px">一文看懂 session 和 cookie</h1><div class="prose max-w-none" style="font-size:14px;color:var(--text)"><h1>一文看懂 session 和 cookie</h1>
+<p>⼀⽂读懂 session 和 cookie
+学算法，认准 labuladong 就够了！
+cookie ⼤家应该都熟悉，⽐如说登录某些⽹站⼀段时间后，就要求你重新登
+录；再⽐如有的同学很喜欢玩爬⾍技术，有时候⽹站就是可以拦截住你的爬
+⾍，这些都和 cookie 有关。如果你明⽩了服务器后端对于 cookie 和 session
+的处理逻辑，就可以解释这些现象，甚⾄钻⼀些空⼦⽆限⽩嫖，待我慢慢道
+来。
+⼀、session 和 cookie 简介
+cookie 的出现是因为 HTTP 是⽆状态的⼀种协议，换句话说，服务器记不住
+你，可能你每刷新⼀次⽹⻚，就要重新输⼊⼀次账号密码进⾏登录。这显然
+是让⼈⽆法接受的，cookie 的作⽤就好⽐服务器给你贴个标签，然后你每次
+向服务器再发请求时，服务器就能够 cookie 认出你。
+抽象地概括⼀下：⼀个 cookie 可以认为是⼀个「变量」，形如
+name=value ，存储在浏览器；⼀个 session 可以理解为⼀种数据结构，多数
+情况是「映射」（键值对），存储在服务器上。
+注意，我说的是「⼀个」cookie 可以认为是⼀个变量，但是服务器可以⼀次
+设置多个 cookie，所以有时候说 cookie 是「⼀组」键值对⼉，这也可以说
+得通。
+cookie 可以在服务器端通过 HTTP 的 SetCookie 字段设置 cookie，⽐如我⽤
+Go 语⾔写的⼀个简单服务：
+func cookie(w http.ResponseWriter, r *http.Request) {
+// 设置了两个 cookie
+http.SetCookie(w, &amp;http.Cookie{
+Name:       &quot;name1&quot;,
+Value:      &quot;value1&quot;,
+})
+⼀⽂看懂 session 和 cookie
+535</p>
+<pre><code>http.SetCookie(w, &amp;http.Cookie{
+    Name:  &quot;name2&quot;,
+    Value: &quot;value2&quot;,
+})
+// 将字符串写⼊⽹⻚
+fmt.Fprintln(w, &quot;⻚⾯内容&quot;)
+</code></pre>
+<p>}
+当浏览器访问对应⽹址时，通过浏览器的开发者⼯具查看此次 HTTP 通信的
+细节，可以看⻅服务器的回应发出了两次  SetCookie  命令：
+在这之后，浏览器的请求中的  Cookie  字段就带上了这两个 cookie：
+cookie 的作⽤其实就是这么简单，⽆⾮就是服务器给每个客户端（浏览器）
+打的标签，⽅便服务器辨认⽽已。当然，HTTP 还有很多参数可以设置
+cookie，⽐如过期时间，或者让某个 cookie 只有某个特定路径才能使⽤等
+等。
+⼀⽂看懂 session 和 cookie
+536</p>
+<p>但问题是，我们也知道现在的很多⽹站功能很复杂，⽽且涉及很多的数据交
+互，⽐如说电商⽹站的购物⻋功能，信息量⼤，⽽且结构也⽐较复杂，⽆法
+通过简单的 cookie 机制传递这么多信息，⽽且要知道 cookie 字段是存储在
+HTTP header 中的，就算能够承载这些信息，也会消耗很多的带宽，⽐较消
+耗⽹络资源。
+session 就可以配合 cookie 解决这⼀问题，⽐如说⼀个 cookie 存储这样⼀个
+变量  sessionID=xxxx ，仅仅把这⼀个 cookie 传给服务器，然后服务器通过
+这个 ID 找到对应的 session，这个 session 是⼀个数据结构，⾥⾯存储着该
+⽤户的购物⻋等详细信息，服务器可以通过这些信息返回该⽤户的定制化⽹
+⻚，有效解决了追踪⽤户的问题。
+session 是⼀个数据结构，由⽹站的开发者设计，所以可以承载各种数据，
+只要客户端的 cookie 传来⼀个唯⼀的 session ID，服务器就可以找到对应的
+session，认出这个客户。
+当然，由于 session 存储在服务器中，肯定会消耗服务器的资源，所以
+session ⼀般都会有⼀个过期时间，服务器⼀般会定期检查并删除过期的
+session，如果后来该⽤户再次访问服务器，可能就会⾯临重新登录等等措
+施，然后服务器新建⼀个 session，将 session ID 通过 cookie 的形式传送给客
+户端。
+那么，我们知道 cookie 和 session 的原理，有什么切实的好处呢？除了应对
+⾯试，我给你说⼀个鸡贼的⽤处，就是可以⽩嫖某些服务。
+有些⽹站，你第⼀次使⽤它的服务，它直接免费让你试⽤，但是⽤⼀次之
+后，就让你登录然后付费继续使⽤该服务。⽽且你发现⽹站似乎通过某些⼿
+段记住了你的电脑，除⾮你换个电脑或者换个浏览器才能再⽩嫖⼀次。
+那么问题来了，你试⽤的时候没有登录，⽹站服务器是怎么记住你的呢？这
+就很显然了，服务器⼀定是给你的浏览器打了 cookie，后台建⽴了对应的
+session 记录你的状态。你的浏览器在每次访问该⽹站的时候都会听话地带
+着 cookie，服务器⼀查 session 就知道这个浏览器已经免费使⽤过了，得让
+它登录付费，不能让它继续⽩嫖了。
+⼀⽂看懂 session 和 cookie
+537</p>
+<p>那如果我不让浏览器发送 cookie，每次都伪装成⼀个第⼀次来试⽤的⼩萌
+新，不就可以不断⽩嫖了么？浏览器会把⽹站的 cookie 以⽂件的形式存在
+某些地⽅（不同的浏览器配置不同），你把他们找到然后删除就⾏了。但是
+对于 Firefox 和 Chrome 浏览器，有很多插件可以直接编辑 cookie，⽐如我
+的 Chrome 浏览器就⽤的⼀款叫做 EditThisCookie 的插件，这是他们官⽹：
+这类插件可以读取浏览器在当前⽹⻚的 cookie，点开插件可以任意编辑和删
+除 cookie。当然，偶尔⽩嫖⼀两次还⾏，不⿎励⾼频率⽩嫖，想常⽤还是掏
+钱吧，否则⽹站赚不到钱，就只能取消免费试⽤这个机制了。
+以上就是关于 cookie 和 session 的简单介绍，cookie 是 HTTP 协议的⼀部
+分，不算复杂，⽽ session 是可以定制的，所以下⾯详细看⼀下实现 session
+管理的代码架构吧。
+⼆、session 的实现
+session 的原理不难，但是具体实现它可是很有技巧的，⼀般需要三个组件
+配合完成，它们分别是  Manager 、 Provider  和  Session  三个类（接
+⼝）。
+⼀⽂看懂 session 和 cookie
+538</p>
+<p>1、浏览器通过 HTTP 协议向服务器请求路径  /content  的⽹⻚资源，对应
+路径上有⼀个 Handler 函数接收请求，解析 HTTP header 中的 cookie，得到
+其中存储的 sessionID，然后把这个 ID 发给  Manager 。
+2、 Manager  充当⼀个 session 管理器的⾓⾊，主要存储⼀些配置信息，⽐
+如 session 的存活时间，cookie 的名字等等。⽽所有的 session 存在  Manager
+内部的⼀个  Provider  中。所以  Manager  会把  sid （sessionID）传递给
+Provider ，让它去找这个 ID 对应的具体是哪个 session。
+3、 Provider  就是⼀个容器，最常⻅的应该就是⼀个散列表，将每个  sid
+和对应的 session ⼀⼀映射起来。收到  Manager  传递的  sid  之后，它就找
+到  sid  对应的 session 结构，也就是  Session  结构，然后返回它。
+4、 Session  中存储着⽤户的具体信息，由 Handler 函数中的逻辑拿出这些
+信息，⽣成该⽤户的 HTML ⽹⻚，返回给客户端。
+那么你也许会问，为什么搞这么⿇烦，直接在 Handler 函数中搞⼀个哈希
+表，然后存储  sid  和  Session  结构的映射不就完事⼉了？
+这就是设计层⾯的技巧了，下⾯就来说说，为什么分成
+Manager 、 Provider  和  Session 。
+⼀⽂看懂 session 和 cookie
+539</p>
+<p>先从最底层的  Session  说。既然 session 就是键值对，为啥不直接⽤哈希
+表，⽽是要抽象出这么⼀个数据结构呢？
+第⼀，因为  Session  结构可能不⽌存储了⼀个哈希表，还可以存储⼀些辅
+助数据，⽐如  sid ，访问次数，过期时间或者最后⼀次的访问时间，这样
+便于实现想 LRU、LFU 这样的算法。
+第⼆，因为 session 可以有不同的存储⽅式。如果⽤编程语⾔内置的哈希
+表，那么 session 数据就是存储在内存中，如果数据量⼤，很容易造成程序
+崩溃，⽽且⼀旦程序结束，所有 session 数据都会丢失。所以可以有很多种
+session 的存储⽅式，⽐如存⼊缓存数据库 Redis，或者存⼊ MySQL 等等。
+因此， Session  结构提供⼀层抽象，屏蔽不同存储⽅式的差异，只要提供
+⼀组通⽤接⼝操纵键值对：
+type Session interface {
+// 设置键值对
+Set(key, val interface{})
+// 获取 key 对应的值
+Get(key interface{}) interface{}
+// 删除键 key
+Delete(key interface{})
+}
+再说  Provider  为啥要抽象出来。我们上⾯那个图的  Provider  就是⼀个散
+列表，保存  sid  到  Session  的映射，但是实际中肯定会更加复杂。我们
+不是要时不时删除⼀些 session 吗，除了设置存活时间之外，还可以采⽤⼀
+些其他策略，⽐如 LRU 缓存淘汰算法，这样就需要  Provider  内部使⽤哈
+希链表这种数据结构来存储 session。
+PS：关于 LRU 算法的奥妙，参⻅前⽂「LRU 算法详解」。
+因此， Provider  作为⼀个容器，就是要屏蔽算法细节，以合理的数据结构
+和算法组织  sid  和  Session  的映射关系，只需要实现下⾯这⼏个⽅法实
+现对 session 的增删查改：
+⼀⽂看懂 session 和 cookie
+540</p>
+<p>type Provider interface {
+// 新增并返回⼀个 session
+SessionCreate(sid string) (Session, error)
+// 删除⼀个 session
+SessionDestroy(sid string)
+// 查找⼀个 session
+SessionRead(sid string) (Session, error)
+// 修改⼀个session
+SessionUpdate(sid string)
+// 通过类似 LRU 的算法回收过期的 session
+SessionGC(maxLifeTime int64)
+}
+最后说  Manager ，⼤部分具体⼯作都委托给  Session  和  Provider  承担
+了， Manager  主要就是⼀个参数集合，⽐如 session 的存活时间，清理过期
+session 的策略，以及 session 的可⽤存储⽅式。 Manager  屏蔽了操作的具体
+细节，我们可以通过  Manager  灵活地配置 session 机制。
+综上，session 机制分成⼏部分的最主要原因就是解耦，实现定制化。我在
+Github 上看过⼏个 Go 语⾔实现的 session 服务，源码都很简单，有兴趣的
+朋友可以学习学习：
+<a href="https://github.com/alexedwards/scs">https://github.com/alexedwards/scs</a>
+<a href="https://github.com/astaxie/build-web-application-with-golang">https://github.com/astaxie/build-web-application-with-golang</a>
+＿＿＿＿＿＿＿＿＿＿＿＿＿
+刷算法，学套路，认准 labuladong。
+本⼩抄即将出版，关注 labuladong 公众号或 ongline book 查看更新⽂章，
+后台回复「进群」可进刷题群，labuladong 带你⽇穿 LeetCode。
+⼀⽂看懂 session 和 cookie
+541</p>
+<p>⼀⽂看懂 session 和 cookie
+542</p>
+<p>密码算法的前世今⽣
+学算法，认准 labuladong 就够了！
+说到密码，我们第⼀个想到的就是登陆账户的密码，但是从密码学的⾓度来
+看，这种根本就不算合格的密码。
+为什么呢，因为我们的账户密码，是依靠隐蔽性来达到加密作⽤：密码藏在
+我⼼⾥，你不知道，所以你登不上我的账户。
+然⽽密码技术认为，「保密」信息总有⼀天会被扒出来，所以加密算法不应
+该依靠「保密」来保证机密性，⽽应该做到：即便知道了加密算法，依然⽆
+计可施。说的魔幻⼀点就是，告诉你我的密码，你依然不知道我的密码。
+最⽞学的就是 Diffie-Hellman 密钥交换算法，我当初就觉得很惊奇，两个⼈
+当着你的⾯互相报⼏个数字，他们就可以拥有⼀个共同的秘密，⽽你却根本
+不可能算出来这个秘密。下⽂会着重介绍⼀下这个算法。
+本⽂讨论的密码技术要解决的主要是信息传输中的加密和解密问题。要假设
+数据传输过程是不安全的，所有信息都在被窃听的，所以发送端要把信息加
+密，接收⽅收到信息之后，肯定得知道如何解密。有意思的是，如果你能够
+让接收者知道如何解密，那么窃听者不是也能够知道如何解密了吗？
+下⾯，我们会介绍对称加密算法、密钥交换算法、⾮对称加密算法、数字签
+名、公钥证书，看看解决安全传输问题的⼀路坎坷波折。
+⼀、对称性加密
+对称性密码，也叫共享密钥密码，顾名思义，这种加密⽅式⽤相同的密钥进
+⾏加密和解密。
+⽐如我说⼀种最简单的对称加密的⽅法。⾸先我们知道信息都可以表⽰成
+0/1 ⽐特序列，也知道相同的两个⽐特序列做异或运算的结果为 0。
+加密算法的前⾝今世
+543</p></div></main><script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function () {
+    navigator.serviceWorker.register('/algorithm-interview/sw.js').catch(function () {});
+  });
+}
+</script><script src="/algorithm-interview/_next/static/chunks/webpack-65b8ce4c1158f96f.js" async=""></script><script>(self.__next_f=self.__next_f||[]).push([0])</script><script>self.__next_f.push([1,"1:\"$Sreact.fragment\"\n2:I[5244,[],\"\"]\n3:I[3866,[],\"\"]\n5:I[6213,[],\"OutletBoundary\"]\n7:I[6213,[],\"MetadataBoundary\"]\n9:I[6213,[],\"ViewportBoundary\"]\nb:I[4835,[],\"\"]\n:HL[\"/algorithm-interview/_next/static/css/c1e787639001e16b.css\",\"style\"]\n"])</script><script>self.__next_f.push([1,"0:{\"P\":null,\"b\":\"xos97fAiWtKfKXI6hZLx4\",\"p\":\"/algorithm-interview\",\"c\":[\"\",\"columns\",\"lbd-079\",\"\"],\"i\":false,\"f\":[[[\"\",{\"children\":[\"columns\",{\"children\":[[\"slug\",\"lbd-079\",\"d\"],{\"children\":[\"__PAGE__\",{}]}]}]},\"$undefined\",\"$undefined\",true],[\"\",[\"$\",\"$1\",\"c\",{\"children\":[[[\"$\",\"link\",\"0\",{\"rel\":\"stylesheet\",\"href\":\"/algorithm-interview/_next/static/css/c1e787639001e16b.css\",\"precedence\":\"next\",\"crossOrigin\":\"$undefined\",\"nonce\":\"$undefined\"}]],[\"$\",\"html\",null,{\"lang\":\"zh\",\"children\":[[\"$\",\"head\",null,{\"children\":[\"$\",\"script\",null,{\"dangerouslySetInnerHTML\":{\"__html\":\"\\ntry {\\n  var raw = localStorage.getItem('algo-interview');\\n  var theme = 'light';\\n  if (raw) { var p = JSON.parse(raw); theme = (p.state \u0026\u0026 p.state.theme) || 'light'; }\\n  if (theme === 'dark') {\\n    document.documentElement.classList.add('dark');\\n    document.documentElement.setAttribute('data-theme', 'dark');\\n  }\\n} catch (e) {}\\n\"}}]}],[\"$\",\"body\",null,{\"children\":[[\"$\",\"$L2\",null,{\"parallelRouterKey\":\"children\",\"segmentPath\":[\"children\"],\"error\":\"$undefined\",\"errorStyles\":\"$undefined\",\"errorScripts\":\"$undefined\",\"template\":[\"$\",\"$L3\",null,{}],\"templateStyles\":\"$undefined\",\"templateScripts\":\"$undefined\",\"notFound\":[[],[[\"$\",\"title\",null,{\"children\":\"404: This page could not be found.\"}],[\"$\",\"div\",null,{\"style\":{\"fontFamily\":\"system-ui,\\\"Segoe UI\\\",Roboto,Helvetica,Arial,sans-serif,\\\"Apple Color Emoji\\\",\\\"Segoe UI Emoji\\\"\",\"height\":\"100vh\",\"textAlign\":\"center\",\"display\":\"flex\",\"flexDirection\":\"column\",\"alignItems\":\"center\",\"justifyContent\":\"center\"},\"children\":[\"$\",\"div\",null,{\"children\":[[\"$\",\"style\",null,{\"dangerouslySetInnerHTML\":{\"__html\":\"body{color:#000;background:#fff;margin:0}.next-error-h1{border-right:1px solid rgba(0,0,0,.3)}@media (prefers-color-scheme:dark){body{color:#fff;background:#000}.next-error-h1{border-right:1px solid rgba(255,255,255,.3)}}\"}}],[\"$\",\"h1\",null,{\"className\":\"next-error-h1\",\"style\":{\"display\":\"inline-block\",\"margin\":\"0 20px 0 0\",\"padding\":\"0 23px 0 0\",\"fontSize\":24,\"fontWeight\":500,\"verticalAlign\":\"top\",\"lineHeight\":\"49px\"},\"children\":404}],[\"$\",\"div\",null,{\"style\":{\"display\":\"inline-block\"},\"children\":[\"$\",\"h2\",null,{\"style\":{\"fontSize\":14,\"fontWeight\":400,\"lineHeight\":\"49px\",\"margin\":0},\"children\":\"This page could not be found.\"}]}]]}]}]]],\"forbidden\":\"$undefined\",\"unauthorized\":\"$undefined\"}],[\"$\",\"script\",null,{\"dangerouslySetInnerHTML\":{\"__html\":\"\\nif ('serviceWorker' in navigator) {\\n  window.addEventListener('load', function () {\\n    navigator.serviceWorker.register('/algorithm-interview/sw.js').catch(function () {});\\n  });\\n}\\n\"}}]]}]]}]]}],{\"children\":[\"columns\",[\"$\",\"$1\",\"c\",{\"children\":[null,[\"$\",\"$L2\",null,{\"parallelRouterKey\":\"children\",\"segmentPath\":[\"children\",\"columns\",\"children\"],\"error\":\"$undefined\",\"errorStyles\":\"$undefined\",\"errorScripts\":\"$undefined\",\"template\":[\"$\",\"$L3\",null,{}],\"templateStyles\":\"$undefined\",\"templateScripts\":\"$undefined\",\"notFound\":\"$undefined\",\"forbidden\":\"$undefined\",\"unauthorized\":\"$undefined\"}]]}],{\"children\":[[\"slug\",\"lbd-079\",\"d\"],[\"$\",\"$1\",\"c\",{\"children\":[null,[\"$\",\"$L2\",null,{\"parallelRouterKey\":\"children\",\"segmentPath\":[\"children\",\"columns\",\"children\",\"$0:f:0:1:2:children:2:children:0\",\"children\"],\"error\":\"$undefined\",\"errorStyles\":\"$undefined\",\"errorScripts\":\"$undefined\",\"template\":[\"$\",\"$L3\",null,{}],\"templateStyles\":\"$undefined\",\"templateScripts\":\"$undefined\",\"notFound\":\"$undefined\",\"forbidden\":\"$undefined\",\"unauthorized\":\"$undefined\"}]]}],{\"children\":[\"__PAGE__\",[\"$\",\"$1\",\"c\",{\"children\":[\"$L4\",null,[\"$\",\"$L5\",null,{\"children\":\"$L6\"}]]}],{},null,false]},null,false]},null,false]},null,false],[\"$\",\"$1\",\"h\",{\"children\":[null,[\"$\",\"$1\",\"JHiuaIs_6ZMaG8vfr-pS-\",{\"children\":[[\"$\",\"$L7\",null,{\"children\":\"$L8\"}],[\"$\",\"$L9\",null,{\"children\":\"$La\"}],null]}]]}],false]],\"m\":\"$undefined\",\"G\":[\"$b\",\"$undefined\"],\"s\":false,\"S\":true}\n"])</script><script>self.__next_f.push([1,"c:I[8173,[\"173\",\"static/chunks/173-69860a4742bb7020.js\",\"829\",\"static/chunks/829-7533e70598480772.js\",\"306\",\"static/chunks/app/columns/%5Bslug%5D/page-58fc1d8f5085c1ff.js\"],\"\"]\nd:I[4780,[\"173\",\"static/chunks/173-69860a4742bb7020.js\",\"829\",\"static/chunks/829-7533e70598480772.js\",\"306\",\"static/chunks/app/columns/%5Bslug%5D/page-58fc1d8f5085c1ff.js\"],\"default\"]\ne:T30c4,"])</script><script>self.__next_f.push([1,"# 一文看懂 session 和 cookie\n\n⼀⽂读懂 session 和 cookie\n学算法，认准 labuladong 就够了！\ncookie ⼤家应该都熟悉，⽐如说登录某些⽹站⼀段时间后，就要求你重新登\n录；再⽐如有的同学很喜欢玩爬⾍技术，有时候⽹站就是可以拦截住你的爬\n⾍，这些都和 cookie 有关。如果你明⽩了服务器后端对于 cookie 和 session\n的处理逻辑，就可以解释这些现象，甚⾄钻⼀些空⼦⽆限⽩嫖，待我慢慢道\n来。\n⼀、session 和 cookie 简介\ncookie 的出现是因为 HTTP 是⽆状态的⼀种协议，换句话说，服务器记不住\n你，可能你每刷新⼀次⽹⻚，就要重新输⼊⼀次账号密码进⾏登录。这显然\n是让⼈⽆法接受的，cookie 的作⽤就好⽐服务器给你贴个标签，然后你每次\n向服务器再发请求时，服务器就能够 cookie 认出你。\n抽象地概括⼀下：⼀个 cookie 可以认为是⼀个「变量」，形如\n name=value ，存储在浏览器；⼀个 session 可以理解为⼀种数据结构，多数\n情况是「映射」（键值对），存储在服务器上。\n注意，我说的是「⼀个」cookie 可以认为是⼀个变量，但是服务器可以⼀次\n设置多个 cookie，所以有时候说 cookie 是「⼀组」键值对⼉，这也可以说\n得通。\ncookie 可以在服务器端通过 HTTP 的 SetCookie 字段设置 cookie，⽐如我⽤\nGo 语⾔写的⼀个简单服务：\nfunc cookie(w http.ResponseWriter, r *http.Request) {\n    // 设置了两个 cookie \n    http.SetCookie(w, \u0026http.Cookie{\n        Name:       \"name1\",\n        Value:      \"value1\",\n    })\n⼀⽂看懂 session 和 cookie\n535\n\n    http.SetCookie(w, \u0026http.Cookie{\n        Name:  \"name2\",\n        Value: \"value2\",\n    })\n    // 将字符串写⼊⽹⻚\n    fmt.Fprintln(w, \"⻚⾯内容\")\n}\n当浏览器访问对应⽹址时，通过浏览器的开发者⼯具查看此次 HTTP 通信的\n细节，可以看⻅服务器的回应发出了两次  SetCookie  命令：\n在这之后，浏览器的请求中的  Cookie  字段就带上了这两个 cookie：\ncookie 的作⽤其实就是这么简单，⽆⾮就是服务器给每个客户端（浏览器）\n打的标签，⽅便服务器辨认⽽已。当然，HTTP 还有很多参数可以设置\ncookie，⽐如过期时间，或者让某个 cookie 只有某个特定路径才能使⽤等\n等。\n⼀⽂看懂 session 和 cookie\n536\n\n但问题是，我们也知道现在的很多⽹站功能很复杂，⽽且涉及很多的数据交\n互，⽐如说电商⽹站的购物⻋功能，信息量⼤，⽽且结构也⽐较复杂，⽆法\n通过简单的 cookie 机制传递这么多信息，⽽且要知道 cookie 字段是存储在\nHTTP header 中的，就算能够承载这些信息，也会消耗很多的带宽，⽐较消\n耗⽹络资源。\nsession 就可以配合 cookie 解决这⼀问题，⽐如说⼀个 cookie 存储这样⼀个\n变量  sessionID=xxxx ，仅仅把这⼀个 cookie 传给服务器，然后服务器通过\n这个 ID 找到对应的 session，这个 session 是⼀个数据结构，⾥⾯存储着该\n⽤户的购物⻋等详细信息，服务器可以通过这些信息返回该⽤户的定制化⽹\n⻚，有效解决了追踪⽤户的问题。\nsession 是⼀个数据结构，由⽹站的开发者设计，所以可以承载各种数据，\n只要客户端的 cookie 传来⼀个唯⼀的 session ID，服务器就可以找到对应的\nsession，认出这个客户。\n当然，由于 session 存储在服务器中，肯定会消耗服务器的资源，所以\nsession ⼀般都会有⼀个过期时间，服务器⼀般会定期检查并删除过期的\nsession，如果后来该⽤户再次访问服务器，可能就会⾯临重新登录等等措\n施，然后服务器新建⼀个 session，将 session ID 通过 cookie 的形式传送给客\n户端。\n那么，我们知道 cookie 和 session 的原理，有什么切实的好处呢？除了应对\n⾯试，我给你说⼀个鸡贼的⽤处，就是可以⽩嫖某些服务。\n有些⽹站，你第⼀次使⽤它的服务，它直接免费让你试⽤，但是⽤⼀次之\n后，就让你登录然后付费继续使⽤该服务。⽽且你发现⽹站似乎通过某些⼿\n段记住了你的电脑，除⾮你换个电脑或者换个浏览器才能再⽩嫖⼀次。\n那么问题来了，你试⽤的时候没有登录，⽹站服务器是怎么记住你的呢？这\n就很显然了，服务器⼀定是给你的浏览器打了 cookie，后台建⽴了对应的\nsession 记录你的状态。你的浏览器在每次访问该⽹站的时候都会听话地带\n着 cookie，服务器⼀查 session 就知道这个浏览器已经免费使⽤过了，得让\n它登录付费，不能让它继续⽩嫖了。\n⼀⽂看懂 session 和 cookie\n537\n\n那如果我不让浏览器发送 cookie，每次都伪装成⼀个第⼀次来试⽤的⼩萌\n新，不就可以不断⽩嫖了么？浏览器会把⽹站的 cookie 以⽂件的形式存在\n某些地⽅（不同的浏览器配置不同），你把他们找到然后删除就⾏了。但是\n对于 Firefox 和 Chrome 浏览器，有很多插件可以直接编辑 cookie，⽐如我\n的 Chrome 浏览器就⽤的⼀款叫做 EditThisCookie 的插件，这是他们官⽹：\n这类插件可以读取浏览器在当前⽹⻚的 cookie，点开插件可以任意编辑和删\n除 cookie。当然，偶尔⽩嫖⼀两次还⾏，不⿎励⾼频率⽩嫖，想常⽤还是掏\n钱吧，否则⽹站赚不到钱，就只能取消免费试⽤这个机制了。\n以上就是关于 cookie 和 session 的简单介绍，cookie 是 HTTP 协议的⼀部\n分，不算复杂，⽽ session 是可以定制的，所以下⾯详细看⼀下实现 session\n管理的代码架构吧。\n⼆、session 的实现\nsession 的原理不难，但是具体实现它可是很有技巧的，⼀般需要三个组件\n配合完成，它们分别是  Manager 、 Provider  和  Session  三个类（接\n⼝）。\n⼀⽂看懂 session 和 cookie\n538\n\n1、浏览器通过 HTTP 协议向服务器请求路径  /content  的⽹⻚资源，对应\n路径上有⼀个 Handler 函数接收请求，解析 HTTP header 中的 cookie，得到\n其中存储的 sessionID，然后把这个 ID 发给  Manager 。\n2、 Manager  充当⼀个 session 管理器的⾓⾊，主要存储⼀些配置信息，⽐\n如 session 的存活时间，cookie 的名字等等。⽽所有的 session 存在  Manager \n内部的⼀个  Provider  中。所以  Manager  会把  sid （sessionID）传递给\n Provider ，让它去找这个 ID 对应的具体是哪个 session。\n3、 Provider  就是⼀个容器，最常⻅的应该就是⼀个散列表，将每个  sid \n和对应的 session ⼀⼀映射起来。收到  Manager  传递的  sid  之后，它就找\n到  sid  对应的 session 结构，也就是  Session  结构，然后返回它。\n4、 Session  中存储着⽤户的具体信息，由 Handler 函数中的逻辑拿出这些\n信息，⽣成该⽤户的 HTML ⽹⻚，返回给客户端。\n那么你也许会问，为什么搞这么⿇烦，直接在 Handler 函数中搞⼀个哈希\n表，然后存储  sid  和  Session  结构的映射不就完事⼉了？\n这就是设计层⾯的技巧了，下⾯就来说说，为什么分成\n Manager 、 Provider  和  Session 。\n⼀⽂看懂 session 和 cookie\n539\n\n先从最底层的  Session  说。既然 session 就是键值对，为啥不直接⽤哈希\n表，⽽是要抽象出这么⼀个数据结构呢？\n第⼀，因为  Session  结构可能不⽌存储了⼀个哈希表，还可以存储⼀些辅\n助数据，⽐如  sid ，访问次数，过期时间或者最后⼀次的访问时间，这样\n便于实现想 LRU、LFU 这样的算法。\n第⼆，因为 session 可以有不同的存储⽅式。如果⽤编程语⾔内置的哈希\n表，那么 session 数据就是存储在内存中，如果数据量⼤，很容易造成程序\n崩溃，⽽且⼀旦程序结束，所有 session 数据都会丢失。所以可以有很多种\nsession 的存储⽅式，⽐如存⼊缓存数据库 Redis，或者存⼊ MySQL 等等。\n因此， Session  结构提供⼀层抽象，屏蔽不同存储⽅式的差异，只要提供\n⼀组通⽤接⼝操纵键值对：\ntype Session interface {\n    // 设置键值对\n    Set(key, val interface{})\n    // 获取 key 对应的值\n    Get(key interface{}) interface{}\n    // 删除键 key\n    Delete(key interface{})\n}\n再说  Provider  为啥要抽象出来。我们上⾯那个图的  Provider  就是⼀个散\n列表，保存  sid  到  Session  的映射，但是实际中肯定会更加复杂。我们\n不是要时不时删除⼀些 session 吗，除了设置存活时间之外，还可以采⽤⼀\n些其他策略，⽐如 LRU 缓存淘汰算法，这样就需要  Provider  内部使⽤哈\n希链表这种数据结构来存储 session。\nPS：关于 LRU 算法的奥妙，参⻅前⽂「LRU 算法详解」。\n因此， Provider  作为⼀个容器，就是要屏蔽算法细节，以合理的数据结构\n和算法组织  sid  和  Session  的映射关系，只需要实现下⾯这⼏个⽅法实\n现对 session 的增删查改：\n⼀⽂看懂 session 和 cookie\n540\n\ntype Provider interface {\n    // 新增并返回⼀个 session\n    SessionCreate(sid string) (Session, error)\n    // 删除⼀个 session\n    SessionDestroy(sid string)\n    // 查找⼀个 session\n    SessionRead(sid string) (Session, error)\n    // 修改⼀个session\n    SessionUpdate(sid string)\n    // 通过类似 LRU 的算法回收过期的 session\n    SessionGC(maxLifeTime int64)\n}\n最后说  Manager ，⼤部分具体⼯作都委托给  Session  和  Provider  承担\n了， Manager  主要就是⼀个参数集合，⽐如 session 的存活时间，清理过期\nsession 的策略，以及 session 的可⽤存储⽅式。 Manager  屏蔽了操作的具体\n细节，我们可以通过  Manager  灵活地配置 session 机制。\n综上，session 机制分成⼏部分的最主要原因就是解耦，实现定制化。我在\nGithub 上看过⼏个 Go 语⾔实现的 session 服务，源码都很简单，有兴趣的\n朋友可以学习学习：\nhttps://github.com/alexedwards/scs\nhttps://github.com/astaxie/build-web-application-with-golang\n＿＿＿＿＿＿＿＿＿＿＿＿＿\n刷算法，学套路，认准 labuladong。\n本⼩抄即将出版，关注 labuladong 公众号或 ongline book 查看更新⽂章，\n后台回复「进群」可进刷题群，labuladong 带你⽇穿 LeetCode。\n⼀⽂看懂 session 和 cookie\n541\n\n⼀⽂看懂 session 和 cookie\n542\n\n密码算法的前世今⽣\n学算法，认准 labuladong 就够了！\n说到密码，我们第⼀个想到的就是登陆账户的密码，但是从密码学的⾓度来\n看，这种根本就不算合格的密码。\n为什么呢，因为我们的账户密码，是依靠隐蔽性来达到加密作⽤：密码藏在\n我⼼⾥，你不知道，所以你登不上我的账户。\n然⽽密码技术认为，「保密」信息总有⼀天会被扒出来，所以加密算法不应\n该依靠「保密」来保证机密性，⽽应该做到：即便知道了加密算法，依然⽆\n计可施。说的魔幻⼀点就是，告诉你我的密码，你依然不知道我的密码。\n最⽞学的就是 Diffie-Hellman 密钥交换算法，我当初就觉得很惊奇，两个⼈\n当着你的⾯互相报⼏个数字，他们就可以拥有⼀个共同的秘密，⽽你却根本\n不可能算出来这个秘密。下⽂会着重介绍⼀下这个算法。\n本⽂讨论的密码技术要解决的主要是信息传输中的加密和解密问题。要假设\n数据传输过程是不安全的，所有信息都在被窃听的，所以发送端要把信息加\n密，接收⽅收到信息之后，肯定得知道如何解密。有意思的是，如果你能够\n让接收者知道如何解密，那么窃听者不是也能够知道如何解密了吗？\n下⾯，我们会介绍对称加密算法、密钥交换算法、⾮对称加密算法、数字签\n名、公钥证书，看看解决安全传输问题的⼀路坎坷波折。\n⼀、对称性加密\n对称性密码，也叫共享密钥密码，顾名思义，这种加密⽅式⽤相同的密钥进\n⾏加密和解密。\n⽐如我说⼀种最简单的对称加密的⽅法。⾸先我们知道信息都可以表⽰成\n0/1 ⽐特序列，也知道相同的两个⽐特序列做异或运算的结果为 0。\n加密算法的前⾝今世\n543"])</script><script>self.__next_f.push([1,"4:[\"$\",\"main\",null,{\"style\":{\"maxWidth\":760,\"margin\":\"0 auto\",\"padding\":\"16px\",\"minHeight\":\"100vh\"},\"children\":[[\"$\",\"$Lc\",null,{\"href\":\"/columns/\",\"style\":{\"display\":\"inline-block\",\"marginBottom\":\"12px\",\"fontSize\":\"13px\"},\"children\":\"← 返回专栏\"}],[\"$\",\"div\",null,{\"style\":{\"fontSize\":\"12px\",\"color\":\"var(--text-tertiary)\",\"marginBottom\":\"4px\"},\"children\":[\"📕\",\" \",\"labuladong 算法小抄\"]}],[\"$\",\"h1\",null,{\"style\":{\"fontSize\":\"22px\",\"fontWeight\":700,\"margin\":\"0 0 16px\"},\"children\":\"一文看懂 session 和 cookie\"}],[\"$\",\"$Ld\",null,{\"children\":\"$e\"}],false]}]\n"])</script><script>self.__next_f.push([1,"a:[[\"$\",\"meta\",\"0\",{\"name\":\"viewport\",\"content\":\"width=device-width, initial-scale=1\"}],[\"$\",\"meta\",\"1\",{\"name\":\"theme-color\",\"content\":\"#f97316\"}]]\n"])</script><script>self.__next_f.push([1,"8:[[\"$\",\"meta\",\"0\",{\"charSet\":\"utf-8\"}],[\"$\",\"title\",\"1\",{\"children\":\"一文看懂 session 和 cookie - 算法面试\"}],[\"$\",\"meta\",\"2\",{\"name\":\"description\",\"content\":\"LeetCode 热题 100 完整 Java 题解、逐题动画、知识专栏与智能间隔复习。\"}],[\"$\",\"meta\",\"3\",{\"name\":\"application-name\",\"content\":\"算法面试\"}],[\"$\",\"link\",\"4\",{\"rel\":\"manifest\",\"href\":\"/algorithm-interview/manifest.json\",\"crossOrigin\":\"$undefined\"}],[\"$\",\"meta\",\"5\",{\"name\":\"keywords\",\"content\":\"LeetCode,热题100,算法面试,Java题解,数据结构,动态规划,面试刷题\"}],[\"$\",\"meta\",\"6\",{\"name\":\"mobile-web-app-capable\",\"content\":\"yes\"}],[\"$\",\"meta\",\"7\",{\"name\":\"apple-mobile-web-app-title\",\"content\":\"算法面试\"}],[\"$\",\"meta\",\"8\",{\"name\":\"apple-mobile-web-app-status-bar-style\",\"content\":\"default\"}],[\"$\",\"meta\",\"9\",{\"property\":\"og:title\",\"content\":\"算法面试题库\"}],[\"$\",\"meta\",\"10\",{\"property\":\"og:description\",\"content\":\"LeetCode 热题 100 完整 Java 题解、逐题动画、知识专栏与智能复习\"}],[\"$\",\"meta\",\"11\",{\"property\":\"og:site_name\",\"content\":\"算法面试题库\"}],[\"$\",\"meta\",\"12\",{\"property\":\"og:locale\",\"content\":\"zh_CN\"}],[\"$\",\"meta\",\"13\",{\"property\":\"og:type\",\"content\":\"website\"}],[\"$\",\"meta\",\"14\",{\"name\":\"twitter:card\",\"content\":\"summary\"}],[\"$\",\"meta\",\"15\",{\"name\":\"twitter:title\",\"content\":\"算法面试题库\"}],[\"$\",\"meta\",\"16\",{\"name\":\"twitter:description\",\"content\":\"LeetCode 热题 100 完整 Java 题解、逐题动画、知识专栏与智能复习\"}]]\n"])</script><script>self.__next_f.push([1,"6:null\n"])</script></body></html>

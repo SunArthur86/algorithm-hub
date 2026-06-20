@@ -1,0 +1,152 @@
+1:"$Sreact.fragment"
+2:I[5244,[],""]
+3:I[3866,[],""]
+5:I[6213,[],"OutletBoundary"]
+7:I[6213,[],"MetadataBoundary"]
+9:I[6213,[],"ViewportBoundary"]
+b:I[4835,[],""]
+:HL["/algorithm-interview/_next/static/css/c1e787639001e16b.css","style"]
+0:{"P":null,"b":"xos97fAiWtKfKXI6hZLx4","p":"/algorithm-interview","c":["","question","141",""],"i":false,"f":[[["",{"children":["question",{"children":[["lcId","141","d"],{"children":["__PAGE__",{}]}]}]},"$undefined","$undefined",true],["",["$","$1","c",{"children":[[["$","link","0",{"rel":"stylesheet","href":"/algorithm-interview/_next/static/css/c1e787639001e16b.css","precedence":"next","crossOrigin":"$undefined","nonce":"$undefined"}]],["$","html",null,{"lang":"zh","children":[["$","head",null,{"children":["$","script",null,{"dangerouslySetInnerHTML":{"__html":"\ntry {\n  var raw = localStorage.getItem('algo-interview');\n  var theme = 'light';\n  if (raw) { var p = JSON.parse(raw); theme = (p.state && p.state.theme) || 'light'; }\n  if (theme === 'dark') {\n    document.documentElement.classList.add('dark');\n    document.documentElement.setAttribute('data-theme', 'dark');\n  }\n} catch (e) {}\n"}}]}],["$","body",null,{"children":[["$","$L2",null,{"parallelRouterKey":"children","segmentPath":["children"],"error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L3",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":[[],[["$","title",null,{"children":"404: This page could not be found."}],["$","div",null,{"style":{"fontFamily":"system-ui,\"Segoe UI\",Roboto,Helvetica,Arial,sans-serif,\"Apple Color Emoji\",\"Segoe UI Emoji\"","height":"100vh","textAlign":"center","display":"flex","flexDirection":"column","alignItems":"center","justifyContent":"center"},"children":["$","div",null,{"children":[["$","style",null,{"dangerouslySetInnerHTML":{"__html":"body{color:#000;background:#fff;margin:0}.next-error-h1{border-right:1px solid rgba(0,0,0,.3)}@media (prefers-color-scheme:dark){body{color:#fff;background:#000}.next-error-h1{border-right:1px solid rgba(255,255,255,.3)}}"}}],["$","h1",null,{"className":"next-error-h1","style":{"display":"inline-block","margin":"0 20px 0 0","padding":"0 23px 0 0","fontSize":24,"fontWeight":500,"verticalAlign":"top","lineHeight":"49px"},"children":404}],["$","div",null,{"style":{"display":"inline-block"},"children":["$","h2",null,{"style":{"fontSize":14,"fontWeight":400,"lineHeight":"49px","margin":0},"children":"This page could not be found."}]}]]}]}]]],"forbidden":"$undefined","unauthorized":"$undefined"}],["$","script",null,{"dangerouslySetInnerHTML":{"__html":"\nif ('serviceWorker' in navigator) {\n  window.addEventListener('load', function () {\n    navigator.serviceWorker.register('/algorithm-interview/sw.js').catch(function () {});\n  });\n}\n"}}]]}]]}]]}],{"children":["question",["$","$1","c",{"children":[null,["$","$L2",null,{"parallelRouterKey":"children","segmentPath":["children","question","children"],"error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L3",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","forbidden":"$undefined","unauthorized":"$undefined"}]]}],{"children":[["lcId","141","d"],["$","$1","c",{"children":[null,["$","$L2",null,{"parallelRouterKey":"children","segmentPath":["children","question","children","$0:f:0:1:2:children:2:children:0","children"],"error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L3",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","forbidden":"$undefined","unauthorized":"$undefined"}]]}],{"children":["__PAGE__",["$","$1","c",{"children":["$L4",null,["$","$L5",null,{"children":"$L6"}]]}],{},null,false]},null,false]},null,false]},null,false],["$","$1","h",{"children":[null,["$","$1","jNYYoAQI9YS1sLGX_Z14l",{"children":[["$","$L7",null,{"children":"$L8"}],["$","$L9",null,{"children":"$La"}],null]}]]}],false]],"m":"$undefined","G":["$b","$undefined"],"s":false,"S":true}
+c:I[8173,["173","static/chunks/173-69860a4742bb7020.js","829","static/chunks/829-7533e70598480772.js","937","static/chunks/937-ef36a5ac4bc37a7e.js","447","static/chunks/447-06af9414e164c047.js","8","static/chunks/app/question/%5BlcId%5D/page-478b0d2a69e222f2.js"],""]
+d:I[3447,["173","static/chunks/173-69860a4742bb7020.js","829","static/chunks/829-7533e70598480772.js","937","static/chunks/937-ef36a5ac4bc37a7e.js","447","static/chunks/447-06af9414e164c047.js","8","static/chunks/app/question/%5BlcId%5D/page-478b0d2a69e222f2.js"],"default"]
+e:T1bcd,# 141. 环形链表
+
+> 难度：**Easy** | 分类：链表 | 标签：哈希表, 链表, 双指针
+
+> 🔗 力扣链接：[https://leetcode.cn/problems/linked-list-cycle/](https://leetcode.cn/problems/linked-list-cycle/)
+
+## 📝 题目描述
+
+给你一个链表的头节点 `head`，判断链表中是否有环。如果链表存在环，则返回 `True`；否则返回 `False`。
+
+环的定义：链表中某个节点的 `next` 指针通过一系列操作可以再次回到该节点。重点不在"找到环在哪"，而在"判断有没有环"。
+
+- 题号：141
+- 题目名：环形链表
+- 难度：简单
+- 题型：链表
+- 为什么选这题：它是"快慢指针"最经典的应用，一句话就能建立"两个速度不同的人在环形跑道上必相遇"的直觉。
+
+## 🧠 思考路径
+
+最直觉的做法是用一个集合记录走过的节点：每走一步就查一下当前节点是否出现过。出现过就说明有环。时间和空间都是 `O(n)`。
+
+但题目鼓励 `O(1)` 空间。有没有不用额外空间的办法？
+
+想象两个人在环形跑道上跑步，一个人跑得快，一个人跑得慢。只要跑道是环形的，快的人一定会从后面追上慢的人。如果跑道是直线，快的人会先到终点，两人永远不会相遇。
+
+这就是快慢指针法：慢指针每走一步，快指针走两步。如果链表有环，快指针最终会和慢指针在环内某个位置相遇。如果没环，快指针会先到达链表末尾。
+
+所以这题的关键词不是"遍历链表"，而是"两个速度不同的指针在环里必相遇"。
+
+## 💻 Java 题解
+
+### 解法 1：快慢指针（Floyd判圈）
+
+slow 走一步，fast 走两步。如果有环，fast 必然追上 slow。
+
+- ⏱ 时间复杂度：`O(n)`
+- 💾 空间复杂度：`O(1)`
+
+```java
+public class Solution {
+    public boolean hasCycle(ListNode head) {
+        ListNode slow = head, fast = head;
+        while (fast != null && fast.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
+            if (slow == fast) return true;
+        }
+        return false;
+    }
+}
+```
+
+**关键点：**
+- 快指针走两步，慢指针走一步
+- 相遇则有环
+- fast 或 fast.next 为 null 则无环
+
+**执行步骤：**
+1. slow=head, fast=head
+1. slow+1, fast+2
+1. slow==fast 返回 true
+1. fast 到 null 返回 false
+
+
+## ⚠️ 易错点
+
+- 循环条件是 `fast and fast.next`，不能只写 `fast`，因为快指针走两步，需要保证 `fast.next` 不为 null。
+- 判断相遇用 `is`（Python）/ `==`（Java）比较的是节点引用，不是节点值。
+- 快慢指针初始都指向 `head`，不能快指针从 `head.next` 开始，否则可能跳过相遇点。
+- 如果链表为空或只有一个节点（且无环），应该直接返回 `False`。
+
+- 要先走再比较，否则初始就相等
+
+- while 条件检查 fast 和 fast.next
+
+## 📊 复杂度分析
+
+- 时间复杂度：`O(n)`。无环时快指针最多走 `n/2` 步到达末尾；有环时在环内最多走环长度的若干圈后相遇。
+- 空间复杂度：`O(1)`。只用了两个指针变量。
+
+## 🏢 实际业务应用
+
+- 死锁检测：操作系统把进程的资源等待关系建模为有向图（类似链表），检测图中是否有环就是检测是否存在死锁。
+- 垃圾回收中的引用计数：对象之间的循环引用形成环，需要检测和处理。
+- 网络路由环路检测：路由表中如果存在环路，数据包会无限转发，快慢指针的思想可以用于检测路径中的环。
+
+- 死锁检测：操作系统把进程的资源等待关系建模为有向图（类似链表），检测图中是否有环就是检测是否存在死锁。
+- 垃圾回收中的引用计数：对象之间的循环引用形成环，需要检测和处理。
+- 网络路由环路检测：路由表中如果存在环路，数据包会无限转发，快慢指针的思想可以用于检测路径中的环。
+
+## 📖 形象类比
+
+可以把它类比成《西游记》里孙悟空和猪八戒在迷宫中探路。
+
+孙悟空跑得快（快指针），一次跨两间房；猪八戒走得慢（慢指针），一次走一间房。迷宫要么是一条直通出口的路（无环链表），要么会绕回已经走过的房间（有环链表）。如果是直线，孙悟空一定会先到出口；如果迷宫有环形通道，孙悟空绕了一圈后一定会从后面追上还在慢走的猪八戒——两人一碰面，就知道这里有环。
+
+对应关系是：
+
+- "迷宫"对应链表
+- "孙悟空"对应快指针，每次走两步
+- "猪八戒"对应慢指针，每次走一步
+- "碰面"对应 `slow == fast`，判定有环
+- "到出口"对应 `fast == null`，判定无环
+
+这段记忆的关键是：两个速度不同的人在环形跑道上一定会相遇。
+
+可以把它类比成《西游记》里孙悟空和猪八戒在迷宫中探路。
+
+孙悟空跑得快（快指针），一次跨两间房；猪八戒走得慢（慢指针），一次走一间房。迷宫要么是一条直通出口的路（无环链表），要么会绕回已经走过的房间（有环链表）。如果是直线，孙悟空一定会先到出口；如果迷宫有环形通道，孙悟空绕了一圈后一定会从后面追上还在慢走的猪八戒——两人一碰面，就知道这里有环。
+
+对应关系是：
+
+- "迷宫"对应链表
+- "孙悟空"对应快指针，每次走两步
+- "猪八戒"对应慢指针，每次走一步
+- "碰面"对应 `slow == fast`，判定有环
+- "到出口"对应 `fast == null`，判定无环
+
+这段记忆的关键是：两个速度不同的人在环形跑道上一定会相遇。
+
+两只小蚂蚁在一条小路上散步。大蚂蚁走得快，每次迈两步；小蚂蚁走得慢，每次迈一步。如果这条路是直的，大蚂蚁会先走到尽头等小蚂蚁。但如果这条路弯成了一个圈，大蚂蚁走着走着就会从后面追上小蚂蚁——"嘿，你怎么又在我前面了？"一碰面就知道，这条路是个环。
+
+两只小蚂蚁在一条小路上散步。大蚂蚁走得快，每次迈两步；小蚂蚁走得慢，每次迈一步。如果这条路是直的，大蚂蚁会先走到尽头等小蚂蚁。但如果这条路弯成了一个圈，大蚂蚁走着走着就会从后面追上小蚂蚁——"嘿，你怎么又在我前面了？"一碰面就知道，这条路是个环。
+
+## 🎵 记忆口诀
+
+快走两步慢走一，相遇就是有环的；走到尽头没碰面，说明路上没有环。
+
+快走两步慢走一，相遇就是有环的；走到尽头没碰面，说明路上没有环。
+
+## 🔗 延伸练习
+
+- `142. 环形链表 II`：从"判断有没有"升级为"找到环的入口"，快慢指针继续发力但需要数学推导。
+- `202. 快乐数`：判断一个数反复按位平方求和是否能到 1，本质也是检测是否有环。
+
+- `142. 环形链表 II`：从"判断有没有"升级为"找到环的入口"，快慢指针继续发力但需要数学推导。
+- `202. 快乐数`：判断一个数反复按位平方求和是否能到 1，本质也是检测是否有环。4:["$","main",null,{"className":"detail-main","style":{"maxWidth":760,"margin":"0 auto","padding":"16px","minHeight":"100vh"},"children":[["$","$Lc",null,{"href":"/","style":{"display":"inline-block","marginBottom":"12px","fontSize":"13px"},"children":"← 返回题库"}],["$","h1",null,{"style":{"fontSize":"22px","fontWeight":700,"margin":"0 0 4px"},"children":[["$","span",null,{"style":{"marginRight":"6px"},"children":"⛓️"}],141,". ","环形链表"]}],["$","$Ld",null,{"q":{"id":"0141","lcId":141,"slug":"linked-list-cycle","title":"环形链表","question":"环形链表","answer":"$e","difficulty":"Easy","category":"linked-list","categories":["linked-list"],"tags":["哈希表","链表","双指针"],"url":"https://leetcode.cn/problems/linked-list-cycle/","planOrder":25,"hasViz":true,"hasDiagram":true,"feynman":{"essence":"给你一个链表的头节点 `head`，判断链表中是否有环。如果链表存在环，则返回 `True`；否则返回 `False`。  环的定义：链表中某个节点的 `next` 指针通过一系列操作可以再次回到该节","analogy":"","key_points":[]},"first_principle":{"problem":"","axioms":[],"rebuild":""}}}]]}]
+a:[["$","meta","0",{"name":"viewport","content":"width=device-width, initial-scale=1"}],["$","meta","1",{"name":"theme-color","content":"#f97316"}]]
+8:[["$","meta","0",{"charSet":"utf-8"}],["$","title","1",{"children":"141. 环形链表 - 算法面试"}],["$","meta","2",{"name":"description","content":"给你一个链表的头节点 `head`，判断链表中是否有环。如果链表存在环，则返回 `True`；否则返回 `False`。  环的定义：链表中某个节点的 `next` 指针通过一系列操作可以再次回到该节"}],["$","meta","3",{"name":"application-name","content":"算法面试"}],["$","link","4",{"rel":"manifest","href":"/algorithm-interview/manifest.json","crossOrigin":"$undefined"}],["$","meta","5",{"name":"keywords","content":"环形链表,LeetCode 141,Easy,哈希表,链表,双指针"}],["$","meta","6",{"name":"mobile-web-app-capable","content":"yes"}],["$","meta","7",{"name":"apple-mobile-web-app-title","content":"算法面试"}],["$","meta","8",{"name":"apple-mobile-web-app-status-bar-style","content":"default"}],["$","meta","9",{"property":"og:title","content":"141. 环形链表"}],["$","meta","10",{"property":"og:description","content":"给你一个链表的头节点 `head`，判断链表中是否有环。如果链表存在环，则返回 `True`；否则返回 `False`。  环的定义：链表中某个节点的 `next` 指针通过一系列操作可以再次回到该节"}],["$","meta","11",{"property":"og:locale","content":"zh_CN"}],["$","meta","12",{"property":"og:type","content":"article"}],["$","meta","13",{"name":"twitter:card","content":"summary"}],["$","meta","14",{"name":"twitter:title","content":"141. 环形链表"}],["$","meta","15",{"name":"twitter:description","content":"给你一个链表的头节点 `head`，判断链表中是否有环。如果链表存在环，则返回 `True`；否则返回 `False`。  环的定义：链表中某个节点的 `next` 指针通过一系列操作可以再次回到该节"}]]
+6:null

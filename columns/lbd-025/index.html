@@ -1,0 +1,222 @@
+<!DOCTYPE html><html lang="zh"><head><meta charSet="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="/algorithm-interview/_next/static/css/c1e787639001e16b.css" data-precedence="next"/><link rel="preload" as="script" fetchPriority="low" href="/algorithm-interview/_next/static/chunks/webpack-65b8ce4c1158f96f.js"/><script src="/algorithm-interview/_next/static/chunks/4bd1b696-899926250d3992f1.js" async=""></script><script src="/algorithm-interview/_next/static/chunks/517-b6df7dad4ff96d0b.js" async=""></script><script src="/algorithm-interview/_next/static/chunks/main-app-9e7bfff32fd8ebe9.js" async=""></script><script src="/algorithm-interview/_next/static/chunks/173-69860a4742bb7020.js" async=""></script><script src="/algorithm-interview/_next/static/chunks/829-7533e70598480772.js" async=""></script><script src="/algorithm-interview/_next/static/chunks/app/columns/%5Bslug%5D/page-58fc1d8f5085c1ff.js" async=""></script><meta name="theme-color" content="#f97316"/><title>动态规划之博弈问题 - 算法面试</title><meta name="description" content="LeetCode 热题 100 完整 Java 题解、逐题动画、知识专栏与智能间隔复习。"/><meta name="application-name" content="算法面试"/><link rel="manifest" href="/algorithm-interview/manifest.json"/><meta name="keywords" content="LeetCode,热题100,算法面试,Java题解,数据结构,动态规划,面试刷题"/><meta name="mobile-web-app-capable" content="yes"/><meta name="apple-mobile-web-app-title" content="算法面试"/><meta name="apple-mobile-web-app-status-bar-style" content="default"/><meta property="og:title" content="算法面试题库"/><meta property="og:description" content="LeetCode 热题 100 完整 Java 题解、逐题动画、知识专栏与智能复习"/><meta property="og:site_name" content="算法面试题库"/><meta property="og:locale" content="zh_CN"/><meta property="og:type" content="website"/><meta name="twitter:card" content="summary"/><meta name="twitter:title" content="算法面试题库"/><meta name="twitter:description" content="LeetCode 热题 100 完整 Java 题解、逐题动画、知识专栏与智能复习"/><script>
+try {
+  var raw = localStorage.getItem('algo-interview');
+  var theme = 'light';
+  if (raw) { var p = JSON.parse(raw); theme = (p.state && p.state.theme) || 'light'; }
+  if (theme === 'dark') {
+    document.documentElement.classList.add('dark');
+    document.documentElement.setAttribute('data-theme', 'dark');
+  }
+} catch (e) {}
+</script><script src="/algorithm-interview/_next/static/chunks/polyfills-42372ed130431b0a.js" noModule=""></script></head><body><main style="max-width:760px;margin:0 auto;padding:16px;min-height:100vh"><a style="display:inline-block;margin-bottom:12px;font-size:13px" href="/algorithm-interview/columns/">← 返回专栏</a><div style="font-size:12px;color:var(--text-tertiary);margin-bottom:4px">📕<!-- --> <!-- -->labuladong 算法小抄</div><h1 style="font-size:22px;font-weight:700;margin:0 0 16px">动态规划之博弈问题</h1><div class="prose max-w-none" style="font-size:14px;color:var(--text)"><h1>动态规划之博弈问题</h1>
+<p>动态规划之博弈问题
+学算法，认准 labuladong 就够了！
+上⼀篇⽂章 ⼏道智⼒题 中讨论到⼀个有趣的「⽯头游戏」，通过题⽬的限
+制条件，这个游戏是先⼿必胜的。但是智⼒题终究是智⼒题，真正的算法问
+题肯定不会是投机取巧能搞定的。所以，本⽂就借⽯头游戏来讲讲「假设两
+个⼈都⾜够聪明，最后谁会获胜」这⼀类问题该如何⽤动态规划算法解决。
+博弈类问题的套路都差不多，下⽂举例讲解，其核⼼思路是在⼆维 dp 的基
+础上使⽤元组分别存储两个⼈的博弈结果。掌握了这个技巧以后，别⼈再问
+你什么俩海盗分宝⽯，俩⼈拿硬币的问题，你就告诉别⼈：我懒得想，直接
+给你写个算法算⼀下得了。
+我们「⽯头游戏」改的更具有⼀般性：
+你和你的朋友⾯前有⼀排⽯头堆，⽤⼀个数组 piles 表⽰，piles[i] 表⽰第 i
+堆⽯⼦有多少个。你们轮流拿⽯头，⼀次拿⼀堆，但是只能拿⾛最左边或者
+最右边的⽯头堆。所有⽯头被拿完后，谁拥有的⽯头多，谁获胜。
+⽯头的堆数可以是任意正整数，⽯头的总数也可以是任意正整数，这样就能
+打破先⼿必胜的局⾯了。⽐如有三堆⽯头  piles = [1, 100, 3] ，先⼿不管
+拿 1 还是 3，能够决定胜负的 100 都会被后⼿拿⾛，后⼿会获胜。
+假设两⼈都很聪明，请你设计⼀个算法，返回先⼿和后⼿的最后得分（⽯头
+总数）之差。⽐如上⾯那个例⼦，先⼿能获得 4 分，后⼿会获得 100 分，你
+的算法应该返回 -96。
+这样推⼴之后，这个问题算是⼀道 Hard 的动态规划问题了。博弈问题的难
+点在于，两个⼈要轮流进⾏选择，⽽且都贼精明，应该如何编程表⽰这个过
+程呢？
+还是强调多次的套路，⾸先明确 dp 数组的含义，然后和股票买卖系列问题
+类似，只要找到「状态」和「选择」，⼀切就⽔到渠成了。
+动态规划之博弈问题
+164</p>
+<p>⼀、定义 dp 数组的含义
+定义 dp 数组的含义是很有技术含量的，同⼀问题可能有多种定义⽅法，不
+同的定义会引出不同的状态转移⽅程，不过只要逻辑没有问题，最终都能得
+到相同的答案。
+我建议不要迷恋那些看起来很⽜逼，代码很短⼩的奇技淫巧，最好是稳⼀
+点，采取可解释性最好，最容易推⼴的设计思路。本⽂就给出⼀种博弈问题
+的通⽤设计框架。
+介绍 dp 数组的含义之前，我们先看⼀下 dp 数组最终的样⼦：
+下⽂讲解时，认为元组是包含 first 和 second 属性的⼀个类，⽽且为了节省
+篇幅，将这两个属性简写为 fir 和 sec。⽐如按上图的数据，我们说  dp[1]
+[3].fir = 10 ， dp[0][1].sec = 3 。
+先回答⼏个读者可能提出的问题：
+动态规划之博弈问题
+165</p>
+<p>这个⼆维 dp table 中存储的是元组，怎么编程表⽰呢？这个 dp table 有⼀半
+根本没⽤上，怎么优化？很简单，都不要管，先把解题的思路想明⽩了再谈
+也不迟。
+以下是对 dp 数组含义的解释：
+dp[i][j].fir 表⽰，对于 piles[i...j] 这部分⽯头堆，先⼿能获得的最⾼分数。
+dp[i][j].sec 表⽰，对于 piles[i...j] 这部分⽯头堆，后⼿能获得的最⾼分数。
+举例理解⼀下，假设 piles = [3, 9, 1, 2]，索引从 0 开始
+dp[0][1].fir = 9 意味着：⾯对⽯头堆 [3, 9]，先⼿最终能够获得 9 分。
+dp[1][3].sec = 2 意味着：⾯对⽯头堆 [9, 1, 2]，后⼿最终能够获得 2 分。
+我们想求的答案是先⼿和后⼿最终分数之差，按照这个定义也就是  dp[0]
+[n-1].fir - dp[0][n-1].sec ，即⾯对整个 piles，先⼿的最优得分和后⼿的
+最优得分之差。
+⼆、状态转移⽅程
+写状态转移⽅程很简单，⾸先要找到所有「状态」和每个状态可以做的「选
+择」，然后择优。
+根据前⾯对 dp 数组的定义，状态显然有三个：开始的索引 i，结束的索引
+j，当前轮到的⼈。
+dp[i][j][fir or sec]
+其中：
+0 &lt;= i &lt; piles.length
+i &lt;= j &lt; piles.length
+对于这个问题的每个状态，可以做的选择有两个：选择最左边的那堆⽯头，
+或者选择最右边的那堆⽯头。 我们可以这样穷举所有状态：
+n = piles.length
+for 0 &lt;= i &lt; n:
+for j &lt;= i &lt; n:
+动态规划之博弈问题
+166</p>
+<pre><code>    for who in {fir, sec}:
+        dp[i][j][who] = max(left, right)
+</code></pre>
+<p>上⾯的伪码是动态规划的⼀个⼤致的框架，股票系列问题中也有类似的伪
+码。这道题的难点在于，两⼈是交替进⾏选择的，也就是说先⼿的选择会对
+后⼿有影响，这怎么表达出来呢？
+根据我们对 dp 数组的定义，很容易解决这个难点，写出状态转移⽅程：
+dp[i][j].fir = max(piles[i] + dp[i+1][j].sec, piles[j] + dp[i][j-1].s
+ec)
+dp[i][j].fir = max(    选择最左边的⽯头堆     ,     选择最右边的⽯头堆     )</p>
+<h1>解释：我作为先⼿，⾯对 piles[i...j] 时，有两种选择：</h1>
+<h1>要么我选择最左边的那⼀堆⽯头，然后⾯对 piles[i+1...j]</h1>
+<h1>但是此时轮到对⽅，相当于我变成了后⼿；</h1>
+<h1>要么我选择最右边的那⼀堆⽯头，然后⾯对 piles[i...j-1]</h1>
+<h1>但是此时轮到对⽅，相当于我变成了后⼿。</h1>
+<p>if 先⼿选择左边:
+dp[i][j].sec = dp[i+1][j].fir
+if 先⼿选择右边:
+dp[i][j].sec = dp[i][j-1].fir</p>
+<h1>解释：我作为后⼿，要等先⼿先选择，有两种情况：</h1>
+<h1>如果先⼿选择了最左边那堆，给我剩下了 piles[i+1...j]</h1>
+<h1>此时轮到我，我变成了先⼿；</h1>
+<h1>如果先⼿选择了最右边那堆，给我剩下了 piles[i...j-1]</h1>
+<h1>此时轮到我，我变成了先⼿。</h1>
+<p>根据 dp 数组的定义，我们也可以找出 base case，也就是最简单的情况：
+dp[i][j].fir = piles[i]
+dp[i][j].sec = 0
+其中 0 &lt;= i == j &lt; n</p>
+<h1>解释：i 和 j 相等就是说⾯前只有⼀堆⽯头 piles[i]</h1>
+<h1>那么显然先⼿的得分为 piles[i]</h1>
+<h1>后⼿没有⽯头拿了，得分为 0</h1>
+<p>动态规划之博弈问题
+167</p>
+<p>这⾥需要注意⼀点，我们发现 base case 是斜着的，⽽且我们推算 dp[i][j] 时
+需要⽤到 dp[i+1][j] 和 dp[i][j-1]：
+动态规划之博弈问题
+168</p>
+<p>所以说算法不能简单的⼀⾏⼀⾏遍历 dp 数组，⽽要斜着遍历数组：
+动态规划之博弈问题
+169</p>
+<p>说实话，斜着遍历⼆维数组说起来容易，你还真不⼀定能想出来怎么实现，
+不信你思考⼀下？这么巧妙的状态转移⽅程都列出来了，要是不会写代码实
+现，那真的很尴尬了。
+三、代码实现
+如何实现这个 fir 和 sec 元组呢，你可以⽤ python，⾃带元组类型；或者使
+⽤ C++ 的 pair 容器；或者⽤⼀个三维数组  dp[n][n][2] ，最后⼀个维度就
+相当于元组；或者我们⾃⼰写⼀个 Pair 类：
+class Pair {
+int fir, sec;
+Pair(int fir, int sec) {
+this.fir = fir;
+this.sec = sec;
+}
+}
+动态规划之博弈问题
+170</p>
+<p>然后直接把我们的状态转移⽅程翻译成代码即可，可以注意⼀下斜着遍历数
+组的技巧：
+/* 返回游戏最后先⼿和后⼿的得分之差 */
+int stoneGame(int[] piles) {
+int n = piles.length;
+// 初始化 dp 数组
+Pair[][] dp = new Pair[n][n];
+for (int i = 0; i &lt; n; i++)
+for (int j = i; j &lt; n; j++)
+dp[i][j] = new Pair(0, 0);
+// 填⼊ base case
+for (int i = 0; i &lt; n; i++) {
+dp[i][i].fir = piles[i];
+dp[i][i].sec = 0;
+}
+// 斜着遍历数组
+for (int l = 2; l &lt;= n; l++) {
+for (int i = 0; i &lt;= n - l; i++) {
+int j = l + i - 1;
+// 先⼿选择最左边或最右边的分数
+int left = piles[i] + dp[i+1][j].sec;
+int right = piles[j] + dp[i][j-1].sec;
+// 套⽤状态转移⽅程
+if (left &gt; right) {
+dp[i][j].fir = left;
+dp[i][j].sec = dp[i+1][j].fir;
+} else {
+dp[i][j].fir = right;
+dp[i][j].sec = dp[i][j-1].fir;
+}
+}
+}
+Pair res = dp[0][n-1];
+return res.fir - res.sec;
+}
+动态规划解法，如果没有状态转移⽅程指导，绝对是⼀头雾⽔，但是根据前
+⾯的详细解释，读者应该可以清晰理解这⼀⼤段代码的含义。
+动态规划之博弈问题
+171</p>
+<p>⽽且，注意到计算  dp[i][j]  只依赖其左边和下边的元素，所以说肯定有优
+化空间，转换成⼀维 dp，想象⼀下把⼆维平⾯压扁，也就是投影到⼀维。
+但是，⼀维 dp ⽐较复杂，可解释性很差，⼤家就不必浪费这个时间去理解
+了。
+四、最后总结
+本⽂给出了解决博弈问题的动态规划解法。博弈问题的前提⼀般都是在两个
+聪明⼈之间进⾏，编程描述这种游戏的⼀般⽅法是⼆维 dp 数组，数组中通
+过元组分别表⽰两⼈的最优决策。
+之所以这样设计，是因为先⼿在做出选择之后，就成了后⼿，后⼿在对⽅做
+完选择后，就变成了先⼿。这种⾓⾊转换使得我们可以重⽤之前的结果，典
+型的动态规划标志。
+读到这⾥的朋友应该能理解算法解决博弈问题的套路了。学习算法，⼀定要
+注重算法的模板框架，⽽不是⼀些看起来⽜逼的思路，也不要奢求上来就写
+⼀个最优的解法。不要舍不得多⽤空间，不要过早尝试优化，不要惧怕多维
+数组。dp 数组就是存储信息避免重复计算的，随便⽤，直到咱满意为⽌。
+希望本⽂对你有帮助。
+＿＿＿＿＿＿＿＿＿＿＿＿＿
+刷算法，学套路，认准 labuladong。
+本⼩抄即将出版，关注 labuladong 公众号或 ongline book 查看更新⽂章，
+后台回复「进群」可进刷题群，labuladong 带你⽇穿 LeetCode。
+动态规划之博弈问题
+172</p>
+<p>动态规划之正则表达
+学算法，认准 labuladong 就够了！
+之前的⽂章「动态规划详解」收到了普遍的好评，今天写⼀个动态规划的实
+际应⽤：正则表达式。如果有读者对「动态规划」还不了解，建议先看⼀下
+上⾯那篇⽂章。
+正则表达式匹配是⼀个很精妙的算法，⽽且难度也不⼩。本⽂主要写两个正
+则符号的算法实现：点号「.」和星号「*」，如果你⽤过正则表达式，应该
+明⽩他们的⽤法，不明⽩也没关系，等会会介绍。⽂章的最后，介绍了⼀种
+快速看出重叠⼦问题的技巧。
+本⽂还有⼀个重要⽬的，就是教会读者如何设计算法。我们平时看别⼈的解
+法，直接看到⼀个⾯⾯俱到的完整答案，总觉得⽆法理解，以⾄觉得问题太
+难，⾃⼰太菜。我⼒求向读者展⽰，算法的设计是⼀个螺旋上升、逐步求精
+的过程，绝不是⼀步到位就能写出正确算法。本⽂会带你解决这个较为复杂
+的问题，让你明⽩如何化繁为简，逐个击破，从最简单的框架搭建出最终的
+答案。
+前⽂⽆数次强调的框架思维，就是在这种设计过程中逐步培养的。下⾯进⼊
+正题，⾸先看⼀下题⽬：
+动态规划之正则表达
+173</p></div></main><script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function () {
+    navigator.serviceWorker.register('/algorithm-interview/sw.js').catch(function () {});
+  });
+}
+</script><script src="/algorithm-interview/_next/static/chunks/webpack-65b8ce4c1158f96f.js" async=""></script><script>(self.__next_f=self.__next_f||[]).push([0])</script><script>self.__next_f.push([1,"1:\"$Sreact.fragment\"\n2:I[5244,[],\"\"]\n3:I[3866,[],\"\"]\n5:I[6213,[],\"OutletBoundary\"]\n7:I[6213,[],\"MetadataBoundary\"]\n9:I[6213,[],\"ViewportBoundary\"]\nb:I[4835,[],\"\"]\n:HL[\"/algorithm-interview/_next/static/css/c1e787639001e16b.css\",\"style\"]\n"])</script><script>self.__next_f.push([1,"0:{\"P\":null,\"b\":\"xos97fAiWtKfKXI6hZLx4\",\"p\":\"/algorithm-interview\",\"c\":[\"\",\"columns\",\"lbd-025\",\"\"],\"i\":false,\"f\":[[[\"\",{\"children\":[\"columns\",{\"children\":[[\"slug\",\"lbd-025\",\"d\"],{\"children\":[\"__PAGE__\",{}]}]}]},\"$undefined\",\"$undefined\",true],[\"\",[\"$\",\"$1\",\"c\",{\"children\":[[[\"$\",\"link\",\"0\",{\"rel\":\"stylesheet\",\"href\":\"/algorithm-interview/_next/static/css/c1e787639001e16b.css\",\"precedence\":\"next\",\"crossOrigin\":\"$undefined\",\"nonce\":\"$undefined\"}]],[\"$\",\"html\",null,{\"lang\":\"zh\",\"children\":[[\"$\",\"head\",null,{\"children\":[\"$\",\"script\",null,{\"dangerouslySetInnerHTML\":{\"__html\":\"\\ntry {\\n  var raw = localStorage.getItem('algo-interview');\\n  var theme = 'light';\\n  if (raw) { var p = JSON.parse(raw); theme = (p.state \u0026\u0026 p.state.theme) || 'light'; }\\n  if (theme === 'dark') {\\n    document.documentElement.classList.add('dark');\\n    document.documentElement.setAttribute('data-theme', 'dark');\\n  }\\n} catch (e) {}\\n\"}}]}],[\"$\",\"body\",null,{\"children\":[[\"$\",\"$L2\",null,{\"parallelRouterKey\":\"children\",\"segmentPath\":[\"children\"],\"error\":\"$undefined\",\"errorStyles\":\"$undefined\",\"errorScripts\":\"$undefined\",\"template\":[\"$\",\"$L3\",null,{}],\"templateStyles\":\"$undefined\",\"templateScripts\":\"$undefined\",\"notFound\":[[],[[\"$\",\"title\",null,{\"children\":\"404: This page could not be found.\"}],[\"$\",\"div\",null,{\"style\":{\"fontFamily\":\"system-ui,\\\"Segoe UI\\\",Roboto,Helvetica,Arial,sans-serif,\\\"Apple Color Emoji\\\",\\\"Segoe UI Emoji\\\"\",\"height\":\"100vh\",\"textAlign\":\"center\",\"display\":\"flex\",\"flexDirection\":\"column\",\"alignItems\":\"center\",\"justifyContent\":\"center\"},\"children\":[\"$\",\"div\",null,{\"children\":[[\"$\",\"style\",null,{\"dangerouslySetInnerHTML\":{\"__html\":\"body{color:#000;background:#fff;margin:0}.next-error-h1{border-right:1px solid rgba(0,0,0,.3)}@media (prefers-color-scheme:dark){body{color:#fff;background:#000}.next-error-h1{border-right:1px solid rgba(255,255,255,.3)}}\"}}],[\"$\",\"h1\",null,{\"className\":\"next-error-h1\",\"style\":{\"display\":\"inline-block\",\"margin\":\"0 20px 0 0\",\"padding\":\"0 23px 0 0\",\"fontSize\":24,\"fontWeight\":500,\"verticalAlign\":\"top\",\"lineHeight\":\"49px\"},\"children\":404}],[\"$\",\"div\",null,{\"style\":{\"display\":\"inline-block\"},\"children\":[\"$\",\"h2\",null,{\"style\":{\"fontSize\":14,\"fontWeight\":400,\"lineHeight\":\"49px\",\"margin\":0},\"children\":\"This page could not be found.\"}]}]]}]}]]],\"forbidden\":\"$undefined\",\"unauthorized\":\"$undefined\"}],[\"$\",\"script\",null,{\"dangerouslySetInnerHTML\":{\"__html\":\"\\nif ('serviceWorker' in navigator) {\\n  window.addEventListener('load', function () {\\n    navigator.serviceWorker.register('/algorithm-interview/sw.js').catch(function () {});\\n  });\\n}\\n\"}}]]}]]}]]}],{\"children\":[\"columns\",[\"$\",\"$1\",\"c\",{\"children\":[null,[\"$\",\"$L2\",null,{\"parallelRouterKey\":\"children\",\"segmentPath\":[\"children\",\"columns\",\"children\"],\"error\":\"$undefined\",\"errorStyles\":\"$undefined\",\"errorScripts\":\"$undefined\",\"template\":[\"$\",\"$L3\",null,{}],\"templateStyles\":\"$undefined\",\"templateScripts\":\"$undefined\",\"notFound\":\"$undefined\",\"forbidden\":\"$undefined\",\"unauthorized\":\"$undefined\"}]]}],{\"children\":[[\"slug\",\"lbd-025\",\"d\"],[\"$\",\"$1\",\"c\",{\"children\":[null,[\"$\",\"$L2\",null,{\"parallelRouterKey\":\"children\",\"segmentPath\":[\"children\",\"columns\",\"children\",\"$0:f:0:1:2:children:2:children:0\",\"children\"],\"error\":\"$undefined\",\"errorStyles\":\"$undefined\",\"errorScripts\":\"$undefined\",\"template\":[\"$\",\"$L3\",null,{}],\"templateStyles\":\"$undefined\",\"templateScripts\":\"$undefined\",\"notFound\":\"$undefined\",\"forbidden\":\"$undefined\",\"unauthorized\":\"$undefined\"}]]}],{\"children\":[\"__PAGE__\",[\"$\",\"$1\",\"c\",{\"children\":[\"$L4\",null,[\"$\",\"$L5\",null,{\"children\":\"$L6\"}]]}],{},null,false]},null,false]},null,false]},null,false],[\"$\",\"$1\",\"h\",{\"children\":[null,[\"$\",\"$1\",\"VXaimz0VlUq2OaYwUlYN2\",{\"children\":[[\"$\",\"$L7\",null,{\"children\":\"$L8\"}],[\"$\",\"$L9\",null,{\"children\":\"$La\"}],null]}]]}],false]],\"m\":\"$undefined\",\"G\":[\"$b\",\"$undefined\"],\"s\":false,\"S\":true}\n"])</script><script>self.__next_f.push([1,"c:I[8173,[\"173\",\"static/chunks/173-69860a4742bb7020.js\",\"829\",\"static/chunks/829-7533e70598480772.js\",\"306\",\"static/chunks/app/columns/%5Bslug%5D/page-58fc1d8f5085c1ff.js\"],\"\"]\nd:I[4780,[\"173\",\"static/chunks/173-69860a4742bb7020.js\",\"829\",\"static/chunks/829-7533e70598480772.js\",\"306\",\"static/chunks/app/columns/%5Bslug%5D/page-58fc1d8f5085c1ff.js\"],\"default\"]\ne:T2c12,"])</script><script>self.__next_f.push([1,"# 动态规划之博弈问题\n\n动态规划之博弈问题\n学算法，认准 labuladong 就够了！\n上⼀篇⽂章 ⼏道智⼒题 中讨论到⼀个有趣的「⽯头游戏」，通过题⽬的限\n制条件，这个游戏是先⼿必胜的。但是智⼒题终究是智⼒题，真正的算法问\n题肯定不会是投机取巧能搞定的。所以，本⽂就借⽯头游戏来讲讲「假设两\n个⼈都⾜够聪明，最后谁会获胜」这⼀类问题该如何⽤动态规划算法解决。\n博弈类问题的套路都差不多，下⽂举例讲解，其核⼼思路是在⼆维 dp 的基\n础上使⽤元组分别存储两个⼈的博弈结果。掌握了这个技巧以后，别⼈再问\n你什么俩海盗分宝⽯，俩⼈拿硬币的问题，你就告诉别⼈：我懒得想，直接\n给你写个算法算⼀下得了。\n我们「⽯头游戏」改的更具有⼀般性：\n你和你的朋友⾯前有⼀排⽯头堆，⽤⼀个数组 piles 表⽰，piles[i] 表⽰第 i\n堆⽯⼦有多少个。你们轮流拿⽯头，⼀次拿⼀堆，但是只能拿⾛最左边或者\n最右边的⽯头堆。所有⽯头被拿完后，谁拥有的⽯头多，谁获胜。\n⽯头的堆数可以是任意正整数，⽯头的总数也可以是任意正整数，这样就能\n打破先⼿必胜的局⾯了。⽐如有三堆⽯头  piles = [1, 100, 3] ，先⼿不管\n拿 1 还是 3，能够决定胜负的 100 都会被后⼿拿⾛，后⼿会获胜。\n假设两⼈都很聪明，请你设计⼀个算法，返回先⼿和后⼿的最后得分（⽯头\n总数）之差。⽐如上⾯那个例⼦，先⼿能获得 4 分，后⼿会获得 100 分，你\n的算法应该返回 -96。\n这样推⼴之后，这个问题算是⼀道 Hard 的动态规划问题了。博弈问题的难\n点在于，两个⼈要轮流进⾏选择，⽽且都贼精明，应该如何编程表⽰这个过\n程呢？\n还是强调多次的套路，⾸先明确 dp 数组的含义，然后和股票买卖系列问题\n类似，只要找到「状态」和「选择」，⼀切就⽔到渠成了。\n动态规划之博弈问题\n164\n\n⼀、定义 dp 数组的含义\n定义 dp 数组的含义是很有技术含量的，同⼀问题可能有多种定义⽅法，不\n同的定义会引出不同的状态转移⽅程，不过只要逻辑没有问题，最终都能得\n到相同的答案。\n我建议不要迷恋那些看起来很⽜逼，代码很短⼩的奇技淫巧，最好是稳⼀\n点，采取可解释性最好，最容易推⼴的设计思路。本⽂就给出⼀种博弈问题\n的通⽤设计框架。\n介绍 dp 数组的含义之前，我们先看⼀下 dp 数组最终的样⼦：\n下⽂讲解时，认为元组是包含 first 和 second 属性的⼀个类，⽽且为了节省\n篇幅，将这两个属性简写为 fir 和 sec。⽐如按上图的数据，我们说  dp[1]\n[3].fir = 10 ， dp[0][1].sec = 3 。\n先回答⼏个读者可能提出的问题：\n动态规划之博弈问题\n165\n\n这个⼆维 dp table 中存储的是元组，怎么编程表⽰呢？这个 dp table 有⼀半\n根本没⽤上，怎么优化？很简单，都不要管，先把解题的思路想明⽩了再谈\n也不迟。\n以下是对 dp 数组含义的解释：\ndp[i][j].fir 表⽰，对于 piles[i...j] 这部分⽯头堆，先⼿能获得的最⾼分数。\ndp[i][j].sec 表⽰，对于 piles[i...j] 这部分⽯头堆，后⼿能获得的最⾼分数。\n举例理解⼀下，假设 piles = [3, 9, 1, 2]，索引从 0 开始\ndp[0][1].fir = 9 意味着：⾯对⽯头堆 [3, 9]，先⼿最终能够获得 9 分。\ndp[1][3].sec = 2 意味着：⾯对⽯头堆 [9, 1, 2]，后⼿最终能够获得 2 分。\n我们想求的答案是先⼿和后⼿最终分数之差，按照这个定义也就是  dp[0]\n[n-1].fir - dp[0][n-1].sec ，即⾯对整个 piles，先⼿的最优得分和后⼿的\n最优得分之差。\n⼆、状态转移⽅程\n写状态转移⽅程很简单，⾸先要找到所有「状态」和每个状态可以做的「选\n择」，然后择优。\n根据前⾯对 dp 数组的定义，状态显然有三个：开始的索引 i，结束的索引\nj，当前轮到的⼈。\ndp[i][j][fir or sec]\n其中：\n0 \u003c= i \u003c piles.length\ni \u003c= j \u003c piles.length\n对于这个问题的每个状态，可以做的选择有两个：选择最左边的那堆⽯头，\n或者选择最右边的那堆⽯头。 我们可以这样穷举所有状态：\nn = piles.length\nfor 0 \u003c= i \u003c n:\n    for j \u003c= i \u003c n:\n动态规划之博弈问题\n166\n\n        for who in {fir, sec}:\n            dp[i][j][who] = max(left, right)\n上⾯的伪码是动态规划的⼀个⼤致的框架，股票系列问题中也有类似的伪\n码。这道题的难点在于，两⼈是交替进⾏选择的，也就是说先⼿的选择会对\n后⼿有影响，这怎么表达出来呢？\n根据我们对 dp 数组的定义，很容易解决这个难点，写出状态转移⽅程：\ndp[i][j].fir = max(piles[i] + dp[i+1][j].sec, piles[j] + dp[i][j-1].s\nec)\ndp[i][j].fir = max(    选择最左边的⽯头堆     ,     选择最右边的⽯头堆     )\n# 解释：我作为先⼿，⾯对 piles[i...j] 时，有两种选择：\n# 要么我选择最左边的那⼀堆⽯头，然后⾯对 piles[i+1...j]\n# 但是此时轮到对⽅，相当于我变成了后⼿；\n# 要么我选择最右边的那⼀堆⽯头，然后⾯对 piles[i...j-1]\n# 但是此时轮到对⽅，相当于我变成了后⼿。\nif 先⼿选择左边:\n    dp[i][j].sec = dp[i+1][j].fir\nif 先⼿选择右边:\n    dp[i][j].sec = dp[i][j-1].fir\n# 解释：我作为后⼿，要等先⼿先选择，有两种情况：\n# 如果先⼿选择了最左边那堆，给我剩下了 piles[i+1...j]\n# 此时轮到我，我变成了先⼿；\n# 如果先⼿选择了最右边那堆，给我剩下了 piles[i...j-1]\n# 此时轮到我，我变成了先⼿。\n根据 dp 数组的定义，我们也可以找出 base case，也就是最简单的情况：\ndp[i][j].fir = piles[i]\ndp[i][j].sec = 0\n其中 0 \u003c= i == j \u003c n\n# 解释：i 和 j 相等就是说⾯前只有⼀堆⽯头 piles[i]\n# 那么显然先⼿的得分为 piles[i]\n# 后⼿没有⽯头拿了，得分为 0\n动态规划之博弈问题\n167\n\n这⾥需要注意⼀点，我们发现 base case 是斜着的，⽽且我们推算 dp[i][j] 时\n需要⽤到 dp[i+1][j] 和 dp[i][j-1]：\n动态规划之博弈问题\n168\n\n所以说算法不能简单的⼀⾏⼀⾏遍历 dp 数组，⽽要斜着遍历数组：\n动态规划之博弈问题\n169\n\n说实话，斜着遍历⼆维数组说起来容易，你还真不⼀定能想出来怎么实现，\n不信你思考⼀下？这么巧妙的状态转移⽅程都列出来了，要是不会写代码实\n现，那真的很尴尬了。\n三、代码实现\n如何实现这个 fir 和 sec 元组呢，你可以⽤ python，⾃带元组类型；或者使\n⽤ C++ 的 pair 容器；或者⽤⼀个三维数组  dp[n][n][2] ，最后⼀个维度就\n相当于元组；或者我们⾃⼰写⼀个 Pair 类：\nclass Pair {\n    int fir, sec;\n    Pair(int fir, int sec) {\n        this.fir = fir;\n        this.sec = sec;\n    }\n}\n动态规划之博弈问题\n170\n\n然后直接把我们的状态转移⽅程翻译成代码即可，可以注意⼀下斜着遍历数\n组的技巧：\n/* 返回游戏最后先⼿和后⼿的得分之差 */\nint stoneGame(int[] piles) {\n    int n = piles.length;\n    // 初始化 dp 数组\n    Pair[][] dp = new Pair[n][n];\n    for (int i = 0; i \u003c n; i++) \n        for (int j = i; j \u003c n; j++)\n            dp[i][j] = new Pair(0, 0);\n    // 填⼊ base case\n    for (int i = 0; i \u003c n; i++) {\n        dp[i][i].fir = piles[i];\n        dp[i][i].sec = 0;\n    }\n    // 斜着遍历数组\n    for (int l = 2; l \u003c= n; l++) {\n        for (int i = 0; i \u003c= n - l; i++) {\n            int j = l + i - 1;\n            // 先⼿选择最左边或最右边的分数\n            int left = piles[i] + dp[i+1][j].sec;\n            int right = piles[j] + dp[i][j-1].sec;\n            // 套⽤状态转移⽅程\n            if (left \u003e right) {\n                dp[i][j].fir = left;\n                dp[i][j].sec = dp[i+1][j].fir;\n            } else {\n                dp[i][j].fir = right;\n                dp[i][j].sec = dp[i][j-1].fir;\n            }\n        }\n    }\n    Pair res = dp[0][n-1];\n    return res.fir - res.sec;\n}\n动态规划解法，如果没有状态转移⽅程指导，绝对是⼀头雾⽔，但是根据前\n⾯的详细解释，读者应该可以清晰理解这⼀⼤段代码的含义。\n动态规划之博弈问题\n171\n\n⽽且，注意到计算  dp[i][j]  只依赖其左边和下边的元素，所以说肯定有优\n化空间，转换成⼀维 dp，想象⼀下把⼆维平⾯压扁，也就是投影到⼀维。\n但是，⼀维 dp ⽐较复杂，可解释性很差，⼤家就不必浪费这个时间去理解\n了。\n四、最后总结\n本⽂给出了解决博弈问题的动态规划解法。博弈问题的前提⼀般都是在两个\n聪明⼈之间进⾏，编程描述这种游戏的⼀般⽅法是⼆维 dp 数组，数组中通\n过元组分别表⽰两⼈的最优决策。\n之所以这样设计，是因为先⼿在做出选择之后，就成了后⼿，后⼿在对⽅做\n完选择后，就变成了先⼿。这种⾓⾊转换使得我们可以重⽤之前的结果，典\n型的动态规划标志。\n读到这⾥的朋友应该能理解算法解决博弈问题的套路了。学习算法，⼀定要\n注重算法的模板框架，⽽不是⼀些看起来⽜逼的思路，也不要奢求上来就写\n⼀个最优的解法。不要舍不得多⽤空间，不要过早尝试优化，不要惧怕多维\n数组。dp 数组就是存储信息避免重复计算的，随便⽤，直到咱满意为⽌。\n希望本⽂对你有帮助。\n＿＿＿＿＿＿＿＿＿＿＿＿＿\n刷算法，学套路，认准 labuladong。\n本⼩抄即将出版，关注 labuladong 公众号或 ongline book 查看更新⽂章，\n后台回复「进群」可进刷题群，labuladong 带你⽇穿 LeetCode。\n动态规划之博弈问题\n172\n\n动态规划之正则表达\n学算法，认准 labuladong 就够了！\n之前的⽂章「动态规划详解」收到了普遍的好评，今天写⼀个动态规划的实\n际应⽤：正则表达式。如果有读者对「动态规划」还不了解，建议先看⼀下\n上⾯那篇⽂章。\n正则表达式匹配是⼀个很精妙的算法，⽽且难度也不⼩。本⽂主要写两个正\n则符号的算法实现：点号「.」和星号「*」，如果你⽤过正则表达式，应该\n明⽩他们的⽤法，不明⽩也没关系，等会会介绍。⽂章的最后，介绍了⼀种\n快速看出重叠⼦问题的技巧。\n本⽂还有⼀个重要⽬的，就是教会读者如何设计算法。我们平时看别⼈的解\n法，直接看到⼀个⾯⾯俱到的完整答案，总觉得⽆法理解，以⾄觉得问题太\n难，⾃⼰太菜。我⼒求向读者展⽰，算法的设计是⼀个螺旋上升、逐步求精\n的过程，绝不是⼀步到位就能写出正确算法。本⽂会带你解决这个较为复杂\n的问题，让你明⽩如何化繁为简，逐个击破，从最简单的框架搭建出最终的\n答案。\n前⽂⽆数次强调的框架思维，就是在这种设计过程中逐步培养的。下⾯进⼊\n正题，⾸先看⼀下题⽬：\n动态规划之正则表达\n173"])</script><script>self.__next_f.push([1,"4:[\"$\",\"main\",null,{\"style\":{\"maxWidth\":760,\"margin\":\"0 auto\",\"padding\":\"16px\",\"minHeight\":\"100vh\"},\"children\":[[\"$\",\"$Lc\",null,{\"href\":\"/columns/\",\"style\":{\"display\":\"inline-block\",\"marginBottom\":\"12px\",\"fontSize\":\"13px\"},\"children\":\"← 返回专栏\"}],[\"$\",\"div\",null,{\"style\":{\"fontSize\":\"12px\",\"color\":\"var(--text-tertiary)\",\"marginBottom\":\"4px\"},\"children\":[\"📕\",\" \",\"labuladong 算法小抄\"]}],[\"$\",\"h1\",null,{\"style\":{\"fontSize\":\"22px\",\"fontWeight\":700,\"margin\":\"0 0 16px\"},\"children\":\"动态规划之博弈问题\"}],[\"$\",\"$Ld\",null,{\"children\":\"$e\"}],false]}]\n"])</script><script>self.__next_f.push([1,"a:[[\"$\",\"meta\",\"0\",{\"name\":\"viewport\",\"content\":\"width=device-width, initial-scale=1\"}],[\"$\",\"meta\",\"1\",{\"name\":\"theme-color\",\"content\":\"#f97316\"}]]\n"])</script><script>self.__next_f.push([1,"8:[[\"$\",\"meta\",\"0\",{\"charSet\":\"utf-8\"}],[\"$\",\"title\",\"1\",{\"children\":\"动态规划之博弈问题 - 算法面试\"}],[\"$\",\"meta\",\"2\",{\"name\":\"description\",\"content\":\"LeetCode 热题 100 完整 Java 题解、逐题动画、知识专栏与智能间隔复习。\"}],[\"$\",\"meta\",\"3\",{\"name\":\"application-name\",\"content\":\"算法面试\"}],[\"$\",\"link\",\"4\",{\"rel\":\"manifest\",\"href\":\"/algorithm-interview/manifest.json\",\"crossOrigin\":\"$undefined\"}],[\"$\",\"meta\",\"5\",{\"name\":\"keywords\",\"content\":\"LeetCode,热题100,算法面试,Java题解,数据结构,动态规划,面试刷题\"}],[\"$\",\"meta\",\"6\",{\"name\":\"mobile-web-app-capable\",\"content\":\"yes\"}],[\"$\",\"meta\",\"7\",{\"name\":\"apple-mobile-web-app-title\",\"content\":\"算法面试\"}],[\"$\",\"meta\",\"8\",{\"name\":\"apple-mobile-web-app-status-bar-style\",\"content\":\"default\"}],[\"$\",\"meta\",\"9\",{\"property\":\"og:title\",\"content\":\"算法面试题库\"}],[\"$\",\"meta\",\"10\",{\"property\":\"og:description\",\"content\":\"LeetCode 热题 100 完整 Java 题解、逐题动画、知识专栏与智能复习\"}],[\"$\",\"meta\",\"11\",{\"property\":\"og:site_name\",\"content\":\"算法面试题库\"}],[\"$\",\"meta\",\"12\",{\"property\":\"og:locale\",\"content\":\"zh_CN\"}],[\"$\",\"meta\",\"13\",{\"property\":\"og:type\",\"content\":\"website\"}],[\"$\",\"meta\",\"14\",{\"name\":\"twitter:card\",\"content\":\"summary\"}],[\"$\",\"meta\",\"15\",{\"name\":\"twitter:title\",\"content\":\"算法面试题库\"}],[\"$\",\"meta\",\"16\",{\"name\":\"twitter:description\",\"content\":\"LeetCode 热题 100 完整 Java 题解、逐题动画、知识专栏与智能复习\"}]]\n"])</script><script>self.__next_f.push([1,"6:null\n"])</script></body></html>

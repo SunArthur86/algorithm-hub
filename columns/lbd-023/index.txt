@@ -1,0 +1,159 @@
+1:"$Sreact.fragment"
+2:I[5244,[],""]
+3:I[3866,[],""]
+5:I[6213,[],"OutletBoundary"]
+7:I[6213,[],"MetadataBoundary"]
+9:I[6213,[],"ViewportBoundary"]
+b:I[4835,[],""]
+:HL["/algorithm-interview/_next/static/css/c1e787639001e16b.css","style"]
+0:{"P":null,"b":"xos97fAiWtKfKXI6hZLx4","p":"/algorithm-interview","c":["","columns","lbd-023",""],"i":false,"f":[[["",{"children":["columns",{"children":[["slug","lbd-023","d"],{"children":["__PAGE__",{}]}]}]},"$undefined","$undefined",true],["",["$","$1","c",{"children":[[["$","link","0",{"rel":"stylesheet","href":"/algorithm-interview/_next/static/css/c1e787639001e16b.css","precedence":"next","crossOrigin":"$undefined","nonce":"$undefined"}]],["$","html",null,{"lang":"zh","children":[["$","head",null,{"children":["$","script",null,{"dangerouslySetInnerHTML":{"__html":"\ntry {\n  var raw = localStorage.getItem('algo-interview');\n  var theme = 'light';\n  if (raw) { var p = JSON.parse(raw); theme = (p.state && p.state.theme) || 'light'; }\n  if (theme === 'dark') {\n    document.documentElement.classList.add('dark');\n    document.documentElement.setAttribute('data-theme', 'dark');\n  }\n} catch (e) {}\n"}}]}],["$","body",null,{"children":[["$","$L2",null,{"parallelRouterKey":"children","segmentPath":["children"],"error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L3",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":[[],[["$","title",null,{"children":"404: This page could not be found."}],["$","div",null,{"style":{"fontFamily":"system-ui,\"Segoe UI\",Roboto,Helvetica,Arial,sans-serif,\"Apple Color Emoji\",\"Segoe UI Emoji\"","height":"100vh","textAlign":"center","display":"flex","flexDirection":"column","alignItems":"center","justifyContent":"center"},"children":["$","div",null,{"children":[["$","style",null,{"dangerouslySetInnerHTML":{"__html":"body{color:#000;background:#fff;margin:0}.next-error-h1{border-right:1px solid rgba(0,0,0,.3)}@media (prefers-color-scheme:dark){body{color:#fff;background:#000}.next-error-h1{border-right:1px solid rgba(255,255,255,.3)}}"}}],["$","h1",null,{"className":"next-error-h1","style":{"display":"inline-block","margin":"0 20px 0 0","padding":"0 23px 0 0","fontSize":24,"fontWeight":500,"verticalAlign":"top","lineHeight":"49px"},"children":404}],["$","div",null,{"style":{"display":"inline-block"},"children":["$","h2",null,{"style":{"fontSize":14,"fontWeight":400,"lineHeight":"49px","margin":0},"children":"This page could not be found."}]}]]}]}]]],"forbidden":"$undefined","unauthorized":"$undefined"}],["$","script",null,{"dangerouslySetInnerHTML":{"__html":"\nif ('serviceWorker' in navigator) {\n  window.addEventListener('load', function () {\n    navigator.serviceWorker.register('/algorithm-interview/sw.js').catch(function () {});\n  });\n}\n"}}]]}]]}]]}],{"children":["columns",["$","$1","c",{"children":[null,["$","$L2",null,{"parallelRouterKey":"children","segmentPath":["children","columns","children"],"error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L3",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","forbidden":"$undefined","unauthorized":"$undefined"}]]}],{"children":[["slug","lbd-023","d"],["$","$1","c",{"children":[null,["$","$L2",null,{"parallelRouterKey":"children","segmentPath":["children","columns","children","$0:f:0:1:2:children:2:children:0","children"],"error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L3",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","forbidden":"$undefined","unauthorized":"$undefined"}]]}],{"children":["__PAGE__",["$","$1","c",{"children":["$L4",null,["$","$L5",null,{"children":"$L6"}]]}],{},null,false]},null,false]},null,false]},null,false],["$","$1","h",{"children":[null,["$","$1","N55k1JaxmcWjEL6ZTo8GC",{"children":[["$","$L7",null,{"children":"$L8"}],["$","$L9",null,{"children":"$La"}],null]}]]}],false]],"m":"$undefined","G":["$b","$undefined"],"s":false,"S":true}
+c:I[8173,["173","static/chunks/173-69860a4742bb7020.js","829","static/chunks/829-7533e70598480772.js","306","static/chunks/app/columns/%5Bslug%5D/page-58fc1d8f5085c1ff.js"],""]
+d:I[4780,["173","static/chunks/173-69860a4742bb7020.js","829","static/chunks/829-7533e70598480772.js","306","static/chunks/app/columns/%5Bslug%5D/page-58fc1d8f5085c1ff.js"],"default"]
+e:T1e7e,# 经典动态规划：最长公共子序列
+
+最⻓公共⼦序列
+学算法，认准 labuladong 就够了！
+最⻓公共⼦序列（Longest Common Subsequence，简称 LCS）是⼀道⾮常经
+典的⾯试题⽬，因为它的解法是典型的⼆维动态规划，⼤部分⽐较困难的字
+符串问题都和这个问题⼀个套路，⽐如说编辑距离。⽽且，这个算法稍加改
+造就可以⽤于解决其他问题，所以说 LCS 算法是值得掌握的。
+题⽬就是让我们求两个字符串的 LCS ⻓度：
+输⼊: str1 = "abcde", str2 = "ace" 
+输出: 3  
+解释: 最⻓公共⼦序列是 "ace"，它的⻓度是 3
+肯定有读者会问，为啥这个问题就是动态规划来解决呢？因为⼦序列类型的
+问题，穷举出所有可能的结果都不容易，⽽动态规划算法做的就是穷举 +
+剪枝，它俩天⽣⼀对⼉。所以可以说只要涉及⼦序列问题，⼗有⼋九都需要
+动态规划来解决，往这⽅⾯考虑就对了。
+下⾯就来⼿把⼿分析⼀下，这道题⽬如何⽤动态规划技巧解决。
+⼀、动态规划思路
+第⼀步，⼀定要明确  dp  数组的含义。对于两个字符串的动态规划问题，
+套路是通⽤的。
+⽐如说对于字符串  s1  和  s2 ，⼀般来说都要构造⼀个这样的 DP table：
+经典动态规划：最⻓公共⼦序列
+155
+
+为了⽅便理解此表，我们暂时认为索引是从 1 开始的，待会的代码中只要稍
+作调整即可。其中， dp[i][j]  的含义是：对于  s1[1..i]  和  s2[1..j] ，
+它们的 LCS ⻓度是  dp[i][j] 。
+⽐如上图的例⼦，d[2][4] 的含义就是：对于  "ac"  和  "babc" ，它们的
+LCS ⻓度是 2。我们最终想得到的答案应该是  dp[3][6] 。
+第⼆步，定义 base case。
+我们专门让索引为 0 的⾏和列表⽰空串， dp[0][..]  和  dp[..][0]  都应该
+初始化为 0，这就是 base case。
+⽐如说，按照刚才 dp 数组的定义， dp[0][3]=0  的含义是：对于字符串
+ ""  和  "bab" ，其 LCS 的⻓度为 0。因为有⼀个字符串是空串，它们的最
+⻓公共⼦序列的⻓度显然应该是 0。
+第三步，找状态转移⽅程。
+这是动态规划最难的⼀步，不过好在这种字符串问题的套路都差不多，权且
+借这道题来聊聊处理这类问题的思路。
+经典动态规划：最⻓公共⼦序列
+156
+
+状态转移说简单些就是做选择，⽐如说这个问题，是求  s1  和  s2  的最⻓
+公共⼦序列，不妨称这个⼦序列为  lcs 。那么对于  s1  和  s2  中的每个
+字符，有什么选择？很简单，两种选择，要么在  lcs  中，要么不在。
+这个「在」和「不在」就是选择，关键是，应该如何选择呢？这个需要动点
+脑筋：如果某个字符应该在  lcs  中，那么这个字符肯定同时存在于  s1  和
+ s2  中，因为  lcs  是最⻓公共⼦序列嘛。所以本题的思路是这样：
+⽤两个指针  i  和  j  从后往前遍历  s1  和  s2 ，如果  s1[i]==s2[j] ，那
+么这个字符⼀定在  lcs  中；否则的话， s1[i]  和  s2[j]  这两个字符⾄少
+有⼀个不在  lcs  中，需要丢弃⼀个。先看⼀下递归解法，⽐较容易理解：
+def longestCommonSubsequence(str1, str2) -> int:
+    def dp(i, j):
+        # 空串的 base case
+        if i == -1 or j == -1:
+            return 0
+        if str1[i] == str2[j]:
+            # 这边找到⼀个 lcs 的元素，继续往前找
+            return dp(i - 1, j - 1) + 1
+        else:
+            # 谁能让 lcs 最⻓，就听谁的
+            return max(dp(i-1, j), dp(i, j-1))
+经典动态规划：最⻓公共⼦序列
+157
+
+    # i 和 j 初始化为最后⼀个索引
+    return dp(len(str1)-1, len(str2)-1)
+对于第⼀种情况，找到⼀个  lcs  中的字符，同时将  i   j  向前移动⼀
+位，并给  lcs  的⻓度加⼀；对于后者，则尝试两种情况，取更⼤的结果。
+其实这段代码就是暴⼒解法，我们可以通过备忘录或者 DP table 来优化时间
+复杂度，⽐如通过前⽂描述的 DP table 来解决：
+def longestCommonSubsequence(str1, str2) -> int:
+    m, n = len(str1), len(str2)
+    # 构建 DP table 和 base case
+    dp = [[0] * (n + 1) for _ in range(m + 1)]
+    # 进⾏状态转移
+    for i in range(1, m + 1):
+        for j in range(1, n + 1):
+            if str1[i - 1] == str2[j - 1]:
+                # 找到⼀个 lcs 中的字符
+                dp[i][j] = 1 + dp[i-1][j-1]
+            else:
+                dp[i][j] = max(dp[i-1][j], dp[i][j-1])
+    return dp[-1][-1]
+⼆、疑难解答
+对于  s1[i]  和  s2[j]  不相等的情况，⾄少有⼀个字符不在  lcs  中，会不
+会两个字符都不在呢？⽐如下⾯这种情况：
+经典动态规划：最⻓公共⼦序列
+158
+
+所以代码是不是应该考虑这种情况，改成这样：
+if str1[i - 1] == str2[j - 1]:
+    # ...
+else:
+    dp[i][j] = max(dp[i-1][j], 
+                   dp[i][j-1],
+                   dp[i-1][j-1])
+我⼀开始也有这种怀疑，其实可以这样改，也能得到正确答案，但是多此⼀
+举，因为  dp[i-1][j-1]  永远是三者中最⼩的，max 根本不可能取到它。
+原因在于我们对 dp 数组的定义：对于  s1[1..i]  和  s2[1..j] ，它们的
+LCS ⻓度是  dp[i][j] 。
+经典动态规划：最⻓公共⼦序列
+159
+
+这样⼀看，显然  dp[i-1][j-1]  对应的  lcs  ⻓度不可能⽐前两种情况⼤，
+所以没有必要参与⽐较。
+三、总结
+对于两个字符串的动态规划问题，⼀般来说都是像本⽂⼀样定义 DP table，
+因为这样定义有⼀个好处，就是容易写出状态转移⽅程， dp[i][j]  的状态
+可以通过之前的状态推导出来：
+经典动态规划：最⻓公共⼦序列
+160
+
+找状态转移⽅程的⽅法是，思考每个状态有哪些「选择」，只要我们能⽤正
+确的逻辑做出正确的选择，算法就能够正确运⾏。
+＿＿＿＿＿＿＿＿＿＿＿＿＿
+刷算法，学套路，认准 labuladong。
+本⼩抄即将出版，关注 labuladong 公众号或 ongline book 查看更新⽂章，
+后台回复「进群」可进刷题群，labuladong 带你⽇穿 LeetCode。
+经典动态规划：最⻓公共⼦序列
+161
+
+动态规划之⼦序列问题解题模板
+学好算法全靠套路，认准 labuladong 就够了。
+读完本⽂，你不仅学会了算法套路，还可以顺便去 LeetCode 上拿下如下题
+⽬：
+516.最⻓回⽂⼦序列
+⼦序列问题是常⻅的算法问题，⽽且并不好解决。
+⾸先，⼦序列问题本⾝就相对⼦串、⼦数组更困难⼀些，因为前者是不连续
+的序列，⽽后两者是连续的，就算穷举你都不⼀定会，更别说求解相关的算
+法问题了。
+⽽且，⼦序列问题很可能涉及到两个字符串，⽐如前⽂「最⻓公共⼦序
+列」，如果没有⼀定的处理经验，真的不容易想出来。所以本⽂就来扒⼀扒
+⼦序列问题的套路，其实就有两种模板，相关问题只要往这两种思路上想，
+⼗拿九稳。
+⼀般来说，这类问题都是让你求⼀个最⻓⼦序列，因为最短⼦序列就是⼀个
+字符嘛，没啥可问的。⼀旦涉及到⼦序列和最值，那⼏乎可以肯定，考察的
+是动态规划技巧，时间复杂度⼀般都是 O(n^2)。
+原因很简单，你想想⼀个字符串，它的⼦序列有多少种可能？起码是指数级
+的吧，这种情况下，不⽤动态规划技巧，还想怎么着？
+既然要⽤动态规划，那就要定义 dp 数组，找状态转移关系。我们说的两种
+思路模板，就是 dp 数组的定义思路。不同的问题可能需要不同的 dp 数组定
+义来解决。
+⼀、两种思路
+动态规划之⼦序列问题解题模板
+1624:["$","main",null,{"style":{"maxWidth":760,"margin":"0 auto","padding":"16px","minHeight":"100vh"},"children":[["$","$Lc",null,{"href":"/columns/","style":{"display":"inline-block","marginBottom":"12px","fontSize":"13px"},"children":"← 返回专栏"}],["$","div",null,{"style":{"fontSize":"12px","color":"var(--text-tertiary)","marginBottom":"4px"},"children":["📕"," ","labuladong 算法小抄"]}],["$","h1",null,{"style":{"fontSize":"22px","fontWeight":700,"margin":"0 0 16px"},"children":"经典动态规划：最长公共子序列"}],["$","$Ld",null,{"children":"$e"}],false]}]
+a:[["$","meta","0",{"name":"viewport","content":"width=device-width, initial-scale=1"}],["$","meta","1",{"name":"theme-color","content":"#f97316"}]]
+8:[["$","meta","0",{"charSet":"utf-8"}],["$","title","1",{"children":"经典动态规划：最长公共子序列 - 算法面试"}],["$","meta","2",{"name":"description","content":"LeetCode 热题 100 完整 Java 题解、逐题动画、知识专栏与智能间隔复习。"}],["$","meta","3",{"name":"application-name","content":"算法面试"}],["$","link","4",{"rel":"manifest","href":"/algorithm-interview/manifest.json","crossOrigin":"$undefined"}],["$","meta","5",{"name":"keywords","content":"LeetCode,热题100,算法面试,Java题解,数据结构,动态规划,面试刷题"}],["$","meta","6",{"name":"mobile-web-app-capable","content":"yes"}],["$","meta","7",{"name":"apple-mobile-web-app-title","content":"算法面试"}],["$","meta","8",{"name":"apple-mobile-web-app-status-bar-style","content":"default"}],["$","meta","9",{"property":"og:title","content":"算法面试题库"}],["$","meta","10",{"property":"og:description","content":"LeetCode 热题 100 完整 Java 题解、逐题动画、知识专栏与智能复习"}],["$","meta","11",{"property":"og:site_name","content":"算法面试题库"}],["$","meta","12",{"property":"og:locale","content":"zh_CN"}],["$","meta","13",{"property":"og:type","content":"website"}],["$","meta","14",{"name":"twitter:card","content":"summary"}],["$","meta","15",{"name":"twitter:title","content":"算法面试题库"}],["$","meta","16",{"name":"twitter:description","content":"LeetCode 热题 100 完整 Java 题解、逐题动画、知识专栏与智能复习"}]]
+6:null

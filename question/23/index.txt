@@ -1,0 +1,154 @@
+1:"$Sreact.fragment"
+2:I[5244,[],""]
+3:I[3866,[],""]
+5:I[6213,[],"OutletBoundary"]
+7:I[6213,[],"MetadataBoundary"]
+9:I[6213,[],"ViewportBoundary"]
+b:I[4835,[],""]
+:HL["/algorithm-interview/_next/static/css/c1e787639001e16b.css","style"]
+0:{"P":null,"b":"xos97fAiWtKfKXI6hZLx4","p":"/algorithm-interview","c":["","question","23",""],"i":false,"f":[[["",{"children":["question",{"children":[["lcId","23","d"],{"children":["__PAGE__",{}]}]}]},"$undefined","$undefined",true],["",["$","$1","c",{"children":[[["$","link","0",{"rel":"stylesheet","href":"/algorithm-interview/_next/static/css/c1e787639001e16b.css","precedence":"next","crossOrigin":"$undefined","nonce":"$undefined"}]],["$","html",null,{"lang":"zh","children":[["$","head",null,{"children":["$","script",null,{"dangerouslySetInnerHTML":{"__html":"\ntry {\n  var raw = localStorage.getItem('algo-interview');\n  var theme = 'light';\n  if (raw) { var p = JSON.parse(raw); theme = (p.state && p.state.theme) || 'light'; }\n  if (theme === 'dark') {\n    document.documentElement.classList.add('dark');\n    document.documentElement.setAttribute('data-theme', 'dark');\n  }\n} catch (e) {}\n"}}]}],["$","body",null,{"children":[["$","$L2",null,{"parallelRouterKey":"children","segmentPath":["children"],"error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L3",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":[[],[["$","title",null,{"children":"404: This page could not be found."}],["$","div",null,{"style":{"fontFamily":"system-ui,\"Segoe UI\",Roboto,Helvetica,Arial,sans-serif,\"Apple Color Emoji\",\"Segoe UI Emoji\"","height":"100vh","textAlign":"center","display":"flex","flexDirection":"column","alignItems":"center","justifyContent":"center"},"children":["$","div",null,{"children":[["$","style",null,{"dangerouslySetInnerHTML":{"__html":"body{color:#000;background:#fff;margin:0}.next-error-h1{border-right:1px solid rgba(0,0,0,.3)}@media (prefers-color-scheme:dark){body{color:#fff;background:#000}.next-error-h1{border-right:1px solid rgba(255,255,255,.3)}}"}}],["$","h1",null,{"className":"next-error-h1","style":{"display":"inline-block","margin":"0 20px 0 0","padding":"0 23px 0 0","fontSize":24,"fontWeight":500,"verticalAlign":"top","lineHeight":"49px"},"children":404}],["$","div",null,{"style":{"display":"inline-block"},"children":["$","h2",null,{"style":{"fontSize":14,"fontWeight":400,"lineHeight":"49px","margin":0},"children":"This page could not be found."}]}]]}]}]]],"forbidden":"$undefined","unauthorized":"$undefined"}],["$","script",null,{"dangerouslySetInnerHTML":{"__html":"\nif ('serviceWorker' in navigator) {\n  window.addEventListener('load', function () {\n    navigator.serviceWorker.register('/algorithm-interview/sw.js').catch(function () {});\n  });\n}\n"}}]]}]]}]]}],{"children":["question",["$","$1","c",{"children":[null,["$","$L2",null,{"parallelRouterKey":"children","segmentPath":["children","question","children"],"error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L3",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","forbidden":"$undefined","unauthorized":"$undefined"}]]}],{"children":[["lcId","23","d"],["$","$1","c",{"children":[null,["$","$L2",null,{"parallelRouterKey":"children","segmentPath":["children","question","children","$0:f:0:1:2:children:2:children:0","children"],"error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L3",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","forbidden":"$undefined","unauthorized":"$undefined"}]]}],{"children":["__PAGE__",["$","$1","c",{"children":["$L4",null,["$","$L5",null,{"children":"$L6"}]]}],{},null,false]},null,false]},null,false]},null,false],["$","$1","h",{"children":[null,["$","$1","cBzmmtEDD3Q_YW0mbUhkl",{"children":[["$","$L7",null,{"children":"$L8"}],["$","$L9",null,{"children":"$La"}],null]}]]}],false]],"m":"$undefined","G":["$b","$undefined"],"s":false,"S":true}
+c:I[8173,["173","static/chunks/173-69860a4742bb7020.js","829","static/chunks/829-7533e70598480772.js","937","static/chunks/937-ef36a5ac4bc37a7e.js","447","static/chunks/447-06af9414e164c047.js","8","static/chunks/app/question/%5BlcId%5D/page-478b0d2a69e222f2.js"],""]
+d:I[3447,["173","static/chunks/173-69860a4742bb7020.js","829","static/chunks/829-7533e70598480772.js","937","static/chunks/937-ef36a5ac4bc37a7e.js","447","static/chunks/447-06af9414e164c047.js","8","static/chunks/app/question/%5BlcId%5D/page-478b0d2a69e222f2.js"],"default"]
+e:T219d,# 23. 合并 K 个升序链表
+
+> 难度：**Hard** | 分类：链表 | 标签：链表, 分治, 堆, 归并排序
+
+> 🔗 力扣链接：[https://leetcode.cn/problems/merge-k-sorted-lists/](https://leetcode.cn/problems/merge-k-sorted-lists/)
+
+## 📝 题目描述
+
+给你 K 条已经排好序的链表，要把它们合成一条，合成之后也得是升序的。
+
+重点不是"会不会合并"，而是"K 条链表的情况下，怎么每次都快速找到最小的那个节点"。
+
+- 题号：23
+- 题目名：合并 K 个升序链表
+- 难度：困难
+- 题型：链表
+- 为什么选这题：它是"合并两个有序链表"的直接升级版，能让你一次学会堆（优先队列）和分治两种思路，是从中等跳到困难的经典跳板。
+
+## 🧠 思考路径
+
+最朴素的想法：每次从 K 条链表的当前头节点中，遍历找出最小值，取下来接到结果链表末尾，重复直到所有链表都为空。这样做每找一个节点要比较 K 次，总共 N 个节点，时间复杂度 `O(NK)`，K 大了就很慢。
+
+能不能更快地找到"当前 K 个头节点中的最小值"？这就想到了最小堆（优先队列）。把 K 个头节点全扔进堆里，每次弹出的就是全局最小，再把弹出节点的 next 塞回堆里。堆操作是 `O(logK)`，总时间 `O(NlogK)`，大幅优化。
+
+另一种思路是分治：两两合并，像锦标赛一样层层向上。第一轮 K 条变成 K/2 条，第二轮 K/2 变成 K/4 条……总共 `logK` 轮，每轮所有节点参与一次合并，也是 `O(NlogK)`。
+
+两种方法复杂度一样，但堆的写法更直觉，分治的写法更优雅。
+
+## 💻 Java 题解
+
+### 解法 1：小顶堆（优先队列）
+
+把每个链表的头节点放入小顶堆。每次弹出最小的，接到结果后面，然后把它的 next 放入堆。
+
+- ⏱ 时间复杂度：`O(N log k)`
+- 💾 空间复杂度：`O(k)`
+
+```java
+class Solution {
+    public ListNode mergeKLists(ListNode[] lists) {
+        PriorityQueue<ListNode> pq = new PriorityQueue<>((a, b) -> a.val - b.val);
+        for (ListNode l : lists) if (l != null) pq.offer(l);
+        ListNode dummy = new ListNode(0), tail = dummy;
+        while (!pq.isEmpty()) {
+            ListNode node = pq.poll();
+            tail.next = node;
+            tail = tail.next;
+            if (node.next != null) pq.offer(node.next);
+        }
+        return dummy.next;
+    }
+}
+```
+
+**关键点：**
+- 堆中始终有 k 个元素（每个链表一个）
+- 弹出最小→接上→放入 next
+- O(N log k)
+
+**执行步骤：**
+1. 所有头节点入堆
+1. 弹最小节点接到结果
+1. 该节点 next 入堆
+1. 重复直到堆空
+
+
+## ⚠️ 易错点
+
+- Python 的 `heapq` 在元组比较时，如果 `val` 相同会继续比较下一个元素。`ListNode` 不支持比较，会报错。解决办法是在元组中加一个唯一的 `index` 字段来打破平局。
+- 输入的 `lists` 可能包含空链表（`None`/`null`），入堆前必须判空，否则空指针异常。
+- 分治写法里，`left == right` 是递归终止条件，漏掉这一步会无限递归。
+
+- 空链表不要入堆
+
+- Comparator 用 lambda 比较值
+
+## 📊 复杂度分析
+
+- 时间复杂度：`O(NlogK)`，其中 N 是所有节点的总数，K 是链表条数。每个节点入堆出堆各一次，每次堆操作 `O(logK)`。
+- 空间复杂度：`O(K)`（堆方案），堆里最多同时存 K 个节点。分治方案的空间是 `O(logK)` 的递归栈深度。
+
+## 🏢 实际业务应用
+
+- **搜索引擎的结果合并**：Google、Bing 等搜索引擎会从多个索引分片（shard）返回各自排好序的结果，汇总层需要把这些有序列表合并成一条统一的排序结果返回给用户，用的就是多路归并。
+- **日志系统的多源聚合**：ELK Stack、Splunk 等日志平台在查询时间范围内的日志时，数据可能分散在多个节点上、各自按时间排序，聚合服务需要多路归并成一条时间有序的日志流。
+- **数据库的 External Sort**：MySQL、PostgreSQL 在处理大数据量的 `ORDER BY` 时，如果数据量超过内存，会先把各块排序成有序的临时文件，最后用多路归并合并这些有序段。
+- **音视频播放器的多字幕/多音轨同步**：VLC、FFmpeg 在处理多路字幕流或音频流时，需要按时间戳将多路有序流合并成统一的输出时间线。
+
+- **搜索引擎的结果合并**：Google、Bing 等搜索引擎会从多个索引分片（shard）返回各自排好序的结果，汇总层需要把这些有序列表合并成一条统一的排序结果返回给用户，用的就是多路归并。
+- **日志系统的多源聚合**：ELK Stack、Splunk 等日志平台在查询时间范围内的日志时，数据可能分散在多个节点上、各自按时间排序，聚合服务需要多路归并成一条时间有序的日志流。
+- **数据库的 External Sort**：MySQL、PostgreSQL 在处理大数据量的 `ORDER BY` 时，如果数据量超过内存，会先把各块排序成有序的临时文件，最后用多路归并合并这些有序段。
+- **音视频播放器的多字幕/多音轨同步**：VLC、FFmpeg 在处理多路字幕流或音频流时，需要按时间戳将多路有序流合并成统一的输出时间线。
+
+## 📖 形象类比
+
+可以类比《三国演义》中赤壁之战前，孙刘联军收集各方情报的过程。
+
+周瑜帐下有多路斥候，分别从荆州、合肥、汉中方向探来消息。每路斥候传回的军报已经按时间排好序（先发生的事先报）。周瑜需要把这些军报按时间线合并成一份完整的情报总览，呈给孙权。
+
+他不会把所有军报摊开乱翻，而是每次只看各路最新的那份，挑出最早的，接到时间线上；然后那路斥候再递上下一份，继续比较。
+
+对应关系：
+
+- "各路斥候的军报"对应 K 条有序链表
+- "每路最新那份"对应各链表的当前头节点
+- "挑出最早的"对应堆顶弹出最小值
+- "接到时间线上"对应链接到结果链表
+- "递上下一份"对应把 next 节点推入堆
+
+可以类比《三国演义》中赤壁之战前，孙刘联军收集各方情报的过程。
+
+周瑜帐下有多路斥候，分别从荆州、合肥、汉中方向探来消息。每路斥候传回的军报已经按时间排好序（先发生的事先报）。周瑜需要把这些军报按时间线合并成一份完整的情报总览，呈给孙权。
+
+他不会把所有军报摊开乱翻，而是每次只看各路最新的那份，挑出最早的，接到时间线上；然后那路斥候再递上下一份，继续比较。
+
+对应关系：
+
+- "各路斥候的军报"对应 K 条有序链表
+- "每路最新那份"对应各链表的当前头节点
+- "挑出最早的"对应堆顶弹出最小值
+- "接到时间线上"对应链接到结果链表
+- "递上下一份"对应把 next 节点推入堆
+
+森林小学要举办朗诵会，小兔老师让 K 个小组各排好队，每组都按身高从矮到高站好了。现在要把所有组合成一条长队，也按身高排。小兔老师每次只看每组的第一个同学，选出最矮的那个出列站到新队伍末尾，那个同学后面的人自动往前挪一位。一直选，直到所有同学都站好了。森林里的小动物们发现，这样每次只需要比较"各组排头"就行了，不用把所有同学都看一遍。
+
+森林小学要举办朗诵会，小兔老师让 K 个小组各排好队，每组都按身高从矮到高站好了。现在要把所有组合成一条长队，也按身高排。小兔老师每次只看每组的第一个同学，选出最矮的那个出列站到新队伍末尾，那个同学后面的人自动往前挪一位。一直选，直到所有同学都站好了。森林里的小动物们发现，这样每次只需要比较"各组排头"就行了，不用把所有同学都看一遍。
+
+## 🎵 记忆口诀
+
+K 路排头比最小，堆顶出列接尾巴。
+
+K 路排头比最小，堆顶出列接尾巴。
+
+## 🔗 延伸练习
+
+- `21. 合并两个有序链表`：本题的基础版，先做它再来挑战 K 路合并。
+- `378. 有序矩阵中第 K 小的元素`：同样是多路有序数据中找最小，堆的用法完全一致，只是输出从"全部合并"变成了"找到第 K 个"。
+
+- `21. 合并两个有序链表`：本题的基础版，先做它再来挑战 K 路合并。
+- `378. 有序矩阵中第 K 小的元素`：同样是多路有序数据中找最小，堆的用法完全一致，只是输出从"全部合并"变成了"找到第 K 个"。4:["$","main",null,{"className":"detail-main","style":{"maxWidth":760,"margin":"0 auto","padding":"16px","minHeight":"100vh"},"children":[["$","$Lc",null,{"href":"/","style":{"display":"inline-block","marginBottom":"12px","fontSize":"13px"},"children":"← 返回题库"}],["$","h1",null,{"style":{"fontSize":"22px","fontWeight":700,"margin":"0 0 4px"},"children":[["$","span",null,{"style":{"marginRight":"6px"},"children":"⛓️"}],23,". ","合并 K 个升序链表"]}],["$","$Ld",null,{"q":{"id":"0023","lcId":23,"slug":"merge-k-sorted-lists","title":"合并 K 个升序链表","question":"合并 K 个升序链表","answer":"$e","difficulty":"Hard","category":"linked-list","categories":["linked-list"],"tags":["链表","分治","堆","归并排序"],"url":"https://leetcode.cn/problems/merge-k-sorted-lists/","planOrder":34,"hasViz":true,"hasDiagram":false,"feynman":{"essence":"给你 K 条已经排好序的链表，要把它们合成一条，合成之后也得是升序的。  重点不是\"会不会合并\"，而是\"K 条链表的情况下，怎么每次都快速找到最小的那个节点\"。","analogy":"","key_points":[]},"first_principle":{"problem":"","axioms":[],"rebuild":""}}}]]}]
+a:[["$","meta","0",{"name":"viewport","content":"width=device-width, initial-scale=1"}],["$","meta","1",{"name":"theme-color","content":"#f97316"}]]
+8:[["$","meta","0",{"charSet":"utf-8"}],["$","title","1",{"children":"23. 合并 K 个升序链表 - 算法面试"}],["$","meta","2",{"name":"description","content":"给你 K 条已经排好序的链表，要把它们合成一条，合成之后也得是升序的。  重点不是\"会不会合并\"，而是\"K 条链表的情况下，怎么每次都快速找到最小的那个节点\"。"}],["$","meta","3",{"name":"application-name","content":"算法面试"}],["$","link","4",{"rel":"manifest","href":"/algorithm-interview/manifest.json","crossOrigin":"$undefined"}],["$","meta","5",{"name":"keywords","content":"合并 K 个升序链表,LeetCode 23,Hard,链表,分治,堆,归并排序"}],["$","meta","6",{"name":"mobile-web-app-capable","content":"yes"}],["$","meta","7",{"name":"apple-mobile-web-app-title","content":"算法面试"}],["$","meta","8",{"name":"apple-mobile-web-app-status-bar-style","content":"default"}],["$","meta","9",{"property":"og:title","content":"23. 合并 K 个升序链表"}],["$","meta","10",{"property":"og:description","content":"给你 K 条已经排好序的链表，要把它们合成一条，合成之后也得是升序的。  重点不是\"会不会合并\"，而是\"K 条链表的情况下，怎么每次都快速找到最小的那个节点\"。"}],["$","meta","11",{"property":"og:locale","content":"zh_CN"}],["$","meta","12",{"property":"og:type","content":"article"}],["$","meta","13",{"name":"twitter:card","content":"summary"}],["$","meta","14",{"name":"twitter:title","content":"23. 合并 K 个升序链表"}],["$","meta","15",{"name":"twitter:description","content":"给你 K 条已经排好序的链表，要把它们合成一条，合成之后也得是升序的。  重点不是\"会不会合并\"，而是\"K 条链表的情况下，怎么每次都快速找到最小的那个节点\"。"}]]
+6:null

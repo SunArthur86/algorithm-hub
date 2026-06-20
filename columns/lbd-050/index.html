@@ -1,0 +1,148 @@
+<!DOCTYPE html><html lang="zh"><head><meta charSet="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="/algorithm-interview/_next/static/css/c1e787639001e16b.css" data-precedence="next"/><link rel="preload" as="script" fetchPriority="low" href="/algorithm-interview/_next/static/chunks/webpack-65b8ce4c1158f96f.js"/><script src="/algorithm-interview/_next/static/chunks/4bd1b696-899926250d3992f1.js" async=""></script><script src="/algorithm-interview/_next/static/chunks/517-b6df7dad4ff96d0b.js" async=""></script><script src="/algorithm-interview/_next/static/chunks/main-app-9e7bfff32fd8ebe9.js" async=""></script><script src="/algorithm-interview/_next/static/chunks/173-69860a4742bb7020.js" async=""></script><script src="/algorithm-interview/_next/static/chunks/829-7533e70598480772.js" async=""></script><script src="/algorithm-interview/_next/static/chunks/app/columns/%5Bslug%5D/page-58fc1d8f5085c1ff.js" async=""></script><meta name="theme-color" content="#f97316"/><title>前缀和技巧 - 算法面试</title><meta name="description" content="LeetCode 热题 100 完整 Java 题解、逐题动画、知识专栏与智能间隔复习。"/><meta name="application-name" content="算法面试"/><link rel="manifest" href="/algorithm-interview/manifest.json"/><meta name="keywords" content="LeetCode,热题100,算法面试,Java题解,数据结构,动态规划,面试刷题"/><meta name="mobile-web-app-capable" content="yes"/><meta name="apple-mobile-web-app-title" content="算法面试"/><meta name="apple-mobile-web-app-status-bar-style" content="default"/><meta property="og:title" content="算法面试题库"/><meta property="og:description" content="LeetCode 热题 100 完整 Java 题解、逐题动画、知识专栏与智能复习"/><meta property="og:site_name" content="算法面试题库"/><meta property="og:locale" content="zh_CN"/><meta property="og:type" content="website"/><meta name="twitter:card" content="summary"/><meta name="twitter:title" content="算法面试题库"/><meta name="twitter:description" content="LeetCode 热题 100 完整 Java 题解、逐题动画、知识专栏与智能复习"/><script>
+try {
+  var raw = localStorage.getItem('algo-interview');
+  var theme = 'light';
+  if (raw) { var p = JSON.parse(raw); theme = (p.state && p.state.theme) || 'light'; }
+  if (theme === 'dark') {
+    document.documentElement.classList.add('dark');
+    document.documentElement.setAttribute('data-theme', 'dark');
+  }
+} catch (e) {}
+</script><script src="/algorithm-interview/_next/static/chunks/polyfills-42372ed130431b0a.js" noModule=""></script></head><body><main style="max-width:760px;margin:0 auto;padding:16px;min-height:100vh"><a style="display:inline-block;margin-bottom:12px;font-size:13px" href="/algorithm-interview/columns/">← 返回专栏</a><div style="font-size:12px;color:var(--text-tertiary);margin-bottom:4px">📕<!-- --> <!-- -->labuladong 算法小抄</div><h1 style="font-size:22px;font-weight:700;margin:0 0 16px">前缀和技巧</h1><div class="prose max-w-none" style="font-size:14px;color:var(--text)"><h1>前缀和技巧</h1>
+<p>前缀和技巧
+学算法，认准 labuladong 就够了！
+今天来聊⼀道简单却⼗分巧妙的算法问题：算出⼀共有⼏个和为 k 的⼦数
+组。
+那我把所有⼦数组都穷举出来，算它们的和，看看谁的和等于 k 不就⾏了。
+关键是，如何快速得到某个⼦数组的和呢，⽐如说给你⼀个数组  nums ，让
+你实现⼀个接⼝  sum(i, j) ，这个接⼝要返回  nums[i..j]  的和，⽽且会被
+多次调⽤，你怎么实现这个接⼝呢？
+因为接⼝要被多次调⽤，显然不能每次都去遍历  nums[i..j] ，有没有⼀种
+快速的⽅法在 O(1) 时间内算出  nums[i..j]  呢？这就需要前缀和技巧了。
+⼀、什么是前缀和
+前缀和的思路是这样的，对于⼀个给定的数组  nums ，我们额外开辟⼀个前
+缀和数组进⾏预处理：
+int n = nums.length;
+// 前缀和数组
+前缀和技巧
+342</p>
+<p>int[] preSum = new int[n + 1];
+preSum[0] = 0;
+for (int i = 0; i &lt; n; i++)
+preSum[i + 1] = preSum[i] + nums[i];
+这个前缀和数组  preSum  的含义也很好理解， preSum[i]  就是  nums[0..i-
+1]  的和。那么如果我们想求  nums[i..j]  的和，只需要⼀步操作
+preSum[j+1]-preSum[i]  即可，⽽不需要重新去遍历数组了。
+回到这个⼦数组问题，我们想求有多少个⼦数组的和为 k，借助前缀和技巧
+很容易写出⼀个解法：
+int subarraySum(int[] nums, int k) {
+int n = nums.length;
+// 构造前缀和
+int[] sum = new int[n + 1];
+sum[0] = 0;
+for (int i = 0; i &lt; n; i++)
+sum[i + 1] = sum[i] + nums[i];
+int ans = 0;
+// 穷举所有⼦数组
+for (int i = 1; i &lt;= n; i++)
+for (int j = 0; j &lt; i; j++)
+前缀和技巧
+343</p>
+<pre><code>        // sum of nums[j..i-1]
+        if (sum[i] - sum[j] == k)
+            ans++;
+return ans;
+</code></pre>
+<p>}
+这个解法的时间复杂度  O(N^2)  空间复杂度  O(N) ，并不是最优的解法。不
+过通过这个解法理解了前缀和数组的⼯作原理之后，可以使⽤⼀些巧妙的办
+法把时间复杂度进⼀步降低。
+⼆、优化解法
+前⾯的解法有嵌套的 for 循环：
+for (int i = 1; i &lt;= n; i++)
+for (int j = 0; j &lt; i; j++)
+if (sum[i] - sum[j] == k)
+ans++;
+第⼆层 for 循环在⼲嘛呢？翻译⼀下就是，在计算，有⼏个  j  能够使得
+sum[i]  和  sum[j]  的差为 k。毎找到⼀个这样的  j ，就把结果加⼀。
+我们可以把 if 语句⾥的条件判断移项，这样写：
+if (sum[j] == sum[i] - k)
+ans++;
+优化的思路是：我直接记录下有⼏个  sum[j]  和  sum[i] - k  相等，直接更
+新结果，就避免了内层的 for 循环。我们可以⽤哈希表，在记录前缀和的同
+时记录该前缀和出现的次数。
+int subarraySum(int[] nums, int k) {
+int n = nums.length;
+// map：前缀和 -&gt; 该前缀和出现的次数
+HashMap&lt;Integer, Integer&gt;
+前缀和技巧
+344</p>
+<pre><code>    preSum = new HashMap&lt;&gt;();
+// base case
+preSum.put(0, 1);
+int ans = 0, sum0_i = 0;
+for (int i = 0; i &lt; n; i++) {
+    sum0_i += nums[i];
+    // 这是我们想找的前缀和 nums[0..j]
+    int sum0_j = sum0_i - k;
+    // 如果前⾯有这个前缀和，则直接更新答案
+    if (preSum.containsKey(sum0_j))
+        ans += preSum.get(sum0_j);
+    // 把前缀和 nums[0..i] 加⼊并记录出现次数
+    preSum.put(sum0_i, 
+        preSum.getOrDefault(sum0_i, 0) + 1);
+}
+return ans;
+</code></pre>
+<p>}
+⽐如说下⾯这个情况，需要前缀和 8 就能找到和为 k 的⼦数组了，之前的暴
+⼒解法需要遍历数组去数有⼏个 8，⽽优化解法借助哈希表可以直接得知有
+⼏个前缀和为 8。
+这样，就把时间复杂度降到了  O(N) ，是最优解法了。
+前缀和技巧
+345</p>
+<p>三、总结
+前缀和不难，却很有⽤，主要⽤于处理数组区间的问题。
+⽐如说，让你统计班上同学考试成绩在不同分数段的百分⽐，也可以利⽤前
+缀和技巧：
+int[] scores; // 存储着所有同学的分数
+// 试卷满分 150 分
+int[] count = new int[150 + 1]
+// 记录每个分数有⼏个同学
+for (int score : scores)
+count[score]++
+// 构造前缀和
+for (int i = 1; i &lt; count.length; i++)
+count[i] = count[i] + count[i-1];
+这样，给你任何⼀个分数段，你都能通过前缀和相减快速计算出这个分数段
+的⼈数，百分⽐也就很容易计算了。
+但是，稍微复杂⼀些的算法问题，不⽌考察简单的前缀和技巧。⽐如本⽂探
+讨的这道题⽬，就需要借助前缀和的思路做进⼀步的优化，借助哈希表去除
+不必要的嵌套循环。可⻅对题⽬的理解和细节的分析能⼒对于算法的优化是
+⾄关重要的。
+希望本⽂对你有帮助。
+＿＿＿＿＿＿＿＿＿＿＿＿＿
+刷算法，学套路，认准 labuladong。
+本⼩抄即将出版，关注 labuladong 公众号或 ongline book 查看更新⽂章，
+后台回复「进群」可进刷题群，labuladong 带你⽇穿 LeetCode。
+前缀和技巧
+346</p>
+<p>前缀和技巧
+347</p>
+<p>字符串乘法
+学算法，认准 labuladong 就够了！
+对于⽐较⼩的数字，做运算可以直接使⽤编程语⾔提供的运算符，但是如果
+相乘的两个因数⾮常⼤，语⾔提供的数据类型可能就会溢出。⼀种替代⽅案
+就是，运算数以字符串的形式输⼊，然后模仿我们⼩学学习的乘法算术过程
+计算出结果，并且也⽤字符串表⽰。
+需要注意的是， num1  和  num2  可以⾮常⻓，所以不可以把他们直接转成
+整型然后运算，唯⼀的思路就是模仿我们⼿算乘法。
+⽐如说我们⼿算  123 × 45 ，应该会这样计算：
+字符串乘法
+348</p></div></main><script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function () {
+    navigator.serviceWorker.register('/algorithm-interview/sw.js').catch(function () {});
+  });
+}
+</script><script src="/algorithm-interview/_next/static/chunks/webpack-65b8ce4c1158f96f.js" async=""></script><script>(self.__next_f=self.__next_f||[]).push([0])</script><script>self.__next_f.push([1,"1:\"$Sreact.fragment\"\n2:I[5244,[],\"\"]\n3:I[3866,[],\"\"]\n5:I[6213,[],\"OutletBoundary\"]\n7:I[6213,[],\"MetadataBoundary\"]\n9:I[6213,[],\"ViewportBoundary\"]\nb:I[4835,[],\"\"]\n:HL[\"/algorithm-interview/_next/static/css/c1e787639001e16b.css\",\"style\"]\n"])</script><script>self.__next_f.push([1,"0:{\"P\":null,\"b\":\"xos97fAiWtKfKXI6hZLx4\",\"p\":\"/algorithm-interview\",\"c\":[\"\",\"columns\",\"lbd-050\",\"\"],\"i\":false,\"f\":[[[\"\",{\"children\":[\"columns\",{\"children\":[[\"slug\",\"lbd-050\",\"d\"],{\"children\":[\"__PAGE__\",{}]}]}]},\"$undefined\",\"$undefined\",true],[\"\",[\"$\",\"$1\",\"c\",{\"children\":[[[\"$\",\"link\",\"0\",{\"rel\":\"stylesheet\",\"href\":\"/algorithm-interview/_next/static/css/c1e787639001e16b.css\",\"precedence\":\"next\",\"crossOrigin\":\"$undefined\",\"nonce\":\"$undefined\"}]],[\"$\",\"html\",null,{\"lang\":\"zh\",\"children\":[[\"$\",\"head\",null,{\"children\":[\"$\",\"script\",null,{\"dangerouslySetInnerHTML\":{\"__html\":\"\\ntry {\\n  var raw = localStorage.getItem('algo-interview');\\n  var theme = 'light';\\n  if (raw) { var p = JSON.parse(raw); theme = (p.state \u0026\u0026 p.state.theme) || 'light'; }\\n  if (theme === 'dark') {\\n    document.documentElement.classList.add('dark');\\n    document.documentElement.setAttribute('data-theme', 'dark');\\n  }\\n} catch (e) {}\\n\"}}]}],[\"$\",\"body\",null,{\"children\":[[\"$\",\"$L2\",null,{\"parallelRouterKey\":\"children\",\"segmentPath\":[\"children\"],\"error\":\"$undefined\",\"errorStyles\":\"$undefined\",\"errorScripts\":\"$undefined\",\"template\":[\"$\",\"$L3\",null,{}],\"templateStyles\":\"$undefined\",\"templateScripts\":\"$undefined\",\"notFound\":[[],[[\"$\",\"title\",null,{\"children\":\"404: This page could not be found.\"}],[\"$\",\"div\",null,{\"style\":{\"fontFamily\":\"system-ui,\\\"Segoe UI\\\",Roboto,Helvetica,Arial,sans-serif,\\\"Apple Color Emoji\\\",\\\"Segoe UI Emoji\\\"\",\"height\":\"100vh\",\"textAlign\":\"center\",\"display\":\"flex\",\"flexDirection\":\"column\",\"alignItems\":\"center\",\"justifyContent\":\"center\"},\"children\":[\"$\",\"div\",null,{\"children\":[[\"$\",\"style\",null,{\"dangerouslySetInnerHTML\":{\"__html\":\"body{color:#000;background:#fff;margin:0}.next-error-h1{border-right:1px solid rgba(0,0,0,.3)}@media (prefers-color-scheme:dark){body{color:#fff;background:#000}.next-error-h1{border-right:1px solid rgba(255,255,255,.3)}}\"}}],[\"$\",\"h1\",null,{\"className\":\"next-error-h1\",\"style\":{\"display\":\"inline-block\",\"margin\":\"0 20px 0 0\",\"padding\":\"0 23px 0 0\",\"fontSize\":24,\"fontWeight\":500,\"verticalAlign\":\"top\",\"lineHeight\":\"49px\"},\"children\":404}],[\"$\",\"div\",null,{\"style\":{\"display\":\"inline-block\"},\"children\":[\"$\",\"h2\",null,{\"style\":{\"fontSize\":14,\"fontWeight\":400,\"lineHeight\":\"49px\",\"margin\":0},\"children\":\"This page could not be found.\"}]}]]}]}]]],\"forbidden\":\"$undefined\",\"unauthorized\":\"$undefined\"}],[\"$\",\"script\",null,{\"dangerouslySetInnerHTML\":{\"__html\":\"\\nif ('serviceWorker' in navigator) {\\n  window.addEventListener('load', function () {\\n    navigator.serviceWorker.register('/algorithm-interview/sw.js').catch(function () {});\\n  });\\n}\\n\"}}]]}]]}]]}],{\"children\":[\"columns\",[\"$\",\"$1\",\"c\",{\"children\":[null,[\"$\",\"$L2\",null,{\"parallelRouterKey\":\"children\",\"segmentPath\":[\"children\",\"columns\",\"children\"],\"error\":\"$undefined\",\"errorStyles\":\"$undefined\",\"errorScripts\":\"$undefined\",\"template\":[\"$\",\"$L3\",null,{}],\"templateStyles\":\"$undefined\",\"templateScripts\":\"$undefined\",\"notFound\":\"$undefined\",\"forbidden\":\"$undefined\",\"unauthorized\":\"$undefined\"}]]}],{\"children\":[[\"slug\",\"lbd-050\",\"d\"],[\"$\",\"$1\",\"c\",{\"children\":[null,[\"$\",\"$L2\",null,{\"parallelRouterKey\":\"children\",\"segmentPath\":[\"children\",\"columns\",\"children\",\"$0:f:0:1:2:children:2:children:0\",\"children\"],\"error\":\"$undefined\",\"errorStyles\":\"$undefined\",\"errorScripts\":\"$undefined\",\"template\":[\"$\",\"$L3\",null,{}],\"templateStyles\":\"$undefined\",\"templateScripts\":\"$undefined\",\"notFound\":\"$undefined\",\"forbidden\":\"$undefined\",\"unauthorized\":\"$undefined\"}]]}],{\"children\":[\"__PAGE__\",[\"$\",\"$1\",\"c\",{\"children\":[\"$L4\",null,[\"$\",\"$L5\",null,{\"children\":\"$L6\"}]]}],{},null,false]},null,false]},null,false]},null,false],[\"$\",\"$1\",\"h\",{\"children\":[null,[\"$\",\"$1\",\"-vRd4nmQFsNnzcJtqlbVZ\",{\"children\":[[\"$\",\"$L7\",null,{\"children\":\"$L8\"}],[\"$\",\"$L9\",null,{\"children\":\"$La\"}],null]}]]}],false]],\"m\":\"$undefined\",\"G\":[\"$b\",\"$undefined\"],\"s\":false,\"S\":true}\n"])</script><script>self.__next_f.push([1,"c:I[8173,[\"173\",\"static/chunks/173-69860a4742bb7020.js\",\"829\",\"static/chunks/829-7533e70598480772.js\",\"306\",\"static/chunks/app/columns/%5Bslug%5D/page-58fc1d8f5085c1ff.js\"],\"\"]\nd:I[4780,[\"173\",\"static/chunks/173-69860a4742bb7020.js\",\"829\",\"static/chunks/829-7533e70598480772.js\",\"306\",\"static/chunks/app/columns/%5Bslug%5D/page-58fc1d8f5085c1ff.js\"],\"default\"]\ne:T168b,"])</script><script>self.__next_f.push([1,"# 前缀和技巧\n\n前缀和技巧\n学算法，认准 labuladong 就够了！\n今天来聊⼀道简单却⼗分巧妙的算法问题：算出⼀共有⼏个和为 k 的⼦数\n组。\n那我把所有⼦数组都穷举出来，算它们的和，看看谁的和等于 k 不就⾏了。\n关键是，如何快速得到某个⼦数组的和呢，⽐如说给你⼀个数组  nums ，让\n你实现⼀个接⼝  sum(i, j) ，这个接⼝要返回  nums[i..j]  的和，⽽且会被\n多次调⽤，你怎么实现这个接⼝呢？\n因为接⼝要被多次调⽤，显然不能每次都去遍历  nums[i..j] ，有没有⼀种\n快速的⽅法在 O(1) 时间内算出  nums[i..j]  呢？这就需要前缀和技巧了。\n⼀、什么是前缀和\n前缀和的思路是这样的，对于⼀个给定的数组  nums ，我们额外开辟⼀个前\n缀和数组进⾏预处理：\nint n = nums.length;\n// 前缀和数组\n前缀和技巧\n342\n\nint[] preSum = new int[n + 1];\npreSum[0] = 0;\nfor (int i = 0; i \u003c n; i++)\n    preSum[i + 1] = preSum[i] + nums[i];\n这个前缀和数组  preSum  的含义也很好理解， preSum[i]  就是  nums[0..i-\n1]  的和。那么如果我们想求  nums[i..j]  的和，只需要⼀步操作\n preSum[j+1]-preSum[i]  即可，⽽不需要重新去遍历数组了。\n回到这个⼦数组问题，我们想求有多少个⼦数组的和为 k，借助前缀和技巧\n很容易写出⼀个解法：\nint subarraySum(int[] nums, int k) {\n    int n = nums.length;\n    // 构造前缀和\n    int[] sum = new int[n + 1];\n    sum[0] = 0; \n    for (int i = 0; i \u003c n; i++)\n        sum[i + 1] = sum[i] + nums[i];\n    int ans = 0;\n    // 穷举所有⼦数组\n    for (int i = 1; i \u003c= n; i++)\n        for (int j = 0; j \u003c i; j++)\n前缀和技巧\n343\n\n            // sum of nums[j..i-1]\n            if (sum[i] - sum[j] == k)\n                ans++;\n    return ans;\n}\n这个解法的时间复杂度  O(N^2)  空间复杂度  O(N) ，并不是最优的解法。不\n过通过这个解法理解了前缀和数组的⼯作原理之后，可以使⽤⼀些巧妙的办\n法把时间复杂度进⼀步降低。\n⼆、优化解法\n前⾯的解法有嵌套的 for 循环：\nfor (int i = 1; i \u003c= n; i++)\n    for (int j = 0; j \u003c i; j++)\n        if (sum[i] - sum[j] == k)\n            ans++;\n第⼆层 for 循环在⼲嘛呢？翻译⼀下就是，在计算，有⼏个  j  能够使得\n sum[i]  和  sum[j]  的差为 k。毎找到⼀个这样的  j ，就把结果加⼀。\n我们可以把 if 语句⾥的条件判断移项，这样写：\nif (sum[j] == sum[i] - k)\n    ans++;\n优化的思路是：我直接记录下有⼏个  sum[j]  和  sum[i] - k  相等，直接更\n新结果，就避免了内层的 for 循环。我们可以⽤哈希表，在记录前缀和的同\n时记录该前缀和出现的次数。\nint subarraySum(int[] nums, int k) {\n    int n = nums.length;\n    // map：前缀和 -\u003e 该前缀和出现的次数\n    HashMap\u003cInteger, Integer\u003e \n前缀和技巧\n344\n\n        preSum = new HashMap\u003c\u003e();\n    // base case\n    preSum.put(0, 1);\n    int ans = 0, sum0_i = 0;\n    for (int i = 0; i \u003c n; i++) {\n        sum0_i += nums[i];\n        // 这是我们想找的前缀和 nums[0..j]\n        int sum0_j = sum0_i - k;\n        // 如果前⾯有这个前缀和，则直接更新答案\n        if (preSum.containsKey(sum0_j))\n            ans += preSum.get(sum0_j);\n        // 把前缀和 nums[0..i] 加⼊并记录出现次数\n        preSum.put(sum0_i, \n            preSum.getOrDefault(sum0_i, 0) + 1);\n    }\n    return ans;\n}\n⽐如说下⾯这个情况，需要前缀和 8 就能找到和为 k 的⼦数组了，之前的暴\n⼒解法需要遍历数组去数有⼏个 8，⽽优化解法借助哈希表可以直接得知有\n⼏个前缀和为 8。\n这样，就把时间复杂度降到了  O(N) ，是最优解法了。\n前缀和技巧\n345\n\n三、总结\n前缀和不难，却很有⽤，主要⽤于处理数组区间的问题。\n⽐如说，让你统计班上同学考试成绩在不同分数段的百分⽐，也可以利⽤前\n缀和技巧：\nint[] scores; // 存储着所有同学的分数\n// 试卷满分 150 分\nint[] count = new int[150 + 1]\n// 记录每个分数有⼏个同学\nfor (int score : scores)\n    count[score]++\n// 构造前缀和\nfor (int i = 1; i \u003c count.length; i++)\n    count[i] = count[i] + count[i-1];\n这样，给你任何⼀个分数段，你都能通过前缀和相减快速计算出这个分数段\n的⼈数，百分⽐也就很容易计算了。\n但是，稍微复杂⼀些的算法问题，不⽌考察简单的前缀和技巧。⽐如本⽂探\n讨的这道题⽬，就需要借助前缀和的思路做进⼀步的优化，借助哈希表去除\n不必要的嵌套循环。可⻅对题⽬的理解和细节的分析能⼒对于算法的优化是\n⾄关重要的。\n希望本⽂对你有帮助。\n＿＿＿＿＿＿＿＿＿＿＿＿＿\n刷算法，学套路，认准 labuladong。\n本⼩抄即将出版，关注 labuladong 公众号或 ongline book 查看更新⽂章，\n后台回复「进群」可进刷题群，labuladong 带你⽇穿 LeetCode。\n前缀和技巧\n346\n\n前缀和技巧\n347\n\n字符串乘法\n学算法，认准 labuladong 就够了！\n对于⽐较⼩的数字，做运算可以直接使⽤编程语⾔提供的运算符，但是如果\n相乘的两个因数⾮常⼤，语⾔提供的数据类型可能就会溢出。⼀种替代⽅案\n就是，运算数以字符串的形式输⼊，然后模仿我们⼩学学习的乘法算术过程\n计算出结果，并且也⽤字符串表⽰。\n需要注意的是， num1  和  num2  可以⾮常⻓，所以不可以把他们直接转成\n整型然后运算，唯⼀的思路就是模仿我们⼿算乘法。\n⽐如说我们⼿算  123 × 45 ，应该会这样计算：\n字符串乘法\n348"])</script><script>self.__next_f.push([1,"4:[\"$\",\"main\",null,{\"style\":{\"maxWidth\":760,\"margin\":\"0 auto\",\"padding\":\"16px\",\"minHeight\":\"100vh\"},\"children\":[[\"$\",\"$Lc\",null,{\"href\":\"/columns/\",\"style\":{\"display\":\"inline-block\",\"marginBottom\":\"12px\",\"fontSize\":\"13px\"},\"children\":\"← 返回专栏\"}],[\"$\",\"div\",null,{\"style\":{\"fontSize\":\"12px\",\"color\":\"var(--text-tertiary)\",\"marginBottom\":\"4px\"},\"children\":[\"📕\",\" \",\"labuladong 算法小抄\"]}],[\"$\",\"h1\",null,{\"style\":{\"fontSize\":\"22px\",\"fontWeight\":700,\"margin\":\"0 0 16px\"},\"children\":\"前缀和技巧\"}],[\"$\",\"$Ld\",null,{\"children\":\"$e\"}],false]}]\n"])</script><script>self.__next_f.push([1,"a:[[\"$\",\"meta\",\"0\",{\"name\":\"viewport\",\"content\":\"width=device-width, initial-scale=1\"}],[\"$\",\"meta\",\"1\",{\"name\":\"theme-color\",\"content\":\"#f97316\"}]]\n"])</script><script>self.__next_f.push([1,"8:[[\"$\",\"meta\",\"0\",{\"charSet\":\"utf-8\"}],[\"$\",\"title\",\"1\",{\"children\":\"前缀和技巧 - 算法面试\"}],[\"$\",\"meta\",\"2\",{\"name\":\"description\",\"content\":\"LeetCode 热题 100 完整 Java 题解、逐题动画、知识专栏与智能间隔复习。\"}],[\"$\",\"meta\",\"3\",{\"name\":\"application-name\",\"content\":\"算法面试\"}],[\"$\",\"link\",\"4\",{\"rel\":\"manifest\",\"href\":\"/algorithm-interview/manifest.json\",\"crossOrigin\":\"$undefined\"}],[\"$\",\"meta\",\"5\",{\"name\":\"keywords\",\"content\":\"LeetCode,热题100,算法面试,Java题解,数据结构,动态规划,面试刷题\"}],[\"$\",\"meta\",\"6\",{\"name\":\"mobile-web-app-capable\",\"content\":\"yes\"}],[\"$\",\"meta\",\"7\",{\"name\":\"apple-mobile-web-app-title\",\"content\":\"算法面试\"}],[\"$\",\"meta\",\"8\",{\"name\":\"apple-mobile-web-app-status-bar-style\",\"content\":\"default\"}],[\"$\",\"meta\",\"9\",{\"property\":\"og:title\",\"content\":\"算法面试题库\"}],[\"$\",\"meta\",\"10\",{\"property\":\"og:description\",\"content\":\"LeetCode 热题 100 完整 Java 题解、逐题动画、知识专栏与智能复习\"}],[\"$\",\"meta\",\"11\",{\"property\":\"og:site_name\",\"content\":\"算法面试题库\"}],[\"$\",\"meta\",\"12\",{\"property\":\"og:locale\",\"content\":\"zh_CN\"}],[\"$\",\"meta\",\"13\",{\"property\":\"og:type\",\"content\":\"website\"}],[\"$\",\"meta\",\"14\",{\"name\":\"twitter:card\",\"content\":\"summary\"}],[\"$\",\"meta\",\"15\",{\"name\":\"twitter:title\",\"content\":\"算法面试题库\"}],[\"$\",\"meta\",\"16\",{\"name\":\"twitter:description\",\"content\":\"LeetCode 热题 100 完整 Java 题解、逐题动画、知识专栏与智能复习\"}]]\n"])</script><script>self.__next_f.push([1,"6:null\n"])</script></body></html>

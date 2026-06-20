@@ -1,0 +1,143 @@
+1:"$Sreact.fragment"
+2:I[5244,[],""]
+3:I[3866,[],""]
+5:I[6213,[],"OutletBoundary"]
+7:I[6213,[],"MetadataBoundary"]
+9:I[6213,[],"ViewportBoundary"]
+b:I[4835,[],""]
+:HL["/algorithm-interview/_next/static/css/c1e787639001e16b.css","style"]
+0:{"P":null,"b":"xos97fAiWtKfKXI6hZLx4","p":"/algorithm-interview","c":["","question","226",""],"i":false,"f":[[["",{"children":["question",{"children":[["lcId","226","d"],{"children":["__PAGE__",{}]}]}]},"$undefined","$undefined",true],["",["$","$1","c",{"children":[[["$","link","0",{"rel":"stylesheet","href":"/algorithm-interview/_next/static/css/c1e787639001e16b.css","precedence":"next","crossOrigin":"$undefined","nonce":"$undefined"}]],["$","html",null,{"lang":"zh","children":[["$","head",null,{"children":["$","script",null,{"dangerouslySetInnerHTML":{"__html":"\ntry {\n  var raw = localStorage.getItem('algo-interview');\n  var theme = 'light';\n  if (raw) { var p = JSON.parse(raw); theme = (p.state && p.state.theme) || 'light'; }\n  if (theme === 'dark') {\n    document.documentElement.classList.add('dark');\n    document.documentElement.setAttribute('data-theme', 'dark');\n  }\n} catch (e) {}\n"}}]}],["$","body",null,{"children":[["$","$L2",null,{"parallelRouterKey":"children","segmentPath":["children"],"error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L3",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":[[],[["$","title",null,{"children":"404: This page could not be found."}],["$","div",null,{"style":{"fontFamily":"system-ui,\"Segoe UI\",Roboto,Helvetica,Arial,sans-serif,\"Apple Color Emoji\",\"Segoe UI Emoji\"","height":"100vh","textAlign":"center","display":"flex","flexDirection":"column","alignItems":"center","justifyContent":"center"},"children":["$","div",null,{"children":[["$","style",null,{"dangerouslySetInnerHTML":{"__html":"body{color:#000;background:#fff;margin:0}.next-error-h1{border-right:1px solid rgba(0,0,0,.3)}@media (prefers-color-scheme:dark){body{color:#fff;background:#000}.next-error-h1{border-right:1px solid rgba(255,255,255,.3)}}"}}],["$","h1",null,{"className":"next-error-h1","style":{"display":"inline-block","margin":"0 20px 0 0","padding":"0 23px 0 0","fontSize":24,"fontWeight":500,"verticalAlign":"top","lineHeight":"49px"},"children":404}],["$","div",null,{"style":{"display":"inline-block"},"children":["$","h2",null,{"style":{"fontSize":14,"fontWeight":400,"lineHeight":"49px","margin":0},"children":"This page could not be found."}]}]]}]}]]],"forbidden":"$undefined","unauthorized":"$undefined"}],["$","script",null,{"dangerouslySetInnerHTML":{"__html":"\nif ('serviceWorker' in navigator) {\n  window.addEventListener('load', function () {\n    navigator.serviceWorker.register('/algorithm-interview/sw.js').catch(function () {});\n  });\n}\n"}}]]}]]}]]}],{"children":["question",["$","$1","c",{"children":[null,["$","$L2",null,{"parallelRouterKey":"children","segmentPath":["children","question","children"],"error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L3",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","forbidden":"$undefined","unauthorized":"$undefined"}]]}],{"children":[["lcId","226","d"],["$","$1","c",{"children":[null,["$","$L2",null,{"parallelRouterKey":"children","segmentPath":["children","question","children","$0:f:0:1:2:children:2:children:0","children"],"error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L3",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","forbidden":"$undefined","unauthorized":"$undefined"}]]}],{"children":["__PAGE__",["$","$1","c",{"children":["$L4",null,["$","$L5",null,{"children":"$L6"}]]}],{},null,false]},null,false]},null,false]},null,false],["$","$1","h",{"children":[null,["$","$1","LUhV30QWvZMY8gOAWPopg",{"children":[["$","$L7",null,{"children":"$L8"}],["$","$L9",null,{"children":"$La"}],null]}]]}],false]],"m":"$undefined","G":["$b","$undefined"],"s":false,"S":true}
+c:I[8173,["173","static/chunks/173-69860a4742bb7020.js","829","static/chunks/829-7533e70598480772.js","937","static/chunks/937-ef36a5ac4bc37a7e.js","447","static/chunks/447-06af9414e164c047.js","8","static/chunks/app/question/%5BlcId%5D/page-478b0d2a69e222f2.js"],""]
+d:I[3447,["173","static/chunks/173-69860a4742bb7020.js","829","static/chunks/829-7533e70598480772.js","937","static/chunks/937-ef36a5ac4bc37a7e.js","447","static/chunks/447-06af9414e164c047.js","8","static/chunks/app/question/%5BlcId%5D/page-478b0d2a69e222f2.js"],"default"]
+e:T1ad0,# 226. 翻转二叉树
+
+> 难度：**Easy** | 分类：二叉树 | 标签：树, 深度优先搜索, 广度优先搜索, 二叉树
+
+> 🔗 力扣链接：[https://leetcode.cn/problems/invert-binary-tree/](https://leetcode.cn/problems/invert-binary-tree/)
+
+## 📝 题目描述
+
+给你一棵二叉树的根节点，翻转这棵树，即交换每个节点的左右子树。
+
+重点不在"怎么翻转"，而在"怎么用递归让每个节点都做同样的交换操作"。
+
+- 题号：226
+- 题目名：翻转二叉树
+- 难度：简单
+- 题型：二叉树
+- 为什么选这题：它是最经典的二叉树递归入门题——"对每个节点做同一件事"，三行代码就能解决，但理解它的递归思维是学好所有树题的基础。
+
+## 🧠 思考路径
+
+这题的直觉非常直接：对每个节点，把它的左孩子和右孩子交换一下就行了。问题是：怎么确保整棵树都被翻转？
+
+答案就是递归。对根节点，先交换它的左右孩子。交换完之后，左子树和右子树各自内部还没有翻转，所以对左子树递归做同样的操作，再对右子树递归做。递归到叶子节点（空节点）时自然停止。
+
+也可以用迭代的方式，借助队列做层序遍历：每个节点出队时交换它的左右孩子，如果有孩子就入队。效果完全一样。
+
+这题之所以出名，还因为一个典故：Homebrew 的作者 Max Howell 在 Google 面试时没写出这题，被拒了。他在推特上说"Google: 90% of our engineers use the software you wrote (Homebrew), but you can't invert a binary tree on a whiteboard so f*** off"，让这道题成为了算法面试文化的标志。
+
+这题的关键词不是"翻转"，而是"递归的本质就是让每个节点做同一件简单的事"。
+
+## 💻 Java 题解
+
+### 解法 1：递归交换
+
+交换当前节点的左右子树，递归翻转左右子树。
+
+- ⏱ 时间复杂度：`O(n)`
+- 💾 空间复杂度：`O(h)`
+
+```java
+class Solution {
+    public TreeNode invertTree(TreeNode root) {
+        if (root == null) return null;
+        TreeNode temp = root.left;
+        root.left = invertTree(root.right);
+        root.right = invertTree(temp);
+        return root;
+    }
+}
+```
+
+**关键点：**
+- 交换左右子树
+- 递归处理子树
+
+**执行步骤：**
+1. 保存左子树引用
+1. left=递归翻转右子树
+1. right=递归翻转保存的左子树
+
+
+## ⚠️ 易错点
+
+- Python 的 `root.left, root.right = root.right, root.left` 可以一行完成交换；Java 需要临时变量，不能连续赋值。
+- 递归时交换和递归的顺序不影响结果——先交换再递归，或先递归再交换，都可以。
+- 空节点必须判断，否则访问 `null.left` 会报错。
+
+- 先保存 left 再赋值，否则会丢失引用
+
+## 📊 复杂度分析
+
+- 时间复杂度：`O(n)`。每个节点恰好被访问一次。
+- 空间复杂度：递归法 `O(h)`（`h` 为树高，递归栈深度），最坏 `O(n)`（退化为链表）；迭代法 `O(n)`（队列最多存一层节点）。
+
+## 🏢 实际业务应用
+
+- 数据库索引（B+ 树）在分裂或合并节点时，需要交换左右子树的指针，逻辑上和翻转二叉树的操作非常类似。
+- 编译器的 AST（抽象语法树）变换中，交换运算符两侧的操作数（比如把 `a - b` 变成 `b - a` 的等价变换），本质上就是在树上做节点交换。
+- 图像处理中的镜像翻转，如果图像数据存储在树结构中，翻转操作就是交换每个节点的左右子树。
+
+- 数据库索引（B+ 树）在分裂或合并节点时，需要交换左右子树的指针，逻辑上和翻转二叉树的操作非常类似。
+- 编译器的 AST（抽象语法树）变换中，交换运算符两侧的操作数（比如把 `a - b` 变成 `b - a` 的等价变换），本质上就是在树上做节点交换。
+- 图像处理中的镜像翻转，如果图像数据存储在树结构中，翻转操作就是交换每个节点的左右子树。
+
+## 📖 形象类比
+
+可以把它类比成《红楼梦》里大观园中左右对称的院落交换。
+
+贾母让下人把大观园里每个院子的东厢房和西厢房对调。总管不用画复杂的图纸，只需要一个规则：到每个院子，把东厢和西厢互换；然后去东厢看看还有没有更小的院落，有就同样换；再去西厢看看。每个院子做的事完全一样，最后整个园子的左右就全部对调了。
+
+对应关系是：
+
+- "每个院子的东厢和西厢"对应每个节点的左右子树
+- "对调"对应交换左右孩子
+- "去更小的院落继续换"对应递归处理子树
+- "总管只记一条规则"对应递归只需要一个简单操作
+
+这段记忆的关键是：不需要理解全局结构，只需要知道"到了一个节点就交换，然后去子节点继续做"。
+
+可以把它类比成《红楼梦》里大观园中左右对称的院落交换。
+
+贾母让下人把大观园里每个院子的东厢房和西厢房对调。总管不用画复杂的图纸，只需要一个规则：到每个院子，把东厢和西厢互换；然后去东厢看看还有没有更小的院落，有就同样换；再去西厢看看。每个院子做的事完全一样，最后整个园子的左右就全部对调了。
+
+对应关系是：
+
+- "每个院子的东厢和西厢"对应每个节点的左右子树
+- "对调"对应交换左右孩子
+- "去更小的院落继续换"对应递归处理子树
+- "总管只记一条规则"对应递归只需要一个简单操作
+
+这段记忆的关键是：不需要理解全局结构，只需要知道"到了一个节点就交换，然后去子节点继续做"。
+
+猫头鹰老师让小鸟们做体操："抬起左翅膀，放下右翅膀……不对，交换！左翅膀变右翅膀！"每只小鸟只需要做一件事：把左翅膀和右翅膀换一下。大鸟带小鸟，小鸟带更小的鸟，一传十十传百，整棵树上的鸟都完成了翅膀交换体操。
+
+猫头鹰老师让小鸟们做体操："抬起左翅膀，放下右翅膀……不对，交换！左翅膀变右翅膀！"每只小鸟只需要做一件事：把左翅膀和右翅膀换一下。大鸟带小鸟，小鸟带更小的鸟，一传十十传百，整棵树上的鸟都完成了翅膀交换体操。
+
+## 🎵 记忆口诀
+
+到了就换，换完往两边递归。
+
+到了就换，换完往两边递归。
+
+## 🔗 延伸练习
+
+- `101. 对称二叉树`：翻转的"镜像版"——不是翻转，而是判断左右子树是否互为镜像。
+- `951. 翻转等价二叉树`：两棵树是否可以通过若干次翻转子树的操作变成相同的。
+
+- `101. 对称二叉树`：翻转的"镜像版"——不是翻转，而是判断左右子树是否互为镜像。
+- `951. 翻转等价二叉树`：两棵树是否可以通过若干次翻转子树的操作变成相同的。4:["$","main",null,{"className":"detail-main","style":{"maxWidth":760,"margin":"0 auto","padding":"16px","minHeight":"100vh"},"children":[["$","$Lc",null,{"href":"/","style":{"display":"inline-block","marginBottom":"12px","fontSize":"13px"},"children":"← 返回题库"}],["$","h1",null,{"style":{"fontSize":"22px","fontWeight":700,"margin":"0 0 4px"},"children":[["$","span",null,{"style":{"marginRight":"6px"},"children":"🌳"}],226,". ","翻转二叉树"]}],["$","$Ld",null,{"q":{"id":"0226","lcId":226,"slug":"invert-binary-tree","title":"翻转二叉树","question":"翻转二叉树","answer":"$e","difficulty":"Easy","category":"binary-tree","categories":["binary-tree"],"tags":["树","深度优先搜索","广度优先搜索","二叉树"],"url":"https://leetcode.cn/problems/invert-binary-tree/","planOrder":38,"hasViz":true,"hasDiagram":false,"feynman":{"essence":"给你一棵二叉树的根节点，翻转这棵树，即交换每个节点的左右子树。  重点不在\"怎么翻转\"，而在\"怎么用递归让每个节点都做同样的交换操作\"。","analogy":"","key_points":[]},"first_principle":{"problem":"","axioms":[],"rebuild":""}}}]]}]
+a:[["$","meta","0",{"name":"viewport","content":"width=device-width, initial-scale=1"}],["$","meta","1",{"name":"theme-color","content":"#f97316"}]]
+8:[["$","meta","0",{"charSet":"utf-8"}],["$","title","1",{"children":"226. 翻转二叉树 - 算法面试"}],["$","meta","2",{"name":"description","content":"给你一棵二叉树的根节点，翻转这棵树，即交换每个节点的左右子树。  重点不在\"怎么翻转\"，而在\"怎么用递归让每个节点都做同样的交换操作\"。"}],["$","meta","3",{"name":"application-name","content":"算法面试"}],["$","link","4",{"rel":"manifest","href":"/algorithm-interview/manifest.json","crossOrigin":"$undefined"}],["$","meta","5",{"name":"keywords","content":"翻转二叉树,LeetCode 226,Easy,树,深度优先搜索,广度优先搜索,二叉树"}],["$","meta","6",{"name":"mobile-web-app-capable","content":"yes"}],["$","meta","7",{"name":"apple-mobile-web-app-title","content":"算法面试"}],["$","meta","8",{"name":"apple-mobile-web-app-status-bar-style","content":"default"}],["$","meta","9",{"property":"og:title","content":"226. 翻转二叉树"}],["$","meta","10",{"property":"og:description","content":"给你一棵二叉树的根节点，翻转这棵树，即交换每个节点的左右子树。  重点不在\"怎么翻转\"，而在\"怎么用递归让每个节点都做同样的交换操作\"。"}],["$","meta","11",{"property":"og:locale","content":"zh_CN"}],["$","meta","12",{"property":"og:type","content":"article"}],["$","meta","13",{"name":"twitter:card","content":"summary"}],["$","meta","14",{"name":"twitter:title","content":"226. 翻转二叉树"}],["$","meta","15",{"name":"twitter:description","content":"给你一棵二叉树的根节点，翻转这棵树，即交换每个节点的左右子树。  重点不在\"怎么翻转\"，而在\"怎么用递归让每个节点都做同样的交换操作\"。"}]]
+6:null

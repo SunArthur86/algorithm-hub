@@ -1,0 +1,270 @@
+<!DOCTYPE html><html lang="zh"><head><meta charSet="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="/algorithm-interview/_next/static/css/c1e787639001e16b.css" data-precedence="next"/><link rel="preload" as="script" fetchPriority="low" href="/algorithm-interview/_next/static/chunks/webpack-65b8ce4c1158f96f.js"/><script src="/algorithm-interview/_next/static/chunks/4bd1b696-899926250d3992f1.js" async=""></script><script src="/algorithm-interview/_next/static/chunks/517-b6df7dad4ff96d0b.js" async=""></script><script src="/algorithm-interview/_next/static/chunks/main-app-9e7bfff32fd8ebe9.js" async=""></script><script src="/algorithm-interview/_next/static/chunks/173-69860a4742bb7020.js" async=""></script><script src="/algorithm-interview/_next/static/chunks/829-7533e70598480772.js" async=""></script><script src="/algorithm-interview/_next/static/chunks/app/columns/%5Bslug%5D/page-58fc1d8f5085c1ff.js" async=""></script><meta name="theme-color" content="#f97316"/><title>LRU算法详解 - 算法面试</title><meta name="description" content="LeetCode 热题 100 完整 Java 题解、逐题动画、知识专栏与智能间隔复习。"/><meta name="application-name" content="算法面试"/><link rel="manifest" href="/algorithm-interview/manifest.json"/><meta name="keywords" content="LeetCode,热题100,算法面试,Java题解,数据结构,动态规划,面试刷题"/><meta name="mobile-web-app-capable" content="yes"/><meta name="apple-mobile-web-app-title" content="算法面试"/><meta name="apple-mobile-web-app-status-bar-style" content="default"/><meta property="og:title" content="算法面试题库"/><meta property="og:description" content="LeetCode 热题 100 完整 Java 题解、逐题动画、知识专栏与智能复习"/><meta property="og:site_name" content="算法面试题库"/><meta property="og:locale" content="zh_CN"/><meta property="og:type" content="website"/><meta name="twitter:card" content="summary"/><meta name="twitter:title" content="算法面试题库"/><meta name="twitter:description" content="LeetCode 热题 100 完整 Java 题解、逐题动画、知识专栏与智能复习"/><script>
+try {
+  var raw = localStorage.getItem('algo-interview');
+  var theme = 'light';
+  if (raw) { var p = JSON.parse(raw); theme = (p.state && p.state.theme) || 'light'; }
+  if (theme === 'dark') {
+    document.documentElement.classList.add('dark');
+    document.documentElement.setAttribute('data-theme', 'dark');
+  }
+} catch (e) {}
+</script><script src="/algorithm-interview/_next/static/chunks/polyfills-42372ed130431b0a.js" noModule=""></script></head><body><main style="max-width:760px;margin:0 auto;padding:16px;min-height:100vh"><a style="display:inline-block;margin-bottom:12px;font-size:13px" href="/algorithm-interview/columns/">← 返回专栏</a><div style="font-size:12px;color:var(--text-tertiary);margin-bottom:4px">📕<!-- --> <!-- -->labuladong 算法小抄</div><h1 style="font-size:22px;font-weight:700;margin:0 0 16px">LRU算法详解</h1><div class="prose max-w-none" style="font-size:14px;color:var(--text)"><h1>LRU算法详解</h1>
+<p>LRU算法详解
+学算法，认准 labuladong 就够了！
+⼀、什么是 LRU 算法
+就是⼀种缓存淘汰策略。
+计算机的缓存容量有限，如果缓存满了就要删除⼀些内容，给新内容腾位
+置。但问题是，删除哪些内容呢？我们肯定希望删掉哪些没什么⽤的缓存，
+⽽把有⽤的数据继续留在缓存⾥，⽅便之后继续使⽤。那么，什么样的数
+据，我们判定为「有⽤的」的数据呢？
+LRU 缓存淘汰算法就是⼀种常⽤策略。LRU 的全称是 Least Recently
+Used，也就是说我们认为最近使⽤过的数据应该是是「有⽤的」，很久都
+没⽤过的数据应该是⽆⽤的，内存满了就优先删那些很久没⽤过的数据。
+举个简单的例⼦，安卓⼿机都可以把软件放到后台运⾏，⽐如我先后打开了
+「设置」「⼿机管家」「⽇历」，那么现在他们在后台排列的顺序是这样
+的：
+LRU算法详解
+235</p>
+<p>LRU算法详解
+236</p>
+<p>但是这时候如果我访问了⼀下「设置」界⾯，那么「设置」就会被提前到第
+⼀个，变成这样：
+LRU算法详解
+237</p>
+<p>LRU算法详解
+238</p>
+<p>假设我的⼿机只允许我同时开 3 个应⽤程序，现在已经满了。那么如果我新
+开了⼀个应⽤「时钟」，就必须关闭⼀个应⽤为「时钟」腾出⼀个位置，关
+那个呢？
+按照 LRU 的策略，就关最底下的「⼿机管家」，因为那是最久未使⽤的，
+然后把新开的应⽤放到最上⾯：
+LRU算法详解
+239</p>
+<p>LRU算法详解
+240</p>
+<p>现在你应该理解 LRU（Least Recently Used）策略了。当然还有其他缓存淘
+汰策略，⽐如不要按访问的时序来淘汰，⽽是按访问频率（LFU 策略）来
+淘汰等等，各有应⽤场景。本⽂讲解 LRU 算法策略。
+⼆、LRU 算法描述
+LRU 算法实际上是让你设计数据结构：⾸先要接收⼀个 capacity 参数作为
+缓存的最⼤容量，然后实现两个 API，⼀个是 put(key, val) ⽅法存⼊键值
+对，另⼀个是 get(key) ⽅法获取 key 对应的 val，如果 key 不存在则返回
+-1。
+注意哦，get 和 put ⽅法必须都是  O(1)  的时间复杂度，我们举个具体例⼦
+来看看 LRU 算法怎么⼯作。
+/* 缓存容量为 2 */
+LRUCache cache = new LRUCache(2);
+// 你可以把 cache 理解成⼀个队列
+// 假设左边是队头，右边是队尾
+// 最近使⽤的排在队头，久未使⽤的排在队尾
+// 圆括号表⽰键值对 (key, val)
+cache.put(1, 1);
+// cache = [(1, 1)]
+cache.put(2, 2);
+// cache = [(2, 2), (1, 1)]
+cache.get(1);       // 返回 1
+// cache = [(1, 1), (2, 2)]
+// 解释：因为最近访问了键 1，所以提前⾄队头
+// 返回键 1 对应的值 1
+cache.put(3, 3);
+// cache = [(3, 3), (1, 1)]
+// 解释：缓存容量已满，需要删除内容空出位置
+// 优先删除久未使⽤的数据，也就是队尾的数据
+// 然后把新的数据插⼊队头
+cache.get(2);       // 返回 -1 (未找到)
+// cache = [(3, 3), (1, 1)]
+// 解释：cache 中不存在键为 2 的数据
+cache.put(1, 4);<br/>
+<!-- -->// cache = [(1, 4), (3, 3)]
+LRU算法详解
+241</p>
+<p>// 解释：键 1 已存在，把原始值 1 覆盖为 4
+// 不要忘了也要将键值对提前到队头
+三、LRU 算法设计
+分析上⾯的操作过程，要让 put 和 get ⽅法的时间复杂度为 O(1)，我们可以
+总结出 cache 这个数据结构必要的条件：查找快，插⼊快，删除快，有顺序
+之分。
+因为显然 cache 必须有顺序之分，以区分最近使⽤的和久未使⽤的数据；⽽
+且我们要在 cache 中查找键是否已存在；如果容量满了要删除最后⼀个数
+据；每次访问还要把数据插⼊到队头。
+那么，什么数据结构同时符合上述条件呢？哈希表查找快，但是数据⽆固定
+顺序；链表有顺序之分，插⼊删除快，但是查找慢。所以结合⼀下，形成⼀
+种新的数据结构：哈希链表。
+LRU 缓存算法的核⼼数据结构就是哈希链表，双向链表和哈希表的结合
+体。这个数据结构⻓这样：
+LRU算法详解
+242</p>
+<p>思想很简单，就是借助哈希表赋予了链表快速查找的特性嘛：可以快速查找
+某个 key 是否存在缓存（链表）中，同时可以快速删除、添加节点。回想刚
+才的例⼦，这种数据结构是不是完美解决了 LRU 缓存的需求？
+也许读者会问，为什么要是双向链表，单链表⾏不⾏？另外，既然哈希表中
+已经存了 key，为什么链表中还要存键值对呢，只存值不就⾏了？
+想的时候都是问题，只有做的时候才有答案。这样设计的原因，必须等我们
+亲⾃实现 LRU 算法之后才能理解，所以我们开始看代码吧〜
+四、代码实现
+很多编程语⾔都有内置的哈希链表或者类似 LRU 功能的库函数，但是为了
+帮⼤家理解算法的细节，我们⽤ Java ⾃⼰造轮⼦实现⼀遍 LRU 算法。
+⾸先，我们把双链表的节点类写出来，为了简化，key 和 val 都认为是 int 类
+型：
+class Node {
+public int key, val;
+public Node next, prev;
+public Node(int k, int v) {
+this.key = k;
+this.val = v;
+}
+}
+然后依靠我们的 Node 类型构建⼀个双链表，实现⼏个需要的 API（这些操
+作的时间复杂度均为  O(1) )：
+class DoubleList {<br/>
+<!-- -->// 在链表头部添加节点 x，时间 O(1)
+public void addFirst(Node x);
+// 删除链表中的 x 节点（x ⼀定存在）
+// 由于是双链表且给的是⽬标 Node 节点，时间 O(1)
+public void remove(Node x);
+LRU算法详解
+243</p>
+<pre><code>// 删除链表中最后⼀个节点，并返回该节点，时间 O(1)
+public Node removeLast();
+// 返回链表⻓度，时间 O(1)
+public int size();
+</code></pre>
+<p>}
+PS：这就是普通双向链表的实现，为了让读者集中精⼒理解 LRU 算法的逻
+辑，就省略链表的具体代码。
+到这⾥就能回答刚才“为什么必须要⽤双向链表”的问题了，因为我们需要删
+除操作。删除⼀个节点不光要得到该节点本⾝的指针，也需要操作其前驱节
+点的指针，⽽双向链表才能⽀持直接查找前驱，保证操作的时间复杂度
+O(1) 。
+有了双向链表的实现，我们只需要在 LRU 算法中把它和哈希表结合起来即
+可。我们先把逻辑理清楚：
+// key 映射到 Node(key, val)
+HashMap&lt;Integer, Node&gt; map;
+// Node(k1, v1) &lt;-&gt; Node(k2, v2)...
+DoubleList cache;
+int get(int key) {
+if (key 不存在) {
+return -1;
+} else {<br/>
+<!-- -->将数据 (key, val) 提到开头；
+return val;
+}
+}
+void put(int key, int val) {
+Node x = new Node(key, val);
+if (key 已存在) {
+把旧的数据删除；
+将新节点 x 插⼊到开头；
+} else {
+if (cache 已满) {
+LRU算法详解
+244</p>
+<pre><code>        删除链表的最后⼀个数据腾位置；
+        删除 map 中映射到该数据的键；
+    } 
+    将新节点 x 插⼊到开头；
+    map 中新建 key 对新节点 x 的映射；
+}
+</code></pre>
+<p>}
+如果能够看懂上述逻辑，翻译成代码就很容易理解了：
+class LRUCache {
+// key -&gt; Node(key, val)
+private HashMap&lt;Integer, Node&gt; map;
+// Node(k1, v1) &lt;-&gt; Node(k2, v2)...
+private DoubleList cache;
+// 最⼤容量
+private int cap;
+public LRUCache(int capacity) {
+this.cap = capacity;
+map = new HashMap&lt;&gt;();
+cache = new DoubleList();
+}
+public int get(int key) {
+if (!map.containsKey(key))
+return -1;
+int val = map.get(key).val;
+// 利⽤ put ⽅法把该数据提前
+put(key, val);
+return val;
+}
+public void put(int key, int val) {
+// 先把新节点 x 做出来
+Node x = new Node(key, val);
+if (map.containsKey(key)) {
+// 删除旧的节点，新的插到头部
+cache.remove(map.get(key));
+cache.addFirst(x);
+// 更新 map 中对应的数据
+LRU算法详解
+245</p>
+<pre><code>        map.put(key, x);
+    } else {
+        if (cap == cache.size()) {
+            // 删除链表最后⼀个数据
+            Node last = cache.removeLast();
+            map.remove(last.key);
+        }
+        // 直接添加到头部
+        cache.addFirst(x);
+        map.put(key, x);
+    }
+}
+</code></pre>
+<p>}
+这⾥就能回答之前的问答题“为什么要在链表中同时存储 key 和 val，⽽不是
+只存储 val”，注意这段代码：
+if (cap == cache.size()) {
+// 删除链表最后⼀个数据
+Node last = cache.removeLast();
+map.remove(last.key);
+}
+当缓存容量已满，我们不仅仅要删除最后⼀个 Node 节点，还要把 map 中映
+射到该节点的 key 同时删除，⽽这个 key 只能由 Node 得到。如果 Node 结
+构中只存储 val，那么我们就⽆法得知 key 是什么，就⽆法删除 map 中的
+键，造成错误。
+⾄此，你应该已经掌握 LRU 算法的思想和实现了，很容易犯错的⼀点是：
+处理链表节点的同时不要忘了更新哈希表中对节点的映射。
+＿＿＿＿＿＿＿＿＿＿＿＿＿
+刷算法，学套路，认准 labuladong。
+本⼩抄即将出版，关注 labuladong 公众号或 ongline book 查看更新⽂章，
+后台回复「进群」可进刷题群，labuladong 带你⽇穿 LeetCode。
+LRU算法详解
+246</p>
+<p>LRU算法详解
+247</p>
+<p>⼆叉搜索树操作集锦
+学算法，认准 labuladong 就够了！
+通过之前的⽂章框架思维，⼆叉树的遍历框架应该已经印到你的脑⼦⾥了，
+这篇⽂章就来实操⼀下，看看框架思维是怎么灵活运⽤，秒杀⼀切⼆叉树问
+题的。
+⼆叉树算法的设计的总路线：明确⼀个节点要做的事情，然后剩下的事抛给
+框架。
+void traverse(TreeNode root) {
+// root 需要做什么？在这做。
+// 其他的不⽤ root 操⼼，抛给框架
+traverse(root.left);
+traverse(root.right);
+}
+举两个简单的例⼦体会⼀下这个思路，热热⾝。</p>
+<ol>
+<li>如何把⼆叉树所有的节点中的值加⼀？
+void plusOne(TreeNode root) {
+if (root == null) return;
+root.val += 1;
+plusOne(root.left);
+plusOne(root.right);
+}</li>
+<li>如何判断两棵⼆叉树是否完全相同？
+boolean isSameTree(TreeNode root1, TreeNode root2) {
+// 都为空的话，显然相同
+if (root1 == null &amp;&amp; root2 == null) return true;
+⼆叉搜索树操作集锦
+248</li>
+</ol></div></main><script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function () {
+    navigator.serviceWorker.register('/algorithm-interview/sw.js').catch(function () {});
+  });
+}
+</script><script src="/algorithm-interview/_next/static/chunks/webpack-65b8ce4c1158f96f.js" async=""></script><script>(self.__next_f=self.__next_f||[]).push([0])</script><script>self.__next_f.push([1,"1:\"$Sreact.fragment\"\n2:I[5244,[],\"\"]\n3:I[3866,[],\"\"]\n5:I[6213,[],\"OutletBoundary\"]\n7:I[6213,[],\"MetadataBoundary\"]\n9:I[6213,[],\"ViewportBoundary\"]\nb:I[4835,[],\"\"]\n:HL[\"/algorithm-interview/_next/static/css/c1e787639001e16b.css\",\"style\"]\n"])</script><script>self.__next_f.push([1,"0:{\"P\":null,\"b\":\"xos97fAiWtKfKXI6hZLx4\",\"p\":\"/algorithm-interview\",\"c\":[\"\",\"columns\",\"lbd-034\",\"\"],\"i\":false,\"f\":[[[\"\",{\"children\":[\"columns\",{\"children\":[[\"slug\",\"lbd-034\",\"d\"],{\"children\":[\"__PAGE__\",{}]}]}]},\"$undefined\",\"$undefined\",true],[\"\",[\"$\",\"$1\",\"c\",{\"children\":[[[\"$\",\"link\",\"0\",{\"rel\":\"stylesheet\",\"href\":\"/algorithm-interview/_next/static/css/c1e787639001e16b.css\",\"precedence\":\"next\",\"crossOrigin\":\"$undefined\",\"nonce\":\"$undefined\"}]],[\"$\",\"html\",null,{\"lang\":\"zh\",\"children\":[[\"$\",\"head\",null,{\"children\":[\"$\",\"script\",null,{\"dangerouslySetInnerHTML\":{\"__html\":\"\\ntry {\\n  var raw = localStorage.getItem('algo-interview');\\n  var theme = 'light';\\n  if (raw) { var p = JSON.parse(raw); theme = (p.state \u0026\u0026 p.state.theme) || 'light'; }\\n  if (theme === 'dark') {\\n    document.documentElement.classList.add('dark');\\n    document.documentElement.setAttribute('data-theme', 'dark');\\n  }\\n} catch (e) {}\\n\"}}]}],[\"$\",\"body\",null,{\"children\":[[\"$\",\"$L2\",null,{\"parallelRouterKey\":\"children\",\"segmentPath\":[\"children\"],\"error\":\"$undefined\",\"errorStyles\":\"$undefined\",\"errorScripts\":\"$undefined\",\"template\":[\"$\",\"$L3\",null,{}],\"templateStyles\":\"$undefined\",\"templateScripts\":\"$undefined\",\"notFound\":[[],[[\"$\",\"title\",null,{\"children\":\"404: This page could not be found.\"}],[\"$\",\"div\",null,{\"style\":{\"fontFamily\":\"system-ui,\\\"Segoe UI\\\",Roboto,Helvetica,Arial,sans-serif,\\\"Apple Color Emoji\\\",\\\"Segoe UI Emoji\\\"\",\"height\":\"100vh\",\"textAlign\":\"center\",\"display\":\"flex\",\"flexDirection\":\"column\",\"alignItems\":\"center\",\"justifyContent\":\"center\"},\"children\":[\"$\",\"div\",null,{\"children\":[[\"$\",\"style\",null,{\"dangerouslySetInnerHTML\":{\"__html\":\"body{color:#000;background:#fff;margin:0}.next-error-h1{border-right:1px solid rgba(0,0,0,.3)}@media (prefers-color-scheme:dark){body{color:#fff;background:#000}.next-error-h1{border-right:1px solid rgba(255,255,255,.3)}}\"}}],[\"$\",\"h1\",null,{\"className\":\"next-error-h1\",\"style\":{\"display\":\"inline-block\",\"margin\":\"0 20px 0 0\",\"padding\":\"0 23px 0 0\",\"fontSize\":24,\"fontWeight\":500,\"verticalAlign\":\"top\",\"lineHeight\":\"49px\"},\"children\":404}],[\"$\",\"div\",null,{\"style\":{\"display\":\"inline-block\"},\"children\":[\"$\",\"h2\",null,{\"style\":{\"fontSize\":14,\"fontWeight\":400,\"lineHeight\":\"49px\",\"margin\":0},\"children\":\"This page could not be found.\"}]}]]}]}]]],\"forbidden\":\"$undefined\",\"unauthorized\":\"$undefined\"}],[\"$\",\"script\",null,{\"dangerouslySetInnerHTML\":{\"__html\":\"\\nif ('serviceWorker' in navigator) {\\n  window.addEventListener('load', function () {\\n    navigator.serviceWorker.register('/algorithm-interview/sw.js').catch(function () {});\\n  });\\n}\\n\"}}]]}]]}]]}],{\"children\":[\"columns\",[\"$\",\"$1\",\"c\",{\"children\":[null,[\"$\",\"$L2\",null,{\"parallelRouterKey\":\"children\",\"segmentPath\":[\"children\",\"columns\",\"children\"],\"error\":\"$undefined\",\"errorStyles\":\"$undefined\",\"errorScripts\":\"$undefined\",\"template\":[\"$\",\"$L3\",null,{}],\"templateStyles\":\"$undefined\",\"templateScripts\":\"$undefined\",\"notFound\":\"$undefined\",\"forbidden\":\"$undefined\",\"unauthorized\":\"$undefined\"}]]}],{\"children\":[[\"slug\",\"lbd-034\",\"d\"],[\"$\",\"$1\",\"c\",{\"children\":[null,[\"$\",\"$L2\",null,{\"parallelRouterKey\":\"children\",\"segmentPath\":[\"children\",\"columns\",\"children\",\"$0:f:0:1:2:children:2:children:0\",\"children\"],\"error\":\"$undefined\",\"errorStyles\":\"$undefined\",\"errorScripts\":\"$undefined\",\"template\":[\"$\",\"$L3\",null,{}],\"templateStyles\":\"$undefined\",\"templateScripts\":\"$undefined\",\"notFound\":\"$undefined\",\"forbidden\":\"$undefined\",\"unauthorized\":\"$undefined\"}]]}],{\"children\":[\"__PAGE__\",[\"$\",\"$1\",\"c\",{\"children\":[\"$L4\",null,[\"$\",\"$L5\",null,{\"children\":\"$L6\"}]]}],{},null,false]},null,false]},null,false]},null,false],[\"$\",\"$1\",\"h\",{\"children\":[null,[\"$\",\"$1\",\"1dXDBiu44_fzK2GygGFd8\",{\"children\":[[\"$\",\"$L7\",null,{\"children\":\"$L8\"}],[\"$\",\"$L9\",null,{\"children\":\"$La\"}],null]}]]}],false]],\"m\":\"$undefined\",\"G\":[\"$b\",\"$undefined\"],\"s\":false,\"S\":true}\n"])</script><script>self.__next_f.push([1,"c:I[8173,[\"173\",\"static/chunks/173-69860a4742bb7020.js\",\"829\",\"static/chunks/829-7533e70598480772.js\",\"306\",\"static/chunks/app/columns/%5Bslug%5D/page-58fc1d8f5085c1ff.js\"],\"\"]\nd:I[4780,[\"173\",\"static/chunks/173-69860a4742bb7020.js\",\"829\",\"static/chunks/829-7533e70598480772.js\",\"306\",\"static/chunks/app/columns/%5Bslug%5D/page-58fc1d8f5085c1ff.js\"],\"default\"]\ne:T2909,"])</script><script>self.__next_f.push([1,"# LRU算法详解\n\nLRU算法详解\n学算法，认准 labuladong 就够了！\n⼀、什么是 LRU 算法\n就是⼀种缓存淘汰策略。\n计算机的缓存容量有限，如果缓存满了就要删除⼀些内容，给新内容腾位\n置。但问题是，删除哪些内容呢？我们肯定希望删掉哪些没什么⽤的缓存，\n⽽把有⽤的数据继续留在缓存⾥，⽅便之后继续使⽤。那么，什么样的数\n据，我们判定为「有⽤的」的数据呢？\nLRU 缓存淘汰算法就是⼀种常⽤策略。LRU 的全称是 Least Recently\nUsed，也就是说我们认为最近使⽤过的数据应该是是「有⽤的」，很久都\n没⽤过的数据应该是⽆⽤的，内存满了就优先删那些很久没⽤过的数据。\n举个简单的例⼦，安卓⼿机都可以把软件放到后台运⾏，⽐如我先后打开了\n「设置」「⼿机管家」「⽇历」，那么现在他们在后台排列的顺序是这样\n的：\nLRU算法详解\n235\n\nLRU算法详解\n236\n\n但是这时候如果我访问了⼀下「设置」界⾯，那么「设置」就会被提前到第\n⼀个，变成这样：\nLRU算法详解\n237\n\nLRU算法详解\n238\n\n假设我的⼿机只允许我同时开 3 个应⽤程序，现在已经满了。那么如果我新\n开了⼀个应⽤「时钟」，就必须关闭⼀个应⽤为「时钟」腾出⼀个位置，关\n那个呢？\n按照 LRU 的策略，就关最底下的「⼿机管家」，因为那是最久未使⽤的，\n然后把新开的应⽤放到最上⾯：\nLRU算法详解\n239\n\nLRU算法详解\n240\n\n现在你应该理解 LRU（Least Recently Used）策略了。当然还有其他缓存淘\n汰策略，⽐如不要按访问的时序来淘汰，⽽是按访问频率（LFU 策略）来\n淘汰等等，各有应⽤场景。本⽂讲解 LRU 算法策略。\n⼆、LRU 算法描述\nLRU 算法实际上是让你设计数据结构：⾸先要接收⼀个 capacity 参数作为\n缓存的最⼤容量，然后实现两个 API，⼀个是 put(key, val) ⽅法存⼊键值\n对，另⼀个是 get(key) ⽅法获取 key 对应的 val，如果 key 不存在则返回\n-1。\n注意哦，get 和 put ⽅法必须都是  O(1)  的时间复杂度，我们举个具体例⼦\n来看看 LRU 算法怎么⼯作。\n/* 缓存容量为 2 */\nLRUCache cache = new LRUCache(2);\n// 你可以把 cache 理解成⼀个队列\n// 假设左边是队头，右边是队尾\n// 最近使⽤的排在队头，久未使⽤的排在队尾\n// 圆括号表⽰键值对 (key, val)\ncache.put(1, 1);\n// cache = [(1, 1)]\ncache.put(2, 2);\n// cache = [(2, 2), (1, 1)]\ncache.get(1);       // 返回 1\n// cache = [(1, 1), (2, 2)]\n// 解释：因为最近访问了键 1，所以提前⾄队头\n// 返回键 1 对应的值 1\ncache.put(3, 3);\n// cache = [(3, 3), (1, 1)]\n// 解释：缓存容量已满，需要删除内容空出位置\n// 优先删除久未使⽤的数据，也就是队尾的数据\n// 然后把新的数据插⼊队头\ncache.get(2);       // 返回 -1 (未找到)\n// cache = [(3, 3), (1, 1)]\n// 解释：cache 中不存在键为 2 的数据\ncache.put(1, 4);    \n// cache = [(1, 4), (3, 3)]\nLRU算法详解\n241\n\n// 解释：键 1 已存在，把原始值 1 覆盖为 4\n// 不要忘了也要将键值对提前到队头\n三、LRU 算法设计\n分析上⾯的操作过程，要让 put 和 get ⽅法的时间复杂度为 O(1)，我们可以\n总结出 cache 这个数据结构必要的条件：查找快，插⼊快，删除快，有顺序\n之分。\n因为显然 cache 必须有顺序之分，以区分最近使⽤的和久未使⽤的数据；⽽\n且我们要在 cache 中查找键是否已存在；如果容量满了要删除最后⼀个数\n据；每次访问还要把数据插⼊到队头。\n那么，什么数据结构同时符合上述条件呢？哈希表查找快，但是数据⽆固定\n顺序；链表有顺序之分，插⼊删除快，但是查找慢。所以结合⼀下，形成⼀\n种新的数据结构：哈希链表。\nLRU 缓存算法的核⼼数据结构就是哈希链表，双向链表和哈希表的结合\n体。这个数据结构⻓这样：\nLRU算法详解\n242\n\n思想很简单，就是借助哈希表赋予了链表快速查找的特性嘛：可以快速查找\n某个 key 是否存在缓存（链表）中，同时可以快速删除、添加节点。回想刚\n才的例⼦，这种数据结构是不是完美解决了 LRU 缓存的需求？\n也许读者会问，为什么要是双向链表，单链表⾏不⾏？另外，既然哈希表中\n已经存了 key，为什么链表中还要存键值对呢，只存值不就⾏了？\n想的时候都是问题，只有做的时候才有答案。这样设计的原因，必须等我们\n亲⾃实现 LRU 算法之后才能理解，所以我们开始看代码吧〜\n四、代码实现\n很多编程语⾔都有内置的哈希链表或者类似 LRU 功能的库函数，但是为了\n帮⼤家理解算法的细节，我们⽤ Java ⾃⼰造轮⼦实现⼀遍 LRU 算法。\n⾸先，我们把双链表的节点类写出来，为了简化，key 和 val 都认为是 int 类\n型：\nclass Node {\n    public int key, val;\n    public Node next, prev;\n    public Node(int k, int v) {\n        this.key = k;\n        this.val = v;\n    }\n}\n然后依靠我们的 Node 类型构建⼀个双链表，实现⼏个需要的 API（这些操\n作的时间复杂度均为  O(1) )：\nclass DoubleList {  \n    // 在链表头部添加节点 x，时间 O(1)\n    public void addFirst(Node x);\n    // 删除链表中的 x 节点（x ⼀定存在）\n    // 由于是双链表且给的是⽬标 Node 节点，时间 O(1)\n    public void remove(Node x);\nLRU算法详解\n243\n\n    // 删除链表中最后⼀个节点，并返回该节点，时间 O(1)\n    public Node removeLast();\n    // 返回链表⻓度，时间 O(1)\n    public int size();\n}\nPS：这就是普通双向链表的实现，为了让读者集中精⼒理解 LRU 算法的逻\n辑，就省略链表的具体代码。\n到这⾥就能回答刚才“为什么必须要⽤双向链表”的问题了，因为我们需要删\n除操作。删除⼀个节点不光要得到该节点本⾝的指针，也需要操作其前驱节\n点的指针，⽽双向链表才能⽀持直接查找前驱，保证操作的时间复杂度\n O(1) 。\n有了双向链表的实现，我们只需要在 LRU 算法中把它和哈希表结合起来即\n可。我们先把逻辑理清楚：\n// key 映射到 Node(key, val)\nHashMap\u003cInteger, Node\u003e map;\n// Node(k1, v1) \u003c-\u003e Node(k2, v2)...\nDoubleList cache;\nint get(int key) {\n    if (key 不存在) {\n        return -1;\n    } else {        \n        将数据 (key, val) 提到开头；\n        return val;\n    }\n}\nvoid put(int key, int val) {\n    Node x = new Node(key, val);\n    if (key 已存在) {\n        把旧的数据删除；\n        将新节点 x 插⼊到开头；\n    } else {\n        if (cache 已满) {\nLRU算法详解\n244\n\n            删除链表的最后⼀个数据腾位置；\n            删除 map 中映射到该数据的键；\n        } \n        将新节点 x 插⼊到开头；\n        map 中新建 key 对新节点 x 的映射；\n    }\n}\n如果能够看懂上述逻辑，翻译成代码就很容易理解了：\nclass LRUCache {\n    // key -\u003e Node(key, val)\n    private HashMap\u003cInteger, Node\u003e map;\n    // Node(k1, v1) \u003c-\u003e Node(k2, v2)...\n    private DoubleList cache;\n    // 最⼤容量\n    private int cap;\n    public LRUCache(int capacity) {\n        this.cap = capacity;\n        map = new HashMap\u003c\u003e();\n        cache = new DoubleList();\n    }\n    public int get(int key) {\n        if (!map.containsKey(key))\n            return -1;\n        int val = map.get(key).val;\n        // 利⽤ put ⽅法把该数据提前\n        put(key, val);\n        return val;\n    }\n    public void put(int key, int val) {\n        // 先把新节点 x 做出来\n        Node x = new Node(key, val);\n        if (map.containsKey(key)) {\n            // 删除旧的节点，新的插到头部\n            cache.remove(map.get(key));\n            cache.addFirst(x);\n            // 更新 map 中对应的数据\nLRU算法详解\n245\n\n            map.put(key, x);\n        } else {\n            if (cap == cache.size()) {\n                // 删除链表最后⼀个数据\n                Node last = cache.removeLast();\n                map.remove(last.key);\n            }\n            // 直接添加到头部\n            cache.addFirst(x);\n            map.put(key, x);\n        }\n    }\n}\n这⾥就能回答之前的问答题“为什么要在链表中同时存储 key 和 val，⽽不是\n只存储 val”，注意这段代码：\nif (cap == cache.size()) {\n    // 删除链表最后⼀个数据\n    Node last = cache.removeLast();\n    map.remove(last.key);\n}\n当缓存容量已满，我们不仅仅要删除最后⼀个 Node 节点，还要把 map 中映\n射到该节点的 key 同时删除，⽽这个 key 只能由 Node 得到。如果 Node 结\n构中只存储 val，那么我们就⽆法得知 key 是什么，就⽆法删除 map 中的\n键，造成错误。\n⾄此，你应该已经掌握 LRU 算法的思想和实现了，很容易犯错的⼀点是：\n处理链表节点的同时不要忘了更新哈希表中对节点的映射。\n＿＿＿＿＿＿＿＿＿＿＿＿＿\n刷算法，学套路，认准 labuladong。\n本⼩抄即将出版，关注 labuladong 公众号或 ongline book 查看更新⽂章，\n后台回复「进群」可进刷题群，labuladong 带你⽇穿 LeetCode。\nLRU算法详解\n246\n\nLRU算法详解\n247\n\n⼆叉搜索树操作集锦\n学算法，认准 labuladong 就够了！\n通过之前的⽂章框架思维，⼆叉树的遍历框架应该已经印到你的脑⼦⾥了，\n这篇⽂章就来实操⼀下，看看框架思维是怎么灵活运⽤，秒杀⼀切⼆叉树问\n题的。\n⼆叉树算法的设计的总路线：明确⼀个节点要做的事情，然后剩下的事抛给\n框架。\nvoid traverse(TreeNode root) {\n    // root 需要做什么？在这做。\n    // 其他的不⽤ root 操⼼，抛给框架\n    traverse(root.left);\n    traverse(root.right);\n}\n举两个简单的例⼦体会⼀下这个思路，热热⾝。\n1. 如何把⼆叉树所有的节点中的值加⼀？\nvoid plusOne(TreeNode root) {\n    if (root == null) return;\n    root.val += 1;\n    plusOne(root.left);\n    plusOne(root.right);\n}\n2. 如何判断两棵⼆叉树是否完全相同？\nboolean isSameTree(TreeNode root1, TreeNode root2) {\n    // 都为空的话，显然相同\n    if (root1 == null \u0026\u0026 root2 == null) return true;\n⼆叉搜索树操作集锦\n248"])</script><script>self.__next_f.push([1,"4:[\"$\",\"main\",null,{\"style\":{\"maxWidth\":760,\"margin\":\"0 auto\",\"padding\":\"16px\",\"minHeight\":\"100vh\"},\"children\":[[\"$\",\"$Lc\",null,{\"href\":\"/columns/\",\"style\":{\"display\":\"inline-block\",\"marginBottom\":\"12px\",\"fontSize\":\"13px\"},\"children\":\"← 返回专栏\"}],[\"$\",\"div\",null,{\"style\":{\"fontSize\":\"12px\",\"color\":\"var(--text-tertiary)\",\"marginBottom\":\"4px\"},\"children\":[\"📕\",\" \",\"labuladong 算法小抄\"]}],[\"$\",\"h1\",null,{\"style\":{\"fontSize\":\"22px\",\"fontWeight\":700,\"margin\":\"0 0 16px\"},\"children\":\"LRU算法详解\"}],[\"$\",\"$Ld\",null,{\"children\":\"$e\"}],false]}]\n"])</script><script>self.__next_f.push([1,"a:[[\"$\",\"meta\",\"0\",{\"name\":\"viewport\",\"content\":\"width=device-width, initial-scale=1\"}],[\"$\",\"meta\",\"1\",{\"name\":\"theme-color\",\"content\":\"#f97316\"}]]\n"])</script><script>self.__next_f.push([1,"8:[[\"$\",\"meta\",\"0\",{\"charSet\":\"utf-8\"}],[\"$\",\"title\",\"1\",{\"children\":\"LRU算法详解 - 算法面试\"}],[\"$\",\"meta\",\"2\",{\"name\":\"description\",\"content\":\"LeetCode 热题 100 完整 Java 题解、逐题动画、知识专栏与智能间隔复习。\"}],[\"$\",\"meta\",\"3\",{\"name\":\"application-name\",\"content\":\"算法面试\"}],[\"$\",\"link\",\"4\",{\"rel\":\"manifest\",\"href\":\"/algorithm-interview/manifest.json\",\"crossOrigin\":\"$undefined\"}],[\"$\",\"meta\",\"5\",{\"name\":\"keywords\",\"content\":\"LeetCode,热题100,算法面试,Java题解,数据结构,动态规划,面试刷题\"}],[\"$\",\"meta\",\"6\",{\"name\":\"mobile-web-app-capable\",\"content\":\"yes\"}],[\"$\",\"meta\",\"7\",{\"name\":\"apple-mobile-web-app-title\",\"content\":\"算法面试\"}],[\"$\",\"meta\",\"8\",{\"name\":\"apple-mobile-web-app-status-bar-style\",\"content\":\"default\"}],[\"$\",\"meta\",\"9\",{\"property\":\"og:title\",\"content\":\"算法面试题库\"}],[\"$\",\"meta\",\"10\",{\"property\":\"og:description\",\"content\":\"LeetCode 热题 100 完整 Java 题解、逐题动画、知识专栏与智能复习\"}],[\"$\",\"meta\",\"11\",{\"property\":\"og:site_name\",\"content\":\"算法面试题库\"}],[\"$\",\"meta\",\"12\",{\"property\":\"og:locale\",\"content\":\"zh_CN\"}],[\"$\",\"meta\",\"13\",{\"property\":\"og:type\",\"content\":\"website\"}],[\"$\",\"meta\",\"14\",{\"name\":\"twitter:card\",\"content\":\"summary\"}],[\"$\",\"meta\",\"15\",{\"name\":\"twitter:title\",\"content\":\"算法面试题库\"}],[\"$\",\"meta\",\"16\",{\"name\":\"twitter:description\",\"content\":\"LeetCode 热题 100 完整 Java 题解、逐题动画、知识专栏与智能复习\"}]]\n"])</script><script>self.__next_f.push([1,"6:null\n"])</script></body></html>

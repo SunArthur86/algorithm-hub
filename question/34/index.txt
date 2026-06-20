@@ -1,0 +1,160 @@
+1:"$Sreact.fragment"
+2:I[5244,[],""]
+3:I[3866,[],""]
+5:I[6213,[],"OutletBoundary"]
+7:I[6213,[],"MetadataBoundary"]
+9:I[6213,[],"ViewportBoundary"]
+b:I[4835,[],""]
+:HL["/algorithm-interview/_next/static/css/c1e787639001e16b.css","style"]
+0:{"P":null,"b":"xos97fAiWtKfKXI6hZLx4","p":"/algorithm-interview","c":["","question","34",""],"i":false,"f":[[["",{"children":["question",{"children":[["lcId","34","d"],{"children":["__PAGE__",{}]}]}]},"$undefined","$undefined",true],["",["$","$1","c",{"children":[[["$","link","0",{"rel":"stylesheet","href":"/algorithm-interview/_next/static/css/c1e787639001e16b.css","precedence":"next","crossOrigin":"$undefined","nonce":"$undefined"}]],["$","html",null,{"lang":"zh","children":[["$","head",null,{"children":["$","script",null,{"dangerouslySetInnerHTML":{"__html":"\ntry {\n  var raw = localStorage.getItem('algo-interview');\n  var theme = 'light';\n  if (raw) { var p = JSON.parse(raw); theme = (p.state && p.state.theme) || 'light'; }\n  if (theme === 'dark') {\n    document.documentElement.classList.add('dark');\n    document.documentElement.setAttribute('data-theme', 'dark');\n  }\n} catch (e) {}\n"}}]}],["$","body",null,{"children":[["$","$L2",null,{"parallelRouterKey":"children","segmentPath":["children"],"error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L3",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":[[],[["$","title",null,{"children":"404: This page could not be found."}],["$","div",null,{"style":{"fontFamily":"system-ui,\"Segoe UI\",Roboto,Helvetica,Arial,sans-serif,\"Apple Color Emoji\",\"Segoe UI Emoji\"","height":"100vh","textAlign":"center","display":"flex","flexDirection":"column","alignItems":"center","justifyContent":"center"},"children":["$","div",null,{"children":[["$","style",null,{"dangerouslySetInnerHTML":{"__html":"body{color:#000;background:#fff;margin:0}.next-error-h1{border-right:1px solid rgba(0,0,0,.3)}@media (prefers-color-scheme:dark){body{color:#fff;background:#000}.next-error-h1{border-right:1px solid rgba(255,255,255,.3)}}"}}],["$","h1",null,{"className":"next-error-h1","style":{"display":"inline-block","margin":"0 20px 0 0","padding":"0 23px 0 0","fontSize":24,"fontWeight":500,"verticalAlign":"top","lineHeight":"49px"},"children":404}],["$","div",null,{"style":{"display":"inline-block"},"children":["$","h2",null,{"style":{"fontSize":14,"fontWeight":400,"lineHeight":"49px","margin":0},"children":"This page could not be found."}]}]]}]}]]],"forbidden":"$undefined","unauthorized":"$undefined"}],["$","script",null,{"dangerouslySetInnerHTML":{"__html":"\nif ('serviceWorker' in navigator) {\n  window.addEventListener('load', function () {\n    navigator.serviceWorker.register('/algorithm-interview/sw.js').catch(function () {});\n  });\n}\n"}}]]}]]}]]}],{"children":["question",["$","$1","c",{"children":[null,["$","$L2",null,{"parallelRouterKey":"children","segmentPath":["children","question","children"],"error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L3",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","forbidden":"$undefined","unauthorized":"$undefined"}]]}],{"children":[["lcId","34","d"],["$","$1","c",{"children":[null,["$","$L2",null,{"parallelRouterKey":"children","segmentPath":["children","question","children","$0:f:0:1:2:children:2:children:0","children"],"error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L3",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","forbidden":"$undefined","unauthorized":"$undefined"}]]}],{"children":["__PAGE__",["$","$1","c",{"children":["$L4",null,["$","$L5",null,{"children":"$L6"}]]}],{},null,false]},null,false]},null,false]},null,false],["$","$1","h",{"children":[null,["$","$1","atud0Jup_zBCJk2LL-Nry",{"children":[["$","$L7",null,{"children":"$L8"}],["$","$L9",null,{"children":"$La"}],null]}]]}],false]],"m":"$undefined","G":["$b","$undefined"],"s":false,"S":true}
+c:I[8173,["173","static/chunks/173-69860a4742bb7020.js","829","static/chunks/829-7533e70598480772.js","937","static/chunks/937-ef36a5ac4bc37a7e.js","447","static/chunks/447-06af9414e164c047.js","8","static/chunks/app/question/%5BlcId%5D/page-478b0d2a69e222f2.js"],""]
+d:I[3447,["173","static/chunks/173-69860a4742bb7020.js","829","static/chunks/829-7533e70598480772.js","937","static/chunks/937-ef36a5ac4bc37a7e.js","447","static/chunks/447-06af9414e164c047.js","8","static/chunks/app/question/%5BlcId%5D/page-478b0d2a69e222f2.js"],"default"]
+e:T1da0,# 34. 在排序数组中查找元素的第一个和最后一个位置
+
+> 难度：**Medium** | 分类：二分查找 | 标签：数组, 二分查找
+
+> 🔗 力扣链接：[https://leetcode.cn/problems/find-first-and-last-position-of-element-in-sorted-array/](https://leetcode.cn/problems/find-first-and-last-position-of-element-in-sorted-array/)
+
+## 📝 题目描述
+
+给你一个非递减排序的整数数组和一个目标值 `target`，返回 `target` 在数组中第一次和最后一次出现的下标。如果 `target` 不存在，返回 `[-1, -1]`。
+
+要求时间复杂度 `O(log n)`。
+
+- 题号：34
+- 题目名：在排序数组中查找元素的第一个和最后一个位置
+- 难度：中等
+- 题型：二分查找
+- 为什么选这题：它把"二分查找"从"找一个点"拓展到"找左右边界"，是理解二分查找变体的核心题。
+
+## 🧠 思考路径
+
+普通的二分找到 `target` 就停了，但这里有重复元素，我们需要找到最左和最右的位置。
+
+换一个角度看：找"第一个位置"等价于找"第一个大于等于 `target` 的位置"，然后再验证这个位置是不是真的是 `target`。找"最后一个位置"等价于找"最后一个小于等于 `target` 的位置"。
+
+具体来说，写两个二分：一个找左边界，一个找右边界。
+
+找左边界时，当 `nums[mid] == target` 不要立刻返回，而是让 `right = mid - 1` 继续往左压，最终 `left` 会停在最左边那个 `target` 上。
+
+找右边界时，当 `nums[mid] == target` 不要立刻返回，而是让 `left = mid + 1` 继续往右压，最终 `right` 会停在最右边那个 `target` 上。
+
+两个二分跑完，验证一下 `left` 和 `right` 位置上的值是否真的是 `target` 即可。
+
+## 💻 Java 题解
+
+### 解法 1：两次二分
+
+第一次二分找左边界（找到target后继续向左），第二次找右边界（找到target后继续向右）。
+
+- ⏱ 时间复杂度：`O(log n)`
+- 💾 空间复杂度：`O(1)`
+
+```java
+class Solution {
+    public int[] searchRange(int[] nums, int target) {
+        int left = findLeft(nums, target);
+        int right = findRight(nums, target);
+        return new int[]{left, right};
+    }
+    private int findLeft(int[] nums, int target) {
+        int lo = 0, hi = nums.length - 1, idx = -1;
+        while (lo <= hi) {
+            int mid = lo + (hi - lo) / 2;
+            if (nums[mid] >= target) hi = mid - 1;
+            else lo = mid + 1;
+            if (nums[mid] == target) idx = mid;
+        }
+        return idx;
+    }
+    private int findRight(int[] nums, int target) {
+        int lo = 0, hi = nums.length - 1, idx = -1;
+        while (lo <= hi) {
+            int mid = lo + (hi - lo) / 2;
+            if (nums[mid] <= target) lo = mid + 1;
+            else hi = mid - 1;
+            if (nums[mid] == target) idx = mid;
+        }
+        return idx;
+    }
+}
+```
+
+**关键点：**
+- findLeft: nums[mid]>=target 时hi=mid-1
+- findRight: nums[mid]<=target 时lo=mid+1
+- 记录最后的匹配位置
+
+**执行步骤：**
+1. 二分找左边界
+1. 二分找右边界
+1. 返回[left, right]
+
+
+## ⚠️ 易错点
+
+- 找左边界时条件是 `nums[mid] >= target`（不是 `==`），找右边界时是 `nums[mid] <= target`（不是 `==`）。等号的方向决定了是"往左压"还是"往右压"。
+- 最后必须验证 `first <= last`，否则当 `target` 不存在于数组中时，`first` 可能大于 `last`，返回的区间是无效的。
+- 数组为空时直接返回 `[-1, -1]`，否则二分会越界。
+
+- 找到target后不立即返回——继续搜索更靠左/右的位置
+
+## 📊 复杂度分析
+
+- 时间复杂度：`O(log n)`。跑了两次二分，每次 `O(log n)`。
+- 空间复杂度：`O(1)`。只用了常数个变量。
+
+## 🏢 实际业务应用
+
+- 数据库的范围查询优化：B+ 树索引中查找某个值第一次和最后一次出现的位置，本质就是找左右边界，数据库用类似逻辑快速定位范围扫描的起止点。
+- 日志系统中按时间范围查日志：找到某个时间戳对应的第一条和最后一条日志记录，需要对有序的时间戳数组做两次二分。
+- 电商库存管理中查询某价格区间内的商品：在按价格排序的商品列表中，用左右边界二分快速定位区间起止位置。
+
+- 数据库的范围查询优化：B+ 树索引中查找某个值第一次和最后一次出现的位置，本质就是找左右边界，数据库用类似逻辑快速定位范围扫描的起止点。
+- 日志系统中按时间范围查日志：找到某个时间戳对应的第一条和最后一条日志记录，需要对有序的时间戳数组做两次二分。
+- 电商库存管理中查询某价格区间内的商品：在按价格排序的商品列表中，用左右边界二分快速定位区间起止位置。
+
+## 📖 形象类比
+
+可以类比《水浒传》里宋江在聚义厅的名册中查找好汉的过程。
+
+名册按好汉的绰号首字排序，同姓的好汉排在一起。宋江想找所有姓"李"的好汉在哪几页。他不会从头翻到尾，而是先从中间翻开：如果这一页是"李"，他继续往左翻，直到翻到第一个"李"之前的那一页，就找到了左边界。再从右边做同样的事，找到右边界。最后就能知道"李"姓好汉占了几页。
+
+对应关系是：
+
+- "名册按首字排序"对应排序数组
+- "往左翻到第一个李之前"对应找左边界二分
+- "往右翻到最后一个李之后"对应找右边界二分
+- "占了几页"对应返回区间 `[first, last]`
+
+可以类比《水浒传》里宋江在聚义厅的名册中查找好汉的过程。
+
+名册按好汉的绰号首字排序，同姓的好汉排在一起。宋江想找所有姓"李"的好汉在哪几页。他不会从头翻到尾，而是先从中间翻开：如果这一页是"李"，他继续往左翻，直到翻到第一个"李"之前的那一页，就找到了左边界。再从右边做同样的事，找到右边界。最后就能知道"李"姓好汉占了几页。
+
+对应关系是：
+
+- "名册按首字排序"对应排序数组
+- "往左翻到第一个李之前"对应找左边界二分
+- "往右翻到最后一个李之后"对应找右边界二分
+- "占了几页"对应返回区间 `[first, last]`
+
+小鹿在小河边捡了一排编号石头，按编号排好，但有些编号重复了。老师问："编号 7 的石头从第几块到第几块？"小鹿不会一块块数，而是先从中间看：编号大于等于 7 就往左找，找到最左边的 7；再从中间看：编号小于等于 7 就往右找，找到最右边的 7。两次就搞定了。
+
+小鹿在小河边捡了一排编号石头，按编号排好，但有些编号重复了。老师问："编号 7 的石头从第几块到第几块？"小鹿不会一块块数，而是先从中间看：编号大于等于 7 就往左找，找到最左边的 7；再从中间看：编号小于等于 7 就往右找，找到最右边的 7。两次就搞定了。
+
+## 🎵 记忆口诀
+
+等号往左压左界，往右压右界。
+
+等号往左压左界，往右压右界。
+
+## 🔗 延伸练习
+
+- `35. 搜索插入位置`：只找左边界（第一个 `>= target` 的位置），不关心右边界，是本题的简化版。
+- `704. 二分查找`：最基础的二分，没有重复元素，是本题的前置练习。
+
+- `35. 搜索插入位置`：只找左边界（第一个 `>= target` 的位置），不关心右边界，是本题的简化版。
+- `704. 二分查找`：最基础的二分，没有重复元素，是本题的前置练习。4:["$","main",null,{"className":"detail-main","style":{"maxWidth":760,"margin":"0 auto","padding":"16px","minHeight":"100vh"},"children":[["$","$Lc",null,{"href":"/","style":{"display":"inline-block","marginBottom":"12px","fontSize":"13px"},"children":"← 返回题库"}],["$","h1",null,{"style":{"fontSize":"22px","fontWeight":700,"margin":"0 0 4px"},"children":[["$","span",null,{"style":{"marginRight":"6px"},"children":"🔍"}],34,". ","在排序数组中查找元素的第一个和最后一个位置"]}],["$","$Ld",null,{"q":{"id":"0034","lcId":34,"slug":"find-first-and-last-position-of-element-in-sorted-array","title":"在排序数组中查找元素的第一个和最后一个位置","question":"在排序数组中查找元素的第一个和最后一个位置","answer":"$e","difficulty":"Medium","category":"binary-search","categories":["binary-search"],"tags":["数组","二分查找"],"url":"https://leetcode.cn/problems/find-first-and-last-position-of-element-in-sorted-array/","planOrder":65,"hasViz":true,"hasDiagram":false,"feynman":{"essence":"给你一个非递减排序的整数数组和一个目标值 `target`，返回 `target` 在数组中第一次和最后一次出现的下标。如果 `target` 不存在，返回 `[-1, -1]`。  要求时间复杂度","analogy":"","key_points":[]},"first_principle":{"problem":"","axioms":[],"rebuild":""}}}]]}]
+a:[["$","meta","0",{"name":"viewport","content":"width=device-width, initial-scale=1"}],["$","meta","1",{"name":"theme-color","content":"#f97316"}]]
+8:[["$","meta","0",{"charSet":"utf-8"}],["$","title","1",{"children":"34. 在排序数组中查找元素的第一个和最后一个位置 - 算法面试"}],["$","meta","2",{"name":"description","content":"给你一个非递减排序的整数数组和一个目标值 `target`，返回 `target` 在数组中第一次和最后一次出现的下标。如果 `target` 不存在，返回 `[-1, -1]`。  要求时间复杂度"}],["$","meta","3",{"name":"application-name","content":"算法面试"}],["$","link","4",{"rel":"manifest","href":"/algorithm-interview/manifest.json","crossOrigin":"$undefined"}],["$","meta","5",{"name":"keywords","content":"在排序数组中查找元素的第一个和最后一个位置,LeetCode 34,Medium,数组,二分查找"}],["$","meta","6",{"name":"mobile-web-app-capable","content":"yes"}],["$","meta","7",{"name":"apple-mobile-web-app-title","content":"算法面试"}],["$","meta","8",{"name":"apple-mobile-web-app-status-bar-style","content":"default"}],["$","meta","9",{"property":"og:title","content":"34. 在排序数组中查找元素的第一个和最后一个位置"}],["$","meta","10",{"property":"og:description","content":"给你一个非递减排序的整数数组和一个目标值 `target`，返回 `target` 在数组中第一次和最后一次出现的下标。如果 `target` 不存在，返回 `[-1, -1]`。  要求时间复杂度"}],["$","meta","11",{"property":"og:locale","content":"zh_CN"}],["$","meta","12",{"property":"og:type","content":"article"}],["$","meta","13",{"name":"twitter:card","content":"summary"}],["$","meta","14",{"name":"twitter:title","content":"34. 在排序数组中查找元素的第一个和最后一个位置"}],["$","meta","15",{"name":"twitter:description","content":"给你一个非递减排序的整数数组和一个目标值 `target`，返回 `target` 在数组中第一次和最后一次出现的下标。如果 `target` 不存在，返回 `[-1, -1]`。  要求时间复杂度"}]]
+6:null

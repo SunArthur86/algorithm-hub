@@ -1,0 +1,165 @@
+1:"$Sreact.fragment"
+2:I[5244,[],""]
+3:I[3866,[],""]
+5:I[6213,[],"OutletBoundary"]
+7:I[6213,[],"MetadataBoundary"]
+9:I[6213,[],"ViewportBoundary"]
+b:I[4835,[],""]
+:HL["/algorithm-interview/_next/static/css/c1e787639001e16b.css","style"]
+0:{"P":null,"b":"xos97fAiWtKfKXI6hZLx4","p":"/algorithm-interview","c":["","question","207",""],"i":false,"f":[[["",{"children":["question",{"children":[["lcId","207","d"],{"children":["__PAGE__",{}]}]}]},"$undefined","$undefined",true],["",["$","$1","c",{"children":[[["$","link","0",{"rel":"stylesheet","href":"/algorithm-interview/_next/static/css/c1e787639001e16b.css","precedence":"next","crossOrigin":"$undefined","nonce":"$undefined"}]],["$","html",null,{"lang":"zh","children":[["$","head",null,{"children":["$","script",null,{"dangerouslySetInnerHTML":{"__html":"\ntry {\n  var raw = localStorage.getItem('algo-interview');\n  var theme = 'light';\n  if (raw) { var p = JSON.parse(raw); theme = (p.state && p.state.theme) || 'light'; }\n  if (theme === 'dark') {\n    document.documentElement.classList.add('dark');\n    document.documentElement.setAttribute('data-theme', 'dark');\n  }\n} catch (e) {}\n"}}]}],["$","body",null,{"children":[["$","$L2",null,{"parallelRouterKey":"children","segmentPath":["children"],"error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L3",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":[[],[["$","title",null,{"children":"404: This page could not be found."}],["$","div",null,{"style":{"fontFamily":"system-ui,\"Segoe UI\",Roboto,Helvetica,Arial,sans-serif,\"Apple Color Emoji\",\"Segoe UI Emoji\"","height":"100vh","textAlign":"center","display":"flex","flexDirection":"column","alignItems":"center","justifyContent":"center"},"children":["$","div",null,{"children":[["$","style",null,{"dangerouslySetInnerHTML":{"__html":"body{color:#000;background:#fff;margin:0}.next-error-h1{border-right:1px solid rgba(0,0,0,.3)}@media (prefers-color-scheme:dark){body{color:#fff;background:#000}.next-error-h1{border-right:1px solid rgba(255,255,255,.3)}}"}}],["$","h1",null,{"className":"next-error-h1","style":{"display":"inline-block","margin":"0 20px 0 0","padding":"0 23px 0 0","fontSize":24,"fontWeight":500,"verticalAlign":"top","lineHeight":"49px"},"children":404}],["$","div",null,{"style":{"display":"inline-block"},"children":["$","h2",null,{"style":{"fontSize":14,"fontWeight":400,"lineHeight":"49px","margin":0},"children":"This page could not be found."}]}]]}]}]]],"forbidden":"$undefined","unauthorized":"$undefined"}],["$","script",null,{"dangerouslySetInnerHTML":{"__html":"\nif ('serviceWorker' in navigator) {\n  window.addEventListener('load', function () {\n    navigator.serviceWorker.register('/algorithm-interview/sw.js').catch(function () {});\n  });\n}\n"}}]]}]]}]]}],{"children":["question",["$","$1","c",{"children":[null,["$","$L2",null,{"parallelRouterKey":"children","segmentPath":["children","question","children"],"error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L3",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","forbidden":"$undefined","unauthorized":"$undefined"}]]}],{"children":[["lcId","207","d"],["$","$1","c",{"children":[null,["$","$L2",null,{"parallelRouterKey":"children","segmentPath":["children","question","children","$0:f:0:1:2:children:2:children:0","children"],"error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L3",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","forbidden":"$undefined","unauthorized":"$undefined"}]]}],{"children":["__PAGE__",["$","$1","c",{"children":["$L4",null,["$","$L5",null,{"children":"$L6"}]]}],{},null,false]},null,false]},null,false]},null,false],["$","$1","h",{"children":[null,["$","$1","PsCYjDFmW6izFTLXliiuo",{"children":[["$","$L7",null,{"children":"$L8"}],["$","$L9",null,{"children":"$La"}],null]}]]}],false]],"m":"$undefined","G":["$b","$undefined"],"s":false,"S":true}
+c:I[8173,["173","static/chunks/173-69860a4742bb7020.js","829","static/chunks/829-7533e70598480772.js","937","static/chunks/937-ef36a5ac4bc37a7e.js","447","static/chunks/447-06af9414e164c047.js","8","static/chunks/app/question/%5BlcId%5D/page-478b0d2a69e222f2.js"],""]
+d:I[3447,["173","static/chunks/173-69860a4742bb7020.js","829","static/chunks/829-7533e70598480772.js","937","static/chunks/937-ef36a5ac4bc37a7e.js","447","static/chunks/447-06af9414e164c047.js","8","static/chunks/app/question/%5BlcId%5D/page-478b0d2a69e222f2.js"],"default"]
+e:T1df3,# 207. 课程表
+
+> 难度：**Medium** | 分类：图论 | 标签：深度优先搜索, 广度优先搜索, 图, 拓扑排序
+
+> 🔗 力扣链接：[https://leetcode.cn/problems/course-schedule/](https://leetcode.cn/problems/course-schedule/)
+
+## 📝 题目描述
+
+给你 `numCourses` 门课程和一个先修列表 `prerequisites`，其中 `prerequisites[i] = [a, b]` 表示要学课程 `a` 必须先学课程 `b`。判断能否学完所有课程。
+
+重点不在"会不会排课表"，而在"怎么检测先修关系里有没有环"。
+
+- 题号：207
+- 题目名：课程表
+- 难度：中等
+- 题型：图论
+- 为什么选这题：它是拓扑排序的入门题，能帮你建立"有向无环图 + 入度"的核心图论思维。
+
+## 🧠 思考路径
+
+这个问题本质上是：给一个有向图，判断其中有没有环。如果没有环（有向无环图，DAG），就能找到一个合法的学习顺序；如果有环（比如"学 A 要先学 B，学 B 要先学 A"），就永远学不完。
+
+检测有向图是否有环，最经典的方法是拓扑排序。具体做法是用 BFS 配合"入度"：
+
+1. 统计每个节点的入度（有多少条边指向它）。入度为 0 表示没有前置依赖，可以先学。
+2. 把所有入度为 0 的节点放入队列。
+3. 从队列中取出一个节点，把它指向的所有邻居的入度减 1。如果减到 0，说明它的前置条件都满足了，也放入队列。
+4. 最后看处理了多少个节点。如果等于总课程数，说明没有环；如果有节点没被处理到，说明这些节点在环里。
+
+也可以用 DFS 做拓扑排序，通过颜色标记（白/灰/黑）来检测环。
+
+这题的关键词不是"排课表"，而是"拓扑排序检测有向图中的环"。
+
+## 💻 Java 题解
+
+### 解法 1：BFS 拓扑排序（Kahn算法）
+
+建图+入度数组。入度为0的入队，弹出时减少邻居入度。最终已修课程数=总数则无环。
+
+- ⏱ 时间复杂度：`O(V+E)`
+- 💾 空间复杂度：`O(V+E)`
+
+```java
+class Solution {
+    public boolean canFinish(int numCourses, int[][] prerequisites) {
+        List<List<Integer>> graph = new ArrayList<>();
+        int[] inDegree = new int[numCourses];
+        for (int i = 0; i < numCourses; i++) graph.add(new ArrayList<>());
+        for (int[] pre : prerequisites) {
+            graph.get(pre[1]).add(pre[0]);
+            inDegree[pre[0]]++;
+        }
+        Queue<Integer> q = new LinkedList<>();
+        for (int i = 0; i < numCourses; i++)
+            if (inDegree[i] == 0) q.offer(i);
+        int count = 0;
+        while (!q.isEmpty()) {
+            int course = q.poll();
+            count++;
+            for (int next : graph.get(course))
+                if (--inDegree[next] == 0) q.offer(next);
+        }
+        return count == numCourses;
+    }
+}
+```
+
+**关键点：**
+- 入度为0先入队
+- 弹出后邻居入度-1
+- count==numCourses 表示无环
+
+**执行步骤：**
+1. 建图+入度数组
+1. 入度0的入队
+1. BFS弹出减少邻居入度
+1. 判断已修课程数
+
+
+## ⚠️ 易错点
+
+- 先修关系 `[a, b]` 表示的是"先学 b 才能学 a"，建图时边是 `b → a`，方向别搞反。
+- BFS 法中入度为 0 的课程可能不止一门，初始时都要入队。
+- DFS 法中三态标记缺一不可：`0` 未访问、`1` 正在当前路径上（遇到说明有环）、`2` 已完成（无需再处理）。
+
+- prerequisites[i] = [a,b] 表示先修b再修a
+
+- count==numCourses 才说明无环
+
+## 📊 复杂度分析
+
+- 时间复杂度：`O(V + E)`。每个节点和每条边各访问一次。
+- 空间复杂度：`O(V + E)`。邻接表存储图。
+
+## 🏢 实际业务应用
+
+- 编译系统的依赖分析：源文件之间的 include 关系形成有向图，编译顺序就是拓扑排序的结果，循环依赖会导致编译失败。
+- 项目管理的任务调度：大项目中的任务依赖关系（任务 A 完成才能开始任务 B），检测循环依赖就是本题的直接应用。
+- 数据库的迁移脚本执行顺序：数据库 schema 变更之间有先后依赖，需要拓扑排序确定执行顺序，避免环路。
+
+- 编译系统的依赖分析：源文件之间的 include 关系形成有向图，编译顺序就是拓扑排序的结果，循环依赖会导致编译失败。
+- 项目管理的任务调度：大项目中的任务依赖关系（任务 A 完成才能开始任务 B），检测循环依赖就是本题的直接应用。
+- 数据库的迁移脚本执行顺序：数据库 schema 变更之间有先后依赖，需要拓扑排序确定执行顺序，避免环路。
+
+## 📖 形象类比
+
+可以把它类比成《西游记》里取经团队的"通关文牒盖章"过程。
+
+每到一个国家，唐僧需要盖一个通关文牒的章，但有些国家的章必须先拿到其他国家的章才能盖（先修关系）。如果出现"A 国的章需要 B 国的，B 国的章又需要 A 国的"，师徒四人就陷入了死循环，永远拿不到全部章——这就是课程表中的环检测。
+
+对应关系是：
+
+- "课程"对应每个国家的通关章
+- "先修关系"对应"先拿到某国章才能去另一国"
+- "入度为 0"对应没有前置要求的章，可以直接去盖
+- "BFS 减入度"对应每盖到一个章，就解锁一批新的可盖章国家
+- "环"对应永远无法完成的盖章循环
+
+这段记忆的关键是：有环就无解，无环就能排好序。
+
+可以把它类比成《西游记》里取经团队的"通关文牒盖章"过程。
+
+每到一个国家，唐僧需要盖一个通关文牒的章，但有些国家的章必须先拿到其他国家的章才能盖（先修关系）。如果出现"A 国的章需要 B 国的，B 国的章又需要 A 国的"，师徒四人就陷入了死循环，永远拿不到全部章——这就是课程表中的环检测。
+
+对应关系是：
+
+- "课程"对应每个国家的通关章
+- "先修关系"对应"先拿到某国章才能去另一国"
+- "入度为 0"对应没有前置要求的章，可以直接去盖
+- "BFS 减入度"对应每盖到一个章，就解锁一批新的可盖章国家
+- "环"对应永远无法完成的盖章循环
+
+这段记忆的关键是：有环就无解，无环就能排好序。
+
+小猫要收集所有果实，但每种果实都有"前置果实"——必须先拿到红苹果才能摘金梨。她画了一张果实关系图，先找到没有前置要求的果实（入度为 0），摘完后发现有些果实的前置条件满足了，继续摘。如果最后所有果实都摘到了，说明关系图没有死循环；如果有些果实永远摘不到，那就是循环依赖了。
+
+小猫要收集所有果实，但每种果实都有"前置果实"——必须先拿到红苹果才能摘金梨。她画了一张果实关系图，先找到没有前置要求的果实（入度为 0），摘完后发现有些果实的前置条件满足了，继续摘。如果最后所有果实都摘到了，说明关系图没有死循环；如果有些果实永远摘不到，那就是循环依赖了。
+
+## 🎵 记忆口诀
+
+入度为零先进队，邻居减一再入队；数够节点无环。
+
+入度为零先进队，邻居减一再入队；数够节点无环。
+
+## 🔗 延伸练习
+
+- `210. 课程表 II`：本题的进阶版，不仅判断能否学完，还要输出具体的学习顺序。
+- `329. 矩阵中的最长递增路径`：拓扑排序在矩阵中的应用，从 DAG 最长路的角度理解。
+
+- `210. 课程表 II`：本题的进阶版，不仅判断能否学完，还要输出具体的学习顺序。
+- `329. 矩阵中的最长递增路径`：拓扑排序在矩阵中的应用，从 DAG 最长路的角度理解。4:["$","main",null,{"className":"detail-main","style":{"maxWidth":760,"margin":"0 auto","padding":"16px","minHeight":"100vh"},"children":[["$","$Lc",null,{"href":"/","style":{"display":"inline-block","marginBottom":"12px","fontSize":"13px"},"children":"← 返回题库"}],["$","h1",null,{"style":{"fontSize":"22px","fontWeight":700,"margin":"0 0 4px"},"children":[["$","span",null,{"style":{"marginRight":"6px"},"children":"🕸️"}],207,". ","课程表"]}],["$","$Ld",null,{"q":{"id":"0207","lcId":207,"slug":"course-schedule","title":"课程表","question":"课程表","answer":"$e","difficulty":"Medium","category":"graph","categories":["graph"],"tags":["深度优先搜索","广度优先搜索","图","拓扑排序"],"url":"https://leetcode.cn/problems/course-schedule/","planOrder":53,"hasViz":true,"hasDiagram":false,"feynman":{"essence":"给你 `numCourses` 门课程和一个先修列表 `prerequisites`，其中 `prerequisites[i] = [a, b]` 表示要学课程 `a` 必须先学课程 `b`。判断能否","analogy":"","key_points":[]},"first_principle":{"problem":"","axioms":[],"rebuild":""}}}]]}]
+a:[["$","meta","0",{"name":"viewport","content":"width=device-width, initial-scale=1"}],["$","meta","1",{"name":"theme-color","content":"#f97316"}]]
+8:[["$","meta","0",{"charSet":"utf-8"}],["$","title","1",{"children":"207. 课程表 - 算法面试"}],["$","meta","2",{"name":"description","content":"给你 `numCourses` 门课程和一个先修列表 `prerequisites`，其中 `prerequisites[i] = [a, b]` 表示要学课程 `a` 必须先学课程 `b`。判断能否"}],["$","meta","3",{"name":"application-name","content":"算法面试"}],["$","link","4",{"rel":"manifest","href":"/algorithm-interview/manifest.json","crossOrigin":"$undefined"}],["$","meta","5",{"name":"keywords","content":"课程表,LeetCode 207,Medium,深度优先搜索,广度优先搜索,图,拓扑排序"}],["$","meta","6",{"name":"mobile-web-app-capable","content":"yes"}],["$","meta","7",{"name":"apple-mobile-web-app-title","content":"算法面试"}],["$","meta","8",{"name":"apple-mobile-web-app-status-bar-style","content":"default"}],["$","meta","9",{"property":"og:title","content":"207. 课程表"}],["$","meta","10",{"property":"og:description","content":"给你 `numCourses` 门课程和一个先修列表 `prerequisites`，其中 `prerequisites[i] = [a, b]` 表示要学课程 `a` 必须先学课程 `b`。判断能否"}],["$","meta","11",{"property":"og:locale","content":"zh_CN"}],["$","meta","12",{"property":"og:type","content":"article"}],["$","meta","13",{"name":"twitter:card","content":"summary"}],["$","meta","14",{"name":"twitter:title","content":"207. 课程表"}],["$","meta","15",{"name":"twitter:description","content":"给你 `numCourses` 门课程和一个先修列表 `prerequisites`，其中 `prerequisites[i] = [a, b]` 表示要学课程 `a` 必须先学课程 `b`。判断能否"}]]
+6:null

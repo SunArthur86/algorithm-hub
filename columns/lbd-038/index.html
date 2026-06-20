@@ -1,0 +1,205 @@
+<!DOCTYPE html><html lang="zh"><head><meta charSet="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="/algorithm-interview/_next/static/css/c1e787639001e16b.css" data-precedence="next"/><link rel="preload" as="script" fetchPriority="low" href="/algorithm-interview/_next/static/chunks/webpack-65b8ce4c1158f96f.js"/><script src="/algorithm-interview/_next/static/chunks/4bd1b696-899926250d3992f1.js" async=""></script><script src="/algorithm-interview/_next/static/chunks/517-b6df7dad4ff96d0b.js" async=""></script><script src="/algorithm-interview/_next/static/chunks/main-app-9e7bfff32fd8ebe9.js" async=""></script><script src="/algorithm-interview/_next/static/chunks/173-69860a4742bb7020.js" async=""></script><script src="/algorithm-interview/_next/static/chunks/829-7533e70598480772.js" async=""></script><script src="/algorithm-interview/_next/static/chunks/app/columns/%5Bslug%5D/page-58fc1d8f5085c1ff.js" async=""></script><meta name="theme-color" content="#f97316"/><title>特殊数据结构：单调队列 - 算法面试</title><meta name="description" content="LeetCode 热题 100 完整 Java 题解、逐题动画、知识专栏与智能间隔复习。"/><meta name="application-name" content="算法面试"/><link rel="manifest" href="/algorithm-interview/manifest.json"/><meta name="keywords" content="LeetCode,热题100,算法面试,Java题解,数据结构,动态规划,面试刷题"/><meta name="mobile-web-app-capable" content="yes"/><meta name="apple-mobile-web-app-title" content="算法面试"/><meta name="apple-mobile-web-app-status-bar-style" content="default"/><meta property="og:title" content="算法面试题库"/><meta property="og:description" content="LeetCode 热题 100 完整 Java 题解、逐题动画、知识专栏与智能复习"/><meta property="og:site_name" content="算法面试题库"/><meta property="og:locale" content="zh_CN"/><meta property="og:type" content="website"/><meta name="twitter:card" content="summary"/><meta name="twitter:title" content="算法面试题库"/><meta name="twitter:description" content="LeetCode 热题 100 完整 Java 题解、逐题动画、知识专栏与智能复习"/><script>
+try {
+  var raw = localStorage.getItem('algo-interview');
+  var theme = 'light';
+  if (raw) { var p = JSON.parse(raw); theme = (p.state && p.state.theme) || 'light'; }
+  if (theme === 'dark') {
+    document.documentElement.classList.add('dark');
+    document.documentElement.setAttribute('data-theme', 'dark');
+  }
+} catch (e) {}
+</script><script src="/algorithm-interview/_next/static/chunks/polyfills-42372ed130431b0a.js" noModule=""></script></head><body><main style="max-width:760px;margin:0 auto;padding:16px;min-height:100vh"><a style="display:inline-block;margin-bottom:12px;font-size:13px" href="/algorithm-interview/columns/">← 返回专栏</a><div style="font-size:12px;color:var(--text-tertiary);margin-bottom:4px">📕<!-- --> <!-- -->labuladong 算法小抄</div><h1 style="font-size:22px;font-weight:700;margin:0 0 16px">特殊数据结构：单调队列</h1><div class="prose max-w-none" style="font-size:14px;color:var(--text)"><h1>特殊数据结构：单调队列</h1>
+<p>特殊数据结构：单调队列
+学算法，认准 labuladong 就够了！
+前⽂讲了⼀种特殊的数据结构「单调栈」monotonic stack，解决了⼀类问题
+「Next Greater Number」，本⽂写⼀个类似的数据结构「单调队列」。
+也许这种数据结构的名字你没听过，其实没啥难的，就是⼀个「队列」，只
+是使⽤了⼀点巧妙的⽅法，使得队列中的元素单调递增（或递减）。这个数
+据结构有什么⽤？可以解决滑动窗⼝的⼀系列问题。
+看⼀道 LeetCode 题⽬，难度 hard：
+⼀、搭建解题框架
+特殊数据结构：单调队列
+266</p>
+<p>这道题不复杂，难点在于如何在 O(1) 时间算出每个「窗⼝」中的最⼤值，
+使得整个算法在线性时间完成。在之前我们探讨过类似的场景，得到⼀个结
+论：
+在⼀堆数字中，已知最值，如果给这堆数添加⼀个数，那么⽐较⼀下就可以
+很快算出最值；但如果减少⼀个数，就不⼀定能很快得到最值了，⽽要遍历
+所有数重新找最值。
+回到这道题的场景，每个窗⼝前进的时候，要添加⼀个数同时减少⼀个数，
+所以想在 O(1) 的时间得出新的最值，就需要「单调队列」这种特殊的数据
+结构来辅助了。
+⼀个普通的队列⼀定有这两个操作：
+class Queue {
+void push(int n);
+// 或 enqueue，在队尾加⼊元素 n
+void pop();
+// 或 dequeue，删除队头元素
+}
+⼀个「单调队列」的操作也差不多：
+class MonotonicQueue {
+// 在队尾添加元素 n
+void push(int n);
+// 返回当前队列中的最⼤值
+int max();
+// 队头元素如果是 n，删除它
+void pop(int n);
+}
+当然，这⼏个 API 的实现⽅法肯定跟⼀般的 Queue 不⼀样，不过我们暂且
+不管，⽽且认为这⼏个操作的时间复杂度都是 O(1)，先把这道「滑动窗
+⼝」问题的解答框架搭出来：
+vector<!-- -->&lt;int&gt;<!-- --> maxSlidingWindow(vector<!-- -->&lt;int&gt;<!-- -->&amp; nums, int k) {
+特殊数据结构：单调队列
+267</p>
+<pre><code>MonotonicQueue window;
+vector&lt;int&gt; res;
+for (int i = 0; i &lt; nums.size(); i++) {
+    if (i &lt; k - 1) { //先把窗⼝的前 k - 1 填满
+        window.push(nums[i]);
+    } else { // 窗⼝开始向前滑动
+        window.push(nums[i]);
+        res.push_back(window.max());
+        window.pop(nums[i - k + 1]);
+        // nums[i - k + 1] 就是窗⼝最后的元素
+    }
+}
+return res;
+</code></pre>
+<p>}
+这个思路很简单，能理解吧？下⾯我们开始重头戏，单调队列的实现。
+⼆、实现单调队列数据结构
+⾸先我们要认识另⼀种数据结构：deque，即双端队列。很简单：
+class deque {
+// 在队头插⼊元素 n
+void push_front(int n);
+// 在队尾插⼊元素 n
+特殊数据结构：单调队列
+268</p>
+<pre><code>void push_back(int n);
+// 在队头删除元素
+void pop_front();
+// 在队尾删除元素
+void pop_back();
+// 返回队头元素
+int front();
+// 返回队尾元素
+int back();
+</code></pre>
+<p>}
+⽽且，这些操作的复杂度都是 O(1)。这其实不是啥稀奇的数据结构，⽤链
+表作为底层结构的话，很容易实现这些功能。
+「单调队列」的核⼼思路和「单调栈」类似。单调队列的 push ⽅法依然在
+队尾添加元素，但是要把前⾯⽐新元素⼩的元素都删掉：
+class MonotonicQueue {
+private:
+deque<!-- -->&lt;int&gt;<!-- --> data;
+public:
+void push(int n) {
+while (!data.empty() &amp;&amp; data.back() &lt; n)
+data.pop_back();
+data.push_back(n);
+}
+};
+你可以想象，加⼊数字的⼤⼩代表⼈的体重，把前⾯体重不⾜的都压扁了，
+直到遇到更⼤的量级才停住。
+特殊数据结构：单调队列
+269</p>
+<p>如果每个元素被加⼊时都这样操作，最终单调队列中的元素⼤⼩就会保持⼀
+个单调递减的顺序，因此我们的 max() API 可以可以这样写：
+int max() {
+return data.front();
+}
+pop() API 在队头删除元素 n，也很好写：
+void pop(int n) {
+if (!data.empty() &amp;&amp; data.front() == n)
+data.pop_front();
+}
+之所以要判断  data.front() == n ，是因为我们想删除的队头元素 n 可能已
+经被「压扁」了，这时候就不⽤删除了：
+特殊数据结构：单调队列
+270</p>
+<p>⾄此，单调队列设计完毕，看下完整的解题代码：
+class MonotonicQueue {
+private:
+deque<!-- -->&lt;int&gt;<!-- --> data;
+public:
+void push(int n) {
+while (!data.empty() &amp;&amp; data.back() &lt; n)
+data.pop_back();
+data.push_back(n);
+}
+int max() { return data.front(); }
+void pop(int n) {
+if (!data.empty() &amp;&amp; data.front() == n)
+data.pop_front();
+}
+};
+vector<!-- -->&lt;int&gt;<!-- --> maxSlidingWindow(vector<!-- -->&lt;int&gt;<!-- -->&amp; nums, int k) {
+MonotonicQueue window;
+vector<!-- -->&lt;int&gt;<!-- --> res;
+for (int i = 0; i &lt; nums.size(); i++) {
+特殊数据结构：单调队列
+271</p>
+<pre><code>    if (i &lt; k - 1) { //先填满窗⼝的前 k - 1
+        window.push(nums[i]);
+    } else { // 窗⼝向前滑动
+        window.push(nums[i]);
+        res.push_back(window.max());
+        window.pop(nums[i - k + 1]);
+    }
+}
+return res;
+</code></pre>
+<p>}
+三、算法复杂度分析
+读者可能疑惑，push 操作中含有 while 循环，时间复杂度不是 O(1) 呀，那
+么本算法的时间复杂度应该不是线性时间吧？
+单独看 push 操作的复杂度确实不是 O(1)，但是算法整体的复杂度依然是
+O(N) 线性时间。要这样想，nums 中的每个元素最多被 push_back 和
+pop_back ⼀次，没有任何多余操作，所以整体的复杂度还是 O(N)。
+空间复杂度就很简单了，就是窗⼝的⼤⼩ O(k)。
+四、最后总结
+有的读者可能觉得「单调队列」和「优先级队列」⽐较像，实际上差别很⼤
+的。
+单调队列在添加元素的时候靠删除元素保持队列的单调性，相当于抽取出某
+个函数中单调递增（或递减）的部分；⽽优先级队列（⼆叉堆）相当于⾃动
+排序，差别⼤了去了。
+赶紧去拿下 LeetCode 第 239 道题吧〜
+＿＿＿＿＿＿＿＿＿＿＿＿＿
+刷算法，学套路，认准 labuladong。
+本⼩抄即将出版，关注 labuladong 公众号或 ongline book 查看更新⽂章，
+后台回复「进群」可进刷题群，labuladong 带你⽇穿 LeetCode。
+特殊数据结构：单调队列
+272</p>
+<p>特殊数据结构：单调队列
+273</p>
+<p>设计Twitter
+学算法，认准 labuladong 就够了！
+「design Twitter」是 LeetCode 上第 355 道题⽬，不仅题⽬本⾝很有意思，
+⽽且把合并多个有序链表的算法和⾯向对象设计（OO design）结合起来
+了，很有实际意义，本⽂就带⼤家来看看这道题。
+⾄于 Twitter 的什么功能跟算法有关系，等我们描述⼀下题⽬要求就知道
+了。
+⼀、题⽬及应⽤场景简介
+Twitter 和微博功能差不多，我们主要要实现这样⼏个 API：
+class Twitter {
+/** user 发表⼀条 tweet 动态 <em>/
+public void postTweet(int userId, int tweetId) {}
+/</em>* 返回该 user 关注的⼈（包括他⾃⼰）最近的动态 id，
+最多 10 条，⽽且这些动态必须按从新到旧的时间线顺序排列。<em>/
+public List<!-- -->&lt;Integer&gt;<!-- --> getNewsFeed(int userId) {}
+/** follower 关注 followee，如果 Id 不存在则新建 <em>/
+public void follow(int followerId, int followeeId) {}
+/</em></em> follower 取关 followee，如果 Id 不存在则什么都不做 */
+public void unfollow(int followerId, int followeeId) {}
+}
+举个具体的例⼦，⽅便⼤家理解 API 的具体⽤法：
+Twitter twitter = new Twitter();
+设计Twitter
+274</p></div></main><script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function () {
+    navigator.serviceWorker.register('/algorithm-interview/sw.js').catch(function () {});
+  });
+}
+</script><script src="/algorithm-interview/_next/static/chunks/webpack-65b8ce4c1158f96f.js" async=""></script><script>(self.__next_f=self.__next_f||[]).push([0])</script><script>self.__next_f.push([1,"1:\"$Sreact.fragment\"\n2:I[5244,[],\"\"]\n3:I[3866,[],\"\"]\n5:I[6213,[],\"OutletBoundary\"]\n7:I[6213,[],\"MetadataBoundary\"]\n9:I[6213,[],\"ViewportBoundary\"]\nb:I[4835,[],\"\"]\n:HL[\"/algorithm-interview/_next/static/css/c1e787639001e16b.css\",\"style\"]\n"])</script><script>self.__next_f.push([1,"0:{\"P\":null,\"b\":\"xos97fAiWtKfKXI6hZLx4\",\"p\":\"/algorithm-interview\",\"c\":[\"\",\"columns\",\"lbd-038\",\"\"],\"i\":false,\"f\":[[[\"\",{\"children\":[\"columns\",{\"children\":[[\"slug\",\"lbd-038\",\"d\"],{\"children\":[\"__PAGE__\",{}]}]}]},\"$undefined\",\"$undefined\",true],[\"\",[\"$\",\"$1\",\"c\",{\"children\":[[[\"$\",\"link\",\"0\",{\"rel\":\"stylesheet\",\"href\":\"/algorithm-interview/_next/static/css/c1e787639001e16b.css\",\"precedence\":\"next\",\"crossOrigin\":\"$undefined\",\"nonce\":\"$undefined\"}]],[\"$\",\"html\",null,{\"lang\":\"zh\",\"children\":[[\"$\",\"head\",null,{\"children\":[\"$\",\"script\",null,{\"dangerouslySetInnerHTML\":{\"__html\":\"\\ntry {\\n  var raw = localStorage.getItem('algo-interview');\\n  var theme = 'light';\\n  if (raw) { var p = JSON.parse(raw); theme = (p.state \u0026\u0026 p.state.theme) || 'light'; }\\n  if (theme === 'dark') {\\n    document.documentElement.classList.add('dark');\\n    document.documentElement.setAttribute('data-theme', 'dark');\\n  }\\n} catch (e) {}\\n\"}}]}],[\"$\",\"body\",null,{\"children\":[[\"$\",\"$L2\",null,{\"parallelRouterKey\":\"children\",\"segmentPath\":[\"children\"],\"error\":\"$undefined\",\"errorStyles\":\"$undefined\",\"errorScripts\":\"$undefined\",\"template\":[\"$\",\"$L3\",null,{}],\"templateStyles\":\"$undefined\",\"templateScripts\":\"$undefined\",\"notFound\":[[],[[\"$\",\"title\",null,{\"children\":\"404: This page could not be found.\"}],[\"$\",\"div\",null,{\"style\":{\"fontFamily\":\"system-ui,\\\"Segoe UI\\\",Roboto,Helvetica,Arial,sans-serif,\\\"Apple Color Emoji\\\",\\\"Segoe UI Emoji\\\"\",\"height\":\"100vh\",\"textAlign\":\"center\",\"display\":\"flex\",\"flexDirection\":\"column\",\"alignItems\":\"center\",\"justifyContent\":\"center\"},\"children\":[\"$\",\"div\",null,{\"children\":[[\"$\",\"style\",null,{\"dangerouslySetInnerHTML\":{\"__html\":\"body{color:#000;background:#fff;margin:0}.next-error-h1{border-right:1px solid rgba(0,0,0,.3)}@media (prefers-color-scheme:dark){body{color:#fff;background:#000}.next-error-h1{border-right:1px solid rgba(255,255,255,.3)}}\"}}],[\"$\",\"h1\",null,{\"className\":\"next-error-h1\",\"style\":{\"display\":\"inline-block\",\"margin\":\"0 20px 0 0\",\"padding\":\"0 23px 0 0\",\"fontSize\":24,\"fontWeight\":500,\"verticalAlign\":\"top\",\"lineHeight\":\"49px\"},\"children\":404}],[\"$\",\"div\",null,{\"style\":{\"display\":\"inline-block\"},\"children\":[\"$\",\"h2\",null,{\"style\":{\"fontSize\":14,\"fontWeight\":400,\"lineHeight\":\"49px\",\"margin\":0},\"children\":\"This page could not be found.\"}]}]]}]}]]],\"forbidden\":\"$undefined\",\"unauthorized\":\"$undefined\"}],[\"$\",\"script\",null,{\"dangerouslySetInnerHTML\":{\"__html\":\"\\nif ('serviceWorker' in navigator) {\\n  window.addEventListener('load', function () {\\n    navigator.serviceWorker.register('/algorithm-interview/sw.js').catch(function () {});\\n  });\\n}\\n\"}}]]}]]}]]}],{\"children\":[\"columns\",[\"$\",\"$1\",\"c\",{\"children\":[null,[\"$\",\"$L2\",null,{\"parallelRouterKey\":\"children\",\"segmentPath\":[\"children\",\"columns\",\"children\"],\"error\":\"$undefined\",\"errorStyles\":\"$undefined\",\"errorScripts\":\"$undefined\",\"template\":[\"$\",\"$L3\",null,{}],\"templateStyles\":\"$undefined\",\"templateScripts\":\"$undefined\",\"notFound\":\"$undefined\",\"forbidden\":\"$undefined\",\"unauthorized\":\"$undefined\"}]]}],{\"children\":[[\"slug\",\"lbd-038\",\"d\"],[\"$\",\"$1\",\"c\",{\"children\":[null,[\"$\",\"$L2\",null,{\"parallelRouterKey\":\"children\",\"segmentPath\":[\"children\",\"columns\",\"children\",\"$0:f:0:1:2:children:2:children:0\",\"children\"],\"error\":\"$undefined\",\"errorStyles\":\"$undefined\",\"errorScripts\":\"$undefined\",\"template\":[\"$\",\"$L3\",null,{}],\"templateStyles\":\"$undefined\",\"templateScripts\":\"$undefined\",\"notFound\":\"$undefined\",\"forbidden\":\"$undefined\",\"unauthorized\":\"$undefined\"}]]}],{\"children\":[\"__PAGE__\",[\"$\",\"$1\",\"c\",{\"children\":[\"$L4\",null,[\"$\",\"$L5\",null,{\"children\":\"$L6\"}]]}],{},null,false]},null,false]},null,false]},null,false],[\"$\",\"$1\",\"h\",{\"children\":[null,[\"$\",\"$1\",\"UtLXTZVtW8lTtq7PaUR4f\",{\"children\":[[\"$\",\"$L7\",null,{\"children\":\"$L8\"}],[\"$\",\"$L9\",null,{\"children\":\"$La\"}],null]}]]}],false]],\"m\":\"$undefined\",\"G\":[\"$b\",\"$undefined\"],\"s\":false,\"S\":true}\n"])</script><script>self.__next_f.push([1,"c:I[8173,[\"173\",\"static/chunks/173-69860a4742bb7020.js\",\"829\",\"static/chunks/829-7533e70598480772.js\",\"306\",\"static/chunks/app/columns/%5Bslug%5D/page-58fc1d8f5085c1ff.js\"],\"\"]\nd:I[4780,[\"173\",\"static/chunks/173-69860a4742bb7020.js\",\"829\",\"static/chunks/829-7533e70598480772.js\",\"306\",\"static/chunks/app/columns/%5Bslug%5D/page-58fc1d8f5085c1ff.js\"],\"default\"]\ne:T1e08,"])</script><script>self.__next_f.push([1,"# 特殊数据结构：单调队列\n\n特殊数据结构：单调队列\n学算法，认准 labuladong 就够了！\n前⽂讲了⼀种特殊的数据结构「单调栈」monotonic stack，解决了⼀类问题\n「Next Greater Number」，本⽂写⼀个类似的数据结构「单调队列」。\n也许这种数据结构的名字你没听过，其实没啥难的，就是⼀个「队列」，只\n是使⽤了⼀点巧妙的⽅法，使得队列中的元素单调递增（或递减）。这个数\n据结构有什么⽤？可以解决滑动窗⼝的⼀系列问题。\n看⼀道 LeetCode 题⽬，难度 hard：\n⼀、搭建解题框架\n特殊数据结构：单调队列\n266\n\n这道题不复杂，难点在于如何在 O(1) 时间算出每个「窗⼝」中的最⼤值，\n使得整个算法在线性时间完成。在之前我们探讨过类似的场景，得到⼀个结\n论：\n在⼀堆数字中，已知最值，如果给这堆数添加⼀个数，那么⽐较⼀下就可以\n很快算出最值；但如果减少⼀个数，就不⼀定能很快得到最值了，⽽要遍历\n所有数重新找最值。\n回到这道题的场景，每个窗⼝前进的时候，要添加⼀个数同时减少⼀个数，\n所以想在 O(1) 的时间得出新的最值，就需要「单调队列」这种特殊的数据\n结构来辅助了。\n⼀个普通的队列⼀定有这两个操作：\nclass Queue {\n    void push(int n);\n    // 或 enqueue，在队尾加⼊元素 n\n    void pop();\n    // 或 dequeue，删除队头元素\n}\n⼀个「单调队列」的操作也差不多：\nclass MonotonicQueue {\n    // 在队尾添加元素 n\n    void push(int n);\n    // 返回当前队列中的最⼤值\n    int max();\n    // 队头元素如果是 n，删除它\n    void pop(int n);\n}\n当然，这⼏个 API 的实现⽅法肯定跟⼀般的 Queue 不⼀样，不过我们暂且\n不管，⽽且认为这⼏个操作的时间复杂度都是 O(1)，先把这道「滑动窗\n⼝」问题的解答框架搭出来：\nvector\u003cint\u003e maxSlidingWindow(vector\u003cint\u003e\u0026 nums, int k) {\n特殊数据结构：单调队列\n267\n\n    MonotonicQueue window;\n    vector\u003cint\u003e res;\n    for (int i = 0; i \u003c nums.size(); i++) {\n        if (i \u003c k - 1) { //先把窗⼝的前 k - 1 填满\n            window.push(nums[i]);\n        } else { // 窗⼝开始向前滑动\n            window.push(nums[i]);\n            res.push_back(window.max());\n            window.pop(nums[i - k + 1]);\n            // nums[i - k + 1] 就是窗⼝最后的元素\n        }\n    }\n    return res;\n}\n这个思路很简单，能理解吧？下⾯我们开始重头戏，单调队列的实现。\n⼆、实现单调队列数据结构\n⾸先我们要认识另⼀种数据结构：deque，即双端队列。很简单：\nclass deque {\n    // 在队头插⼊元素 n\n    void push_front(int n);\n    // 在队尾插⼊元素 n\n特殊数据结构：单调队列\n268\n\n    void push_back(int n);\n    // 在队头删除元素\n    void pop_front();\n    // 在队尾删除元素\n    void pop_back();\n    // 返回队头元素\n    int front();\n    // 返回队尾元素\n    int back();\n}\n⽽且，这些操作的复杂度都是 O(1)。这其实不是啥稀奇的数据结构，⽤链\n表作为底层结构的话，很容易实现这些功能。\n「单调队列」的核⼼思路和「单调栈」类似。单调队列的 push ⽅法依然在\n队尾添加元素，但是要把前⾯⽐新元素⼩的元素都删掉：\nclass MonotonicQueue {\nprivate:\n    deque\u003cint\u003e data;\npublic:\n    void push(int n) {\n        while (!data.empty() \u0026\u0026 data.back() \u003c n) \n            data.pop_back();\n        data.push_back(n);\n    }\n};\n你可以想象，加⼊数字的⼤⼩代表⼈的体重，把前⾯体重不⾜的都压扁了，\n直到遇到更⼤的量级才停住。\n特殊数据结构：单调队列\n269\n\n如果每个元素被加⼊时都这样操作，最终单调队列中的元素⼤⼩就会保持⼀\n个单调递减的顺序，因此我们的 max() API 可以可以这样写：\nint max() {\n    return data.front();\n}\npop() API 在队头删除元素 n，也很好写：\nvoid pop(int n) {\n    if (!data.empty() \u0026\u0026 data.front() == n)\n        data.pop_front();\n}\n之所以要判断  data.front() == n ，是因为我们想删除的队头元素 n 可能已\n经被「压扁」了，这时候就不⽤删除了：\n特殊数据结构：单调队列\n270\n\n⾄此，单调队列设计完毕，看下完整的解题代码：\nclass MonotonicQueue {\nprivate:\n    deque\u003cint\u003e data;\npublic:\n    void push(int n) {\n        while (!data.empty() \u0026\u0026 data.back() \u003c n) \n            data.pop_back();\n        data.push_back(n);\n    }\n    int max() { return data.front(); }\n    void pop(int n) {\n        if (!data.empty() \u0026\u0026 data.front() == n)\n            data.pop_front();\n    }\n};\nvector\u003cint\u003e maxSlidingWindow(vector\u003cint\u003e\u0026 nums, int k) {\n    MonotonicQueue window;\n    vector\u003cint\u003e res;\n    for (int i = 0; i \u003c nums.size(); i++) {\n特殊数据结构：单调队列\n271\n\n        if (i \u003c k - 1) { //先填满窗⼝的前 k - 1\n            window.push(nums[i]);\n        } else { // 窗⼝向前滑动\n            window.push(nums[i]);\n            res.push_back(window.max());\n            window.pop(nums[i - k + 1]);\n        }\n    }\n    return res;\n}\n三、算法复杂度分析\n读者可能疑惑，push 操作中含有 while 循环，时间复杂度不是 O(1) 呀，那\n么本算法的时间复杂度应该不是线性时间吧？\n单独看 push 操作的复杂度确实不是 O(1)，但是算法整体的复杂度依然是\nO(N) 线性时间。要这样想，nums 中的每个元素最多被 push_back 和\npop_back ⼀次，没有任何多余操作，所以整体的复杂度还是 O(N)。\n空间复杂度就很简单了，就是窗⼝的⼤⼩ O(k)。\n四、最后总结\n有的读者可能觉得「单调队列」和「优先级队列」⽐较像，实际上差别很⼤\n的。\n单调队列在添加元素的时候靠删除元素保持队列的单调性，相当于抽取出某\n个函数中单调递增（或递减）的部分；⽽优先级队列（⼆叉堆）相当于⾃动\n排序，差别⼤了去了。\n赶紧去拿下 LeetCode 第 239 道题吧〜\n＿＿＿＿＿＿＿＿＿＿＿＿＿\n刷算法，学套路，认准 labuladong。\n本⼩抄即将出版，关注 labuladong 公众号或 ongline book 查看更新⽂章，\n后台回复「进群」可进刷题群，labuladong 带你⽇穿 LeetCode。\n特殊数据结构：单调队列\n272\n\n特殊数据结构：单调队列\n273\n\n设计Twitter\n学算法，认准 labuladong 就够了！\n「design Twitter」是 LeetCode 上第 355 道题⽬，不仅题⽬本⾝很有意思，\n⽽且把合并多个有序链表的算法和⾯向对象设计（OO design）结合起来\n了，很有实际意义，本⽂就带⼤家来看看这道题。\n⾄于 Twitter 的什么功能跟算法有关系，等我们描述⼀下题⽬要求就知道\n了。\n⼀、题⽬及应⽤场景简介\nTwitter 和微博功能差不多，我们主要要实现这样⼏个 API：\nclass Twitter {\n    /** user 发表⼀条 tweet 动态 */\n    public void postTweet(int userId, int tweetId) {}\n    /** 返回该 user 关注的⼈（包括他⾃⼰）最近的动态 id，\n    最多 10 条，⽽且这些动态必须按从新到旧的时间线顺序排列。*/\n    public List\u003cInteger\u003e getNewsFeed(int userId) {}\n    /** follower 关注 followee，如果 Id 不存在则新建 */\n    public void follow(int followerId, int followeeId) {}\n    /** follower 取关 followee，如果 Id 不存在则什么都不做 */\n    public void unfollow(int followerId, int followeeId) {}\n}\n举个具体的例⼦，⽅便⼤家理解 API 的具体⽤法：\nTwitter twitter = new Twitter();\n设计Twitter\n274"])</script><script>self.__next_f.push([1,"4:[\"$\",\"main\",null,{\"style\":{\"maxWidth\":760,\"margin\":\"0 auto\",\"padding\":\"16px\",\"minHeight\":\"100vh\"},\"children\":[[\"$\",\"$Lc\",null,{\"href\":\"/columns/\",\"style\":{\"display\":\"inline-block\",\"marginBottom\":\"12px\",\"fontSize\":\"13px\"},\"children\":\"← 返回专栏\"}],[\"$\",\"div\",null,{\"style\":{\"fontSize\":\"12px\",\"color\":\"var(--text-tertiary)\",\"marginBottom\":\"4px\"},\"children\":[\"📕\",\" \",\"labuladong 算法小抄\"]}],[\"$\",\"h1\",null,{\"style\":{\"fontSize\":\"22px\",\"fontWeight\":700,\"margin\":\"0 0 16px\"},\"children\":\"特殊数据结构：单调队列\"}],[\"$\",\"$Ld\",null,{\"children\":\"$e\"}],false]}]\n"])</script><script>self.__next_f.push([1,"a:[[\"$\",\"meta\",\"0\",{\"name\":\"viewport\",\"content\":\"width=device-width, initial-scale=1\"}],[\"$\",\"meta\",\"1\",{\"name\":\"theme-color\",\"content\":\"#f97316\"}]]\n"])</script><script>self.__next_f.push([1,"8:[[\"$\",\"meta\",\"0\",{\"charSet\":\"utf-8\"}],[\"$\",\"title\",\"1\",{\"children\":\"特殊数据结构：单调队列 - 算法面试\"}],[\"$\",\"meta\",\"2\",{\"name\":\"description\",\"content\":\"LeetCode 热题 100 完整 Java 题解、逐题动画、知识专栏与智能间隔复习。\"}],[\"$\",\"meta\",\"3\",{\"name\":\"application-name\",\"content\":\"算法面试\"}],[\"$\",\"link\",\"4\",{\"rel\":\"manifest\",\"href\":\"/algorithm-interview/manifest.json\",\"crossOrigin\":\"$undefined\"}],[\"$\",\"meta\",\"5\",{\"name\":\"keywords\",\"content\":\"LeetCode,热题100,算法面试,Java题解,数据结构,动态规划,面试刷题\"}],[\"$\",\"meta\",\"6\",{\"name\":\"mobile-web-app-capable\",\"content\":\"yes\"}],[\"$\",\"meta\",\"7\",{\"name\":\"apple-mobile-web-app-title\",\"content\":\"算法面试\"}],[\"$\",\"meta\",\"8\",{\"name\":\"apple-mobile-web-app-status-bar-style\",\"content\":\"default\"}],[\"$\",\"meta\",\"9\",{\"property\":\"og:title\",\"content\":\"算法面试题库\"}],[\"$\",\"meta\",\"10\",{\"property\":\"og:description\",\"content\":\"LeetCode 热题 100 完整 Java 题解、逐题动画、知识专栏与智能复习\"}],[\"$\",\"meta\",\"11\",{\"property\":\"og:site_name\",\"content\":\"算法面试题库\"}],[\"$\",\"meta\",\"12\",{\"property\":\"og:locale\",\"content\":\"zh_CN\"}],[\"$\",\"meta\",\"13\",{\"property\":\"og:type\",\"content\":\"website\"}],[\"$\",\"meta\",\"14\",{\"name\":\"twitter:card\",\"content\":\"summary\"}],[\"$\",\"meta\",\"15\",{\"name\":\"twitter:title\",\"content\":\"算法面试题库\"}],[\"$\",\"meta\",\"16\",{\"name\":\"twitter:description\",\"content\":\"LeetCode 热题 100 完整 Java 题解、逐题动画、知识专栏与智能复习\"}]]\n"])</script><script>self.__next_f.push([1,"6:null\n"])</script></body></html>

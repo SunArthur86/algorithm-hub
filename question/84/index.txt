@@ -1,0 +1,147 @@
+1:"$Sreact.fragment"
+2:I[5244,[],""]
+3:I[3866,[],""]
+5:I[6213,[],"OutletBoundary"]
+7:I[6213,[],"MetadataBoundary"]
+9:I[6213,[],"ViewportBoundary"]
+b:I[4835,[],""]
+:HL["/algorithm-interview/_next/static/css/c1e787639001e16b.css","style"]
+0:{"P":null,"b":"xos97fAiWtKfKXI6hZLx4","p":"/algorithm-interview","c":["","question","84",""],"i":false,"f":[[["",{"children":["question",{"children":[["lcId","84","d"],{"children":["__PAGE__",{}]}]}]},"$undefined","$undefined",true],["",["$","$1","c",{"children":[[["$","link","0",{"rel":"stylesheet","href":"/algorithm-interview/_next/static/css/c1e787639001e16b.css","precedence":"next","crossOrigin":"$undefined","nonce":"$undefined"}]],["$","html",null,{"lang":"zh","children":[["$","head",null,{"children":["$","script",null,{"dangerouslySetInnerHTML":{"__html":"\ntry {\n  var raw = localStorage.getItem('algo-interview');\n  var theme = 'light';\n  if (raw) { var p = JSON.parse(raw); theme = (p.state && p.state.theme) || 'light'; }\n  if (theme === 'dark') {\n    document.documentElement.classList.add('dark');\n    document.documentElement.setAttribute('data-theme', 'dark');\n  }\n} catch (e) {}\n"}}]}],["$","body",null,{"children":[["$","$L2",null,{"parallelRouterKey":"children","segmentPath":["children"],"error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L3",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":[[],[["$","title",null,{"children":"404: This page could not be found."}],["$","div",null,{"style":{"fontFamily":"system-ui,\"Segoe UI\",Roboto,Helvetica,Arial,sans-serif,\"Apple Color Emoji\",\"Segoe UI Emoji\"","height":"100vh","textAlign":"center","display":"flex","flexDirection":"column","alignItems":"center","justifyContent":"center"},"children":["$","div",null,{"children":[["$","style",null,{"dangerouslySetInnerHTML":{"__html":"body{color:#000;background:#fff;margin:0}.next-error-h1{border-right:1px solid rgba(0,0,0,.3)}@media (prefers-color-scheme:dark){body{color:#fff;background:#000}.next-error-h1{border-right:1px solid rgba(255,255,255,.3)}}"}}],["$","h1",null,{"className":"next-error-h1","style":{"display":"inline-block","margin":"0 20px 0 0","padding":"0 23px 0 0","fontSize":24,"fontWeight":500,"verticalAlign":"top","lineHeight":"49px"},"children":404}],["$","div",null,{"style":{"display":"inline-block"},"children":["$","h2",null,{"style":{"fontSize":14,"fontWeight":400,"lineHeight":"49px","margin":0},"children":"This page could not be found."}]}]]}]}]]],"forbidden":"$undefined","unauthorized":"$undefined"}],["$","script",null,{"dangerouslySetInnerHTML":{"__html":"\nif ('serviceWorker' in navigator) {\n  window.addEventListener('load', function () {\n    navigator.serviceWorker.register('/algorithm-interview/sw.js').catch(function () {});\n  });\n}\n"}}]]}]]}]]}],{"children":["question",["$","$1","c",{"children":[null,["$","$L2",null,{"parallelRouterKey":"children","segmentPath":["children","question","children"],"error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L3",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","forbidden":"$undefined","unauthorized":"$undefined"}]]}],{"children":[["lcId","84","d"],["$","$1","c",{"children":[null,["$","$L2",null,{"parallelRouterKey":"children","segmentPath":["children","question","children","$0:f:0:1:2:children:2:children:0","children"],"error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L3",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","forbidden":"$undefined","unauthorized":"$undefined"}]]}],{"children":["__PAGE__",["$","$1","c",{"children":["$L4",null,["$","$L5",null,{"children":"$L6"}]]}],{},null,false]},null,false]},null,false]},null,false],["$","$1","h",{"children":[null,["$","$1","zZ61Q03m4QLdGlBDNlwST",{"children":[["$","$L7",null,{"children":"$L8"}],["$","$L9",null,{"children":"$La"}],null]}]]}],false]],"m":"$undefined","G":["$b","$undefined"],"s":false,"S":true}
+c:I[8173,["173","static/chunks/173-69860a4742bb7020.js","829","static/chunks/829-7533e70598480772.js","937","static/chunks/937-ef36a5ac4bc37a7e.js","447","static/chunks/447-06af9414e164c047.js","8","static/chunks/app/question/%5BlcId%5D/page-478b0d2a69e222f2.js"],""]
+d:I[3447,["173","static/chunks/173-69860a4742bb7020.js","829","static/chunks/829-7533e70598480772.js","937","static/chunks/937-ef36a5ac4bc37a7e.js","447","static/chunks/447-06af9414e164c047.js","8","static/chunks/app/question/%5BlcId%5D/page-478b0d2a69e222f2.js"],"default"]
+e:T1a55,# 84. 柱状图中最大的矩形
+
+> 难度：**Hard** | 分类：栈 | 标签：栈, 数组, 单调栈
+
+> 🔗 力扣链接：[https://leetcode.cn/problems/largest-rectangle-in-histogram/](https://leetcode.cn/problems/largest-rectangle-in-histogram/)
+
+## 📝 题目描述
+
+给你一个非负整数数组 `heights`，表示柱状图中各柱子的高度，每根柱子宽度为 `1`。求柱状图中能框出的最大矩形面积。
+
+比如 `heights = [2,1,5,6,2,3]`，最大矩形面积是 `10`（高度 5 和 6 的两根柱子框出 `5×2=10`）。
+
+- 题号：84
+- 题目名：柱状图中最大的矩形
+- 难度：困难
+- 题型：单调栈
+- 为什么选这题：它是单调栈的巅峰之作，理解了"以每根柱子为高度的最大矩形"这个核心思想，单调栈就算真正入门了。
+
+## 🧠 思考路径
+
+暴力方法是枚举每对左右边界，计算矩形面积，`O(n²)`。
+
+换个角度：以第 `i` 根柱子的高度为矩形高度，矩形能向左右扩展多远？答案是：向左到第一根比它矮的柱子右边一位，向右到第一根比它矮的柱子左边一位。即找到每个柱子的"左右边界"。
+
+"找左边/右边第一个比它小的元素"——这正是单调栈的拿手好戏。维护一个单调递增栈，当新来的柱子比栈顶矮时，栈顶柱子的右边界就确定了（就是当前柱子）。弹出栈顶后，新的栈顶就是它的左边界。面积 = `heights[栈顶] × (right - left - 1)`。
+
+## 💻 Java 题解
+
+### 解法 1：单调递增栈
+
+栈存索引，高度递增。遇到比栈顶矮的柱子时弹出，计算以弹出柱子为高的矩形面积。
+
+- ⏱ 时间复杂度：`O(n)`
+- 💾 空间复杂度：`O(n)`
+
+```java
+class Solution {
+    public int largestRectangleArea(int[] heights) {
+        Deque<Integer> stack = new ArrayDeque<>();
+        int maxArea = 0;
+        for (int i = 0; i <= heights.length; i++) {
+            int h = i == heights.length ? 0 : heights[i];
+            while (!stack.isEmpty() && h < heights[stack.peek()]) {
+                int height = heights[stack.pop()];
+                int width = stack.isEmpty() ? i : i - stack.peek() - 1;
+                maxArea = Math.max(maxArea, height * width);
+            }
+            stack.push(i);
+        }
+        return maxArea;
+    }
+}
+```
+
+**关键点：**
+- 单调递增栈
+- i==n 时 h=0 强制清空栈
+- 宽度 = i - stack.peek() - 1
+
+**执行步骤：**
+1. 遍历到i+1（含末尾哨兵0）
+1. 比栈顶矮→弹出计算面积
+1. 宽=当前i-新栈顶-1
+
+
+## ⚠️ 易错点
+
+- 哨兵 `0` 不能忘。没有它，最后栈里可能还有柱子没被处理。
+- 宽度计算：弹出后如果栈为空，宽度就是 `i`（从 0 到 i-1）；否则是 `i - stack[-1] - 1`。
+- 栈里存的是下标不是高度，取出后要用 `heights[stack[-1]]` 来获取高度。
+
+- 末尾哨兵h=0确保栈清空
+
+- 栈空时宽度=i
+
+## 📊 复杂度分析
+
+- 时间复杂度：`O(n)`，每个元素最多入栈出栈各一次。
+- 空间复杂度：`O(n)`，栈的大小。
+
+## 🏢 实际业务应用
+
+- 城市天际线分析中的最大建筑群面积计算：给定一组建筑高度，找出能框出的最大矩形地块。
+- 股票交易的最大利润区间分析：把价格序列看作柱状图，找最大矩形对应最优持有区间。
+- 水资源管理中的最大蓄水面积：堤坝高度数组中，计算能围出的最大水面面积。
+- UI 布局引擎的最大矩形空间查找：在有限高度和宽度约束下，找到能放置最大组件的空间。
+
+- 城市天际线分析中的最大建筑群面积计算：给定一组建筑高度，找出能框出的最大矩形地块。
+- 股票交易的最大利润区间分析：把价格序列看作柱状图，找最大矩形对应最优持有区间。
+- 水资源管理中的最大蓄水面积：堤坝高度数组中，计算能围出的最大水面面积。
+- UI 布局引擎的最大矩形空间查找：在有限高度和宽度约束下，找到能放置最大组件的空间。
+
+## 📖 形象类比
+
+可以类比《三国演义》里诸葛亮设伏的地形分析。
+
+山谷两侧的山峰高度不同（柱子高度）。诸葛亮要找一段山谷，使得在某个高度上能横向展开最宽的伏击面。每座山峰只能向左右延伸到比它矮的山峰为止。他用单调栈从左到右扫描：当前山峰比前一做高就继续往前看，遇到矮的就回头算面积——"这座山能从左到右覆盖多宽"。
+
+对应关系：
+
+- "山峰高度"对应柱子高度
+- "向左右延伸到矮峰"对应找左右边界
+- "伏击面积"对应矩形面积
+- "遇到矮峰就回头算"对应弹出栈顶计算面积
+
+可以类比《三国演义》里诸葛亮设伏的地形分析。
+
+山谷两侧的山峰高度不同（柱子高度）。诸葛亮要找一段山谷，使得在某个高度上能横向展开最宽的伏击面。每座山峰只能向左右延伸到比它矮的山峰为止。他用单调栈从左到右扫描：当前山峰比前一做高就继续往前看，遇到矮的就回头算面积——"这座山能从左到右覆盖多宽"。
+
+对应关系：
+
+- "山峰高度"对应柱子高度
+- "向左右延伸到矮峰"对应找左右边界
+- "伏击面积"对应矩形面积
+- "遇到矮峰就回头算"对应弹出栈顶计算面积
+
+河狸在河边筑坝，每根木头的高度不同，排成一排。河狸想知道用这些木头能围出多大的水面。它从左到右一根根看：如果当前木头比前面那根矮，前面那根木头围出的水面宽度就确定了——从它左边的矮木头到当前这根矮木头之间。河狸算出每根木头对应的面积，最大的那个就是答案。
+
+河狸在河边筑坝，每根木头的高度不同，排成一排。河狸想知道用这些木头能围出多大的水面。它从左到右一根根看：如果当前木头比前面那根矮，前面那根木头围出的水面宽度就确定了——从它左边的矮木头到当前这根矮木头之间。河狸算出每根木头对应的面积，最大的那个就是答案。
+
+## 🎵 记忆口诀
+
+单调栈里存下标，遇到矮柱就弹出；弹出算高乘以宽，末尾加零做哨兵。
+
+单调栈里存下标，遇到矮柱就弹出；弹出算高乘以宽，末尾加零做哨兵。
+
+## 🔗 延伸练习
+
+- `85. 最大矩形`：把一维柱状图变成二维矩阵，逐行构造柱状图后调用本题算法。
+- `42. 接雨水`：同样是单调栈，但目标从"最大矩形"变成"凹槽蓄水量"。
+
+- `85. 最大矩形`：把一维柱状图变成二维矩阵，逐行构造柱状图后调用本题算法。
+- `42. 接雨水`：同样是单调栈，但目标从"最大矩形"变成"凹槽蓄水量"。4:["$","main",null,{"className":"detail-main","style":{"maxWidth":760,"margin":"0 auto","padding":"16px","minHeight":"100vh"},"children":[["$","$Lc",null,{"href":"/","style":{"display":"inline-block","marginBottom":"12px","fontSize":"13px"},"children":"← 返回题库"}],["$","h1",null,{"style":{"fontSize":"22px","fontWeight":700,"margin":"0 0 4px"},"children":[["$","span",null,{"style":{"marginRight":"6px"},"children":"🥞"}],84,". ","柱状图中最大的矩形"]}],["$","$Ld",null,{"q":{"id":"0084","lcId":84,"slug":"largest-rectangle-in-histogram","title":"柱状图中最大的矩形","question":"柱状图中最大的矩形","answer":"$e","difficulty":"Hard","category":"stack","categories":["stack"],"tags":["栈","数组","单调栈"],"url":"https://leetcode.cn/problems/largest-rectangle-in-histogram/","planOrder":73,"hasViz":true,"hasDiagram":false,"feynman":{"essence":"给你一个非负整数数组 `heights`，表示柱状图中各柱子的高度，每根柱子宽度为 `1`。求柱状图中能框出的最大矩形面积。  比如 `heights = [2,1,5,6,2,3]`，最大矩形面积是","analogy":"","key_points":[]},"first_principle":{"problem":"","axioms":[],"rebuild":""}}}]]}]
+a:[["$","meta","0",{"name":"viewport","content":"width=device-width, initial-scale=1"}],["$","meta","1",{"name":"theme-color","content":"#f97316"}]]
+8:[["$","meta","0",{"charSet":"utf-8"}],["$","title","1",{"children":"84. 柱状图中最大的矩形 - 算法面试"}],["$","meta","2",{"name":"description","content":"给你一个非负整数数组 `heights`，表示柱状图中各柱子的高度，每根柱子宽度为 `1`。求柱状图中能框出的最大矩形面积。  比如 `heights = [2,1,5,6,2,3]`，最大矩形面积是"}],["$","meta","3",{"name":"application-name","content":"算法面试"}],["$","link","4",{"rel":"manifest","href":"/algorithm-interview/manifest.json","crossOrigin":"$undefined"}],["$","meta","5",{"name":"keywords","content":"柱状图中最大的矩形,LeetCode 84,Hard,栈,数组,单调栈"}],["$","meta","6",{"name":"mobile-web-app-capable","content":"yes"}],["$","meta","7",{"name":"apple-mobile-web-app-title","content":"算法面试"}],["$","meta","8",{"name":"apple-mobile-web-app-status-bar-style","content":"default"}],["$","meta","9",{"property":"og:title","content":"84. 柱状图中最大的矩形"}],["$","meta","10",{"property":"og:description","content":"给你一个非负整数数组 `heights`，表示柱状图中各柱子的高度，每根柱子宽度为 `1`。求柱状图中能框出的最大矩形面积。  比如 `heights = [2,1,5,6,2,3]`，最大矩形面积是"}],["$","meta","11",{"property":"og:locale","content":"zh_CN"}],["$","meta","12",{"property":"og:type","content":"article"}],["$","meta","13",{"name":"twitter:card","content":"summary"}],["$","meta","14",{"name":"twitter:title","content":"84. 柱状图中最大的矩形"}],["$","meta","15",{"name":"twitter:description","content":"给你一个非负整数数组 `heights`，表示柱状图中各柱子的高度，每根柱子宽度为 `1`。求柱状图中能框出的最大矩形面积。  比如 `heights = [2,1,5,6,2,3]`，最大矩形面积是"}]]
+6:null

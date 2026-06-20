@@ -1,0 +1,199 @@
+1:"$Sreact.fragment"
+2:I[5244,[],""]
+3:I[3866,[],""]
+5:I[6213,[],"OutletBoundary"]
+7:I[6213,[],"MetadataBoundary"]
+9:I[6213,[],"ViewportBoundary"]
+b:I[4835,[],""]
+:HL["/algorithm-interview/_next/static/css/c1e787639001e16b.css","style"]
+0:{"P":null,"b":"xos97fAiWtKfKXI6hZLx4","p":"/algorithm-interview","c":["","question","94",""],"i":false,"f":[[["",{"children":["question",{"children":[["lcId","94","d"],{"children":["__PAGE__",{}]}]}]},"$undefined","$undefined",true],["",["$","$1","c",{"children":[[["$","link","0",{"rel":"stylesheet","href":"/algorithm-interview/_next/static/css/c1e787639001e16b.css","precedence":"next","crossOrigin":"$undefined","nonce":"$undefined"}]],["$","html",null,{"lang":"zh","children":[["$","head",null,{"children":["$","script",null,{"dangerouslySetInnerHTML":{"__html":"\ntry {\n  var raw = localStorage.getItem('algo-interview');\n  var theme = 'light';\n  if (raw) { var p = JSON.parse(raw); theme = (p.state && p.state.theme) || 'light'; }\n  if (theme === 'dark') {\n    document.documentElement.classList.add('dark');\n    document.documentElement.setAttribute('data-theme', 'dark');\n  }\n} catch (e) {}\n"}}]}],["$","body",null,{"children":[["$","$L2",null,{"parallelRouterKey":"children","segmentPath":["children"],"error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L3",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":[[],[["$","title",null,{"children":"404: This page could not be found."}],["$","div",null,{"style":{"fontFamily":"system-ui,\"Segoe UI\",Roboto,Helvetica,Arial,sans-serif,\"Apple Color Emoji\",\"Segoe UI Emoji\"","height":"100vh","textAlign":"center","display":"flex","flexDirection":"column","alignItems":"center","justifyContent":"center"},"children":["$","div",null,{"children":[["$","style",null,{"dangerouslySetInnerHTML":{"__html":"body{color:#000;background:#fff;margin:0}.next-error-h1{border-right:1px solid rgba(0,0,0,.3)}@media (prefers-color-scheme:dark){body{color:#fff;background:#000}.next-error-h1{border-right:1px solid rgba(255,255,255,.3)}}"}}],["$","h1",null,{"className":"next-error-h1","style":{"display":"inline-block","margin":"0 20px 0 0","padding":"0 23px 0 0","fontSize":24,"fontWeight":500,"verticalAlign":"top","lineHeight":"49px"},"children":404}],["$","div",null,{"style":{"display":"inline-block"},"children":["$","h2",null,{"style":{"fontSize":14,"fontWeight":400,"lineHeight":"49px","margin":0},"children":"This page could not be found."}]}]]}]}]]],"forbidden":"$undefined","unauthorized":"$undefined"}],["$","script",null,{"dangerouslySetInnerHTML":{"__html":"\nif ('serviceWorker' in navigator) {\n  window.addEventListener('load', function () {\n    navigator.serviceWorker.register('/algorithm-interview/sw.js').catch(function () {});\n  });\n}\n"}}]]}]]}]]}],{"children":["question",["$","$1","c",{"children":[null,["$","$L2",null,{"parallelRouterKey":"children","segmentPath":["children","question","children"],"error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L3",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","forbidden":"$undefined","unauthorized":"$undefined"}]]}],{"children":[["lcId","94","d"],["$","$1","c",{"children":[null,["$","$L2",null,{"parallelRouterKey":"children","segmentPath":["children","question","children","$0:f:0:1:2:children:2:children:0","children"],"error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L3",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","forbidden":"$undefined","unauthorized":"$undefined"}]]}],{"children":["__PAGE__",["$","$1","c",{"children":["$L4",null,["$","$L5",null,{"children":"$L6"}]]}],{},null,false]},null,false]},null,false]},null,false],["$","$1","h",{"children":[null,["$","$1","aAONyJNwdJ-SCxMX7NrhA",{"children":[["$","$L7",null,{"children":"$L8"}],["$","$L9",null,{"children":"$La"}],null]}]]}],false]],"m":"$undefined","G":["$b","$undefined"],"s":false,"S":true}
+c:I[8173,["173","static/chunks/173-69860a4742bb7020.js","829","static/chunks/829-7533e70598480772.js","937","static/chunks/937-ef36a5ac4bc37a7e.js","447","static/chunks/447-06af9414e164c047.js","8","static/chunks/app/question/%5BlcId%5D/page-478b0d2a69e222f2.js"],""]
+d:I[3447,["173","static/chunks/173-69860a4742bb7020.js","829","static/chunks/829-7533e70598480772.js","937","static/chunks/937-ef36a5ac4bc37a7e.js","447","static/chunks/447-06af9414e164c047.js","8","static/chunks/app/question/%5BlcId%5D/page-478b0d2a69e222f2.js"],"default"]
+e:T20eb,# 94. 二叉树的中序遍历
+
+> 难度：**Easy** | 分类：二叉树 | 标签：栈, 树, 深度优先搜索, 二叉树
+
+> 🔗 力扣链接：[https://leetcode.cn/problems/binary-tree-inorder-traversal/](https://leetcode.cn/problems/binary-tree-inorder-traversal/)
+
+## 📝 题目描述
+
+给你一棵二叉树的根节点 `root`，返回它的中序遍历结果。
+
+中序遍历的顺序是：先遍历左子树，再访问根节点，最后遍历右子树。即"左 → 根 → 右"。
+
+对于一棵 BST（二叉搜索树），中序遍历的结果天然是递增排序的，这个性质在后续很多题中都会用到。
+
+- 题号：94
+- 题目名：二叉树的中序遍历
+- 难度：简单
+- 题型：二叉树
+- 为什么选这题：中序遍历是二叉树三大遍历之一，掌握递归和迭代两种写法，是后续所有树题的基石。对于 BST，中序遍历的结果恰好是升序序列。
+
+## 🧠 思考路径
+
+最直觉的写法是递归：定义一个辅助函数，先递归左子树，把根节点的值加入结果，再递归右子树。代码极其简洁，3 行核心逻辑。
+
+但面试中通常会追问迭代写法。递归的本质是用系统栈保存"返回地址"，迭代写法就是用显式栈来模拟这个过程。
+
+迭代中序遍历的思路：
+1. 从根节点出发，一直往左走，把沿途节点都压入栈。
+2. 栈顶弹出，访问该节点（加入结果）。
+3. 转向该节点的右子树，重复步骤 1。
+
+这个过程模拟了"先走到底，再回头，再转向右边"的递归行为。
+
+## 💻 Java 题解
+
+### 解法 1：递归
+
+递归访问左子树、记录当前节点、递归访问右子树。
+
+- ⏱ 时间复杂度：`O(n)`
+- 💾 空间复杂度：`O(h)`
+
+```java
+class Solution {
+    public List<Integer> inorderTraversal(TreeNode root) {
+        List<Integer> result = new ArrayList<>();
+        inorder(root, result);
+        return result;
+    }
+    private void inorder(TreeNode node, List<Integer> result) {
+        if (node == null) return;
+        inorder(node.left, result);
+        result.add(node.val);
+        inorder(node.right, result);
+    }
+}
+```
+
+**关键点：**
+- 左→根→右顺序
+- 递归终止条件 node==null
+
+**执行步骤：**
+1. 递归左子树
+1. 访问当前节点
+1. 递归右子树
+
+
+### 解法 2：迭代（栈）
+
+用栈模拟递归。一路向左走到底，弹出访问，再转向右子树。
+
+- ⏱ 时间复杂度：`O(n)`
+- 💾 空间复杂度：`O(h)`
+
+```java
+class Solution {
+    public List<Integer> inorderTraversal(TreeNode root) {
+        List<Integer> result = new ArrayList<>();
+        Deque<TreeNode> stack = new ArrayDeque<>();
+        TreeNode curr = root;
+        while (curr != null || !stack.isEmpty()) {
+            while (curr != null) {
+                stack.push(curr);
+                curr = curr.left;
+            }
+            curr = stack.pop();
+            result.add(curr.val);
+            curr = curr.right;
+        }
+        return result;
+    }
+}
+```
+
+**关键点：**
+- 一路向左压栈
+- 弹出时访问
+- 转向右子树
+
+**执行步骤：**
+1. 一路向左压栈
+1. 弹出栈顶访问
+1. 转向右子树继续
+
+
+## ⚠️ 易错点
+
+- 迭代写法中，内层 `while` 是"一路往左压栈"，外层 `while` 是"整个遍历还没结束"。两个循环的条件不同，不要混用。
+- 弹出节点后要转向右子树，而不是左子树。`curr = curr.right` 这一步容易漏。
+- 栈里存的是节点引用，不是值。弹出后才能访问值。
+- 递归写法中不要忘了 `base case`（节点为空直接返回）。
+
+- 迭代法外层 while 条件是 curr!=null || !stack.isEmpty()
+
+## 📊 复杂度分析
+
+- 时间复杂度：`O(n)`。每个节点访问一次。
+- 空间复杂度：`O(h)`。`h` 是树的高度，栈的最大深度等于树的高度。最坏情况（链状树）为 `O(n)`，平衡树为 `O(log n)`。
+
+## 🏢 实际业务应用
+
+- 数据库 B+ 树的范围查询：B+ 树的叶子节点形成有序链表，中序遍历的"左→根→右"逻辑正是数据库按索引顺序扫描数据的核心原理。
+- 表达式求值：中缀表达式对应中序遍历，编译器需要按"左操作数→运算符→右操作数"的顺序构建和求值。
+- 文件系统目录排序：操作系统按字典序列出文件夹内容时，内部维护的树结构按中序遍历输出有序结果。
+- JSON/XML 的有序解析：嵌套数据结构的深度优先解析，本质上就是树的中序或前序遍历。
+
+- 数据库 B+ 树的范围查询：B+ 树的叶子节点形成有序链表，中序遍历的"左→根→右"逻辑正是数据库按索引顺序扫描数据的核心原理。
+- 表达式求值：中缀表达式对应中序遍历，编译器需要按"左操作数→运算符→右操作数"的顺序构建和求值。
+- 文件系统目录排序：操作系统按字典序列出文件夹内容时，内部维护的树结构按中序遍历输出有序结果。
+- JSON/XML 的有序解析：嵌套数据结构的深度优先解析，本质上就是树的中序或前序遍历。
+
+## 📖 形象类比
+
+可以把它类比成《水浒传》里梁山好汉排座次的场景。
+
+宋江要按照武功高低的顺序宣读好汉名单。梁山的好汉按二叉搜索树组织：左边的武功低，右边的武功高。宋江的宣读规则是"先看左边的人，再念中间这位，最后看右边的人"。
+
+于是宋江从自己开始，一直往左边走，走到最左边的杜迁，先念他的名字。然后回到上一级宋万，再念。然后看宋万右边有没有人……如此反复，最终所有人的名字按武功从低到高全部念完。
+
+对应关系是：
+
+- "二叉搜索树"对应梁山好汉的武功排名树
+- "左子树"对应武功更低的兄弟们
+- "右子树"对应武功更高的兄弟们
+- "中序遍历结果"对应按武功排序的好汉名单
+
+这段记忆的关键是：先走左边到底，回头念自己，再走右边。这就是"左→根→右"。
+
+可以把它类比成《水浒传》里梁山好汉排座次的场景。
+
+宋江要按照武功高低的顺序宣读好汉名单。梁山的好汉按二叉搜索树组织：左边的武功低，右边的武功高。宋江的宣读规则是"先看左边的人，再念中间这位，最后看右边的人"。
+
+于是宋江从自己开始，一直往左边走，走到最左边的杜迁，先念他的名字。然后回到上一级宋万，再念。然后看宋万右边有没有人……如此反复，最终所有人的名字按武功从低到高全部念完。
+
+对应关系是：
+
+- "二叉搜索树"对应梁山好汉的武功排名树
+- "左子树"对应武功更低的兄弟们
+- "右子树"对应武功更高的兄弟们
+- "中序遍历结果"对应按武功排序的好汉名单
+
+这段记忆的关键是：先走左边到底，回头念自己，再走右边。这就是"左→根→右"。
+
+猫头鹰老师带小动物们去参观一棵神奇的大树。树上每根树枝的左边结的果子比较小，右边结的果子比较大。老师要求大家按照从小到大的顺序摘果子。
+
+小兔子先沿着左边的小枝一直走到底，摘了最小的果子。然后退回到上一根枝，摘那根枝上的果子，再走到右边的枝继续摘。就这样走走退退，最后所有果子按从小到大的顺序整整齐齐地排在了篮子里。
+
+猫头鹰老师带小动物们去参观一棵神奇的大树。树上每根树枝的左边结的果子比较小，右边结的果子比较大。老师要求大家按照从小到大的顺序摘果子。
+
+小兔子先沿着左边的小枝一直走到底，摘了最小的果子。然后退回到上一根枝，摘那根枝上的果子，再走到右边的枝继续摘。就这样走走退退，最后所有果子按从小到大的顺序整整齐齐地排在了篮子里。
+
+## 🎵 记忆口诀
+
+一路向左压到底，弹出访问再往右。
+
+一路向左压到底，弹出访问再往右。
+
+## 🔗 延伸练习
+
+- `144. 二叉树的前序遍历`：把"左→根→右"换成"根→左→右"，体会访问顺序的变化。
+- `145. 二叉树的后序遍历`：把顺序换成"左→右→根"，迭代写法难度升级。
+
+- `144. 二叉树的前序遍历`：把"左→根→右"换成"根→左→右"，体会访问顺序的变化。
+- `145. 二叉树的后序遍历`：把顺序换成"左→右→根"，迭代写法难度升级。4:["$","main",null,{"className":"detail-main","style":{"maxWidth":760,"margin":"0 auto","padding":"16px","minHeight":"100vh"},"children":[["$","$Lc",null,{"href":"/","style":{"display":"inline-block","marginBottom":"12px","fontSize":"13px"},"children":"← 返回题库"}],["$","h1",null,{"style":{"fontSize":"22px","fontWeight":700,"margin":"0 0 4px"},"children":[["$","span",null,{"style":{"marginRight":"6px"},"children":"🌳"}],94,". ","二叉树的中序遍历"]}],["$","$Ld",null,{"q":{"id":"0094","lcId":94,"slug":"binary-tree-inorder-traversal","title":"二叉树的中序遍历","question":"二叉树的中序遍历","answer":"$e","difficulty":"Easy","category":"binary-tree","categories":["binary-tree"],"tags":["栈","树","深度优先搜索","二叉树"],"url":"https://leetcode.cn/problems/binary-tree-inorder-traversal/","planOrder":36,"hasViz":true,"hasDiagram":true,"feynman":{"essence":"给你一棵二叉树的根节点 `root`，返回它的中序遍历结果。  中序遍历的顺序是：先遍历左子树，再访问根节点，最后遍历右子树。即\"左 → 根 → 右\"。  对于一棵 BST（二叉搜索树），中序遍历的结","analogy":"","key_points":[]},"first_principle":{"problem":"","axioms":[],"rebuild":""}}}]]}]
+a:[["$","meta","0",{"name":"viewport","content":"width=device-width, initial-scale=1"}],["$","meta","1",{"name":"theme-color","content":"#f97316"}]]
+8:[["$","meta","0",{"charSet":"utf-8"}],["$","title","1",{"children":"94. 二叉树的中序遍历 - 算法面试"}],["$","meta","2",{"name":"description","content":"给你一棵二叉树的根节点 `root`，返回它的中序遍历结果。  中序遍历的顺序是：先遍历左子树，再访问根节点，最后遍历右子树。即\"左 → 根 → 右\"。  对于一棵 BST（二叉搜索树），中序遍历的结"}],["$","meta","3",{"name":"application-name","content":"算法面试"}],["$","link","4",{"rel":"manifest","href":"/algorithm-interview/manifest.json","crossOrigin":"$undefined"}],["$","meta","5",{"name":"keywords","content":"二叉树的中序遍历,LeetCode 94,Easy,栈,树,深度优先搜索,二叉树"}],["$","meta","6",{"name":"mobile-web-app-capable","content":"yes"}],["$","meta","7",{"name":"apple-mobile-web-app-title","content":"算法面试"}],["$","meta","8",{"name":"apple-mobile-web-app-status-bar-style","content":"default"}],["$","meta","9",{"property":"og:title","content":"94. 二叉树的中序遍历"}],["$","meta","10",{"property":"og:description","content":"给你一棵二叉树的根节点 `root`，返回它的中序遍历结果。  中序遍历的顺序是：先遍历左子树，再访问根节点，最后遍历右子树。即\"左 → 根 → 右\"。  对于一棵 BST（二叉搜索树），中序遍历的结"}],["$","meta","11",{"property":"og:locale","content":"zh_CN"}],["$","meta","12",{"property":"og:type","content":"article"}],["$","meta","13",{"name":"twitter:card","content":"summary"}],["$","meta","14",{"name":"twitter:title","content":"94. 二叉树的中序遍历"}],["$","meta","15",{"name":"twitter:description","content":"给你一棵二叉树的根节点 `root`，返回它的中序遍历结果。  中序遍历的顺序是：先遍历左子树，再访问根节点，最后遍历右子树。即\"左 → 根 → 右\"。  对于一棵 BST（二叉搜索树），中序遍历的结"}]]
+6:null
